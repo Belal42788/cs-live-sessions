@@ -1,0 +1,12 @@
+@echo off
+setlocal enabledelayedexpansion
+
+for /f "delims=" %%f in ('git diff --name-only') do (
+    echo Adding: %%f
+    git add "%%f"
+    git commit -m "Add %%~nxf"
+    git push
+)
+
+echo Done!
+pause
