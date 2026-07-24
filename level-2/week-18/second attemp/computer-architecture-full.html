@@ -36,8 +36,8 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overf
 @keyframes fLeft{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
 @keyframes sIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(25,60,255,.3)}50%{box-shadow:0 0 40px rgba(25,60,255,.6)}}
-.section{min-height:100vh;padding:100px 20px;display:flex;align-items:center;justify-content:center}
-.section-inner{max-width:1200px;width:100%;opacity:0;transform:translateY(60px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+.section{min-height:auto;padding:60px 20px;display:flex;align-items:center;justify-content:center}
+.section-inner{max-width:1200px;width:100%;opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
 .section-inner.visible{opacity:1;transform:translateY(0)}
 .section-header{text-align:center;margin-bottom:60px}
 .section-number{display:inline-flex;width:60px;height:60px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:20px;align-items:center;justify-content:center;font-size:24px;font-weight:900;margin:0 auto 20px;animation:glow 3s infinite}
@@ -287,11 +287,10 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="diagram-container">
 <div class="diagram-title">بوابة AND: الناتج 1 بس لو الاتنين 1</div>
 <svg class="diagram-svg" viewBox="0 0 300 180">
-<path d="M 80 40 L 120 40 L 120 140 L 80 140 Z" class="gate-body"/>
-<path d="M 120 40 Q 180 90 120 140" class="gate-body"/>
+<path d="M 80 40 L 120 40 Q 180 90 120 140 L 80 140 Z" class="gate-body"/>
 <line x1="20" y1="60" x2="80" y2="60" class="wire" id="andWireA"/>
 <line x1="20" y1="120" x2="80" y2="120" class="wire" id="andWireB"/>
-<line x1="180" y1="90" x2="260" y2="90" class="wire" id="andWireOut"/>
+<line x1="175" y1="90" x2="260" y2="90" class="wire" id="andWireOut"/>
 <circle cx="20" cy="60" r="12" class="node" id="andNodeA"/>
 <circle cx="20" cy="120" r="12" class="node" id="andNodeB"/>
 <circle cx="260" cy="90" r="18" class="node" id="andNodeOut"/>
@@ -570,36 +569,84 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="circuit-compare">
 <div class="circuit-side">
 <h4>الأصلية (3 بوابات)</h4>
-<svg viewBox="0 0 300 150" style="width:100%;max-width:300px">
-<rect x="20" y="10" width="60" height="40" rx="5" fill="var(--primary)"/>
-<text x="50" y="35" fill="white" font-size="10" text-anchor="middle">AND</text>
-<rect x="20" y="90" width="60" height="40" rx="5" fill="var(--primary)"/>
-<text x="50" y="115" fill="white" font-size="10" text-anchor="middle">AND</text>
-<rect x="140" y="45" width="60" height="40" rx="5" fill="var(--accent)"/>
-<text x="170" y="70" fill="var(--bg)" font-size="10" text-anchor="middle">OR</text>
-<line x1="80" y1="30" x2="140" y2="55" stroke="var(--dim)" stroke-width="2"/>
-<line x1="80" y1="110" x2="140" y2="75" stroke="var(--dim)" stroke-width="2"/>
-<circle cx="10" cy="30" r="8" fill="var(--accent)"/>
-<circle cx="10" cy="110" r="8" fill="var(--accent)"/>
-<circle cx="220" cy="65" r="12" fill="var(--success)"/>
+<svg viewBox="0 0 350 180" style="width:100%;max-width:350px">
+<!-- Inputs -->
+<circle cx="20" cy="40" r="10" fill="var(--accent)"/>
+<text x="20" y="44" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">A</text>
+<circle cx="20" cy="90" r="10" fill="var(--accent)"/>
+<text x="20" y="94" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">B</text>
+<circle cx="20" cy="140" r="10" fill="var(--accent)"/>
+<text x="20" y="144" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">C</text>
+<!-- AND gate 1 (A,B) -->
+<rect x="70" y="25" width="50" height="40" rx="5" fill="var(--primary)"/>
+<text x="95" y="50" fill="white" font-size="9" text-anchor="middle">AND</text>
+<!-- AND gate 2 (A,C) -->
+<rect x="70" y="100" width="50" height="40" rx="5" fill="var(--primary)"/>
+<text x="95" y="125" fill="white" font-size="9" text-anchor="middle">AND</text>
+<!-- OR gate -->
+<rect x="170" y="55" width="50" height="40" rx="5" fill="var(--accent)"/>
+<text x="195" y="80" fill="var(--bg)" font-size="9" text-anchor="middle">OR</text>
+<!-- Wires: A to both ANDs -->
+<line x1="30" y1="40" x2="70" y2="40" stroke="var(--dim)" stroke-width="2"/>
+<line x1="30" y1="40" x2="30" y2="120" stroke="var(--dim)" stroke-width="2"/>
+<line x1="30" y1="120" x2="70" y2="120" stroke="var(--dim)" stroke-width="2"/>
+<!-- Wire: B to AND1 -->
+<line x1="30" y1="90" x2="50" y2="90" stroke="var(--dim)" stroke-width="2"/>
+<line x1="50" y1="90" x2="50" y2="45" stroke="var(--dim)" stroke-width="2"/>
+<line x1="50" y1="45" x2="70" y2="45" stroke="var(--dim)" stroke-width="2"/>
+<!-- Wire: C to AND2 -->
+<line x1="30" y1="140" x2="55" y2="140" stroke="var(--dim)" stroke-width="2"/>
+<line x1="55" y1="140" x2="55" y2="125" stroke="var(--dim)" stroke-width="2"/>
+<line x1="55" y1="125" x2="70" y2="125" stroke="var(--dim)" stroke-width="2"/>
+<!-- AND1 out to OR -->
+<line x1="120" y1="45" x2="145" y2="45" stroke="var(--dim)" stroke-width="2"/>
+<line x1="145" y1="45" x2="145" y2="70" stroke="var(--dim)" stroke-width="2"/>
+<line x1="145" y1="70" x2="170" y2="70" stroke="var(--dim)" stroke-width="2"/>
+<!-- AND2 out to OR -->
+<line x1="120" y1="120" x2="145" y2="120" stroke="var(--dim)" stroke-width="2"/>
+<line x1="145" y1="120" x2="145" y2="90" stroke="var(--dim)" stroke-width="2"/>
+<line x1="145" y1="90" x2="170" y2="90" stroke="var(--dim)" stroke-width="2"/>
+<!-- OR out -->
+<line x1="220" y1="75" x2="280" y2="75" stroke="var(--dim)" stroke-width="2"/>
+<circle cx="290" cy="75" r="12" fill="var(--success)"/>
+<text x="290" y="79" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">=</text>
 </svg>
 <p style="margin-top:10px;color:var(--dim);text-align:center">(A AND B) OR (A AND C)</p>
 </div>
 <div class="circuit-side simplified">
 <h4>المبسطة (2 بوابات) ✓</h4>
-<svg viewBox="0 0 300 150" style="width:100%;max-width:300px">
-<rect x="80" y="30" width="60" height="40" rx="5" fill="var(--accent)"/>
-<text x="110" y="55" fill="var(--bg)" font-size="10" text-anchor="middle">OR</text>
-<rect x="180" y="30" width="60" height="40" rx="5" fill="var(--primary)"/>
-<text x="210" y="55" fill="white" font-size="10" text-anchor="middle">AND</text>
-<circle cx="50" cy="20" r="8" fill="var(--accent)"/>
-<circle cx="50" cy="70" r="8" fill="var(--accent)"/>
-<circle cx="50" cy="120" r="8" fill="var(--accent)"/>
-<line x1="58" y1="20" x2="80" y2="40" stroke="var(--dim)" stroke-width="2"/>
-<line x1="58" y1="70" x2="110" y2="50" stroke="var(--dim)" stroke-width="2"/>
-<line x1="58" y1="120" x2="110" y2="60" stroke="var(--dim)" stroke-width="2"/>
-<line x1="140" y1="50" x2="180" y2="50" stroke="var(--dim)" stroke-width="2"/>
-<circle cx="260" cy="50" r="12" fill="var(--success)"/>
+<svg viewBox="0 0 350 180" style="width:100%;max-width:350px">
+<!-- Inputs -->
+<circle cx="20" cy="50" r="10" fill="var(--accent)"/>
+<text x="20" y="54" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">A</text>
+<circle cx="20" cy="100" r="10" fill="var(--accent)"/>
+<text x="20" y="104" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">B</text>
+<circle cx="20" cy="150" r="10" fill="var(--accent)"/>
+<text x="20" y="154" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">C</text>
+<!-- OR gate (B,C) -->
+<rect x="80" y="85" width="50" height="40" rx="5" fill="var(--accent)"/>
+<text x="105" y="110" fill="var(--bg)" font-size="9" text-anchor="middle">OR</text>
+<!-- AND gate (A, OR out) -->
+<rect x="180" y="55" width="50" height="40" rx="5" fill="var(--primary)"/>
+<text x="205" y="80" fill="white" font-size="9" text-anchor="middle">AND</text>
+<!-- Wire: A to AND -->
+<line x1="30" y1="50" x2="60" y2="50" stroke="var(--dim)" stroke-width="2"/>
+<line x1="60" y1="50" x2="60" y2="70" stroke="var(--dim)" stroke-width="2"/>
+<line x1="60" y1="70" x2="180" y2="70" stroke="var(--dim)" stroke-width="2"/>
+<!-- Wire: B to OR -->
+<line x1="30" y1="100" x2="80" y2="100" stroke="var(--dim)" stroke-width="2"/>
+<!-- Wire: C to OR -->
+<line x1="30" y1="150" x2="60" y2="150" stroke="var(--dim)" stroke-width="2"/>
+<line x1="60" y1="150" x2="60" y2="115" stroke="var(--dim)" stroke-width="2"/>
+<line x1="60" y1="115" x2="80" y2="115" stroke="var(--dim)" stroke-width="2"/>
+<!-- OR out to AND -->
+<line x1="130" y1="105" x2="155" y2="105" stroke="var(--dim)" stroke-width="2"/>
+<line x1="155" y1="105" x2="155" y2="80" stroke="var(--dim)" stroke-width="2"/>
+<line x1="155" y1="80" x2="180" y2="80" stroke="var(--dim)" stroke-width="2"/>
+<!-- AND out -->
+<line x1="230" y1="75" x2="280" y2="75" stroke="var(--dim)" stroke-width="2"/>
+<circle cx="290" cy="75" r="12" fill="var(--success)"/>
+<text x="290" y="79" fill="var(--bg)" font-size="10" text-anchor="middle" font-weight="bold">=</text>
 </svg>
 <p style="margin-top:10px;color:var(--accent);text-align:center;font-weight:700">A AND (B OR C)</p>
 </div>
@@ -647,7 +694,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 function createParticles(){const c=document.getElementById('particles');for(let i=0;i<30;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*15+'s';p.style.animationDuration=(15+Math.random()*10)+'s';c.appendChild(p)}}
 createParticles();
 window.addEventListener('scroll',()=>{const nav=document.getElementById('mainNav');if(window.scrollY>100)nav.classList.add('visible');else nav.classList.remove('visible');const sections=document.querySelectorAll('.section, .hero');let current='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.getAttribute('id')});document.querySelectorAll('.nav a').forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+current)a.classList.add('active')})});
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.2});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
 document.querySelectorAll('.section-inner').forEach(el=>observer.observe(el));
 const journeyObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');const step=parseInt(e.target.dataset.step);document.getElementById('journeyFill').style.height=(step*11)+'%'}})},{threshold:0.5});
 document.querySelectorAll('.journey-step').forEach(el=>journeyObserver.observe(el));
