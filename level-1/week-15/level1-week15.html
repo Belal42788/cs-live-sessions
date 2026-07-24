@@ -1,1432 +1,1441 @@
-<h1 id="slide-1-human-vision-how-we-see-the-world"><strong>🎤 Slide 1 —
-Human Vision: How We See the World</strong></h1>
-<p><span dir="ltr"></span></p>
-<p><img src="assets/media/image6.png"
-style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
-<h2 id="eyes-capture-light"><strong>📌 Eyes Capture Light</strong></h2>
-<h3 id="العربية"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">العين بتستقبل الضوء.</span></p>
-<h3 id="speaker-notes"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">إحنا مش بنشوف الأشياء نفسها.</span></p>
-<p><span dir="rtl">إحنا بنشوف الضوء اللي بينعكس منها.</span></p>
-<p><span dir="rtl">العين تجمع الضوء.</span></p>
-<p><span dir="rtl">وتركزه على الشبكية.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="brain-interprets"><strong>📌 Brain Interprets</strong></h2>
-<h3 id="العربية-1"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">المخ بيفسر.</span></p>
-<h3 id="speaker-notes-1"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بعد العين.</span></p>
-<p><span dir="rtl">الإشارات العصبية تروح للمخ.</span></p>
-<p><span dir="rtl">والمخ يبدأ يفسرها.</span></p>
-<p><span dir="rtl">يعرف:</span></p>
-<p><span dir="rtl">ده إنسان.</span></p>
-<p><span dir="rtl">ده كرسي.</span></p>
-<p><span dir="rtl">ده كتاب.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="instant-recognition"><strong>📌 Instant
-Recognition</strong></h2>
-<h3 id="العربية-2"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">التعرف الفوري.</span></p>
-<h3 id="speaker-notes-2"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">المخ بيستخدم الذاكرة.</span></p>
-<p><span dir="rtl">أول ما يشوف شيء.</span></p>
-<p><span dir="rtl">يقارنه بالحاجات اللي شافها قبل كده.</span></p>
-<p><span dir="rtl">وعشان كده بنعرف الأشخاص والأماكن بسرعة
-جدًا.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="context-emotion"><strong>📌 Context &amp; Emotion</strong></h2>
-<h3 id="العربية-3"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">السياق والمشاعر.</span></p>
-<h3 id="speaker-notes-3"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">دي أكبر ميزة عند الإنسان.</span></p>
-<p><span dir="rtl">إحنا مش بنشوف الصورة بس.</span></p>
-<p><span dir="rtl">إحنا بنفهم:</span></p>
-<p><span dir="rtl">الموقف.</span></p>
-<p><span dir="rtl">المشاعر.</span></p>
-<p><span dir="rtl">نية الشخص.</span></p>
-<p><span dir="rtl">وده لحد دلوقتي أصعب حاجة على</span> <span
-dir="ltr">Computer Vision</span><span dir="rtl">.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">لو شفت شخص بيبتسم.</span></p>
-<p><span dir="rtl">إنت هتفهم إنه سعيد.</span></p>
-<p><span dir="rtl">لكن الكمبيوتر ممكن يعرف إنه "وجه مبتسم"
-فقط.</span></p>
-<p><span dir="rtl">أما سبب الابتسامة أو معناها الحقيقي فدي محتاجة فهم
-للسياق.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-2-computer-vision-how-machines-see"><strong>🎤 Slide 2 —
-Computer Vision: How Machines See</strong></h1>
-<p><span dir="ltr"></span></p>
-<h2 id="camera"><strong>📌 Camera</strong></h2>
-<h3 id="العربية-4"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">الكاميرا.</span></p>
-<h3 id="speaker-notes-4"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">كل حاجة بتبدأ بالكاميرا.</span></p>
-<p><span dir="rtl">الكاميرا تصور صورة أو فيديو.</span></p>
-<p><span dir="rtl">زي عين الإنسان بالضبط.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="pixels"><strong>📌 Pixels</strong></h2>
-<h3 id="العربية-5"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">البكسلات.</span></p>
-<h3 id="speaker-notes-5"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الصورة اللي إحنا شايفينها.</span></p>
-<p><span dir="rtl">الكمبيوتر بيحولها لمصفوفة كبيرة من الـ</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">له:</span></p>
-<p><span dir="rtl">لون.</span></p>
-<p><span dir="rtl">وشدة إضاءة.</span></p>
-<p><span dir="rtl">وأرقام.</span></p>
-<p><span dir="rtl">يعني الصورة تتحول لبيانات.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="ai-model"><strong>📌 AI Model</strong></h2>
-<h3 id="العربية-6"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">نموذج الذكاء الاصطناعي.</span></p>
-<h3 id="speaker-notes-6"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بعد تحويل الصورة لأرقام.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI Model</span> <span
-dir="rtl">يبدأ يبحث عن</span> <span dir="ltr">Patterns</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">هل الشكل ده شبه قطة؟</span></p>
-<p><span dir="rtl">هل ده إنسان؟</span></p>
-<p><span dir="rtl">هل ده عربية؟</span></p>
-<p><span dir="rtl">كل ده لأنه اتدرب على صور كتير قبل كده.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="decision"><strong>📌 Decision</strong></h2>
-<h3 id="العربية-7"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">القرار.</span></p>
-<h3 id="speaker-notes-7"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">في النهاية.</span></p>
-<p><span dir="rtl">النظام يطلع نتيجة.</span></p>
-<p><span dir="rtl">مثلًا:</span></p>
-<p>Cat.</p>
-<p>Dog.</p>
-<p>Face.</p>
-<p>Stop Sign.</p>
-<p><span dir="rtl">وده القرار النهائي.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="needs-good-data"><strong>📌 Needs Good Data</strong></h2>
-<h3 id="العربية-8"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">يحتاج بيانات جيدة.</span></p>
-<h3 id="speaker-notes-8"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">حتى لو عندك أقوى</span> <span dir="ltr">AI</span>
-<span dir="rtl">في العالم.</span></p>
-<p><span dir="rtl">لو الصور:</span></p>
-<p><span dir="rtl">مظلمة.</span></p>
-<p><span dir="rtl">ضبابية.</span></p>
-<p><span dir="rtl">أو قليلة.</span></p>
-<p><span dir="rtl">النظام هيغلط.</span></p>
-<p><span dir="rtl">علشان كده جودة البيانات أهم من قوة البرنامج
-أحيانًا.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-1"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">كاميرا بتصور تفاحة.</span></p>
-<p>↓</p>
-<p><span dir="rtl">الصورة تتحول</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p>↓</p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحللها.</span></p>
-<p>↓</p>
-<p><span dir="rtl">يقول:</span></p>
-<p>Apple.</p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-3-human-vision-vs.-computer-vision"><strong>🎤 Slide 3 —
-Human Vision vs. Computer Vision</strong></h1>
-<p><img src="assets/media/image9.png"
-style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
-<h2 id="مقدمة"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">دلوقتي هنقارن بين الإنسان والكمبيوتر.</span></p>
-<p><span dir="rtl">الاتنين بيشوفوا.</span></p>
-<p><span dir="rtl">لكن طريقة الرؤية مختلفة تمامًا.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="sensor"><strong>📌 Sensor</strong></h2>
-<h3 id="العربية-9"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">وسيلة استقبال الصورة.</span></p>
-<h3 id="speaker-notes-9"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الإنسان بيستخدم: العين.</span></p>
-<p><span dir="rtl">أما الكمبيوتر فبيستخدم:الكاميرا.</span></p>
-<p><span dir="rtl">يعني الكاميرا بالنسبة للكمبيوتر هي العين.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="processor"><strong>📌 Processor</strong></h2>
-<h3 id="العربية-10"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">المعالج.</span></p>
-<h3 id="speaker-notes-10"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بعد العين.</span></p>
-<p><span dir="rtl">المعلومات بتروح للمخ.</span></p>
-<p><span dir="rtl">أما الكمبيوتر.</span></p>
-<p><span dir="rtl">الصورة بتروح للـ</span> <span dir="ltr">AI
-Model</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">وده البرنامج المدرب اللي بيحلل الصورة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="speed"><strong>📌 Speed</strong></h2>
-<h3 id="العربية-11"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">السرعة.</span></p>
-<h3 id="speaker-notes-11"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الإنسان سريع جدًا.</span></p>
-<p><span dir="rtl">لكن بيتعب.</span></p>
-<p><span dir="rtl">أما الكمبيوتر.</span></p>
-<p><span dir="rtl">ممكن يشتغل أيام كاملة بدون توقف.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="learns-from"><strong>📌 Learns From</strong></h2>
-<h3 id="العربية-12"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">مصدر التعلم.</span></p>
-<h3 id="speaker-notes-12"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الإنسان بيتعلم من:</span></p>
-<p><span dir="rtl">الحياة.</span></p>
-<p><span dir="rtl">التجارب.</span></p>
-<p><span dir="rtl">الأخطاء.</span></p>
-<p><span dir="rtl">أما</span> Computer Vision.</p>
-<p><span dir="rtl">بيتدرب على آلاف أو ملايين الصور.</span></p>
-<p><span dir="rtl">كل صورة بتساعده يتعلم شكل الأشياء.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="sees-an-image-as"><strong>📌 Sees an Image As</strong></h2>
-<h3 id="العربية-13"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">إزاي كل واحد بيشوف الصورة؟</span></p>
-<h3 id="speaker-notes-13"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">دي أهم نقطة في السلايد.</span></p>
-<p><span dir="rtl">إحنا لما نبص لصورة عربية.</span></p>
-<p><span dir="rtl">على طول نقول:</span></p>
-<p><span dir="ltr"></span><span dir="rtl">"دي عربية."</span></p>
-<p><span dir="rtl">لكن الكمبيوتر.</span></p>
-<p><span dir="rtl">في البداية.</span></p>
-<p><span dir="rtl">مش بيشوف عربية.</span></p>
-<p><span dir="rtl">هو بيشوف ملايين الـ</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">عبارة عن رقم.</span></p>
-<p><span dir="rtl">وبعد التحليل يحول الأرقام لمعنى.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="best-at"><strong>📌 Best At</strong></h2>
-<h3 id="العربية-14"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">أفضل استخدام.</span></p>
-<h3 id="speaker-notes-14"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الإنسان ممتاز في:</span></p>
-<p><span dir="rtl">فهم المشاعر.</span></p>
-<p><span dir="rtl">السياق.</span></p>
-<p><span dir="rtl">المواقف.</span></p>
-<p><span dir="rtl">أما الكمبيوتر.</span></p>
-<p><span dir="rtl">فممتاز في:</span></p>
-<p><span dir="rtl">السرعة.</span></p>
-<p><span dir="rtl">الدقة.</span></p>
-<p><span dir="rtl">تحليل كميات ضخمة من البيانات.</span></p>
-<p><span dir="rtl">وده سبب إن الإنسان والكمبيوتر بيكملوا بعض.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-2"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">طبيب أشعة.</span></p>
-<p><span dir="rtl">الكمبيوتر يحدد الأماكن المشبوهة بسرعة.</span></p>
-<p><span dir="rtl">لكن الطبيب هو اللي ياخد القرار النهائي.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-4-what-is-computer-vision."><strong>🎤 Slide 4 — What Is
-Computer Vision?</strong>.</h1>
-<p><span dir="ltr"></span></p>
-<h2 id="computer-vision"><strong>📌 Computer Vision</strong></h2>
-<h3 id="العربية-15"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">الرؤية الحاسوبية.</span></p>
-<h3 id="speaker-notes-15"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="ltr">Computer Vision</span> <span dir="rtl">أو الرؤية
-الحاسوبية هو فرع من فروع الذكاء الاصطناعي.</span></p>
-<p><span dir="rtl">وظيفته إنه يخلي الكمبيوتر يقدر يفهم الصور
-والفيديوهات.</span></p>
-<p><span dir="rtl">لكن مهم جدًا نفهم إن الكمبيوتر <strong>مش بيشوف
-بعينه</strong></span><span dir="ltr">.</span></p>
-<p><span dir="rtl">هو بيستقبل صورة من الكاميرا، وبعد كده يحللها ويستخرج
-منها معلومات.</span></p>
-<p><span dir="rtl">يعني بدل ما يشوف "قطة"، هو في البداية بيشوف بيانات
-وأرقام، وبعد التحليل يقرر إن الصورة دي لقطة.</span></p>
-<p><span dir="rtl">يبقى الهدف الأساسي من</span> <span dir="ltr">Computer
-Vision</span> <span dir="rtl">هو:</span></p>
-<p><strong>Capture → Process → Understand → Decide</strong></p>
-<p><span dir="rtl">يعني:</span></p>
-<ul>
-<li><p><span dir="rtl">يلتقط الصورة.</span></p></li>
-<li><p><span dir="rtl">يعالجها.</span></p></li>
-<li><p><span dir="rtl">يفهمها.</span></p></li>
-<li><p><span dir="rtl">ياخد قرار بناءً عليها.</span></p></li>
-</ul>
-<p><span dir="ltr"></span></p>
-<h2 id="artificial-intelligence"><strong>📌 Artificial
-Intelligence</strong></h2>
-<h3 id="العربية-16"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">الذكاء الاصطناعي.</span></p>
-<h3 id="speaker-notes-16"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">لاحظ إن السلايد بيقول إن</span> <span
-dir="ltr">Computer Vision</span> <span dir="rtl">هو</span> <span
-dir="ltr"><strong>Sub-field</strong></span> <span dir="rtl">من</span>
-<span dir="ltr">AI</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">وده معناه إنه جزء من الذكاء الاصطناعي.</span></p>
-<p><span dir="rtl">يعني</span> <span dir="ltr">AI</span> <span
-dir="rtl">مجال كبير.</span></p>
-<p><span dir="rtl">وجواه تخصصات كتير.</span></p>
-<p><span dir="rtl">زي:</span></p>
-<ul>
-<li><p>Machine Learning</p></li>
-<li><p>Computer Vision</p></li>
-<li><p>Natural Language Processing</p></li>
-</ul>
-<p><span dir="rtl">فالنهارده إحنا بندرس جزء واحد منهم وهو</span> <span
-dir="ltr">Computer Vision</span><span dir="rtl">.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="why-do-we-need-it"><strong>📌 Why do we need it?</strong></h2>
-<h3 id="العربية-17"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">ليه محتاجين</span> <span dir="ltr">Computer
-Vision</span><span dir="rtl">؟</span></p>
-<h3 id="speaker-notes-17"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">السلايد ذكر 3 أسباب رئيسية.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="cameras-are-everywhere"><strong>📌 Cameras are
-everywhere</strong></h3>
-<p><span dir="rtl">الكاميرات موجودة في كل مكان.</span></p>
-<p><span dir="rtl">في الموبايلات.</span></p>
-<p><span dir="rtl">في العربيات.</span></p>
-<p><span dir="rtl">في المحلات.</span></p>
-<p><span dir="rtl">في المستشفيات.</span></p>
-<p><span dir="rtl">في المصانع.</span></p>
-<p><span dir="rtl">كل الكاميرات دي بتنتج كمية ضخمة جدًا من الصور
-والفيديوهات.</span></p>
-<p><span dir="rtl">وعاوزين بدل ما الكاميرا تكون بتصور بس وبنحفظ الصور او
-الفيديوهات دي لحد ما الانسان يبدأ يراجع ويقول مثلا حصلت سرقة هنا او ده
-شكله حرامي مثلا او ده مسموحله يدخل المبنى لكن ده من المستحيل إن الإنسان
-يراجعها كلها بنفسه.</span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="too-fast-repetitive-or-dangerous"><strong>📌 Too fast,
-repetitive or dangerous</strong></h3>
-<p><span dir="rtl">فيه شغل الإنسان يقدر يعمله.</span></p>
-<p><span dir="rtl">لكن فيه شغل:</span></p>
-<ul>
-<li><p><span dir="rtl">سريع جدًا.</span></p></li>
-<li><p><span dir="rtl">ممل ومتكرر.</span></p></li>
-<li><p><span dir="rtl">أو خطر.</span></p></li>
-</ul>
-<p><span dir="rtl">زي مراقبة آلاف الكاميرات الأمنية.</span></p>
-<p><span dir="rtl">أو اكتشاف عيوب المنتجات في المصنع.</span></p>
-<p><span dir="rtl">أو تحليل صور الأشعة.</span></p>
-<p><span dir="rtl">هنا الكمبيوتر يقدر يساعد.</span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="works-247"><strong>📌 Works 24/7</strong></h3>
-<p><span dir="rtl">الكمبيوتر يقدر يشتغل:</span></p>
-<p><span dir="ltr"></span><span dir="rtl">24 ساعة.</span></p>
-<p><span dir="ltr"></span><span dir="rtl">7 أيام.</span></p>
-<p><span dir="rtl">من غير تعب.</span></p>
-<p><span dir="rtl">ومن غير ما تركيزه يقل.</span></p>
-<p><span dir="rtl">وده بيديه ميزة كبيرة في المهام المتكررة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-3"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">كاميرات المرور.</span></p>
-<p><span dir="rtl">بدل ما موظف يشوف آلاف السيارات.</span></p>
-<p><span dir="rtl">هنا</span> Computer Vision <span
-dir="rtl">يحدد</span>:</p>
-<ul>
-<li><p><span dir="rtl">العربية عدت الإشارة.</span></p></li>
-<li><p><span dir="rtl">العربية ماشية بسرعة.</span></p></li>
-<li><p><span dir="rtl">العربية واقفة في مكان ممنوع.</span></p></li>
-</ul>
-<p><span dir="rtl">كل ده تلقائي.</span><span dir="ltr"></span></p>
-<p><span dir="ltr"><strong>🔗 Recap:<br />
-</strong></span> <span dir="rtl">اربط للطلاب بين العمليتين في آخر
-الشرح:</span></p>
-<ul>
-<li><p><strong><span dir="rtl">الإنسان</span>:</strong> Light → Eye →
-Brain → Meaning</p></li>
-<li><p><strong><span dir="rtl">الكمبيوتر</span>:</strong> Camera →
-Pixels → AI Model → Decision</p></li>
-</ul>
-<p><span dir="rtl">وقلهم إن كل موضوعات</span> <span dir="ltr">Computer
-Vision</span> <span dir="rtl">اللي هتيجي بعد كده (</span><span
-dir="ltr">Image Classification, Object Detection, Face
-Recognition</span><span dir="rtl">...) هي مجرد تطبيقات لنفس الـ</span>
-<span dir="ltr">Workflow</span> <span dir="rtl">ده.</span><span
-dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><strong><span dir="ltr">🎤 Slide 5 — What Is an Image? Meet the
-Pixel</span></strong></p>
-<h2 id="مقدمة-1"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">قبل ما نفهم</span> <span dir="ltr">Computer
-Vision</span> <span dir="rtl">بيفهم الصور إزاي...</span></p>
-<p><span dir="rtl">لازم الأول نعرف:</span></p>
-<p><strong><span dir="rtl">الصورة نفسها عبارة عن
-إيه؟</span></strong></p>
-<p><span dir="rtl">إحنا بنشوف صورة كاملة.</span></p>
-<p><span dir="rtl">لكن الكمبيوتر بيشوفها بطريقة مختلفة تمامًا.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="image"><strong>📌 Image</strong></h2>
-<h3 id="العربية-18"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">الصورة الرقمية.</span></p>
-<h3 id="speaker-notes-18"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">إحنا لما نبص لأي صورة.</span></p>
-<p><span dir="rtl">بنشوفها كأنها حاجة واحدة.</span></p>
-<p><span dir="rtl">لكن الحقيقة إن أي صورة على الكمبيوتر أو
-الموبايل.</span></p>
-<p><span dir="rtl">متكونة من آلاف أو ملايين النقط الصغيرة
-جدًا.</span></p>
-<p><span dir="rtl">النقط دي اسمها</span> <span
-dir="ltr"><strong>Pixels</strong>.</span></p>
-<p><span dir="rtl">يعني الصورة الكبيرة اللي إحنا شايفينها.</span></p>
-<p><span dir="rtl">هي في الحقيقة شبكة ضخمة جدًا من النقط
-الصغيرة.</span><span dir="ltr"></span></p>
-<p><span dir="rtl">يعني الصورة عبارة عن جدول.</span></p>
-<p><span dir="rtl">فيه:</span></p>
-<p><span dir="ltr">Rows</span> <span dir="rtl">(صفوف).</span></p>
-<p><span dir="ltr">Columns</span> <span dir="rtl">(أعمدة).</span></p>
-<p><span dir="rtl">وعند تقاطع كل صف مع كل عمود.</span></p>
-<p><span dir="rtl">يوجد</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">واحد.</span></p>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">له مكان ثابت.</span></p>
-<p><span dir="rtl">ولون واحد فقط.</span></p>
-<p><span dir="rtl">ولما نحط ملايين الـ</span> <span
-dir="ltr">Pixels</span> <span dir="rtl">جنب بعض.</span></p>
-<p><span dir="rtl">عيننا تشوف صورة كاملة وناعمة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="pixel"><strong>📌 Pixel</strong></h2>
-<h3 id="العربية-19"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">البكسل.</span></p>
-<h3 id="speaker-notes-19"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الـ</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">هو أصغر جزء في الصورة.</span></p>
-<p><span dir="rtl">تخيل إن الصورة لعبة</span> <span
-dir="ltr">LEGO</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">كل قطعة</span> <span dir="ltr">LEGO</span> <span
-dir="rtl">تمثل</span> <span dir="ltr">Pixel</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">كل قطعة لوحدها بسيطة.</span></p>
-<p><span dir="rtl">لكن لما نجمع آلاف القطع.</span></p>
-<p><span dir="rtl">يطلع شكل كامل.</span></p>
-<p><span dir="rtl">نفس الفكرة في الصور.</span></p>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">يعرض لونًا واحدًا فقط.</span></p>
-<p><span dir="rtl">لكن ملايين الـ</span> <span dir="ltr">Pixels</span>
-<span dir="rtl">مع بعض.</span></p>
-<p><span dir="rtl">يصنعوا صورة كاملة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-4"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><img src="assets/media/image6.png"
-style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-6-image-resolution"><strong>🎤 Slide 6 — Image
-Resolution</strong></h1>
-<p><span dir="ltr"></span></p>
-<h2 id="section"><img src="assets/media/image4.png"
-style="width:6.26772in;height:3.52778in" /></h2>
-<h2 id="resolution"><strong>📌 Resolution</strong></h2>
-<h3 id="العربية-20"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">دقة الصورة.</span></p>
-<h3 id="speaker-notes-20"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الـ</span> <span dir="ltr">Resolution</span> <span
-dir="rtl">هو عدد الـ</span> <span dir="ltr">Pixels</span> <span
-dir="rtl">الموجودة في الصورة.</span></p>
-<p><span dir="rtl">وبيتحسب كده:</span></p>
-<p>Width × Height.</p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">عرض × ارتفاع.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="more-pixels"><strong>📌 More Pixels</strong></h2>
-<h3 id="العربية-21"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="ltr">Pixels</span> <span dir="rtl">أكثر.</span></p>
-<h3 id="speaker-notes-21"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">كلما زاد عدد الـ</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">زاد مستوى التفاصيل.</span></p>
-<p><span dir="rtl">الصورة تبقى أوضح.</span></p>
-<p><span dir="rtl">وأسهل للـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">إنه يحللها.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="fewer-pixels"><strong>📌 Fewer Pixels</strong></h2>
-<h3 id="العربية-22"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="ltr">Pixels</span> <span dir="rtl">أقل.</span></p>
-<h3 id="speaker-notes-22"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">لو عدد الـ</span> <span dir="ltr">Pixels</span> <span
-dir="rtl">قليل.</span></p>
-<p><span dir="rtl">الصورة تبدأ تبقى مربعة.</span></p>
-<p><span dir="rtl">والتفاصيل تضيع.</span></p>
-<p><span dir="rtl">وساعتها حتى الإنسان.</span></p>
-<p><span dir="rtl">ممكن ميعرفش الصورة دي فيها إيه.</span></p>
-<p><span dir="rtl">والـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">كمان هتكون مهمته أصعب.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="bigger-file-size"><strong>📌 Bigger File Size</strong></h2>
-<h3 id="العربية-23"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">حجم ملف أكبر.</span></p>
-<h3 id="speaker-notes-23"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">بيحتاج بيانات للتخزين.</span></p>
-<p><span dir="rtl">فكلما زاد عدد الـ</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">زاد حجم الصورة.</span></p>
-<p><span dir="rtl">عشان كده.</span></p>
-<p><span dir="rtl">فيه دائمًا توازن بين:</span></p>
-<p><span dir="rtl">الجودة.</span></p>
-<p><span dir="rtl">وحجم الملف.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="p"><strong>📌 720p</strong></h2>
-<h3 id="العربية-24"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">دقة 720</span><span dir="ltr">p</span><span
-dir="rtl">.</span></p>
-<h3 id="speaker-notes-24"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">السلايد بيذكر مثال.</span></p>
-<p>720p.</p>
-<p><span dir="rtl">وده معناه تقريبًا:</span></p>
-<p>1280 × 720 Pixel.</p>
-<p><span dir="rtl">أي حوالي:</span></p>
-<p>921 <span dir="rtl">ألف</span> Pixel.</p>
-<p><span dir="rtl">كلهم مع بعض.</span></p>
-<p><span dir="rtl">بيكونوا الصورة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-5"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">لو صورت صورة بالموبايل.</span></p>
-<p><span dir="rtl">ثم ضغطتها جدًا.</span></p>
-<p><span dir="rtl">هتلاحظ إن التفاصيل قلت.</span></p>
-<p><span dir="rtl">ولما تكبر الصورة.</span></p>
-<p><span dir="rtl">هتلاقيها مشوشة.</span></p>
-<p><span dir="rtl">وده لأن عدد الـ</span> <span dir="ltr">Pixels</span>
-<span dir="rtl">الفعال أصبح أقل.</span></p>
-<p><img src="assets/media/image1.png"
-style="width:6.26772in;height:3.52778in" /><img
-src="assets/media/image4.png"
-style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
-<h1 id="slide-7-the-rgb-colour-model"><strong>🎤 Slide 7 — The RGB
-Colour Model</strong></h1>
-<h2 id="مقدمة-2"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">طيب...</span></p>
-<p><span dir="rtl">عرفنا إن الكمبيوتر بيخزن الصورة كأرقام.</span></p>
-<p><span dir="rtl">لكن الصور الملونة فيها ملايين الألوان.</span></p>
-<p><span dir="rtl">إزاي الكمبيوتر يخزن كل الألوان دي؟</span></p>
-<p><span dir="rtl">الإجابة هي:</span></p>
-<p><strong>RGB Color Model.</strong></p>
-<p><span dir="ltr"></span></p>
-<h2 id="rgb"><strong>📌 RGB</strong></h2>
-<h3 id="العربية-25"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">نموذج الألوان</span> <span dir="ltr">RGB</span><span
-dir="rtl">.</span></p>
-<h3 id="speaker-notes-25"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="ltr">RGB</span> <span dir="rtl">اختصار لـ:</span></p>
-<p>Red</p>
-<p>Green</p>
-<p>Blue</p>
-<p><span dir="rtl">وهي الألوان الأساسية للضوء.</span></p>
-<p><span dir="rtl">أي لون على شاشة الكمبيوتر.</span></p>
-<p><span dir="rtl">بيتكون من خلط الثلاثة دول.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="every-pixel-stores-three-numbers"><strong>📌 Every Pixel Stores
-Three Numbers</strong></h2>
-<h3 id="العربية-26"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">يخزن ثلاث قيم.</span></p>
-<h3 id="speaker-notes-26"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">في الصورة الملونة.</span></p>
-<p><span dir="rtl">بيحتوي على:</span></p>
-<p><span dir="rtl">قيمة للأحمر.</span></p>
-<p><span dir="rtl">وقيمة للأخضر.</span></p>
-<p><span dir="rtl">وقيمة للأزرق.</span></p>
-<p><span dir="rtl">يعني بدل رقم واحد.</span></p>
-<p><span dir="rtl">يبقى عندنا 3 أرقام.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="range-0255"><strong>📌 Range (0–255)</strong></h2>
-<h3 id="العربية-27"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">مدى القيم.</span></p>
-<h3 id="speaker-notes-27"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">كل لون.</span></p>
-<p><span dir="rtl">قيمته من: 0 إلى 255</span></p>
-<p><span dir="ltr"></span><span dir="rtl">0 يعني مفيش ضوء.</span></p>
-<p><span dir="ltr"></span><span dir="rtl">255 يعني أقصى شدة.</span></p>
-<p><span dir="rtl">وده يسمح بتكوين ملايين الألوان المختلفة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="examples"><strong>📌 Examples</strong></h2>
-<h3 id="speaker-notes-28"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">السلايد بيعرض أمثلة مهمة جدًا.</span></p>
-<p><strong>(255,0,0)</strong></p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">أحمر كامل.</span></p>
-<p><span dir="rtl">مفيش أخضر.</span></p>
-<p><span dir="rtl">مفيش أزرق.</span></p>
-<p><span dir="rtl">فتطلع النتيجة:</span></p>
-<p><span dir="rtl">لون أحمر.</span></p>
-<p><span dir="ltr"></span></p>
-<p><strong>(0,0,0)</strong></p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">ولا لون شغال.</span></p>
-<p><span dir="rtl">فتطلع:</span></p>
-<p><span dir="rtl">أسود.</span></p>
-<p><span dir="ltr"></span></p>
-<p><strong>(255,255,255)</strong></p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">الثلاث ألوان بأقصى شدة.</span></p>
-<p><span dir="rtl">فتطلع:</span></p>
-<p><span dir="rtl">أبيض.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-6"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">لو بحثنا على جوجل على</span> <span dir="ltr">color
-picker<br />
-<a
-href="https://www.google.com/search?q=color+picker&amp;sca_esv=6fd337b2c9137bab&amp;sxsrf=APpeQnuUrlGiGvunuT4FCa2PCA1OciwP5w%3A1783931925120&amp;source=hp&amp;ei=FaRUaq2RBNiZi-gP_uGRiQQ&amp;iflsig=ABILxe8AAAAAalSyJbpkif1iGGQdjghGj6caElW6Gw6U&amp;oq=color+pi&amp;gs_lp=Egdnd3Mtd2l6Ighjb2xvciBwaSoCCAAyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBMgUQABiABDIIEAAYgAQYywEyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBSJdRUL4HWIBLcAF4AJABAJgBgAGgAZgGqgEDMS42uAEByAEA-AEBmAIIoAKwBqgCCsICDRAjGPAFGMkCGOoCGCfCAgcQIxjqAhgnwgIKECMY8AUY6gIYJ8ICCxAAGIAEGLEDGIMBwgINEAAYARiABBixAxiDAcICChAAGAEYgAQYsQPCAgkQABgBGIAEGArCAggQABiABBixA8ICBRAuGIAEwgILEAAYARiABBgKGCrCAgkQLhgBGIAEGArCAgQQIxgnmAMH8QXGW2L2PqvXoJIHAzEuN6AH6heyBwMwLje4B6gGwgcFMC43LjHIBxCACAE&amp;sclient=gws-wiz"><u>color</u></a></span>
-<a
-href="https://www.google.com/search?q=color+picker&amp;sca_esv=6fd337b2c9137bab&amp;sxsrf=APpeQnuUrlGiGvunuT4FCa2PCA1OciwP5w%3A1783931925120&amp;source=hp&amp;ei=FaRUaq2RBNiZi-gP_uGRiQQ&amp;iflsig=ABILxe8AAAAAalSyJbpkif1iGGQdjghGj6caElW6Gw6U&amp;oq=color+pi&amp;gs_lp=Egdnd3Mtd2l6Ighjb2xvciBwaSoCCAAyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBMgUQABiABDIIEAAYgAQYywEyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBSJdRUL4HWIBLcAF4AJABAJgBgAGgAZgGqgEDMS42uAEByAEA-AEBmAIIoAKwBqgCCsICDRAjGPAFGMkCGOoCGCfCAgcQIxjqAhgnwgIKECMY8AUY6gIYJ8ICCxAAGIAEGLEDGIMBwgINEAAYARiABBixAxiDAcICChAAGAEYgAQYsQPCAgkQABgBGIAEGArCAggQABiABBixA8ICBRAuGIAEwgILEAAYARiABBgKGCrCAgkQLhgBGIAEGArCAgQQIxgnmAMH8QXGW2L2PqvXoJIHAzEuN6AH6heyBwMwLje4B6gGwgcFMC43LjHIBxCACAE&amp;sclient=gws-wiz"><span
-dir="ltr"><u>picker</u></span> <span dir="rtl"><u>-</u></span> <span
-dir="rtl"><u>بحث</u></span> <span dir="rtl"></span><span
-dir="ltr"><u>Google‏</u></span></a><span dir="ltr"></span><span
-dir="rtl"><br />
-هيجيلنا مربع نقدر نحدد منه اللون بالقيم المختلفة له</span></p>
-<p><span dir="rtl">حركت منزلق</span> <span dir="ltr">Red</span> <span
-dir="rtl">لأقصى قيمة.</span></p>
-<p><span dir="rtl">وسبت</span> <span dir="ltr">Green</span> <span
-dir="rtl">و</span><span dir="ltr">Blue</span> <span
-dir="rtl">صفر.</span></p>
-<p><span dir="rtl">هيطلع اللون أحمر.</span></p>
-<p><span dir="rtl">ولو زودت</span> <span dir="ltr">Green</span> <span
-dir="rtl">معاه.</span></p>
-<p><span dir="rtl">اللون يبدأ يتحول لأصفر أو برتقالي حسب
-القيم.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-8-how-computers-turn-images-into-numbers"><strong>🎤 Slide
-8 — How Computers Turn Images Into Numbers</strong></h1>
-<h2 id="مقدمة-3"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">عرفنا إن الصورة عبارة عن</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">طيب...</span></p>
-<p><span dir="rtl">الكمبيوتر يفهم الـ</span> <span
-dir="ltr">Pixels</span> <span dir="rtl">دي إزاي؟</span></p>
-<p><span dir="rtl">هل بيفهمها كألوان؟</span></p>
-<p><span dir="rtl">الإجابة:</span></p>
-<p><span dir="rtl">لا.</span></p>
-<p><span dir="rtl">هو بيحولها كلها إلى أرقام.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="what-we-see"><strong>📌 What We See</strong></h2>
-<h3 id="العربية-28"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">ما يراه الإنسان.</span></p>
-<h3 id="speaker-notes-29"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">إحنا لما نبص للصورة.</span></p>
-<p><span dir="rtl">بنشوف شخص.</span></p>
-<p><span dir="rtl">ونتعرف عليه بسهولة.</span></p>
-<p><span dir="rtl">لكن الكمبيوتر.</span></p>
-<p><span dir="rtl">مش بيشوف شخص.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="what-the-computer-sees"><strong>📌 What the Computer
-Sees</strong></h2>
-<h3 id="العربية-29"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">ما يراه الكمبيوتر.</span></p>
-<h3 id="speaker-notes-30"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الكمبيوتر بيشوف جدول مليان أرقام.</span></p>
-<p><span dir="rtl">كل رقم بيمثل قيمة</span> <span
-dir="ltr">Pixel</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">يعني بالنسبة له.</span></p>
-<p><span dir="rtl">الصورة كلها عبارة عن بيانات رقمية.</span></p>
-<p><span dir="rtl">وده سبب إن الكمبيوتر يقدر يعمل عليها عمليات
-حسابية.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="image-matrix"><strong>📌 Image Matrix</strong></h2>
-<h3 id="العربية-30"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">مصفوفة الصورة.</span></p>
-<h3 id="speaker-notes-31"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">السلايد بيقول:</span></p>
-<p><strong>An image is a matrix.</strong></p>
-<p><span dir="rtl">يعني الصورة عبارة عن</span> <span
-dir="ltr">Matrix</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">أو جدول كبير.</span></p>
-<p><span dir="rtl">كل خانة فيه.</span></p>
-<p><span dir="rtl">تمثل</span> <span dir="ltr">Pixel</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">ولو الصورة ملونة.</span></p>
-<p><span dir="rtl">يبقى كل</span> <span dir="ltr">Pixel</span> <span
-dir="rtl">غالبًا بيحتوي على 3 قيم.</span></p>
-<p><span dir="rtl">مش قيمة واحدة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="why-numbers"><strong>📌 Why Numbers?</strong></h2>
-<h3 id="العربية-31"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">ليه الكمبيوتر بيحول الصورة لأرقام؟</span></p>
-<h3 id="speaker-notes-32"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">لأن الكمبيوتر لا يفهم إلا الأرقام.</span></p>
-<p><span dir="rtl">مفيش حاجة اسمها عند الكمبيوتر:</span></p>
-<p><span dir="ltr"></span><span dir="rtl">"دي عربية."</span></p>
-<p><span dir="rtl">أو</span></p>
-<p><span dir="ltr"></span><span dir="rtl">"ده إنسان."</span></p>
-<p><span dir="rtl">في البداية.</span></p>
-<p><span dir="rtl">كلها أرقام.</span></p>
-<p><span dir="rtl">وبعد كده.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يعمل عمليات رياضية على الأرقام.</span></p>
-<p><span dir="rtl">ويبدأ يكتشف:</span></p>
-<p><span dir="rtl">الحواف.</span></p>
-<p><span dir="rtl">الأشكال.</span></p>
-<p><span dir="rtl">الألوان.</span></p>
-<p><span dir="rtl">الأنماط.</span></p>
-<p><span dir="rtl">وفي النهاية.</span></p>
-<p><span dir="rtl">يقرر الصورة فيها إيه.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-7"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><img src="assets/media/image9.png"
-style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><strong>🔗 Recap</strong></p>
-<p><span dir="rtl">اربط للطلاب تسلسل الأفكار في نهاية الجزء:</span></p>
-<p><strong><span dir="ltr">Image → Grid of Pixels → Pixels</span> <span
-dir="rtl">تتحول إلى</span> <span dir="ltr">Numbers</span> <span
-dir="rtl">→ كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">في
-الصورة الملونة يحتوي على</span> <span dir="ltr">RGB</span> <span
-dir="rtl">→ عدد الـ</span> <span dir="ltr">Pixels</span> <span
-dir="rtl">يحدد الـ</span> <span dir="ltr">Resolution</span><span
-dir="rtl">.</span></strong></p>
-<p><span dir="rtl">وقلهم إن دي هي "لغة الصور" بالنسبة للكمبيوتر، وكل
-خوارزميات</span> <span dir="ltr"><strong>Computer Vision</strong></span>
-<span dir="rtl">تعتمد على هذه الفكرة قبل أن تبدأ في التعرف على الأشخاص
-أو الأشياء داخل الصورة.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-9-everyday-examples-of-computer-vision"><strong>🎤 Slide 9
-— Everyday Examples of Computer Vision</strong></h1>
-<h2 id="مقدمة-4"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">بعد ما عرفنا الكمبيوتر بيشوف الصورة إزاي، بيحولها
-لـ</span> <span dir="ltr">Pixels</span><span dir="rtl">، وبعدين</span>
-<span dir="ltr">Numbers</span><span dir="rtl">...</span></p>
-<p><span dir="rtl">دلوقتي هنشوف فين بنستخدم</span> <span
-dir="ltr">Computer Vision</span> <span dir="rtl">في حياتنا
-اليومية.</span></p>
-<p><span dir="rtl">المفاجأة إنك تقريبًا بتستخدمه كل يوم حتى لو مش واخد
-بالك.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="face-unlock"><strong>📌 Face Unlock</strong></h2>
-<h3 id="العربية-32"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">فتح الهاتف بالوجه.</span></p>
-<h3 id="speaker-notes-33"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">أول مثال معانا هو</span> <span dir="ltr">Face
-Unlock</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">لما تبص للموبايل...</span></p>
-<p><span dir="rtl">الكاميرا تصور وشك.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحدد إن فيه</span> <span dir="ltr">Face</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">بعدها يقارن ملامح وشك بالبيانات المخزنة.</span></p>
-<p><span dir="rtl">لو التطابق كبير...</span></p>
-<p><span dir="rtl">يفتح الموبايل.</span></p>
-<p><span dir="rtl">لاحظ إنه مش مجرد تصوير.</span></p>
-<p><span dir="rtl">هو بيحلل تفاصيل الوجه.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="photo-tagging"><strong>📌 Photo Tagging</strong></h2>
-<h3 id="العربية-33"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تجميع الصور حسب الأشخاص.</span></p>
-<h3 id="speaker-notes-34"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">زي</span> Google Photos <span dir="rtl">أو</span>
-Apple Photos.</p>
-<p><span dir="rtl">الموبايل يلاقي كل الصور اللي فيها نفس
-الشخص.</span></p>
-<p><span dir="rtl">ويحطها في</span> <span dir="ltr">Album</span> <span
-dir="rtl">واحد.</span></p>
-<p><span dir="rtl">من غير ما أنت ترتبهم.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="qr-barcode-scan"><strong>📌 QR &amp; Barcode Scan</strong></h2>
-<h3 id="العربية-34"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">قراءة</span> <span dir="ltr">QR Code</span> <span
-dir="rtl">والباركود.</span></p>
-<h3 id="speaker-notes-35"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الكاميرا تصور الكود.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحدد مكانه.</span></p>
-<p><span dir="rtl">ويقرأ المربعات السودا والبيضا.</span></p>
-<p><span dir="rtl">وبعدين يحولها لمعلومات.</span></p>
-<p><span dir="rtl">زي:</span></p>
-<p><span dir="rtl">رابط.</span></p>
-<p><span dir="rtl">رقم منتج.</span></p>
-<p><span dir="rtl">أو بيانات دفع.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="ar-camera-filters"><strong>📌 AR Camera Filters</strong></h2>
-<h3 id="العربية-35"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">فلاتر الصور</span><span dir="ltr"></span></p>
-<h3 id="speaker-notes-36"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">سناب شات.</span></p>
-<p><span dir="rtl">إنستجرام.</span></p>
-<p><span dir="rtl">تيك توك.</span></p>
-<p><span dir="rtl">كلهم بيعتمدوا على</span> <span dir="ltr">Computer
-Vision</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">النظام يحدد:</span></p>
-<p><span dir="rtl">مكان العين.</span></p>
-<p><span dir="rtl">مكان الأنف.</span></p>
-<p><span dir="rtl">مكان الفم.</span></p>
-<p><span dir="rtl">وبعدين يحط الفلتر فوقهم في نفس اللحظة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="number-plate-reading"><strong>📌 Number Plate
-Reading</strong></h2>
-<h3 id="العربية-36"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">قراءة أرقام السيارات.</span></p>
-<h3 id="speaker-notes-37"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الكاميرا تصور العربية.</span></p>
-<p><span dir="rtl">تحدد اللوحة.</span></p>
-<p><span dir="rtl">تفصل الحروف والأرقام.</span></p>
-<p><span dir="rtl">وبعدين تحولهم لنص.</span></p>
-<p><span dir="rtl">وده مستخدم في:</span></p>
-<p><span dir="rtl">الجراجات.</span></p>
-<p><span dir="rtl">الكباري.</span></p>
-<p><span dir="rtl">الطرق السريعة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="search-by-image"><strong>📌 Search by Image</strong></h2>
-<h3 id="العربية-37"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">البحث باستخدام صورة.</span></p>
-<h3 id="speaker-notes-38"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بدل ما تكتب اسم المنتج...</span></p>
-<p><span dir="rtl">تصور صورة.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحللها.</span></p>
-<p><span dir="rtl">وبعدين يبحث عن صور مشابهة.</span></p>
-<p><span dir="rtl">زي</span> Google Lens.</p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-8"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">طالب صور نبات.</span></p>
-<p><span dir="ltr">Google Lens</span> <span dir="rtl">قاله اسم النبات
-ونوعه.</span></p>
-<p><span dir="rtl">وده مثال على</span> <span dir="ltr">Search by
-Image</span><span dir="rtl">.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-10-vision-ai-around-us-cities"><strong>🎤 Slide 10 —
-Vision AI Around Us: Cities</strong></h1>
-<h2 id="مقدمة-5"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">لحد دلوقتي كنا بنتكلم عن</span> <span
-dir="ltr">Computer Vision</span> <span dir="rtl">في الموبايل أو
-الكمبيوتر.</span></p>
-<p><span dir="rtl">لكن الحقيقة إن أكبر استخدام لـ</span> <span
-dir="ltr">Computer Vision</span> <span dir="rtl">موجود بره
-البيت...</span></p>
-<p><span dir="rtl">في الشوارع والمدن.</span></p>
-<p><span dir="rtl">تقريبًا أي مدينة حديثة فيها آلاف الكاميرات.</span></p>
-<p><span dir="rtl">لكن الكاميرات لوحدها مش ذكية.</span></p>
-<p><span dir="rtl">اللي بيخليها ذكية هو</span> <span
-dir="ltr"><strong>Computer Vision</strong>.</span></p>
-<p><span dir="rtl">بدل ما إنسان يقعد يبص على مئات الشاشات، الـ</span>
-<span dir="ltr">AI</span> <span dir="rtl">هو اللي يراقب ويحلل ويبلغ عن
-أي حدث مهم.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="smart-security"><strong>📌 Smart Security</strong></h1>
-<h3 id="العربية-38"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">الأمن الذكي.</span></p>
-<h3 id="speaker-notes-39"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">أول استخدام هو</span> <span dir="ltr"><strong>Smart
-Security</strong>.</span></p>
-<p><span dir="rtl">زمان، كان رجل الأمن لازم يقعد قدام شاشات الكاميرات
-طول اليوم، ولو غمض عينه لحظة ممكن يفوته حدث مهم.</span></p>
-<p><span dir="rtl">دلوقتي الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">بيعمل المهمة دي.</span></p>
-<p><span dir="rtl">الكاميرا تصور باستمرار، والـ</span> <span
-dir="ltr">AI</span> <span dir="rtl">يحلل كل</span> <span
-dir="ltr">Frame</span> <span dir="rtl">في الفيديو.</span></p>
-<p><span dir="rtl">لو لقى حاجة غير طبيعية، يرسل</span> <span
-dir="ltr">Alert</span> <span dir="rtl">فورًا.</span></p>
-<p><span dir="rtl">مثلًا:</span></p>
-<ul>
-<li><p><span dir="rtl">شخص دخل منطقة ممنوع الدخول ليها</span></p></li>
-<li><p><span dir="rtl">شخص بينط فوق سور.</span></p></li>
-<li><p><span dir="rtl">شنطة متسابا في مكان عام.</span></p></li>
-<li><p><span dir="rtl">عربية دخلت اتجاه غلط.</span></p></li>
-<li><p><span dir="rtl">شخص وقع على الأرض وكش بتحرك.</span></p></li>
-</ul>
-<p><span dir="rtl">البرنامج لا ينتظر إن الإنسان يلاحظ، لكنه ينبه رجل
-الأمن مباشرة.</span></p>
-<p><span dir="rtl">وده بيخلي الاستجابة أسرع بكتير.</span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="مثال-عملي-9"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h3>
-<p><span dir="rtl">في بنك، بعد مواعيد العمل، أي شخص يدخل
-المبنى.</span></p>
-<p><span dir="rtl">الكاميرا يتلقطه.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يعرف إن الوقت خارج ساعات العمل.</span></p>
-<p><span dir="rtl">فبيطلع صوت إنذار وبيرسل رسالة للأمن.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="smart-cities"><strong>📌 Smart Cities</strong></h1>
-<h3 id="العربية-39"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">المدن الذكية.</span></p>
-<h3 id="speaker-notes-40"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">المدينة الذكية هي مدينة بتستخدم التكنولوجيا والذكاء
-الاصطناعي لإدارة الخدمات بشكل أفضل.</span></p>
-<p><span dir="rtl">بدل ما كل جهاز يشتغل لوحده...</span></p>
-<p><span dir="rtl">كل الأنظمة بتتواصل مع بعض.</span></p>
-<p><span dir="rtl">مثلاً:</span></p>
-<p><span dir="rtl">كاميرات المرور.</span></p>
-<p><span dir="rtl">إشارات المرور.</span></p>
-<p><span dir="rtl">أعمدة الإنارة.</span></p>
-<p><span dir="rtl">مواقف السيارات.</span></p>
-<p><span dir="rtl">كلها تبعت بيانات إلى مركز تحكم واحد.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحلل البيانات دي ويبدأ ياخد قرارات.</span></p>
-<p><span dir="rtl">مثلاً:</span></p>
-<p><span dir="rtl">لو فيه حادث.</span></p>
-<p><span dir="rtl">يغير مسار المرور.</span></p>
-<p><span dir="rtl">لو شارع فاضي.</span></p>
-<p><span dir="rtl">يقلل مدة الإشارة الخضرا.</span></p>
-<p><span dir="rtl">لو منطقة مضلمة.</span></p>
-<p><span dir="rtl">يشغل الإضاءة تلقائيًا.</span></p>
-<p><span dir="rtl">فالـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">هنا مش بيتفرج بس ولكن بيساعد في اتخاذ القرارات.</span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="مثال-عملي-10"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h3>
-<p><span dir="rtl">في يوم مطر شديد.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يلاحظ إن السيارات بتمشي أبطأ من المعتاد.</span></p>
-<p><span dir="rtl">فيغير توقيت إشارات المرور.</span></p>
-<p><span dir="rtl">ويرسل رسالة على اللوحات الإلكترونية:</span></p>
-<p><span dir="ltr"></span><strong><span dir="rtl">"ازدحام أمامك...
-استخدم طريقًا بديلًا."</span></strong></p>
-<p><span dir="ltr"></span></p>
-<h1 id="traffic-monitoring"><strong>📌 Traffic Monitoring</strong></h1>
-<h3 id="العربية-40"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">مراقبة المرور.</span></p>
-<h3 id="speaker-notes-41"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">ده من أشهر تطبيقات</span> <span dir="ltr">Computer
-Vision</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">الكاميرات مش بس بتصور العربيات.</span></p>
-<p><span dir="rtl">لكن بتحلل الفيديو.</span></p>
-<p><span dir="rtl">وبتعرف:</span></p>
-<ul>
-<li><p><span dir="rtl">عدد السيارات.</span></p></li>
-<li><p><span dir="rtl">سرعة السيارات.</span></p></li>
-<li><p><span dir="rtl">اتجاه الحركة.</span></p></li>
-<li><p><span dir="rtl">هل فيه زحمة؟</span></p></li>
-<li><p><span dir="rtl">هل فيه حادث؟</span></p></li>
-<li><p><span dir="rtl">هل فيه سيارة واقفة في مكان ممنوع؟</span></p></li>
-</ul>
-<p><span dir="rtl">بعد كده النظام بيرسل البيانات لمركز
-التحكم.</span></p>
-<p><span dir="rtl">ومنها يتم التحكم في إشارات المرور.</span></p>
-<p><span dir="rtl">أو إرسال دورية مرور.</span></p>
-<p><span dir="rtl">أو اقتراح طريق بديل للسائقين.</span></p>
-<p><span dir="ltr"></span></p>
-<h3 id="مثال-عملي-11"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h3>
-<p><span dir="rtl">إشارة مرور عليها كاميرا.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يعد السيارات.</span></p>
-<p><span dir="rtl">لقا إن الاتجاه الأول فيه 120 عربية.</span></p>
-<p><span dir="rtl">والاتجاه الثاني فيه 20 عربية فقط.</span></p>
-<p><span dir="rtl">فبيقرر يخلي الإشارة الخضراء للاتجاه الأول لمدة
-أطول.</span></p>
-<p><span dir="rtl">وده يقلل الزحمة.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="كيف-تعمل-كل-هذه-الأنظمة"><strong><span dir="rtl">📌 كيف تعمل كل
-هذه الأنظمة؟</span></strong></h1>
-<h3 id="speaker-notes-42"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">لاحظوا إن التطبيقات الثلاثة مختلفة.</span></p>
-<p><span dir="rtl">لكن كلها بتشتغل بنفس الـ</span> <span
-dir="ltr">Workflow</span> <span dir="rtl">اللي درسناه.</span></p>
-<p><strong>Camera</strong></p>
-<p>↓</p>
-<p><span dir="rtl">تلتقط صورة أو فيديو.</span></p>
-<p>↓</p>
-<p><strong>Image</strong></p>
-<p>↓</p>
-<p><span dir="rtl">الصورة تتحول إلى</span> <span
-dir="ltr">Pixels</span><span dir="rtl">.</span></p>
-<p>↓</p>
-<p><strong>Numbers</strong></p>
-<p>↓</p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحلل الأرقام ويبحث عن</span> <span
-dir="ltr">Patterns</span><span dir="rtl">.</span></p>
-<p>↓</p>
-<p><strong>Decision</strong></p>
-<p>↓</p>
-<p><span dir="rtl">إرسال</span> <span dir="ltr">Alert</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">أو تغيير الإشارة.</span></p>
-<p><span dir="rtl">أو فتح بوابة.</span></p>
-<p><span dir="rtl">أو تسجيل مخالفة.</span></p>
-<p><span dir="rtl">يعني نفس الفكرة...</span></p>
-<p><span dir="rtl">لكن القرار النهائي يختلف حسب التطبيق.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-11-machine-learning-process"><strong>🎤 Slide 11 — Machine
-Learning Process</strong></h1>
-<h2 id="مقدمة-6"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">بعد ما عرفنا التطبيقات...</span></p>
-<p><span dir="rtl">تعالوا نشوف إزاي أصلاً بنبني نموذج</span> <span
-dir="ltr">AI</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">وده اسمه</span> Machine Learning Process.</p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-1-problem-definition"><strong>📌 Step 1 — Problem
-Definition</strong></h2>
-<h3 id="العربية-41"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تحديد المشكلة.</span></p>
-<h3 id="speaker-notes-43"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">أول سؤال.</span></p>
-<p><span dir="rtl">أنا عايز أحل إيه؟</span></p>
-<p><span dir="rtl">مثلاً:</span></p>
-<p><span dir="rtl">أتعرف على القطط.</span></p>
-<p><span dir="rtl">ولا أقرأ لوحات العربيات.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-2-data-collection"><strong>📌 Step 2 — Data
-Collection</strong></h2>
-<h3 id="العربية-42"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">جمع البيانات.</span></p>
-<h3 id="speaker-notes-44"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">نجمع آلاف الصور.</span></p>
-<p><span dir="rtl">كل ما البيانات تكون أكتر وأفضل...</span></p>
-<p><span dir="rtl">النموذج يتعلم أحسن.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-3-data-preprocessing"><strong>📌 Step 3 — Data
-Preprocessing</strong></h2>
-<h3 id="العربية-43"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تجهيز البيانات.</span></p>
-<h3 id="speaker-notes-45"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">ننضف الصور.</span></p>
-<p><span dir="rtl">نحذف الصور الغلط.</span></p>
-<p><span dir="rtl">نوحد الأحجام.</span></p>
-<p><span dir="rtl">ونضيف</span> <span dir="ltr">Labels</span><span
-dir="rtl">.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-4-training-model"><strong>📌 Step 4 — Training
-Model</strong></h2>
-<h3 id="العربية-44"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تدريب النموذج.</span></p>
-<h3 id="speaker-notes-46"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يبدأ يتعلم.</span></p>
-<p><span dir="rtl">يشوف الصور.</span></p>
-<p><span dir="rtl">ويقارنها بالإجابة الصحيحة.</span></p>
-<p><span dir="rtl">ويعدل نفسه بعد كل محاولة.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-5-model-evaluation"><strong>📌 Step 5 — Model
-Evaluation</strong></h2>
-<h3 id="العربية-45"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تقييم النموذج.</span></p>
-<h3 id="speaker-notes-47"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">نقيس الدقة.</span></p>
-<p><span dir="rtl">هل النموذج كويس؟</span></p>
-<p><span dir="rtl">ولا محتاج تدريب أكتر؟</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-6-test-model"><strong>📌 Step 6 — Test Model</strong></h2>
-<h3 id="العربية-46"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">اختبار النموذج.</span></p>
-<h3 id="speaker-notes-48"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">نجربه على صور جديدة عمره ما شافها.</span></p>
-<p><span dir="rtl">لو نجح...</span></p>
-<p><span dir="rtl">يبقى اتعلم صح.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="step-7-deploy-the-model"><strong>📌 Step 7 — Deploy the
-Model</strong></h2>
-<h3 id="العربية-47"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تشغيل النموذج.</span></p>
-<h3 id="speaker-notes-49"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بعد النجاح.</span></p>
-<p><span dir="rtl">نحطه داخل تطبيق.</span></p>
-<p><span dir="rtl">أو موقع.</span></p>
-<p><span dir="rtl">أو كاميرا.</span></p>
-<p><span dir="rtl">ويبدأ الناس تستخدمه.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-12-image-classification-vs.-object-detection"><strong>🎤
-Slide 12 — Image Classification vs. Object Detection</strong></h1>
-<p><span dir="ltr"></span></p>
-<h2 id="image-classification"><strong>📌 Image
-Classification</strong></h2>
-<h3 id="العربية-48"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">تصنيف الصورة.</span></p>
-<h3 id="speaker-notes-50"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">ينظر للصورة كلها.</span></p>
-<p><span dir="rtl">ويقول:</span></p>
-<p><span dir="rtl">الصورة دي عبارة عن كذا ويوصفها وصف في جملة واحدة سواء
-كان في الصور حاجة واحدة او اكتر من حاجة فمثلا يقولك في الصورة
-في...</span></p>
-<p><span dir="rtl">قطة.</span></p>
-<p><span dir="rtl">كلب.</span></p>
-<p><span dir="rtl">سيارة.</span></p>
-<p><span dir="ltr"></span> <span dir="rtl">كل ده في</span> <span
-dir="ltr">Label</span> <span dir="rtl">واحد او جملة واحدة
-فقط.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="object-detection"><strong>📌 Object Detection</strong></h2>
-<h3 id="العربية-49"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">اكتشاف العناصر.</span></p>
-<h3 id="speaker-notes-51"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">هنا الموضوع أكبر.</span></p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يحدد:</span></p>
-<p><span dir="rtl">كل عنصر.</span></p>
-<p><span dir="rtl">ومكانه.</span></p>
-<p><span dir="rtl">ويرسم مربع حواليه.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="الفرق"><strong><span dir="rtl">📌 الفرق</span></strong></h2>
-<h3 id="العربية-50"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">السؤال اللي بيجاوب عليه كل واحد.</span></p>
-<h3 id="speaker-notes-52"><strong>🗣️ Speaker Notes</strong></h3>
-<p>Classification <span dir="rtl">يسأل</span>:</p>
-<p>What's in this image?</p>
-<p><span dir="rtl">أما</span> <span dir="ltr">Detection</span> <span
-dir="rtl">يسأل:</span></p>
-<p>What objects are there?</p>
-<p>And where are they?</p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-12"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">صورة فيها:</span></p>
-<p><span dir="rtl">ولد.</span></p>
-<p><span dir="rtl">كلب.</span></p>
-<p><span dir="rtl">كرة.</span></p>
-<p>Classification:</p>
-<p>Outdoor scene.</p>
-<p><span dir="rtl">أو</span> <span dir="ltr">Dog</span><span
-dir="rtl">.</span></p>
-<p>Detection:</p>
-<p><span dir="ltr">Person</span> <span dir="rtl">هنا.</span></p>
-<p><span dir="ltr">Dog</span> <span dir="rtl">هنا.</span></p>
-<p><span dir="ltr">Ball</span> <span dir="rtl">هنا.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="slide-13-face-detection-vs.-face-recognition"><strong>🎤 Slide
-13 — Face Detection vs. Face Recognition</strong></h1>
-<h2 id="مقدمة-7"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
-<p><span dir="rtl">من أكتر الحاجات اللي الطلبة بيلخبطوا
-بينها.</span></p>
-<p>Face Detection</p>
-<p><span dir="rtl">و</span></p>
-<p>Face Recognition</p>
-<p><span dir="rtl">الفرق بينهم بسيط جدًا.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="face-detection"><strong>📌 Face Detection</strong></h2>
-<h3 id="العربية-51"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">اكتشاف الوجوه.</span></p>
-<h3 id="speaker-notes-53"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يسأل سؤال واحد فقط:</span></p>
-<p><span dir="rtl">هل يوجد وجه؟</span></p>
-<p><span dir="rtl">لو موجود...</span></p>
-<p><span dir="rtl">يرسم مربع حواليه.</span></p>
-<p><span dir="rtl">ممكن يعد كام شخص.</span></p>
-<p><span dir="rtl">لكن لا يعرف مين هما.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="face-recognition"><strong>📌 Face Recognition</strong></h2>
-<h3 id="العربية-52"><strong><span dir="rtl">العربية</span></strong></h3>
-<p><span dir="rtl">التعرف على الشخص.</span></p>
-<h3 id="speaker-notes-54"><strong>🗣️ Speaker Notes</strong></h3>
-<p><span dir="rtl">بعد ما لقى الوجه...</span></p>
-<p><span dir="rtl">يقارن ملامحه بقاعدة بيانات.</span></p>
-<p><span dir="rtl">لو لقى تطابق.</span></p>
-<p><span dir="rtl">يقول:</span></p>
-<p><span dir="rtl">ده أحمد.</span></p>
-<p><span dir="rtl">أو سارة.</span></p>
-<p><span dir="rtl">يعني يعرف هوية الشخص.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">الفرق الأساسي.</span></p>
-<h3 id="speaker-notes-55"><strong>🗣️ Speaker Notes</strong></h3>
-<p>Detection</p>
-<p>=</p>
-<p>Where is the face? <span dir="rtl">هل في وش في الصورة ولو موججود فهو
-موجود فين</span></p>
-<p>Recognition</p>
-<p>=</p>
-<p>Who is the face? <span dir="rtl">وش مين اللي موجود في
-الصورة</span></p>
-<p><span dir="rtl">دي أهم جملة في السلايد كله.</span></p>
-<p><span dir="ltr"></span></p>
-<h2 id="مثال-عملي-13"><strong><span dir="rtl">👨‍🎓 مثال
-عملي</span></strong></h2>
-<p><span dir="rtl">في الفصل.</span></p>
-<p>Detection <span dir="rtl">يقول</span>:</p>
-<p><span dir="rtl">فيه 25 طالب.</span></p>
-<p>Recognition <span dir="rtl">يقول</span>:</p>
-<p><span dir="rtl">أحمد.</span></p>
-<p><span dir="rtl">محمد.</span></p>
-<p><span dir="rtl">سارة.</span></p>
-<p><span dir="rtl">علي.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><img src="assets/media/image3.png"
-style="width:6.26772in;height:4.18056in" /><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="activity-1-object-recognition-using-pictoblox"><strong>🎯
-Activity 1 — Object Recognition using PictoBlox</strong></h1>
-<p><span dir="ltr"></span></p>
-<p><img src="assets/media/image5.png"
-style="width:6.26772in;height:4.54167in" /><span dir="ltr"></span></p>
-<h1 id="مقدمة-للطلبة"><strong><span dir="rtl">🎤 مقدمة
-للطلبة</span></strong></h1>
-<blockquote>
-<p><span dir="ltr"></span><span dir="rtl">"الإنسان أول ما يشوف كتاب يعرف
-إنه كتاب.</span></p>
-<p><span dir="rtl">النهارده هنخلي الكمبيوتر يعمل نفس الحاجة."</span></p>
-</blockquote>
-<p><span dir="ltr"></span></p>
-<h1 id="المطلوب"><strong><span dir="rtl">📌 المطلوب</span></strong></h1>
-<p><span dir="rtl">السلايد بيقول اننا عاوزين نعمل ايه:</span></p>
-<p>Build a Computer Vision Application.</p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">برنامج بيستخدم الكاميرا.</span></p>
-<p><span dir="ltr"></span></p>
-<p>Recognize any object.</p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">يتعرف على الجسم.</span></p>
-<p><span dir="ltr"></span></p>
-<p>Display object name.</p>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">يعرض اسمه.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="المطلوب-تنفيذه"><strong><span dir="rtl">💻 المطلوب
-تنفيذه</span></strong></h1>
-<p><span dir="rtl">مثلاً:</span></p>
-<p><span dir="rtl">لو ظهر:</span></p>
-<p>📚 Book</p>
-<p><span dir="rtl">يقول</span></p>
-<p>"I Found A Book!"</p>
-<p><span dir="ltr"></span></p>
-<p>🖊 Pen</p>
-<p><span dir="rtl">يقول</span></p>
-<p>"I Found A Pen!"</p>
-<p><span dir="ltr"></span></p>
-<p>🍼 Bottle</p>
-<p><span dir="rtl">يقول</span></p>
-<p>"I Found A Bottle!"</p>
-<p><span dir="ltr"></span></p>
-<h1 id="منطق-البرنامج"><strong><span dir="rtl">🧠 منطق
-البرنامج</span></strong></h1>
-<p><span dir="ltr">Start</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Turn Camera ON</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Recognize Object</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">IF Book</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Say</span></p>
-<p><span dir="ltr">"I Found A Book"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">IF Pen</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Say</span></p>
-<p><span dir="ltr">"I Found A Pen"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">IF Bottle</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Say</span></p>
-<p><span dir="ltr">"I Found A Bottle"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p>Repeat Forever</p>
-<p><span dir="ltr"></span></p>
-<h1 id="أثناء-الشرح"><strong><span dir="rtl">🖥 أثناء
-الشرح</span></strong></h1>
-<p><span dir="rtl">أكد إن فيه مرحلتين مختلفتين:</span></p>
-<p><span dir="rtl">المرحلة الأولى</span></p>
-<p>Detection</p>
-<p><span dir="rtl">هل فيه جسم؟</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">المرحلة الثانية</span></p>
-<p>Recognition</p>
-<p><span dir="rtl">هو جسم إيه؟</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">وده بيربط مباشرة بالسلايد اللي شرحناه:</span></p>
-<p>Face Detection</p>
-<p>vs</p>
-<p>Face Recognition</p>
-<p><span dir="rtl">نفس الفكرة بالضبط.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="مثال-داخل-الفصل"><strong><span dir="rtl">👨‍🎓 مثال داخل
-الفصل</span></strong></h1>
-<p><span dir="rtl">حط قدام الكاميرا:</span></p>
-<p><span dir="rtl">كتاب</span></p>
-<p><span dir="rtl">قلم</span></p>
-<p><span dir="rtl">زجاجة مياه</span></p>
-<p><span dir="rtl">كوباية</span></p>
-<p><span dir="rtl">موبايل</span></p>
-<p><span dir="rtl">وخلي الطلبة يتوقعوا قبل البرنامج:</span></p>
-<p><span dir="rtl">هيتعرف عليه ولا لأ؟</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="سؤال-مهم"><strong><span dir="rtl">🧠 سؤال
-مهم</span></strong></h1>
-<p><span dir="rtl">لو جبت جسم عمر الـ</span> <span dir="ltr">AI</span>
-<span dir="rtl">ما شافهش.</span></p>
-<p><span dir="rtl">هيعمل إيه؟</span></p>
-<p><span dir="rtl">الإجابة:</span></p>
-<p><span dir="rtl">مش هيعرفه.</span></p>
-<p><span dir="rtl">لأن الـ</span> <span dir="ltr">Model</span> <span
-dir="rtl">لازم يكون متدرب على الجسم ده.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="activity-2-color-detection-using-computer-vision"><strong>🎯
-Activity 2 — Color Detection using Computer Vision</strong></h1>
-<p><img src="assets/media/image7.png"
-style="width:6.26772in;height:3.33333in" /><span dir="ltr"></span></p>
-<h2 id="هدف-النشاط"><strong><span dir="rtl">📖 هدف
-النشاط</span></strong></h2>
-<p><span dir="rtl">في النشاط ده الطلبة هيتعلموا أول تطبيق عملي
-للـ</span> <span dir="ltr">Computer Vision</span><span
-dir="rtl">.</span></p>
-<p><span dir="rtl">بدل ما الـ</span> <span dir="ltr">AI</span> <span
-dir="rtl">يتعرف على أشخاص أو حيوانات، هيبدأ بحاجة أبسط وهي <strong>تمييز
-الألوان</strong></span><span dir="ltr">.</span></p>
-<p><span dir="rtl">الطلبة هيستخدموا كاميرا اللاب توب، والـ</span> <span
-dir="ltr">AI</span> <span dir="rtl">هيشوف اللون الموجود قدام الكاميرا
-ويحدد هو إيه.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="قبل-ما-تبدأ-النشاط-teacher-notes"><strong><span dir="rtl">🎤 قبل
-ما تبدأ النشاط (</span>Teacher Notes<span
-dir="rtl">)</span></strong></h1>
-<p><span dir="rtl">قول للطلبة:</span></p>
-<blockquote>
-<p><span dir="ltr"></span><span dir="rtl">"إحنا لحد دلوقتي عرفنا إن
-الكمبيوتر بيحول الصورة لـ</span> <span dir="ltr">Pixels</span> <span
-dir="rtl">وأرقام، وبعدها يبدأ يدور على</span> <span
-dir="ltr">Patterns</span><span dir="rtl">.</span></p>
-<p><span dir="rtl">النهارده هنخليه يستخدم المعلومات دي علشان يعرف لون
-الجسم اللي قدامه."</span></p>
-</blockquote>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="المطلوب-من-الطلبة"><strong><span dir="rtl">🛠 المطلوب من
-الطلبة</span></strong></h1>
-<p><span dir="rtl">السلايد كاتب:</span></p>
-<blockquote>
-<p>Detect Colors</p>
-</blockquote>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">البرنامج يشوف اللون.</span></p>
-<p><span dir="ltr"></span></p>
-<blockquote>
-<p>Analyze Live Camera</p>
-</blockquote>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">يستخدم</span> <span dir="ltr">Webcam</span> <span
-dir="rtl">مباشرة.</span></p>
-<p><span dir="ltr"></span></p>
-<blockquote>
-<p>Build Color Recognition Application</p>
-</blockquote>
-<p><span dir="rtl">يعني:</span></p>
-<p><span dir="rtl">كل لون يعمل</span> <span dir="ltr">Action</span>
-<span dir="rtl">مختلف.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="model-solution"><strong>💻 Model Solution</strong></h1>
-<p><span dir="rtl">مثال:</span></p>
-<p><span dir="rtl">لو اللون:</span></p>
-<p>🔴 Red</p>
-<p><span dir="rtl">الـ</span> <span dir="ltr">Sprite</span> <span
-dir="rtl">يقول:</span></p>
-<p>"I found Red"</p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">لو اللون:</span></p>
-<p>🟢 Green</p>
-<p><span dir="rtl">يقول:</span></p>
-<p>"I found Green"</p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">لو اللون:</span></p>
-<p>🔵 Blue</p>
-<p><span dir="rtl">يقول:</span></p>
-<p>"I found Blue"</p>
-<p><span dir="ltr"></span></p>
-<p><span dir="rtl">لو اللون:</span></p>
-<p>🟡 Yellow</p>
-<p><span dir="rtl">يقول:</span></p>
-<p>"I found Yellow"</p>
-<p><span dir="ltr"></span></p>
-<h1 id="منطق-البرنامج-1"><strong><span dir="rtl">🧠 منطق
-البرنامج</span></strong></h1>
-<p><span dir="rtl">اشرحه كده للطلبة:</span></p>
-<p><span dir="ltr">Start</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Open Camera</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Look at Image</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">Detect Color</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">↓</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">IF Red</span></p>
-<p><span dir="ltr">Say "Red"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">ELSE IF Blue</span></p>
-<p><span dir="ltr">Say "Blue"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">ELSE IF Green</span></p>
-<p><span dir="ltr">Say "Green"</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr">ELSE IF Yellow</span></p>
-<p><span dir="ltr">Say "Yellow"</span></p>
-<p><span dir="ltr"></span></p>
-<p>Repeat Forever</p>
-<p><span dir="ltr"></span></p>
-<h1 id="ليه-النشاط-ده-مهم"><strong><span dir="rtl">🎨 ليه النشاط ده
-مهم؟</span></strong></h1>
-<p><span dir="rtl">علشان الطلبة يفهموا إن:</span></p>
-<p>Computer Vision</p>
-<p><span dir="rtl">مش لازم يتعرف على أشخاص.</span></p>
-<p><span dir="rtl">ممكن يتعرف على:</span></p>
-<p><span dir="rtl">ألوان</span></p>
-<p><span dir="rtl">أشكال</span></p>
-<p><span dir="rtl">حروف</span></p>
-<p><span dir="rtl">إشارات</span></p>
-<p><span dir="rtl">أجسام</span></p>
-<p><span dir="rtl">كلها بنفس الفكرة.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="مثال-داخل-الفصل-1"><strong><span dir="rtl">👨‍🎓 مثال داخل
-الفصل</span></strong></h1>
-<p><span dir="rtl">هات:</span></p>
-<p><span dir="rtl">كتاب أحمر</span></p>
-<p><span dir="rtl">قلم أزرق</span></p>
-<p><span dir="rtl">كرة صفراء</span></p>
-<p><span dir="rtl">كوب أخضر</span></p>
-<p><span dir="rtl">وخلي كل طالب يقربهم من الكاميرا.</span></p>
-<p><span dir="rtl">البرنامج هيقول اسم اللون.</span></p>
-<p><span dir="rtl">هيتبسطوا جدًا لأنه أول</span> <span
-dir="ltr">AI</span> <span dir="rtl">حقيقي بيشتغل قدامهم.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="أسئلة-أثناء-النشاط"><strong><span dir="rtl">❓أسئلة أثناء
-النشاط</span></strong></h1>
-<p><span dir="rtl">اسألهم:</span></p>
-<p><span dir="rtl">لو الإضاءة ضعيفة...</span></p>
-<p><span dir="rtl">هل البرنامج هيعرف اللون بنفس الدقة؟</span></p>
-<p><span dir="rtl">ليه؟</span></p>
-<p><span dir="rtl">الإجابة:</span></p>
-<p><span dir="rtl">لا.</span></p>
-<p><span dir="rtl">لأن</span> <span dir="ltr">Computer Vision</span>
-<span dir="rtl">يعتمد على جودة الصورة.</span></p>
-<p><span dir="ltr"></span></p>
-<h1 id="challenge"><strong>🎯 Challenge</strong></h1>
-<p><span dir="rtl">بدل ما يقول اسم اللون...</span></p>
-<p><span dir="rtl">يغير لون الـ</span> <span dir="ltr">Sprite</span>
-<span dir="rtl">نفسه.</span></p>
-<p><span dir="rtl">أو يشغل صوت مختلف لكل لون.</span></p>
-<p><span dir="ltr"></span></p>
-<p><span dir="ltr"></span></p>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: Cairo, Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="slide-1-human-vision-how-we-see-the-world"><strong>🎤 Slide 1 —
+            Human Vision: How We See the World</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <p><img src="assets/media/image6.png" style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <h2 id="eyes-capture-light"><strong>📌 Eyes Capture Light</strong></h2>
+    <h3 id="العربية"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">العين بتستقبل الضوء.</span></p>
+    <h3 id="speaker-notes"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">إحنا مش بنشوف الأشياء نفسها.</span></p>
+    <p><span dir="rtl">إحنا بنشوف الضوء اللي بينعكس منها.</span></p>
+    <p><span dir="rtl">العين تجمع الضوء.</span></p>
+    <p><span dir="rtl">وتركزه على الشبكية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="brain-interprets"><strong>📌 Brain Interprets</strong></h2>
+    <h3 id="العربية-1"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">المخ بيفسر.</span></p>
+    <h3 id="speaker-notes-1"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بعد العين.</span></p>
+    <p><span dir="rtl">الإشارات العصبية تروح للمخ.</span></p>
+    <p><span dir="rtl">والمخ يبدأ يفسرها.</span></p>
+    <p><span dir="rtl">يعرف:</span></p>
+    <p><span dir="rtl">ده إنسان.</span></p>
+    <p><span dir="rtl">ده كرسي.</span></p>
+    <p><span dir="rtl">ده كتاب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="instant-recognition"><strong>📌 Instant
+            Recognition</strong></h2>
+    <h3 id="العربية-2"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">التعرف الفوري.</span></p>
+    <h3 id="speaker-notes-2"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">المخ بيستخدم الذاكرة.</span></p>
+    <p><span dir="rtl">أول ما يشوف شيء.</span></p>
+    <p><span dir="rtl">يقارنه بالحاجات اللي شافها قبل كده.</span></p>
+    <p><span dir="rtl">وعشان كده بنعرف الأشخاص والأماكن بسرعة
+            جدًا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="context-emotion"><strong>📌 Context &amp; Emotion</strong></h2>
+    <h3 id="العربية-3"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">السياق والمشاعر.</span></p>
+    <h3 id="speaker-notes-3"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">دي أكبر ميزة عند الإنسان.</span></p>
+    <p><span dir="rtl">إحنا مش بنشوف الصورة بس.</span></p>
+    <p><span dir="rtl">إحنا بنفهم:</span></p>
+    <p><span dir="rtl">الموقف.</span></p>
+    <p><span dir="rtl">المشاعر.</span></p>
+    <p><span dir="rtl">نية الشخص.</span></p>
+    <p><span dir="rtl">وده لحد دلوقتي أصعب حاجة على</span> <span dir="ltr">Computer Vision</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">لو شفت شخص بيبتسم.</span></p>
+    <p><span dir="rtl">إنت هتفهم إنه سعيد.</span></p>
+    <p><span dir="rtl">لكن الكمبيوتر ممكن يعرف إنه "وجه مبتسم"
+            فقط.</span></p>
+    <p><span dir="rtl">أما سبب الابتسامة أو معناها الحقيقي فدي محتاجة فهم
+            للسياق.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-2-computer-vision-how-machines-see"><strong>🎤 Slide 2 —
+            Computer Vision: How Machines See</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="camera"><strong>📌 Camera</strong></h2>
+    <h3 id="العربية-4"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">الكاميرا.</span></p>
+    <h3 id="speaker-notes-4"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">كل حاجة بتبدأ بالكاميرا.</span></p>
+    <p><span dir="rtl">الكاميرا تصور صورة أو فيديو.</span></p>
+    <p><span dir="rtl">زي عين الإنسان بالضبط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="pixels"><strong>📌 Pixels</strong></h2>
+    <h3 id="العربية-5"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">البكسلات.</span></p>
+    <h3 id="speaker-notes-5"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الصورة اللي إحنا شايفينها.</span></p>
+    <p><span dir="rtl">الكمبيوتر بيحولها لمصفوفة كبيرة من الـ</span> <span dir="ltr">Pixels</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">له:</span></p>
+    <p><span dir="rtl">لون.</span></p>
+    <p><span dir="rtl">وشدة إضاءة.</span></p>
+    <p><span dir="rtl">وأرقام.</span></p>
+    <p><span dir="rtl">يعني الصورة تتحول لبيانات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ai-model"><strong>📌 AI Model</strong></h2>
+    <h3 id="العربية-6"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">نموذج الذكاء الاصطناعي.</span></p>
+    <h3 id="speaker-notes-6"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بعد تحويل الصورة لأرقام.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI Model</span> <span dir="rtl">يبدأ يبحث عن</span> <span
+            dir="ltr">Patterns</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">هل الشكل ده شبه قطة؟</span></p>
+    <p><span dir="rtl">هل ده إنسان؟</span></p>
+    <p><span dir="rtl">هل ده عربية؟</span></p>
+    <p><span dir="rtl">كل ده لأنه اتدرب على صور كتير قبل كده.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="decision"><strong>📌 Decision</strong></h2>
+    <h3 id="العربية-7"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">القرار.</span></p>
+    <h3 id="speaker-notes-7"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">في النهاية.</span></p>
+    <p><span dir="rtl">النظام يطلع نتيجة.</span></p>
+    <p><span dir="rtl">مثلًا:</span></p>
+    <p>Cat.</p>
+    <p>Dog.</p>
+    <p>Face.</p>
+    <p>Stop Sign.</p>
+    <p><span dir="rtl">وده القرار النهائي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="needs-good-data"><strong>📌 Needs Good Data</strong></h2>
+    <h3 id="العربية-8"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">يحتاج بيانات جيدة.</span></p>
+    <h3 id="speaker-notes-8"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">حتى لو عندك أقوى</span> <span dir="ltr">AI</span>
+        <span dir="rtl">في العالم.</span>
+    </p>
+    <p><span dir="rtl">لو الصور:</span></p>
+    <p><span dir="rtl">مظلمة.</span></p>
+    <p><span dir="rtl">ضبابية.</span></p>
+    <p><span dir="rtl">أو قليلة.</span></p>
+    <p><span dir="rtl">النظام هيغلط.</span></p>
+    <p><span dir="rtl">علشان كده جودة البيانات أهم من قوة البرنامج
+            أحيانًا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-1"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">كاميرا بتصور تفاحة.</span></p>
+    <p>↓</p>
+    <p><span dir="rtl">الصورة تتحول</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p>↓</p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحللها.</span></p>
+    <p>↓</p>
+    <p><span dir="rtl">يقول:</span></p>
+    <p>Apple.</p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-3-human-vision-vs.-computer-vision"><strong>🎤 Slide 3 —
+            Human Vision vs. Computer Vision</strong></h1>
+    <p><img src="assets/media/image9.png" style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <h2 id="مقدمة"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">دلوقتي هنقارن بين الإنسان والكمبيوتر.</span></p>
+    <p><span dir="rtl">الاتنين بيشوفوا.</span></p>
+    <p><span dir="rtl">لكن طريقة الرؤية مختلفة تمامًا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="sensor"><strong>📌 Sensor</strong></h2>
+    <h3 id="العربية-9"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">وسيلة استقبال الصورة.</span></p>
+    <h3 id="speaker-notes-9"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الإنسان بيستخدم: العين.</span></p>
+    <p><span dir="rtl">أما الكمبيوتر فبيستخدم:الكاميرا.</span></p>
+    <p><span dir="rtl">يعني الكاميرا بالنسبة للكمبيوتر هي العين.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="processor"><strong>📌 Processor</strong></h2>
+    <h3 id="العربية-10"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">المعالج.</span></p>
+    <h3 id="speaker-notes-10"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بعد العين.</span></p>
+    <p><span dir="rtl">المعلومات بتروح للمخ.</span></p>
+    <p><span dir="rtl">أما الكمبيوتر.</span></p>
+    <p><span dir="rtl">الصورة بتروح للـ</span> <span dir="ltr">AI
+            Model</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وده البرنامج المدرب اللي بيحلل الصورة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speed"><strong>📌 Speed</strong></h2>
+    <h3 id="العربية-11"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">السرعة.</span></p>
+    <h3 id="speaker-notes-11"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الإنسان سريع جدًا.</span></p>
+    <p><span dir="rtl">لكن بيتعب.</span></p>
+    <p><span dir="rtl">أما الكمبيوتر.</span></p>
+    <p><span dir="rtl">ممكن يشتغل أيام كاملة بدون توقف.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="learns-from"><strong>📌 Learns From</strong></h2>
+    <h3 id="العربية-12"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">مصدر التعلم.</span></p>
+    <h3 id="speaker-notes-12"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الإنسان بيتعلم من:</span></p>
+    <p><span dir="rtl">الحياة.</span></p>
+    <p><span dir="rtl">التجارب.</span></p>
+    <p><span dir="rtl">الأخطاء.</span></p>
+    <p><span dir="rtl">أما</span> Computer Vision.</p>
+    <p><span dir="rtl">بيتدرب على آلاف أو ملايين الصور.</span></p>
+    <p><span dir="rtl">كل صورة بتساعده يتعلم شكل الأشياء.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="sees-an-image-as"><strong>📌 Sees an Image As</strong></h2>
+    <h3 id="العربية-13"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">إزاي كل واحد بيشوف الصورة؟</span></p>
+    <h3 id="speaker-notes-13"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">دي أهم نقطة في السلايد.</span></p>
+    <p><span dir="rtl">إحنا لما نبص لصورة عربية.</span></p>
+    <p><span dir="rtl">على طول نقول:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"دي عربية."</span></p>
+    <p><span dir="rtl">لكن الكمبيوتر.</span></p>
+    <p><span dir="rtl">في البداية.</span></p>
+    <p><span dir="rtl">مش بيشوف عربية.</span></p>
+    <p><span dir="rtl">هو بيشوف ملايين الـ</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">عبارة عن رقم.</span></p>
+    <p><span dir="rtl">وبعد التحليل يحول الأرقام لمعنى.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="best-at"><strong>📌 Best At</strong></h2>
+    <h3 id="العربية-14"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">أفضل استخدام.</span></p>
+    <h3 id="speaker-notes-14"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الإنسان ممتاز في:</span></p>
+    <p><span dir="rtl">فهم المشاعر.</span></p>
+    <p><span dir="rtl">السياق.</span></p>
+    <p><span dir="rtl">المواقف.</span></p>
+    <p><span dir="rtl">أما الكمبيوتر.</span></p>
+    <p><span dir="rtl">فممتاز في:</span></p>
+    <p><span dir="rtl">السرعة.</span></p>
+    <p><span dir="rtl">الدقة.</span></p>
+    <p><span dir="rtl">تحليل كميات ضخمة من البيانات.</span></p>
+    <p><span dir="rtl">وده سبب إن الإنسان والكمبيوتر بيكملوا بعض.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-2"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">طبيب أشعة.</span></p>
+    <p><span dir="rtl">الكمبيوتر يحدد الأماكن المشبوهة بسرعة.</span></p>
+    <p><span dir="rtl">لكن الطبيب هو اللي ياخد القرار النهائي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-4-what-is-computer-vision."><strong>🎤 Slide 4 — What Is
+            Computer Vision?</strong>.</h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="computer-vision"><strong>📌 Computer Vision</strong></h2>
+    <h3 id="العربية-15"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">الرؤية الحاسوبية.</span></p>
+    <h3 id="speaker-notes-15"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="ltr">Computer Vision</span> <span dir="rtl">أو الرؤية
+            الحاسوبية هو فرع من فروع الذكاء الاصطناعي.</span></p>
+    <p><span dir="rtl">وظيفته إنه يخلي الكمبيوتر يقدر يفهم الصور
+            والفيديوهات.</span></p>
+    <p><span dir="rtl">لكن مهم جدًا نفهم إن الكمبيوتر <strong>مش بيشوف
+                بعينه</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">هو بيستقبل صورة من الكاميرا، وبعد كده يحللها ويستخرج
+            منها معلومات.</span></p>
+    <p><span dir="rtl">يعني بدل ما يشوف "قطة"، هو في البداية بيشوف بيانات
+            وأرقام، وبعد التحليل يقرر إن الصورة دي لقطة.</span></p>
+    <p><span dir="rtl">يبقى الهدف الأساسي من</span> <span dir="ltr">Computer
+            Vision</span> <span dir="rtl">هو:</span></p>
+    <p><strong>Capture → Process → Understand → Decide</strong></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">يلتقط الصورة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">يعالجها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">يفهمها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">ياخد قرار بناءً عليها.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="artificial-intelligence"><strong>📌 Artificial
+            Intelligence</strong></h2>
+    <h3 id="العربية-16"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">الذكاء الاصطناعي.</span></p>
+    <h3 id="speaker-notes-16"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">لاحظ إن السلايد بيقول إن</span> <span dir="ltr">Computer Vision</span> <span dir="rtl">هو</span>
+        <span dir="ltr"><strong>Sub-field</strong></span> <span dir="rtl">من</span>
+        <span dir="ltr">AI</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">وده معناه إنه جزء من الذكاء الاصطناعي.</span></p>
+    <p><span dir="rtl">يعني</span> <span dir="ltr">AI</span> <span dir="rtl">مجال كبير.</span></p>
+    <p><span dir="rtl">وجواه تخصصات كتير.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <ul>
+        <li>
+            <p>Machine Learning</p>
+        </li>
+        <li>
+            <p>Computer Vision</p>
+        </li>
+        <li>
+            <p>Natural Language Processing</p>
+        </li>
+    </ul>
+    <p><span dir="rtl">فالنهارده إحنا بندرس جزء واحد منهم وهو</span> <span dir="ltr">Computer Vision</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="why-do-we-need-it"><strong>📌 Why do we need it?</strong></h2>
+    <h3 id="العربية-17"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">ليه محتاجين</span> <span dir="ltr">Computer
+            Vision</span><span dir="rtl">؟</span></p>
+    <h3 id="speaker-notes-17"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">السلايد ذكر 3 أسباب رئيسية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="cameras-are-everywhere"><strong>📌 Cameras are
+            everywhere</strong></h3>
+    <p><span dir="rtl">الكاميرات موجودة في كل مكان.</span></p>
+    <p><span dir="rtl">في الموبايلات.</span></p>
+    <p><span dir="rtl">في العربيات.</span></p>
+    <p><span dir="rtl">في المحلات.</span></p>
+    <p><span dir="rtl">في المستشفيات.</span></p>
+    <p><span dir="rtl">في المصانع.</span></p>
+    <p><span dir="rtl">كل الكاميرات دي بتنتج كمية ضخمة جدًا من الصور
+            والفيديوهات.</span></p>
+    <p><span dir="rtl">وعاوزين بدل ما الكاميرا تكون بتصور بس وبنحفظ الصور او
+            الفيديوهات دي لحد ما الانسان يبدأ يراجع ويقول مثلا حصلت سرقة هنا او ده
+            شكله حرامي مثلا او ده مسموحله يدخل المبنى لكن ده من المستحيل إن الإنسان
+            يراجعها كلها بنفسه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="too-fast-repetitive-or-dangerous"><strong>📌 Too fast,
+            repetitive or dangerous</strong></h3>
+    <p><span dir="rtl">فيه شغل الإنسان يقدر يعمله.</span></p>
+    <p><span dir="rtl">لكن فيه شغل:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">سريع جدًا.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">ممل ومتكرر.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">أو خطر.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">زي مراقبة آلاف الكاميرات الأمنية.</span></p>
+    <p><span dir="rtl">أو اكتشاف عيوب المنتجات في المصنع.</span></p>
+    <p><span dir="rtl">أو تحليل صور الأشعة.</span></p>
+    <p><span dir="rtl">هنا الكمبيوتر يقدر يساعد.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="works-247"><strong>📌 Works 24/7</strong></h3>
+    <p><span dir="rtl">الكمبيوتر يقدر يشتغل:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">24 ساعة.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">7 أيام.</span></p>
+    <p><span dir="rtl">من غير تعب.</span></p>
+    <p><span dir="rtl">ومن غير ما تركيزه يقل.</span></p>
+    <p><span dir="rtl">وده بيديه ميزة كبيرة في المهام المتكررة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-3"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">كاميرات المرور.</span></p>
+    <p><span dir="rtl">بدل ما موظف يشوف آلاف السيارات.</span></p>
+    <p><span dir="rtl">هنا</span> Computer Vision <span dir="rtl">يحدد</span>:</p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العربية عدت الإشارة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">العربية ماشية بسرعة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">العربية واقفة في مكان ممنوع.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">كل ده تلقائي.</span><span dir="ltr"></span></p>
+    <p><span dir="ltr"><strong>🔗 Recap:<br />
+            </strong></span> <span dir="rtl">اربط للطلاب بين العمليتين في آخر
+            الشرح:</span></p>
+    <ul>
+        <li>
+            <p><strong><span dir="rtl">الإنسان</span>:</strong> Light → Eye →
+                Brain → Meaning</p>
+        </li>
+        <li>
+            <p><strong><span dir="rtl">الكمبيوتر</span>:</strong> Camera →
+                Pixels → AI Model → Decision</p>
+        </li>
+    </ul>
+    <p><span dir="rtl">وقلهم إن كل موضوعات</span> <span dir="ltr">Computer
+            Vision</span> <span dir="rtl">اللي هتيجي بعد كده (</span><span dir="ltr">Image Classification, Object
+            Detection, Face
+            Recognition</span><span dir="rtl">...) هي مجرد تطبيقات لنفس الـ</span>
+        <span dir="ltr">Workflow</span> <span dir="rtl">ده.</span><span dir="ltr"></span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <p><strong><span dir="ltr">🎤 Slide 5 — What Is an Image? Meet the
+                Pixel</span></strong></p>
+    <h2 id="مقدمة-1"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">قبل ما نفهم</span> <span dir="ltr">Computer
+            Vision</span> <span dir="rtl">بيفهم الصور إزاي...</span></p>
+    <p><span dir="rtl">لازم الأول نعرف:</span></p>
+    <p><strong><span dir="rtl">الصورة نفسها عبارة عن
+                إيه؟</span></strong></p>
+    <p><span dir="rtl">إحنا بنشوف صورة كاملة.</span></p>
+    <p><span dir="rtl">لكن الكمبيوتر بيشوفها بطريقة مختلفة تمامًا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="image"><strong>📌 Image</strong></h2>
+    <h3 id="العربية-18"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">الصورة الرقمية.</span></p>
+    <h3 id="speaker-notes-18"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">إحنا لما نبص لأي صورة.</span></p>
+    <p><span dir="rtl">بنشوفها كأنها حاجة واحدة.</span></p>
+    <p><span dir="rtl">لكن الحقيقة إن أي صورة على الكمبيوتر أو
+            الموبايل.</span></p>
+    <p><span dir="rtl">متكونة من آلاف أو ملايين النقط الصغيرة
+            جدًا.</span></p>
+    <p><span dir="rtl">النقط دي اسمها</span> <span dir="ltr"><strong>Pixels</strong>.</span></p>
+    <p><span dir="rtl">يعني الصورة الكبيرة اللي إحنا شايفينها.</span></p>
+    <p><span dir="rtl">هي في الحقيقة شبكة ضخمة جدًا من النقط
+            الصغيرة.</span><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني الصورة عبارة عن جدول.</span></p>
+    <p><span dir="rtl">فيه:</span></p>
+    <p><span dir="ltr">Rows</span> <span dir="rtl">(صفوف).</span></p>
+    <p><span dir="ltr">Columns</span> <span dir="rtl">(أعمدة).</span></p>
+    <p><span dir="rtl">وعند تقاطع كل صف مع كل عمود.</span></p>
+    <p><span dir="rtl">يوجد</span> <span dir="ltr">Pixel</span> <span dir="rtl">واحد.</span></p>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">له مكان ثابت.</span></p>
+    <p><span dir="rtl">ولون واحد فقط.</span></p>
+    <p><span dir="rtl">ولما نحط ملايين الـ</span> <span dir="ltr">Pixels</span> <span dir="rtl">جنب بعض.</span></p>
+    <p><span dir="rtl">عيننا تشوف صورة كاملة وناعمة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="pixel"><strong>📌 Pixel</strong></h2>
+    <h3 id="العربية-19"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">البكسل.</span></p>
+    <h3 id="speaker-notes-19"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">Pixel</span> <span dir="rtl">هو أصغر جزء في الصورة.</span></p>
+    <p><span dir="rtl">تخيل إن الصورة لعبة</span> <span dir="ltr">LEGO</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">كل قطعة</span> <span dir="ltr">LEGO</span> <span dir="rtl">تمثل</span> <span
+            dir="ltr">Pixel</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">كل قطعة لوحدها بسيطة.</span></p>
+    <p><span dir="rtl">لكن لما نجمع آلاف القطع.</span></p>
+    <p><span dir="rtl">يطلع شكل كامل.</span></p>
+    <p><span dir="rtl">نفس الفكرة في الصور.</span></p>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">يعرض لونًا واحدًا فقط.</span></p>
+    <p><span dir="rtl">لكن ملايين الـ</span> <span dir="ltr">Pixels</span>
+        <span dir="rtl">مع بعض.</span>
+    </p>
+    <p><span dir="rtl">يصنعوا صورة كاملة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-4"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><img src="assets/media/image6.png" style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-6-image-resolution"><strong>🎤 Slide 6 — Image
+            Resolution</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="section"><img src="assets/media/image4.png" style="width:6.26772in;height:3.52778in" /></h2>
+    <h2 id="resolution"><strong>📌 Resolution</strong></h2>
+    <h3 id="العربية-20"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">دقة الصورة.</span></p>
+    <h3 id="speaker-notes-20"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">Resolution</span> <span dir="rtl">هو عدد الـ</span> <span
+            dir="ltr">Pixels</span> <span dir="rtl">الموجودة في الصورة.</span></p>
+    <p><span dir="rtl">وبيتحسب كده:</span></p>
+    <p>Width × Height.</p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">عرض × ارتفاع.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="more-pixels"><strong>📌 More Pixels</strong></h2>
+    <h3 id="العربية-21"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="ltr">Pixels</span> <span dir="rtl">أكثر.</span></p>
+    <h3 id="speaker-notes-21"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">كلما زاد عدد الـ</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">زاد مستوى التفاصيل.</span></p>
+    <p><span dir="rtl">الصورة تبقى أوضح.</span></p>
+    <p><span dir="rtl">وأسهل للـ</span> <span dir="ltr">AI</span> <span dir="rtl">إنه يحللها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="fewer-pixels"><strong>📌 Fewer Pixels</strong></h2>
+    <h3 id="العربية-22"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="ltr">Pixels</span> <span dir="rtl">أقل.</span></p>
+    <h3 id="speaker-notes-22"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">لو عدد الـ</span> <span dir="ltr">Pixels</span> <span dir="rtl">قليل.</span></p>
+    <p><span dir="rtl">الصورة تبدأ تبقى مربعة.</span></p>
+    <p><span dir="rtl">والتفاصيل تضيع.</span></p>
+    <p><span dir="rtl">وساعتها حتى الإنسان.</span></p>
+    <p><span dir="rtl">ممكن ميعرفش الصورة دي فيها إيه.</span></p>
+    <p><span dir="rtl">والـ</span> <span dir="ltr">AI</span> <span dir="rtl">كمان هتكون مهمته أصعب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="bigger-file-size"><strong>📌 Bigger File Size</strong></h2>
+    <h3 id="العربية-23"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">حجم ملف أكبر.</span></p>
+    <h3 id="speaker-notes-23"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">بيحتاج بيانات للتخزين.</span></p>
+    <p><span dir="rtl">فكلما زاد عدد الـ</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">زاد حجم الصورة.</span></p>
+    <p><span dir="rtl">عشان كده.</span></p>
+    <p><span dir="rtl">فيه دائمًا توازن بين:</span></p>
+    <p><span dir="rtl">الجودة.</span></p>
+    <p><span dir="rtl">وحجم الملف.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="p"><strong>📌 720p</strong></h2>
+    <h3 id="العربية-24"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">دقة 720</span><span dir="ltr">p</span><span dir="rtl">.</span></p>
+    <h3 id="speaker-notes-24"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">السلايد بيذكر مثال.</span></p>
+    <p>720p.</p>
+    <p><span dir="rtl">وده معناه تقريبًا:</span></p>
+    <p>1280 × 720 Pixel.</p>
+    <p><span dir="rtl">أي حوالي:</span></p>
+    <p>921 <span dir="rtl">ألف</span> Pixel.</p>
+    <p><span dir="rtl">كلهم مع بعض.</span></p>
+    <p><span dir="rtl">بيكونوا الصورة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-5"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">لو صورت صورة بالموبايل.</span></p>
+    <p><span dir="rtl">ثم ضغطتها جدًا.</span></p>
+    <p><span dir="rtl">هتلاحظ إن التفاصيل قلت.</span></p>
+    <p><span dir="rtl">ولما تكبر الصورة.</span></p>
+    <p><span dir="rtl">هتلاقيها مشوشة.</span></p>
+    <p><span dir="rtl">وده لأن عدد الـ</span> <span dir="ltr">Pixels</span>
+        <span dir="rtl">الفعال أصبح أقل.</span>
+    </p>
+    <p><img src="assets/media/image1.png" style="width:6.26772in;height:3.52778in" /><img src="assets/media/image4.png"
+            style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <h1 id="slide-7-the-rgb-colour-model"><strong>🎤 Slide 7 — The RGB
+            Colour Model</strong></h1>
+    <h2 id="مقدمة-2"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">طيب...</span></p>
+    <p><span dir="rtl">عرفنا إن الكمبيوتر بيخزن الصورة كأرقام.</span></p>
+    <p><span dir="rtl">لكن الصور الملونة فيها ملايين الألوان.</span></p>
+    <p><span dir="rtl">إزاي الكمبيوتر يخزن كل الألوان دي؟</span></p>
+    <p><span dir="rtl">الإجابة هي:</span></p>
+    <p><strong>RGB Color Model.</strong></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="rgb"><strong>📌 RGB</strong></h2>
+    <h3 id="العربية-25"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">نموذج الألوان</span> <span dir="ltr">RGB</span><span dir="rtl">.</span></p>
+    <h3 id="speaker-notes-25"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="ltr">RGB</span> <span dir="rtl">اختصار لـ:</span></p>
+    <p>Red</p>
+    <p>Green</p>
+    <p>Blue</p>
+    <p><span dir="rtl">وهي الألوان الأساسية للضوء.</span></p>
+    <p><span dir="rtl">أي لون على شاشة الكمبيوتر.</span></p>
+    <p><span dir="rtl">بيتكون من خلط الثلاثة دول.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="every-pixel-stores-three-numbers"><strong>📌 Every Pixel Stores
+            Three Numbers</strong></h2>
+    <h3 id="العربية-26"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">يخزن ثلاث قيم.</span></p>
+    <h3 id="speaker-notes-26"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">في الصورة الملونة.</span></p>
+    <p><span dir="rtl">بيحتوي على:</span></p>
+    <p><span dir="rtl">قيمة للأحمر.</span></p>
+    <p><span dir="rtl">وقيمة للأخضر.</span></p>
+    <p><span dir="rtl">وقيمة للأزرق.</span></p>
+    <p><span dir="rtl">يعني بدل رقم واحد.</span></p>
+    <p><span dir="rtl">يبقى عندنا 3 أرقام.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="range-0255"><strong>📌 Range (0–255)</strong></h2>
+    <h3 id="العربية-27"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">مدى القيم.</span></p>
+    <h3 id="speaker-notes-27"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">كل لون.</span></p>
+    <p><span dir="rtl">قيمته من: 0 إلى 255</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 يعني مفيش ضوء.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">255 يعني أقصى شدة.</span></p>
+    <p><span dir="rtl">وده يسمح بتكوين ملايين الألوان المختلفة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="examples"><strong>📌 Examples</strong></h2>
+    <h3 id="speaker-notes-28"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">السلايد بيعرض أمثلة مهمة جدًا.</span></p>
+    <p><strong>(255,0,0)</strong></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">أحمر كامل.</span></p>
+    <p><span dir="rtl">مفيش أخضر.</span></p>
+    <p><span dir="rtl">مفيش أزرق.</span></p>
+    <p><span dir="rtl">فتطلع النتيجة:</span></p>
+    <p><span dir="rtl">لون أحمر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><strong>(0,0,0)</strong></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">ولا لون شغال.</span></p>
+    <p><span dir="rtl">فتطلع:</span></p>
+    <p><span dir="rtl">أسود.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><strong>(255,255,255)</strong></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">الثلاث ألوان بأقصى شدة.</span></p>
+    <p><span dir="rtl">فتطلع:</span></p>
+    <p><span dir="rtl">أبيض.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-6"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو بحثنا على جوجل على</span> <span dir="ltr">color
+            picker<br />
+            <a
+                href="https://www.google.com/search?q=color+picker&amp;sca_esv=6fd337b2c9137bab&amp;sxsrf=APpeQnuUrlGiGvunuT4FCa2PCA1OciwP5w%3A1783931925120&amp;source=hp&amp;ei=FaRUaq2RBNiZi-gP_uGRiQQ&amp;iflsig=ABILxe8AAAAAalSyJbpkif1iGGQdjghGj6caElW6Gw6U&amp;oq=color+pi&amp;gs_lp=Egdnd3Mtd2l6Ighjb2xvciBwaSoCCAAyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBMgUQABiABDIIEAAYgAQYywEyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBSJdRUL4HWIBLcAF4AJABAJgBgAGgAZgGqgEDMS42uAEByAEA-AEBmAIIoAKwBqgCCsICDRAjGPAFGMkCGOoCGCfCAgcQIxjqAhgnwgIKECMY8AUY6gIYJ8ICCxAAGIAEGLEDGIMBwgINEAAYARiABBixAxiDAcICChAAGAEYgAQYsQPCAgkQABgBGIAEGArCAggQABiABBixA8ICBRAuGIAEwgILEAAYARiABBgKGCrCAgkQLhgBGIAEGArCAgQQIxgnmAMH8QXGW2L2PqvXoJIHAzEuN6AH6heyBwMwLje4B6gGwgcFMC43LjHIBxCACAE&amp;sclient=gws-wiz"><u>color</u></a></span>
+        <a
+            href="https://www.google.com/search?q=color+picker&amp;sca_esv=6fd337b2c9137bab&amp;sxsrf=APpeQnuUrlGiGvunuT4FCa2PCA1OciwP5w%3A1783931925120&amp;source=hp&amp;ei=FaRUaq2RBNiZi-gP_uGRiQQ&amp;iflsig=ABILxe8AAAAAalSyJbpkif1iGGQdjghGj6caElW6Gw6U&amp;oq=color+pi&amp;gs_lp=Egdnd3Mtd2l6Ighjb2xvciBwaSoCCAAyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBMgUQABiABDIIEAAYgAQYywEyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyCBAAGIAEGMsBSJdRUL4HWIBLcAF4AJABAJgBgAGgAZgGqgEDMS42uAEByAEA-AEBmAIIoAKwBqgCCsICDRAjGPAFGMkCGOoCGCfCAgcQIxjqAhgnwgIKECMY8AUY6gIYJ8ICCxAAGIAEGLEDGIMBwgINEAAYARiABBixAxiDAcICChAAGAEYgAQYsQPCAgkQABgBGIAEGArCAggQABiABBixA8ICBRAuGIAEwgILEAAYARiABBgKGCrCAgkQLhgBGIAEGArCAgQQIxgnmAMH8QXGW2L2PqvXoJIHAzEuN6AH6heyBwMwLje4B6gGwgcFMC43LjHIBxCACAE&amp;sclient=gws-wiz"><span
+                dir="ltr"><u>picker</u></span> <span dir="rtl"><u>-</u></span> <span dir="rtl"><u>بحث</u></span> <span
+                dir="rtl"></span><span dir="ltr"><u>Google‏</u></span></a><span dir="ltr"></span><span dir="rtl"><br />
+            هيجيلنا مربع نقدر نحدد منه اللون بالقيم المختلفة له</span>
+    </p>
+    <p><span dir="rtl">حركت منزلق</span> <span dir="ltr">Red</span> <span dir="rtl">لأقصى قيمة.</span></p>
+    <p><span dir="rtl">وسبت</span> <span dir="ltr">Green</span> <span dir="rtl">و</span><span dir="ltr">Blue</span>
+        <span dir="rtl">صفر.</span></p>
+    <p><span dir="rtl">هيطلع اللون أحمر.</span></p>
+    <p><span dir="rtl">ولو زودت</span> <span dir="ltr">Green</span> <span dir="rtl">معاه.</span></p>
+    <p><span dir="rtl">اللون يبدأ يتحول لأصفر أو برتقالي حسب
+            القيم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-8-how-computers-turn-images-into-numbers"><strong>🎤 Slide
+            8 — How Computers Turn Images Into Numbers</strong></h1>
+    <h2 id="مقدمة-3"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">عرفنا إن الصورة عبارة عن</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">طيب...</span></p>
+    <p><span dir="rtl">الكمبيوتر يفهم الـ</span> <span dir="ltr">Pixels</span> <span dir="rtl">دي إزاي؟</span></p>
+    <p><span dir="rtl">هل بيفهمها كألوان؟</span></p>
+    <p><span dir="rtl">الإجابة:</span></p>
+    <p><span dir="rtl">لا.</span></p>
+    <p><span dir="rtl">هو بيحولها كلها إلى أرقام.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="what-we-see"><strong>📌 What We See</strong></h2>
+    <h3 id="العربية-28"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">ما يراه الإنسان.</span></p>
+    <h3 id="speaker-notes-29"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">إحنا لما نبص للصورة.</span></p>
+    <p><span dir="rtl">بنشوف شخص.</span></p>
+    <p><span dir="rtl">ونتعرف عليه بسهولة.</span></p>
+    <p><span dir="rtl">لكن الكمبيوتر.</span></p>
+    <p><span dir="rtl">مش بيشوف شخص.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="what-the-computer-sees"><strong>📌 What the Computer
+            Sees</strong></h2>
+    <h3 id="العربية-29"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">ما يراه الكمبيوتر.</span></p>
+    <h3 id="speaker-notes-30"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الكمبيوتر بيشوف جدول مليان أرقام.</span></p>
+    <p><span dir="rtl">كل رقم بيمثل قيمة</span> <span dir="ltr">Pixel</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني بالنسبة له.</span></p>
+    <p><span dir="rtl">الصورة كلها عبارة عن بيانات رقمية.</span></p>
+    <p><span dir="rtl">وده سبب إن الكمبيوتر يقدر يعمل عليها عمليات
+            حسابية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="image-matrix"><strong>📌 Image Matrix</strong></h2>
+    <h3 id="العربية-30"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">مصفوفة الصورة.</span></p>
+    <h3 id="speaker-notes-31"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">السلايد بيقول:</span></p>
+    <p><strong>An image is a matrix.</strong></p>
+    <p><span dir="rtl">يعني الصورة عبارة عن</span> <span dir="ltr">Matrix</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">أو جدول كبير.</span></p>
+    <p><span dir="rtl">كل خانة فيه.</span></p>
+    <p><span dir="rtl">تمثل</span> <span dir="ltr">Pixel</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">ولو الصورة ملونة.</span></p>
+    <p><span dir="rtl">يبقى كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">غالبًا بيحتوي على 3 قيم.</span></p>
+    <p><span dir="rtl">مش قيمة واحدة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="why-numbers"><strong>📌 Why Numbers?</strong></h2>
+    <h3 id="العربية-31"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">ليه الكمبيوتر بيحول الصورة لأرقام؟</span></p>
+    <h3 id="speaker-notes-32"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">لأن الكمبيوتر لا يفهم إلا الأرقام.</span></p>
+    <p><span dir="rtl">مفيش حاجة اسمها عند الكمبيوتر:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"دي عربية."</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"ده إنسان."</span></p>
+    <p><span dir="rtl">في البداية.</span></p>
+    <p><span dir="rtl">كلها أرقام.</span></p>
+    <p><span dir="rtl">وبعد كده.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يعمل عمليات رياضية على الأرقام.</span></p>
+    <p><span dir="rtl">ويبدأ يكتشف:</span></p>
+    <p><span dir="rtl">الحواف.</span></p>
+    <p><span dir="rtl">الأشكال.</span></p>
+    <p><span dir="rtl">الألوان.</span></p>
+    <p><span dir="rtl">الأنماط.</span></p>
+    <p><span dir="rtl">وفي النهاية.</span></p>
+    <p><span dir="rtl">يقرر الصورة فيها إيه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-7"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><img src="assets/media/image9.png" style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><strong>🔗 Recap</strong></p>
+    <p><span dir="rtl">اربط للطلاب تسلسل الأفكار في نهاية الجزء:</span></p>
+    <p><strong><span dir="ltr">Image → Grid of Pixels → Pixels</span> <span dir="rtl">تتحول إلى</span> <span
+                dir="ltr">Numbers</span> <span dir="rtl">→ كل</span> <span dir="ltr">Pixel</span> <span dir="rtl">في
+                الصورة الملونة يحتوي على</span> <span dir="ltr">RGB</span> <span dir="rtl">→ عدد الـ</span> <span
+                dir="ltr">Pixels</span> <span dir="rtl">يحدد الـ</span> <span dir="ltr">Resolution</span><span
+                dir="rtl">.</span></strong></p>
+    <p><span dir="rtl">وقلهم إن دي هي "لغة الصور" بالنسبة للكمبيوتر، وكل
+            خوارزميات</span> <span dir="ltr"><strong>Computer Vision</strong></span>
+        <span dir="rtl">تعتمد على هذه الفكرة قبل أن تبدأ في التعرف على الأشخاص
+            أو الأشياء داخل الصورة.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-9-everyday-examples-of-computer-vision"><strong>🎤 Slide 9
+            — Everyday Examples of Computer Vision</strong></h1>
+    <h2 id="مقدمة-4"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">بعد ما عرفنا الكمبيوتر بيشوف الصورة إزاي، بيحولها
+            لـ</span> <span dir="ltr">Pixels</span><span dir="rtl">، وبعدين</span>
+        <span dir="ltr">Numbers</span><span dir="rtl">...</span>
+    </p>
+    <p><span dir="rtl">دلوقتي هنشوف فين بنستخدم</span> <span dir="ltr">Computer Vision</span> <span dir="rtl">في حياتنا
+            اليومية.</span></p>
+    <p><span dir="rtl">المفاجأة إنك تقريبًا بتستخدمه كل يوم حتى لو مش واخد
+            بالك.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="face-unlock"><strong>📌 Face Unlock</strong></h2>
+    <h3 id="العربية-32"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">فتح الهاتف بالوجه.</span></p>
+    <h3 id="speaker-notes-33"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">أول مثال معانا هو</span> <span dir="ltr">Face
+            Unlock</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">لما تبص للموبايل...</span></p>
+    <p><span dir="rtl">الكاميرا تصور وشك.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحدد إن فيه</span> <span
+            dir="ltr">Face</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">بعدها يقارن ملامح وشك بالبيانات المخزنة.</span></p>
+    <p><span dir="rtl">لو التطابق كبير...</span></p>
+    <p><span dir="rtl">يفتح الموبايل.</span></p>
+    <p><span dir="rtl">لاحظ إنه مش مجرد تصوير.</span></p>
+    <p><span dir="rtl">هو بيحلل تفاصيل الوجه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="photo-tagging"><strong>📌 Photo Tagging</strong></h2>
+    <h3 id="العربية-33"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تجميع الصور حسب الأشخاص.</span></p>
+    <h3 id="speaker-notes-34"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">زي</span> Google Photos <span dir="rtl">أو</span>
+        Apple Photos.</p>
+    <p><span dir="rtl">الموبايل يلاقي كل الصور اللي فيها نفس
+            الشخص.</span></p>
+    <p><span dir="rtl">ويحطها في</span> <span dir="ltr">Album</span> <span dir="rtl">واحد.</span></p>
+    <p><span dir="rtl">من غير ما أنت ترتبهم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="qr-barcode-scan"><strong>📌 QR &amp; Barcode Scan</strong></h2>
+    <h3 id="العربية-34"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">قراءة</span> <span dir="ltr">QR Code</span> <span dir="rtl">والباركود.</span></p>
+    <h3 id="speaker-notes-35"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الكاميرا تصور الكود.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحدد مكانه.</span></p>
+    <p><span dir="rtl">ويقرأ المربعات السودا والبيضا.</span></p>
+    <p><span dir="rtl">وبعدين يحولها لمعلومات.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <p><span dir="rtl">رابط.</span></p>
+    <p><span dir="rtl">رقم منتج.</span></p>
+    <p><span dir="rtl">أو بيانات دفع.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ar-camera-filters"><strong>📌 AR Camera Filters</strong></h2>
+    <h3 id="العربية-35"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">فلاتر الصور</span><span dir="ltr"></span></p>
+    <h3 id="speaker-notes-36"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">سناب شات.</span></p>
+    <p><span dir="rtl">إنستجرام.</span></p>
+    <p><span dir="rtl">تيك توك.</span></p>
+    <p><span dir="rtl">كلهم بيعتمدوا على</span> <span dir="ltr">Computer
+            Vision</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">النظام يحدد:</span></p>
+    <p><span dir="rtl">مكان العين.</span></p>
+    <p><span dir="rtl">مكان الأنف.</span></p>
+    <p><span dir="rtl">مكان الفم.</span></p>
+    <p><span dir="rtl">وبعدين يحط الفلتر فوقهم في نفس اللحظة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="number-plate-reading"><strong>📌 Number Plate
+            Reading</strong></h2>
+    <h3 id="العربية-36"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">قراءة أرقام السيارات.</span></p>
+    <h3 id="speaker-notes-37"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الكاميرا تصور العربية.</span></p>
+    <p><span dir="rtl">تحدد اللوحة.</span></p>
+    <p><span dir="rtl">تفصل الحروف والأرقام.</span></p>
+    <p><span dir="rtl">وبعدين تحولهم لنص.</span></p>
+    <p><span dir="rtl">وده مستخدم في:</span></p>
+    <p><span dir="rtl">الجراجات.</span></p>
+    <p><span dir="rtl">الكباري.</span></p>
+    <p><span dir="rtl">الطرق السريعة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="search-by-image"><strong>📌 Search by Image</strong></h2>
+    <h3 id="العربية-37"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">البحث باستخدام صورة.</span></p>
+    <h3 id="speaker-notes-38"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بدل ما تكتب اسم المنتج...</span></p>
+    <p><span dir="rtl">تصور صورة.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحللها.</span></p>
+    <p><span dir="rtl">وبعدين يبحث عن صور مشابهة.</span></p>
+    <p><span dir="rtl">زي</span> Google Lens.</p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-8"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">طالب صور نبات.</span></p>
+    <p><span dir="ltr">Google Lens</span> <span dir="rtl">قاله اسم النبات
+            ونوعه.</span></p>
+    <p><span dir="rtl">وده مثال على</span> <span dir="ltr">Search by
+            Image</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-10-vision-ai-around-us-cities"><strong>🎤 Slide 10 —
+            Vision AI Around Us: Cities</strong></h1>
+    <h2 id="مقدمة-5"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">لحد دلوقتي كنا بنتكلم عن</span> <span dir="ltr">Computer Vision</span> <span dir="rtl">في
+            الموبايل أو
+            الكمبيوتر.</span></p>
+    <p><span dir="rtl">لكن الحقيقة إن أكبر استخدام لـ</span> <span dir="ltr">Computer Vision</span> <span
+            dir="rtl">موجود بره
+            البيت...</span></p>
+    <p><span dir="rtl">في الشوارع والمدن.</span></p>
+    <p><span dir="rtl">تقريبًا أي مدينة حديثة فيها آلاف الكاميرات.</span></p>
+    <p><span dir="rtl">لكن الكاميرات لوحدها مش ذكية.</span></p>
+    <p><span dir="rtl">اللي بيخليها ذكية هو</span> <span dir="ltr"><strong>Computer Vision</strong>.</span></p>
+    <p><span dir="rtl">بدل ما إنسان يقعد يبص على مئات الشاشات، الـ</span>
+        <span dir="ltr">AI</span> <span dir="rtl">هو اللي يراقب ويحلل ويبلغ عن
+            أي حدث مهم.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="smart-security"><strong>📌 Smart Security</strong></h1>
+    <h3 id="العربية-38"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">الأمن الذكي.</span></p>
+    <h3 id="speaker-notes-39"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">أول استخدام هو</span> <span dir="ltr"><strong>Smart
+                Security</strong>.</span></p>
+    <p><span dir="rtl">زمان، كان رجل الأمن لازم يقعد قدام شاشات الكاميرات
+            طول اليوم، ولو غمض عينه لحظة ممكن يفوته حدث مهم.</span></p>
+    <p><span dir="rtl">دلوقتي الـ</span> <span dir="ltr">AI</span> <span dir="rtl">بيعمل المهمة دي.</span></p>
+    <p><span dir="rtl">الكاميرا تصور باستمرار، والـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحلل كل</span>
+        <span dir="ltr">Frame</span> <span dir="rtl">في الفيديو.</span></p>
+    <p><span dir="rtl">لو لقى حاجة غير طبيعية، يرسل</span> <span dir="ltr">Alert</span> <span dir="rtl">فورًا.</span>
+    </p>
+    <p><span dir="rtl">مثلًا:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">شخص دخل منطقة ممنوع الدخول ليها</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">شخص بينط فوق سور.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">شنطة متسابا في مكان عام.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">عربية دخلت اتجاه غلط.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">شخص وقع على الأرض وكش بتحرك.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">البرنامج لا ينتظر إن الإنسان يلاحظ، لكنه ينبه رجل
+            الأمن مباشرة.</span></p>
+    <p><span dir="rtl">وده بيخلي الاستجابة أسرع بكتير.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="مثال-عملي-9"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h3>
+    <p><span dir="rtl">في بنك، بعد مواعيد العمل، أي شخص يدخل
+            المبنى.</span></p>
+    <p><span dir="rtl">الكاميرا يتلقطه.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يعرف إن الوقت خارج ساعات العمل.</span></p>
+    <p><span dir="rtl">فبيطلع صوت إنذار وبيرسل رسالة للأمن.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="smart-cities"><strong>📌 Smart Cities</strong></h1>
+    <h3 id="العربية-39"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">المدن الذكية.</span></p>
+    <h3 id="speaker-notes-40"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">المدينة الذكية هي مدينة بتستخدم التكنولوجيا والذكاء
+            الاصطناعي لإدارة الخدمات بشكل أفضل.</span></p>
+    <p><span dir="rtl">بدل ما كل جهاز يشتغل لوحده...</span></p>
+    <p><span dir="rtl">كل الأنظمة بتتواصل مع بعض.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="rtl">كاميرات المرور.</span></p>
+    <p><span dir="rtl">إشارات المرور.</span></p>
+    <p><span dir="rtl">أعمدة الإنارة.</span></p>
+    <p><span dir="rtl">مواقف السيارات.</span></p>
+    <p><span dir="rtl">كلها تبعت بيانات إلى مركز تحكم واحد.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحلل البيانات دي ويبدأ ياخد قرارات.</span>
+    </p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="rtl">لو فيه حادث.</span></p>
+    <p><span dir="rtl">يغير مسار المرور.</span></p>
+    <p><span dir="rtl">لو شارع فاضي.</span></p>
+    <p><span dir="rtl">يقلل مدة الإشارة الخضرا.</span></p>
+    <p><span dir="rtl">لو منطقة مضلمة.</span></p>
+    <p><span dir="rtl">يشغل الإضاءة تلقائيًا.</span></p>
+    <p><span dir="rtl">فالـ</span> <span dir="ltr">AI</span> <span dir="rtl">هنا مش بيتفرج بس ولكن بيساعد في اتخاذ
+            القرارات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="مثال-عملي-10"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h3>
+    <p><span dir="rtl">في يوم مطر شديد.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يلاحظ إن السيارات بتمشي أبطأ من
+            المعتاد.</span></p>
+    <p><span dir="rtl">فيغير توقيت إشارات المرور.</span></p>
+    <p><span dir="rtl">ويرسل رسالة على اللوحات الإلكترونية:</span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">"ازدحام أمامك...
+                استخدم طريقًا بديلًا."</span></strong></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="traffic-monitoring"><strong>📌 Traffic Monitoring</strong></h1>
+    <h3 id="العربية-40"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">مراقبة المرور.</span></p>
+    <h3 id="speaker-notes-41"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">ده من أشهر تطبيقات</span> <span dir="ltr">Computer
+            Vision</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">الكاميرات مش بس بتصور العربيات.</span></p>
+    <p><span dir="rtl">لكن بتحلل الفيديو.</span></p>
+    <p><span dir="rtl">وبتعرف:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">عدد السيارات.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">سرعة السيارات.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اتجاه الحركة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">هل فيه زحمة؟</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">هل فيه حادث؟</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">هل فيه سيارة واقفة في مكان ممنوع؟</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">بعد كده النظام بيرسل البيانات لمركز
+            التحكم.</span></p>
+    <p><span dir="rtl">ومنها يتم التحكم في إشارات المرور.</span></p>
+    <p><span dir="rtl">أو إرسال دورية مرور.</span></p>
+    <p><span dir="rtl">أو اقتراح طريق بديل للسائقين.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="مثال-عملي-11"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h3>
+    <p><span dir="rtl">إشارة مرور عليها كاميرا.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يعد السيارات.</span></p>
+    <p><span dir="rtl">لقا إن الاتجاه الأول فيه 120 عربية.</span></p>
+    <p><span dir="rtl">والاتجاه الثاني فيه 20 عربية فقط.</span></p>
+    <p><span dir="rtl">فبيقرر يخلي الإشارة الخضراء للاتجاه الأول لمدة
+            أطول.</span></p>
+    <p><span dir="rtl">وده يقلل الزحمة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="كيف-تعمل-كل-هذه-الأنظمة"><strong><span dir="rtl">📌 كيف تعمل كل
+                هذه الأنظمة؟</span></strong></h1>
+    <h3 id="speaker-notes-42"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">لاحظوا إن التطبيقات الثلاثة مختلفة.</span></p>
+    <p><span dir="rtl">لكن كلها بتشتغل بنفس الـ</span> <span dir="ltr">Workflow</span> <span dir="rtl">اللي
+            درسناه.</span></p>
+    <p><strong>Camera</strong></p>
+    <p>↓</p>
+    <p><span dir="rtl">تلتقط صورة أو فيديو.</span></p>
+    <p>↓</p>
+    <p><strong>Image</strong></p>
+    <p>↓</p>
+    <p><span dir="rtl">الصورة تتحول إلى</span> <span dir="ltr">Pixels</span><span dir="rtl">.</span></p>
+    <p>↓</p>
+    <p><strong>Numbers</strong></p>
+    <p>↓</p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحلل الأرقام ويبحث عن</span> <span
+            dir="ltr">Patterns</span><span dir="rtl">.</span></p>
+    <p>↓</p>
+    <p><strong>Decision</strong></p>
+    <p>↓</p>
+    <p><span dir="rtl">إرسال</span> <span dir="ltr">Alert</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">أو تغيير الإشارة.</span></p>
+    <p><span dir="rtl">أو فتح بوابة.</span></p>
+    <p><span dir="rtl">أو تسجيل مخالفة.</span></p>
+    <p><span dir="rtl">يعني نفس الفكرة...</span></p>
+    <p><span dir="rtl">لكن القرار النهائي يختلف حسب التطبيق.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-11-machine-learning-process"><strong>🎤 Slide 11 — Machine
+            Learning Process</strong></h1>
+    <h2 id="مقدمة-6"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">بعد ما عرفنا التطبيقات...</span></p>
+    <p><span dir="rtl">تعالوا نشوف إزاي أصلاً بنبني نموذج</span> <span dir="ltr">AI</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وده اسمه</span> Machine Learning Process.</p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-1-problem-definition"><strong>📌 Step 1 — Problem
+            Definition</strong></h2>
+    <h3 id="العربية-41"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تحديد المشكلة.</span></p>
+    <h3 id="speaker-notes-43"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">أول سؤال.</span></p>
+    <p><span dir="rtl">أنا عايز أحل إيه؟</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="rtl">أتعرف على القطط.</span></p>
+    <p><span dir="rtl">ولا أقرأ لوحات العربيات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-2-data-collection"><strong>📌 Step 2 — Data
+            Collection</strong></h2>
+    <h3 id="العربية-42"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">جمع البيانات.</span></p>
+    <h3 id="speaker-notes-44"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">نجمع آلاف الصور.</span></p>
+    <p><span dir="rtl">كل ما البيانات تكون أكتر وأفضل...</span></p>
+    <p><span dir="rtl">النموذج يتعلم أحسن.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-3-data-preprocessing"><strong>📌 Step 3 — Data
+            Preprocessing</strong></h2>
+    <h3 id="العربية-43"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تجهيز البيانات.</span></p>
+    <h3 id="speaker-notes-45"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">ننضف الصور.</span></p>
+    <p><span dir="rtl">نحذف الصور الغلط.</span></p>
+    <p><span dir="rtl">نوحد الأحجام.</span></p>
+    <p><span dir="rtl">ونضيف</span> <span dir="ltr">Labels</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-4-training-model"><strong>📌 Step 4 — Training
+            Model</strong></h2>
+    <h3 id="العربية-44"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تدريب النموذج.</span></p>
+    <h3 id="speaker-notes-46"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يبدأ يتعلم.</span></p>
+    <p><span dir="rtl">يشوف الصور.</span></p>
+    <p><span dir="rtl">ويقارنها بالإجابة الصحيحة.</span></p>
+    <p><span dir="rtl">ويعدل نفسه بعد كل محاولة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-5-model-evaluation"><strong>📌 Step 5 — Model
+            Evaluation</strong></h2>
+    <h3 id="العربية-45"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تقييم النموذج.</span></p>
+    <h3 id="speaker-notes-47"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">نقيس الدقة.</span></p>
+    <p><span dir="rtl">هل النموذج كويس؟</span></p>
+    <p><span dir="rtl">ولا محتاج تدريب أكتر؟</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-6-test-model"><strong>📌 Step 6 — Test Model</strong></h2>
+    <h3 id="العربية-46"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">اختبار النموذج.</span></p>
+    <h3 id="speaker-notes-48"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">نجربه على صور جديدة عمره ما شافها.</span></p>
+    <p><span dir="rtl">لو نجح...</span></p>
+    <p><span dir="rtl">يبقى اتعلم صح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-7-deploy-the-model"><strong>📌 Step 7 — Deploy the
+            Model</strong></h2>
+    <h3 id="العربية-47"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تشغيل النموذج.</span></p>
+    <h3 id="speaker-notes-49"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بعد النجاح.</span></p>
+    <p><span dir="rtl">نحطه داخل تطبيق.</span></p>
+    <p><span dir="rtl">أو موقع.</span></p>
+    <p><span dir="rtl">أو كاميرا.</span></p>
+    <p><span dir="rtl">ويبدأ الناس تستخدمه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-12-image-classification-vs.-object-detection"><strong>🎤
+            Slide 12 — Image Classification vs. Object Detection</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="image-classification"><strong>📌 Image
+            Classification</strong></h2>
+    <h3 id="العربية-48"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">تصنيف الصورة.</span></p>
+    <h3 id="speaker-notes-50"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">ينظر للصورة كلها.</span></p>
+    <p><span dir="rtl">ويقول:</span></p>
+    <p><span dir="rtl">الصورة دي عبارة عن كذا ويوصفها وصف في جملة واحدة سواء
+            كان في الصور حاجة واحدة او اكتر من حاجة فمثلا يقولك في الصورة
+            في...</span></p>
+    <p><span dir="rtl">قطة.</span></p>
+    <p><span dir="rtl">كلب.</span></p>
+    <p><span dir="rtl">سيارة.</span></p>
+    <p><span dir="ltr"></span> <span dir="rtl">كل ده في</span> <span dir="ltr">Label</span> <span dir="rtl">واحد او جملة
+            واحدة
+            فقط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="object-detection"><strong>📌 Object Detection</strong></h2>
+    <h3 id="العربية-49"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">اكتشاف العناصر.</span></p>
+    <h3 id="speaker-notes-51"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">هنا الموضوع أكبر.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يحدد:</span></p>
+    <p><span dir="rtl">كل عنصر.</span></p>
+    <p><span dir="rtl">ومكانه.</span></p>
+    <p><span dir="rtl">ويرسم مربع حواليه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="الفرق"><strong><span dir="rtl">📌 الفرق</span></strong></h2>
+    <h3 id="العربية-50"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">السؤال اللي بيجاوب عليه كل واحد.</span></p>
+    <h3 id="speaker-notes-52"><strong>🗣️ Speaker Notes</strong></h3>
+    <p>Classification <span dir="rtl">يسأل</span>:</p>
+    <p>What's in this image?</p>
+    <p><span dir="rtl">أما</span> <span dir="ltr">Detection</span> <span dir="rtl">يسأل:</span></p>
+    <p>What objects are there?</p>
+    <p>And where are they?</p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-12"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">صورة فيها:</span></p>
+    <p><span dir="rtl">ولد.</span></p>
+    <p><span dir="rtl">كلب.</span></p>
+    <p><span dir="rtl">كرة.</span></p>
+    <p>Classification:</p>
+    <p>Outdoor scene.</p>
+    <p><span dir="rtl">أو</span> <span dir="ltr">Dog</span><span dir="rtl">.</span></p>
+    <p>Detection:</p>
+    <p><span dir="ltr">Person</span> <span dir="rtl">هنا.</span></p>
+    <p><span dir="ltr">Dog</span> <span dir="rtl">هنا.</span></p>
+    <p><span dir="ltr">Ball</span> <span dir="rtl">هنا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-13-face-detection-vs.-face-recognition"><strong>🎤 Slide
+            13 — Face Detection vs. Face Recognition</strong></h1>
+    <h2 id="مقدمة-7"><strong><span dir="rtl">📖 مقدمة</span></strong></h2>
+    <p><span dir="rtl">من أكتر الحاجات اللي الطلبة بيلخبطوا
+            بينها.</span></p>
+    <p>Face Detection</p>
+    <p><span dir="rtl">و</span></p>
+    <p>Face Recognition</p>
+    <p><span dir="rtl">الفرق بينهم بسيط جدًا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="face-detection"><strong>📌 Face Detection</strong></h2>
+    <h3 id="العربية-51"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">اكتشاف الوجوه.</span></p>
+    <h3 id="speaker-notes-53"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يسأل سؤال واحد فقط:</span></p>
+    <p><span dir="rtl">هل يوجد وجه؟</span></p>
+    <p><span dir="rtl">لو موجود...</span></p>
+    <p><span dir="rtl">يرسم مربع حواليه.</span></p>
+    <p><span dir="rtl">ممكن يعد كام شخص.</span></p>
+    <p><span dir="rtl">لكن لا يعرف مين هما.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="face-recognition"><strong>📌 Face Recognition</strong></h2>
+    <h3 id="العربية-52"><strong><span dir="rtl">العربية</span></strong></h3>
+    <p><span dir="rtl">التعرف على الشخص.</span></p>
+    <h3 id="speaker-notes-54"><strong>🗣️ Speaker Notes</strong></h3>
+    <p><span dir="rtl">بعد ما لقى الوجه...</span></p>
+    <p><span dir="rtl">يقارن ملامحه بقاعدة بيانات.</span></p>
+    <p><span dir="rtl">لو لقى تطابق.</span></p>
+    <p><span dir="rtl">يقول:</span></p>
+    <p><span dir="rtl">ده أحمد.</span></p>
+    <p><span dir="rtl">أو سارة.</span></p>
+    <p><span dir="rtl">يعني يعرف هوية الشخص.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الفرق الأساسي.</span></p>
+    <h3 id="speaker-notes-55"><strong>🗣️ Speaker Notes</strong></h3>
+    <p>Detection</p>
+    <p>=</p>
+    <p>Where is the face? <span dir="rtl">هل في وش في الصورة ولو موججود فهو
+            موجود فين</span></p>
+    <p>Recognition</p>
+    <p>=</p>
+    <p>Who is the face? <span dir="rtl">وش مين اللي موجود في
+            الصورة</span></p>
+    <p><span dir="rtl">دي أهم جملة في السلايد كله.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="مثال-عملي-13"><strong><span dir="rtl">👨‍🎓 مثال
+                عملي</span></strong></h2>
+    <p><span dir="rtl">في الفصل.</span></p>
+    <p>Detection <span dir="rtl">يقول</span>:</p>
+    <p><span dir="rtl">فيه 25 طالب.</span></p>
+    <p>Recognition <span dir="rtl">يقول</span>:</p>
+    <p><span dir="rtl">أحمد.</span></p>
+    <p><span dir="rtl">محمد.</span></p>
+    <p><span dir="rtl">سارة.</span></p>
+    <p><span dir="rtl">علي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><img src="assets/media/image3.png" style="width:6.26772in;height:4.18056in" /><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="activity-1-object-recognition-using-pictoblox"><strong>🎯
+            Activity 1 — Object Recognition using PictoBlox</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <p><img src="assets/media/image5.png" style="width:6.26772in;height:4.54167in" /><span dir="ltr"></span></p>
+    <h1 id="مقدمة-للطلبة"><strong><span dir="rtl">🎤 مقدمة
+                للطلبة</span></strong></h1>
+    <blockquote>
+        <p><span dir="ltr"></span><span dir="rtl">"الإنسان أول ما يشوف كتاب يعرف
+                إنه كتاب.</span></p>
+        <p><span dir="rtl">النهارده هنخلي الكمبيوتر يعمل نفس الحاجة."</span></p>
+    </blockquote>
+    <p><span dir="ltr"></span></p>
+    <h1 id="المطلوب"><strong><span dir="rtl">📌 المطلوب</span></strong></h1>
+    <p><span dir="rtl">السلايد بيقول اننا عاوزين نعمل ايه:</span></p>
+    <p>Build a Computer Vision Application.</p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">برنامج بيستخدم الكاميرا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p>Recognize any object.</p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">يتعرف على الجسم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p>Display object name.</p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">يعرض اسمه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="المطلوب-تنفيذه"><strong><span dir="rtl">💻 المطلوب
+                تنفيذه</span></strong></h1>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="rtl">لو ظهر:</span></p>
+    <p>📚 Book</p>
+    <p><span dir="rtl">يقول</span></p>
+    <p>"I Found A Book!"</p>
+    <p><span dir="ltr"></span></p>
+    <p>🖊 Pen</p>
+    <p><span dir="rtl">يقول</span></p>
+    <p>"I Found A Pen!"</p>
+    <p><span dir="ltr"></span></p>
+    <p>🍼 Bottle</p>
+    <p><span dir="rtl">يقول</span></p>
+    <p>"I Found A Bottle!"</p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="منطق-البرنامج"><strong><span dir="rtl">🧠 منطق
+                البرنامج</span></strong></h1>
+    <p><span dir="ltr">Start</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Turn Camera ON</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Recognize Object</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">IF Book</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Say</span></p>
+    <p><span dir="ltr">"I Found A Book"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">IF Pen</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Say</span></p>
+    <p><span dir="ltr">"I Found A Pen"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">IF Bottle</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Say</span></p>
+    <p><span dir="ltr">"I Found A Bottle"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p>Repeat Forever</p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="أثناء-الشرح"><strong><span dir="rtl">🖥 أثناء
+                الشرح</span></strong></h1>
+    <p><span dir="rtl">أكد إن فيه مرحلتين مختلفتين:</span></p>
+    <p><span dir="rtl">المرحلة الأولى</span></p>
+    <p>Detection</p>
+    <p><span dir="rtl">هل فيه جسم؟</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المرحلة الثانية</span></p>
+    <p>Recognition</p>
+    <p><span dir="rtl">هو جسم إيه؟</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده بيربط مباشرة بالسلايد اللي شرحناه:</span></p>
+    <p>Face Detection</p>
+    <p>vs</p>
+    <p>Face Recognition</p>
+    <p><span dir="rtl">نفس الفكرة بالضبط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="مثال-داخل-الفصل"><strong><span dir="rtl">👨‍🎓 مثال داخل
+                الفصل</span></strong></h1>
+    <p><span dir="rtl">حط قدام الكاميرا:</span></p>
+    <p><span dir="rtl">كتاب</span></p>
+    <p><span dir="rtl">قلم</span></p>
+    <p><span dir="rtl">زجاجة مياه</span></p>
+    <p><span dir="rtl">كوباية</span></p>
+    <p><span dir="rtl">موبايل</span></p>
+    <p><span dir="rtl">وخلي الطلبة يتوقعوا قبل البرنامج:</span></p>
+    <p><span dir="rtl">هيتعرف عليه ولا لأ؟</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="سؤال-مهم"><strong><span dir="rtl">🧠 سؤال
+                مهم</span></strong></h1>
+    <p><span dir="rtl">لو جبت جسم عمر الـ</span> <span dir="ltr">AI</span>
+        <span dir="rtl">ما شافهش.</span>
+    </p>
+    <p><span dir="rtl">هيعمل إيه؟</span></p>
+    <p><span dir="rtl">الإجابة:</span></p>
+    <p><span dir="rtl">مش هيعرفه.</span></p>
+    <p><span dir="rtl">لأن الـ</span> <span dir="ltr">Model</span> <span dir="rtl">لازم يكون متدرب على الجسم ده.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="activity-2-color-detection-using-computer-vision"><strong>🎯
+            Activity 2 — Color Detection using Computer Vision</strong></h1>
+    <p><img src="assets/media/image7.png" style="width:6.26772in;height:3.33333in" /><span dir="ltr"></span></p>
+    <h2 id="هدف-النشاط"><strong><span dir="rtl">📖 هدف
+                النشاط</span></strong></h2>
+    <p><span dir="rtl">في النشاط ده الطلبة هيتعلموا أول تطبيق عملي
+            للـ</span> <span dir="ltr">Computer Vision</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">بدل ما الـ</span> <span dir="ltr">AI</span> <span dir="rtl">يتعرف على أشخاص أو حيوانات، هيبدأ
+            بحاجة أبسط وهي <strong>تمييز
+                الألوان</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">الطلبة هيستخدموا كاميرا اللاب توب، والـ</span> <span dir="ltr">AI</span> <span dir="rtl">هيشوف
+            اللون الموجود قدام الكاميرا
+            ويحدد هو إيه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="قبل-ما-تبدأ-النشاط-teacher-notes"><strong><span dir="rtl">🎤 قبل
+                ما تبدأ النشاط (</span>Teacher Notes<span dir="rtl">)</span></strong></h1>
+    <p><span dir="rtl">قول للطلبة:</span></p>
+    <blockquote>
+        <p><span dir="ltr"></span><span dir="rtl">"إحنا لحد دلوقتي عرفنا إن
+                الكمبيوتر بيحول الصورة لـ</span> <span dir="ltr">Pixels</span> <span dir="rtl">وأرقام، وبعدها يبدأ يدور
+                على</span> <span dir="ltr">Patterns</span><span dir="rtl">.</span></p>
+        <p><span dir="rtl">النهارده هنخليه يستخدم المعلومات دي علشان يعرف لون
+                الجسم اللي قدامه."</span></p>
+    </blockquote>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="المطلوب-من-الطلبة"><strong><span dir="rtl">🛠 المطلوب من
+                الطلبة</span></strong></h1>
+    <p><span dir="rtl">السلايد كاتب:</span></p>
+    <blockquote>
+        <p>Detect Colors</p>
+    </blockquote>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">البرنامج يشوف اللون.</span></p>
+    <p><span dir="ltr"></span></p>
+    <blockquote>
+        <p>Analyze Live Camera</p>
+    </blockquote>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">يستخدم</span> <span dir="ltr">Webcam</span> <span dir="rtl">مباشرة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <blockquote>
+        <p>Build Color Recognition Application</p>
+    </blockquote>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">كل لون يعمل</span> <span dir="ltr">Action</span>
+        <span dir="rtl">مختلف.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="model-solution"><strong>💻 Model Solution</strong></h1>
+    <p><span dir="rtl">مثال:</span></p>
+    <p><span dir="rtl">لو اللون:</span></p>
+    <p>🔴 Red</p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">Sprite</span> <span dir="rtl">يقول:</span></p>
+    <p>"I found Red"</p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو اللون:</span></p>
+    <p>🟢 Green</p>
+    <p><span dir="rtl">يقول:</span></p>
+    <p>"I found Green"</p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو اللون:</span></p>
+    <p>🔵 Blue</p>
+    <p><span dir="rtl">يقول:</span></p>
+    <p>"I found Blue"</p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو اللون:</span></p>
+    <p>🟡 Yellow</p>
+    <p><span dir="rtl">يقول:</span></p>
+    <p>"I found Yellow"</p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="منطق-البرنامج-1"><strong><span dir="rtl">🧠 منطق
+                البرنامج</span></strong></h1>
+    <p><span dir="rtl">اشرحه كده للطلبة:</span></p>
+    <p><span dir="ltr">Start</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Open Camera</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Look at Image</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Detect Color</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">IF Red</span></p>
+    <p><span dir="ltr">Say "Red"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">ELSE IF Blue</span></p>
+    <p><span dir="ltr">Say "Blue"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">ELSE IF Green</span></p>
+    <p><span dir="ltr">Say "Green"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">ELSE IF Yellow</span></p>
+    <p><span dir="ltr">Say "Yellow"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p>Repeat Forever</p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="ليه-النشاط-ده-مهم"><strong><span dir="rtl">🎨 ليه النشاط ده
+                مهم؟</span></strong></h1>
+    <p><span dir="rtl">علشان الطلبة يفهموا إن:</span></p>
+    <p>Computer Vision</p>
+    <p><span dir="rtl">مش لازم يتعرف على أشخاص.</span></p>
+    <p><span dir="rtl">ممكن يتعرف على:</span></p>
+    <p><span dir="rtl">ألوان</span></p>
+    <p><span dir="rtl">أشكال</span></p>
+    <p><span dir="rtl">حروف</span></p>
+    <p><span dir="rtl">إشارات</span></p>
+    <p><span dir="rtl">أجسام</span></p>
+    <p><span dir="rtl">كلها بنفس الفكرة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="مثال-داخل-الفصل-1"><strong><span dir="rtl">👨‍🎓 مثال داخل
+                الفصل</span></strong></h1>
+    <p><span dir="rtl">هات:</span></p>
+    <p><span dir="rtl">كتاب أحمر</span></p>
+    <p><span dir="rtl">قلم أزرق</span></p>
+    <p><span dir="rtl">كرة صفراء</span></p>
+    <p><span dir="rtl">كوب أخضر</span></p>
+    <p><span dir="rtl">وخلي كل طالب يقربهم من الكاميرا.</span></p>
+    <p><span dir="rtl">البرنامج هيقول اسم اللون.</span></p>
+    <p><span dir="rtl">هيتبسطوا جدًا لأنه أول</span> <span dir="ltr">AI</span> <span dir="rtl">حقيقي بيشتغل
+            قدامهم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="أسئلة-أثناء-النشاط"><strong><span dir="rtl">❓أسئلة أثناء
+                النشاط</span></strong></h1>
+    <p><span dir="rtl">اسألهم:</span></p>
+    <p><span dir="rtl">لو الإضاءة ضعيفة...</span></p>
+    <p><span dir="rtl">هل البرنامج هيعرف اللون بنفس الدقة؟</span></p>
+    <p><span dir="rtl">ليه؟</span></p>
+    <p><span dir="rtl">الإجابة:</span></p>
+    <p><span dir="rtl">لا.</span></p>
+    <p><span dir="rtl">لأن</span> <span dir="ltr">Computer Vision</span>
+        <span dir="rtl">يعتمد على جودة الصورة.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="challenge"><strong>🎯 Challenge</strong></h1>
+    <p><span dir="rtl">بدل ما يقول اسم اللون...</span></p>
+    <p><span dir="rtl">يغير لون الـ</span> <span dir="ltr">Sprite</span>
+        <span dir="rtl">نفسه.</span>
+    </p>
+    <p><span dir="rtl">أو يشغل صوت مختلف لكل لون.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+
+</body>
+
+</html>
