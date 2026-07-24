@@ -44,4 +44,646 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overf
 .section-header h2{font-size:clamp(28px,5vw,48px);font-weight:900;margin-bottom:15px}
 .section-header p{color:var(--dim);font-size:18px;max-width:600px;margin:0 auto}
 .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-@media(max-width:900px){.content-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}}.card{background:var(--card);border-radius:24px;padding:30px;border:1px solid rgba(255,255,255,.05);transition:all .4s}
+.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
+.card-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px}
+.card h3{font-size:22px;margin-bottom:15px}
+.card p{color:var(--dim);line-height:1.8}
+.diagram-container{background:var(--card);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
+.diagram-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.diagram-title{font-size:18px;color:var(--dim);margin-bottom:25px;text-align:center}
+.diagram-svg{width:100%;max-width:500px;margin:0 auto;display:block}
+.wire{stroke:var(--dim);stroke-width:3;fill:none;transition:stroke .3s}
+.wire.active{stroke:var(--success);filter:drop-shadow(0 0 5px var(--success))}
+.gate-body{fill:var(--primary);transition:fill .3s}
+.gate-body:hover{fill:#4d6bff}
+.node{fill:var(--accent);transition:all .3s}
+.node.active{fill:var(--success);filter:drop-shadow(0 0 10px var(--success))}
+.bit-row{display:flex;gap:8px;justify-content:center;flex-direction:row-reverse}
+.bit-box{width:60px;height:70px;background:var(--card);border:2px solid rgba(255,255,255,.1);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.bit-box::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--primary),var(--accent));opacity:0;transition:opacity .3s}
+.bit-box.active{border-color:var(--accent);transform:scale(1.05)}
+.bit-box.active::before{opacity:1}
+.bit-value{font-size:28px;font-weight:900;position:relative;z-index:1}
+.bit-label{font-size:10px;color:var(--dim);position:relative;z-index:1}
+.bit-power{font-size:11px;color:var(--accent);position:relative;z-index:1}
+.decimal-display{text-align:center;margin-top:25px;padding:20px;background:rgba(25,60,255,.1);border-radius:16px;border:1px solid rgba(25,60,255,.3)}
+.decimal-display .label{color:var(--dim);font-size:14px;margin-bottom:5px}
+.decimal-display .value{font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lamp-container{text-align:center}
+.lamp-bulb{width:150px;height:150px;border-radius:50%;background:#333;margin:0 auto 30px;cursor:pointer;transition:all .5s cubic-bezier(.4,0,.2,1);position:relative}
+.lamp-bulb::before{content:'';position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.4) 0%,transparent 70%);opacity:0;transition:opacity .5s}
+.lamp-bulb.on{background:var(--warn);box-shadow:0 0 60px var(--warn),0 0 100px rgba(255,215,0,.5);transform:scale(1.1)}
+.lamp-bulb.on::before{opacity:1}
+.gate-tabs{display:flex;gap:10px;justify-content:center;margin-bottom:30px}
+.gate-tab{padding:12px 30px;background:var(--card);border:2px solid transparent;border-radius:12px;cursor:pointer;font-family:'Cairo';font-size:16px;font-weight:700;color:var(--dim);transition:all .3s}
+.gate-tab:hover{background:var(--card-hover);color:var(--text)}
+.gate-tab.active{background:var(--primary);color:var(--text);border-color:var(--accent);transform:scale(1.05)}
+.gate-visual{display:none;text-align:center}
+.gate-visual.active{display:block;animation:fUp .5s ease-out}
+.gate-inputs{display:flex;justify-content:center;gap:30px;margin-bottom:20px}
+.gate-input-group{text-align:center}
+.gate-input-group .label{color:var(--dim);margin-bottom:8px}
+.gate-output{margin-top:20px}
+.output-circle{width:80px;height:80px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin:0 auto;transition:all .4s}
+.output-circle.high{background:var(--success);color:var(--bg);box-shadow:0 0 30px rgba(0,255,136,.5)}
+.truth-table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.truth-table th{padding:15px;background:var(--primary);color:var(--text);font-weight:700}
+.truth-table th:first-child{border-radius:12px 0 0 12px}
+.truth-table th:last-child{border-radius:0 12px 12px 0}
+.truth-table td{padding:15px;background:var(--card);text-align:center;font-weight:600}
+.truth-cell{width:50px;height:50px;border-radius:10px;background:rgba(255,255,255,.1);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;font-weight:900;transition:all .3s}
+.truth-cell.correct{background:var(--success);color:var(--bg)}
+.truth-cell.wrong{background:var(--danger)}
+.memory-visual{text-align:center}
+.memory-box{width:200px;height:120px;background:var(--card);border:3px solid var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;position:relative;overflow:hidden}
+.memory-box::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(25,60,255,.2),rgba(0,212,170,.2));opacity:0;transition:opacity .5s}
+.memory-box.active::before{opacity:1}
+.memory-state{font-size:48px;font-weight:900;position:relative;z-index:1}
+.replay-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--card);border:2px solid var(--primary);border-radius:12px;color:var(--text);font-family:'Cairo';font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;margin-top:20px}
+.replay-btn:hover{background:var(--primary);transform:scale(1.05)}
+.replay-btn svg{width:18px;height:18px}
+.quiz-box{background:var(--card);border-radius:20px;padding:30px;margin-top:30px;border:1px solid rgba(255,255,255,.05);opacity:0;transform:translateY(20px);transition:all .5s}
+.quiz-box.visible{opacity:1;transform:translateY(0)}
+.quiz-box h4{color:var(--accent);margin-bottom:15px}
+.quiz-options{display:flex;flex-direction:column;gap:12px}
+.quiz-option{padding:15px 20px;background:rgba(255,255,255,.05);border:2px solid transparent;border-radius:12px;cursor:pointer;transition:all .3s;font-family:'Cairo';font-size:16px;color:var(--text);text-align:right}
+.quiz-option:hover{background:rgba(25,60,255,.2);border-color:var(--primary)}
+.quiz-option.correct{background:rgba(0,255,136,.2);border-color:var(--success)}
+.quiz-option.wrong{background:rgba(255,71,87,.2);border-color:var(--danger)}
+.quiz-feedback{margin-top:15px;padding:15px;border-radius:12px;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:rgba(0,255,136,.1);color:var(--success)}
+.quiz-feedback.wrong{background:rgba(255,71,87,.1);color:var(--danger)}
+.mistake-box{margin-top:20px;padding:15px;background:rgba(255,71,87,.1);border-radius:12px;border-right:4px solid var(--danger)}
+.activity-card{background:var(--card);border:2px dashed var(--accent);border-radius:24px;padding:40px;margin:40px 0;position:relative}
+.activity-card h3{color:var(--accent);font-size:24px;margin-bottom:20px;text-align:center}
+.decode-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:30px 0}
+.decode-item{text-align:center;background:var(--bg);padding:20px;border-radius:16px;border:2px solid rgba(255,255,255,.1);min-width:120px;transition:all .4s}
+.decode-item.active{border-color:var(--accent);transform:scale(1.05)}
+.decode-binary{font-size:20px;font-weight:700;color:var(--accent);margin-bottom:10px;font-family:monospace}
+.decode-letter{font-size:48px;font-weight:900;color:var(--text);opacity:0;transform:scale(.5);transition:all .5s}
+.decode-letter.show{opacity:1;transform:scale(1)}
+.decode-letter.revealed{color:var(--success)}
+.circuit-compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:30px 0}
+.circuit-side{background:var(--bg);border-radius:16px;padding:25px;border:2px solid rgba(255,255,255,.1);text-align:center}
+.circuit-side.simplified{border-color:var(--accent)}
+.circuit-side h4{margin-bottom:15px;font-size:18px}
+.journey-timeline{position:relative;padding:20px 0;max-width:800px;margin:0 auto}
+.journey-line{position:absolute;left:50%;top:0;bottom:0;width:4px;background:rgba(25,60,255,.3);transform:translateX(-50%)}
+.journey-line-fill{position:absolute;left:50%;top:0;width:4px;height:0;background:linear-gradient(180deg,var(--primary),var(--accent));transform:translateX(-50%);transition:height .5s}
+.journey-step{display:flex;align-items:center;margin-bottom:40px;opacity:.3;transition:all .5s;cursor:pointer}
+.journey-step.visible{opacity:1}
+.journey-step:nth-child(odd){flex-direction:row;padding-right:55%}
+.journey-step:nth-child(even){flex-direction:row-reverse;padding-left:55%}
+.journey-dot{width:20px;height:20px;background:var(--card);border:3px solid var(--primary);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);z-index:1;transition:all .3s}
+.journey-step.visible .journey-dot{background:var(--primary);box-shadow:0 0 20px var(--primary)}
+.journey-content{background:var(--card);padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,.05);flex:1}
+.journey-step:nth-child(odd) .journey-content{margin-left:40px}
+.journey-step:nth-child(even) .journey-content{margin-right:40px}
+.journey-content h4{color:var(--accent);margin-bottom:5px}
+footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20px;text-align:center;border-top:1px solid rgba(25,60,255,.2)}
+.footer-logo{height:50px;border-radius:12px;margin-bottom:20px}
+.footer-encouragement{font-size:24px;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hierarchy-box{display:flex;flex-direction:column;align-items:center;gap:15px;margin:30px 0}
+.hierarchy-step{padding:15px 30px;background:var(--card);border:2px solid rgba(255,255,255,.1);border-radius:12px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .5s;min-width:200px;text-align:center;cursor:pointer}
+.hierarchy-step.show{opacity:1;transform:translateY(0)}
+.hierarchy-step.active-step{border-color:var(--accent);background:rgba(0,212,170,.1)}
+.hierarchy-arrow{font-size:24px;color:var(--primary);opacity:0;transition:all .5s}
+.hierarchy-arrow.show{opacity:1}
+.cycle-diagram{display:flex;align-items:center;justify-content:center;gap:20px;margin:30px 0;flex-wrap:wrap}
+.cycle-box{padding:15px 25px;background:var(--card);border-radius:12px;border:2px solid var(--primary);font-weight:700;transition:all .3s}
+.cycle-box.active-cycle{background:var(--primary);transform:scale(1.1)}
+.cycle-arrow{font-size:24px;color:var(--accent)}
+@media(max-width:768px){.circuit-compare{grid-template-columns:1fr}.journey-step:nth-child(odd),.journey-step:nth-child(even){padding:0 0 0 60px;flex-direction:row}.journey-line,.journey-line-fill{left:20px}.journey-dot{left:20px}.journey-step:nth-child(odd) .journey-content,.journey-step:nth-child(even) .journey-content{margin:0 0 0 40px}}
+</style>
+</head><body>
+<div class="bg-anim"></div>
+<div class="particles" id="particles"></div>
+<nav class="nav" id="mainNav">
+<img src="data:image/webp;base64,UklGRsAcAABXRUJQVlA4ILQcAAAQsACdASpYAlUCPlEok0ajoqGhItWIMHAKCWdu/Eb3rSGO7W24Kxp8t/z35QbaL2P8mvy09B3LHy/76/vP/lMzu8T/Ov9N/jP3B/vn/////3R/1/qP/Uf6m/AB/Df4//kP7/+3f9m/////+rT1F/uJ6gP6r/d/+d/hf3/+a7/Jepz/JeoF/Vv7/1iHoCfsB6Yn/r/2Hwe/tJ/5v9F+//0Lfzz+7/9r8//kA9ADqx+wP9p7Rf7Z/XvPvq8+1nMHiU/Fftn+o/uftp7JfkXqBfiX8x/xP5Z8JQAD6t/6b+4+upM+yAOC8oAfpr1aP6T/6f5Pz7/of+X/ab4Dv57/aP+12E/2y///u7/uQEd8QtYY3sgthnhSjzlxsHsUNtqxsYPmY/tAnTWk3eRvx96FjeyHJvbr2WcMflxsHxsHxwNwpR5y43vhzrGX1TpNJmXt4xgkLqDmwfG99YZRGMFcyZ4Uo85gZwBbN+NllprGxSRxW1rTyCRoZg+h0Lk9hyLKBQ73OHulwtb0r7Yt5PSoBq70s+RV+vmqzZCqvAjDoiSnBwHM9u3kIwbzlxsBQO5nrVFmIT0cN4xUVTTop/in5EP7B8VPficNp4Uo9CYJ2MbGe2QcycuNhDjHYMc1hRlU7TBo7ET+m0ecuLWrsysVbJwwyW7Gwci7/f4b7eY3spo8hACO9F7eM0cndhYzBzYPjYPi2s3lloqwH/ypFHIWDg3LWx724JkPCjzlxsIARP9cmu7/ZownOm6SXZWcSrN1ionLjYPjYPdF1f9yA04STy2woP8q2ZDab97eMV4Uo8j+rxDgQtFzXmj0BexP/th4o9HZap/AcfrB8bB8bByt9LZK1LVnj6oAWMnX6h5/qUKSpGE52zPJmXt4xXhLKBMjlKRRBOFPTCBFLs0PlKB6EBul4xXhSgtMgQT6oNB3AFnhzPt44fdrVBd0wgBYJ5nkzL28YroE3NmKKreywfJTq9znjhtX1aq8EtMLlxsHuu2EKfH9FOy4j31Ko0UwYo70PeKl4jJoqMhKYlb5YktMajaS5Wc3/adyZdDaAfhhDWpYWGcPKvDaRep78mGQHCd7//L5zA9p7+w4sz5T9KoniwkKqUrmI71fQgTVtI0XVrqq7V+mYy9wK3ffqz/+Or3peC0mkpVYx955ZowcBHo6v9i29B5LQfA6DqaLpoV7SiHFmRAm0UldUDcX/ouciJah9bJ0zGUds8ApyspaVFT0aFb610bmwG8MKUciDdQbUxIc3kQgFF0BQ2+3/1twur1bsbB8bAIuNI7ctdbxiyyP8bBzhMbmYIM4b8pn03S9501OtiXK9jYPjYPjYBU0J1td0x2zWnRSj2ENErPauhSJbsbB8bB8WzQmMIoN6mSeoaPbS7xhqgz7Rm90udSbfM+/M+/M+2q5zkHwgOmW7IxrgGfnantR5bmZ/GwfGwfGwCfuyIPBLrvY17b1479hUwupcbB8bB8bAQAQPxFm5wHM/DGX2dGUTnPSSORRmBAFKPOXGwfGqnUawYBmUlb7o2gq3xIt+5qaTHReecuNg+Ng5S5VEPIKn7R5y5KdgNEP/CctFGRfdcbB8bB8bAG2kbnnjfj5oluv/gRhkt633Yzw7bkmwo85cbByF8VOjWFDUjwLg+AhHWghGXOkAj3IYK3YrIOKIEsJ2Lx5D63xJhyMnSjFi2aaOqZHGOU83UPjf+fNGyE+Z/GxpEB8bD1WDQ6zDahWy4eI+Q2GD/8t2/te3jGOtkUmvH29gn/+TICZmhiQUW7GwfLPCtqooUgpRoHcGtw3szflXEGGS3Y2D5Kdg+OQE+JVtRv+yklVIuo8dXQx116rM3el4dZCC3JvTG+pMds+GvBFYveHV3km1Cry4VeO7G9/euRjXSwAAP77d89+nafhMf4TD6F7w6ETqw/BiNp9R3MH+fjgGRkNcGuDzzJDh5wD5niJcxxptKbzbw2ZkkcLHYPDYtAgeyGavwCzeP1Hv+Jx2rSaoRfE+1+cYFN6+O2ZqnVjPDdbvv2KdVrlK5PMUvmhCbwAFqQybdpqs3k8yQvZtDTr3o6w4WQHXQz0sykl3GEA/CFxJfMOTkJ1y3/nSlwC+0naIxAJyDvxU6hMY1Kijbe/v3PVRvALgd+p4nomE6P93IUmkld97JR/G3ZE1/J8NqOg4AvmO7nptwCH3HSUoM6p/CRSrejS0vyLndCB//fmeUVLGONqwvyYyljGfrFourMOaQMXBCFRLQAyveZAUJ9JywJ+AVVD+sJNUA6GatZh4AdTxKA2dHNSOckmJRAt/7BHRHNkGj1FU7gHWJmbORZicUCUV2HnTtoWdwwJCBXehscM5VNujpC8Utn5blnaBm35pWeDb7CEt5w+HOnoOBgUZ8lMaeLgCEXlrUJpflBtRgV+gsy7lfDzZuTdBBC9bJ+WjVDLsilgNPYb2Bn4qLf9JCQJz93pPj6pXSeypSJqPO7tDcStOt7hJXjTIABlTAkEZ0ClV1T+Fk/GhKoe7jYAlVZe+AAPqHSZ/5HXWidWApbQ2UMwqybyTQme22FkskGS7op7bwWUmZEuNM5EptmdgYL/bSWxv5zSRLRzZtI7+AuJyPGu5bP91AAy63dbb2jeXmrncak0ayciOLtOOpK2k5sDSiibrh+Muv5FYYShZ3hrKRzQ8UBQ/gfQenCcUNsLynSscgfO50r8yMK9cDuaBxrBESuwTIv/Ba0OrhKBFGKoBl3qVLroHVXijv7TQvCDUoiNj6QzckInt4JNrVD40IKDUFeE+h6CHHeehl/ZG0Ad7sJ7kLTjyLucB/zjIcOzHcQucWaiZ51eTy08zaI7BEoOdEFW2o1U6cCEDY9tvkxj/0aGCk54aEKD6zCqjgQPFPLcXLVZZzkvGIJeZaXqa2WRZ/IIry/rCxb9h1PLcmZ8Wt1zX2zR9vZWfwAAJ9htLnPiA63VF7+H83NoFmLGnFiBJFoDISdaPlPU4X4+EhN0jDFe0wixZBfRJAZbnB3JEh2pivFjU96ax8UCq4Z0zsQib2CXlOVlDdgJeEzH+B4YnFVq8JzwVVUzHrUniFQI/sRaQriG+J2qKN9zH2+ilo3hKJkFjqFWNcKFPqxqK/gHQOYNWlcC3C/aIKttRqpz77PtqzMDT1f1F7c0dKBhiY3IYvx2O42at13k1Yhxf8TJeQJui1Kpa8fhmVemU1QNyk1TIm/1bghfQIAFYQF70bIV7Bpm55kEih6BcY9Uq3UjKZq1tlL5AUmpzCCXKf0Tmdp3LB48OISsYb/SME9HekTO91T31fF7Taf3f1MmICO+AWoIrVmAQmaX6h4PpP9j4/EkKrOyfSQnzitH19H/4c1yr9d0dHU3qN46Amo6Xf5Xd0Gc1FoPixuLj30doDHLcNjQkOekKELEf12Dcy+XllpnDZtzYdVQ7pYMpZ3UDCaGnKVvpzZM/NcwAAK+rG8FhSEcsLamGjV3RMDAHc/cLkPrHqti5utRJ//yFREt5ISjCeQFVrQSb90qDCwphOkX7tJk8STj9IRMoYKJStCMW0Wo0q+LTH+maNPCFUlkVFd8yT0MXTaTE1T1IYN5ZgnsayrqF0w612PjhakbgqBvk9WdsHHkfH5RlihZR+MfTG3a0eiYzaUv8ubMKwAAIqZJl705RYs2D/BSe2+dFn/APWfeDcHQm7effuGf6lb46uKXiOGwU00wIYC0biN/AsWpUy0rhg0gj85my03P7bTDm0u7TNGNcejLO85d50usVZUC/jagNbQDNiRKybMkWpqYAgWb3V99t1UzIaTDi9mhMhpda6hr6N/Zb9Drvr4p7mQ7q7VBZFypv+Mv+73DxLhb/VQAAeH0jvC/DkpFUdv9v43SCuH72zsCKB7f6um2hr77ez5P2RqJ6tv6p4hN5i3/FsTZv9bN+Nl4fv9KKUaDXnMXi7N7f/bZq4DwTNxpUnyiYDd2GQb1nCVo6Gjtzdn+HEbwtYeKBC8j1X1C4qCG30E7tvqEtjkrmhQ4PcACopAAASgT/5kXtSKi9J6EcBv8hPNt1uPaXHQeNjO2lQzqWPIZJUKdg/tFh1DmcnqHGGPFYSTQbfPsjERRa3WkpEh0Dy8sY/Yg0nhlsH0+GWPdBRPzFkd4zvkyT20zqeHtZ7JROwNGlAAvcQIlFJ9nvCvRNK38jR0rFWzvqPk6QViXkBLumJqMKlw2uOiEC9wER6v0Hflp3QYDQ25dkn/cFJ7Y5pS2kdTrLaFp0IRlr4ki2/IgDH5wxgaaybYh81w8Qt9zfoXR3UJhkhQIKIA7WAACd2f2peO5lvJ9lS7TMkCcwOMJh8v03NI4b6DBPlsKtsll+DYtgNcoarMQvauSVcU6okOjbu+Psle925mPQhZ+kV7uGVbW0Bi0jxV51h40/R5iFzu+OrHRhrCV1jBuR4GjHmrVllfL1HHLAQ+AAG2I0xcQol1N6Fk2XFP0e5tO4Y6flC0y01riBHNMDd2mT/VFHEoPb9OJoh+DNIjRmgjzjjxOrvtxOobdx8u7oAiSTWAeORxqDGj4hG5i5mAChl3tAGqbnpCu3ub5cOb+ZaSx61KYf6JuW/CdvA8o68PFWhpzD344h6IUB+RINaQBoB5kXjvYppl6LnvKobIqSlpQaNFFNdOqqRO3NdSdyp1fQiHBHfh13aAPQIr5Q0Ze+hCqrO/mkBLzeVhLmkAAVR+5qO45NgzGlNzWA98NI4zs/xTNG2ERCyHfF3xLhKeIdp97BhBIJceiMGYayZjcXNbw1msYweDmGYCT7SGL1CEPR/SqiOldqpxqfdnSA3Z5qiSmZJ4sOAlcPZvz6A28xZVTiZnZvccPSvpG7Lo3My862Kbx6Xh9nLNNxQJcFRHgZDm+cARCB7LCugHy7kbepoicKQ7UpVLr3o+YbbnvOR7BmMmIn5N3JkqnHF2Ej1bC2wMImRFvhcjsYFH3kL+zpp21DboPHPxU7uRVQM+QhrG5z5uVJ+swmIgwMT+SkqBlUuc1Flu4Uc6G2IjfoTd8N1xuw0bZVHlh8cDcK3oPJ7OxittMYz1zH8d0vZYkquEYU+i375WeraEDESfDjCgNVOE7cEnaouSNx4mciGplmk2ODV8uclKFuTRKTDs32n8XD8y7enPfBGPfMm79dvTU+yYRkTa1j5EuSBIxy2zrFLF0hD/ECUFIk5SHe2gQpcEbBX8yhF6IBZrMtEM12W8LD1Nlbr5/xY3ACw8q5OGgOFXLuYQQnlD+Uxa5ok0BLKGRWfc9wjUz4u8xGIZAhTlrq/qfnMZ2x49l9aUgULleRNw3aODmvc+6cth+WwJ5tuof2QffV5fkGtyBPKEIWD4TBHY9vaTfBAp4vzHSumXeoaM9lw+IvPtQlZr0aU1p25/az85EXf7wyzyHt0OcmzzMMiALkvXPsQAZWQ8nL+zMLA5zR96TKV9+jsoXW03yg1FbEV5URaTTKrdshYI8OUeYjZBrHIWyzETRdiEpp19H3TvGtQS/jDBHH7vf7UPvWwLXnErSl/F52L504J/TwiPNCEexYsHnIPeSn7uCfe8DQriX9WOR7wdSBBXgUZP5zmDHgIR5WC/1uecNdddnM3HbRrPs2lHbLbBAjcDNU8REL46FebHryj9KjLGsaxmS//66+KJu7Qg8e9yo34xjkn1bQYAXz7tN0O63IezR+DUQlCNWkiuuoQDLlJD8wW0bOEJihhKSJw00InMY0pxSUr5Byqxw8ou2Wbhzz4MFEjhF3eSUYnS192yMGP9pA0itiQwKOHBi7PJMk3MmA9zma7mtFiu33G4Pi5ikOyf3gxN2CMyuAyv+l8caLB8Qt/fRpbVHvVuOPXnGat3n3K+Oszq8z/bNWRqeUlgDAz/B8PtyDPZC92jHEAc+ioeNadDdUBCFplppPEhydgEgRc2KgzRwTDYg9Hx+dTopc9aXkhMM1KPddqGrHkpQP/ggLw+HGGIhPnjsksUd3QkgfVdUg8JeP8aGteK/umY6rXA+6QSvWGP7f/HJh/xDzHBfU2l90KF/aV5mp3bGD0Ms7qpju5ofDBfdIPH8bNu8rqy62u5KlnetQaULHdW7F+/zeJ5wlr9H8pls6DGH+irJngNGS82OSScvjRpENTt9XPHrlI+UN/duVQ3KnRTgEOg6GSt1ImqfBwa1Y06Oe+9YthZ4mEuY/itUjcW4Jggs+44stpmPoBHnGSOO7Lz2SCHX9FXfVPrT+QzXwveMMNhvyNwl4jpoBTsONU77voNQrD/zcveT7ckBcdT0gf1RMVqZ3GvM1mcCHgbuLT5xcAG3ZVLvKLrwiZWpDzjkOmg+/TCYuaX/PmRs2QaildfviW/Hevmw9fcUXrTPqGSG1H0GqrjyoxA23V8Bv1vcoq5T+skp8dIbcJSQWuOiEdN/9r6Wwt+ce/Owj5RMyX8svgiDy7Xia6lFiVez5+mc6+MH18/KBmUi0rBT5bMEzDB02KxSzK3qMi/OAOQbYPYfNIl59lkdsAQipp0fl0TyGTMHZ6ntmqj2l5zkJHU7TG1zdi/FIUctcz1DIEPg+NlhS9FbjN2wp3mA4pVD5nTNRsfJ8aoZDP/THBSRncKJ1B32ZKWVISad+YBO2I7HsSylu/2JAid4ONBCK+SXX0Ii5QJpT2K3qJoU5O0AEeUSCFgMH6Y0slKRny0AgFmKdd3IbCl0FGoDRgky6Kpl5nReBFLOxJS3raORhaVQNPjf6oF+EHRybCVLEr2dX0tp6of1g4ChOehyVdIHiy4yc+gbVR3W/VSagggPu3cNPok6jhStOwANbe5q7sXPijAPFAv6IzRTeO+embmWD/0qG5c0hamY1SJx7TGITr8KHQlNMLOnLk6d6hKiUFY33FuDSrU4FOK/DlA77NZOQ2DoItuiRVHrv93c3Ynvsatdiv8ltHKtG/HPn2xQ5i/+KmnggfDXrNjTme/buvA7XBzP+X4knz+wOMF/GahG7NjGP4B3LS0isYWNJlgzkv5ZfAqZmMgiDL4Uw4froX5zPClgLcuZvrSJ3LpZ0hehlg3LRhV48WBz4HdDyylIkXHc+1n8we2Bk9pRa002V390oHwHjfeG+UQzp8xz1K8/Cfw6bCvjE4aKrMJSUJ4q7/F7nFLMCzzZyEr44/A6jwLMnJ3s7RyEHPjMyGRN94cyyYkwoKb46jjdNwFExp+uDx84AAAAroJ0dGaMpTEuuEdi2qExu11QiBqZ/k52IRMSeBomwPLBUoCC8wSTtiP9HRqh7gJus94cKYgES9OiJll+Cd3eIwOD6JCQCieA/wbdylWAGytAp3nxurx9pmMhUhGTeB+MkM5BsZMrDn/2sMJOKRjjNt2g0gMbKKE6b5+Zj7Cnd+it9FsOUbY4dzXBasH8mOWkUdOI8rZbbZ5Ll0X32qlwrfJQrNejOjC88t/wEkQn0aj+6BXoSXhIqy/Og0akMBNMzvrKK+YGjEnqMgfR8Vpj0ee5n2jjWzUqk4KeO/ye62D30AACl1qF9rD6SKSdlx/s5cA4IilVP+dWfn0F78WBdIwyb//SQkDGmtdbenSegElOP6PacZhBb+i/K8WWTu9VXV3yrgDCPhPh6e1HISsrz0WbU+T58ifQfGwICXCSYKy3/m/Q75i2vmdDwxPgO8ZKBu9IGoODXA6ISUVPugBOst1nXbOPsFGCKUxkCIpAtzR0oGWylfhafGgcXX2YVelEAAGZgDheCp4xVtvY6XlUgAdaEsyBTVzlwPi/1zEK15FcNTBocGc2mwzP940f/Ashv782L8JhH49Yr5i19NOyEFc+9yVMP/6v+VKsyT4GdSWcrI4IuBItt9W0eC9/olYFePtXmHUf4orvWMA4Ok/W/DPiAUumcO3Z0vqCIn8iI0XTxO2/zE+EDIAAFuz8FhwjaiUQbn36vQuiVliQzezMSYEHFqL+njMKYWo93d8PUR898ko0xT6vUj+34B+74g4wqOCXw+Cpi7xYYwWrwcwF0nshveDXg8u+B6hLwmZwwxBeoOUIUGwH0wyzflw/31HIVK6kC5oZxg0wgAA82cHeRYUKwMf/ySi9883rB2PBjX8qg2kjev0DgFfZ1IKg9U4aUh8UT1bDFwl3sBQXGuyjBeDP8jqk45LpO+aPbW06uXAoE8nL95AopOsshrUb8sP84XohoiO/5/d08Xryx9hxWI4rLaIBcfmEfVc1NiDjAtOHWezpQb0QAACc5+bXJ/5c8ma7r1QlsmaQAHx0BfVeFYcWPOwD8qxBR4lUSO/nw6bIb6g7TWDahUxcJwuRqbh8PYZ/UtLQFpj8nXxP4U0xeR7RGm3rNZp7dgAYVm91AgbmXK2KNYeYYboTOI6Lh3nCBvAgjPDwP3JK8acBLD88RcNiUjnnXtI/wb+3ss4QXRBsBT6yAAAKLsVYaJb9tG38fU+Dy3kcwCp4xK+BxgigXzeGOjVZ1Zthw0Uot+zDRyv6/H3nGPexdydUWakaeWAvpJAFIx8fT5aJcWISdjzNts2ZCBu9xVyDQejhGxOb1sDHhs4Qk/7zoOavD7DRNkCZqWhPBXpgAAovbf2BaKv5fsKRRZIQGT5BaFjTtxayO1Vd6REt5oNcLWWuV6YaVjmIvvWr82rRWLLttX4fGSUxuQotS3+Y16SrHdinQSlfuhfvL+/uyeTARUxTmsR/AAL1vjINJMdmifKg0gVzJGIu1Z/Dkf5Y/hUzlqBcJb2osBeaSI4M4rnr8RVamVM8Z8AAGxpyQlWyeg+U2Tq5mgyuILgDWO+v8/0RzncBLV3LwOhX/Irt8x3SBRMSdvLIUn3icw4KNUhuDN5Lt+CSvxkqBG19L//adaEnZctqMCo9DEmXJl87OL/CIt6Blqbs3QvZXA9XV9ZAAA85GVkZ+1e47Id5Iy0J0PvVwLkzR2CU4xMBjk5msHJel6C8R0ziTx4LLVIaXvtaUTDd/G79Y0xDsLb6rqCzF28SD/EBTY7FtSFjUvEHAAGBNVeJtO0mdTot44rDszK8dYovrtO4nM7hzp90q6LKQol6jSi2aCdBg1acKvD1Aqv8HTsw66VaIOGvpPUYjPJxleE9cxsPm6UsFjd1dep90xrnSXr38Zz2i0Cs8PfS7DV0V/elsE4FXVUHZ8t7HYJNzeibY84HWUhoCiuWL1RVR8/DkCoD51uyMtlWbJPs/5BI+S8wTiPaQgME2YRkzJezhlvcu0BaaXWlRjPe04fYmbaCaZO4qaBheEE0tWchTr75PJV3HzhDTOdaSszkS/idII8KajAQ/lE1ia6RA3G2JaP8KQPy7Ug32nKmv29lkFjPRdgWsxgiETxNaGHPyAD5AgCXRhQFiSBDDTnAfDFmYIpfMFbI9vO2VWgP/DXKciVSHgZFCvOTrBQPSk5fktQlWoDVJLm318cOxMWCHhT4GfUZsqcA7UoBeHwIxyRbJ25xoP2E8Cyp4UIFXdIa6B5Go+OroDuZkXuw09nlRjdV4RPHCe+xM/Uw1OPHeHNhQ3Qxncojf6ikNcXmVFEqRW71oNAl6NBT7hVd+8Pjdv05Ijez2Y4Z9W2Qu0FlKO7aURS80VVzsFkSpPE2XMX69PwgCxIocOy/ulP4+hklymXG/633l6cdZBe0Or+Qm4vzJMvIFgaOslYHUvpQi1vQfq6j8SL9CNMlzK5AMhNxOYAABYD5T55OaqRumUpYFO85YMYSSAALKHSqDsuryuUgnYT+Bap4FwOS4o51LWFhi/ek4+Ah1dwLscK/+OnBM8TZ5dxmGxO0I1Ppo7wcdEXAKdaiHXyAq03+wgJDKzMcTxJ9T/QADJmGKIdThjZOeWspnLMJHUutYYH+vDPzW/BOQdz+QyyLg8AA" class="logo-nav" alt="Bilal">
+<div class="nav-links">
+<a href="#intro">المقدمة</a>
+<a href="#s1">النظام الثنائي</a>
+<a href="#s2">الـ Bit</a>
+<a href="#s3">بوابات المنطق</a>
+<a href="#s4">جداول الحقيقة</a>
+<a href="#s5">المعادلات</a>
+<a href="#s6">الذاكرة</a>
+<a href="#s7">من البوابات للكمبيوتر</a>
+<a href="#a1">فك الرسالة</a>
+<a href="#a2">بسّط الدائرة</a>
+<a href="#closing">الرحلة</a>
+</div>
+</nav>
+
+<section class="hero" id="intro">
+<div class="hero-badge">Computer Architecture - Full Lesson</div>
+<h1>من <span>المفتاح الكهربائي</span><br>لعالم الكمبيوتر الكامل</h1>
+<p>هنتعلم إزاي أي كمبيوتر أساسه مجرد مفتاح كهربائي بسيط — ونمشي من أول 0 و1 لحد ما نفهم الكمبيوتر الكامل</p>
+<button class="start-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">ابدأ الدرس</button>
+<div class="scroll-ind">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+<path d="M12 5v14M5 12l7 7 7-7"/>
+</svg>
+</div>
+</section>
+
+<section class="section" id="s1">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">01</div>
+<h2>النظام الثنائي: لغة الآلات (Binary)</h2>
+<p>الكمبيوتر مابيفهمش غير 0 و1 بس. تعالى نشوف ليه ولغة الـ Binary إزاي شغّالة</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">💡</div>
+<h3>ليه 0 و1 بس؟</h3>
+<p>لأن الدوائر الإلكترونية تقدر تفرق بسهولة بين حالتين بس: فيه كهرباء أو مفيش. أي Switch يا إما مفتوح يا إما مقفول.</p>
+<p style="margin-top:15px">المسار: Physical State → Electrical Signal → Binary Value (0 أو 1)</p>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">اضغط على الخانات لتبديل القيمة</div>
+<div class="bit-row" id="binaryBits">
+<div class="bit-box" data-val="128" onclick="toggleBit(this)"><span class="bit-power">2⁷</span><span class="bit-value">0</span><span class="bit-label">128</span></div>
+<div class="bit-box" data-val="64" onclick="toggleBit(this)"><span class="bit-power">2⁶</span><span class="bit-value">0</span><span class="bit-label">64</span></div>
+<div class="bit-box" data-val="32" onclick="toggleBit(this)"><span class="bit-power">2⁵</span><span class="bit-value">0</span><span class="bit-label">32</span></div>
+<div class="bit-box" data-val="16" onclick="toggleBit(this)"><span class="bit-power">2⁴</span><span class="bit-value">0</span><span class="bit-label">16</span></div>
+<div class="bit-box" data-val="8" onclick="toggleBit(this)"><span class="bit-power">2³</span><span class="bit-value">0</span><span class="bit-label">8</span></div>
+<div class="bit-box" data-val="4" onclick="toggleBit(this)"><span class="bit-power">2²</span><span class="bit-value">0</span><span class="bit-label">4</span></div>
+<div class="bit-box" data-val="2" onclick="toggleBit(this)"><span class="bit-power">2¹</span><span class="bit-value">0</span><span class="bit-label">2</span></div>
+<div class="bit-box" data-val="1" onclick="toggleBit(this)"><span class="bit-power">2⁰</span><span class="bit-value">0</span><span class="bit-label">1</span></div>
+</div>
+<div class="decimal-display">
+<div class="label">القيمة العشرية</div>
+<div class="value" id="decimalValue">0</div>
+</div>
+<button class="replay-btn" onclick="resetBinary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+<div class="quiz-box" id="s1Quiz">
+<h4>QUICK CHECK</h4>
+<p>لو كتبنا للكمبيوتر كلمة Hello، هو بيفهمها مباشرة ولا بيحولها لحاجة تانية؟</p>
+<div class="quiz-options">
+<div class="quiz-option" onclick="checkQuiz(this,false)">بيفهمها مباشرة</div>
+<div class="quiz-option" onclick="checkQuiz(this,true)">بيحولها لأرقام ثنائية أولاً</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</div>
+</section><section class="section" id="s2">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s2),var(--accent))">02</div>
+<h2>الـ Bit وتحويل الأرقام</h2>
+<p>كل رقم (0 أو 1) اسمه Bit — أصغر وحدة بيانات في الكمبيوتر</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">🔢</div>
+<h3>إيه هو الـ Bit؟</h3>
+<p>Bit واحد لوحده معلوماته قليلة، فبنجمع كذا Bit مع بعض. كل ما زودنا عدد الـ Bits قدرنا نمثل أرقام أكتر.</p>
+<p style="margin-top:15px">الخانات مضاعفات 2: <strong>1-2-4-8</strong></p>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">حوّل الرقم 13 لBinary — خطوة بخطوة</div>
+<div class="hierarchy-step show" style="margin-bottom:10px">هل فيه 8 في 13؟ أيوة → <span style="color:var(--s2)">1</span></div>
+<div class="hierarchy-step show" style="margin-bottom:10px">الباقي 5. هل فيه 4؟ أيوة → <span style="color:var(--s2)">1</span></div>
+<div class="hierarchy-step show" style="margin-bottom:10px">الباقي 1. هل فيه 2؟ لأ → <span style="color:var(--s2)">0</span></div>
+<div class="hierarchy-step show" style="margin-bottom:10px">الباقي 1. هل فيه 1؟ أيوة → <span style="color:var(--s2)">1</span></div>
+<div class="decimal-display" style="margin-top:20px">
+<div class="label">النتيجة: 13 =</div>
+<div class="value" style="font-size:36px">1101</div>
+</div>
+</div>
+</div>
+<div class="quiz-box" id="s2Quiz">
+<h4>QUICK CHECK</h4>
+<p>حوّل الرقم 6 من Decimal إلى Binary:</p>
+<div class="quiz-options">
+<div class="quiz-option" onclick="checkQuiz(this,false)">1001</div>
+<div class="quiz-option" onclick="checkQuiz(this,true)">110</div>
+<div class="quiz-option" onclick="checkQuiz(this,false)">111</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="s3">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">03</div>
+<h2>بوابات المنطق: AND, OR, NOT</h2>
+<p>الكمبيوتر بياخد قرارات كل ثانية عن طريق بوابات منطقية بسيطة</p>
+</div>
+<div class="gate-tabs">
+<button class="gate-tab active" onclick="showGate('AND')">AND</button>
+<button class="gate-tab" onclick="showGate('OR')">OR</button>
+<button class="gate-tab" onclick="showGate('NOT')">NOT</button>
+</div>
+<div class="gate-visual active" id="gateAND">
+<div class="diagram-container">
+<div class="diagram-title">بوابة AND: الناتج 1 بس لو الاتنين 1</div>
+<svg class="diagram-svg" viewBox="0 0 300 180">
+<path d="M 80 40 L 120 40 L 120 140 L 80 140 Z" class="gate-body"/>
+<path d="M 120 40 Q 180 90 120 140" class="gate-body"/>
+<line x1="20" y1="60" x2="80" y2="60" class="wire" id="andWireA"/>
+<line x1="20" y1="120" x2="80" y2="120" class="wire" id="andWireB"/>
+<line x1="180" y1="90" x2="260" y2="90" class="wire" id="andWireOut"/>
+<circle cx="20" cy="60" r="12" class="node" id="andNodeA"/>
+<circle cx="20" cy="120" r="12" class="node" id="andNodeB"/>
+<circle cx="260" cy="90" r="18" class="node" id="andNodeOut"/>
+</svg>
+<div class="gate-inputs">
+<div class="gate-input-group"><div class="label">A</div><div class="bit-box" id="andA" onclick="toggleGateBit('AND','A')"><span class="bit-value">0</span></div></div>
+<div class="gate-input-group"><div class="label">B</div><div class="bit-box" id="andB" onclick="toggleGateBit('AND','B')"><span class="bit-value">0</span></div></div>
+</div>
+<div class="gate-output"><div class="label">Output</div><div class="output-circle" id="andOutput">0</div></div>
+<button class="replay-btn" onclick="resetGate('AND')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<div class="quiz-box"><h4>QUICK CHECK</h4><p>عربية المصنع مش هتشتغل إلا لو زرار التشغيل متداس و زرار الأمان متداس. لو A=1, B=0 → الناتج؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,true)">0</div><div class="quiz-option" onclick="checkQuiz(this,false)">1</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+<div class="gate-visual" id="gateOR">
+<div class="diagram-container">
+<div class="diagram-title">بوابة OR: الناتج 1 لو أي مدخل 1</div>
+<svg class="diagram-svg" viewBox="0 0 300 180">
+<path d="M 80 40 Q 100 90 80 140 Q 140 140 180 90 Q 140 40 80 40" class="gate-body"/>
+<line x1="20" y1="60" x2="80" y2="60" class="wire" id="orWireA"/>
+<line x1="20" y1="120" x2="80" y2="120" class="wire" id="orWireB"/>
+<line x1="180" y1="90" x2="260" y2="90" class="wire" id="orWireOut"/>
+<circle cx="20" cy="60" r="12" class="node" id="orNodeA"/>
+<circle cx="20" cy="120" r="12" class="node" id="orNodeB"/>
+<circle cx="260" cy="90" r="18" class="node" id="orNodeOut"/>
+</svg>
+<div class="gate-inputs">
+<div class="gate-input-group"><div class="label">A</div><div class="bit-box" id="orA" onclick="toggleGateBit('OR','A')"><span class="bit-value">0</span></div></div>
+<div class="gate-input-group"><div class="label">B</div><div class="bit-box" id="orB" onclick="toggleGateBit('OR','B')"><span class="bit-value">0</span></div></div>
+</div>
+<div class="gate-output"><div class="label">Output</div><div class="output-circle" id="orOutput">0</div></div>
+<button class="replay-btn" onclick="resetGate('OR')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<div class="quiz-box"><h4>QUICK CHECK</h4><p>إنذار فيه Sensor A و Sensor B — لو أي واحد شاف خطر الإنذار هيشتغل. لو A=0, B=1 → الناتج؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,false)">0</div><div class="quiz-option" onclick="checkQuiz(this,true)">1</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+<div class="gate-visual" id="gateNOT">
+<div class="diagram-container">
+<div class="diagram-title">بوابة NOT: بتعكس القيمة</div>
+<svg class="diagram-svg" viewBox="0 0 300 180">
+<polygon points="80,40 180,90 80,140" class="gate-body"/>
+<circle cx="190" cy="90" r="10" fill="var(--bg)" stroke="var(--primary)" stroke-width="3"/>
+<line x1="20" y1="90" x2="80" y2="90" class="wire" id="notWireA"/>
+<line x1="200" y1="90" x2="260" y2="90" class="wire" id="notWireOut"/>
+<circle cx="20" cy="90" r="12" class="node" id="notNodeA"/>
+<circle cx="260" cy="90" r="18" class="node" id="notNodeOut"/>
+</svg>
+<div class="gate-inputs">
+<div class="gate-input-group"><div class="label">Input</div><div class="bit-box" id="notA" onclick="toggleGateBit('NOT','A')"><span class="bit-value">0</span></div></div>
+</div>
+<div class="gate-output"><div class="label">Output</div><div class="output-circle high" id="notOutput">1</div></div>
+<button class="replay-btn" onclick="resetGate('NOT')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<div class="quiz-box"><h4>QUICK CHECK</h4><p>مفتاح نور — لو النور شغال وضغطت الززار يطفي. بوابة NOT بتعكس. لو دخلت 0 الناتج؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,true)">1</div><div class="quiz-option" onclick="checkQuiz(this,false)">0</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+</div>
+</section><section class="section" id="s4">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">04</div>
+<h2>جداول الحقيقة (Truth Tables)</h2>
+<p>وسيلة منظمة لتجربة كل الاحتمالات الممكنة للمدخلات</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">📊</div>
+<h3>ليه بنعمل جداول حقيقة؟</h3>
+<p>علشان نتأكد إن الدائرة شغالة صح في كل الحالات، ونكتشف أي خطأ قبل ما نبنيها فعليًا.</p>
+<p style="margin-top:15px">لمدخلين: 00, 01, 10, 11 بس — مفيش احتمال خامس!</p>
+<div class="mistake-box"><strong>غلطة شائعة:</strong> الطلبة بينسوا يجربوا كل الاحتمالات ويكتفوا بحالة أو اتنين.</div>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">اضغط على كل خلية لتحديد قيمتها</div>
+<table class="truth-table">
+<tr><th>A</th><th>B</th><th>A AND B</th></tr>
+<tr><td>0</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
+<tr><td>0</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
+<tr><td>1</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
+<tr><td>1</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1)">?</div></td></tr>
+</table>
+<p id="truthScore" style="text-align:center;margin-top:20px;color:var(--accent)">الإجابات الصحيحة: 0/4</p>
+<button class="replay-btn" onclick="resetTruthTable()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="s5">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">05</div>
+<h2>من المعادلة للدائرة (Boolean ↔ Circuit)</h2>
+<p>المهندس ساعات بيكتب معادلة وساعات بيرسم دائرة — والاتنين بيوصلوا لنفس النتيجة</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">📝</div>
+<h3>المعادلة زي الوصفة</h3>
+<p>المعادلة المكتوبة زي وصفة الأكل، والدائرة المرسومة زي التنفيذ الفعلي. الاتنين بيوصلوا لنفس النتيجة!</p>
+<div class="mistake-box"><strong>غلطة شائعة:</strong> الطلبة بيشوفوا المعادلة والدائرة كحاجتين منفصلتين، مش نفس الحاجة بشكلين مختلفين.</div>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">اضغط على A أو B أو C</div>
+<div style="text-align:center;margin-bottom:20px"><span style="font-size:24px;font-weight:700;color:var(--accent)">(A AND B) OR C</span></div>
+<svg class="diagram-svg" viewBox="0 0 400 180">
+<circle cx="30" cy="30" r="15" class="node" id="boolNodeA"/>
+<line x1="45" y1="30" x2="100" y2="50" class="wire" id="boolWireA"/>
+<circle cx="30" cy="90" r="15" class="node" id="boolNodeB"/>
+<line x1="45" y1="90" x2="100" y2="70" class="wire" id="boolWireB"/>
+<rect x="100" y="40" width="80" height="60" rx="10" class="gate-body"/>
+<line x1="180" y1="70" x2="240" y2="70" class="wire"/>
+<rect x="240" y="50" width="80" height="60" rx="10" fill="var(--accent)"/>
+<line x1="320" y1="80" x2="370" y2="80" class="wire" id="boolWireOut"/>
+<circle cx="370" cy="80" r="20" class="node" id="boolNodeOut"/>
+<circle cx="30" cy="150" r="15" class="node" id="boolNodeC"/>
+<line x1="45" y1="150" x2="100" y2="150" class="wire" id="boolWireC1"/>
+<line x1="100" y1="150" x2="100" y2="120" class="wire" id="boolWireC2"/>
+<line x1="100" y1="120" x2="240" y2="100" class="wire" id="boolWireC"/>
+</svg>
+<div class="gate-inputs" style="margin-top:20px">
+<div class="gate-input-group"><div class="label">A</div><div class="bit-box" id="boolA" onclick="toggleBooleanBit('A')"><span class="bit-value">0</span></div></div>
+<div class="gate-input-group"><div class="label">B</div><div class="bit-box" id="boolB" onclick="toggleBooleanBit('B')"><span class="bit-value">0</span></div></div>
+<div class="gate-input-group"><div class="label">C</div><div class="bit-box" id="boolC" onclick="toggleBooleanBit('C')"><span class="bit-value">0</span></div></div>
+</div>
+<div class="decimal-display" style="margin-top:20px"><div class="label">الناتج النهائي</div><div class="value" id="boolOutput">0</div></div>
+<button class="replay-btn" onclick="resetBoolean()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+<div class="quiz-box"><h4>QUICK CHECK</h4><p>لو شفت معادلة فيها AND، تتوقع هتلاقي إيه في الرسم؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,true)">بوابة AND</div><div class="quiz-option" onclick="checkQuiz(this,false)">بوابة OR</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+</section>
+
+<section class="section" id="s6">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s6),var(--accent))">06</div>
+<h2>الذاكرة والتغذية الراجعة (Memory & Feedback)</h2>
+<p>الدائرة تقدر "تفتكر" حالتها القديمة عن طريق إن الـ Output بيرجع تاني كـ Input</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">🧠</div>
+<h3>مفتاح قفل الباب</h3>
+<p>تدوسه مرة يقفل ويفضل مقفول لحد ما تدوسه تاني. مش محتاج تفضل ماسك عليه!</p>
+<p style="margin-top:15px"><strong>Combinational:</strong> الناتج بيعتمد على الـ Input الحالي بس<br><strong>Sequential:</strong> فيها Feedback — الناتج يرجع يأثر على الدائرة تاني</p>
+<div class="mistake-box"><strong>غلطة شائعة:</strong> الطلبة بيفتكروا إن الدائرة لازم تفضل موصولة بمصدر Input عشان تفتكر حالتها.</div>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">اضغط الزرار مرة واحدة وشوف الحالة</div>
+<div class="memory-visual">
+<div class="memory-box" id="memoryBox"><div class="memory-state" id="memoryState">0</div></div>
+<svg width="100" height="60" viewBox="0 0 100 60" style="margin:0 auto 20px;display:block">
+<path d="M 80 10 Q 50 50 20 10" stroke="var(--accent)" stroke-width="3" fill="none" stroke-dasharray="5,5">
+<animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
+</path>
+<polygon points="20,10 30,5 25,15" fill="var(--accent)"/>
+</svg>
+<div style="color:var(--accent);font-weight:600;margin-bottom:20px">Feedback Loop</div>
+<button class="replay-btn" onclick="triggerMemory()" style="background:var(--accent);color:var(--bg);border:none">اضغط مرة واحدة</button>
+</div>
+<button class="replay-btn" onclick="resetMemory()" style="margin-top:15px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+<div class="quiz-box"><h4>QUICK CHECK</h4><p>لو فصلت الكهرباء عن آلة حاسبة، هل هتفتكر آخر رقم كنت كاتبه؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,false)">أيوه هتفتكره</div><div class="quiz-option" onclick="checkQuiz(this,true)">لأ هتنساه</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+</section><section class="section" id="s7">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s7),var(--accent))">07</div>
+<h2>من البوابات للكمبيوتر الكامل</h2>
+<p>إزاي بنبني من أصغر جزء لحد ما نوصل لكمبيوتر كامل</p>
+</div>
+<div class="content-grid">
+<div class="card">
+<div class="card-icon">🏗️</div>
+<h3>الهرم: من البوابات للكمبيوتر</h3>
+<p>Logic Gates → Memory Circuits → Registers → Processor → Computer الكامل.</p>
+</div>
+<div class="diagram-container">
+<div class="diagram-title">اضغط على كل مرحلة</div>
+<div class="hierarchy-box" id="hierarchyBox">
+<div class="hierarchy-step" onclick="showHierarchy(0)">Logic Gates</div>
+<div class="hierarchy-arrow">↓</div>
+<div class="hierarchy-step" onclick="showHierarchy(1)">Memory Circuits</div>
+<div class="hierarchy-arrow">↓</div>
+<div class="hierarchy-step" onclick="showHierarchy(2)">Registers</div>
+<div class="hierarchy-arrow">↓</div>
+<div class="hierarchy-step" onclick="showHierarchy(3)">Processor</div>
+<div class="hierarchy-arrow">↓</div>
+<div class="hierarchy-step" onclick="showHierarchy(4)">Computer</div>
+</div>
+<div style="margin-top:30px">
+<div class="diagram-title">الصورة الكبيرة: أي كمبيوتر بيشتغل بـ 4 خطوات</div>
+<div class="cycle-diagram">
+<div class="cycle-box" id="cycleInput">Input</div>
+<div class="cycle-arrow">→</div>
+<div class="cycle-box" id="cycleProcess">Process</div>
+<div class="cycle-arrow">→</div>
+<div class="cycle-box" id="cycleStore">Store</div>
+<div class="cycle-arrow">→</div>
+<div class="cycle-box" id="cycleOutput">Output</div>
+</div>
+<button class="replay-btn" onclick="animateCycle()" style="margin-top:15px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+</div>
+<div class="quiz-box" style="margin-top:40px"><h4>QUICK CHECK</h4><p>لو دوست حرف A في الكيبورد، إيه أول خطوة؟ Input ولا Output؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,true)">Input</div><div class="quiz-option" onclick="checkQuiz(this,false)">Output</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+</section>
+
+<section class="section" id="a1">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">🎯</div>
+<h2>فك الرسالة السرية</h2>
+<p>تفتكروا الرسالة هتطلع كلمة ولا جملة؟</p>
+</div>
+<div class="activity-card">
+<h3>Decode the Message</h3>
+<p style="text-align:center;color:var(--dim);margin-bottom:20px">كل رقم Binary بيمثل حرف. حوّل كل رقم لDecimal، بعدين استخدم الجدول</p>
+<div style="text-align:center;margin-bottom:20px;padding:15px;background:var(--bg);border-radius:12px">
+<span style="color:var(--dim)">الجدول: </span>
+<span style="font-weight:700;color:var(--s1)">H=8</span> · 
+<span style="font-weight:700;color:var(--s1)">E=5</span> · 
+<span style="font-weight:700;color:var(--s1)">L=12</span> · 
+<span style="font-weight:700;color:var(--s1)">O=15</span>
+</div>
+<div class="decode-grid">
+<div class="decode-item" id="decode1"><div class="decode-binary">01000</div><div class="decode-letter" id="letter1">?</div></div>
+<div class="decode-item" id="decode2"><div class="decode-binary">00101</div><div class="decode-letter" id="letter2">?</div></div>
+<div class="decode-item" id="decode3"><div class="decode-binary">01100</div><div class="decode-letter" id="letter3">?</div></div>
+<div class="decode-item" id="decode4"><div class="decode-binary">01100</div><div class="decode-letter" id="letter4">?</div></div>
+<div class="decode-item" id="decode5"><div class="decode-binary">01111</div><div class="decode-letter" id="letter5">?</div></div>
+</div>
+<div style="text-align:center;margin-top:30px">
+<button class="replay-btn" onclick="decodeNext()" id="decodeBtn" style="background:var(--accent);color:var(--bg);border:none;font-size:16px;padding:15px 30px">فك الرسالة</button>
+</div>
+<div class="decimal-display" style="margin-top:30px;display:none" id="decodeResult">
+<div class="label">الرسالة:</div>
+<div class="value" style="font-size:36px" id="decodedText"></div>
+</div>
+<button class="replay-btn" onclick="resetDecode()" style="margin-top:20px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="a2">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">🎯</div>
+<h2>بسّط الدائرة</h2>
+<p>المعادلة (A AND B) OR (A AND C) — ممكن نعملها أبسط!</p>
+</div>
+<div class="activity-card">
+<h3>Simplify the Circuit</h3>
+<div class="content-grid">
+<div class="card" style="background:var(--bg)">
+<h3 style="color:var(--s5)">Step 1: البناء</h3>
+<p>المعادلة الأصلية: (A AND B) OR (A AND C)<br>محتاجين: بوابة AND أولى (A,B) + بوابة AND تانية (A,C) + بوابة OR تجمعهم</p>
+</div>
+<div class="card" style="background:var(--bg)">
+<h3 style="color:var(--s5)">Step 2: الاختبار</h3>
+<p>اجرب قيم مختلفة لـ A, B, C وشوف الناتج. هل لاحظت إن A متكررة في الطرفين؟</p>
+</div>
+</div>
+<div class="circuit-compare">
+<div class="circuit-side">
+<h4>الأصلية (3 بوابات)</h4>
+<svg viewBox="0 0 300 150" style="width:100%;max-width:300px">
+<rect x="20" y="10" width="60" height="40" rx="5" fill="var(--primary)"/>
+<text x="50" y="35" fill="white" font-size="10" text-anchor="middle">AND</text>
+<rect x="20" y="90" width="60" height="40" rx="5" fill="var(--primary)"/>
+<text x="50" y="115" fill="white" font-size="10" text-anchor="middle">AND</text>
+<rect x="140" y="45" width="60" height="40" rx="5" fill="var(--accent)"/>
+<text x="170" y="70" fill="var(--bg)" font-size="10" text-anchor="middle">OR</text>
+<line x1="80" y1="30" x2="140" y2="55" stroke="var(--dim)" stroke-width="2"/>
+<line x1="80" y1="110" x2="140" y2="75" stroke="var(--dim)" stroke-width="2"/>
+<circle cx="10" cy="30" r="8" fill="var(--accent)"/>
+<circle cx="10" cy="110" r="8" fill="var(--accent)"/>
+<circle cx="220" cy="65" r="12" fill="var(--success)"/>
+</svg>
+<p style="margin-top:10px;color:var(--dim);text-align:center">(A AND B) OR (A AND C)</p>
+</div>
+<div class="circuit-side simplified">
+<h4>المبسطة (2 بوابات) ✓</h4>
+<svg viewBox="0 0 300 150" style="width:100%;max-width:300px">
+<rect x="80" y="30" width="60" height="40" rx="5" fill="var(--accent)"/>
+<text x="110" y="55" fill="var(--bg)" font-size="10" text-anchor="middle">OR</text>
+<rect x="180" y="30" width="60" height="40" rx="5" fill="var(--primary)"/>
+<text x="210" y="55" fill="white" font-size="10" text-anchor="middle">AND</text>
+<circle cx="50" cy="20" r="8" fill="var(--accent)"/>
+<circle cx="50" cy="70" r="8" fill="var(--accent)"/>
+<circle cx="50" cy="120" r="8" fill="var(--accent)"/>
+<line x1="58" y1="20" x2="80" y2="40" stroke="var(--dim)" stroke-width="2"/>
+<line x1="58" y1="70" x2="110" y2="50" stroke="var(--dim)" stroke-width="2"/>
+<line x1="58" y1="120" x2="110" y2="60" stroke="var(--dim)" stroke-width="2"/>
+<line x1="140" y1="50" x2="180" y2="50" stroke="var(--dim)" stroke-width="2"/>
+<circle cx="260" cy="50" r="12" fill="var(--success)"/>
+</svg>
+<p style="margin-top:10px;color:var(--accent);text-align:center;font-weight:700">A AND (B OR C)</p>
+</div>
+</div>
+<div class="card" style="background:var(--bg);margin-top:20px">
+<h3 style="color:var(--accent)">ليه الأبسط أحسن؟</h3>
+<p>مش للشكل! لكن لأن الدائرة الأبسط بتستخدم مكونات أقل — وأسهل في التنفيذ والتنظيم والصيانة.</p>
+</div>
+</div>
+<div class="quiz-box" style="margin-top:30px"><h4>QUICK CHECK</h4><p>ليه بنفضل الدائرة اللي فيها بوابات أقل؟</p>
+<div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,true)">أقل مكونات وأسهل في التنفيذ</div><div class="quiz-option" onclick="checkQuiz(this,false)">أحلى شكلًا</div></div>
+<div class="quiz-feedback"></div></div>
+</div>
+</section>
+
+<section class="section" id="closing">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number">✓</div>
+<h2>الرحلة الكاملة</h2>
+<p>مبارك! وصلنا لنهاية الرحلة. تعالى نراجع كل خطوة</p>
+</div>
+<div class="journey-timeline">
+<div class="journey-line"></div>
+<div class="journey-line-fill" id="journeyFill"></div>
+<div class="journey-step" data-step="1"><div class="journey-dot"></div><div class="journey-content"><h4>Electronic Switch</h4><p>المفتاح الكهربائي - بداية كل حاجة</p></div></div>
+<div class="journey-step" data-step="2"><div class="journey-dot"></div><div class="journey-content"><h4>Binary (0/1)</h4><p>النظام الثنائي - لغة الكمبيوتر</p></div></div>
+<div class="journey-step" data-step="3"><div class="journey-dot"></div><div class="journey-content"><h4>Bit</h4><p>أصغر وحدة بيانات</p></div></div>
+<div class="journey-step" data-step="4"><div class="journey-dot"></div><div class="journey-content"><h4>Logic Gates</h4><p>بوابات المنطق - أساس الدوائر</p></div></div>
+<div class="journey-step" data-step="5"><div class="journey-dot"></div><div class="journey-content"><h4>Truth Tables</h4><p>جداول الحقيقة - اختبار كل الاحتمالات</p></div></div>
+<div class="journey-step" data-step="6"><div class="journey-dot"></div><div class="journey-content"><h4>Boolean Equations</h4><p>المعادلات المنطقية</p></div></div>
+<div class="journey-step" data-step="7"><div class="journey-dot"></div><div class="journey-content"><h4>Feedback & Memory</h4><p>التغذية الراجعة والذاكرة</p></div></div>
+<div class="journey-step" data-step="8"><div class="journey-dot"></div><div class="journey-content"><h4>Registers & Processor</h4><p>السجلات والمعالج</p></div></div>
+<div class="journey-step" data-step="9"><div class="journey-dot"></div><div class="journey-content"><h4>Full Computer</h4><p>الكمبيوتر الكامل!</p></div></div>
+</div>
+</div>
+</section>
+
+<footer>
+<img src="data:image/webp;base64,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" class="footer-logo" alt="Bilal">
+<p class="footer-encouragement">كل يوم بتتعلم حاجة جديدة، وده بيفرق معاك!</p>
+</footer>
+
+<script>
+function createParticles(){const c=document.getElementById('particles');for(let i=0;i<30;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*15+'s';p.style.animationDuration=(15+Math.random()*10)+'s';c.appendChild(p)}}
+createParticles();
+window.addEventListener('scroll',()=>{const nav=document.getElementById('mainNav');if(window.scrollY>100)nav.classList.add('visible');else nav.classList.remove('visible');const sections=document.querySelectorAll('.section, .hero');let current='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.getAttribute('id')});document.querySelectorAll('.nav a').forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+current)a.classList.add('active')})});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.2});
+document.querySelectorAll('.section-inner').forEach(el=>observer.observe(el));
+const journeyObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');const step=parseInt(e.target.dataset.step);document.getElementById('journeyFill').style.height=(step*11)+'%'}})},{threshold:0.5});
+document.querySelectorAll('.journey-step').forEach(el=>journeyObserver.observe(el));
+const quizObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),800)})},{threshold:0.5});
+document.querySelectorAll('.quiz-box').forEach(q=>quizObserver.observe(q));
+function toggleBit(el){const v=el.querySelector('.bit-value');const val=parseInt(v.textContent);const newVal=val===0?1:0;v.textContent=newVal;el.classList.toggle('active',newVal===1);updateDecimal();el.style.transform='scale(1.1)';setTimeout(()=>el.style.transform='',200)}
+function updateDecimal(){let t=0;document.querySelectorAll('#binaryBits .bit-box').forEach(b=>{if(b.querySelector('.bit-value').textContent==='1')t+=parseInt(b.dataset.val)});const el=document.getElementById('decimalValue');el.style.transform='scale(1.2)';el.textContent=t;setTimeout(()=>el.style.transform='',200)}
+function resetBinary(){document.querySelectorAll('#binaryBits .bit-box').forEach(b=>{b.querySelector('.bit-value').textContent='0';b.classList.remove('active')});updateDecimal()}
+let lampOn=false;
+function toggleLamp(){lampOn=!lampOn;const bulb=document.getElementById('lampBulb');bulb.classList.toggle('on',lampOn)}
+function resetLamp(){lampOn=false;document.getElementById('lampBulb').classList.remove('on')}
+const gateStates={AND:{A:0,B:0},OR:{A:0,B:0},NOT:{A:0}};
+function showGate(type){document.querySelectorAll('.gate-visual').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.gate-tab').forEach(t=>t.classList.remove('active'));document.getElementById('gate'+type).classList.add('active');event.target.classList.add('active')}
+function toggleGateBit(gate,input){const el=document.getElementById(gate.toLowerCase()+input);const v=el.querySelector('.bit-value');const val=parseInt(v.textContent);v.textContent=val===0?1:0;el.classList.toggle('active',v.textContent==='1');gateStates[gate][input]=parseInt(v.textContent);updateGateOutput(gate)}
+function updateGateOutput(gate){const s=gateStates[gate];let out;const outEl=document.getElementById(gate.toLowerCase()+'Output');const nodeOut=document.getElementById(gate.toLowerCase()+'NodeOut');const wireOut=document.getElementById(gate.toLowerCase()+'WireOut');if(gate==='AND')out=s.A&s.B;else if(gate==='OR')out=s.A|s.B;else out=s.A===0?1:0;outEl.textContent=out;outEl.classList.toggle('high',out===1);nodeOut.classList.toggle('active',out===1);wireOut.classList.toggle('active',out===1);const nodeA=document.getElementById(gate.toLowerCase()+'NodeA');const wireA=document.getElementById(gate.toLowerCase()+'WireA');nodeA.classList.toggle('active',s.A===1);wireA.classList.toggle('active',s.A===1);if(gate!=='NOT'){const nodeB=document.getElementById(gate.toLowerCase()+'NodeB');const wireB=document.getElementById(gate.toLowerCase()+'WireB');nodeB.classList.toggle('active',s.B===1);wireB.classList.toggle('active',s.B===1)}}
+function resetGate(gate){gateStates[gate]={A:0,B:0};const ids=gate==='NOT'?['notA']:['andA','andB','orA','orB','notA'];ids.forEach(id=>{const el=document.getElementById(id);if(el){el.querySelector('.bit-value').textContent='0';el.classList.remove('active')}});updateGateOutput(gate)}
+let truthCorrect=0;
+function toggleTruthCell(el,correct){const val=el.textContent;let newVal;if(val==='?')newVal=0;else if(val==='0')newVal=1;else newVal=0;el.textContent=newVal;if(newVal===correct){el.classList.add('correct');el.classList.remove('wrong')}else{el.classList.add('wrong');el.classList.remove('correct')}truthCorrect=0;document.querySelectorAll('.truth-cell').forEach((c,i)=>{const exp=i===3?1:0;if(parseInt(c.textContent)===exp)truthCorrect++});document.getElementById('truthScore').textContent='الإجابات الصحيحة: '+truthCorrect+'/4'}
+function resetTruthTable(){document.querySelectorAll('.truth-cell').forEach(c=>{c.textContent='?';c.classList.remove('correct','wrong')});truthCorrect=0;document.getElementById('truthScore').textContent='الإجابات الصحيحة: 0/4'}
+const boolState={A:0,B:0,C:0};
+function toggleBooleanBit(input){boolState[input]=boolState[input]===0?1:0;const el=document.getElementById('bool'+input);el.querySelector('.bit-value').textContent=boolState[input];el.classList.toggle('active',boolState[input]===1);updateBooleanOutput()}
+function updateBooleanOutput(){const out=(boolState.A&boolState.B)|boolState.C;document.getElementById('boolOutput').textContent=out;document.getElementById('boolNodeOut').classList.toggle('active',out===1);document.getElementById('boolWireOut').classList.toggle('active',out===1);document.getElementById('boolNodeA').classList.toggle('active',boolState.A===1);document.getElementById('boolNodeB').classList.toggle('active',boolState.B===1)}
+function resetBoolean(){boolState.A=0;boolState.B=0;boolState.C=0;['A','B','C'].forEach(i=>{const el=document.getElementById('bool'+i);el.querySelector('.bit-value').textContent='0';el.classList.remove('active')});updateBooleanOutput()}
+let memoryState=0;
+function triggerMemory(){memoryState=memoryState===0?1:0;document.getElementById('memoryState').textContent=memoryState;document.getElementById('memoryBox').classList.toggle('active',memoryState===1)}
+function resetMemory(){memoryState=0;document.getElementById('memoryState').textContent='0';document.getElementById('memoryBox').classList.remove('active')}
+let hierarchyIndex=-1;
+function showHierarchy(idx){const steps=document.querySelectorAll('#hierarchyBox .hierarchy-step');const arrows=document.querySelectorAll('#hierarchyBox .hierarchy-arrow');if(idx<=hierarchyIndex){for(let i=idx;i<steps.length;i++){steps[i].classList.remove('show','active-step');if(i<arrows.length)arrows[i].classList.remove('show')}hierarchyIndex=idx-1;return}for(let i=0;i<=idx;i++){steps[i].classList.add('show');if(i>0)steps[i-1].classList.add('active-step');if(i<arrows.length)arrows[i].classList.add('show')}hierarchyIndex=idx}
+function animateCycle(){const boxes=['cycleInput','cycleProcess','cycleStore','cycleOutput'];boxes.forEach(b=>document.getElementById(b).classList.remove('active-cycle'));let i=0;function next(){if(i>=boxes.length)return;document.getElementById(boxes[i]).classList.add('active-cycle');setTimeout(()=>{document.getElementById(boxes[i]).classList.remove('active-cycle');i++;next()},1000)}next()}
+const decodeMap={8:'H',5:'E',12:'L',15:'O'};
+const decodeBinary=['01000','00101','01100','01100','01111'];
+let decodeStep=0;let decodedStr='';
+function decodeNext(){if(decodeStep>=5)return;const item=document.getElementById('decode'+(decodeStep+1));const letter=document.getElementById('letter'+(decodeStep+1));item.classList.add('active');letter.classList.add('show','revealed');letter.textContent=decodeMap[parseInt(decodeBinary[decodeStep],2)];decodedStr+=decodeMap[parseInt(decodeBinary[decodeStep],2)];decodeStep++;if(decodeStep>=5){document.getElementById('decodeResult').style.display='block';document.getElementById('decodedText').textContent=decodedStr;document.getElementById('decodeBtn').textContent='تمام! 🎉'}}
+function resetDecode(){decodeStep=0;decodedStr='';for(let i=1;i<=5;i++){document.getElementById('decode'+i).classList.remove('active');const l=document.getElementById('letter'+i);l.classList.remove('show','revealed');l.textContent='?'}document.getElementById('decodeResult').style.display='none';document.getElementById('decodeBtn').textContent='فك الرسالة'}
+function checkQuiz(el,isCorrect){const box=el.closest('.quiz-box');box.querySelectorAll('.quiz-option').forEach(o=>{o.style.pointerEvents='none'});if(isCorrect){el.classList.add('correct');const fb=box.querySelector('.quiz-feedback');fb.textContent='إجابة صحيحة!';fb.className='quiz-feedback show correct'}else{el.classList.add('wrong');const fb=box.querySelector('.quiz-feedback');fb.textContent='إجابة خاطئة. حاول تاني!';fb.className='quiz-feedback show wrong'}}
+document.addEventListener('keydown',e=>{const sections=document.querySelectorAll('.section');let currentIdx=0;sections.forEach((s,i)=>{if(window.scrollY>=s.offsetTop-200)currentIdx=i});if(e.key==='ArrowDown'||e.key==='ArrowLeft'){e.preventDefault();if(currentIdx<sections.length-1)sections[currentIdx+1].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowRight'){e.preventDefault();if(currentIdx>0)sections[currentIdx-1].scrollIntoView({behavior:'smooth'})}});
+</script>
+</body>
+</html>
