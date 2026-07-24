@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: Cairo, Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="slide-1"><strong>🎤 Slide 1</strong></h1>
+    <h1 id="introduction-to-computer-architecture"><strong>💻 Introduction
+            to Computer Architecture</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes"><strong>🎙️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"صباح الخير يا
+            شباب.</span></p>
+    <p><span dir="rtl">النهارده هنبدأ رحلة جديدة مع جزء مهم جدًا اسمه</span>
+        <span dir="ltr"><strong>Computer Architecture</strong>.</span>
+    </p>
+    <p><span dir="rtl">قبل ما نعرف الكمبيوتر بيشغل ألعاب أو برامج أو ذكاء
+            اصطناعي، لازم نفهم هو من جوه شغال إزاي.</span></p>
+    <p><span dir="rtl">لو فتحت أي كمبيوتر أو موبايل هتلاقيه عبارة عن مكونات
+            إلكترونية كتير، لكن السؤال هو...</span></p>
+    <p><span dir="rtl">إزاي المكونات دي كلها بتشتغل مع بعض علشان تنفذ أمر
+            بسيط زي إنك تفتح صورة أو تضغط على زرار؟</span></p>
+    <p><span dir="rtl">ده اللي هنتعلمه خلال الدرس، وهنبدأ من أبسط حاجة
+            موجودة داخل أي كمبيوتر."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="technical-terms"><strong>📖 Technical Terms</strong></h2>
+    <h3 id="computer-architecture"><strong>💻 Computer
+            Architecture</strong></h3>
+    <p><span dir="ltr"></span><strong><span dir="rtl">📝
+                الترجمة:</span></strong><span dir="ltr"></span> <span dir="rtl">معمارية
+            الحاسب</span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">💡
+                الشرح:</span></strong></p>
+    <p><span dir="rtl">يعني الطريقة اللي كل أجزاء الكمبيوتر متوصلة وبتشتغل
+            بيها مع بعض علشان تنفذ أي أمر.</span></p>
+    <p><span dir="rtl">مش المقصود شكل الجهاز من بره، لكن طريقة شغله من
+            جوه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">➡️
+                الانتقال</span></strong></p>
+    <p><span dir="ltr"></span><span dir="rtl">"طيب... بما إن الكمبيوتر جهاز
+            إلكتروني، يا ترى هو بيفهم لغتنا ولا ليه لغة خاصة بيه؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="quick-interaction"><strong>🙋 Quick Interaction</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">❓اسأل الطلبة:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"لو أنا كتبت للكمبيوتر كلمة
+            (</span><span dir="ltr">Hello</span><span dir="rtl">)، هل هو بيفهمها كده
+            مباشرة؟ ولا بيحولها لحاجة تانية؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-2"><strong>🎤 Slide 2</strong></h1>
+    <h1 id="binary-the-language-of-machines"><strong>🔢 Binary: The Language
+            of Machines</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-1"><strong>🎙️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"إحنا لسه سألنا الكمبيوتر
+            بيفهم لغة إيه.</span></p>
+    <p><span dir="rtl">الإجابة هي</span> <span dir="ltr"><strong>Binary</strong>.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">Binary</span> <span dir="rtl">هو اللغة الأساسية اللي كل أجهزة
+            الكمبيوتر
+            بتستخدمها.</span></p>
+    <p><span dir="rtl">اللغة دي بسيطة جدًا، لأنها فيها رقمين بس.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 و1.</span></p>
+    <p><span dir="rtl">بصوا على الجدول.</span></p>
+    <p><span dir="rtl">الصفر غالبًا معناه إن الحاجة مقفولة أو مفيش كهربا أو
+            القيمة</span> <span dir="ltr">False</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">أما الواحد فمعناه إن الحاجة شغالة أو فيه كهربا أو
+            القيمة</span> <span dir="ltr">True</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وكمان الصورة اللي تحت بتوضح الفكرة.</span></p>
+    <p><span dir="rtl">كل لمبة منورة معناها 1.</span></p>
+    <p><span dir="rtl">وكل لمبة مطفية معناها 0.</span></p>
+    <p><span dir="rtl">فالكمبيوتر بيشوف الحالات دي كأرقام."</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">➡️
+                الانتقال</span></strong></p>
+    <p><span dir="ltr"></span><span dir="rtl">"دلوقتي عرفنا إن الكمبيوتر
+            بيستخدم 0 و1... لكن ليه اختار رقمين بس؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-3"><strong>🎤 Slide 3</strong></h1>
+    <h1 id="why-only-0-and-1"><strong>❓ Why Only 0 and 1?</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-2"><strong>🎙️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"فاكرين إننا عرفنا إن
+            الكمبيوتر بيستخدم الـ</span> <span dir="ltr">Binary</span><span dir="rtl">؟</span></p>
+    <p><span dir="rtl">السؤال الطبيعي دلوقتي...</span></p>
+    <p><span dir="rtl">ليه الرقمين دول بس؟</span></p>
+    <p><span dir="rtl">الإجابة لأن الدوائر الإلكترونية تقدر تفرق بسهولة بين
+            حالتين فقط.</span></p>
+    <p><span dir="rtl">وجود كهربا.</span></p>
+    <p><span dir="rtl">أو عدم وجود كهربا.</span></p>
+    <p><span dir="rtl">بصوا على المثال.</span></p>
+    <p><span dir="rtl">أي</span> <span dir="ltr">Switch</span> <span dir="rtl">في الدنيا يا إما مفتوح.</span></p>
+    <p><span dir="rtl">يا إما مقفول.</span></p>
+    <p><span dir="rtl">ولما الكمبيوتر يحول الحالتين دول إلى 0 و1، يبقى عنده
+            طريقة ثابتة وواضحة يفهم بيها كل حاجة.</span></p>
+    <p><span dir="rtl">وده اللي بيخلي الأجهزة الرقمية دقيقة جدًا."</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p>Physical State → Electrical Signal → Binary Value</p>
+    <p><span dir="rtl">الكمبيوتر بيحوّل أي</span> <span dir="ltr"><strong>Physical State</strong></span> <span
+            dir="rtl">(حالة
+            فيزيائية) زي ضغط زر أو فتح باب إلى</span> <span dir="ltr"><strong>Electrical Signal</strong></span> <span
+            dir="rtl">(إشارة كهربائية)، ثم يحولها إلى</span> <strong><span dir="ltr">Binary Value</span> <span
+                dir="rtl">(0 أو
+                1)</span></strong><span dir="ltr"></span> <span dir="rtl">لأنها اللغة
+            الوحيدة اللي يقدر يفهمها ويعالجها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">➡️
+                الانتقال</span></strong></p>
+    <p><span dir="ltr"></span><span dir="rtl">"طيب لو عندنا رقم واحد بس اسمه
+            0 أو 1... اسمه إيه؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="quick-interaction-1"><strong>🙋 Quick Interaction</strong></h2>
+    <p><span dir="rtl">اسأل الطلبة:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"زرار المصعد لما أضغطه
+            يبقى</span> <span dir="ltr">ON</span> <span dir="rtl">ولا</span> <span dir="ltr">OFF</span><span
+            dir="rtl">؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-4"><strong>🎤 Slide 4</strong></h1>
+    <h1 id="bits-and-binary-numbers"><strong>🧩 Bits and Binary
+            Numbers</strong></h1>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-3"><strong>🎙️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"إحنا عرفنا إن الكمبيوتر
+            بيستخدم 0 و1.</span></p>
+    <p><span dir="rtl">كل رقم واحد من دول ليه اسم.</span></p>
+    <p><span dir="rtl">اسمه</span> <span dir="ltr"><strong>Bit</strong>.</span></p>
+    <p><span dir="rtl">الـ</span> <span dir="ltr">Bit</span> <span dir="rtl">هو أصغر وحدة بيانات في الكمبيوتر.</span>
+    </p>
+    <p><span dir="rtl">لكن</span> <span dir="ltr">Bit</span> <span dir="rtl">واحد لوحده معلوماته قليلة جدًا.</span></p>
+    <p><span dir="rtl">علشان كده الكمبيوتر يجمع كذا</span> <span dir="ltr">Bit</span> <span dir="rtl">جنب بعض.</span>
+    </p>
+    <p><span dir="rtl">كل ما نزود عدد الـ</span> <span dir="ltr">Bits</span><span dir="rtl">، نقدر نمثل أرقام ومعلومات
+            أكتر.</span></p>
+    <p><span dir="rtl">بصوا على الأمثلة.</span></p>
+    <p><span dir="rtl">كل مرة بيتغير</span> <span dir="ltr">Bit</span> <span dir="rtl">واحد، بيطلع رقم جديد."</span></p>
+    <p><span dir="rtl">ولما نجمع أكثر من</span> <span dir="ltr">Bit</span>
+        <span dir="rtl">مع بعض نكوّن</span> <span dir="ltr">Binary
+            Number</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span><strong><span dir="rtl">➡️
+                الانتقال</span></strong></p>
+    <p><span dir="ltr"></span><span dir="rtl">"إحنا دلوقتي بقينا عارفين يعني
+            إيه</span> <span dir="ltr">Bit</span><span dir="rtl">... في السلايد
+            الجاية هنشوف لما نجمع 8</span> <span dir="ltr">Bits</span> <span dir="rtl">مع بعض، هيطلع لنا إيه."</span>
+    </p>
+    <h1 id="slide-1-from-decimal-to-binary"><strong>🎤 Slide 1 — From
+            Decimal to Binary</strong></h1>
+    <h3 id="مقدمة"><strong><span dir="rtl">🎙️ مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">💡 "إحنا عرفنا إن الكمبيوتر
+            بيفهم 0 و1 بس، دلوقتي السؤال: لو أنا عندي رقم عادي زي 13، الكمبيوتر
+            هيكتبه إزاي؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-4"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"لحد دلوقتي عرفنا إن الكمبيوتر
+            بيتعامل بلغة اسمها</span> <span dir="ltr"><strong>Binary</strong></span><span dir="rtl">، واللغة دي فيها
+            رقمين بس:</span> <span dir="ltr"></span><strong><span dir="rtl">0
+                و1</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">لكن إحنا كبشر بنتعامل بأرقام زي 5 و13 و100. يبقى
+            الكمبيوتر هيحولهم إزاي؟</span></p>
+    <p><span dir="rtl">الفكرة كلها إن الـ</span> <span dir="ltr"><strong>Binary</strong></span> <span dir="rtl">بيستخدم
+            خانات،
+            وكل خانة ليها قيمة ثابتة.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📌 هنا عندنا الخانات:</span>
+        <span dir="ltr"><strong>1 - 2 - 4 - 8</strong></span> <span dir="rtl">وكل خانة هي مضاعفات الرقم 2.<br />
+            والواحد هنا عبارة عن 2 اس 0</span>
+    </p>
+    <p><span dir="rtl">دلوقتي هنحول الرقم</span> <span dir="ltr"><strong>13</strong>.</span></p>
+    <p><span dir="rtl">نسأل نفسنا: هل 13 فيه 8؟ ✅ أيوه. يبقى نحط</span>
+        <span dir="ltr"><strong>1</strong>.</span>
+    </p>
+    <p><span dir="rtl">يتبقى 5. هل فيه 4؟ ✅ أيوه. يبقى نحط</span> <span dir="ltr"><strong>1</strong>.</span></p>
+    <p><span dir="rtl">يتبقى 1. هل فيه 2؟ ❌ لأ. يبقى نحط</span> <span dir="ltr"><strong>0</strong>.</span></p>
+    <p><span dir="rtl">هل فيه 1؟ ✅ أيوه. يبقى نحط</span> <span dir="ltr"><strong>1</strong>.</span></p>
+    <p><span dir="rtl">فالنتيجة تبقى:</span></p>
+    <p><strong><span dir="ltr">1101</span></strong></p>
+    <p><span dir="rtl">يعني الرقم 13 في النظام العشري بقى 1101 في النظام
+            الثنائي.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">💬 أحب أقولهم إن الـ 1 معناه
+            إننا استخدمنا قيمة الخانة، والـ 0 معناه إننا مستخدمناهاش."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"مين يقدر يحاول يحول الرقم 9
+            بنفس الطريقة؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "دلوقتي بقينا نعرف
+            الكمبيوتر بيمثل الأرقام، لكن هو بياخد قرارات إزاي؟ هنا بقى هنشوف
+            الـ</span> <span dir="ltr">Logic Gates</span><span dir="rtl">."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-2-logic-gates-making-decisions"><strong>🎤 Slide 2 — Logic
+            Gates: Making Decisions</strong></h1>
+    <h3 id="مقدمة-1"><strong><span dir="rtl">🎙️ مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">💡 "الكمبيوتر مش بس بيخزن
+            أرقام، ده كمان لازم ياخد قرارات كل ثانية."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-5"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"تخيل إن الكمبيوتر قدامه
+            معلومات داخلة، ولازم يقرر يطلع إيه.</span></p>
+    <p><span dir="rtl">الشغل ده بيعمله جزء صغير جدًا اسمه</span> <span dir="ltr"><strong>Logic Gate</strong>.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🧩 الـ</span> <span dir="ltr">Logic Gate</span> <span dir="rtl">عبارة عن
+            دائرة إلكترونية
+            صغيرة.</span></p>
+    <p><span dir="rtl">بتستقبل: 👉</span> <strong><span dir="ltr">Input</span></strong></p>
+    <p><span dir="rtl">وبعد ما تعمل عملية بسيطة، بتطلع: 👉</span>
+        <strong><span dir="ltr">Output</span></strong>
+    </p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="ltr">Input ➜ Logic Gate ➜ Output</span></p>
+    <p><span dir="rtl">وكل الكلام ده بيشتغل باستخدام</span> <span dir="ltr"></span><strong><span dir="rtl">0
+                و1</span></strong><span dir="ltr"></span> <span dir="rtl">بس.</span></p>
+    <p><span dir="rtl">يعني بدل ما الإنسان يقول: 'لو الشرط اتحقق اعمل
+            كذا.'</span></p>
+    <p><span dir="rtl">الكمبيوتر بينفذ نفس الفكرة باستخدام</span> <span dir="ltr">Logic Gates</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-1"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "أول نوع من الـ</span>
+        <span dir="ltr">Logic Gates</span> <span dir="rtl">اسمه</span> <span dir="ltr">AND</span><span
+            dir="rtl">."</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-3-the-and-gate"><strong>🎤 Slide 3 — The AND
+            Gate</strong></h1>
+    <h3 id="مقدمة-2"><strong><span dir="rtl">🎙️ مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">💡 "كل</span> <span dir="ltr">Logic Gate</span> <span dir="rtl">ليها قاعدة
+            مختلفة، وأول
+            قاعدة هنتعلمها هي</span> <span dir="ltr">AND</span><span dir="rtl">."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-6"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"الـ</span> <span dir="ltr"><strong>AND Gate</strong></span> <span
+            dir="rtl">عندها شرط
+            واضح جدًا.</span></p>
+    <p><span dir="rtl">لازم <strong>كل المدخلات</strong></span><span dir="ltr"></span> <span dir="rtl">تكون 1.</span>
+    </p>
+    <p><span dir="rtl">لو حتى واحد بس صفر... الناتج هيكون صفر.</span></p>
+    <p><span dir="rtl">بصوا على الجدول.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 و0 ➜ 0</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 و1 ➜ 0</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">1 و0 ➜ 0</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">1 و1 ➜ ✅ 1</span></p>
+    <p><span dir="rtl">يعني دي الحالة الوحيدة اللي بتشتغل فيها.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📌 المعادلة
+            بتاعتها:</span></p>
+    <p><span dir="ltr">A AND B</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr">A × B</span></p>
+    <p><span dir="rtl">مثال من الحياة:</span></p>
+    <p><span dir="rtl">عربية المصنع مش هتشتغل إلا لو:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🔹 زرار التشغيل متداس. 🔹
+            وزرار الأمان متداس.</span></p>
+    <p><span dir="rtl">لو واحد منهم بس متحققش... العربية مش
+            هتشتغل."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع-1"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لو</span> <span dir="ltr">A</span> <span dir="rtl">= 1 و</span><span
+            dir="ltr">B</span>
+        <span dir="rtl">= 0... الناتج كام؟"</span>
+    </p>
+    <p><span dir="rtl">الإجابة:</span> <strong><span dir="ltr">0</span></strong></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-2"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "طيب لو إحنا مش محتاجين
+            الشرطين، ومحتاجين أي واحد منهم بس؟ يبقى نستخدم</span> <span dir="ltr">OR
+            Gate</span><span dir="rtl">."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-4-the-or-gate"><strong>🎤 Slide 4 — The OR
+            Gate</strong></h1>
+    <h3 id="مقدمة-3"><strong><span dir="rtl">🎙️ مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">💡 "الـ</span> <span dir="ltr">OR</span> <span dir="rtl">أسهل شوية
+            من</span> <span dir="ltr">AND</span> <span dir="rtl">لأنها مش بتشترط إن الاتنين يبقوا
+            شغالين."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-7"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"الـ</span> <span dir="ltr"><strong>OR Gate</strong></span> <span
+            dir="rtl">بتقول:</span></p>
+    <p><span dir="rtl">لو فيه <strong>أي </strong></span><strong><span dir="ltr">Input</span> <span
+                dir="rtl">واحد</span></strong><span dir="ltr"></span> <span dir="rtl">قيمته 1... يبقى الناتج هيكون
+            1.</span></p>
+    <p><span dir="rtl">يعني يكفي واحد بس.</span></p>
+    <p><span dir="rtl">نشوف الجدول.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 و0 ➜ 0</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">0 و1 ➜ 1</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">1 و0 ➜ 1</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">1 و1 ➜ 1</span></p>
+    <p><span dir="rtl">يعني الحالة الوحيدة اللي بتطلع صفر هي لما الاتنين
+            يكونوا صفر.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📌 المعادلة:</span></p>
+    <p><span dir="ltr">A OR B</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr">A + B</span></p>
+    <p><span dir="rtl">مثال بسيط جدًا:</span></p>
+    <p><span dir="rtl">عندنا إنذار.</span></p>
+    <p><span dir="rtl">لو</span> <span dir="ltr"><strong>Sensor
+                A</strong></span> <span dir="rtl">شاف خطر...</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr"><strong>Sensor B</strong></span> <span dir="rtl">شاف
+            خطر...</span></p>
+    <p><span dir="rtl">الإنذار هيشتغل.</span></p>
+    <p><span dir="rtl">مش لازم الاتنين يشوفوا الخطر مع بعض."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع-2"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لو</span> <span dir="ltr">A</span> <span dir="rtl">= 0 و</span><span
+            dir="ltr">B</span>
+        <span dir="rtl">= 1... الناتج كام؟"</span>
+    </p>
+    <p><span dir="rtl">الإجابة:</span> <strong><span dir="ltr">1</span></strong></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-3"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "دلوقتي عرفنا إن الكمبيوتر
+            يقدر يمثل الأرقام باستخدام</span> <span dir="ltr">Binary</span><span dir="rtl">، ويقدر كمان ياخد قرارات
+            باستخدام</span> <span dir="ltr">Logic
+            Gates</span><span dir="rtl">. في السلايد اللي بعده هنشوف أنواع جديدة من
+            البوابات المنطقية وإزاي نبني دوائر أعقد بيها."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-1-the-not-gate"><strong>🎤 Slide 1 — The NOT
+            Gate</strong></h1>
+    <h3 id="مقدمة-4"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"إحنا اتعلمنا</span> <span dir="ltr">AND</span> <span dir="rtl">و</span>
+        <span dir="ltr">OR</span><span dir="rtl">، ودول بيحتاجوا مدخلين. دلوقتي هنتعرف
+            على بوابة مختلفة، بتشتغل على مدخل واحد بس."</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-8"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 اسمها</span> <span dir="ltr"><strong>NOT Gate</strong>.</span></p>
+    <p><span dir="rtl">دي أبسط</span> <span dir="ltr">Logic Gate</span>
+        <span dir="rtl">عندنا.</span>
+    </p>
+    <p><span dir="rtl">وظيفتها إنها <strong>تعكس القيمة</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">يعني لو دخلها</span> <span dir="ltr"><strong>1</strong></span> <span dir="rtl">تطلع</span> <span
+            dir="ltr"><strong>0</strong>.</span></p>
+    <p><span dir="rtl">ولو دخلها</span> <span dir="ltr"><strong>0</strong></span> <span dir="rtl">تطلع</span> <span
+            dir="ltr"><strong>1</strong>.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📊 نبص على الـ</span> <span dir="ltr">Truth Table</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="ltr">0 ➜ 1</span></p>
+    <p><span dir="ltr">1 ➜ 0</span></p>
+    <p><span dir="rtl">يعني مفيش أي حالات تانية لأنها بتتعامل مع</span>
+        <span dir="ltr">Input</span> <span dir="rtl">واحد بس.</span>
+    </p>
+    <p><span dir="ltr"></span><span dir="rtl">🖼️ الصورة اللي على اليمين
+            بتوضح رمز الـ</span> <span dir="ltr">NOT Gate</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">لاحظوا الدائرة الصغيرة اللي في آخر الرمز، دي معناها
+            إن الإشارة اتعكست.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📌 المثال:</span></p>
+    <p><span dir="rtl">لو دخلنا 1...</span></p>
+    <p><span dir="rtl">هيطلع 0.</span></p>
+    <p><span dir="rtl">ولو دخلنا 0...</span></p>
+    <p><span dir="rtl">هيطلع 1.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">💡 تخيلوها زي مفتاح
+            نور.</span></p>
+    <p><span dir="rtl">لو النور شغال، حد ضغط زرار بيعكس الحالة
+            فيطفيه.</span></p>
+    <p><span dir="rtl">ولو مطفي، يعكسها ويشغله.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📌 وعلشان كده بنقول إن</span>
+        <span dir="ltr">NOT</span> <span dir="rtl">بتحول:</span>
+    </p>
+    <p><span dir="ltr">TRUE ➜ FALSE</span></p>
+    <p><span dir="ltr">FALSE ➜ TRUE."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-4"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "دلوقتي عرفنا كل</span>
+        <span dir="ltr">Gate</span> <span dir="rtl">لوحدها، تعالى نجمعهم كلهم في
+            مقارنة واحدة."</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-3-truth-tables-testing-every-possibility"><strong>🎤 Slide
+            3 — Truth Tables: Testing Every Possibility</strong></h1>
+    <h3 id="مقدمة-5"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"عرفنا شكل جدول الحقيقة،
+            دلوقتي نعرف هو بيستخدم في إيه."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-9"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 الـ</span> <span dir="ltr"><strong>Truth Table</strong></span> <span
+            dir="rtl">معناه جدول
+            الحقيقة.</span></p>
+    <p><span dir="rtl">وده جدول بنكتب فيه كل الاحتمالات الممكنة
+            للمدخلات.</span></p>
+    <p><span dir="rtl">لو عندنا مدخلين.</span></p>
+    <p><span dir="rtl">يبقى الاحتمالات هما:</span></p>
+    <p><span dir="ltr">00</span></p>
+    <p><span dir="ltr">01</span></p>
+    <p><span dir="ltr">10</span></p>
+    <p><span dir="ltr">11</span></p>
+    <p><span dir="rtl">بس.</span></p>
+    <p><span dir="rtl">مفيش احتمال خامس.</span></p>
+    <p><span dir="rtl">بعد كده نحسب الناتج لكل حالة حسب نوع الـ</span> <span dir="ltr">Logic Gate</span><span
+            dir="rtl">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">💡 ليه بنعمل كده؟</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ علشان نتأكد إن الدائرة
+            شغالة صح.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ نكتشف أي خطأ.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ ونتوقع الـ</span> <span dir="ltr">Output</span> <span dir="rtl">قبل ما
+            نبني الدائرة.</span></p>
+    <p><span dir="rtl">يعني بدل ما نوصل أسلاك ونغلط،</span></p>
+    <p><span dir="rtl">نجرب الأول على الورق."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع-3"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لو عندنا 3</span> <span dir="ltr">Inputs</span><span dir="rtl">، كام
+            احتمال مختلف؟"</span></p>
+    <p><span dir="ltr">✅ 8.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-5"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "دلوقتي عرفنا نحسب النتائج،
+            لكن إزاي نحول الكلام ده لدائرة إلكترونية؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-4-from-boolean-equation-to-circuit"><strong>🎤 Slide 4 —
+            From Boolean Equation to Circuit</strong></h1>
+    <h3 id="مقدمة-6"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"المهندس ساعات يكتب معادلة،
+            وساعات يرسم دائرة، والاتنين بيوصلوا لنفس النتيجة."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-10"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 هنا بنتعرف على حاجة
+            اسمها</span> <span dir="ltr"><strong>Boolean
+                Equation</strong>.</span></p>
+    <p><span dir="rtl">دي معادلة بتوصف منطق الدائرة.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">A AND B</span></p>
+    <p><span dir="rtl">دي مجرد معادلة.</span></p>
+    <p><span dir="rtl">لكن نقدر نحولها لرسم فيه</span> <span dir="ltr">Logic
+            Gates</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🖼️ بصوا على المثال
+            البسيط.</span></p>
+    <p><span dir="ltr">A</span> <span dir="rtl">و</span> <span dir="ltr">B</span> <span dir="rtl">داخلين على</span>
+        <span dir="ltr">AND
+            Gate</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">ويطلع</span> <span dir="ltr">Output</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">أما الرسم اللي على اليمين فهو دائرة أكبر.</span></p>
+    <p><span dir="rtl">فيها أكتر من</span> <span dir="ltr">Logic Gate</span>
+        <span dir="rtl">متوصلين مع بعض.</span>
+    </p>
+    <p><span dir="rtl">يعني ممكن دائرة تستخدم:</span></p>
+    <p><span dir="ltr">AND</span></p>
+    <p><span dir="rtl">و</span><span dir="ltr">NOT</span></p>
+    <p><span dir="rtl">وبعدين الناتج يدخل على</span> <span dir="ltr">Gate</span> <span dir="rtl">تانية.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">💡 الفكرة المهمة
+            هنا:</span></p>
+    <p><span dir="rtl">المعادلة والرسم الاتنين بيشرحوا نفس
+            المنطق.</span></p>
+    <p><span dir="rtl">واحد مكتوب.</span></p>
+    <p><span dir="rtl">والتاني مرسوم.</span></p>
+    <p><span dir="rtl">والمهندس يقدر يستخدم أي طريقة فيهم."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع-4"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لو شفت معادلة فيها</span>
+        <span dir="ltr">AND</span><span dir="rtl">، تتوقع هتلاقي إيه في
+            الرسم؟"</span>
+    </p>
+    <p><span dir="ltr">✅ AND Gate</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-6"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "إحنا كده بقينا نعرف يعني
+            إيه</span> <span dir="ltr">Binary</span><span dir="rtl">، و</span><span dir="ltr">Logic Gates</span><span
+            dir="rtl">، و</span><span dir="ltr">Truth Tables</span><span dir="rtl">، وكمان إزاي نحول المعادلات
+            لدوائر. السلايد الجاية هنبدأ نبني دوائر منطقية أكبر باستخدام الحاجات دي
+            كلها."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-1-how-circuits-remember"><strong>🎤 Slide 1 — How Circuits
+            Remember</strong></h1>
+    <h3 id="مقدمة-7"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لحد دلوقتي كل الدواير اللي
+            عملناها كانت بترد على اللي داخلها في نفس اللحظة. لكن يا ترى الكمبيوتر
+            بيفتكر إزاي؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-11"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 كل الـ</span> <span dir="ltr"><strong>Logic Gates</strong></span>
+        <span dir="rtl">اللي
+            اتعلمناها قبل كده كانت بتشتغل بطريقة بسيطة.</span>
+    </p>
+    <p><span dir="rtl">يدخل</span> <span dir="ltr"><strong>Input</strong>...</span></p>
+    <p><span dir="rtl">تطلع</span> <span dir="ltr"><strong>Output</strong>.</span></p>
+    <p><span dir="rtl">وخلاص.</span></p>
+    <p><span dir="rtl">ودي اسمها</span> <span dir="ltr"><strong>Combinational Circuits</strong>.</span></p>
+    <p><span dir="rtl">يعني الناتج بيعتمد على الـ</span> <span dir="ltr">Input</span> <span dir="rtl">الحالي بس.</span>
+    </p>
+    <p><span dir="rtl">لكن الكمبيوتر محتاج يعمل حاجات أكتر من
+            كده.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🧠 محتاج:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📂 يفتكر بيانات.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">📝 يخزن تعليمات.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">⏳ ويفتكر كان حالته إيه من
+            شوية.</span></p>
+    <p><span dir="rtl">يعني مش كل مرة يبدأ من الصفر.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🖼️ بصوا على الرسم.</span></p>
+    <p><span dir="rtl">فيه</span> <span dir="ltr">Inputs</span> <span dir="rtl">داخلة.</span></p>
+    <p><span dir="rtl">والدائرة بتطلع</span> <span dir="ltr">Outputs</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">لكن مفيش أي حاجة بتخليها تفتكر اللي حصل قبل
+            كده.</span></p>
+    <p><span dir="rtl">وعلشان الكمبيوتر يقدر يفتكر...</span></p>
+    <p><span dir="rtl">لازم يبقى عندنا نوع جديد من الدواير يقدر يحتفظ
+            بالحالة (</span><span dir="ltr"><strong>State</strong>)."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="سؤال-سريع-5"><strong><span dir="rtl">💬 سؤال
+                سريع</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"لو فصلت الكهرباء عن آلة
+            حاسبة، هل هتفتكر آخر رقم كنت كاتبه؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-7"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "طيب الدائرة هتفتكر إزاي؟
+            السر في حاجة اسمها</span> <span dir="ltr">Feedback</span><span dir="rtl">."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-2-feedback-creates-memory"><strong>🎤 Slide 2 — Feedback
+            Creates Memory</strong></h1>
+    <h3 id="مقدمة-8"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"دلوقتي هنشوف الفكرة اللي خلت
+            الكمبيوتر يقدر يفتكر المعلومات."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-12"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 الكلمة الجديدة هنا
+            هي</span> <span dir="ltr"><strong>Feedback</strong>.</span></p>
+    <p><span dir="rtl">يعني ببساطة...</span></p>
+    <p><span dir="rtl">الناتج يرجع يأثر على الدائرة مرة تانية.</span></p>
+    <p><span dir="rtl">بدل ما الـ</span> <span dir="ltr">Output</span> <span dir="rtl">يطلع وينتهي دوره...</span></p>
+    <p><span dir="rtl">بيرجع للدائرة تاني.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🖼️ بصوا على الرسمة
+            البسيطة.</span></p>
+    <p><span dir="ltr">Input ➜ Process ➜ Output</span></p>
+    <p><span dir="rtl">لكن بعد الـ</span> <span dir="ltr">Output</span><span dir="rtl">...</span></p>
+    <p><span dir="rtl">فيه سهم راجع اسمه</span> <span dir="ltr"><strong>Feedback</strong>.</span></p>
+    <p><span dir="rtl">وده بيرجع المعلومة للدائرة.</span></p>
+    <p><span dir="rtl">كأن الدائرة بتقول:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">'أنا فاكرة آخر حاجة
+            حصلت.'</span></p>
+    <p><span dir="rtl">علشان كده بنقول إن الـ</span> <span dir="ltr">Feedback</span> <span dir="rtl">هو اللي بيبدأ
+            يعمل</span>
+        <span dir="ltr"><strong>Memory</strong>.</span>
+    </p>
+    <p><span dir="rtl">ومن غير</span> <span dir="ltr">Feedback</span><span dir="rtl">...</span></p>
+    <p><span dir="rtl">الدائرة هتنسى كل حاجة أول ما الـ</span> <span dir="ltr">Input</span> <span
+            dir="rtl">يتغير."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-8"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "طيب لما نضيف</span> <span dir="ltr">Feedback</span><span dir="rtl">،
+            إيه اللي هيحصل
+            للدائرة؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-3-feedback-creates-memory-state"><strong>🎤 Slide 3 —
+            Feedback Creates Memory (State)</strong></h1>
+    <h3 id="مقدمة-9"><strong><span dir="rtl">🎙️ 💡
+                مقدمة</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">"دلوقتي هنشوف النتيجة المهمة
+            جدًا للـ</span> <span dir="ltr">Feedback</span><span dir="rtl">."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="speaker-notes-13"><strong>🗣️ Speaker Notes</strong></h2>
+    <p><span dir="ltr"></span><span dir="rtl">"📌 لما الدائرة تستخدم</span>
+        <span dir="ltr"><strong>Feedback</strong>...</span>
+    </p>
+    <p><span dir="rtl">تقدر تحتفظ بالحالة بتاعتها.</span></p>
+    <p><span dir="rtl">يعني لو كانت</span> <span dir="ltr"><strong>ON</strong>...</span></p>
+    <p><span dir="rtl">تفضل</span> <span dir="ltr">ON</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">ولو كانت</span> <span dir="ltr"><strong>OFF</strong>...</span></p>
+    <p><span dir="rtl">تفضل</span> <span dir="ltr">OFF</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">إمتى تتغير؟</span></p>
+    <p><span dir="rtl">لما ييجي</span> <strong><span dir="ltr">Input</span>
+            <span dir="rtl">جديد</span></strong><span dir="ltr"></span> <span dir="rtl">يغيرها.</span></p>
+    <p><span dir="rtl">وده اسمه إن الدائرة بتحتفظ بـ</span> <span dir="ltr"><strong>State</strong>.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">💡 تخيلوا مفتاح
+            النور.</span></p>
+    <p><span dir="rtl">لما تشغله...</span></p>
+    <p><span dir="rtl">هيفضل شغال.</span></p>
+    <p><span dir="rtl">مش لازم تضغط عليه كل ثانية.</span></p>
+    <p><span dir="rtl">هيفضل كده لحد ما تيجي وتطفيه.</span></p>
+    <p><span dir="rtl">وده نفس اللي بيحصل في دوائر الذاكرة.</span></p>
+    <p><span dir="rtl">هي بتحتفظ بالحالة الحالية لحد ما أمر جديد
+            يغيرها."</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الانتقال-9"><strong><span dir="rtl">🔄
+                الانتقال</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">➡️ "إحنا كده عرفنا أول خطوة في
+            فكرة الذاكرة داخل الكمبيوتر. بعد كده هنشوف الدوائر الحقيقية اللي بتستخدم
+            الـ</span> <span dir="ltr">Feedback</span> <span dir="rtl">علشان تبني
+            الـ</span> <span dir="ltr">Memory</span> <span dir="rtl">المستخدمة في
+            المعالجات والرام."</span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">بعد ما عرفنا إزاي
+                الـ</span> <span dir="ltr">Logic Gates</span> <span dir="rtl">بتشتغل،
+                تعالى نشوف إزاي الحاجات البسيطة دي بتتبني فوق بعضها لحد ما تعمل كمبيوتر
+                كامل.</span></strong></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="from-gates-to-memory"><strong>🎞️ From Gates to
+            Memory</strong></h1>
+    <h2 id="speaker-notes-14"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">إحنا طول السيشن كنا بنتعلم إن كل</span> <span dir="ltr"><strong>Logic Gate</strong></span> <span
+            dir="rtl">بتعمل قرار
+            بسيط جدًا.</span></p>
+    <p><span dir="rtl">لكن لما نجمع عدد كبير من الـ</span> <span dir="ltr">Logic Gates</span> <span dir="rtl">مع بعض،
+            نقدر نعمل دوائر
+            أكبر ليها وظائف جديدة.</span></p>
+    <p><span dir="rtl">بصوا على الـ</span> <span dir="ltr">Workflow</span>
+        <span dir="rtl">اللي في نص السلايد.</span>
+    </p>
+    <p><span dir="rtl">أول خطوة هي</span> <span dir="ltr"><strong>Logic
+                Gates</strong>.</span></p>
+    <p><span dir="rtl">دي أصغر جزء، وبتنفذ عمليات منطقية بسيطة.</span></p>
+    <p><span dir="rtl">بعدها تيجي</span> <span dir="ltr"><strong>Memory
+                Circuits</strong>.</span></p>
+    <p><span dir="rtl">دي دوائر هدفها إنها تقدر تحتفظ بالمعلومة بدل ما تختفي
+            أول ما الإشارة تروح.</span></p>
+    <p><span dir="rtl">بعد كده مجموعة من</span> <strong><span dir="ltr">Memory Circuits</span></strong> <span
+            dir="rtl">بتكون</span>
+        <span dir="ltr"><strong>Registers</strong>.</span>
+    </p>
+    <p><span dir="rtl">والـ</span> <span dir="ltr">Registers</span> <span dir="rtl">بتستخدم لتخزين بيانات صغيرة وسريعة
+            جدًا أثناء شغل
+            المعالج.</span></p>
+    <p><span dir="rtl">ولما نجمع عدد كبير جدًا من الـ</span> <span dir="ltr">Registers</span> <span
+            dir="rtl">و</span><span dir="ltr"><strong>Memory Circuits</strong></span> <span dir="rtl">نوصل
+            في الآخر إلى</span> <span dir="ltr"><strong>Computer
+                Memory</strong></span> <span dir="rtl">اللي بتخزن البيانات
+            والبرامج.</span></p>
+    <p><span dir="rtl">الفكرة المهمة هنا إن الكمبيوتر متبني خطوة بخطوة، وكل
+            مستوى بيتبني على المستوى اللي قبله.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 <strong>Transition</strong></span></p>
+    <p><span dir="rtl">دلوقتي بعد ما عرفنا إن الـ</span> <span dir="ltr">Logic Gates</span> <span dir="rtl">بتبني
+            الذاكرة، هنشوف إزاي
+            كل الأجزاء دي مع بعض بتكون الكمبيوتر بالكامل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">بعد ما فهمنا بناء
+                الذاكرة، تعالى نشوف الكمبيوتر كله بيتبني إزاي.</span></strong></p>
+    <h1 id="meet-the-computer-your-gates-built"><strong>🎞️ Meet the Computer
+            Your Gates Built</strong></h1>
+    <h2 id="speaker-notes-15"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">بصوا على الـ</span> <span dir="ltr">Workflow</span>
+        <span dir="rtl">الموجود في السلايد.</span>
+    </p>
+    <p><span dir="rtl">أول حاجة عندنا</span> <span dir="ltr"><strong>Logic
+                Gates</strong>.</span></p>
+    <p><span dir="rtl">دي بتعمل العمليات البسيطة.</span></p>
+    <p><span dir="rtl">لما نجمع عدد كبير منها، نعمل</span> <span dir="ltr"><strong>Circuits</strong>.</span></p>
+    <p><span dir="rtl">الدوائر دي تقدر تنفذ شغل أصعب وأكبر.</span></p>
+    <p><span dir="rtl">بعدها يبقى عندنا</span> <span dir="ltr"><strong>Memory</strong>.</span></p>
+    <p><span dir="rtl">ودي مسؤولة عن حفظ المعلومات.</span></p>
+    <p><span dir="rtl">بعد كده ييجي</span> <span dir="ltr"><strong>Processor</strong>.</span></p>
+    <p><span dir="rtl">وده الجزء اللي بينفذ التعليمات ويستخدم البيانات اللي
+            موجودة في الذاكرة.</span></p>
+    <p><span dir="rtl">ولما كل الأجزاء دي تشتغل مع بعض، يبقى عندنا</span>
+        <span dir="ltr"><strong>Computer</strong></span> <span dir="rtl">كامل.</span>
+    </p>
+    <p><span dir="rtl">يبقى الكمبيوتر مش قطعة واحدة، لكنه عبارة عن مستويات
+            مبنية فوق بعض.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 <strong>Transition</strong></span></p>
+    <p><span dir="rtl">بعد ما عرفنا الكمبيوتر بيتبني من إيه، هنراجع رحلة أي
+            معلومة جوه الكمبيوتر من أول ما تدخل لحد ما النتيجة تظهر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">دلوقتي هنجمع كل
+                اللي اتعلمناه في رحلة واحدة بسيطة.</span></strong></p>
+    <h1 id="the-big-picture"><strong>🎞️ The Big Picture</strong></h1>
+    <h2 id="speaker-notes-16"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">أي كمبيوتر بيشتغل بنفس الأربع خطوات.</span></p>
+    <p><span dir="rtl">أول خطوة</span> <span dir="ltr"><strong>Receives
+                Input</strong>.</span></p>
+    <p><span dir="rtl">يعني يستقبل معلومة من المستخدم، زي إنك تدوس زر في
+            الكيبورد.</span></p>
+    <p><span dir="rtl">بعدها</span> <span dir="ltr"><strong>Processes
+                Information</strong>.</span></p>
+    <p><span dir="rtl">المعالج والـ</span> <span dir="ltr">Logic
+            Gates</span> <span dir="rtl">يقرروا يعملوا إيه بالمعلومة.</span></p>
+    <p><span dir="rtl">بعد كده</span> <span dir="ltr"><strong>Stores
+                Information</strong>.</span></p>
+    <p><span dir="rtl">لو محتاج يحتفظ بالبيانات، يخزنها في
+            الذاكرة.</span></p>
+    <p><span dir="rtl">وفي الآخر</span> <span dir="ltr"><strong>Produces
+                Output</strong>.</span></p>
+    <p><span dir="rtl">يعني يطلعلك النتيجة على الشاشة أو أي جهاز
+            إخراج.</span></p>
+    <p><span dir="rtl">بصوا على المثال اللي على اليمين.</span></p>
+    <p><span dir="ltr">Keyboard.</span></p>
+    <p><span dir="rtl">بعدها</span> <span dir="ltr">Computer</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">جوه الكمبيوتر المعالج والـ</span> <span dir="ltr">Logic</span> <span dir="rtl">بيشتغلوا.</span>
+    </p>
+    <p><span dir="rtl">لو احتاج يخزن بيانات، يستخدم الـ</span> <span dir="ltr">Memory</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وفي الآخر النتيجة تظهر على الـ</span> <span dir="ltr">Screen</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">دي نفس الرحلة اللي بتحصل تقريبًا في أي برنامج
+            بنستخدمه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="student-activity-part-1-decimal-binary"><strong>🎞️ Student
+            Activity – Part 1: Decimal → Binary</strong></h1>
+    <h2 id="teacher-instructions"><strong>👨‍🏫 Teacher
+            Instructions</strong></h2>
+    <p><span dir="rtl">قسم الطلبة لمجموعات صغيرة.</span></p>
+    <p><span dir="rtl">خلي كل مجموعة تحل الأرقام بالترتيب.</span></p>
+    <p><span dir="rtl">بعد ما يخلصوا، اطلب من كل مجموعة تشرح رقم واحد قدام
+            الفصل، مش تدي الإجابة بس.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="student-instructions"><strong>👨‍🎓 Student
+            Instructions</strong></h2>
+    <ul>
+        <li>
+            <p><span dir="rtl">حول كل رقم من</span> <span dir="ltr"><strong>Decimal</strong></span> <span
+                    dir="rtl">إلى</span>
+                <span dir="ltr"><strong>Binary</strong>.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">اشتغلوا مع بعض.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اتأكدوا إن كل أعضاء المجموعة فاهمين طريقة
+                    الحل.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="model-solution"><strong>✅ Model Solution</strong></h2>
+    <ul>
+        <li>
+            <p><span dir="ltr">5₁₀ = <strong>101₂</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">10₁₀ = <strong>1010₂</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">13₁₀ = <strong>1101₂</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">9₁₀ = <strong>1001₂</strong></span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h1 id="group-activity-1-part-2-binary-decimal"><strong>🎞️ Group
+            Activity 1 — Part 2: Binary → Decimal</strong></h1>
+    <h2 id="speaker-notes-17"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">دلوقتي هنعكس اللي عملناه من شوية.</span></p>
+    <p><span dir="rtl">المرة اللي فاتت كنا بنحول من</span> <span dir="ltr"><strong>Decimal</strong></span> <span
+            dir="rtl">لـ</span>
+        <span dir="ltr"><strong>Binary</strong></span><span dir="rtl">، أما
+            دلوقتي هنحول من</span> <span dir="ltr"><strong>Binary</strong></span>
+        <span dir="rtl">لـ</span> <span dir="ltr"><strong>Decimal</strong>.</span>
+    </p>
+    <p><span dir="rtl">كل مجموعة هتحل الأربع أرقام الموجودة.</span></p>
+    <p><span dir="rtl">مش مطلوب تكتبوا الإجابة بسرعة، المطلوب إن كل واحد في
+            المجموعة يكون فاهم خطوات التحويل.</span></p>
+    <p><span dir="rtl">بعد ما تخلصوا، هنراجع الحل مع بعض ونشوف إذا كانت كل
+            المجموعات وصلت لنفس النتيجة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 <strong>Transition</strong></span></p>
+    <p><span dir="rtl">بعد ما نحول الأرقام، هنستخدمها علشان نفك رسالة
+            مخفية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="group-activity-1-decode-the-message"><strong>🎞️ Group Activity 1
+            — Decode the Message</strong></h1>
+    <h2 id="speaker-notes-18"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">دلوقتي التحدي بقى ألطف شوية.</span></p>
+    <p><span dir="rtl">قدامكم مجموعة أرقام مكتوبة بالـ</span> <span dir="ltr">Binary</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">كل رقم بيمثل حرف.</span></p>
+    <p><span dir="rtl">أول خطوة هنحول كل رقم لـ</span> <span dir="ltr">Decimal</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">بعد كده هنستخدم الجدول اللي في السلايد اللي بعده
+            علشان نعرف كل رقم بيمثل أنهي حرف.</span></p>
+    <p><span dir="rtl">وفي الآخر لما نجمع الحروف بالترتيب، هنكتشف الرسالة
+            المخفية.</span></p>
+    <p><span dir="rtl">اشتغلوا كفريق، وكل واحد يحل رقم أو اتنين علشان نخلص
+            أسرع.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 <strong>Transition</strong></span></p>
+    <p><span dir="rtl">دلوقتي هنستخدم جدول التحويل علشان نحول كل رقم للحرف
+            المناسب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="group-activity-1-challenge"><strong>🎞️ Group Activity 1 —
+            Challenge</strong></h1>
+    <p><span dir="rtl">هنشتغل على موقع</span> <span dir="ltr"><a href="https://logic.ly/demo/"><u>Untitled Circuit* -
+                    Logic.ly Online
+                    Demo</u></a></span></p>
+    <p><span dir="rtl">الحل النموذجي</span></p>
+    <p><img src="assets/media/image1.png" style="width:6.11458in;height:6.33333in" /><span dir="ltr"></span></p>
+    <h2 id="teacher-instructions-1"><strong>👨‍🏫 Teacher
+            Instructions</strong></h2>
+    <p><span dir="rtl">اطلب من كل مجموعة:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تحول كل رقم</span> <span dir="ltr">Binary</span>
+                <span dir="rtl">إلى</span> <span dir="ltr">Decimal</span><span dir="rtl">.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">تستخدم الجدول الموجود قدامها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تكتب الحرف المقابل لكل رقم.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تجمع الحروف بالترتيب.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">امشِ بين المجموعات وساعدهم لو وقفوا في خطوة التحويل
+            فقط، وسيبهم يكتشفوا الرسالة بنفسهم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="student-instructions-1"><strong>👨‍🎓 Student
+            Instructions</strong></h2>
+    <ul>
+        <li>
+            <p><span dir="rtl">حول كل رقم من</span> <span dir="ltr">Binary</span> <span dir="rtl">إلى</span> <span
+                    dir="ltr">Decimal</span><span dir="rtl">.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">ابص على الجدول.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">هات الحرف المناسب لكل رقم.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">رتب الحروف بنفس الترتيب.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="model-solution-1"><strong>✅ Model Solution</strong></h2>
+    <ul>
+        <li>
+            <p><span dir="ltr">01000 → 8 → <strong>H</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">00101 → 5 → <strong>E</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">01100 → 12 → <strong>L</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">01100 → 12 → <strong>L</strong></span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">01111 → 15 → <strong>O</strong></span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">الرسالة هي:</span></p>
+    <p><strong><span dir="ltr">HELLO</span></strong></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="slide-group-activity-2-activity-goal"><strong>🎞️ Slide: Group
+            Activity 2 — Activity Goal</strong></h1>
+    <h2 id="speaker-notes-19"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">دلوقتي هنبدأ النشاط التاني.</span></p>
+    <p><span dir="rtl">في النشاط ده مش هنرسم أي دائرة وخلاص، لكن هنفكر
+            كمهندسين.</span></p>
+    <p><span dir="rtl">قدامكم معادلة</span> <span dir="ltr">Boolean</span><span dir="rtl">، ومطلوب منكم:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تبنوا الدائرة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تجربوها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وبعد كده تشوفوا هل ينفع نعمل نفس الشغل بعدد أقل
+                    من الـ</span> <span dir="ltr">Logic Gates</span> <span dir="rtl">ولا
+                    لأ.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">وده بالظبط اللي بيحصل في تصميم الدوائر الحقيقية، لأن
+            المهندس دايمًا بيدور على أبسط تصميم يدي نفس النتيجة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">❓ Quick Interaction</span></p>
+    <p><span dir="rtl">اسأل الطلاب: "إيه رأيكم؟ لو عملنا نفس النتيجة بعدد
+            أقل من البوابات... يبقى ده أفضل ولا أسوأ؟ وليه؟"</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 Transition</span></p>
+    <p><span dir="rtl">يلا نبدأ أول خطوة ونبني الدائرة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">دلوقتي هنحول
+                المعادلة إلى دائرة فعلية.</span></strong></p>
+    <h1 id="slide-part-1-build-the-circuit"><strong>🎞️ Slide: Part 1 — Build
+            the Circuit</strong></h1>
+    <h2 id="speaker-notes-20"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">المعادلة قدامنا هي:</span></p>
+    <p><span dir="ltr">(A AND B) OR (A AND C)</span></p>
+    <p><span dir="rtl">هنشتغل عليها خطوة خطوة.</span></p>
+    <p><span dir="rtl">أول حاجة نحسب:</span> <span dir="ltr">A AND
+            B</span></p>
+    <p><span dir="rtl">وبعدين نحسب:</span> <span dir="ltr">A AND
+            C</span></p>
+    <p><span dir="rtl">وبعد ما يطلع عندنا الناتجين، هنوصلهم ببوابة</span>
+        <span dir="ltr">OR</span> <span dir="rtl">علشان نطلع الـ</span> <span dir="ltr">Output</span> <span
+            dir="rtl">النهائي.</span>
+    </p>
+    <p><span dir="rtl">امشوا بنفس ترتيب المعادلة، ومتقفزوش لأي
+            خطوة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span><span dir="rtl">🔁 مراجعة سريعة</span></p>
+    <p><span dir="rtl">إحنا عرفنا قبل كده إن:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">AND</span> <span dir="rtl">لازم كل المدخلات تبقى
+                    1.</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">OR</span> <span dir="rtl">يكفي مدخل واحد يكون
+                    1.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">وده اللي هنستخدمه دلوقتي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🏫 <strong>Teacher Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اطلب من كل مجموعة ترسم الدائرة على الورقة أو
+                    البرنامج.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اتأكد إنهم بنوا كل جزء بنفس ترتيب
+                    المعادلة.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🎓 <strong>Student Instructions</strong></span></p>
+    <ol type="1">
+        <li>
+            <p><span dir="rtl">ارسم بوابة</span> <span dir="ltr">AND</span>
+                <span dir="rtl">لأول جزء.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">ارسم بوابة</span> <span dir="ltr">AND</span>
+                <span dir="rtl">للجزء التاني.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">وصل الناتجين ببوابة</span> <span dir="ltr">OR</span><span dir="rtl">.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اكتب الـ</span> <span dir="ltr">Output</span><span dir="rtl">.</span></p>
+        </li>
+    </ol>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">✅ <strong>Model Solution</strong></span></p>
+    <p><span dir="ltr">AND(A,B)</span></p>
+    <p><span dir="ltr">AND(A,C)</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">OR</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">Output</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 Transition</span></p>
+    <p><span dir="rtl">بعد ما بنينا الدائرة، لازم نتأكد إنها شغالة
+            صح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">دلوقتي هنختبر
+                الدائرة باستخدام قيم مختلفة.</span></strong></p>
+    <h1 id="slide-part-2-test-the-circuit"><strong>🎞️ Slide: Part 2 — Test
+            the Circuit</strong></h1>
+    <h2 id="speaker-notes-21"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">أي دائرة بنبنيها لازم نجربها.</span></p>
+    <p><span dir="rtl">هندي قيم مختلفة لـ</span> <span dir="ltr">A</span>
+        <span dir="rtl">و</span><span dir="ltr">B</span> <span dir="rtl">و</span><span dir="ltr">C</span><span
+            dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">وبعدين نحسب الناتج خطوة خطوة.</span></p>
+    <p><span dir="rtl">ابدأوا بحساب:</span> <span dir="ltr">A AND
+            B</span></p>
+    <p><span dir="rtl">بعدها:</span> <span dir="ltr">A AND C</span></p>
+    <p><span dir="rtl">وفي الآخر استخدموا</span> <span dir="ltr">OR</span>
+        <span dir="rtl">علشان تطلعوا الناتج النهائي.</span>
+    </p>
+    <p><span dir="rtl">ماتستعجلوش، واحسبوا كل خطوة لوحدها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🏫 <strong>Teacher Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">خلي كل مجموعة تحسب بنفسها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اطلب منهم يكتبوا كل نتيجة وسيطة قبل الـ</span>
+                <span dir="ltr">Output</span> <span dir="rtl">النهائي.</span>
+            </p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🎓 <strong>Student Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">احسب</span> <span dir="ltr">AND</span> <span dir="rtl">الأول.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">احسب</span> <span dir="ltr">AND</span> <span dir="rtl">التانية.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">استخدم</span> <span dir="ltr">OR</span><span dir="rtl">.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اكتب الناتج النهائي.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">✅ <strong>Model Solution</strong></span></p>
+    <p><span dir="rtl">يتحسب بنفس القيم الموجودة في السلايد حتى الوصول إلى
+            الـ</span> <span dir="ltr">Output</span> <span dir="rtl">الصحيح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 Transition</span></p>
+    <p><span dir="rtl">بما إن الدائرة شغالة... نشوف هل نقدر
+            نصغرها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">دلوقتي هنفكر بطريقة
+                أذكى ونحاول نقلل عدد البوابات.</span></strong></p>
+    <h1 id="slide-part-3-shrink-the-circuit-finding-the-pattern"><strong>🎞️
+            Slide: Part 3 — Shrink the Circuit (Finding the Pattern)</strong></h1>
+    <h2 id="speaker-notes-22"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">بصوا على المعادلة كويس.</span></p>
+    <p><span dir="ltr">(A AND B)</span></p>
+    <p><span dir="ltr">(A AND C)</span></p>
+    <p><span dir="rtl">هتلاحظوا إن في حاجة متكررة.</span></p>
+    <p><span dir="rtl">إيه هي؟</span></p>
+    <p><span dir="rtl">المتغير</span> <span dir="ltr">A</span> <span dir="rtl">موجود في الجزئين.</span></p>
+    <p><span dir="rtl">ولما يبقى في جزء متكرر، أوقات نقدر نكتبه مرة واحدة
+            بدل ما نكرره.</span></p>
+    <p><span dir="rtl">سيبوا نفسكم تكتشفوا الفكرة قبل ما نبين
+            الحل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🏫 <strong>Teacher Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">ادّي الطلاب دقيقة يلاحظوا النمط.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">متقولش الحل مباشرة.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🎓 <strong>Student Instructions</strong></span></p>
+    <p><span dir="rtl">حدد الجزء المتكرر في المعادلة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 Transition</span></p>
+    <p><span dir="rtl">دلوقتي نشوف الشكل الأبسط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">بصوا إزاي نفس
+                الفكرة اتكتبت بطريقة أقصر.</span></strong></p>
+    <h1 id="slide-part-3-simplified-circuit"><strong>🎞️ Slide: Part 3 —
+            Simplified Circuit</strong></h1>
+    <h2 id="speaker-notes-23"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">المعادلة بقت:</span></p>
+    <p><span dir="ltr">A AND (B OR C)</span></p>
+    <p><span dir="rtl">لاحظوا إننا وصلنا لنفس النتيجة، لكن استخدمنا عدد أقل
+            من البوابات.</span></p>
+    <p><span dir="rtl">وده معناه إن التصميم بقى أبسط وأسهل في
+            التنفيذ.</span></p>
+    <p><span dir="rtl">في تصميم الدوائر، أي تصميم يحقق نفس النتيجة بعدد أقل
+            من المكونات غالبًا بيكون أفضل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🏫 <strong>Teacher Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اطلب من الطلاب يرسموا الدائرة
+                    الجديدة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">خليهم يقارنوا بينها وبين الدائرة
+                    الأولى.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🎓 <strong>Student Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">ارسم الدائرة الجديدة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">عدّ عدد البوابات.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">قارنها بالدائرة الأصلية.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">✅ <strong>Model Solution</strong></span></p>
+    <p><span dir="ltr">A</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">AND</span></p>
+    <p><span dir="ltr">↑</span></p>
+    <p><span dir="ltr">(B OR C)</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">Output</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🔄 Transition</span></p>
+    <p><span dir="rtl">آخر خطوة... ليه فعلًا الدائرة الجديدة تعتبر
+            أفضل؟</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🎯</span> <strong><span dir="rtl">دلوقتي هنقارن
+                التصميمين ونفكر كمهندسين.</span></strong></p>
+    <h1 id="slide-final-challenge"><strong>🎞️ Slide: Final
+            Challenge</strong></h1>
+    <h2 id="speaker-notes-24"><strong>🎤 Speaker Notes</strong></h2>
+    <p><span dir="rtl">قدامكم دلوقتي تصميمين.</span></p>
+    <p><span dir="rtl">الاتنين بيطلعوا نفس الـ</span> <span dir="ltr">Output</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">لكن واحد فيهم أبسط.</span></p>
+    <p><span dir="rtl">فكروا...</span></p>
+    <p><span dir="rtl">ليه المهندس يختار الدائرة الأبسط؟</span></p>
+    <p><span dir="rtl">الإجابة مش علشان الشكل، لكن لأنها تستخدم مكونات أقل،
+            وبالتالي تبقى أسهل في التنفيذ والتنظيم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🏫 <strong>Teacher Instructions</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">افتح نقاش بين المجموعات.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اطلب من كل مجموعة تذكر سبب واحد على
+                    الأقل.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">👨‍🎓 <strong>Student Instructions</strong></span></p>
+    <p><span dir="rtl">اكتب سبب واحد يوضح ليه الدائرة المبسطة أفضل من
+            الأصلية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">✅ <strong>Model Solution</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تستخدم عدد أقل من الـ</span> <span dir="ltr">Logic Gates</span><span dir="rtl">.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">أسهل في الرسم والتنفيذ.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تحقق نفس الـ</span> <span dir="ltr">Output</span><span dir="rtl">.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">🌳 <strong>Tree Summary</strong></span></p>
+    <p><span dir="ltr">Boolean Equation</span></p>
+    <p><span dir="ltr">⬇️</span></p>
+    <p><span dir="ltr">Build Circuit</span></p>
+    <p><span dir="ltr">⬇️</span></p>
+    <p><span dir="ltr">Test Circuit</span></p>
+    <p><span dir="ltr">⬇️</span></p>
+    <p><span dir="ltr">Find Repeated Part</span></p>
+    <p><span dir="ltr">⬇️</span></p>
+    <p><span dir="ltr">Simplify Circuit</span></p>
+    <p><span dir="ltr">⬇️</span></p>
+    <p><span dir="ltr">Same Output + Simpler Design</span></p>
+    <p><span dir="ltr"></span></p>
+
+</body>
+
+</html>
