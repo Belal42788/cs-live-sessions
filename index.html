@@ -306,52 +306,52 @@ body {
         }
     </style>
     <script>
-document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
 
-    // مستوى واحد فقط مفتوح
-    document.querySelectorAll(".lessons > details").forEach(level => {
+            // مستوى واحد فقط مفتوح
+            document.querySelectorAll(".lessons > details").forEach(level => {
 
-        level.querySelector("summary").addEventListener("click", () => {
+                level.querySelector("summary").addEventListener("click", () => {
 
-            if (!level.open) {
-                document.querySelectorAll(".lessons > details").forEach(other => {
-                    if (other !== level) {
-                        other.removeAttribute("open");
+                    if (!level.open) {
+                        document.querySelectorAll(".lessons > details").forEach(other => {
+                            if (other !== level) {
+                                other.removeAttribute("open");
+                            }
+                        });
                     }
+
                 });
-            }
 
-        });
+            });
 
-    });
+            // درس واحد فقط مفتوح داخل كل مستوى
+            document.querySelectorAll(".level-content").forEach(container => {
 
-    // درس واحد فقط مفتوح داخل كل مستوى
-    document.querySelectorAll(".level-content").forEach(container => {
+                const lessons = container.querySelectorAll(".lesson-card-details");
 
-        const lessons = container.querySelectorAll(".lesson-card-details");
+                lessons.forEach(lesson => {
 
-        lessons.forEach(lesson => {
+                    lesson.querySelector("summary").addEventListener("click", () => {
 
-            lesson.querySelector("summary").addEventListener("click", () => {
+                        if (!lesson.open) {
 
-                if (!lesson.open) {
+                            lessons.forEach(other => {
+                                if (other !== lesson) {
+                                    other.removeAttribute("open");
+                                }
+                            });
 
-                    lessons.forEach(other => {
-                        if (other !== lesson) {
-                            other.removeAttribute("open");
                         }
+
                     });
 
-                }
+                });
 
             });
 
         });
-
-    });
-
-});
-</script>
+    </script>
 </head>
 
 <body>
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <header>
         <img src="/cs-live-sessions/assets/image.png" onerror="this.src='assets/image.png'" alt="Bilal Logo"
             class="logo" style="width: 120px;">
-  
+
     </header>
 
     <div class="lessons">
@@ -368,7 +368,66 @@ document.addEventListener("DOMContentLoaded", () => {
         <details>
             <summary>📘 المستوى الأول</summary>
             <div class="level-content">
-
+                <details class="lesson-card-details">
+                    <summary class="lesson-card">
+                        <span class="num">2</span>
+                        الأسبوع الثالث عشر : AI
+                    </summary>
+                    <div class="level-content">
+                        <!-- <a class="lesson-card" href="/cs-live-sessions/level-2/week-17/Level2-Week17-embedded.html">
+                            🌐 الموقع التفاعلي
+                        </a> -->
+                        <a class="lesson-card" href="\cs-live-sessions\level-1\week-13\level1-week13.html">
+                            📝 Speaker Notes
+                        </a>
+                    </div>
+                </details>
+                <!-- أضف هنا باقي دروس المستوى الأول -->
+                <details class="lesson-card-details">
+                    <summary class="lesson-card">
+                        <span class="num">2</span>
+                        الأسبوع الرابع عشر : Machine learning
+                    </summary>
+                    <div class="level-content">
+                        <!-- <a class="lesson-card" href="/cs-live-sessions/level-2/week-17/Level2-Week17-embedded.html">
+                            🌐 الموقع التفاعلي
+                        </a> -->
+                        <a class="lesson-card" href="/cs-live-sessions/level-1/week-14/level1-week14.html">
+                            📝 Speaker Notes
+                        </a>
+                    </div>
+                </details>
+                <!-- أضف هنا باقي دروس المستوى الأول -->
+                <details class="lesson-card-details">
+                    <summary class="lesson-card">
+                        <span class="num">2</span>
+                        الأسبوع الخامس عشر : Computer vision
+                    </summary>
+                    <div class="level-content">
+                        <!-- <a class="lesson-card" href="/cs-live-sessions/level-2/week-17/Level2-Week17-embedded.html">
+                            🌐 الموقع التفاعلي
+                        </a> -->
+                        <a class="lesson-card" href="/cs-live-sessions/level-1/week-15/level1-week15.html">
+                            📝 Speaker Notes
+                        </a>
+                    </div>
+                </details>
+                <!-- أضف هنا باقي دروس المستوى الأول -->
+                <details class="lesson-card-details">
+                    <summary class="lesson-card">
+                        <span class="num">2</span>
+                        الأسبوع السادس عشر : NLP
+                    </summary>
+                    <div class="level-content">
+                        <!-- <a class="lesson-card" href="/cs-live-sessions/level-2/week-17/Level2-Week17-embedded.html">
+                            🌐 الموقع التفاعلي
+                        </a> -->
+                        <a class="lesson-card" href="/cs-live-sessions/level-1/week-16/level1-week16.html">
+                            📝 Speaker Notes
+                        </a>
+                    </div>
+                </details>
+                <!-- أضف هنا باقي دروس المستوى الأول -->
                 <details class="lesson-card-details">
                     <summary class="lesson-card">
                         <span class="num">1</span>
