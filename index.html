@@ -3,7 +3,6 @@
 <!-- 
 to use pandoc
 pandoc level2-week.docx --extract-media=assets -o level2-week.html
-
 and in css file created
 <html lang="ar" dir="rtl">
     <head>
@@ -26,7 +25,6 @@ body {
         type="image/x-icon">
     <title>Bilal</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #1F45FC;
@@ -56,7 +54,6 @@ body {
         }
 
         /* ================= HEADER ================= */
-
         header {
             text-align: center;
             margin-bottom: 45px;
@@ -81,7 +78,6 @@ body {
         }
 
         /* ================= CONTAINER ================= */
-
         .lessons {
             max-width: 720px;
             margin: auto;
@@ -91,7 +87,6 @@ body {
         }
 
         /* ================= LEVEL ================= */
-
         details {
             background: white;
             border: 1px solid var(--border);
@@ -115,204 +110,120 @@ body {
         }
 
         /* ================= LEVEL TITLE ================= */
-
         .lessons>details>summary {
-
             background: white;
-
             padding: 20px 24px;
-
             font-size: 1.1rem;
-
             font-weight: 800;
-
             transition: .2s;
         }
 
         .lessons>details>summary:hover {
-
             background: var(--primary-light);
-
         }
 
         /* ================= CONTENT ================= */
-
         .level-content {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 12px;
-
             padding: 14px;
-
         }
 
         /* ================= WEEK CARD ================= */
-
         .lesson-card-details {
-
             border: none;
-
             background: transparent;
-
             box-shadow: none;
-
         }
 
         .lesson-card-details>summary {
-
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
             background: white;
-
             border: 1px solid var(--border);
-
             border-radius: 16px;
-
             padding: 18px 20px;
-
             transition: .25s;
-
         }
 
         .lesson-card-details>summary:hover {
-
             border-color: var(--primary);
-
             transform: translateY(-2px);
-
             box-shadow: 0 8px 22px rgba(31, 69, 252, .12);
-
         }
 
         /* ================= WEEK NUMBER ================= */
-
         .num {
-
             width: 34px;
-
             height: 34px;
-
             border-radius: 50%;
-
             background: var(--primary);
-
             color: white;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             font-weight: 700;
-
             flex-shrink: 0;
-
         }
 
         /* ================= ARROW ================= */
-
         .lesson-card-details>summary::after {
-
             content: "";
-
             margin-right: auto;
-
             width: 18px;
-
             height: 18px;
-
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231F45FC' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E");
-
             background-size: contain;
-
             background-repeat: no-repeat;
-
             transition: .25s;
-
         }
 
         .lesson-card-details[open]>summary::after {
-
             transform: rotate(180deg);
-
         }
 
         /* ================= LINKS ================= */
-
         .lesson-card {
-
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
             padding: 14px 18px;
-
             text-decoration: none;
-
             color: var(--text);
-
             background: #FAFBFF;
-
             border: 1px solid var(--border);
-
             border-radius: 14px;
-
             transition: .2s;
-
         }
 
         .lesson-card:hover {
-
             background: var(--primary);
-
             color: white;
-
             border-color: var(--primary);
-
             transform: translateX(-3px);
-
         }
 
         /* ================= SCROLL ================= */
-
         ::-webkit-scrollbar {
-
             width: 8px;
-
         }
 
         ::-webkit-scrollbar-thumb {
-
             background: #C8D4FF;
-
             border-radius: 20px;
-
         }
 
         ::-webkit-scrollbar-thumb:hover {
-
             background: var(--primary);
-
         }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-
             // مستوى واحد فقط مفتوح
             document.querySelectorAll(".lessons > details").forEach(level => {
-
                 level.querySelector("summary").addEventListener("click", () => {
-
                     if (!level.open) {
                         document.querySelectorAll(".lessons > details").forEach(other => {
                             if (other !== level) {
@@ -320,50 +231,33 @@ body {
                             }
                         });
                     }
-
                 });
-
             });
-
             // درس واحد فقط مفتوح داخل كل مستوى
             document.querySelectorAll(".level-content").forEach(container => {
-
                 const lessons = container.querySelectorAll(".lesson-card-details");
-
                 lessons.forEach(lesson => {
-
                     lesson.querySelector("summary").addEventListener("click", () => {
-
                         if (!lesson.open) {
-
                             lessons.forEach(other => {
                                 if (other !== lesson) {
                                     other.removeAttribute("open");
                                 }
                             });
-
                         }
-
                     });
-
                 });
-
             });
-
         });
     </script>
 </head>
 
 <body>
-
     <header>
         <img src="/cs-live-sessions/assets/image.png" onerror="this.src='assets/image.png'" alt="Bilal Logo"
             class="logo" style="width: 120px;">
-
     </header>
-
     <div class="lessons">
-
         <!-- المستوى الأول -->
         <details>
             <summary>📘 المستوى الأول</summary>
@@ -480,10 +374,12 @@ body {
 </details>
 
                 <!-- أضف هنا باقي دروس المستوى الأول -->
-
             </div>
         </details>
-
+        <!-- ======================================================================================================================================================================== -->
+        <!-- ======================================================================================================================================================================== -->
+        <!-- ======================================================================================================================================================================== -->
+        <!-- ======================================================================================================================================================================== -->
         <!-- المستوى الثاني -->
         <details>
             <summary>📗 المستوى الثاني</summary>
@@ -578,10 +474,21 @@ body {
                     </div>
                 </details>
                 <!-- أضف هنا باقي دروس المستوى الثاني -->
+                <details class="lesson-card-details">
+                    <summary class="lesson-card">
+                        <span class="num">7</span>
+                        الأسبوع الثامن عشر: Computer Architecture
+                    </summary>
+                    <div class="level-content">
+                        <a class="lesson-card" href="/cs-live-sessions/level-2/week-18/level2-week18.html">
+                            📝 Speaker Notes
+                        </a>
+                    </div>
+                </details>
+                <!-- أضف هنا باقي دروس المستوى الثاني -->
             </div>
         </details>
     </div>
-
 </body>
 
 </html>
