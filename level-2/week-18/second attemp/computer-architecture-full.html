@@ -92,6 +92,8 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overf
 .truth-table th:first-child{border-radius:12px 0 0 12px}
 .truth-table th:last-child{border-radius:0 12px 12px 0}
 .truth-table td{padding:15px;background:var(--card);text-align:center;font-weight:600}
+.truth-tab{display:none;text-align:center}
+.truth-tab.active{display:block;animation:fUp .5s ease-out}
 .truth-cell{width:50px;height:50px;border-radius:10px;background:rgba(255,255,255,.1);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;font-weight:900;transition:all .3s}
 .truth-cell.correct{background:var(--success);color:var(--bg)}
 .truth-cell.wrong{background:var(--danger)}
@@ -216,22 +218,12 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="bit-box" data-val="2" onclick="toggleBit(this)"><span class="bit-power">2¹</span><span class="bit-value">0</span><span class="bit-label">2</span></div>
 <div class="bit-box" data-val="1" onclick="toggleBit(this)"><span class="bit-power">2⁰</span><span class="bit-value">0</span><span class="bit-label">1</span></div>
 </div>
-<div class="decimal-display">
-<div class="label">القيمة العشرية</div>
+<div class="decimal-display" style="cursor:pointer" onclick="editDecimal()" title="اضغط للتعديل">
+<div class="label">القيمة العشرية (اضغط للتعديل)</div>
 <div class="value" id="decimalValue">0</div>
+<input type="number" id="decimalInput" min="0" max="255" style="display:none;width:120px;background:transparent;border:none;border-bottom:3px solid var(--accent);color:var(--text);font-family:'Cairo';font-size:48px;font-weight:900;text-align:center;outline:none;background-clip:text;-webkit-background-clip:text" onblur="applyDecimal()" onkeydown="if(event.key==='Enter')applyDecimal()">
 </div>
 <button class="replay-btn" onclick="resetBinary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
-<div style="margin-top:25px;padding-top:25px;border-top:1px solid rgba(255,255,255,.1)">
-<div class="diagram-title">حوّل من عشري لثنائي</div>
-<div style="display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap">
-<input type="number" id="decimalInput" min="0" max="255" placeholder="اكتب رقم عشري (0-255)" style="padding:12px 20px;background:var(--bg);border:2px solid rgba(255,255,255,.1);border-radius:12px;color:var(--text);font-family:'Cairo';font-size:16px;width:220px;text-align:center;outline:none;transition:border-color .3s" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
-<button class="replay-btn" onclick="convertDecimalToBinary()" style="margin-top:0;background:var(--accent);color:var(--bg);border:none">حوّل</button>
-</div>
-<div id="convertResult" style="margin-top:15px;text-align:center;display:none">
-<span style="color:var(--dim)">النتيجة: </span>
-<span id="convertBinaryResult" style="font-size:24px;font-weight:900;color:var(--accent);font-family:monospace;letter-spacing:3px"></span>
-</div>
-</div>
 </div>
 </div>
 <div class="quiz-box" id="s1Quiz">
@@ -425,16 +417,45 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="mistake-box"><strong>غلطة شائعة:</strong> الطلبة بينسوا يجربوا كل الاحتمالات ويكتفوا بحالة أو اتنين.</div>
 </div>
 <div class="diagram-container">
+<div class="gate-tabs" style="margin-bottom:20px">
+<button class="gate-tab active" onclick="showTruthTab('AND')">AND</button>
+<button class="gate-tab" onclick="showTruthTab('OR')">OR</button>
+<button class="gate-tab" onclick="showTruthTab('NOT')">NOT</button>
+</div>
+<div class="truth-tab active" id="truthAND">
 <div class="diagram-title">اضغط على كل خلية لتحديد قيمتها</div>
 <table class="truth-table">
 <tr><th>A</th><th>B</th><th>A AND B</th></tr>
-<tr><td>0</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
-<tr><td>0</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
-<tr><td>1</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0)">?</div></td></tr>
-<tr><td>1</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1)">?</div></td></tr>
+<tr><td>0</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0,'AND')">?</div></td></tr>
+<tr><td>0</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0,'AND')">?</div></td></tr>
+<tr><td>1</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0,'AND')">?</div></td></tr>
+<tr><td>1</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1,'AND')">?</div></td></tr>
 </table>
-<p id="truthScore" style="text-align:center;margin-top:20px;color:var(--accent)">الإجابات الصحيحة: 0/4</p>
-<button class="replay-btn" onclick="resetTruthTable()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+<p class="truth-score" style="text-align:center;margin-top:15px;color:var(--accent)">الإجابات الصحيحة: 0/4</p>
+<button class="replay-btn" onclick="resetTruthTable('AND')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<div class="truth-tab" id="truthOR">
+<div class="diagram-title">اضغط على كل خلية لتحديد قيمتها</div>
+<table class="truth-table">
+<tr><th>A</th><th>B</th><th>A OR B</th></tr>
+<tr><td>0</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0,'OR')">?</div></td></tr>
+<tr><td>0</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1,'OR')">?</div></td></tr>
+<tr><td>1</td><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1,'OR')">?</div></td></tr>
+<tr><td>1</td><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1,'OR')">?</div></td></tr>
+</table>
+<p class="truth-score" style="text-align:center;margin-top:15px;color:var(--accent)">الإجابات الصحيحة: 0/4</p>
+<button class="replay-btn" onclick="resetTruthTable('OR')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<div class="truth-tab" id="truthNOT">
+<div class="diagram-title">اضغط على كل خلية لتحديد قيمتها</div>
+<table class="truth-table">
+<tr><th>A</th><th>NOT A</th></tr>
+<tr><td>0</td><td><div class="truth-cell" onclick="toggleTruthCell(this,1,'NOT')">?</div></td></tr>
+<tr><td>1</td><td><div class="truth-cell" onclick="toggleTruthCell(this,0,'NOT')">?</div></td></tr>
+</table>
+<p class="truth-score" style="text-align:center;margin-top:15px;color:var(--accent)">الإجابات الصحيحة: 0/2</p>
+<button class="replay-btn" onclick="resetTruthTable('NOT')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
 </div>
 </div>
 </div>
@@ -760,10 +781,12 @@ const journeyObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(
 document.querySelectorAll('.journey-step').forEach(el=>journeyObserver.observe(el));
 const quizObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),800)})},{threshold:0.5});
 document.querySelectorAll('.quiz-box').forEach(q=>quizObserver.observe(q));
-function toggleBit(el){const v=el.querySelector('.bit-value');const val=parseInt(v.textContent);const newVal=val===0?1:0;v.textContent=newVal;el.classList.toggle('active',newVal===1);updateDecimal();el.style.transform='scale(1.1)';setTimeout(()=>el.style.transform='',200)}
-function updateDecimal(){let t=0;document.querySelectorAll('#binaryBits .bit-box').forEach(b=>{if(b.querySelector('.bit-value').textContent==='1')t+=parseInt(b.dataset.val)});const el=document.getElementById('decimalValue');el.style.transform='scale(1.2)';el.textContent=t;setTimeout(()=>el.style.transform='',200)}
-function resetBinary(){document.querySelectorAll('#binaryBits .bit-box').forEach(b=>{b.querySelector('.bit-value').textContent='0';b.classList.remove('active')});updateDecimal();document.getElementById('convertResult').style.display='none';document.getElementById('decimalInput').value=''}
-function convertDecimalToBinary(){const val=parseInt(document.getElementById('decimalInput').value);if(isNaN(val)||val<0||val>255)return;const bits=[128,64,32,16,8,4,2,1];const boxes=document.querySelectorAll('#binaryBits .bit-box');let binary='';let remaining=val;bits.forEach((b,i)=>{const bit=remaining>=b?1:0;if(bit)remaining-=b;boxes[i].querySelector('.bit-value').textContent=bit;boxes[i].classList.toggle('active',bit===1);binary+=bit});document.getElementById('decimalValue').textContent=val;document.getElementById('convertResult').style.display='block';document.getElementById('convertBinaryResult').textContent=binary}
+function toggleBit(el){var v=el.querySelector('.bit-value');var cur=parseInt(v.textContent);var next=cur===0?1:0;v.textContent=next;el.classList.toggle('active',next===1);el.style.transform='scale(1.1)';setTimeout(function(){el.style.transform=''},200);updateDecimal()}
+function updateDecimal(){var total=0;var boxes=document.querySelectorAll('#binaryBits .bit-box');boxes.forEach(function(b){if(b.querySelector('.bit-value').textContent==='1')total+=parseInt(b.dataset.val)});document.getElementById('decimalValue').textContent=total}
+function decimalToBits(num){var powers=[128,64,32,16,8,4,2,1];var boxes=document.querySelectorAll('#binaryBits .bit-box');var remaining=num;for(var i=0;i<powers.length;i++){if(remaining>=powers[i]){boxes[i].querySelector('.bit-value').textContent='1';boxes[i].classList.add('active');remaining-=powers[i]}else{boxes[i].querySelector('.bit-value').textContent='0';boxes[i].classList.remove('active')}}}
+function editDecimal(){var val=document.getElementById('decimalValue').textContent;var disp=document.getElementById('decimalValue');var inp=document.getElementById('decimalInput');disp.style.display='none';inp.style.display='block';inp.value=val;inp.focus();inp.select()}
+function applyDecimal(){var inp=document.getElementById('decimalInput');var disp=document.getElementById('decimalValue');var val=parseInt(inp.value);if(isNaN(val))val=0;if(val<0)val=0;if(val>255)val=255;decimalToBits(val);disp.textContent=val;disp.style.display='block';inp.style.display='none'}
+function resetBinary(){document.querySelectorAll('#binaryBits .bit-box').forEach(function(b){b.querySelector('.bit-value').textContent='0';b.classList.remove('active')});updateDecimal();var disp=document.getElementById('decimalValue');var inp=document.getElementById('decimalInput');disp.style.display='block';inp.style.display='none';disp.textContent='0'}
 let lampOn=false;
 function toggleLamp(){lampOn=!lampOn;const bulb=document.getElementById('lampBulb');bulb.classList.toggle('on',lampOn);if(lampOn){document.getElementById('labelOFF').textContent='ON';document.getElementById('labelLOW').textContent='HIGH';document.getElementById('labelFALSE').textContent='TRUE';document.getElementById('label0').textContent='1';['OFF','LOW','FALSE','0'].forEach(l=>document.getElementById('label'+l).classList.add('active'))}else{document.getElementById('labelOFF').textContent='OFF';document.getElementById('labelLOW').textContent='LOW';document.getElementById('labelFALSE').textContent='FALSE';document.getElementById('label0').textContent='0';['OFF','LOW','FALSE','0'].forEach(l=>document.getElementById('label'+l).classList.remove('active'))}}
 function resetLamp(){lampOn=false;document.getElementById('lampBulb').classList.remove('on');document.getElementById('labelOFF').textContent='OFF';document.getElementById('labelLOW').textContent='LOW';document.getElementById('labelFALSE').textContent='FALSE';document.getElementById('label0').textContent='0';['OFF','LOW','FALSE','0'].forEach(l=>document.getElementById('label'+l).classList.remove('active'))}
@@ -772,9 +795,10 @@ function showGate(type){document.querySelectorAll('.gate-visual').forEach(v=>v.c
 function toggleGateBit(gate,input){const el=document.getElementById(gate.toLowerCase()+input);const v=el.querySelector('.bit-value');const val=parseInt(v.textContent);v.textContent=val===0?1:0;el.classList.toggle('active',v.textContent==='1');gateStates[gate][input]=parseInt(v.textContent);updateGateOutput(gate)}
 function updateGateOutput(gate){const s=gateStates[gate];let out;const outEl=document.getElementById(gate.toLowerCase()+'Output');const nodeOut=document.getElementById(gate.toLowerCase()+'NodeOut');const wireOut=document.getElementById(gate.toLowerCase()+'WireOut');if(gate==='AND')out=s.A&s.B;else if(gate==='OR')out=s.A|s.B;else out=s.A===0?1:0;outEl.textContent=out;outEl.classList.toggle('high',out===1);nodeOut.classList.toggle('active',out===1);wireOut.classList.toggle('active',out===1);const nodeA=document.getElementById(gate.toLowerCase()+'NodeA');const wireA=document.getElementById(gate.toLowerCase()+'WireA');nodeA.classList.toggle('active',s.A===1);wireA.classList.toggle('active',s.A===1);if(gate!=='NOT'){const nodeB=document.getElementById(gate.toLowerCase()+'NodeB');const wireB=document.getElementById(gate.toLowerCase()+'WireB');nodeB.classList.toggle('active',s.B===1);wireB.classList.toggle('active',s.B===1)}}
 function resetGate(gate){gateStates[gate]={A:0,B:0};const ids=gate==='NOT'?['notA']:['andA','andB','orA','orB','notA'];ids.forEach(id=>{const el=document.getElementById(id);if(el){el.querySelector('.bit-value').textContent='0';el.classList.remove('active')}});updateGateOutput(gate)}
-let truthCorrect=0;
-function toggleTruthCell(el,correct){const val=el.textContent;let newVal;if(val==='?')newVal=0;else if(val==='0')newVal=1;else newVal=0;el.textContent=newVal;if(newVal===correct){el.classList.add('correct');el.classList.remove('wrong')}else{el.classList.add('wrong');el.classList.remove('correct')}truthCorrect=0;document.querySelectorAll('.truth-cell').forEach((c,i)=>{const exp=i===3?1:0;if(parseInt(c.textContent)===exp)truthCorrect++});document.getElementById('truthScore').textContent='الإجابات الصحيحة: '+truthCorrect+'/4'}
-function resetTruthTable(){document.querySelectorAll('.truth-cell').forEach(c=>{c.textContent='?';c.classList.remove('correct','wrong')});truthCorrect=0;document.getElementById('truthScore').textContent='الإجابات الصحيحة: 0/4'}
+var truthScores={AND:0,OR:0,NOT:0};
+function showTruthTab(type){document.querySelectorAll('.truth-tab').forEach(function(t){t.classList.remove('active')});document.getElementById('truth'+type).classList.add('active');var tabs=document.getElementById('truth'+type).closest('.diagram-container').querySelectorAll('.gate-tab');tabs.forEach(function(t){t.classList.remove('active')});event.target.classList.add('active')}
+function toggleTruthCell(el,correct,gate){var val=el.textContent;var newVal;if(val==='?')newVal=0;else if(val==='0')newVal=1;else newVal=0;el.textContent=newVal;if(newVal===correct){el.classList.add('correct');el.classList.remove('wrong')}else{el.classList.add('wrong');el.classList.remove('correct')}var tab=document.getElementById('truth'+gate);var cells=tab.querySelectorAll('.truth-cell');var score=0;cells.forEach(function(c){if(c.classList.contains('correct'))score++});truthScores[gate]=score;var total=cells.length;tab.querySelector('.truth-score').textContent='الإجابات الصحيحة: '+score+'/'+total}
+function resetTruthTable(gate){var tab=document.getElementById('truth'+gate);tab.querySelectorAll('.truth-cell').forEach(function(c){c.textContent='?';c.classList.remove('correct','wrong')});truthScores[gate]=0;var total=tab.querySelectorAll('.truth-cell').length;tab.querySelector('.truth-score').textContent='الإجابات الصحيحة: 0/'+total}
 const boolState={A:0,B:0,C:0};
 function toggleBooleanBit(input){boolState[input]=boolState[input]===0?1:0;const el=document.getElementById('bool'+input);el.querySelector('.bit-value').textContent=boolState[input];el.classList.toggle('active',boolState[input]===1);updateBooleanOutput()}
 function updateBooleanOutput(){const out=(boolState.A&boolState.B)|boolState.C;document.getElementById('boolOutput').textContent=out;document.getElementById('boolNodeOut').classList.toggle('active',out===1);document.getElementById('boolWireOut').classList.toggle('active',out===1);document.getElementById('boolNodeA').classList.toggle('active',boolState.A===1);document.getElementById('boolNodeB').classList.toggle('active',boolState.B===1)}
