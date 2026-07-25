@@ -452,7 +452,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <p>الآلة الحاسبة، حتى المعقدة جدًا، أساسها نفس البوابات التلاتة اللي اتعلمناها بس متكررة ومرتبة بذكاء</p>
 </div>
 <div class="ha-wrap">
-<p style="color:var(--dim);margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto">هنبني آلة حاسبة صغيرة بتجمع رقمين بالظبط زي ما بيحصل جوه أي معالج حقيقي — وهنشوف الرحلة كاملة: من رقم عادي، لثنائي، للبوابات، ورجوع لرقم عادي تاني.</p>
+<p style="color:var(--dim);margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto">هنبني آلة حاسبة حقيقية بتجمع تلات أرقام — زي ما بيحصل جوه أي معالج حقيقي — وهنشوف الرحلة كاملة: من رقم عادي، لثنائي، للبوابات، ورجوع لرقم عادي تاني.</p>
 <div class="ha-inputs">
 <div class="ha-input-group">
 <div style="color:var(--dim);margin-bottom:8px;font-size:14px">الرقم الأول (A)</div>
@@ -475,55 +475,97 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="ha-conv">← ثنائي: <span class="ha-bit" id="haBitB">0</span></div>
 <div style="color:var(--dim);font-size:11px;margin-top:4px">B</div>
 </div>
+<div style="font-size:32px;font-weight:900;color:var(--accent);align-self:center">+</div>
+<div class="ha-input-group">
+<div style="color:var(--dim);margin-bottom:8px;font-size:14px">الباقي من الخانة اللي قبلها (Cin)</div>
+<div class="ha-pick">
+<button onclick="haChange('C',-1)">▼</button>
+<div class="ha-val" id="haValC">0</div>
+<button onclick="haChange('C',1)">▲</button>
 </div>
+<div class="ha-conv">← ثنائي: <span class="ha-bit" id="haBitC">0</span></div>
+<div style="color:var(--dim);font-size:11px;margin-top:4px">Cin</div>
+</div>
+</div>
+<div style="color:var(--dim);font-size:12px;margin-bottom:15px">زي لما بنجمع أرقام كبيرة بالورقة وبيفضل باقي بينقل للخانة اللي بعدها</div>
 <div class="ha-circuit">
-<svg viewBox="0 0 580 310" width="560" height="300">
-<line x1="25" y1="105" x2="95" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wa1"/>
-<line x1="25" y1="105" x2="25" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wa2"/>
-<line x1="25" y1="185" x2="95" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb1"/>
-<line x1="25" y1="185" x2="25" y2="245" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb2"/>
-<line x1="25" y1="245" x2="155" y2="245" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb3"/>
-<path d="M 95 85 Q 115 65 135 85 Q 155 105 135 125 Q 115 145 95 125 Q 75 105 95 85" fill="var(--primary)" class="bg" id="ha-gand1"/>
-<text x="120" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
-<line x1="155" y1="105" x2="195" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wand1"/>
-<path d="M 95 165 Q 115 145 135 165 Q 155 185 135 205 Q 115 225 95 205 Q 75 185 95 165" fill="var(--primary)" class="bg" id="ha-gor"/>
-<text x="120" y="190" fill="white" font-size="11" font-weight="bold" text-anchor="middle">OR</text>
-<line x1="155" y1="185" x2="195" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wor"/>
-<polygon points="245,175 305,215 245,255" fill="var(--primary)" class="bg" id="ha-gnot1"/>
-<circle cx="313" cy="215" r="7" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
-<line x1="195" y1="185" x2="245" y2="215" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wton1"/>
-<line x1="320" y1="215" x2="355" y2="215" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wtn1"/>
-<path d="M 245 85 Q 265 65 285 85 Q 305 105 285 125 Q 265 145 245 125 Q 225 105 245 85" fill="var(--primary)" class="bg" id="ha-gand2"/>
-<text x="270" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
-<line x1="305" y1="105" x2="355" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wand2"/>
-<path d="M 355 85 Q 375 65 395 85 Q 415 105 395 125 Q 375 145 355 125 Q 335 105 355 85" fill="var(--primary)" class="bg" id="ha-gand3"/>
-<text x="380" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
-<line x1="415" y1="105" x2="460" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wsum"/>
-<polygon points="440,150 500,190 440,230" fill="var(--primary)" class="bg" id="ha-gnot2"/>
-<circle cx="508" cy="190" r="7" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
-<line x1="460" y1="105" x2="460" y2="150" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wtn2"/>
-<line x1="355" y1="105" x2="460" y2="105" stroke="var(--dim)" stroke-width="0"/>
-<circle cx="20" cy="105" r="10" class="nd" id="ha-na"/>
-<circle cx="20" cy="185" r="10" class="nd" id="ha-nb"/>
-<circle cx="170" cy="105" r="10" class="nd" id="ha-n1"/>
-<circle cx="170" cy="185" r="10" class="nd" id="ha-n2"/>
-<circle cx="200" cy="105" r="7" class="nd" id="ha-n3"/>
-<circle cx="200" cy="185" r="7" class="nd" id="ha-n4"/>
-<circle cx="340" cy="105" r="7" class="nd" id="ha-n5"/>
-<circle cx="340" cy="215" r="7" class="nd" id="ha-n6"/>
-<circle cx="465" cy="105" r="7" class="nd" id="ha-n7"/>
-<circle cx="530" cy="190" r="14" class="nd off" id="ha-sumOut"/>
-<circle cx="170" cy="45" r="14" class="nd off" id="ha-carryOut"/>
-<text x="530" y="196" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-sumTxt">0</text>
-<text x="170" y="51" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-carryTxt">0</text>
-<text x="530" y="225" fill="var(--dim)" font-size="12" font-weight="bold" text-anchor="middle">SUM</text>
-<text x="170" y="25" fill="var(--dim)" font-size="12" font-weight="bold" text-anchor="middle">CARRY</text>
-<text x="20" y="88" fill="var(--dim)" font-size="10" text-anchor="middle">A</text>
-<text x="20" y="210" fill="var(--dim)" font-size="10" text-anchor="middle">B</text>
-<text x="280" y="155" fill="var(--dim)" font-size="9" font-style="italic" text-anchor="middle">A AND NOT B</text>
-<text x="380" y="155" fill="var(--dim)" font-size="9" font-style="italic" text-anchor="middle">NOT A AND B</text>
-<circle cx="25" cy="105" r="5" class="pulse" id="ha-pulse1" opacity="0"/>
-<circle cx="25" cy="185" r="5" class="pulse" id="ha-pulse2" opacity="0"/>
+<svg viewBox="0 0 700 340" width="680" height="330">
+<line x1="30" y1="80" x2="100" y2="80" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w1"/>
+<line x1="30" y1="80" x2="30" y2="170" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w2a"/>
+<line x1="30" y1="170" x2="100" y2="170" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w2b"/>
+<line x1="30" y1="170" x2="100" y2="140" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w3"/>
+<line x1="170" y1="110" x2="260" y2="110" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w4"/>
+<line x1="170" y1="110" x2="170" y2="50" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w5a"/>
+<line x1="170" y1="50" x2="530" y2="50" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w5b"/>
+<line x1="530" y1="50" x2="530" y2="90" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w5c"/>
+<line x1="170" y1="200" x2="260" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w6"/>
+<line x1="320" y1="110" x2="260" y2="215" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w7"/>
+<line x1="320" y1="200" x2="320" y2="130" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w8a"/>
+<line x1="320" y1="130" x2="400" y2="130" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w8b"/>
+<line x1="320" y1="200" x2="320" y2="220" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w9a"/>
+<line x1="320" y1="220" x2="400" y2="220" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w9b"/>
+<line x1="30" y1="260" x2="370" y2="260" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w10a"/>
+<line x1="370" y1="260" x2="370" y2="150" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w10b"/>
+<line x1="370" y1="150" x2="400" y2="150" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w10c"/>
+<line x1="30" y1="260" x2="390" y2="260" stroke="var(--dim)" stroke-width="0" class="wg" id="ha-w11a"/>
+<line x1="390" y1="260" x2="390" y2="240" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w11b"/>
+<line x1="390" y1="240" x2="400" y2="240" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w11c"/>
+<line x1="460" y1="140" x2="460" y2="60" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w12a"/>
+<line x1="460" y1="60" x2="530" y2="60" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w12b"/>
+<line x1="530" y1="60" x2="530" y2="110" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w12c"/>
+<line x1="460" y1="140" x2="480" y2="140" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w13a"/>
+<line x1="480" y1="140" x2="480" y2="310" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w13b"/>
+<line x1="480" y1="310" x2="400" y2="310" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w13c"/>
+<line x1="460" y1="230" x2="530" y2="260" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w14"/>
+<line x1="460" y1="310" x2="530" y2="280" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-w15"/>
+<path d="M 100 80 Q 120 60 140 80 Q 160 100 140 120 Q 120 140 100 120 Q 80 100 100 80" fill="var(--primary)" class="bg" id="ha-g1"/>
+<path d="M 100 170 Q 120 150 140 170 Q 160 190 140 210 Q 120 230 100 210 Q 80 190 100 170" fill="var(--primary)" class="bg" id="ha-g2"/>
+<polygon points="260,95 320,110 260,125" fill="var(--primary)" class="bg" id="ha-g3"/>
+<circle cx="326" cy="110" r="6" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
+<path d="M 260 170 Q 280 150 300 170 Q 320 190 300 210 Q 280 230 260 210 Q 240 190 260 170" fill="var(--primary)" class="bg" id="ha-s1"/>
+<path d="M 400 120 Q 420 100 440 120 Q 460 140 440 160 Q 420 180 400 160 Q 380 140 400 120" fill="var(--primary)" class="bg" id="ha-g4"/>
+<path d="M 400 210 Q 420 190 440 210 Q 460 230 440 250 Q 420 270 400 250 Q 380 230 400 210" fill="var(--primary)" class="bg" id="ha-g5"/>
+<polygon points="400,295 460,310 400,325" fill="var(--primary)" class="bg" id="ha-g6"/>
+<circle cx="466" cy="310" r="6" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
+<path d="M 530 250 Q 550 230 570 250 Q 590 270 570 290 Q 550 310 530 290 Q 510 270 530 250" fill="var(--primary)" class="bg" id="ha-sum"/>
+<path d="M 530 80 Q 550 60 570 80 Q 590 100 570 120 Q 550 140 530 120 Q 510 100 530 80" fill="var(--primary)" class="bg" id="ha-cout"/>
+<circle cx="25" cy="80" r="10" class="nd" id="ha-na"/>
+<circle cx="25" cy="170" r="10" class="nd" id="ha-nb"/>
+<circle cx="25" cy="260" r="10" class="nd" id="ha-nc"/>
+<circle cx="170" cy="110" r="10" class="nd" id="ha-ng1"/>
+<circle cx="170" cy="200" r="10" class="nd" id="ha-ng2"/>
+<circle cx="330" cy="110" r="8" class="nd" id="ha-ng3"/>
+<circle cx="330" cy="200" r="10" class="nd" id="ha-ns1"/>
+<circle cx="465" cy="140" r="8" class="nd" id="ha-ng4"/>
+<circle cx="465" cy="230" r="8" class="nd" id="ha-ng5"/>
+<circle cx="465" cy="310" r="8" class="nd" id="ha-ng6"/>
+<circle cx="595" cy="270" r="14" class="nd off" id="ha-sumOut"/>
+<circle cx="595" cy="100" r="14" class="nd off" id="ha-coutOut"/>
+<text x="595" y="276" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-sumTxt">0</text>
+<text x="595" y="106" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-coutTxt">0</text>
+<text x="595" y="300" fill="var(--dim)" font-size="11" font-weight="bold" text-anchor="middle">SUM</text>
+<text x="595" y="60" fill="var(--dim)" font-size="11" font-weight="bold" text-anchor="middle">Cout</text>
+<text x="18" y="65" fill="var(--dim)" font-size="10" text-anchor="middle">A</text>
+<text x="18" y="195" fill="var(--dim)" font-size="10" text-anchor="middle">B</text>
+<text x="18" y="285" fill="var(--dim)" font-size="10" text-anchor="middle">Cin</text>
+<text x="125" y="114" fill="white" font-size="10" font-weight="bold" text-anchor="middle">AND</text>
+<text x="125" y="204" fill="white" font-size="10" font-weight="bold" text-anchor="middle">OR</text>
+<text x="283" y="114" fill="white" font-size="10" font-weight="bold" text-anchor="middle">NOT</text>
+<text x="285" y="204" fill="white" font-size="10" font-weight="bold" text-anchor="middle">AND</text>
+<text x="425" y="144" fill="white" font-size="10" font-weight="bold" text-anchor="middle">AND</text>
+<text x="425" y="234" fill="white" font-size="10" font-weight="bold" text-anchor="middle">OR</text>
+<text x="423" y="314" fill="white" font-size="10" font-weight="bold" text-anchor="middle">NOT</text>
+<text x="555" y="274" fill="white" font-size="10" font-weight="bold" text-anchor="middle">AND</text>
+<text x="555" y="104" fill="white" font-size="10" font-weight="bold" text-anchor="middle">OR</text>
+<text x="135" y="68" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g1=A∧B</text>
+<text x="135" y="238" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g2=A∨B</text>
+<text x="290" y="140" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g3=¬g1</text>
+<text x="290" y="240" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">s1=g2∧g3</text>
+<text x="430" y="170" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g4=s1∧Cin</text>
+<text x="430" y="268" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g5=s1∨Cin</text>
+<text x="430" y="338" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">g6=¬g4</text>
+<text x="565" y="310" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">SUM=g5∧g6</text>
+<text x="565" y="135" fill="var(--dim)" font-size="8" font-style="italic" text-anchor="middle">Cout=g1∨g4</text>
 </svg>
 </div>
 <div class="ha-result" id="haResult">اختر أرقام واضغط على "احسب"</div>
@@ -531,7 +573,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <button class="replay-btn" onclick="haAnimate()" style="background:var(--accent);color:var(--bg);border:none">⚡ احسب</button>
 <button class="replay-btn" onclick="haReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
 </div>
-<p style="color:var(--dim);margin-top:15px;font-size:12px">المعادلات: SUM = (A OR B) AND NOT(A AND B) &nbsp;|&nbsp; CARRY = A AND B</p>
+<p style="color:var(--dim);margin-top:15px;font-size:12px">g1=A∧B, g2=A∨B, g3=¬g1, s1=g2∧g3 (A⊕B), g4=s1∧Cin, g5=s1∨Cin, g6=¬g4, SUM=g5∧g6, Cout=g1∨g4</p>
 </div>
 </section>
 <section class="section" id="s4">
@@ -994,7 +1036,7 @@ function checkVisibility(){document.querySelectorAll('.section-inner').forEach(e
 window.addEventListener('scroll',checkVisibility);checkVisibility();
 const journeyObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');const step=parseInt(e.target.dataset.step);document.getElementById('journeyFill').style.height=(step*11)+'%'}})},{threshold:0.5});
 document.querySelectorAll('.journey-step').forEach(el=>journeyObserver.observe(el));
-const quizObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),800)})},{threshold:0.5});
+const quizObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),100)})},{threshold:0.1});
 document.querySelectorAll('.quiz-box').forEach(q=>quizObserver.observe(q));
 function toggleBit(el){var v=el.querySelector('.bit-value');var cur=parseInt(v.textContent);var next=cur===0?1:0;v.textContent=next;el.classList.toggle('active',next===1);el.style.transform='scale(1.1)';setTimeout(function(){el.style.transform=''},200);updateDecimal()}
 function updateDecimal(){var total=0;var boxes=document.querySelectorAll('#binaryBits .bit-box');boxes.forEach(function(b){if(b.querySelector('.bit-value').textContent==='1')total+=parseInt(b.dataset.val)});document.getElementById('decimalValue').textContent=total}
@@ -1068,10 +1110,10 @@ document.getElementById('zl0').classList.add('active');
 document.getElementById('zoomLabel').textContent=zoomLabels[0];
 document.getElementById('zoomSub').textContent=zoomSubs[0];
 document.getElementById('zoomBtn').textContent='تكبير ↗'}
-let haState={A:0,B:0};
+let haState={A:0,B:0,C:0};
 let haAnimating2=false;
 function haChange(which,d){
-const key=which==='A'?'A':'B';
+const key=which==='A'?'A':which==='B'?'B':'C';
 haState[key]=Math.max(0,Math.min(1,haState[key]+d));
 const valEl=document.getElementById('haVal'+key);
 valEl.textContent=haState[key];
@@ -1081,30 +1123,54 @@ document.getElementById('haBit'+key).classList.toggle('on',haState[key]===1);
 haReset()}
 function haAnimate(){
 if(haAnimating2)return;haAnimating2=true;
-const A=haState.A,B=haState.B;
-const and1=A&B,or1=A|B;
-const notA=A===0?1:0,notB=B===0?1:0;
-const ha2=notA&B,ha3=A&notB;
-const sum=(or1)&((A&B)===0?1:0);
-const carry=A&B;
+const A=haState.A,B=haState.B,Cin=haState.C;
+const g1=A&B,g2=A|B,g3=g1===0?1:0;
+const s1=g2&g3;
+const g4=s1&Cin,g5=s1|Cin,g6=g4===0?1:0;
+const sum=g5&g6,cout=g1|g4;
 function activate(id){const e=document.getElementById(id);if(e)e.classList.add('active')}
 function deactivate(id){const e=document.getElementById(id);if(e)e.classList.remove('active')}
 function on(id){const e=document.getElementById(id);if(e){e.classList.remove('off');e.classList.add('on')}}
 function off(id){const e=document.getElementById(id);if(e){e.classList.remove('on');e.classList.add('off')}}
-deactivate('ha-na');deactivate('ha-nb');deactivate('ha-n1');deactivate('ha-n2');deactivate('ha-n3');deactivate('ha-n4');deactivate('ha-n5');deactivate('ha-n6');deactivate('ha-n7');deactivate('ha-wa1');deactivate('ha-wa2');deactivate('ha-wb1');deactivate('ha-wb2');deactivate('ha-wb3');deactivate('ha-wand1');deactivate('ha-wor');deactivate('ha-wton1');deactivate('ha-wtn1');deactivate('ha-wand2');deactivate('ha-wsum');deactivate('ha-wtn2');off('ha-carryOut');off('ha-sumOut');off('ha-carryTxt');off('ha-sumTxt');
-activate('ha-na');activate('ha-nb');activate('ha-wa1');activate('ha-wa2');activate('ha-wb1');activate('ha-wb2');activate('ha-wb3');
-setTimeout(()=>{activate('ha-n1');activate('ha-n2');activate('ha-wand1');activate('ha-wor');activate('ha-gand1');activate('ha-gor')},300);
-setTimeout(()=>{activate('ha-n3');activate('ha-n4');activate('ha-wton1');activate('ha-wtn1');activate('ha-gnot1')},700);
-setTimeout(()=>{activate('ha-n5');activate('ha-wand2');activate('ha-gand2');activate('ha-gand3')},1100);
-setTimeout(()=>{activate('ha-n6');activate('ha-wsum');activate('ha-wtn2');activate('ha-gnot2')},1500);
-setTimeout(()=>{activate('ha-n7')},1800);
-setTimeout(()=>{on('ha-carryOut');on('ha-carryTxt');document.getElementById('ha-carryTxt').textContent=carry},2100);
-setTimeout(()=>{on('ha-sumOut');on('ha-sumTxt');document.getElementById('ha-sumTxt').textContent=sum;const r=document.getElementById('haResult');r.innerHTML='<span style="color:var(--accent)">'+A+'</span> + <span style="color:var(--accent)">'+B+'</span> = <span>'+sum+'</span>'+(carry?' (CARRY = 1)':'')},2400);
+deactivate('ha-na');deactivate('ha-nb');deactivate('ha-nc');
+deactivate('ha-ng1');deactivate('ha-ng2');deactivate('ha-ng3');deactivate('ha-ns1');
+deactivate('ha-ng4');deactivate('ha-ng5');deactivate('ha-ng6');
+deactivate('ha-w1');deactivate('ha-w2a');deactivate('ha-w2b');deactivate('ha-w3');
+deactivate('ha-w4');deactivate('ha-w5a');deactivate('ha-w5b');deactivate('ha-w5c');
+deactivate('ha-w6');deactivate('ha-w7');
+deactivate('ha-w8a');deactivate('ha-w8b');deactivate('ha-w9a');deactivate('ha-w9b');
+deactivate('ha-w10a');deactivate('ha-w10b');deactivate('ha-w10c');
+deactivate('ha-w11a');deactivate('ha-w11b');deactivate('ha-w11c');
+deactivate('ha-w12a');deactivate('ha-w12b');deactivate('ha-w12c');
+deactivate('ha-w13a');deactivate('ha-w13b');deactivate('ha-w13c');
+deactivate('ha-w14');deactivate('ha-w15');
+deactivate('ha-g1');deactivate('ha-g2');deactivate('ha-g3');deactivate('ha-s1');
+deactivate('ha-g4');deactivate('ha-g5');deactivate('ha-g6');
+deactivate('ha-sum');deactivate('ha-cout');
+off('ha-sumOut');off('ha-coutOut');off('ha-sumTxt');off('ha-coutTxt');
+activate('ha-na');activate('ha-nb');activate('ha-nc');
+activate('ha-w1');activate('ha-w2a');activate('ha-w2b');activate('ha-w3');
+activate('ha-w10a');activate('ha-w11a');
+setTimeout(()=>{activate('ha-ng1');activate('ha-ng2');activate('ha-w4');activate('ha-w5a');activate('ha-g1');activate('ha-g2')},300);
+setTimeout(()=>{activate('ha-ng3');activate('ha-w5b');activate('ha-w5c');activate('ha-w6');activate('ha-w7');activate('ha-g3')},600);
+setTimeout(()=>{activate('ha-ns1');activate('ha-w8a');activate('ha-w8b');activate('ha-w9a');activate('ha-w9b');activate('ha-s1');activate('ha-w10b');activate('ha-w10c');activate('ha-w11b');activate('ha-w11c')},900);
+setTimeout(()=>{activate('ha-ng4');activate('ha-ng5');activate('ha-w12a');activate('ha-w12b');activate('ha-w12c');activate('ha-w13a');activate('ha-g4');activate('ha-g5')},1200);
+setTimeout(()=>{activate('ha-ng6');activate('ha-w13b');activate('ha-w13c');activate('ha-w14');activate('ha-w15');activate('ha-g6')},1500);
+setTimeout(()=>{activate('ha-sum');activate('ha-cout')},1800);
+setTimeout(()=>{on('ha-sumOut');on('ha-sumTxt');document.getElementById('ha-sumTxt').textContent=sum},2100);
+setTimeout(()=>{on('ha-coutOut');on('ha-coutTxt');document.getElementById('ha-coutTxt').textContent=cout;
+const r=document.getElementById('haResult');
+r.innerHTML='<span style="color:var(--accent)">'+A+'</span> + <span style="color:var(--accent)">'+B+'</span> + <span style="color:var(--accent)">'+Cin+'</span> = <span style="color:var(--success)">'+(cout*2+sum)+'</span>'+(cout?' <span style="color:var(--dim)">(Cout=1)</span>':'')},2400);
 setTimeout(()=>{haAnimating2=false},3000)}
 function haReset(){
 haAnimating2=false;
-['ha-na','ha-nb','ha-n1','ha-n2','ha-n3','ha-n4','ha-n5','ha-n6','ha-n7','ha-wa1','ha-wa2','ha-wb1','ha-wb2','ha-wb3','ha-wand1','ha-wor','ha-wton1','ha-wtn1','ha-wand2','ha-wsum','ha-wtn2','ha-gand1','ha-gor','ha-gnot1','ha-gand2','ha-gand3','ha-gnot2'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active')});
-['ha-carryOut','ha-sumOut','ha-carryTxt','ha-sumTxt'].forEach(id=>{const e=document.getElementById(id);if(e){e.classList.remove('on');e.classList.add('off')}});
+['ha-na','ha-nb','ha-nc','ha-ng1','ha-ng2','ha-ng3','ha-ns1','ha-ng4','ha-ng5','ha-ng6',
+'ha-w1','ha-w2a','ha-w2b','ha-w3','ha-w4','ha-w5a','ha-w5b','ha-w5c','ha-w6','ha-w7',
+'ha-w8a','ha-w8b','ha-w9a','ha-w9b','ha-w10a','ha-w10b','ha-w10c',
+'ha-w11a','ha-w11b','ha-w11c','ha-w12a','ha-w12b','ha-w12c',
+'ha-w13a','ha-w13b','ha-w13c','ha-w14','ha-w15',
+'ha-g1','ha-g2','ha-g3','ha-s1','ha-g4','ha-g5','ha-g6','ha-sum','ha-cout'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active')});
+['ha-sumOut','ha-coutOut','ha-sumTxt','ha-coutTxt'].forEach(id=>{const e=document.getElementById(id);if(e){e.classList.remove('on');e.classList.add('off')}});
 document.getElementById('haResult').textContent='اختر أرقام واضغط على "احسب"'}
 </script>
 </body>
