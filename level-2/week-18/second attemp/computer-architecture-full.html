@@ -157,7 +157,48 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 .cycle-box{padding:15px 25px;background:var(--card);border-radius:12px;border:2px solid var(--primary);font-weight:700;transition:all .3s}
 .cycle-box.active-cycle{background:var(--primary);transform:scale(1.1)}
 .cycle-arrow{font-size:24px;color:var(--accent)}
-@media(max-width:768px){.circuit-compare{grid-template-columns:1fr}.journey-step:nth-child(odd),.journey-step:nth-child(even){padding:0 0 0 60px;flex-direction:row}.journey-line,.journey-line-fill{left:20px}.journey-dot{left:20px}.journey-step:nth-child(odd) .journey-content,.journey-step:nth-child(even) .journey-content{margin:0 0 0 40px}}
+.feedback-gates-wrap{margin:30px auto;text-align:center}
+.feedback-gates-svg{display:block;margin:0 auto}
+.feedback-gates-svg .wg{stroke:var(--dim);stroke-width:3;fill:none;transition:stroke .3s,filter .3s}
+.feedback-gates-svg .wg.active{stroke:var(--success);filter:drop-shadow(0 0 6px var(--success))}
+.feedback-gates-svg .bg{fill:var(--primary);transition:fill .3s}
+.feedback-gates-svg .bg.active{fill:var(--accent)}
+.feedback-gates-svg .nd{fill:var(--accent);transition:fill .3s,filter .3s}
+.feedback-gates-svg .nd.active{fill:var(--success);filter:drop-shadow(0 0 8px var(--success))}
+.pulse{fill:var(--success);filter:drop-shadow(0 0 6px var(--success))}
+.zoom-wrap{margin:30px auto;text-align:center}
+.zoom-stage{position:relative;width:420px;height:320px;margin:0 auto 20px}
+.zoom-level{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.85);transition:opacity .6s ease,transform .6s ease;pointer-events:none}
+.zoom-level.active{opacity:1;transform:scale(1);pointer-events:auto}
+.zoom-label{font-size:28px;font-weight:900;color:var(--accent);margin-top:10px;min-height:40px}
+.zoom-sub{font-size:14px;color:var(--dim);margin-top:5px;min-height:20px}
+.ha-wrap{margin:30px auto;text-align:center}
+.ha-inputs{display:flex;gap:50px;justify-content:center;margin-bottom:25px;flex-wrap:wrap}
+.ha-input-group{text-align:center}
+.ha-pick{display:flex;align-items:center;gap:12px;justify-content:center}
+.ha-pick button{width:42px;height:42px;border-radius:50%;background:var(--card);border:2px solid var(--primary);color:var(--text);font-size:22px;font-weight:900;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.ha-pick button:hover{background:var(--primary);transform:scale(1.1)}
+.ha-pick .ha-val{font-size:48px;font-weight:900;min-width:50px;color:var(--text)}
+.ha-pick .ha-val.high{color:var(--accent)}
+.ha-conv{margin:10px 0;font-size:14px;color:var(--dim)}
+.ha-bit{display:inline-block;width:32px;height:36px;line-height:36px;background:var(--card);border:2px solid rgba(255,255,255,.15);border-radius:8px;font-size:18px;font-weight:900;margin:0 2px;transition:all .3s}
+.ha-bit.on{border-color:var(--accent);background:rgba(0,212,170,.15);color:var(--accent)}
+.ha-circuit{margin:20px auto}
+.ha-circuit svg{display:block;margin:0 auto}
+.ha-circuit .wg{stroke:var(--dim);stroke-width:3;fill:none;transition:stroke .3s,filter .3s}
+.ha-circuit .wg.active{stroke:var(--success);filter:drop-shadow(0 0 6px var(--success))}
+.ha-circuit .bg{fill:var(--primary);transition:fill .3s}
+.ha-circuit .bg.active{fill:var(--accent)}
+.ha-circuit .nd{fill:var(--accent);transition:fill .3s,filter .3s}
+.ha-circuit .nd.on{fill:var(--success);filter:drop-shadow(0 0 8px var(--success))}
+.ha-circuit .nd.out{fill:var(--success);filter:drop-shadow(0 0 10px var(--success))}
+.ha-circuit .nd.off{fill:#333;filter:none}
+.ha-circuit .op{font-size:15px;font-weight:900;transition:fill .3s}
+.ha-circuit .op.on{fill:var(--success)}
+.ha-circuit .op.off{fill:#555}
+.ha-result{font-size:22px;font-weight:700;color:var(--accent);margin-top:20px;min-height:30px}
+.ha-result span{font-size:32px;font-weight:900}
+@media(max-width:768px){.feedback-gates-svg{max-width:280px}.zoom-stage{width:300px;height:240px}.ha-pick .ha-val{font-size:36px}.ha-pick button{width:36px;height:36px;font-size:18px}.circuit-compare{grid-template-columns:1fr}.journey-step:nth-child(odd),.journey-step:nth-child(even){padding:0 0 0 60px;flex-direction:row}.journey-line,.journey-line-fill{left:20px}.journey-dot{left:20px}.journey-step:nth-child(odd) .journey-content,.journey-step:nth-child(even) .journey-content{margin:0 0 0 40px}}
 </style>
 </head><body>
 <div class="bg-anim"></div>
@@ -170,6 +211,7 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <a href="#s1b">الحالات الثنائية</a>
 <a href="#s2">الـ Bit</a>
 <a href="#s3">بوابات المنطق</a>
+<a href="#s3b">آلة حاسبة صغيرة</a>
 <a href="#s4">جداول الحقيقة</a>
 <a href="#s5">المعادلات</a>
 <a href="#s6">الذاكرة</a>
@@ -401,7 +443,98 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="quiz-feedback"></div></div>
 </div>
 </div>
-</section><section class="section" id="s4">
+</section>
+<section class="section" id="s3b" style="background:rgba(25,60,255,.06)">
+<div class="section-inner">
+<div class="section-header">
+<div class="section-number" style="background:linear-gradient(135deg,var(--accent),var(--primary))">🔗</div>
+<h2>آلة حاسبة صغيرة من البوابات</h2>
+<p>الآلة الحاسبة، حتى المعقدة جدًا، أساسها نفس البوابات التلاتة اللي اتعلمناها بس متكررة ومرتبة بذكاء</p>
+</div>
+<div class="ha-wrap">
+<p style="color:var(--dim);margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto">هنبني آلة حاسبة صغيرة بتجمع رقمين بالظبط زي ما بيحصل جوه أي معالج حقيقي — وهنشوف الرحلة كاملة: من رقم عادي، لثنائي، للبوابات، ورجوع لرقم عادي تاني.</p>
+<div class="ha-inputs">
+<div class="ha-input-group">
+<div style="color:var(--dim);margin-bottom:8px;font-size:14px">الرقم الأول (A)</div>
+<div class="ha-pick">
+<button onclick="haChange('A',-1)">▼</button>
+<div class="ha-val" id="haValA">0</div>
+<button onclick="haChange('A',1)">▲</button>
+</div>
+<div class="ha-conv">← ثنائي: <span class="ha-bit" id="haBitA">0</span></div>
+<div style="color:var(--dim);font-size:11px;margin-top:4px">A</div>
+</div>
+<div style="font-size:32px;font-weight:900;color:var(--accent);align-self:center">+</div>
+<div class="ha-input-group">
+<div style="color:var(--dim);margin-bottom:8px;font-size:14px">الرقم الثاني (B)</div>
+<div class="ha-pick">
+<button onclick="haChange('B',-1)">▼</button>
+<div class="ha-val" id="haValB">0</div>
+<button onclick="haChange('B',1)">▲</button>
+</div>
+<div class="ha-conv">← ثنائي: <span class="ha-bit" id="haBitB">0</span></div>
+<div style="color:var(--dim);font-size:11px;margin-top:4px">B</div>
+</div>
+</div>
+<div class="ha-circuit">
+<svg viewBox="0 0 580 310" width="560" height="300">
+<line x1="25" y1="105" x2="95" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wa1"/>
+<line x1="25" y1="105" x2="25" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wa2"/>
+<line x1="25" y1="185" x2="95" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb1"/>
+<line x1="25" y1="185" x2="25" y2="245" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb2"/>
+<line x1="25" y1="245" x2="155" y2="245" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wb3"/>
+<path d="M 95 85 Q 115 65 135 85 Q 155 105 135 125 Q 115 145 95 125 Q 75 105 95 85" fill="var(--primary)" class="bg" id="ha-gand1"/>
+<text x="120" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
+<line x1="155" y1="105" x2="195" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wand1"/>
+<path d="M 95 165 Q 115 145 135 165 Q 155 185 135 205 Q 115 225 95 205 Q 75 185 95 165" fill="var(--primary)" class="bg" id="ha-gor"/>
+<text x="120" y="190" fill="white" font-size="11" font-weight="bold" text-anchor="middle">OR</text>
+<line x1="155" y1="185" x2="195" y2="185" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wor"/>
+<polygon points="245,175 305,215 245,255" fill="var(--primary)" class="bg" id="ha-gnot1"/>
+<circle cx="313" cy="215" r="7" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
+<line x1="195" y1="185" x2="245" y2="215" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wton1"/>
+<line x1="320" y1="215" x2="355" y2="215" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wtn1"/>
+<path d="M 245 85 Q 265 65 285 85 Q 305 105 285 125 Q 265 145 245 125 Q 225 105 245 85" fill="var(--primary)" class="bg" id="ha-gand2"/>
+<text x="270" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
+<line x1="305" y1="105" x2="355" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wand2"/>
+<path d="M 355 85 Q 375 65 395 85 Q 415 105 395 125 Q 375 145 355 125 Q 335 105 355 85" fill="var(--primary)" class="bg" id="ha-gand3"/>
+<text x="380" y="110" fill="white" font-size="11" font-weight="bold" text-anchor="middle">AND</text>
+<line x1="415" y1="105" x2="460" y2="105" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wsum"/>
+<polygon points="440,150 500,190 440,230" fill="var(--primary)" class="bg" id="ha-gnot2"/>
+<circle cx="508" cy="190" r="7" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
+<line x1="460" y1="105" x2="460" y2="150" stroke="var(--dim)" stroke-width="2.5" class="wg" id="ha-wtn2"/>
+<line x1="355" y1="105" x2="460" y2="105" stroke="var(--dim)" stroke-width="0"/>
+<circle cx="20" cy="105" r="10" class="nd" id="ha-na"/>
+<circle cx="20" cy="185" r="10" class="nd" id="ha-nb"/>
+<circle cx="170" cy="105" r="10" class="nd" id="ha-n1"/>
+<circle cx="170" cy="185" r="10" class="nd" id="ha-n2"/>
+<circle cx="200" cy="105" r="7" class="nd" id="ha-n3"/>
+<circle cx="200" cy="185" r="7" class="nd" id="ha-n4"/>
+<circle cx="340" cy="105" r="7" class="nd" id="ha-n5"/>
+<circle cx="340" cy="215" r="7" class="nd" id="ha-n6"/>
+<circle cx="465" cy="105" r="7" class="nd" id="ha-n7"/>
+<circle cx="530" cy="190" r="14" class="nd off" id="ha-sumOut"/>
+<circle cx="170" cy="45" r="14" class="nd off" id="ha-carryOut"/>
+<text x="530" y="196" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-sumTxt">0</text>
+<text x="170" y="51" fill="white" font-size="16" font-weight="900" text-anchor="middle" class="op off" id="ha-carryTxt">0</text>
+<text x="530" y="225" fill="var(--dim)" font-size="12" font-weight="bold" text-anchor="middle">SUM</text>
+<text x="170" y="25" fill="var(--dim)" font-size="12" font-weight="bold" text-anchor="middle">CARRY</text>
+<text x="20" y="88" fill="var(--dim)" font-size="10" text-anchor="middle">A</text>
+<text x="20" y="210" fill="var(--dim)" font-size="10" text-anchor="middle">B</text>
+<text x="280" y="155" fill="var(--dim)" font-size="9" font-style="italic" text-anchor="middle">A AND NOT B</text>
+<text x="380" y="155" fill="var(--dim)" font-size="9" font-style="italic" text-anchor="middle">NOT A AND B</text>
+<circle cx="25" cy="105" r="5" class="pulse" id="ha-pulse1" opacity="0"/>
+<circle cx="25" cy="185" r="5" class="pulse" id="ha-pulse2" opacity="0"/>
+</svg>
+</div>
+<div class="ha-result" id="haResult">اختر أرقام واضغط على "احسب"</div>
+<div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
+<button class="replay-btn" onclick="haAnimate()" style="background:var(--accent);color:var(--bg);border:none">⚡ احسب</button>
+<button class="replay-btn" onclick="haReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<p style="color:var(--dim);margin-top:15px;font-size:12px">المعادلات: SUM = (A OR B) AND NOT(A AND B) &nbsp;|&nbsp; CARRY = A AND B</p>
+</div>
+</section>
+<section class="section" id="s4">
 <div class="section-inner">
 <div class="section-header">
 <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">05</div>
@@ -539,6 +672,38 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <button class="replay-btn" onclick="resetMemory()" style="margin-top:15px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
 </div>
 </div>
+<div class="feedback-gates-wrap" style="margin-top:30px">
+<div class="diagram-title">دلوقتي نشوف إزاي ده بيحصل فعليًا جوه بوابتين</div>
+<p style="color:var(--dim);margin-bottom:15px;font-size:14px">تخيل بوابتين متوصلين ببعض — ناتج البوابة الأولى داخل كـ Input للتانية، وناتج التانية راجع تاني كـ Input للأولى. لما حد يضغط زرار لحظة واحدة ويدّي قيمة 1، البوابتين بيبدأوا "يأكدوا لبعض" الحالة دي — كل واحدة بتقول للتانية "أيوة أنا لسه 1"، حتى لو الزرار الأصلي اتسحب.</p>
+<div class="feedback-gates-svg" style="width:320px;height:180px;margin:0 auto 15px">
+<svg viewBox="0 0 320 180" width="320" height="180">
+<path d="M 100 50 L 140 50 Q 180 50 180 75 Q 180 100 140 100 L 100 100 L 100 50" class="bg" id="fb-g1"/>
+<text x="120" y="80" fill="var(--bg)" font-size="12" font-weight="bold" text-anchor="middle">AND</text>
+<path d="M 100 110 L 140 110 Q 180 110 180 130 Q 180 150 140 150 L 100 150 L 100 110" class="bg" id="fb-g2"/>
+<text x="120" y="137" fill="var(--bg)" font-size="12" font-weight="bold" text-anchor="middle">AND</text>
+<line x1="180" y1="75" x2="240" y2="75" class="wg" id="fb-w1"/>
+<line x1="240" y1="75" x2="240" y2="130" class="wg" id="fb-w2"/>
+<line x1="240" y1="130" x2="180" y2="130" class="wg" id="fb-w3"/>
+<path d="M 100 130 L 70 130 Q 50 130 50 100 L 50 75 Q 50 55 70 55 L 100 55" class="wg" id="fb-wback" stroke-dasharray="6,4"/>
+<line x1="20" y1="75" x2="100" y2="75" class="wg" id="fb-win"/>
+<circle cx="15" cy="75" r="10" class="nd" id="fb-in"/>
+<circle cx="245" cy="75" r="8" class="nd" id="fb-n1"/>
+<circle cx="245" cy="130" r="8" class="nd" id="fb-n2"/>
+<circle cx="55" cy="55" r="6" class="nd" id="fb-nback"/>
+<circle cx="20" cy="75" r="5" class="pulse" id="fb-pulse" opacity="0"/>
+<text x="10" y="45" fill="var(--dim)" font-size="9">1</text>
+<text x="160" y="75" fill="var(--dim)" font-size="9" text-anchor="middle">0</text>
+<text x="160" y="130" fill="var(--dim)" font-size="9" text-anchor="middle">0</text>
+<text x="250" y="75" fill="var(--dim)" font-size="8">1</text>
+<text x="250" y="130" fill="var(--dim)" font-size="8">1</text>
+</svg>
+</div>
+<div style="display:flex;gap:10px;justify-content:center">
+<button class="replay-btn" onclick="triggerFeedback()" style="background:var(--accent);color:var(--bg);border:none">اضغط مرة واحدة</button>
+<button class="replay-btn" onclick="resetFeedback()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> إعادة</button>
+</div>
+<p style="color:var(--dim);margin-top:12px;font-size:12px">شرائح الذاكرة الحقيقية (زي الـ RAM) بتستخدم نسخة أعقد من نفس الفكرة دي بالظبط.</p>
+</div>
 <div class="quiz-box"><h4>QUICK CHECK</h4><p>لو فصلت الكهرباء عن آلة حاسبة، هل هتفتكر آخر رقم كنت كاتبه؟</p>
 <div class="quiz-options"><div class="quiz-option" onclick="checkQuiz(this,false)">أيوه هتفتكره</div><div class="quiz-option" onclick="checkQuiz(this,true)">لأ هتنساه</div></div>
 <div class="quiz-feedback"></div></div>
@@ -549,6 +714,88 @@ footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20p
 <div class="section-number" style="background:linear-gradient(135deg,var(--s7),var(--accent))">08</div>
 <h2>من البوابات للكمبيوتر الكامل</h2>
 <p>إزاي بنبني من أصغر جزء لحد ما نوصل لكمبيوتر كامل</p>
+</div>
+<div class="zoom-wrap">
+<div class="diagram-title">رحلة التكبير — من بوابة واحدة لمليارات</div>
+<div class="zoom-stage" id="zoomStage">
+<div class="zoom-level active" id="zl0">
+<svg viewBox="0 0 200 160" width="180" height="140">
+<rect x="65" y="40" width="70" height="80" rx="10" fill="var(--primary)" stroke="var(--accent)" stroke-width="3"/>
+<text x="100" y="85" fill="white" font-size="13" font-weight="bold" text-anchor="middle">AND</text>
+<circle cx="55" cy="65" r="8" fill="var(--accent)"/>
+<circle cx="55" cy="95" r="8" fill="var(--accent)"/>
+<circle cx="145" cy="80" r="10" fill="var(--success)"/>
+<line x1="55" y1="65" x2="65" y2="65" stroke="var(--dim)" stroke-width="2"/>
+<line x1="55" y1="95" x2="65" y2="95" stroke="var(--dim)" stroke-width="2"/>
+<line x1="135" y1="80" x2="145" y2="80" stroke="var(--success)" stroke-width="2"/>
+</svg>
+</div>
+<div class="zoom-level" id="zl1">
+<svg viewBox="0 0 260 180" width="240" height="160">
+<rect x="25" y="20" width="55" height="35" rx="6" fill="var(--primary)"/><text x="52" y="42" fill="white" font-size="9" font-weight="bold" text-anchor="middle">AND</text>
+<rect x="25" y="65" width="55" height="35" rx="6" fill="var(--primary)"/><text x="52" y="87" fill="white" font-size="9" font-weight="bold" text-anchor="middle">OR</text>
+<rect x="25" y="110" width="55" height="35" rx="6" fill="var(--primary)"/><text x="52" y="132" fill="white" font-size="9" font-weight="bold" text-anchor="middle">AND</text>
+<rect x="120" y="55" width="55" height="35" rx="6" fill="var(--accent)"/><text x="147" y="77" fill="var(--bg)" font-size="9" font-weight="bold" text-anchor="middle">OR</text>
+<rect x="120" y="105" width="55" height="35" rx="6" fill="var(--accent)"/><text x="147" y="127" fill="var(--bg)" font-size="9" font-weight="bold" text-anchor="middle">AND</text>
+<line x1="80" y1="37" x2="120" y2="65" stroke="var(--dim)" stroke-width="1.5"/>
+<line x1="80" y1="82" x2="120" y2="75" stroke="var(--dim)" stroke-width="1.5"/>
+<line x1="80" y1="127" x2="120" y2="122" stroke="var(--dim)" stroke-width="1.5"/>
+<line x1="175" y1="72" x2="200" y2="80" stroke="var(--success)" stroke-width="2"/>
+<circle cx="210" cy="80" r="10" fill="var(--success)"/>
+<text x="210" y="84" fill="var(--bg)" font-size="10" font-weight="bold" text-anchor="middle">1</text>
+</svg>
+</div>
+<div class="zoom-level" id="zl2">
+<svg viewBox="0 0 300 200" width="280" height="180">
+<rect x="20" y="15" width="70" height="28" rx="4" fill="var(--primary)"/><text x="55" y="34" fill="white" font-size="8" font-weight="bold" text-anchor="middle">Reg 0</text>
+<rect x="20" y="48" width="70" height="28" rx="4" fill="var(--primary)"/><text x="55" y="67" fill="white" font-size="8" font-weight="bold" text-anchor="middle">Reg 1</text>
+<rect x="20" y="81" width="70" height="28" rx="4" fill="var(--primary)"/><text x="55" y="100" fill="white" font-size="8" font-weight="bold" text-anchor="middle">Reg 2</text>
+<rect x="20" y="114" width="70" height="28" rx="4" fill="var(--primary)"/><text x="55" y="133" fill="white" font-size="8" font-weight="bold" text-anchor="middle">Reg 3</text>
+<rect x="120" y="40" width="70" height="28" rx="4" fill="var(--accent)"/><text x="155" y="59" fill="var(--bg)" font-size="8" font-weight="bold" text-anchor="middle">ALU</text>
+<rect x="120" y="80" width="70" height="28" rx="4" fill="var(--accent)"/><text x="155" y="99" fill="var(--bg)" font-size="8" font-weight="bold" text-anchor="middle">Ctrl</text>
+<rect x="220" y="55" width="60" height="50" rx="6" fill="var(--success)"/><text x="250" y="85" fill="var(--bg)" font-size="9" font-weight="bold" text-anchor="middle">8-bit</text>
+<line x1="90" y1="29" x2="120" y2="50" stroke="var(--dim)" stroke-width="1"/>
+<line x1="90" y1="62" x2="120" y2="55" stroke="var(--dim)" stroke-width="1"/>
+<line x1="90" y1="95" x2="120" y2="90" stroke="var(--dim)" stroke-width="1"/>
+<line x1="90" y1="128" x2="120" y2="95" stroke="var(--dim)" stroke-width="1"/>
+<line x1="190" y1="54" x2="220" y2="70" stroke="var(--success)" stroke-width="2"/>
+<line x1="190" y1="94" x2="220" y2="90" stroke="var(--success)" stroke-width="2"/>
+</svg>
+</div>
+<div class="zoom-level" id="zl3">
+<svg viewBox="0 0 320 200" width="300" height="180">
+<rect x="20" y="20" width="280" height="160" rx="12" fill="var(--card)" stroke="var(--primary)" stroke-width="3"/>
+<text x="160" y="15" fill="var(--primary)" font-size="11" font-weight="bold" text-anchor="middle">CPU Chip</text>
+<g opacity=".8">
+<rect x="35" y="35" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="35" y="57" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="35" y="79" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="35" y="101" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="35" y="123" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="35" y="145" width="40" height="18" rx="3" fill="var(--primary)"/>
+<rect x="85" y="35" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="85" y="57" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="85" y="79" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="85" y="101" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="85" y="123" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="85" y="145" width="40" height="18" rx="3" fill="var(--accent)"/>
+<rect x="135" y="35" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="135" y="57" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="135" y="79" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="135" y="101" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="135" y="123" width="40" height="18" rx="3" fill="var(--primary)"/><rect x="135" y="145" width="40" height="18" rx="3" fill="var(--primary)"/>
+<rect x="185" y="35" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="185" y="57" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="185" y="79" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="185" y="101" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="185" y="123" width="40" height="18" rx="3" fill="var(--accent)"/><rect x="185" y="145" width="40" height="18" rx="3" fill="var(--accent)"/>
+<rect x="235" y="35" width="50" height="128" rx="6" fill="var(--success)"/><text x="260" y="105" fill="var(--bg)" font-size="10" font-weight="bold" text-anchor="middle">RAM</text>
+</g>
+</svg>
+</div>
+<div class="zoom-level" id="zl4">
+<svg viewBox="0 0 280 200" width="260" height="180">
+<rect x="40" y="20" width="200" height="130" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+<rect x="55" y="35" width="170" height="100" rx="6" fill="var(--primary)" opacity=".3"/>
+<text x="140" y="85" fill="var(--accent)" font-size="14" font-weight="bold" text-anchor="middle">CPU</text>
+<rect x="60" y="105" width="35" height="20" rx="3" fill="var(--success)" opacity=".6"/><text x="77" y="119" fill="var(--bg)" font-size="7" font-weight="bold" text-anchor="middle">RAM</text>
+<rect x="100" y="105" width="35" height="20" rx="3" fill="var(--success)" opacity=".6"/><text x="117" y="119" fill="var(--bg)" font-size="7" font-weight="bold" text-anchor="middle">GPU</text>
+<rect x="140" y="105" width="35" height="20" rx="3" fill="var(--success)" opacity=".6"/><text x="157" y="119" fill="var(--bg)" font-size="7" font-weight="bold" text-anchor="middle">SSD</text>
+<rect x="180" y="105" width="35" height="20" rx="3" fill="var(--success)" opacity=".6"/><text x="197" y="119" fill="var(--bg)" font-size="7" font-weight="bold" text-anchor="middle">WiFi</text>
+<rect x="80" y="155" width="120" height="25" rx="5" fill="var(--dim)" opacity=".4"/><text x="140" y="172" fill="var(--text)" font-size="9" font-weight="bold" text-anchor="middle">Screen</text>
+<line x1="140" y1="135" x2="140" y2="155" stroke="var(--dim)" stroke-width="2"/>
+<text x="140" y="15" fill="var(--success)" font-size="11" font-weight="bold" text-anchor="middle">Billions of gates inside</text>
+</svg>
+</div>
+</div>
+<div class="zoom-label" id="zoomLabel">بوابة واحدة = قرار واحد بسيط</div>
+<div class="zoom-sub" id="zoomSub">اضغط على الزرار للتكبير</div>
+<div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
+<button class="replay-btn" id="zoomBtn" onclick="zoomNext()" style="background:var(--primary);color:var(--bg);border:none">تكبير ↗</button>
+<button class="replay-btn" onclick="zoomReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg> من الأول</button>
+</div>
 </div>
 <div class="content-grid">
 <div class="card">
@@ -819,6 +1066,78 @@ function decodeNext(){if(decodeStep>=5)return;const item=document.getElementById
 function resetDecode(){decodeStep=0;decodedStr='';for(let i=1;i<=5;i++){document.getElementById('decode'+i).classList.remove('active');const l=document.getElementById('letter'+i);l.classList.remove('show','revealed');l.textContent='?'}document.getElementById('decodeResult').style.display='none';document.getElementById('decodeBtn').textContent='فك الرسالة'}
 function checkQuiz(el,isCorrect){const box=el.closest('.quiz-box');box.querySelectorAll('.quiz-option').forEach(o=>{o.style.pointerEvents='none'});if(isCorrect){el.classList.add('correct');const fb=box.querySelector('.quiz-feedback');fb.textContent='إجابة صحيحة!';fb.className='quiz-feedback show correct'}else{el.classList.add('wrong');const fb=box.querySelector('.quiz-feedback');fb.textContent='إجابة خاطئة. حاول تاني!';fb.className='quiz-feedback show wrong'}}
 document.addEventListener('keydown',e=>{const sections=document.querySelectorAll('.section');let currentIdx=0;sections.forEach((s,i)=>{if(window.scrollY>=s.offsetTop-200)currentIdx=i});if(e.key==='ArrowDown'||e.key==='ArrowLeft'){e.preventDefault();if(currentIdx<sections.length-1)sections[currentIdx+1].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowRight'){e.preventDefault();if(currentIdx>0)sections[currentIdx-1].scrollIntoView({behavior:'smooth'})}});
+let fbAnimating=false;
+function triggerFeedback(){
+if(fbAnimating)return;fbAnimating=true;
+const g1=document.getElementById('fb-g1'),g2=document.getElementById('fb-g2');
+const w1=document.getElementById('fb-w1'),w2=document.getElementById('fb-w2'),w3=document.getElementById('fb-w3'),wb=document.getElementById('fb-wback'),wi=document.getElementById('fb-win');
+const n1=document.getElementById('fb-n1'),n2=document.getElementById('fb-n2'),nb=document.getElementById('fb-nback');
+const p=document.getElementById('fb-pulse');
+g1.classList.add('active');g2.classList.add('active');
+w1.classList.add('active');w2.classList.add('active');w3.classList.add('active');wb.classList.add('active');wi.classList.add('active');
+n1.classList.add('active');n2.classList.add('active');nb.classList.add('active');
+p.setAttribute('opacity','1');
+setTimeout(()=>{p.setAttribute('opacity','0');fbAnimating=false},3500)}
+function resetFeedback(){
+fbAnimating=false;
+['fb-g1','fb-g2','fb-w1','fb-w2','fb-w3','fb-wback','fb-win','fb-n1','fb-n2','fb-nback'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active')});
+const p=document.getElementById('fb-pulse');if(p)p.setAttribute('opacity','0')}
+let zoomLevel=0;const zoomMax=4;
+const zoomLabels=['بوابة واحدة = قرار واحد بسيط','عشرات البوابات = دائرة بسيطة','مئات البوابات = Register واحد','ملايين البوابات = شريحة معالج أو رام','مليارات البوابات = الكمبيوتر الكامل'];
+const zoomSubs=['اضغط على الزرار للتكبير','zoogling out...','zoogling out...','zoogling out...','المعالج جوه موبايلك أو لابتوبك فيه مليارات البوابات زي اللي اتعلمناها، كل واحدة بتعمل شغلها البسيط، بس تجميعهم بالبلايين هو اللي بيخلي الكمبيوتر يشغّل ألعاب وتطبيقات معقدة.'];
+function zoomNext(){
+if(zoomLevel>=zoomMax)return;
+document.getElementById('zl'+zoomLevel).classList.remove('active');
+zoomLevel++;
+document.getElementById('zl'+zoomLevel).classList.add('active');
+document.getElementById('zoomLabel').textContent=zoomLabels[zoomLevel];
+document.getElementById('zoomSub').textContent=zoomSubs[zoomLevel];
+if(zoomLevel>=zoomMax)document.getElementById('zoomBtn').textContent='تمام! 🎉'}
+function zoomReset(){
+zoomLevel=0;
+for(let i=0;i<=zoomMax;i++)document.getElementById('zl'+i).classList.remove('active');
+document.getElementById('zl0').classList.add('active');
+document.getElementById('zoomLabel').textContent=zoomLabels[0];
+document.getElementById('zoomSub').textContent=zoomSubs[0];
+document.getElementById('zoomBtn').textContent='تكبير ↗'}
+let haState={A:0,B:0};
+let haAnimating2=false;
+function haChange(which,d){
+const key=which==='A'?'A':'B';
+haState[key]=Math.max(0,Math.min(1,haState[key]+d));
+const valEl=document.getElementById('haVal'+key);
+valEl.textContent=haState[key];
+valEl.classList.toggle('high',haState[key]===1);
+document.getElementById('haBit'+key).textContent=haState[key];
+document.getElementById('haBit'+key).classList.toggle('on',haState[key]===1);
+haReset()}
+function haAnimate(){
+if(haAnimating2)return;haAnimating2=true;
+const A=haState.A,B=haState.B;
+const and1=A&B,or1=A|B;
+const notA=A===0?1:0,notB=B===0?1:0;
+const ha2=notA&B,ha3=A&notB;
+const sum=(or1)&((A&B)===0?1:0);
+const carry=A&B;
+function activate(id){const e=document.getElementById(id);if(e)e.classList.add('active')}
+function deactivate(id){const e=document.getElementById(id);if(e)e.classList.remove('active')}
+function on(id){const e=document.getElementById(id);if(e){e.classList.remove('off');e.classList.add('on')}}
+function off(id){const e=document.getElementById(id);if(e){e.classList.remove('on');e.classList.add('off')}}
+deactivate('ha-na');deactivate('ha-nb');deactivate('ha-n1');deactivate('ha-n2');deactivate('ha-n3');deactivate('ha-n4');deactivate('ha-n5');deactivate('ha-n6');deactivate('ha-n7');deactivate('ha-wa1');deactivate('ha-wa2');deactivate('ha-wb1');deactivate('ha-wb2');deactivate('ha-wb3');deactivate('ha-wand1');deactivate('ha-wor');deactivate('ha-wton1');deactivate('ha-wtn1');deactivate('ha-wand2');deactivate('ha-wsum');deactivate('ha-wtn2');off('ha-carryOut');off('ha-sumOut');off('ha-carryTxt');off('ha-sumTxt');
+activate('ha-na');activate('ha-nb');activate('ha-wa1');activate('ha-wa2');activate('ha-wb1');activate('ha-wb2');activate('ha-wb3');
+setTimeout(()=>{activate('ha-n1');activate('ha-n2');activate('ha-wand1');activate('ha-wor');activate('ha-gand1');activate('ha-gor')},300);
+setTimeout(()=>{activate('ha-n3');activate('ha-n4');activate('ha-wton1');activate('ha-wtn1');activate('ha-gnot1')},700);
+setTimeout(()=>{activate('ha-n5');activate('ha-wand2');activate('ha-gand2');activate('ha-gand3')},1100);
+setTimeout(()=>{activate('ha-n6');activate('ha-wsum');activate('ha-wtn2');activate('ha-gnot2')},1500);
+setTimeout(()=>{activate('ha-n7')},1800);
+setTimeout(()=>{on('ha-carryOut');on('ha-carryTxt');document.getElementById('ha-carryTxt').textContent=carry},2100);
+setTimeout(()=>{on('ha-sumOut');on('ha-sumTxt');document.getElementById('ha-sumTxt').textContent=sum;const r=document.getElementById('haResult');r.innerHTML='<span style="color:var(--accent)">'+A+'</span> + <span style="color:var(--accent)">'+B+'</span> = <span>'+sum+'</span>'+(carry?' (CARRY = 1)':'')},2400);
+setTimeout(()=>{haAnimating2=false},3000)}
+function haReset(){
+haAnimating2=false;
+['ha-na','ha-nb','ha-n1','ha-n2','ha-n3','ha-n4','ha-n5','ha-n6','ha-n7','ha-wa1','ha-wa2','ha-wb1','ha-wb2','ha-wb3','ha-wand1','ha-wor','ha-wton1','ha-wtn1','ha-wand2','ha-wsum','ha-wtn2','ha-gand1','ha-gor','ha-gnot1','ha-gand2','ha-gand3','ha-gnot2'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active')});
+['ha-carryOut','ha-sumOut','ha-carryTxt','ha-sumTxt'].forEach(id=>{const e=document.getElementById(id);if(e){e.classList.remove('on');e.classList.add('off')}});
+document.getElementById('haResult').textContent='اختر أرقام واضغط على "احسب"'}
 </script>
 </body>
 </html>
