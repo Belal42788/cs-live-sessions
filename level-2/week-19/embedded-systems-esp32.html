@@ -595,6 +595,227 @@
             display: block
         }
 
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 8px
+        }
+
+        .activity-grid .demo-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(255, 255, 255, .03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .activity-grid .code-panel {
+            background: #0d1a1f;
+            border-radius: 16px;
+            padding: 16px 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+            display: flex;
+            flex-direction: column;
+            max-height: 460px;
+            height: 100%
+        }
+
+        .code-panel .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-family: monospace;
+            font-size: .7rem;
+            color: rgba(159, 230, 201, .5);
+            letter-spacing: .04em;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex-shrink: 0
+        }
+
+        .code-panel .code-header .filename {
+            color: rgba(159, 230, 201, .7)
+        }
+
+        .code-panel .code-header .line-hint {
+            color: var(--warn);
+            font-weight: 600
+        }
+
+        .code-panel .code-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: .8rem;
+            line-height: 2;
+            color: #d4e6f0;
+            white-space: pre;
+            counter-reset: line;
+            padding-bottom: 12px;
+            scroll-behavior: smooth
+        }
+
+        .code-panel .code-body::-webkit-scrollbar {
+            width: 4px;
+            height: 4px
+        }
+
+        .code-panel .code-body::-webkit-scrollbar-thumb {
+            background: rgba(159, 230, 201, .2);
+            border-radius: 99px
+        }
+
+        .code-panel .code-body .cl {
+            display: block;
+            padding: 0 6px;
+            border-left: 3px solid transparent;
+            transition: background .25s, border-color .25s;
+            counter-increment: line;
+            position: relative;
+            border-radius: 2px;
+            min-width: max-content
+        }
+
+        .code-panel .code-body .cl::before {
+            content: counter(line);
+            display: inline-block;
+            width: 28px;
+            color: #4a5a66;
+            font-size: .65rem;
+            text-align: right;
+            margin-right: 16px;
+            user-select: none;
+            flex-shrink: 0
+        }
+
+        .code-panel .code-body .cl.hl {
+            background: rgba(255, 177, 0, .18);
+            border-left-color: var(--warn)
+        }
+
+        .code-panel .code-body .cl.hl::before {
+            color: var(--warn)
+        }
+
+        .code-panel .code-body .kw {
+            color: #c792ea
+        }
+
+        .code-panel .code-body .fn {
+            color: #82aaff
+        }
+
+        .code-panel .code-body .cm {
+            color: #546e7a;
+            font-style: italic
+        }
+
+        .code-panel .code-body .str {
+            color: #c3e88d
+        }
+
+        .code-panel .code-body .num {
+            color: #f78c6c
+        }
+
+        .activity-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            align-items: center
+        }
+
+        .activity-controls .status {
+            font-family: monospace;
+            font-size: .75rem;
+            color: var(--dim);
+            margin-left: auto;
+            font-weight: 500
+        }
+
+        .door-scene {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            padding: 6px 0
+        }
+
+        .door-frame {
+            width: 80px;
+            height: 92px;
+            background: #2a2a4a;
+            border: 4px solid var(--dim);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0
+        }
+
+        .door-leaf {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(180deg, #3a3a5a, #2a2a4a);
+            transition: transform .9s cubic-bezier(.34, 1.2, .64, 1);
+            border-right: 2px solid var(--dim)
+        }
+
+        .door-leaf.right {
+            left: 50%;
+            border-right: none;
+            border-left: 2px solid var(--dim)
+        }
+
+        .door-scene.open .door-leaf {
+            transform: translateX(-100%)
+        }
+
+        .door-scene.open .door-leaf.right {
+            transform: translateX(100%)
+        }
+
+        .door-walker {
+            font-size: 1.8rem;
+            transition: transform .9s cubic-bezier(.34, 1.2, .64, 1)
+        }
+
+        .door-scene.open .door-walker {
+            transform: translateX(-60px)
+        }
+
+        .door-status {
+            font-family: monospace;
+            font-size: .7rem;
+            font-weight: 600;
+            color: var(--dim);
+            text-align: center;
+            min-height: 20px
+        }
+
+        @media(max-width:860px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+                gap: 18px
+            }
+            .activity-grid .demo-panel {
+                order: 1
+            }
+            .activity-grid .code-panel {
+                order: 2;
+                max-height: 320px
+            }
+        }
+
         footer {
             background: linear-gradient(180deg, var(--bg), var(--card));
             padding: 60px 20px;
@@ -1001,6 +1222,59 @@
                     </div>
                 </div>
             </div>
+
+            <div class="diagram-container" style="margin-top:30px">
+                <div class="diagram-title">مثال تاني: الباب الأوتوماتيك — شوف الكود بيشتغل خطوة بخطوة</div>
+                <div class="activity-grid">
+                    <div class="demo-panel">
+                        <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 محاكاة الباب</div>
+                        <div class="door-scene" id="doorScene">
+                            <div class="door-walker" id="doorWalker">🚶</div>
+                            <div class="door-frame">
+                                <div class="door-leaf"></div>
+                                <div class="door-leaf right"></div>
+                            </div>
+                        </div>
+                        <div class="door-status" id="doorStatus">🚪 الباب مقفل — في حد بيблиّك؟</div>
+                        <div class="activity-controls">
+                            <button class="replay-btn" id="doorAutoBtn" style="background:var(--warn);color:var(--bg);font-size:13px">▶ شغل تلقائي</button>
+                            <button class="replay-btn" id="doorStepBtn" style="font-size:13px">⏭ خطوة</button>
+                            <button class="replay-btn" id="doorResetBtn" style="font-size:13px">↺ إعادة</button>
+                            <span class="status" id="doorStepCounter">خطوة 0/5</span>
+                        </div>
+                    </div>
+                    <div class="code-panel">
+                        <div class="code-header">
+                            <span class="filename">📄 automatic_door.py</span>
+                            <span class="line-hint" id="doorLineHint">▶ سطر —</span>
+                        </div>
+                        <div class="code-body" id="doorCode">
+<span class="cl" data-line="0"><span class="kw">from</span> machine <span class="kw">import</span> Pin</span>
+<span class="cl" data-line="1"><span class="kw">import</span> time</span>
+<span class="cl" data-line="2"></span>
+<span class="cl" data-line="3"><span class="cm"># إعداد الأرجل</span></span>
+<span class="cl" data-line="4">sensor = Pin(<span class="num">4</span>, Pin.IN)   <span class="cm"># حساس الحركة</span></span>
+<span class="cl" data-line="5">servo  = Pin(<span class="num">5</span>, Pin.OUT)  <span class="cm"># موتور الباب</span></span>
+<span class="cl" data-line="6"></span>
+<span class="cl" data-line="7"><span class="kw">while</span> <span class="fn">True</span>:</span>
+<span class="cl" data-line="8">    <span class="cm"># 👀 SENSE — قراءة الحساس</span></span>
+<span class="cl" data-line="9">    motion = sensor.<span class="fn">value</span>()</span>
+<span class="cl" data-line="10"></span>
+<span class="cl" data-line="11">    <span class="cm"># 🧠 THINK — اتخاذ القرار</span></span>
+<span class="cl" data-line="12">    <span class="kw">if</span> motion == <span class="num">1</span>:</span>
+<span class="cl" data-line="13">        <span class="cm"># 🦾 ACT — فتح الباب</span></span>
+<span class="cl" data-line="14">        servo.<span class="fn">value</span>(<span class="num">1</span>)</span>
+<span class="cl" data-line="15">        <span class="fn">print</span>(<span class="str">"🚪 الباب بيفتح..."</span>)</span>
+<span class="cl" data-line="16">        time.<span class="fn">sleep</span>(<span class="num">3</span>)</span>
+<span class="cl" data-line="17">        <span class="cm"># 🦾 ACT — إغلاق الباب</span></span>
+<span class="cl" data-line="18">        servo.<span class="fn">value</span>(<span class="num">0</span>)</span>
+<span class="cl" data-line="19">        <span class="fn">print</span>(<span class="str">"🚪 الباب اتقفل"</span>)</span>
+<span class="cl" data-line="20">    time.<span class="fn">sleep</span>(<span class="num">0.1</span>)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="quiz-box">
                 <h4>QUICK CHECK</h4>
                 <p>إنذار حريق سمع دخان وطلق صوت تنبيه — رتب المراحل بالترتيب الصح:</p>
@@ -1193,13 +1467,117 @@
                 </div>
             </div>
             <div class="card" style="margin-top:20px">
+                <div class="card-icon" style="background:linear-gradient(135deg,var(--s6),var(--accent))">📋</div>
+                <h3>خطوات استخدام <span dir="ltr">Wokwi</span></h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px">
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--primary);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">افتح الموقع</h4>
+                            <p style="color:var(--dim);font-size:12px">ادخل <span dir="ltr">wokwi.com</span> واعمل حساب مجاني (أو ادخل كضيف)</p>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--primary);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">اختار اللوحة</h4>
+                            <p style="color:var(--dim);font-size:12px">اعمل مشروع جديد واختار <span dir="ltr">ESP32</span> كلوحة عمل</p>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--primary);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">أضف المكونات</h4>
+                            <p style="color:var(--dim);font-size:12px">اضغط <span dir="ltr">+ Add</span> واختار LEDs، زراير، أسلك</p>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--primary);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">4</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">وصّل الأسلاك</h4>
+                            <p style="color:var(--dim);font-size:12px">ارسم أسلاك من أرجل الـ ESP32 للمكونات — كل رجل لها وظيفة</p>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--primary);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">5</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">اكتب الكود</h4>
+                            <p style="color:var(--dim);font-size:12px">في الناحية التانية، اكتب كود <span dir="ltr">MicroPython</span> الخاص بيك</p>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:15px;display:flex;gap:12px;align-items:flex-start">
+                        <div style="background:var(--accent);color:#fff;border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">6</div>
+                        <div>
+                            <h4 style="color:var(--text);font-size:14px;margin-bottom:4px">شغّل!</h4>
+                            <p style="color:var(--dim);font-size:12px">اضغط زرار <span dir="ltr">▶ Start</span> وشوف النتيجة مباشرة</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:15px;padding:12px;background:rgba(255,71,87,.05);border:1px solid rgba(255,71,87,.2);border-radius:10px">
+                    <p style="color:var(--danger);font-weight:700;font-size:13px;margin-bottom:4px">⚠️ أخطاء شائعة</p>
+                    <p style="color:var(--dim);font-size:12px;line-height:1.7">
+                        • نسيان توصيل الـ GND — لازم كل دائرة فيها GND<br>
+                        • توصيل LED من غير مقاومة — ممكن يحترق<br>
+                        • استخدام رجل GPIO غلط — راجع الجدول قبل التوصيل<br>
+                        • نسيان <span dir="ltr">while True:</span> — الكود هيتنفذ مرة واحدة بس
+                    </p>
+                </div>
+            </div>
+            <div class="card" style="margin-top:20px">
                 <div class="card-icon" style="background:linear-gradient(135deg,var(--s6),var(--accent))">🐍</div>
-                <h3><span dir="ltr">MicroPython</span></h3>
+                <h3><span dir="ltr">MicroPython</span> — الأسس</h3>
                 <p>دي نسخة خفيفة من بايثون معمولة للمicrocontrollers. لو تعرف بايثون، الصورة هتكون مألوفة لك.</p>
-                <div
-                    style="background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);border-radius:8px;padding:15px;margin-top:10px;font-family:monospace;color:var(--success)">
-                    from machine import Pin<br>
-                    <span style="color:var(--dim)"># بنستورد أداة اسمها Pin عشان نتحكم في أرجل الـ ESP32</span>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px">
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">📦 استيراد المكتبات</h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px">قبل ما تتحكم في أي حardware، لازم تستورد المكتبة الصح.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre"><span style="color:#c792ea">from</span> machine <span style="color:#c792ea">import</span> Pin
+<span style="color:#c792ea">import</span> time</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">🔌 إعداد الأرجل</h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px">كل رجل <span dir="ltr">GPIO</span> ممكن تكون Input أو Output.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre">led    = Pin(<span style="color:#f78c6c">2</span>, Pin.OUT)
+button = Pin(<span style="color:#f78c6c">0</span>, Pin.IN)</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">💡 التحكم في الإخراج</h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px"><span dir="ltr">Pin.OUT</span> = تحكم في شيء (لمبة، موتور). <span dir="ltr">value(1)</span> = شغّل، <span dir="ltr">value(0)</span> = أطفئ.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre">led.<span style="color:#82aaff">value</span>(<span style="color:#f78c6c">1</span>)  <span style="color:#546e7a"># شغّل اللمبة</span>
+led.<span style="color:#82aaff">value</span>(<span style="color:#f78c6c">0</span>)  <span style="color:#546e7a"># أطفئها</span></div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">📥 قراءة المدخلات</h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px"><span dir="ltr">Pin.IN</span> = تقرأ معلومة من الخارج. القيمة <span dir="ltr">0</span> أو <span dir="ltr">1</span>.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre">val = button.<span style="color:#82aaff">value</span>()
+<span style="color:#c792ea">if</span> val == <span style="color:#f78c6c">1</span>:
+    <span style="color:#82aaff">print</span>(<span style="color:#c3e88d">"الزرار اتداس!"</span>)</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">⏱ التوقيت <span dir="ltr">sleep()</span></h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px">بيوقف الكود شوية. المدة بالثواني.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre"><span style="color:#c792ea">import</span> time
+time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</span>)  <span style="color:#546e7a"># وقف ثانيتين</span></div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px">
+                        <h4 style="color:var(--accent);margin-bottom:8px;font-size:15px">🔄 الحلقة اللانهائية</h4>
+                        <p style="color:var(--dim);font-size:13px;margin-bottom:10px">ال ESP32 بيشتغل 24/7 — الحلقة بتخلي الكود يشتغل دايمًا.</p>
+                        <div style="background:#0d1a1f;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;white-space:pre"><span style="color:#c792ea">while</span> <span style="color:#82aaff">True</span>:
+    led.<span style="color:#82aaff">value</span>(<span style="color:#f78c6c">1</span>)
+    time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">1</span>)
+    led.<span style="color:#82aaff">value</span>(<span style="color:#f78c6c">0</span>)
+    time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">1</span>)</div>
+                    </div>
+                </div>
+                <div style="margin-top:20px;padding:15px;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);border-radius:10px">
+                    <p style="color:var(--warn);font-weight:700;font-size:14px;margin-bottom:8px">💡 نصائح مهمة</p>
+                    <p style="color:var(--dim);font-size:13px;line-height:1.8">
+                        • <strong>Pin.IN</strong> = الإدخال (زرار، حساس) — الـ ESP32 بيقرا القيمة<br>
+                        • <strong>Pin.OUT</strong> = الإخراج (LED، موتور) — الـ ESP32 بيتحكم فيه<br>
+                        • <strong>value(1)</strong> = HIGH = شغّل | <strong>value(0)</strong> = LOW = أطفئ<br>
+                        • لازم تكتب <strong>while True:</strong> عشان الكود ما يتوقفش<br>
+                        • شغل الكود بالخطأ ممكن يحرق المكونات — راجع التوصيل قبل ما تشغّل!
+                    </p>
                 </div>
             </div>
             <div class="quiz-box">
@@ -1292,27 +1670,57 @@
                     ومكونات فعلية.</p>
                 <p style="margin-bottom:15px">المقاومات <span dir="ltr">(Resistors)</span> بتحمي الـ LEDs من زيادة
                     التيار.</p>
-                <div class="diagram-container">
-                    <div class="diagram-title">إشارة المرور — شوف الإشارة بتشتغل</div>
-                    <div class="traffic-light">
-                        <div class="tl-light red" id="tlRed"></div>
-                        <div class="tl-light yellow" id="tlYellow"></div>
-                        <div class="tl-light green" id="tlGreen"></div>
+                <div class="activity-grid">
+                    <div class="demo-panel">
+                        <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 محاكاة إشارة المرور</div>
+                        <div class="traffic-light">
+                            <div class="tl-light red" id="tlRed"></div>
+                            <div class="tl-light yellow" id="tlYellow"></div>
+                            <div class="tl-light green" id="tlGreen"></div>
+                        </div>
+                        <div style="text-align:center;margin-top:10px;font-weight:700;font-size:14px;min-height:24px" id="tlStatusText"></div>
+                        <div style="text-align:center;margin-top:10px">
+                            <label style="color:var(--dim);font-size:13px">سرعة التبديل: <span id="speedVal">1</span>x</label><br>
+                            <input type="range" id="tlSpeed" min="1" max="5" value="1"
+                                style="width:60%;accent-color:var(--warn)"
+                                oninput="document.getElementById('speedVal').textContent=this.value">
+                        </div>
+                        <div class="activity-controls">
+                            <button class="replay-btn" id="tlStartBtn" style="background:var(--warn);color:var(--bg);font-size:13px">▶ ابدأ</button>
+                            <button class="replay-btn" id="tlStopBtn" style="font-size:13px">⏹ إيقاف</button>
+                            <span class="status" id="tlStepNum">خطوة 0</span>
+                        </div>
                     </div>
-                    <div style="text-align:center;margin-top:15px">
-                        <label style="color:var(--dim)">سرعة التبديل: <span id="speedVal">1</span>x</label><br>
-                        <input type="range" id="tlSpeed" min="1" max="5" value="1"
-                            style="width:60%;accent-color:var(--warn)"
-                            oninput="document.getElementById('speedVal').textContent=this.value">
-                    </div>
-                    <div style="text-align:center;margin-top:15px">
-                        <button class="replay-btn" onclick="startTrafficLight()"
-                            style="background:var(--warn);color:var(--bg)">ابدأ الإشارة</button>
-                        <button class="replay-btn" onclick="stopTrafficLight()"><svg viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M1 4v6h6M23 20v-6h-6" />
-                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
-                            </svg> إيقاف</button>
+                    <div class="code-panel">
+                        <div class="code-header">
+                            <span class="filename">📄 traffic_light.py</span>
+                            <span class="line-hint" id="tlLineHint">▶ سطر —</span>
+                        </div>
+                        <div class="code-body" id="tlCode">
+<span class="cl" data-line="0"><span class="kw">from</span> machine <span class="kw">import</span> Pin</span>
+<span class="cl" data-line="1"><span class="kw">import</span> time</span>
+<span class="cl" data-line="2"></span>
+<span class="cl" data-line="3"><span class="cm"># إعداد LEDs على أرجل GPIO</span></span>
+<span class="cl" data-line="4">red    = Pin(<span class="num">16</span>, Pin.OUT)</span>
+<span class="cl" data-line="5">yellow = Pin(<span class="num">17</span>, Pin.OUT)</span>
+<span class="cl" data-line="6">green  = Pin(<span class="num">18</span>, Pin.OUT)</span>
+<span class="cl" data-line="7"></span>
+<span class="cl" data-line="8"><span class="kw">def</span> <span class="fn">set_lights</span>(r, y, g):</span>
+<span class="cl" data-line="9">    red.<span class="fn">value</span>(r)</span>
+<span class="cl" data-line="10">    yellow.<span class="fn">value</span>(y)</span>
+<span class="cl" data-line="11">    green.<span class="fn">value</span>(g)</span>
+<span class="cl" data-line="12"></span>
+<span class="cl" data-line="13"><span class="kw">while</span> <span class="fn">True</span>:</span>
+<span class="cl" data-line="14">    <span class="cm"># 🔴 أحمر — وقف</span></span>
+<span class="cl" data-line="15">    <span class="fn">set_lights</span>(<span class="num">1</span>, <span class="num">0</span>, <span class="num">0</span>)</span>
+<span class="cl" data-line="16">    time.<span class="fn">sleep</span>(<span class="num">2</span>)</span>
+<span class="cl" data-line="17">    <span class="cm"># 🟢 أخضر — مشي</span></span>
+<span class="cl" data-line="18">    <span class="fn">set_lights</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">1</span>)</span>
+<span class="cl" data-line="19">    time.<span class="fn">sleep</span>(<span class="num">2</span>)</span>
+<span class="cl" data-line="20">    <span class="cm"># 🟡 أصفر — خلّي بالك</span></span>
+<span class="cl" data-line="21">    <span class="fn">set_lights</span>(<span class="num">0</span>, <span class="num">1</span>, <span class="num">0</span>)</span>
+<span class="cl" data-line="22">    time.<span class="fn">sleep</span>(<span class="num">1</span>)</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1347,32 +1755,68 @@
                 </div>
                 <p style="color:var(--dim);margin:15px 0">النشاط ده محتاج بورد <span dir="ltr">ESP32</span> حقيقي
                     ومكونات فعلية.</p>
-                <div class="diagram-container">
-                    <div class="diagram-title">اضغط الزرار عشان تعدي المشاة</div>
-                    <div
-                        style="display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;margin:20px 0">
-                        <div style="text-align:center">
-                            <p style="color:var(--dim);margin-bottom:10px">مشاة</p>
-                            <div class="tl-light red" id="pedCar"></div>
-                        </div>
-                        <div style="text-align:center">
-                            <button class="replay-btn" onclick="pedestrianCross()"
-                                style="background:var(--warn);color:var(--bg);font-size:18px;padding:20px 30px">🚶
-                                اضغط</button>
-                            <div id="pedCountdown"
-                                style="margin-top:10px;font-size:24px;font-weight:900;color:var(--accent);display:none">
+                <div class="activity-grid">
+                    <div class="demo-panel">
+                        <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 محاكاة ممر المشاة</div>
+                        <div style="display:flex;gap:30px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px 0">
+                            <div style="text-align:center">
+                                <p style="color:var(--dim);margin-bottom:8px;font-size:13px">🚗 عربيات</p>
+                                <div class="tl-light red" id="pedCar"></div>
+                                <div style="font-size:12px;font-weight:700;margin-top:6px;min-height:18px" id="pedCarLabel"></div>
+                            </div>
+                            <div style="text-align:center">
+                                <button class="replay-btn" id="pedCrossBtn"
+                                    style="background:var(--warn);color:var(--bg);font-size:16px;padding:16px 24px">🚶 اضغط</button>
+                                <div id="pedCountdown"
+                                    style="margin-top:10px;font-size:22px;font-weight:900;color:var(--accent);display:none">
+                                </div>
+                            </div>
+                            <div style="text-align:center">
+                                <p style="color:var(--dim);margin-bottom:8px;font-size:13px">🚶 مشاة</p>
+                                <div class="tl-light green" id="pedWalk"></div>
+                                <div style="font-size:12px;font-weight:700;margin-top:6px;min-height:18px" id="pedWalkLabel"></div>
                             </div>
                         </div>
-                        <div style="text-align:center">
-                            <p style="color:var(--dim);margin-bottom:10px">عربيات</p>
-                            <div class="tl-light green" id="pedWalk"></div>
+                        <div class="activity-controls">
+                            <button class="replay-btn" id="pedResetBtn" style="font-size:13px">↺ إعادة</button>
+                            <span class="status" id="pedStatus">جاهز</span>
                         </div>
                     </div>
-                    <button class="replay-btn" onclick="resetPedestrian()"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M1 4v6h6M23 20v-6h-6" />
-                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
-                        </svg> إعادة</button>
+                    <div class="code-panel">
+                        <div class="code-header">
+                            <span class="filename">📄 pedestrian_crossing.py</span>
+                            <span class="line-hint" id="pedLineHint">▶ سطر —</span>
+                        </div>
+                        <div class="code-body" id="pedCode">
+<span class="cl" data-line="0"><span class="kw">from</span> machine <span class="kw">import</span> Pin</span>
+<span class="cl" data-line="1"><span class="kw">import</span> time</span>
+<span class="cl" data-line="2"></span>
+<span class="cl" data-line="3"><span class="cm"># إعداد الأرجل</span></span>
+<span class="cl" data-line="4">car_green = Pin(<span class="num">19</span>, Pin.OUT)</span>
+<span class="cl" data-line="5">car_red   = Pin(<span class="num">20</span>, Pin.OUT)</span>
+<span class="cl" data-line="6">ped_green = Pin(<span class="num">21</span>, Pin.OUT)</span>
+<span class="cl" data-line="7">button    = Pin(<span class="num">22</span>, Pin.IN)</span>
+<span class="cl" data-line="8"></span>
+<span class="cl" data-line="9"><span class="kw">def</span> <span class="fn">normal_state</span>():</span>
+<span class="cl" data-line="10">    car_green.<span class="fn">value</span>(<span class="num">1</span>)  <span class="cm"># عربيات تمشي</span></span>
+<span class="cl" data-line="11">    car_red.<span class="fn">value</span>(<span class="num">0</span>)</span>
+<span class="cl" data-line="12">    ped_green.<span class="fn">value</span>(<span class="num">0</span>)   <span class="cm"># مشاة يستنوا</span></span>
+<span class="cl" data-line="13"></span>
+<span class="cl" data-line="14"><span class="kw">def</span> <span class="fn">cross_state</span>():</span>
+<span class="cl" data-line="15">    car_green.<span class="fn">value</span>(<span class="num">0</span>)</span>
+<span class="cl" data-line="16">    car_red.<span class="fn">value</span>(<span class="num">1</span>)    <span class="cm"># عربيات توقف</span></span>
+<span class="cl" data-line="17">    ped_green.<span class="fn">value</span>(<span class="num">1</span>)   <span class="cm"># مشاة يعدي</span></span>
+<span class="cl" data-line="18"></span>
+<span class="cl" data-line="19"><span class="kw">while</span> <span class="fn">True</span>:</span>
+<span class="cl" data-line="20">    <span class="cm"># 👀 SENSE — قراءة الزرار</span></span>
+<span class="cl" data-line="21">    <span class="kw">if</span> button.<span class="fn">value</span>() == <span class="num">1</span>:</span>
+<span class="cl" data-line="22">        <span class="cm"># 🧠 THINK — قرار العبور</span></span>
+<span class="cl" data-line="23">        <span class="fn">cross_state</span>()</span>
+<span class="cl" data-line="24">        time.<span class="fn">sleep</span>(<span class="num">3</span>)</span>
+<span class="cl" data-line="25">        <span class="fn">normal_state</span>()  <span class="cm"># 🦾 ACT — رجوع للوضع الطبيعي</span></span>
+<span class="cl" data-line="26">    time.<span class="fn">sleep</span>(<span class="num">0.05</span>)</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="quiz-box">
                     <h4>QUICK CHECK</h4>
@@ -1548,9 +1992,114 @@
             if (journeyOrderIdx === 4) { const items = document.querySelectorAll('#journeyOrder li'); let correct = true; items.forEach((item, i) => { if (parseInt(item.dataset.order) !== journeyCorrect[i]) correct = false }); const fb = document.getElementById('journeyFeedback'); if (correct) { fb.textContent = 'ترتيب صحيح!'; fb.className = 'quiz-feedback show correct' } else { fb.textContent = 'الترتيب غلط — حاول تاني'; fb.className = 'quiz-feedback show wrong' } }
         }
         function resetJourneyOrder() { journeyOrderIdx = 0; document.querySelectorAll('#journeyOrder li').forEach(li => { li.classList.remove('active'); delete li.dataset.order }); document.getElementById('journeyFeedback').className = 'quiz-feedback' }
-        let tlInterval;
-        function startTrafficLight() { stopTrafficLight(); const speed = document.getElementById('tlSpeed').value; const delay = 2000 / speed; let phase = 0; const phases = [{ red: true, yellow: false, green: false }, { red: false, yellow: false, green: true }, { red: false, yellow: true, green: false }]; function cycle() { const p = phases[phase % 3]; document.getElementById('tlRed').classList.toggle('on', p.red); document.getElementById('tlYellow').classList.toggle('on', p.yellow); document.getElementById('tlGreen').classList.toggle('on', p.green); phase++ } cycle(); tlInterval = setInterval(cycle, delay) }
-        function stopTrafficLight() { clearInterval(tlInterval); document.getElementById('tlRed').classList.remove('on'); document.getElementById('tlYellow').classList.remove('on'); document.getElementById('tlGreen').classList.remove('on') }
+
+        /* ===== DOOR ANIMATION ===== */
+        function hlCode(containerId, lineNums, hintId) {
+            document.querySelectorAll('#' + containerId + ' .cl').forEach(el => el.classList.remove('hl'));
+            if (!lineNums || !lineNums.length) return;
+            lineNums.forEach(ln => { const el = document.querySelector('#' + containerId + ' .cl[data-line="' + ln + '"]'); if (el) { el.classList.add('hl'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } });
+            const hint = document.getElementById(hintId);
+            if (hint) { const first = lineNums[0], last = lineNums[lineNums.length - 1]; hint.textContent = '▶ سطر ' + (first + 1) + (first !== last ? '–' + (last + 1) : ''); }
+        }
+        function clearHL(containerId) { document.querySelectorAll('#' + containerId + ' .cl').forEach(el => el.classList.remove('hl')); }
+
+        let doorStep = -1, doorAutoTimer = null, doorIsAuto = false;
+        const doorSteps = [
+            { lines: [0, 1], desc: '📦 استيراد المكتبات', doorOpen: false, walkerX: 0 },
+            { lines: [3, 4, 5], desc: '🔧 إعداد الأرجل — حساس + موتور', doorOpen: false, walkerX: 0 },
+            { lines: [7, 8, 9], desc: '👀 SENSE — قراءة حساس الحركة', doorOpen: false, walkerX: 0 },
+            { lines: [11, 12, 13, 14, 15], desc: '🧠 THINK + 🦾 ACT — فتح الباب!', doorOpen: true, walkerX: 1 },
+            { lines: [16, 17, 18, 19], desc: '🦾 ACT — إغلاق الباب بعد 3 ثواني', doorOpen: false, walkerX: 2 }
+        ];
+        function setDoorStep(s) {
+            if (s < 0 || s >= doorSteps.length) return;
+            doorStep = s;
+            const step = doorSteps[s];
+            hlCode('doorCode', step.lines, 'doorLineHint');
+            document.getElementById('doorStatus').textContent = step.desc;
+            document.getElementById('doorStepCounter').textContent = 'خطوة ' + (s + 1) + '/' + doorSteps.length;
+            const scene = document.getElementById('doorScene');
+            const walker = document.getElementById('doorWalker');
+            scene.classList.toggle('open', step.doorOpen);
+            if (step.walkerX === 0) walker.style.transform = 'translateX(0)';
+            else if (step.walkerX === 1) walker.style.transform = 'translateX(-30px)';
+            else walker.style.transform = 'translateX(-80px)';
+        }
+        function nextDoorStep() { if (doorStep >= doorSteps.length - 1) { if (doorIsAuto) { doorStep = -1; setDoorStep(0); } else { document.getElementById('doorStatus').textContent = '✅ خلصت! اضغط إعادة عشان تجرّب تاني'; } return; } setDoorStep(doorStep + 1); }
+        function resetDoor() { if (doorAutoTimer) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } doorStep = -1; clearHL('doorCode'); document.getElementById('doorLineHint').textContent = '▶ سطر —'; document.getElementById('doorStatus').textContent = '🚪 الباب مقفل — في حد بيблиّك؟'; document.getElementById('doorStepCounter').textContent = 'خطوة 0/5'; document.getElementById('doorScene').classList.remove('open'); document.getElementById('doorWalker').style.transform = 'translateX(0)'; }
+        document.getElementById('doorStepBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } if (doorStep >= doorSteps.length - 1) { resetDoor(); setTimeout(() => nextDoorStep(), 200); } else nextDoorStep(); });
+        document.getElementById('doorAutoBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; return; } if (doorStep >= doorSteps.length - 1) resetDoor(); if (doorStep === -1) setDoorStep(0); doorIsAuto = true; document.getElementById('doorAutoBtn').textContent = '⏹ إيقاف'; doorAutoTimer = setInterval(() => { if (doorStep >= doorSteps.length - 1) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; document.getElementById('doorStatus').textContent = '🔄 خلصت! اضغط شغل تاني عشان تتكرر'; return; } nextDoorStep(); }, 1800); });
+        document.getElementById('doorResetBtn').addEventListener('click', resetDoor);
+
+        /* ===== TRAFFIC LIGHT WITH CODE ===== */
+        let tlInterval, tlRunning = false, tlIdx = 0;
+        const tlPhases = [
+            { r: 1, y: 0, g: 0, label: '🔴 أحمر — وقف', lines: [14, 15, 16] },
+            { r: 0, y: 0, g: 1, label: '🟢 أخضر — مشي', lines: [17, 18, 19] },
+            { r: 0, y: 1, g: 0, label: '🟡 أصفر — خلّي بالك', lines: [20, 21, 22] }
+        ];
+        function updateTL() {
+            const p = tlPhases[tlIdx];
+            document.getElementById('tlRed').classList.toggle('on', !!p.r);
+            document.getElementById('tlYellow').classList.toggle('on', !!p.y);
+            document.getElementById('tlGreen').classList.toggle('on', !!p.g);
+            document.getElementById('tlStatusText').textContent = p.label;
+            document.getElementById('tlStepNum').textContent = 'خطوة ' + (tlIdx + 1) + '/' + tlPhases.length;
+            hlCode('tlCode', p.lines, 'tlLineHint');
+        }
+        function nextTL() { tlIdx = (tlIdx + 1) % tlPhases.length; updateTL(); }
+        document.getElementById('tlStartBtn').addEventListener('click', () => { if (tlRunning) return; tlRunning = true; tlIdx = 0; updateTL(); const speed = document.getElementById('tlSpeed').value; tlInterval = setInterval(nextTL, 2000 / speed); document.getElementById('tlStartBtn').textContent = '▶ شغال...'; });
+        document.getElementById('tlStopBtn').addEventListener('click', () => { clearInterval(tlInterval); tlRunning = false; document.getElementById('tlStartBtn').textContent = '▶ ابدأ'; document.getElementById('tlRed').classList.remove('on'); document.getElementById('tlYellow').classList.remove('on'); document.getElementById('tlGreen').classList.remove('on'); document.getElementById('tlStatusText').textContent = ''; document.getElementById('tlStepNum').textContent = 'خطوة 0'; clearHL('tlCode'); document.getElementById('tlLineHint').textContent = '▶ سطر —'; });
+
+        /* ===== PEDESTRIAN WITH CODE ===== */
+        let pedActive = false, pedCrossTimeout = null;
+        function setPedState(normal) {
+            const car = document.getElementById('pedCar'), walk = document.getElementById('pedWalk');
+            const carLabel = document.getElementById('pedCarLabel'), walkLabel = document.getElementById('pedWalkLabel');
+            clearHL('pedCode');
+            if (normal) {
+                car.className = 'tl-light green'; carLabel.textContent = '🟢 أخضر'; carLabel.style.color = 'var(--success)';
+                walk.className = 'tl-light red'; walkLabel.textContent = '🔴 أحمر'; walkLabel.style.color = 'var(--danger)';
+                document.getElementById('pedStatus').textContent = '🚗 عربيات تمشي — استن';
+                hlCode('pedCode', [9, 10, 11, 12], 'pedLineHint');
+            } else {
+                car.className = 'tl-light red'; carLabel.textContent = '🔴 أحمر'; carLabel.style.color = 'var(--danger)';
+                walk.className = 'tl-light green'; walkLabel.textContent = '🟢 أخضر'; walkLabel.style.color = 'var(--success)';
+                document.getElementById('pedStatus').textContent = '🚶 مشاة بيعدي!';
+                hlCode('pedCode', [14, 15, 16, 17], 'pedLineHint');
+            }
+        }
+        function resetPed() {
+            clearTimeout(pedCrossTimeout); pedActive = false;
+            const car = document.getElementById('pedCar'), walk = document.getElementById('pedWalk');
+            car.className = 'tl-light green'; walk.className = 'tl-light red';
+            document.getElementById('pedCarLabel').textContent = '🟢 أخضر';
+            document.getElementById('pedWalkLabel').textContent = '🔴 أحمر';
+            document.getElementById('pedCarLabel').style.color = 'var(--success)';
+            document.getElementById('pedWalkLabel').style.color = 'var(--danger)';
+            document.getElementById('pedCountdown').style.display = 'none';
+            document.getElementById('pedCrossBtn').textContent = '🚶 اضغط';
+            document.getElementById('pedStatus').textContent = 'جاهز';
+            clearHL('pedCode'); document.getElementById('pedLineHint').textContent = '▶ سطر —';
+        }
+        document.getElementById('pedCrossBtn').addEventListener('click', () => {
+            if (pedActive) return; pedActive = true;
+            setPedState(false);
+            hlCode('pedCode', [20, 21, 22, 23], 'pedLineHint');
+            document.getElementById('pedStatus').textContent = '⏳ عبور — 3 ثواني';
+            document.getElementById('pedCrossBtn').textContent = '⏳ بيعدي...';
+            const cd = document.getElementById('pedCountdown'); cd.style.display = 'block'; let t = 3; cd.textContent = t;
+            const cdInterval = setInterval(() => { t--; cd.textContent = t; if (t <= 0) clearInterval(cdInterval); }, 1000);
+            pedCrossTimeout = setTimeout(() => {
+                setPedState(true);
+                hlCode('pedCode', [25, 26], 'pedLineHint');
+                document.getElementById('pedCountdown').style.display = 'none';
+                document.getElementById('pedCrossBtn').textContent = '🚶 اضغط';
+                document.getElementById('pedStatus').textContent = '✅ خلص — عربيات تاني';
+                pedActive = false;
+            }, 3000);
+        });
+        document.getElementById('pedResetBtn').addEventListener('click', resetPed);
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
 </body>
