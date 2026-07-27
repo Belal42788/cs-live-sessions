@@ -688,6 +688,7 @@
 
         .cross-walker.active {
             left: 88%;
+            transform: scaleX(-1);
         }
 
         .cross-status {
@@ -1929,6 +1930,7 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
                         <div class="cross-status" id="crossStatus">🚗 عربيات ماشية — استنى عشان تعدي</div>
                         <div class="activity-controls">
                             <button class="replay-btn" id="crossBtn" style="background:var(--warn);color:var(--bg);font-size:14px;padding:10px 20px">🚦 اضغط عشان تعدي</button>
+                            <button class="replay-btn" id="crossResetBtn" style="font-size:13px">↺ إعادة</button>
                             <span class="status" id="crossStep">جاهز</span>
                         </div>
                     </div>
@@ -2274,12 +2276,18 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
             setCross(false);
             document.getElementById('crossBtn').textContent = '⏳ بيعدي...';
             setTimeout(() => {
-                setCross(true);
                 crossActive = false;
                 document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
-                crossStatus.textContent = '✅ العبور خلص — عربيات تاني';
-                setTimeout(() => { crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي'; }, 1000);
+                crossStatus.textContent = '✅ عدّى — اضغط إعادة عشان يرجع';
+                crossStep.textContent = 'خلص';
             }, 2800);
+        });
+        document.getElementById('crossResetBtn').addEventListener('click', () => {
+            crossActive = false;
+            setCross(true);
+            document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
+            crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي';
+            crossStep.textContent = 'جاهز';
         });
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
