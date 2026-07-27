@@ -259,9 +259,11 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overf
 <div class="diagram-title">شوف الروبوت في الحركة — اضغط "ابدأ"</div>
 <svg id="robotSvg" viewBox="0 0 400 120" width="100%" height="120">
 <rect x="0" y="80" width="400" height="4" fill="var(--dim)" rx="2"/>
+<g id="robotGroup">
 <rect id="robotBody" x="50" y="40" width="40" height="40" rx="8" fill="var(--primary)"/>
 <circle cx="60" cy="55" r="4" fill="var(--text)"/>
 <circle cx="80" cy="55" r="4" fill="var(--text)"/>
+</g>
 <rect id="wall" x="300" y="30" width="10" height="50" rx="3" fill="var(--danger)" opacity="0"/>
 </svg>
 <div style="text-align:center;margin-top:15px">
@@ -673,8 +675,8 @@ function resetOrder(){orderIndex=0;document.querySelectorAll('#alarmOrder li').f
 function showPin(pin){const info=document.getElementById('pinInfo');const text=document.getElementById('pinText');const pins={gpio:'GPIO — أرجل عامة الغرض — تقدر تشتغل Input أو Output حسب الكود اللي بتكتبه.',gnd:'GND — الأرضي، أي دائرة بتشتغلها لازم يكون فيها GND عشان الكهرباء تكمل دورتها.',vin:'VIN — بيغذي اللوحة بالطاقة من مصدر خارجي.','3v3':'3.3V — بيدي جهد 3.3 فولت لتشغيل بعض المكونات الحساسة.',adc:'ADC — بيقرا قيم متغيرة زي درجة الحرارة أو شدة الضوء، مش بس صح أو غلط.',touch:'Touch — بتحس باللمس المباشر من غير زرار فيزيائي.',txrx:'TX/RX — بترسل وتستقبل بيانات بين الـ ESP32 وأجهزة تانية.'};text.textContent=pins[pin];info.style.display='block'}
 function updateLamp(val){const led=document.getElementById('nightLed');const status=document.getElementById('lampStatus');if(val<30){led.classList.add('on');status.textContent='الإضاءة: ضعيف — اللمبة شغالة!'}else{led.classList.remove('on');status.textContent='الإضاءة: عالي — اللمبة مطفية'}}
 let robotAnim;
-function animateRobot(){const robot=document.getElementById('robotBody');const wall=document.getElementById('wall');wall.setAttribute('opacity','1');let pos=50;robotAnim=setInterval(()=>{pos+=2;robot.setAttribute('x',pos);if(pos>=280){clearInterval(robotAnim);robot.setAttribute('fill','var(--warn)');setTimeout(()=>{robot.setAttribute('x',pos);robot.setAttribute('y',20);robot.setAttribute('fill','var(--primary)')},500)}},30)}
-function resetRobot(){clearInterval(robotAnim);const robot=document.getElementById('robotBody');const wall=document.getElementById('wall');robot.setAttribute('x',50);robot.setAttribute('y',40);robot.setAttribute('fill','var(--primary)');wall.setAttribute('opacity','0')}
+function animateRobot(){const group=document.getElementById('robotGroup');const body=document.getElementById('robotBody');const wall=document.getElementById('wall');wall.setAttribute('opacity','1');let pos=50;robotAnim=setInterval(()=>{pos+=2;if(pos>=260){clearInterval(robotAnim);body.setAttribute('fill','var(--warn)');setTimeout(()=>{group.setAttribute('transform','translate(0,-20)');body.setAttribute('fill','var(--primary)')},500);return}group.setAttribute('transform','translate('+(pos-50)+',0)')},30)}
+function resetRobot(){clearInterval(robotAnim);const group=document.getElementById('robotGroup');const body=document.getElementById('robotBody');const wall=document.getElementById('wall');group.setAttribute('transform','');body.setAttribute('x',50);body.setAttribute('y',40);body.setAttribute('fill','var(--primary)');wall.setAttribute('opacity','0')}
 let pedTimeout;
 function pedestrianCross(){const car=document.getElementById('pedCar');const walk=document.getElementById('pedWalk');const cd=document.getElementById('pedCountdown');car.classList.remove('on');walk.classList.add('on');cd.style.display='block';let t=12;cd.textContent=t;const interval=setInterval(()=>{t--;cd.textContent=t;if(t<=0){clearInterval(interval);walk.classList.remove('on');car.classList.add('on');cd.style.display='none'}},1000);pedTimeout=interval}
 function resetPedestrian(){clearInterval(pedTimeout);const car=document.getElementById('pedCar');const walk=document.getElementById('pedWalk');const cd=document.getElementById('pedCountdown');car.classList.remove('on');walk.classList.remove('on');cd.style.display='none'}
