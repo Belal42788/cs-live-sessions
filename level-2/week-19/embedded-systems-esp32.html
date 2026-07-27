@@ -624,6 +624,80 @@
             height: 100%
         }
 
+        .cross-lights {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cross-light {
+            font-weight: 700;
+            font-size: .85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cross-light .indicator {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--dim);
+            transition: var(--transition);
+        }
+
+        .cross-light .indicator.green {
+            background: var(--success);
+            box-shadow: 0 0 12px rgba(0, 212, 170, .4);
+        }
+
+        .cross-light .indicator.red {
+            background: var(--danger);
+            box-shadow: 0 0 12px rgba(255, 71, 87, .4);
+        }
+
+        .cross-road {
+            background: #1a2332;
+            border-radius: 10px;
+            height: 56px;
+            position: relative;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .cross-road::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: repeating-linear-gradient(90deg, #fff 0 18px, transparent 18px 36px);
+            transform: translateY(-50%);
+        }
+
+        .cross-walker {
+            position: absolute;
+            top: 10px;
+            left: 4%;
+            font-size: 1.6rem;
+            transition: left 2.4s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .cross-walker.active {
+            left: 88%;
+        }
+
+        .cross-status {
+            font-family: monospace;
+            font-size: .7rem;
+            color: var(--dim);
+            text-align: center;
+            padding: 6px 0;
+        }
+
         .code-panel .code-header {
             display: flex;
             justify-content: space-between;
@@ -1758,36 +1832,25 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
                 <div class="activity-grid">
                     <div class="demo-panel">
                         <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 محاكاة ممر المشاة</div>
-                        <div style="display:flex;gap:30px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px 0">
-                            <div style="text-align:center">
-                                <p style="color:var(--dim);margin-bottom:8px;font-size:13px">🚗 عربيات</p>
-                                <div class="tl-light red" id="pedCar"></div>
-                                <div style="font-size:12px;font-weight:700;margin-top:6px;min-height:18px" id="pedCarLabel"></div>
-                            </div>
-                            <div style="text-align:center">
-                                <button class="replay-btn" id="pedCrossBtn"
-                                    style="background:var(--warn);color:var(--bg);font-size:16px;padding:16px 24px">🚶 اضغط</button>
-                                <div id="pedCountdown"
-                                    style="margin-top:10px;font-size:22px;font-weight:900;color:var(--accent);display:none">
-                                </div>
-                            </div>
-                            <div style="text-align:center">
-                                <p style="color:var(--dim);margin-bottom:8px;font-size:13px">🚶 مشاة</p>
-                                <div class="tl-light green" id="pedWalk"></div>
-                                <div style="font-size:12px;font-weight:700;margin-top:6px;min-height:18px" id="pedWalkLabel"></div>
-                            </div>
+                        <div class="cross-lights">
+                            <span class="cross-light">🚗 عربيات: <span class="indicator green" id="crossCar"></span> <span id="crossCarLabel" style="font-weight:700;font-size:.8rem;color:var(--success)">GREEN</span></span>
+                            <span class="cross-light">🚶 مشاة: <span class="indicator red" id="crossPed"></span> <span id="crossPedLabel" style="font-weight:700;font-size:.8rem;color:var(--danger)">RED</span></span>
                         </div>
+                        <div class="cross-road">
+                            <div class="cross-walker" id="crossWalker">🚶</div>
+                        </div>
+                        <div class="cross-status" id="crossStatus">🚗 عربيات ماشية — استنى عشان تعدي</div>
                         <div class="activity-controls">
-                            <button class="replay-btn" id="pedResetBtn" style="font-size:13px">↺ إعادة</button>
-                            <span class="status" id="pedStatus">جاهز</span>
+                            <button class="replay-btn" id="crossBtn" style="background:var(--warn);color:var(--bg);font-size:14px;padding:10px 20px">🚦 اضغط عشان تعدي</button>
+                            <span class="status" id="crossStep">جاهز</span>
                         </div>
                     </div>
                     <div class="code-panel">
                         <div class="code-header">
-                            <span class="filename">📄 pedestrian_crossing.py</span>
-                            <span class="line-hint" id="pedLineHint">▶ سطر —</span>
+                            <span class="filename">📄 crossing.py</span>
+                            <span class="line-hint" id="crossLineHint">▶ سطر —</span>
                         </div>
-                        <div class="code-body" id="pedCode">
+                        <div class="code-body" id="crossCode">
 <span class="cl" data-line="0"><span class="kw">from</span> machine <span class="kw">import</span> Pin</span>
 <span class="cl" data-line="1"><span class="kw">import</span> time</span>
 <span class="cl" data-line="2"></span>
@@ -1982,8 +2045,6 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
         function animateRobot() { const group = document.getElementById('robotGroup'); const body = document.getElementById('robotBody'); const wall = document.getElementById('wall'); wall.setAttribute('opacity', '1'); let pos = 50; robotAnim = setInterval(() => { pos += 2; if (pos >= 260) { clearInterval(robotAnim); body.setAttribute('fill', 'var(--warn)'); return } group.setAttribute('transform', 'translate(' + (pos - 50) + ',0)') }, 30) }
         function resetRobot() { clearInterval(robotAnim); const group = document.getElementById('robotGroup'); const body = document.getElementById('robotBody'); const wall = document.getElementById('wall'); group.removeAttribute('transform'); body.setAttribute('fill', 'var(--primary)'); wall.setAttribute('opacity', '0') }
         let pedTimeout;
-        function pedestrianCross() { const car = document.getElementById('pedCar'); const walk = document.getElementById('pedWalk'); const cd = document.getElementById('pedCountdown'); car.classList.remove('red'); car.classList.add('green'); walk.classList.remove('green'); walk.classList.add('red'); car.classList.add('on'); walk.classList.add('on'); cd.style.display = 'block'; let t = 12; cd.textContent = t; const interval = setInterval(() => { t--; cd.textContent = t; if (t <= 0) { clearInterval(interval); car.classList.remove('green'); car.classList.add('red'); walk.classList.remove('red'); walk.classList.add('green'); cd.style.display = 'none' } }, 1000); pedTimeout = interval }
-        function resetPedestrian() { clearInterval(pedTimeout); const car = document.getElementById('pedCar'); const walk = document.getElementById('pedWalk'); const cd = document.getElementById('pedCountdown'); car.classList.remove('on', 'green'); car.classList.add('red'); walk.classList.remove('on', 'red'); walk.classList.add('green'); cd.style.display = 'none' }
         function animateJourney() { const boxes = ['jBtn', 'jEsp', 'jLed']; const arrows = ['jArr1', 'jArr2']; boxes.forEach(b => document.getElementById(b).classList.remove('active')); arrows.forEach(a => document.getElementById(a).style.color = 'var(--dim)'); let i = 0; function next() { if (i >= boxes.length) return; document.getElementById(boxes[i]).classList.add('active'); if (i > 0) document.getElementById(arrows[i - 1]).style.color = 'var(--accent)'; setTimeout(() => { i++; next() }, 800) } next() }
         function resetJourney() { ['jBtn', 'jEsp', 'jLed'].forEach(b => document.getElementById(b).classList.remove('active'));['jArr1', 'jArr2'].forEach(a => document.getElementById(a).style.color = 'var(--dim)') }
         let journeyOrderIdx = 0; const journeyCorrect = [0, 1, 2, 3];
@@ -2051,55 +2112,66 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
         document.getElementById('tlStartBtn').addEventListener('click', () => { if (tlRunning) return; tlRunning = true; tlIdx = 0; updateTL(); const speed = document.getElementById('tlSpeed').value; tlInterval = setInterval(nextTL, 2000 / speed); document.getElementById('tlStartBtn').textContent = '▶ شغال...'; });
         document.getElementById('tlStopBtn').addEventListener('click', () => { clearInterval(tlInterval); tlRunning = false; document.getElementById('tlStartBtn').textContent = '▶ ابدأ'; document.getElementById('tlRed').classList.remove('on'); document.getElementById('tlYellow').classList.remove('on'); document.getElementById('tlGreen').classList.remove('on'); document.getElementById('tlStatusText').textContent = ''; document.getElementById('tlStepNum').textContent = 'خطوة 0'; clearHL('tlCode'); document.getElementById('tlLineHint').textContent = '▶ سطر —'; });
 
-        /* ===== PEDESTRIAN WITH CODE ===== */
-        let pedActive = false, pedCrossTimeout = null;
-        function setPedState(normal) {
-            const car = document.getElementById('pedCar'), walk = document.getElementById('pedWalk');
-            const carLabel = document.getElementById('pedCarLabel'), walkLabel = document.getElementById('pedWalkLabel');
-            clearHL('pedCode');
+        /* ===== PEDESTRIAN CROSSING ===== */
+        let crossActive = false;
+        const crossCar = document.getElementById('crossCar');
+        const crossPed = document.getElementById('crossPed');
+        const crossCarLabel = document.getElementById('crossCarLabel');
+        const crossPedLabel = document.getElementById('crossPedLabel');
+        const crossWalker = document.getElementById('crossWalker');
+        const crossStatus = document.getElementById('crossStatus');
+        const crossStep = document.getElementById('crossStep');
+
+        function setCross(normal) {
+            document.querySelectorAll('#crossCode .cl').forEach(el => el.classList.remove('hl'));
+            let lines = [];
             if (normal) {
-                car.className = 'tl-light green'; carLabel.textContent = '🟢 أخضر'; carLabel.style.color = 'var(--success)';
-                walk.className = 'tl-light red'; walkLabel.textContent = '🔴 أحمر'; walkLabel.style.color = 'var(--danger)';
-                document.getElementById('pedStatus').textContent = '🚗 عربيات تمشي — استن';
-                hlCode('pedCode', [9, 10, 11, 12], 'pedLineHint');
+                crossCar.className = 'indicator green';
+                crossCarLabel.textContent = 'GREEN';
+                crossCarLabel.style.color = 'var(--success)';
+                crossPed.className = 'indicator red';
+                crossPedLabel.textContent = 'RED';
+                crossPedLabel.style.color = 'var(--danger)';
+                crossWalker.classList.remove('active');
+                crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي';
+                crossStep.textContent = 'الوضع الطبيعي';
+                lines = [9, 10, 11, 12];
             } else {
-                car.className = 'tl-light red'; carLabel.textContent = '🔴 أحمر'; carLabel.style.color = 'var(--danger)';
-                walk.className = 'tl-light green'; walkLabel.textContent = '🟢 أخضر'; walkLabel.style.color = 'var(--success)';
-                document.getElementById('pedStatus').textContent = '🚶 مشاة بيعدي!';
-                hlCode('pedCode', [14, 15, 16, 17], 'pedLineHint');
+                crossCar.className = 'indicator red';
+                crossCarLabel.textContent = 'RED';
+                crossCarLabel.style.color = 'var(--danger)';
+                crossPed.className = 'indicator green';
+                crossPedLabel.textContent = 'GREEN';
+                crossPedLabel.style.color = 'var(--success)';
+                crossWalker.classList.add('active');
+                crossStatus.textContent = '🚶 بتعدي دلوقتي!';
+                crossStep.textContent = 'عبور';
+                lines = [14, 15, 16, 17];
             }
+            lines.forEach(ln => {
+                document.querySelector('#crossCode .cl[data-line="' + ln + '"]')?.classList.add('hl');
+            });
+            const hint = document.getElementById('crossLineHint');
+            if (lines.length) {
+                const first = lines[0], last = lines[lines.length - 1];
+                hint.textContent = '▶ سطر ' + (first + 1) + (first !== last ? '–' + (last + 1) : '');
+            } else hint.textContent = '▶ سطر —';
         }
-        function resetPed() {
-            clearTimeout(pedCrossTimeout); pedActive = false;
-            const car = document.getElementById('pedCar'), walk = document.getElementById('pedWalk');
-            car.className = 'tl-light green'; walk.className = 'tl-light red';
-            document.getElementById('pedCarLabel').textContent = '🟢 أخضر';
-            document.getElementById('pedWalkLabel').textContent = '🔴 أحمر';
-            document.getElementById('pedCarLabel').style.color = 'var(--success)';
-            document.getElementById('pedWalkLabel').style.color = 'var(--danger)';
-            document.getElementById('pedCountdown').style.display = 'none';
-            document.getElementById('pedCrossBtn').textContent = '🚶 اضغط';
-            document.getElementById('pedStatus').textContent = 'جاهز';
-            clearHL('pedCode'); document.getElementById('pedLineHint').textContent = '▶ سطر —';
-        }
-        document.getElementById('pedCrossBtn').addEventListener('click', () => {
-            if (pedActive) return; pedActive = true;
-            setPedState(false);
-            hlCode('pedCode', [20, 21, 22, 23], 'pedLineHint');
-            document.getElementById('pedStatus').textContent = '⏳ عبور — 3 ثواني';
-            document.getElementById('pedCrossBtn').textContent = '⏳ بيعدي...';
-            const cd = document.getElementById('pedCountdown'); cd.style.display = 'block'; let t = 3; cd.textContent = t;
-            const cdInterval = setInterval(() => { t--; cd.textContent = t; if (t <= 0) clearInterval(cdInterval); }, 1000);
-            pedCrossTimeout = setTimeout(() => {
-                setPedState(true);
-                hlCode('pedCode', [25, 26], 'pedLineHint');
-                document.getElementById('pedCountdown').style.display = 'none';
-                document.getElementById('pedCrossBtn').textContent = '🚶 اضغط';
-                document.getElementById('pedStatus').textContent = '✅ خلص — عربيات تاني';
-                pedActive = false;
-            }, 3000);
+        setCross(true);
+
+        document.getElementById('crossBtn').addEventListener('click', () => {
+            if (crossActive) return;
+            crossActive = true;
+            setCross(false);
+            document.getElementById('crossBtn').textContent = '⏳ بيعدي...';
+            setTimeout(() => {
+                setCross(true);
+                crossActive = false;
+                document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
+                crossStatus.textContent = '✅ العبور خلص — عربيات تاني';
+                setTimeout(() => { crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي'; }, 1000);
+            }, 2800);
         });
-        document.getElementById('pedResetBtn').addEventListener('click', resetPed);
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
 </body>
