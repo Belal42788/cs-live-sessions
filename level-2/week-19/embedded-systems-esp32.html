@@ -814,6 +814,74 @@
             font-weight: 500
         }
 
+        .sta-cycle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 16px 0;
+            padding: 16px;
+            background: rgba(255, 255, 255, .03);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .sta-step {
+            text-align: center;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .02);
+            transition: all .4s ease;
+            min-width: 100px
+        }
+
+        .sta-step.active {
+            border-color: var(--accent);
+            background: rgba(0, 212, 170, .08);
+            box-shadow: 0 0 20px rgba(0, 212, 170, .15)
+        }
+
+        .sta-step.active .sta-icon {
+            transform: scale(1.2)
+        }
+
+        .sta-step.active .sta-label {
+            color: var(--accent)
+        }
+
+        .sta-icon {
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+            transition: transform .3s
+        }
+
+        .sta-label {
+            font-family: monospace;
+            font-weight: 700;
+            font-size: .8rem;
+            color: var(--dim);
+            letter-spacing: .05em;
+            transition: color .3s
+        }
+
+        .sta-desc {
+            font-size: .7rem;
+            color: var(--dim);
+            margin-top: 2px
+        }
+
+        .sta-arrow {
+            font-size: 1.4rem;
+            color: var(--dim);
+            font-weight: 700;
+            transition: color .3s
+        }
+
+        .sta-arrow.lit {
+            color: var(--accent)
+        }
+
         .door-scene {
             display: flex;
             align-items: center;
@@ -1299,6 +1367,25 @@
 
             <div class="diagram-container" style="margin-top:30px">
                 <div class="diagram-title">مثال تاني: الباب الأوتوماتيك — شوف الكود بيشتغل خطوة بخطوة</div>
+                <div class="sta-cycle" id="doorCycle">
+                    <div class="sta-step" id="doorSense">
+                        <div class="sta-icon">👀</div>
+                        <div class="sta-label">SENSE</div>
+                        <div class="sta-desc">قراءة الحساس</div>
+                    </div>
+                    <div class="sta-arrow">→</div>
+                    <div class="sta-step" id="doorThink">
+                        <div class="sta-icon">🧠</div>
+                        <div class="sta-label">THINK</div>
+                        <div class="sta-desc">اتخاذ القرار</div>
+                    </div>
+                    <div class="sta-arrow">→</div>
+                    <div class="sta-step" id="doorAct">
+                        <div class="sta-icon">🦾</div>
+                        <div class="sta-label">ACT</div>
+                        <div class="sta-desc">فتح / إغلاق الباب</div>
+                    </div>
+                </div>
                 <div class="activity-grid">
                     <div class="demo-panel">
                         <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 محاكاة الباب</div>
@@ -2085,9 +2172,31 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
             if (step.walkerX === 0) walker.style.transform = 'translateX(0)';
             else if (step.walkerX === 1) walker.style.transform = 'translateX(-30px)';
             else walker.style.transform = 'translateX(-80px)';
+            updateDoorCycle(s);
+        }
+        function updateDoorCycle(s) {
+            const sense = document.getElementById('doorSense');
+            const think = document.getElementById('doorThink');
+            const act = document.getElementById('doorAct');
+            const arrows = document.querySelectorAll('#doorCycle .sta-arrow');
+            sense.classList.remove('active');
+            think.classList.remove('active');
+            act.classList.remove('active');
+            arrows.forEach(a => a.classList.remove('lit'));
+            if (s === 2) {
+                sense.classList.add('active');
+            } else if (s === 3) {
+                think.classList.add('active');
+                act.classList.add('active');
+                arrows[0].classList.add('lit');
+                arrows[1].classList.add('lit');
+            } else if (s === 4) {
+                act.classList.add('active');
+                arrows[1].classList.add('lit');
+            }
         }
         function nextDoorStep() { if (doorStep >= doorSteps.length - 1) { if (doorIsAuto) { doorStep = -1; setDoorStep(0); } else { document.getElementById('doorStatus').textContent = '✅ خلصت! اضغط إعادة عشان تجرّب تاني'; } return; } setDoorStep(doorStep + 1); }
-        function resetDoor() { if (doorAutoTimer) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } doorStep = -1; clearHL('doorCode'); document.getElementById('doorLineHint').textContent = '▶ سطر —'; document.getElementById('doorStatus').textContent = '🚪 الباب مقفل — في حد بيблиّك؟'; document.getElementById('doorStepCounter').textContent = 'خطوة 0/5'; document.getElementById('doorScene').classList.remove('open'); document.getElementById('doorWalker').style.transform = 'translateX(0)'; }
+        function resetDoor() { if (doorAutoTimer) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } doorStep = -1; clearHL('doorCode'); document.getElementById('doorLineHint').textContent = '▶ سطر —'; document.getElementById('doorStatus').textContent = '🚪 الباب مقفل — في حد بيблиّك؟'; document.getElementById('doorStepCounter').textContent = 'خطوة 0/5'; document.getElementById('doorScene').classList.remove('open'); document.getElementById('doorWalker').style.transform = 'translateX(0)'; updateDoorCycle(-1); }
         document.getElementById('doorStepBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } if (doorStep >= doorSteps.length - 1) { resetDoor(); setTimeout(() => nextDoorStep(), 200); } else nextDoorStep(); });
         document.getElementById('doorAutoBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; return; } if (doorStep >= doorSteps.length - 1) resetDoor(); if (doorStep === -1) setDoorStep(0); doorIsAuto = true; document.getElementById('doorAutoBtn').textContent = '⏹ إيقاف'; doorAutoTimer = setInterval(() => { if (doorStep >= doorSteps.length - 1) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; document.getElementById('doorStatus').textContent = '🔄 خلصت! اضغط شغل تاني عشان تتكرر'; return; } nextDoorStep(); }, 1800); });
         document.getElementById('doorResetBtn').addEventListener('click', resetDoor);
