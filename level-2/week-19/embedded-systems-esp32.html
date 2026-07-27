@@ -312,21 +312,21 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overf
 <rect x="100" y="20" width="200" height="160" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
 <text x="200" y="15" fill="var(--accent)" font-size="12" font-weight="bold" text-anchor="middle" font-family="Cairo">ESP32 Board</text>
 <g id="espPins">
-<rect x="120" y="40" width="30" height="15" rx="3" fill="var(--primary)" class="pin" onclick="showPin('gpio')" style="cursor:pointer"/>
-<rect x="120" y="60" width="30" height="15" rx="3" fill="var(--danger)" class="pin" onclick="showPin('gnd')" style="cursor:pointer"/>
-<rect x="120" y="80" width="30" height="15" rx="3" fill="var(--accent)" class="pin" onclick="showPin('vin')" style="cursor:pointer"/>
-<rect x="120" y="100" width="30" height="15" rx="3" fill="var(--warn)" class="pin" onclick="showPin('3v3')" style="cursor:pointer"/>
-<rect x="250" y="40" width="30" height="15" rx="3" fill="var(--s5)" class="pin" onclick="showPin('adc')" style="cursor:pointer"/>
-<rect x="250" y="60" width="30" height="15" rx="3" fill="var(--s3)" class="pin" onclick="showPin('touch')" style="cursor:pointer"/>
-<rect x="250" y="80" width="30" height="15" rx="3" fill="var(--s1)" class="pin" onclick="showPin('txrx')" style="cursor:pointer"/>
+<rect x="120" y="40" width="55" height="18" rx="4" fill="var(--primary)" class="pin" onclick="showPin('gpio')" style="cursor:pointer"/>
+<rect x="120" y="65" width="55" height="18" rx="4" fill="var(--danger)" class="pin" onclick="showPin('gnd')" style="cursor:pointer"/>
+<rect x="120" y="90" width="55" height="18" rx="4" fill="var(--accent)" class="pin" onclick="showPin('vin')" style="cursor:pointer"/>
+<rect x="120" y="115" width="55" height="18" rx="4" fill="var(--warn)" class="pin" onclick="showPin('3v3')" style="cursor:pointer"/>
+<rect x="225" y="40" width="55" height="18" rx="4" fill="var(--s5)" class="pin" onclick="showPin('adc')" style="cursor:pointer"/>
+<rect x="225" y="65" width="55" height="18" rx="4" fill="var(--s3)" class="pin" onclick="showPin('touch')" style="cursor:pointer"/>
+<rect x="225" y="90" width="55" height="18" rx="4" fill="var(--s1)" class="pin" onclick="showPin('txrx')" style="cursor:pointer"/>
+<text x="147" y="53" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">GPIO</text>
+<text x="147" y="78" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">GND</text>
+<text x="147" y="103" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">VIN</text>
+<text x="147" y="128" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">3.3V</text>
+<text x="252" y="53" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">ADC</text>
+<text x="252" y="78" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">Touch</text>
+<text x="252" y="103" fill="#fff" font-size="9" font-weight="700" text-anchor="middle" font-family="Cairo" pointer-events="none">TX/RX</text>
 </g>
-<text x="115" y="52" fill="var(--dim)" font-size="8" text-anchor="end" font-family="Cairo">GPIO</text>
-<text x="115" y="72" fill="var(--dim)" font-size="8" text-anchor="end" font-family="Cairo">GND</text>
-<text x="115" y="92" fill="var(--dim)" font-size="8" text-anchor="end" font-family="Cairo">VIN</text>
-<text x="115" y="112" fill="var(--dim)" font-size="8" text-anchor="end" font-family="Cairo">3.3V</text>
-<text x="295" y="52" fill="var(--dim)" font-size="8" text-anchor="start" font-family="Cairo">ADC</text>
-<text x="295" y="72" fill="var(--dim)" font-size="8" text-anchor="start" font-family="Cairo">Touch</text>
-<text x="295" y="92" fill="var(--dim)" font-size="8" text-anchor="start" font-family="Cairo">TX/RX</text>
 </svg>
 <div id="pinInfo" style="margin-top:15px;padding:15px;background:rgba(0,212,170,.1);border-radius:12px;display:none">
 <p id="pinText" style="color:var(--accent)"></p>
