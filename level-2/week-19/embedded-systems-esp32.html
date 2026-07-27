@@ -2233,7 +2233,7 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
         const crossStatus = document.getElementById('crossStatus');
         const crossStep = document.getElementById('crossStep');
 
-        function setCross(normal) {
+        function setLights(normal) {
             document.querySelectorAll('#crossCode .cl').forEach(el => el.classList.remove('hl'));
             let lines = [];
             if (normal) {
@@ -2243,9 +2243,6 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
                 crossPed.className = 'indicator red';
                 crossPedLabel.textContent = 'RED';
                 crossPedLabel.style.color = 'var(--danger)';
-                crossWalker.classList.remove('active');
-                crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي';
-                crossStep.textContent = 'الوضع الطبيعي';
                 lines = [9, 10, 11, 12];
             } else {
                 crossCar.className = 'indicator red';
@@ -2254,9 +2251,6 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
                 crossPed.className = 'indicator green';
                 crossPedLabel.textContent = 'GREEN';
                 crossPedLabel.style.color = 'var(--success)';
-                crossWalker.classList.add('active');
-                crossStatus.textContent = '🚶 بتعدي دلوقتي!';
-                crossStep.textContent = 'عبور';
                 lines = [14, 15, 16, 17];
             }
             lines.forEach(ln => {
@@ -2268,27 +2262,31 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
                 hint.textContent = '▶ سطر ' + (first + 1) + (first !== last ? '–' + (last + 1) : '');
             } else hint.textContent = '▶ سطر —';
         }
-        setCross(true);
+        function resetCross() {
+            crossActive = false;
+            crossWalker.classList.remove('active');
+            setLights(true);
+            document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
+            crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي';
+            crossStep.textContent = 'جاهز';
+        }
+        resetCross();
 
         document.getElementById('crossBtn').addEventListener('click', () => {
             if (crossActive) return;
             crossActive = true;
-            setCross(false);
+            crossWalker.classList.add('active');
             document.getElementById('crossBtn').textContent = '⏳ بيعدي...';
+            crossStatus.textContent = '🚶 بتعدي دلوقتي!';
+            crossStep.textContent = 'عبور';
             setTimeout(() => {
-                crossActive = false;
-                document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
-                crossStatus.textContent = '✅ عدّى — اضغط إعادة عشان يرجع';
+                setLights(false);
+                document.getElementById('crossBtn').textContent = '🔄 حطّيه تاني';
+                crossStatus.textContent = '✅ عدّى — الأضواء اتغيّرت';
                 crossStep.textContent = 'خلص';
             }, 2800);
         });
-        document.getElementById('crossResetBtn').addEventListener('click', () => {
-            crossActive = false;
-            setCross(true);
-            document.getElementById('crossBtn').textContent = '🚦 اضغط عشان تعدي';
-            crossStatus.textContent = '🚗 عربيات ماشية — استنى عشان تعدي';
-            crossStep.textContent = 'جاهز';
-        });
+        document.getElementById('crossResetBtn').addEventListener('click', resetCross);
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
 </body>
