@@ -2155,10 +2155,9 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
 
         let doorStep = -1, doorAutoTimer = null, doorIsAuto = false;
         const doorSteps = [
-            { lines: [0, 1], desc: '📦 استيراد المكتبات', doorOpen: false, walkerX: 0 },
-            { lines: [3, 4, 5], desc: '🔧 إعداد الأرجل — حساس + موتور', doorOpen: false, walkerX: 0 },
             { lines: [7, 8, 9], desc: '👀 SENSE — قراءة حساس الحركة', doorOpen: false, walkerX: 0 },
-            { lines: [11, 12, 13, 14, 15], desc: '🧠 THINK + 🦾 ACT — فتح الباب!', doorOpen: true, walkerX: 1 },
+            { lines: [11, 12], desc: '🧠 THINK — اتخاذ القرار', doorOpen: false, walkerX: 0 },
+            { lines: [13, 14, 15], desc: '🦾 ACT — فتح الباب', doorOpen: true, walkerX: 1 },
             { lines: [16, 17, 18, 19], desc: '🦾 ACT — إغلاق الباب بعد 3 ثواني', doorOpen: false, walkerX: 2 }
         ];
         function setDoorStep(s) {
@@ -2185,20 +2184,18 @@ time.<span style="color:#82aaff">sleep</span>(<span style="color:#f78c6c">2</spa
             think.classList.remove('active');
             act.classList.remove('active');
             arrows.forEach(a => a.classList.remove('lit'));
-            if (s === 2) {
+            if (s === 0) {
                 sense.classList.add('active');
-            } else if (s === 3) {
+            } else if (s === 1) {
                 think.classList.add('active');
-                act.classList.add('active');
                 arrows[0].classList.add('lit');
-                arrows[1].classList.add('lit');
-            } else if (s === 4) {
+            } else if (s === 2 || s === 3) {
                 act.classList.add('active');
                 arrows[1].classList.add('lit');
             }
         }
         function nextDoorStep() { if (doorStep >= doorSteps.length - 1) { if (doorIsAuto) { doorStep = -1; setDoorStep(0); } else { document.getElementById('doorStatus').textContent = '✅ خلصت! اضغط إعادة عشان تجرّب تاني'; } return; } setDoorStep(doorStep + 1); }
-        function resetDoor() { if (doorAutoTimer) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } doorStep = -1; clearHL('doorCode'); document.getElementById('doorLineHint').textContent = '▶ سطر —'; document.getElementById('doorStatus').textContent = '🚪 الباب مقفل — في حد بيблиّك؟'; document.getElementById('doorStepCounter').textContent = 'خطوة 0/5'; document.getElementById('doorScene').classList.remove('open'); document.getElementById('doorWalker').style.transform = 'translateX(0)'; updateDoorCycle(-1); }
+        function resetDoor() { if (doorAutoTimer) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } doorStep = -1; clearHL('doorCode'); document.getElementById('doorLineHint').textContent = '▶ سطر —'; document.getElementById('doorStatus').textContent = '🚪 الباب مقفل — في حد بيблиّك؟'; document.getElementById('doorStepCounter').textContent = 'خطوة 0/4'; document.getElementById('doorScene').classList.remove('open'); document.getElementById('doorWalker').style.transform = 'translateX(0)'; updateDoorCycle(-1); }
         document.getElementById('doorStepBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; } if (doorStep >= doorSteps.length - 1) { resetDoor(); setTimeout(() => nextDoorStep(), 200); } else nextDoorStep(); });
         document.getElementById('doorAutoBtn').addEventListener('click', () => { if (doorIsAuto) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; return; } if (doorStep >= doorSteps.length - 1) resetDoor(); if (doorStep === -1) setDoorStep(0); doorIsAuto = true; document.getElementById('doorAutoBtn').textContent = '⏹ إيقاف'; doorAutoTimer = setInterval(() => { if (doorStep >= doorSteps.length - 1) { clearInterval(doorAutoTimer); doorAutoTimer = null; doorIsAuto = false; document.getElementById('doorAutoBtn').textContent = '▶ شغل تلقائي'; document.getElementById('doorStatus').textContent = '🔄 خلصت! اضغط شغل تاني عشان تتكرر'; return; } nextDoorStep(); }, 1800); });
         document.getElementById('doorResetBtn').addEventListener('click', resetDoor);
