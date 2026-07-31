@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: Cairo, Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3 id="لينك-الملف-على-جوجل-دوكس"><strong><span dir="rtl">لينك الملف على
+                جوجل دوكس</span></strong></h3>
+    <p><a
+            href="https://docs.google.com/document/d/14jnSAGHQeI3TkVNRNM6yOBqh64WmSKkIqveD-HJiaxk/edit?usp=sharing"><u>https://docs.google.com/document/d/14jnSAGHQeI3TkVNRNM6yOBqh64WmSKkIqveD-HJiaxk/edit?usp=sharing</u></a>
+    </p>
+    <h3 id="task-1"><strong>Task 1</strong></h3>
+    <p><span dir="rtl">التاسك الأول في الحقيقة متقسم لـ</span> <span dir="ltr"></span><strong><span dir="rtl">3 أجزاء
+                مستقلين</span></strong><span dir="ltr"></span><span dir="rtl">، يعني
+            كأنهم 3 واجبات جوه نفس التاسك.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d259eda7c81919def1c394bc590ec"><u>https://chatgpt.com/s/m_6a6d259eda7c81919def1c394bc590ec</u></a>
+    </p>
+    <p><img src="assets/media/image4.png" style="width:6.26772in;height:3.52778in" /><span dir="ltr"></span></p>
+    <h2 id="أول-جزء-cashier-program-python"><strong><span dir="rtl">أول
+                جزء:</span> Cashier Program (Python<span dir="rtl">)</span></strong></h2>
+    <p><span dir="rtl">الفكرة كلها إنك هتعمل برنامج بسيط يمثل كاشير موجود
+            في</span> <span dir="ltr">Future Mall</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني تخيل إن فيه عميل داخل يشتري منتجات، والبرنامج
+            بتاعك هو اللي هيحسب الفاتورة.</span></p>
+    <h3 id="أول-حاجة"><strong><span dir="rtl">أول حاجة</span></strong></h3>
+    <p><span dir="rtl">لازم تحفظ الملف باسم بالشكل ده:</span></p>
+    <p><span dir="ltr">StudentID-Mall.py</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">20231234-Mall.py</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">دي مجرد طريقة لتسمية الملف علشان احنا نعرف الملف بتاع
+            كل طالب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="بعد-كده-تعمل-قائمتين-lists"><strong><span dir="rtl">بعد كده تعمل
+                قائمتين (</span>Lists<span dir="rtl">)</span></strong></h3>
+    <p><span dir="rtl">أول</span> <span dir="ltr">List</span> <span dir="rtl">فيها أسماء المنتجات.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">products = ["Milk", "Bread", "Rice", "Apple",
+            "Juice"]</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وتاني</span> <span dir="ltr">List</span> <span dir="rtl">فيها الأسعار.</span></p>
+    <p><span dir="ltr">prices = [40,25,90,15,35]</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">ليه قائمتين؟</span></p>
+    <p><span dir="rtl">لأن أول عنصر في</span> <span dir="ltr">products</span> <span dir="rtl">لازم يقابله أول عنصر
+            في</span>
+        <span dir="ltr">prices</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">يعني</span></p>
+    <p><span dir="ltr">Milk --&gt; 40</span></p>
+    <p><span dir="ltr">Bread --&gt; 25</span></p>
+    <p><span dir="ltr">Rice --&gt; 90</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وهكذا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="بعد-كده-يبدأ-العميل-يشتري"><strong><span dir="rtl">بعد كده يبدأ
+                العميل يشتري</span></strong></h3>
+    <p><span dir="rtl">المطلوب تستخدم</span> <span dir="ltr">Loop</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">ليه؟</span></p>
+    <p><span dir="rtl">لأن العميل ممكن يشتري منتج واحد أو عشرة.</span></p>
+    <p><span dir="rtl">لو معملتش</span> <span dir="ltr">Loop</span> <span dir="rtl">البرنامج هيسأل مرة واحدة
+            ويقف.</span></p>
+    <p><span dir="rtl">إنما الـ</span> <span dir="ltr">Loop</span> <span dir="rtl">هيفضل يسأل:</span></p>
+    <p><span dir="rtl">اختار منتج</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">ولو العميل خلص يكتب مثلاً:</span></p>
+    <p><span dir="ltr">0</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">فالبرنامج يخرج من الـ</span> <span dir="ltr">Loop</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="حساب-الإجمالي"><strong><span dir="rtl">حساب
+                الإجمالي</span></strong></h3>
+    <p><span dir="rtl">كل مرة العميل يختار منتج،</span></p>
+    <p><span dir="rtl">سعر المنتج يتحط على متغير اسمه مثلاً</span></p>
+    <p><span dir="ltr">total</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">في البداية</span></p>
+    <p><span dir="ltr">total = 0</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو العميل اشترى</span></p>
+    <p><span dir="ltr">Milk = 40</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يبقى</span></p>
+    <p><span dir="ltr">total = 40</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">بعدها اشترى</span></p>
+    <p><span dir="ltr">Rice = 90</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يبقى</span></p>
+    <p><span dir="ltr">total = 130</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وهكذا.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الخصم"><strong><span dir="rtl">الخصم</span></strong></h3>
+    <p><span dir="rtl">بعد ما العميل يخلص شراء،</span></p>
+    <p><span dir="rtl">تبص على قيمة</span></p>
+    <p><span dir="ltr">total</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لو أكبر من</span></p>
+    <p><span dir="ltr">500</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">تعمل خصم</span></p>
+    <p><span dir="ltr">10%</span></p>
+    <p><span dir="rtl">مثلاً</span></p>
+    <p><span dir="rtl">الإجمالي = 600</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الخصم</span></p>
+    <p><span dir="ltr">60</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">والفاتورة النهائية</span></p>
+    <p><span dir="ltr">540</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">أما لو</span></p>
+    <p><span dir="ltr">500</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">أو أقل</span></p>
+    <p><span dir="rtl">فمفيش أي خصم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="طباعة-الفاتورة"><strong><span dir="rtl">طباعة
+                الفاتورة</span></strong></h3>
+    <p><span dir="rtl">في الآخر البرنامج يطبع</span> <span dir="ltr">Receipt</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">ويكون فيها:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اسم المول.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">المنتجات اللي اتشرت.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">السعر قبل الخصم.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">قيمة الخصم.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">السعر النهائي.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">رسالة شكر.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني حاجة شبه:</span></p>
+    <p><span dir="ltr">Future Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Milk</span></p>
+    <p><span dir="ltr">Rice</span></p>
+    <p><span dir="ltr">Bread</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Original Total : 650</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Discount : 65</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Final Total : 585</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Thank you</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="bonus"><strong>Bonus</strong></h3>
+    <p><span dir="rtl">من الأفضل تعمل</span> <span dir="ltr">Function</span>
+        <span dir="rtl">اسمها مثلاً</span>
+    </p>
+    <p><span dir="ltr">calculate_total()</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">ودي تكون مسؤولة عن حساب الإجمالي.</span></p>
+    <p><span dir="rtl">دي مش إجبارية، لكنها</span> <span dir="ltr">Bonus</span> <span dir="rtl">لو عملتها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="احنا-هنقيمك-على-إيه"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h2>
+    <p><span dir="rtl">هو انا مش مهتم بشكل البرنامج قد ما مهتم إن الشروط دي
+            كلها موجودة:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">استخدمت قائمتين.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">عندك 5 منتجات فقط.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">استخدمت</span> <span dir="ltr">Loop</span><span dir="rtl">.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">حسبت الإجمالي صح.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الخصم يشتغل فقط لو المبلغ أكبر من
+                    500.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الفاتورة تطلع كاملة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">البرنامج يشتغل من غير</span> <span dir="ltr">Errors</span><span dir="rtl">.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني لو كل الشروط دي متحققة، فأنت منفذ الجزء الأول
+            صح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الجزء-الثاني-من-task-1-visitors-analysis-microsoft-excel"><strong><span dir="rtl">الجزء الثاني من</span>
+            Task 1: Visitors Analysis (Microsoft
+            Excel<span dir="rtl">)</span></strong></h3>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d25d8a4d48191bc721098e1058599"><u>https://chatgpt.com/s/m_6a6d25d8a4d48191bc721098e1058599</u></a>
+    </p>
+    <p><img src="assets/media/image6.png" style="width:6.26772in;height:3.52778in" /></p>
+    <p><span dir="rtl">الجزء ده ملوش علاقة ببايثون خالص. المطلوب إنك
+            تستخدم</span> <span dir="ltr"><strong>Microsoft Excel</strong></span>
+        <span dir="rtl">علشان تحلل بيانات عدد الزوار في</span> <span dir="ltr">Future Mall</span> <span dir="rtl">خلال
+            أسبوع.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="الفكرة-العامة"><strong><span dir="rtl">الفكرة
+                العامة</span></strong></h2>
+    <p><span dir="rtl">أنت عندك جدول جاهز فيه عدد الزوار لكل يوم في الأسبوع،
+            ومطلوب تطلع منه معلومات واستنتاجات.</span></p>
+    <p><span dir="rtl">الجدول هو:</span></p>
+    <table style="width:25%;">
+        <colgroup>
+            <col style="width: 14%" />
+            <col style="width: 11%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><strong><span dir="rtl">اليوم</span></strong><span dir="ltr"></span>
+                </td>
+                <td style="text-align: center;"><strong><span dir="rtl">عدد
+                            الزوار</span></strong><span dir="ltr"></span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Saturday</span></td>
+                <td style="text-align: center;"><span dir="ltr">1240</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Sunday</span></td>
+                <td style="text-align: center;"><span dir="ltr">860</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Monday</span></td>
+                <td style="text-align: center;"><span dir="ltr">640</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Tuesday</span></td>
+                <td style="text-align: center;"><span dir="ltr">705</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Wednesday</span></td>
+                <td style="text-align: center;"><span dir="ltr">780</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Thursday</span></td>
+                <td style="text-align: center;"><span dir="ltr">1020</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Friday</span></td>
+                <td style="text-align: center;"><span dir="ltr">1460</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <p><span dir="rtl">أنت مش هتجمع البيانات، هي موجودة بالفعل في ال</span>
+        <span dir="ltr">reading material</span><span dir="rtl">. دورك إنك
+            <strong>تحللها</strong></span><span dir="ltr">.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-1---define-the-question"><strong>Step 1 - Define the
+            Question</strong></h2>
+    <p><span dir="rtl">أول حاجة انا عايزك تحدد سؤال.</span></p>
+    <p><span dir="rtl">يعني قبل ما تبدأ التحليل، لازم تقول:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">"أنا عايز أعرف
+            إيه؟"</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">إيه أكتر يوم فيه زوار؟</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">إيه أقل يوم فيه زوار؟</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">الفكرة إن أي</span> <span dir="ltr">Data
+            Analysis</span> <span dir="rtl">بيبدأ بسؤال، وبعدها تبدأ تدور على
+            الإجابة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-2---identify-the-data"><strong>Step 2 - Identify the
+            Data</strong></h2>
+    <p><span dir="rtl">هنا بتوصف البيانات اللي عندك.</span></p>
+    <p><span dir="rtl">يعني تقول:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">عندي عمود فيه أيام الأسبوع.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وعمود فيه عدد الزوار.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">البيانات دي بتغطي أسبوع كامل.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني مجرد وصف للجدول، مش تحليل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-3---analyze-the-data"><strong>Step 3 - Analyze the
+            Data</strong></h2>
+    <p><span dir="rtl">دي أهم خطوة.</span></p>
+    <p><span dir="rtl">هنا هتبدأ تستخدم</span> <span dir="ltr">Excel</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني تبص على الأرقام وتشوف:</span></p>
+    <p><span dir="rtl">مين أكبر رقم؟</span></p>
+    <p><span dir="rtl">مين أصغر رقم؟</span></p>
+    <p><span dir="rtl">تقارن الأيام ببعض.</span></p>
+    <p><span dir="rtl">ولو حبيت ترتب البيانات تصاعدي أو تنازلي
+            ممكن.</span></p>
+    <p><span dir="rtl">وكمان تعمل رسم بياني (</span><span dir="ltr">Column
+            Chart</span><span dir="rtl">).</span></p>
+    <p><span dir="rtl">الفكرة إنك تستخدم أدوات</span> <span dir="ltr">Excel</span> <span dir="rtl">علشان تبقى البيانات
+            أسهل في
+            الفهم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-4---present-the-results"><strong>Step 4 - Present the
+            Results</strong></h2>
+    <p><span dir="rtl">بعد ما خلصت التحليل، تكتب النتائج.</span></p>
+    <p><span dir="rtl">في الملف انا كاتب النتائج الصحيحة بالفعل.</span></p>
+    <p><span dir="rtl">أكبر عدد زوار:</span></p>
+    <p><span dir="ltr">Friday</span></p>
+    <p><span dir="ltr">1460 Visitors</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وأقل عدد زوار:</span></p>
+    <p><span dir="ltr">Monday</span></p>
+    <p><span dir="ltr">640 Visitors</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني المطلوب إنك تعرض النتيجة بشكل واضح داخل ملف
+            الإكسيل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-5---write-the-conclusion"><strong>Step 5 - Write the
+            Conclusion</strong></h2>
+    <p><span dir="rtl">دي أهم نقطة ناس كتير بتغلط فيها.</span></p>
+    <p><span dir="rtl">انا مش عايز أرقام بس.</span></p>
+    <p><span dir="rtl">عايزك تفسر الأرقام.</span></p>
+    <p><span dir="rtl">مثلاً تقول:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">يوم الجمعة هو أكتر يوم فيه زوار.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">يبقى المول ممكن يحتاج موظفين أكتر يوم
+                    الجمعة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">يوم الإثنين أقل يوم، فممكن يعملوا عروض أو خصومات
+                    علشان يجذبوا ناس أكتر.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني المطلوب إنك تستنتج من البيانات، مش مجرد
+            تنقلها.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="إنشاء-column-chart"><strong><span dir="rtl">إنشاء</span> Column
+            Chart</strong></h2>
+    <p><span dir="rtl">بعد كده تعمل رسم بياني.</span></p>
+    <p><span dir="rtl">نوعه:</span></p>
+    <p><strong><span dir="ltr">Column Chart</span></strong></p>
+    <p><span dir="rtl">يعني أعمدة.</span></p>
+    <p><span dir="rtl">هيكون فيه:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">الأيام تحت.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وعدد الزوار على المحور الرأسي.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">لما تبص عليه هتعرف بسرعة مين أعلى يوم ومين أقل يوم
+            بدل ما تقرأ الأرقام واحدة واحدة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="احنا-هنقيمك-على-إيه-1"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h2>
+    <p><span dir="rtl">في الآخر هيشوف إن ملف</span> <span dir="ltr">Excel</span> <span dir="rtl">فيه الحاجات دي:</span>
+    </p>
+    <ul>
+        <li>
+            <p><span dir="rtl">السؤال اللي هتحلل بناءً عليه.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وصف البيانات.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">التحليل.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">النتائج.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الاستنتاج (</span><span dir="ltr">Conclusion</span><span dir="rtl">).</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Column Chart.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">لو كل الحاجات دي موجودة، يبقى الجزء التاني متنفذ
+            صح.</span></p>
+    <p><span dir="rtl">في الرسالة الجاية هشرح <strong>الجزء الثالث من
+            </strong></span><span dir="ltr"><strong>Task 1 (Basic AI Product
+                Classifier)</strong></span> <span dir="rtl">بنفس الطريقة وبكل
+            التفاصيل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="الجزء-الثالث-من-task-1-product-classifier-basic-ai"><strong><span dir="rtl">الجزء الثالث من</span> Task 1:
+            Product Classifier (Basic
+            AI<span dir="rtl">)</span></strong></h2>
+    <p><span dir="ltr"></span></p>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d25ec6d3c8191a7ebfaeae37cefcd"><u>https://chatgpt.com/s/m_6a6d25ec6d3c8191a7ebfaeae37cefcd</u></a>
+    </p>
+    <p><img src="assets/media/image8.png" style="width:6.26772in;height:3.52778in" /></p>
+    <h2 id="الفكرة-العامة-1"><strong><span dir="rtl">الفكرة
+                العامة</span></strong></h2>
+    <p><span dir="rtl">باستخدام البايثون و</span> <span dir="ltr">teachable
+            machine</span> <span dir="rtl">زي ما عملنا زمان في المحاضرات بتاعت
+            ال</span> <span dir="ltr">ai</span></p>
+    <p><span dir="rtl">تخيل إن عندك صور كتير لمنتجات.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">صور تفاح وموز وبرتقال.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">صور طماطم وخيار وجزر.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">صور لبن وجبنة وزبادي.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">أنت عايز الكمبيوتر لما يشوف صورة جديدة
+            يقول:</span></p>
+    <blockquote>
+        <p><span dir="ltr"></span><span dir="rtl">"دي</span> <span dir="ltr">Fruit</span><span dir="rtl">"</span></p>
+    </blockquote>
+    <p><span dir="rtl">أو</span></p>
+    <blockquote>
+        <p><span dir="ltr"></span><span dir="rtl">"دي</span> <span dir="ltr">Vegetable</span><span dir="rtl">"</span>
+        </p>
+    </blockquote>
+    <p><span dir="rtl">أو</span></p>
+    <blockquote>
+        <p><span dir="ltr"></span><span dir="rtl">"دي</span> <span dir="ltr">Dairy</span><span dir="rtl">"</span></p>
+    </blockquote>
+    <p><span dir="rtl">وده هو دور الـ</span> <span dir="ltr"><strong>Image
+                Classifier</strong>.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-1---اختار-3-categories"><strong>Step <span dir="rtl">1 -
+                اختار 3</span> Categories</strong></h2>
+    <p><span dir="rtl">أول حاجة تختار 3 فئات مختلفة.</span></p>
+    <p><span dir="rtl">احنا ادنالك مثال:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">Fruits</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Vegetables</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Dairy Products</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-2---جمع-صور-التدريب-training-images"><strong>Step <span dir="rtl">2 - جمع صور التدريب (</span>Training
+            Images<span dir="rtl">)</span></strong></h2>
+    <p><span dir="rtl">لكل</span> <span dir="ltr">Category</span> <span dir="rtl">لازم تجمع</span> <span
+            dir="ltr"></span><strong><span dir="rtl">10 صور</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">يعني لو اخترت:</span></p>
+    <p><span dir="ltr">Fruits</span></p>
+    <p><span dir="rtl">يبقى تجمع:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تفاح</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">موز</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">برتقال</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">عنب</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr"></span><span dir="rtl">... لحد ما يبقوا 10
+                    صور.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">ولو عندك 3</span> <span dir="ltr">Categories</span>
+        <span dir="rtl">يبقى:</span>
+    </p>
+    <p><span dir="ltr"></span><span dir="rtl">10 صور × 3</span> <span dir="ltr">Categories</span> <span dir="rtl">= 30
+            صورة</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الـ 30 صورة دول اسمهم</span> <span dir="ltr"><strong>Training Dataset</strong>.</span></p>
+    <p><span dir="rtl">دول اللي البرنامج هيتعلم منهم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-3---احتفظ-بصور-للاختبار"><strong>Step <span dir="rtl">3 -
+                احتفظ بصور للاختبار</span></strong></h2>
+    <p><span dir="rtl">دي نقطة مهمة جدًا.</span></p>
+    <p><span dir="rtl">مينفعش تستخدم كل الصور في التدريب.</span></p>
+    <p><span dir="rtl">لازم تسيب</span> <span dir="ltr"></span><strong><span dir="rtl">3 صور على
+                الأقل</span></strong><span dir="ltr"></span> <span dir="rtl">بعيد عن التدريب.</span></p>
+    <p><span dir="rtl">ليه؟</span></p>
+    <p><span dir="rtl">علشان بعد ما البرنامج يتعلم، تمتحنه.</span></p>
+    <p><span dir="rtl">يعني تديله صور عمره ما شافها قبل كده.</span></p>
+    <p><span dir="rtl">لو عرف يصنفها صح يبقى التعلم نجح.</span></p>
+    <p><span dir="rtl">لو استخدمت نفس الصور في التدريب والاختبار، النتيجة مش
+            هتكون حقيقية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-4---كمل-الـ-template"><strong>Step <span dir="rtl">4 - كمل
+                الـ</span> Template</strong></h2>
+    <p><span dir="rtl">احنا مدينك ملف اسمه:</span></p>
+    <p><span dir="ltr">Future_Mall_Product_Classifier_Template.py</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الملف ده فيه كود جاهز.</span></p>
+    <p><span dir="rtl">وجواه أماكن مكتوب فيها:</span></p>
+    <p><span dir="ltr">TODO</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المطلوب منك إنك تكتب الكود <strong>في الأماكن دي
+                فقط</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">ومتعدلش أي حاجة تانية في الملف.</span></p>
+    <p><span dir="rtl">يعني احنا مجهزين معظم المشروع، وأنت هتكمل الأجزاء
+            الناقصة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-5---train-the-classifier"><strong>Step 5 - Train the
+            Classifier</strong></h2>
+    <p><span dir="rtl">بعد ما تكمل الكود وتشغل البرنامج،</span></p>
+    <p><span dir="rtl">هيبدأ يتعلم من الصور اللي جمعتها.</span></p>
+    <p><span dir="rtl">بمعنى إنه يحاول يلاقي الخصائص المشتركة لكل</span>
+        <span dir="ltr">Category</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">يعني يتعلم يفرق بين الفواكه والخضار ومنتجات
+            الألبان.</span></p>
+    <p><span dir="rtl">أنت مش هتكتب قواعد بنفسك، البرنامج هو اللي بيتعلم من
+            الصور.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="step-6---test-the-classifier"><strong>Step 6 - Test the
+            Classifier</strong></h2>
+    <p><span dir="rtl">بعد التدريب،</span></p>
+    <p><span dir="rtl">هتجيب الـ 3 صور اللي مخبيهم من الأول.</span></p>
+    <p><span dir="rtl">وتخلي البرنامج يصنفهم.</span></p>
+    <p><span dir="rtl">لكل صورة لازم تسجل 3 حاجات:</span></p>
+    <h3 id="اسم-الصورة"><strong><span dir="rtl">1. اسم
+                الصورة</span></strong></h3>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">apple_test.jpg</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="النتيجة-prediction"><strong><span dir="rtl">2. النتيجة
+                (</span>Prediction<span dir="rtl">)</span></strong></h3>
+    <p><span dir="rtl">يعني البرنامج قال الصورة دي إيه.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">Fruit</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="نسبة-الثقة-confidence"><strong><span dir="rtl">3. نسبة الثقة
+                (</span>Confidence<span dir="rtl">)</span></strong></h3>
+    <p><span dir="rtl">يعني البرنامج واثق قد إيه من إجابته.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">98%</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">كل ما النسبة تبقى أعلى، يبقى البرنامج واثق أكتر من
+            توقعه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="لو-البرنامج-غلط"><strong><span dir="rtl">لو البرنامج
+                غلط؟</span></strong></h2>
+    <p><span dir="rtl">انا كاتب نقطة مهمة.</span></p>
+    <p><span dir="rtl">لو البرنامج أخطأ،</span></p>
+    <p><strong><span dir="rtl">متخبيش الغلط.</span></strong></p>
+    <p><span dir="rtl">اكتبه عادي.</span></p>
+    <p><span dir="rtl">يعني لو الصورة كانت تفاحة،</span></p>
+    <p><span dir="rtl">والبرنامج قال:</span></p>
+    <p><span dir="ltr">Vegetable</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">سجل النتيجة زي ما هي.</span></p>
+    <p><span dir="rtl">لأن الهدف إنك تعرض نتائج البرنامج، مش لازم تكون كلها
+            صحيحة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="احنا-هنقيمك-على-إيه-2"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h2>
+    <p><span dir="rtl">في الآخر هنتأكد إنك عملت الآتي:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اخترت 3</span> <span dir="ltr">Categories</span>
+                <span dir="rtl">مختلفة.</span>
+            </p>
+        </li>
+        <li>
+            <p><span dir="rtl">لكل</span> <span dir="ltr">Category</span> <span dir="rtl">فيه 10 صور تدريب.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">كملت كل أماكن الـ</span> <span dir="ltr"><strong>TODO</strong>.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">ما غيرتش هيكل الملف الأصلي.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">استخدمت 3 صور للاختبار.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">سجلت اسم كل صورة، والتصنيف، ونسبة
+                    الثقة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">حتى لو فيه تصنيف غلط، سجلته.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="الفكرة-الأساسية-من-الجزء-ده"><strong><span dir="rtl">الفكرة
+                الأساسية من الجزء ده</span></strong></h2>
+    <p><span dir="rtl">احنا مش بنختبرك في بناء نموذج ذكاء اصطناعي من الصفر،
+            لكنه عايزينك تفهم</span> <span dir="ltr"><strong>Workflow</strong></span> <span dir="rtl">بسيط:</span></p>
+    <ol type="1">
+        <li>
+            <p><span dir="rtl">تجمع بيانات (</span><span dir="ltr">Training
+                    Images</span><span dir="rtl">).</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تدرب النموذج عليها.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تختبره على صور جديدة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تسجل النتائج كما ظهرت.</span></p>
+        </li>
+    </ol>
+    <p><span dir="rtl">وده يعتبر أبسط شكل لفكرة</span> <span dir="ltr"><strong>Machine Learning Image
+                Classification</strong></span>
+        <span dir="rtl">الموجودة في الملف.</span><span dir="ltr"></span>
+    </p>
+    <h1 id="task-2-html-web-page-for-future-mall"><strong>Task 2: HTML Web
+            Page for Future Mall</strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d2600b56881919b0e94e3c61c24ee"><u>https://chatgpt.com/s/m_6a6d2600b56881919b0e94e3c61c24ee</u></a>
+    </p>
+    <p><img src="assets/media/image7.png" style="width:6.26772in;height:3.52778in" /></p>
+    <p><span dir="rtl">التاسك ده كله عبارة عن إنك تعمل <strong>صفحة ويب
+                بسيطة</strong></span><span dir="ltr"></span> <span dir="rtl">باستخدام</span> <strong><span
+                dir="ltr">HTML</span> <span dir="rtl">و</span> <span dir="ltr">CSS</span> <span
+                dir="rtl">فقط</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">المطلوب مش موقع كامل، ولا فيه</span> <span dir="ltr">JavaScript</span> <span dir="rtl">أو قواعد
+            بيانات، مجرد صفحة
+            ويب فيها معلومات عن</span> <span dir="ltr">Future Mall</span> <span dir="rtl">وشكلها يكون منظم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="الهدف-من-التاسك"><strong><span dir="rtl">الهدف من
+                التاسك</span></strong></h2>
+    <p><span dir="rtl">انا عايز اشوف إنك فاهم أساسيات الـ</span> <span dir="ltr">HTML</span> <span dir="rtl">والـ</span>
+        <span dir="ltr">CSS</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">يعني تعرف:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تعمل صفحة ويب.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تضيف عنوان.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تكتب فقرة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تعمل</span> <span dir="ltr">List</span><span dir="rtl">.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تحط صورة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تغير شكل الصفحة باستخدام</span> <span dir="ltr">CSS</span><span dir="rtl">.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-1---اسم-الملف"><strong>Step <span dir="rtl">1 - اسم
+                الملف</span></strong></h1>
+    <p><span dir="rtl">أول حاجة تحفظ الملف بالشكل ده:</span></p>
+    <p><span dir="ltr">StudentID-Mall.html</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">20231234-Mall.html</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده مجرد نظام تسمية علشان التسليم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-2---اعمل-الهيكل-الأساسي-للـ-html"><strong>Step <span dir="rtl">2 - اعمل الهيكل الأساسي للـ</span>
+            HTML</strong></h1>
+    <p><span dir="rtl">أي صفحة</span> <span dir="ltr">HTML</span> <span dir="rtl">لازم يبقى فيها جزئين رئيسيين.</span>
+    </p>
+    <h2 id="أول-جزء"><strong><span dir="rtl">أول جزء</span></strong></h2>
+    <p><span dir="ltr">&lt;head&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده الجزء اللي المستخدم مش بيشوفه.</span></p>
+    <p><span dir="rtl">بتحط فيه معلومات عن الصفحة نفسها.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">عنوان الصفحة (</span><span dir="ltr">Title</span><span dir="rtl">)</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">أكواد</span> <span dir="ltr">CSS</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Character Encoding</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Metadata</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني ده يعتبر إعدادات الصفحة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ثاني-جزء"><strong><span dir="rtl">ثاني جزء</span></strong></h2>
+    <p><span dir="ltr">&lt;body&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده أهم جزء.</span></p>
+    <p><span dir="rtl">كل حاجة المستخدم هيشوفها لازم تبقى هنا.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العناوين</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الفقرات</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الصور</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الليست</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">أي محتوى</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">لو كتبت حاجة خارج الـ</span> <span dir="ltr">Body</span> <span dir="rtl">غالبًا مش هتظهر
+            للمستخدم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-3---أضف-العنوان-الرئيسي"><strong>Step <span dir="rtl">3 -
+                أضف العنوان الرئيسي</span></strong></h1>
+    <p><span dir="rtl">احنا طالبين انك تستخدم:</span></p>
+    <p><span dir="ltr">&lt;h1&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده أكبر</span> <span dir="ltr">Heading</span> <span dir="rtl">في</span> <span
+            dir="ltr">HTML</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وتكتب فيه:</span></p>
+    <p><span dir="ltr">Future Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المهم تستخدم</span> <strong><span dir="ltr">H</span><span dir="rtl">1 واحد
+                فقط</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">ليه؟</span></p>
+    <p><span dir="rtl">لأن</span> <span dir="ltr">H</span><span dir="rtl">1
+            بيمثل العنوان الرئيسي للصفحة.</span></p>
+    <p><span dir="rtl">مش المفروض يبقى عندك أكتر من</span> <span dir="ltr">H</span><span dir="rtl">1 في الصفحة
+            دي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-4---اكتب-فقرة-تعريفية"><strong>Step <span dir="rtl">4 -
+                اكتب فقرة تعريفية</span></strong></h1>
+    <p><span dir="rtl">تحت الـ</span> <span dir="ltr">H</span><span dir="rtl">1 مباشرة.</span></p>
+    <p><span dir="rtl">اكتب</span> <span dir="ltr">Paragraph</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">مثلاً تعرف فيها المول.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">إنه مول حديث.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">فيه محلات كتير.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">مطاعم.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">أماكن ترفيه.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">المهم تكون فقرة قصيرة تعرف بالمول.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-5---اعمل-قائمة-بالمحلات"><strong>Step <span dir="rtl">5 -
+                اعمل قائمة بالمحلات</span></strong></h1>
+    <p><span dir="rtl">المطلوب هنا تستخدم:</span></p>
+    <p><span dir="ltr">&lt;ul&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني</span> <span dir="ltr">Unordered
+            List</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني الليست اللي فيها نقاط.</span></p>
+    <p><span dir="rtl">مش أرقام.</span></p>
+    <p><span dir="rtl">وجواها:</span></p>
+    <p><span dir="ltr">&lt;li&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لكل محل.</span></p>
+    <p><span dir="rtl">المطلوب بالظبط:</span></p>
+    <p><strong><span dir="rtl">خمسة محلات.</span></strong></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">Zara</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Nike</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Carrefour</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Samsung</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Starbucks</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">المهم يبقوا خمسة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-6---حط-اللوجو"><strong>Step <span dir="rtl">6 - حط
+                اللوجو</span></strong></h1>
+    <p><span dir="rtl">هنا بيقول:</span></p>
+    <p><span dir="rtl">استخدم اللوجو اللي هتعمله في</span> <span dir="ltr"><strong>Task 4</strong>.</span></p>
+    <p><span dir="rtl">يعني متعملش لوجو جديد.</span></p>
+    <p><span dir="rtl">تحطه باستخدام:</span></p>
+    <p><span dir="ltr">&lt;img&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وتحدد مكان الصورة.</span></p>
+    <p><span dir="rtl">زي:</span></p>
+    <p><span dir="ltr">&lt;img src="future_mall_logo.png"&gt;</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">ولو الصورة في نفس فولدر المشروع هتظهر
+            مباشرة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-7---استخدم-css"><strong>Step <span dir="rtl">7 -
+                استخدم</span> CSS</strong></h1>
+    <p><span dir="rtl">بعد ما خلصت الصفحة.</span></p>
+    <p><span dir="rtl">لازم تغير شكلها.</span></p>
+    <p><span dir="rtl">انا طالب 3 حاجات فقط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="أول-حاجة-1"><strong><span dir="rtl">أول
+                حاجة</span></strong></h2>
+    <p><span dir="rtl">غير لون الخلفية.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">أبيض</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">رمادي فاتح</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">أزرق فاتح</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">أي لون.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ثاني-حاجة"><strong><span dir="rtl">ثاني
+                حاجة</span></strong></h2>
+    <p><span dir="rtl">غير لون عنوان:</span></p>
+    <p><span dir="ltr">Future Mall</span></p>
+    <p><span dir="rtl">يعني تخليه أزرق أو أحمر أو أخضر.</span></p>
+    <p><span dir="rtl">المهم يكون مختلف عن اللون الافتراضي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ثالث-حاجة"><strong><span dir="rtl">ثالث
+                حاجة</span></strong></h2>
+    <p><span dir="rtl">غير نوع الخط.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">Arial</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr">Verdana</span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr">Tahoma</span></p>
+    <p><span dir="rtl">أي</span> <span dir="ltr">Font Family</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="هل-مطلوب-css-خارجي"><strong><span dir="rtl">هل مطلوب</span> CSS
+            <span dir="rtl">خارجي؟</span></strong></h1>
+    <p><span dir="rtl">لا.</span></p>
+    <p><span dir="rtl">مكتوب فقط:</span></p>
+    <blockquote>
+        <p><span dir="ltr">Use CSS Styling</span></p>
+    </blockquote>
+    <p><span dir="rtl">ومحدد ثلاث تغييرات.</span></p>
+    <p><span dir="rtl">المفروض تكتبتها داخل:</span></p>
+    <p><span dir="ltr">&lt;style</span><span dir="rtl">&gt; داخل ال</span>
+        <span dir="ltr">head</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="احنا-هنقيمك-على-إيه-3"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h1>
+    <p><span dir="rtl">في الآخر هيشوف:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ اسم الملف صح.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ فيه</span> <span dir="ltr">Head</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ فيه</span> <span dir="ltr">Body</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ فيه</span> <span dir="ltr">H</span><span dir="rtl">1 واحد.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ فيه</span> <span dir="ltr">Paragraph</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ فيه</span> <span dir="ltr">Unordered List</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الليست فيها 5 محلات
+            بالظبط.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ اللوجو ظاهر.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ غيرت لون
+            الخلفية.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ غيرت لون الـ</span> <span dir="ltr">H</span><span dir="rtl">1.</span>
+    </p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ غيرت نوع الخط.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الصفحة تفتح في المتصفح بدون
+            أي أخطاء.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="العلاقة-بين-task-2-و-task-4"><strong><span dir="rtl">العلاقة
+                بين</span> Task <span dir="rtl">2 و</span> Task <span dir="rtl">4</span></strong></h1>
+    <p><span dir="rtl">في نقطة ناس كتير بتفوتها.</span></p>
+    <p><span dir="rtl">انا طالب انك تستخدم <strong>نفس
+                اللوجو</strong></span><span dir="ltr"></span> <span dir="rtl">اللي
+            هتصممه في</span> <span dir="ltr"><strong>Task 4</strong></span> <span dir="rtl">داخل صفحة الـ</span> <span
+            dir="ltr">HTML</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني متعملش لوجو للويب ولوجو تاني للتصميم.</span></p>
+    <p><span dir="rtl">اعمل لوجو واحد، واستخدمه في الاتنين.</span></p>
+    <p><span dir="rtl">وده معناه إن التاسكات مرتبطة ببعض، مش مستقلة
+            بالكامل.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="task-3-protection-plan-for-future-mall"><strong>Task 3:
+            Protection Plan for Future Mall</strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d26179fbc819195aa62dec9f73bb1"><u>https://chatgpt.com/s/m_6a6d26179fbc819195aa62dec9f73bb1</u></a>
+    </p>
+    <p><img src="assets/media/image2.png" style="width:6.26772in;height:4.18056in" /></p>
+    <p><span dir="rtl">التاسك ده خاص بـ</span> <strong><span dir="ltr">Cybersecurity</span> <span dir="rtl">(الأمن
+                السيبراني)</span></strong><span dir="ltr"></span><span dir="rtl">، لكن
+            على مستوى بسيط جدًا. الفكرة إنك تتخيل إنك مسؤول عن تأمين الأنظمة الموجودة
+            في</span> <span dir="ltr">Future Mall</span><span dir="rtl">، وتكتب خطة
+            حماية لكل نظام.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الهدف-من-التاسك-1"><strong><span dir="rtl">الهدف من
+                التاسك</span></strong></h1>
+    <p><span dir="rtl">انا مش طالب منك تبقى خبير أمن سيبراني.</span></p>
+    <p><span dir="rtl">هو عايز يشوف إنك تقدر:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تحدد خطر (</span><span dir="ltr">Risk</span><span dir="rtl">).</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وتقترح طريقة حماية مناسبة (</span><span dir="ltr">Protection Method</span><span
+                    dir="rtl">).</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وتكتب شوية نصائح للموظفين.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-1---اسم-الملف-1"><strong>Step <span dir="rtl">1 - اسم
+                الملف</span></strong></h1>
+    <p><span dir="rtl">احفظ الملف بنفس طريقة التسمية المطلوبة.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">StudentID-Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">نوع الملف مش محدد في التعليمات، المهم يكون بالاسم
+            المطلوب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-2---اعمل-جدول"><strong>Step <span dir="rtl">2 - اعمل
+                جدول</span></strong></h1>
+    <p><span dir="rtl">المطلوب تعمل جدول فيه</span> <span dir="ltr"></span><strong><span dir="rtl">3
+                أعمدة</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">الأعمدة هي:</span></p>
+    <p><span dir="ltr">| System | Possible Risk | Protection Method
+            |</span></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اسم النظام.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الخطر اللي ممكن يحصل.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">طريقة الحماية.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="هيبقى-فيه-كام-صف"><strong><span dir="rtl">هيبقى فيه كام
+                صف؟</span></strong></h2>
+    <p><span dir="rtl">احنا محددين</span> <span dir="ltr"></span><strong><span dir="rtl">3 صفوف فقط</span></strong><span
+            dir="ltr"></span> <span dir="rtl">لأن عندك 3 أنظمة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="النظام-الأول"><strong><span dir="rtl">النظام
+                الأول</span></strong></h3>
+    <p><span dir="ltr">Free Wi-Fi</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني شبكة الواي فاي المجانية في المول.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="النظام-الثاني"><strong><span dir="rtl">النظام
+                الثاني</span></strong></h3>
+    <p><span dir="ltr">Cashier Device</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني جهاز الكاشير.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="النظام-الثالث"><strong><span dir="rtl">النظام
+                الثالث</span></strong></h3>
+    <p><span dir="ltr">Mall Website</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني موقع المول.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-3---اكتب-خطر-لكل-نظام"><strong>Step <span dir="rtl">3 -
+                اكتب خطر لكل نظام</span></strong></h1>
+    <p><span dir="rtl">كل نظام لازم تكتب له <strong>خطر واحد
+                فقط</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <h2 id="free-wi-fi"><strong>Free Wi-Fi</strong></h2>
+    <p><span dir="rtl">الخطر:</span></p>
+    <p><span dir="rtl">ناس غير مصرح لها تدخل على الشبكة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="cashier-device"><strong>Cashier Device</strong></h2>
+    <p><span dir="rtl">الخطر:</span></p>
+    <p><span dir="rtl">يدخله</span> <span dir="ltr">Virus</span> <span dir="rtl">أو</span> <span
+            dir="ltr">Malware</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="mall-website"><strong>Mall Website</strong></h2>
+    <p><span dir="rtl">الخطر:</span></p>
+    <p><span dir="rtl">حد يحاول يهكر الموقع أو يغير محتواه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الفكرة إن كل نظام له نوع خطر مختلف.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-4---اكتب-طريقة-الحماية"><strong>Step <span dir="rtl">4 -
+                اكتب طريقة الحماية</span></strong></h1>
+    <p><span dir="rtl">بعد ما كتبت الخطر،</span></p>
+    <p><span dir="rtl">لازم تكتب قدامه حل مناسب.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <h2 id="free-wi-fi-1"><strong>Free Wi-Fi</strong></h2>
+    <p><span dir="rtl">الحماية:</span></p>
+    <p><span dir="rtl">استخدام</span> <span dir="ltr">Password</span> <span dir="rtl">قوي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="cashier-device-1"><strong>Cashier Device</strong></h2>
+    <p><span dir="rtl">الحماية:</span></p>
+    <p><span dir="rtl">تثبيت</span> <span dir="ltr">Antivirus</span> <span dir="rtl">وتحديثه باستمرار.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="mall-website-1"><strong>Mall Website</strong></h2>
+    <p><span dir="rtl">الحماية:</span></p>
+    <p><span dir="rtl">استخدام</span> <span dir="ltr">HTTPS</span> <span dir="rtl">وكلمة مرور قوية للأدمن.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المهم يكون الحل منطقي ومناسب للخطر اللي
+            كتبته.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-5---اكتب-3-نصائح-للموظفين"><strong>Step <span dir="rtl">5 -
+                اكتب 3 نصائح للموظفين</span></strong></h1>
+    <p><span dir="rtl">بعد الجدول،</span></p>
+    <p><span dir="rtl">المطلوب تكتب</span> <span dir="ltr"></span><strong><span dir="rtl">3 نصائح
+                فقط</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">مش أربعة.</span></p>
+    <p><span dir="rtl">مش خمسة.</span></p>
+    <p><span dir="rtl">بالظبط ثلاثة.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">متفتحش أي لينك من إيميل مجهول.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">استخدم كلمة مرور قوية.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اقفل الكمبيوتر قبل ما تسيب مكانك.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">المطلوب إن النصائح تكون قصيرة وسهلة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-6---اعمل-awareness-sign"><strong>Step <span dir="rtl">6 -
+                اعمل</span> Awareness Sign</strong></h1>
+    <p><span dir="rtl">دي آخر خطوة.</span></p>
+    <p><span dir="rtl">انا طالب انك تعمل</span> <span dir="ltr">Poster</span> <span dir="rtl">صغير تعملوها بال</span>
+        <span dir="ltr">AI</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="rtl">الفكرة إنك تاخد النصائح الثلاثة اللي كتبتهم وتحطهم في
+            تصميم بسيط.</span></p>
+    <p><span dir="rtl">يعني تخيل ورقة هتتعلق على مكتب الموظف.</span></p>
+    <p><span dir="rtl">يكون فيها مثلاً:</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">⚠️ <strong>Cybersecurity Tips</strong></span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">Don't open unknown email links.</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Use strong passwords.</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Lock your computer before
+                    leaving.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المهم تكون:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">سهلة القراءة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">واضحة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">في صفحة واحدة.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">مش مطلوب تصميم احترافي، لكن يكون مرتب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="احنا-هنقيمك-على-إيه-4"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h1>
+    <p><span dir="rtl">في النهاية هيشوف:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ اسم الملف صح.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الجدول موجود.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الجدول فيه</span> <span dir="ltr"></span><strong><span dir="rtl">3
+                أعمدة</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ والـ</span> <span dir="ltr"></span><strong><span dir="rtl">3
+                أنظمة</span></strong><span dir="ltr"></span> <span dir="rtl">موجودين.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ لكل نظام خطر
+            واحد.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ ولكل خطر طريقة حماية
+            مناسبة.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ كتبت</span> <span dir="ltr"></span><strong><span dir="rtl">3 نصائح
+                فقط</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ عملت</span> <span dir="ltr">Awareness Sign</span> <span dir="rtl">يحتوي
+            على نفس
+            النصائح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الفكرة-الأساسية-من-التاسك"><strong><span dir="rtl">الفكرة
+                الأساسية من التاسك</span></strong></h1>
+    <p><span dir="rtl">التاسك كله قائم على فكرة بسيطة:</span></p>
+    <ol type="1">
+        <li>
+            <p><span dir="rtl">عندك نظام.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تفكر: إيه الخطر اللي ممكن يحصل؟</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">بعد كده تسأل نفسك: أحميه إزاي؟</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وفي الآخر توعي الموظفين علشان يقللوا الأخطاء
+                    البشرية.</span></p>
+        </li>
+    </ol>
+    <p><span dir="rtl">يعني الهدف مش إنك تبني نظام حماية، لكن إنك تثبت إنك
+            فاهم أساسيات التفكير في الأمن السيبراني، وتقدر تربط بين <strong>النظام →
+                الخطر → وسيلة الحماية</strong></span><span dir="ltr"></span> <span dir="rtl">بشكل منطقي.</span></p>
+    <p><strong><span dir="ltr">Task 4: Logo and Opening Advertisement for
+                Future Mall</span></strong></p>
+    <p><span dir="rtl">التاسك ده خاص بالتصميم (</span><span dir="ltr">Graphic Design</span><span dir="rtl">). المطلوب
+            إنك تعمل
+            <strong>هوية بصرية (</strong></span><span dir="ltr"><strong>Visual
+                Identity)</strong></span> <span dir="rtl">للمول، يعني تصمم لوجو وإعلان
+            افتتاح للمول.</span></p>
+    <p><span dir="rtl">الفكرة مش إنك تعمل تصميم معقد، لكن إنك تمشي في خطوات
+            المصمم من أول الفكرة لحد التصميم النهائي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الهدف-من-التاسك-2"><strong><span dir="rtl">الهدف من
+                التاسك</span></strong></h1>
+    <p><span dir="rtl">اناعايز اشوف إنك تقدر:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">تطلع أفكار مختلفة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تختار أفضل فكرة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تصمم لوجو.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تختار ألوان مناسبة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تستخدم اللوجو في إعلان.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-1---اسم-الملف-2"><strong>Step <span dir="rtl">1 - اسم
+                الملف</span></strong></h1>
+    <p><span dir="rtl">احفظ الملف بنفس طريقة التسمية المطلوبة.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">StudentID-Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-2---ارسم-فكرتين-للوجو"><strong>Step <span dir="rtl">2 -
+                ارسم فكرتين للوجو</span></strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d2629ff8c8191aaab0b1a74e0eae6"><u>https://chatgpt.com/s/m_6a6d2629ff8c8191aaab0b1a74e0eae6</u></a>
+    </p>
+    <p><img src="assets/media/image1.png" style="width:6.26772in;height:3.52778in" /></p>
+    <p><span dir="rtl">قبل ما تبدأ التصميم النهائي،</span></p>
+    <p><span dir="rtl">انا طالب ترسم <strong>فكرتين
+                مختلفتين</strong></span><span dir="ltr">.</span></p>
+    <p><span dir="rtl">يعني متفتحش</span> <span dir="ltr">Canva</span> <span dir="rtl">أو</span> <span
+            dir="ltr">Photoshop</span> <span dir="rtl">على
+            طول.</span></p>
+    <p><span dir="rtl">ابدأ بورقة وقلم وارسم فكرتين.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="rtl">الفكرة الأولى</span></p>
+    <p><span dir="rtl">لوجو عبارة عن مبنى مول.</span></p>
+    <p><span dir="rtl">الفكرة الثانية</span></p>
+    <p><span dir="rtl">لوجو عبارة عن</span> <span dir="ltr">Shopping
+            Bag</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">المهم يكونوا مختلفين.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="ليه-انا-طالب-فكرتين"><strong><span dir="rtl">ليه انا طالب
+                فكرتين؟</span></strong></h1>
+    <p><span dir="rtl">علشان اشوف إنك فكرت قبل ما تصمم.</span></p>
+    <p><span dir="rtl">وده طبيعي في أي شغل تصميم.</span></p>
+    <p><span dir="rtl">المصمم بيطلع أكثر من</span> <span dir="ltr">Concept</span> <span dir="rtl">الأول،</span></p>
+    <p><span dir="rtl">وبعدين يختار أفضل واحد.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-3---اختار-أفضل-لوجو"><strong>Step <span dir="rtl">3 - اختار
+                أفضل لوجو</span></strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d29fceda08191a8f016634a6fc5e9"><u>https://chatgpt.com/s/m_6a6d29fceda08191a8f016634a6fc5e9</u></a>
+    </p>
+    <p><img src="assets/media/image9.png" style="width:6.26772in;height:4.18056in" /></p>
+    <p><span dir="rtl">بعد ما ترسم الفكرتين،</span></p>
+    <p><span dir="rtl">بص عليهم.</span></p>
+    <p><span dir="rtl">واسأل نفسك:</span></p>
+    <p><span dir="rtl">مين شكله أحسن؟</span></p>
+    <p><span dir="rtl">مين أوضح؟</span></p>
+    <p><span dir="rtl">مين ينفع يمثل المول؟</span></p>
+    <p><span dir="rtl">وبعدين اختار واحد منهم.</span></p>
+    <p><span dir="rtl">وده اللي هتكمل عليه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-4---اعمل-اللوجو-النهائي"><strong>Step <span dir="rtl">4 -
+                اعمل اللوجو النهائي</span></strong></h1>
+    <p><span dir="rtl">دلوقتي تنفذ اللوجو اللي اخترته.</span></p>
+    <p><span dir="rtl">انا مديك حرية كاملة.</span></p>
+    <p><span dir="rtl">ممكن تستخدم:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">Canva</span></p>
+        </li>
+        <li>
+            <p>chat gpt</p>
+        </li>
+        <li>
+            <p><span dir="ltr">PowerPoint</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Illustrator</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Photoshop</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Figma</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">أو حتى ترسمه بإيدك بشكل مرتب.</span></p>
+    <p><span dir="rtl">المهم في الآخر يبقى شكله نظيف وواضح.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-5---اختار-3-ألوان"><strong>Step <span dir="rtl">5 - اختار 3
+                ألوان</span></strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d2a94a2108191bce648b21fa3cbfb"><u>https://chatgpt.com/s/m_6a6d2a94a2108191bce648b21fa3cbfb</u></a>
+    </p>
+    <p><img src="assets/media/image10.png" style="width:6.26772in;height:4.18056in" /></p>
+    <p><span dir="rtl">بعد اللوجو،</span></p>
+    <p><span dir="rtl">لازم تختار</span> <span dir="ltr"></span><strong><span dir="rtl">3 ألوان
+                فقط</span></strong><span dir="ltr">.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr">Blue</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Green</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr">Orange</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">أو أي ثلاثة ألوان تانية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="وبعدها-تشرح-ليه-اخترتهم"><strong><span dir="rtl">وبعدها تشرح ليه
+                اخترتهم</span></strong></h2>
+    <p><span dir="rtl">يعني تكتب جملة واحدة.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <blockquote>
+        <p><span dir="rtl">الأزرق بيدل على الثقة، والأخضر بيدل على الحيوية،
+                والبرتقالي بيدي إحساس بالطاقة والترحيب.</span></p>
+    </blockquote>
+    <p><span dir="rtl">مش المطلوب شرح طويل.</span></p>
+    <p><span dir="rtl">جملة واحدة كفاية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-6---اعمل-إعلان-افتتاح"><strong>Step <span dir="rtl">6 -
+                اعمل إعلان افتتاح</span></strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d317498748191ab440612de18a3a2"><u>https://chatgpt.com/s/m_6a6d317498748191ab440612de18a3a2</u></a>
+    </p>
+    <p><img src="assets/media/image5.png" style="width:6.26772in;height:9.40278in" /><span dir="ltr"></span></p>
+    <p><span dir="rtl">بعد ما خلصت اللوجو،</span></p>
+    <p><span dir="rtl">تعمل</span> <span dir="ltr">Poster</span> <span dir="rtl">أو</span> <span
+            dir="ltr">Advertisement</span> <span dir="rtl">للمول.</span></p>
+    <p><span dir="rtl">الإعلان لازم يحتوي على:</span></p>
+    <h3 id="أول-حاجة-2"><strong><span dir="rtl">أول
+                حاجة</span></strong></h3>
+    <p><span dir="rtl">اللوجو النهائي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="ثاني-حاجة-1"><strong><span dir="rtl">ثاني
+                حاجة</span></strong></h3>
+    <p><span dir="rtl">الألوان الثلاثة اللي اخترتهم.</span></p>
+    <p><span dir="rtl">يعني تستخدمهم داخل التصميم.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="ثالث-حاجة-1"><strong><span dir="rtl">ثالث
+                حاجة</span></strong></h3>
+    <p><span dir="rtl">اسم المول.</span></p>
+    <p><span dir="ltr">Future Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="رابع-حاجة"><strong><span dir="rtl">رابع
+                حاجة</span></strong></h3>
+    <p><span dir="rtl">تاريخ الافتتاح.</span></p>
+    <p><span dir="rtl">أي تاريخ مطلوب منك تحطه داخل الإعلان.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="خامس-حاجة"><strong><span dir="rtl">خامس
+                حاجة</span></strong></h3>
+    <p><span dir="rtl">عنوان واضح.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">Grand Opening</span> <span dir="rtl">ـ الالفتتاح
+            الكبيير قريبا</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">أو</span></p>
+    <p><span dir="ltr">Future Mall Opening</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">المهم يبقى عنوان ظاهر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-7---استخدم-نفس-اللوجو-في-task-2"><strong>Step <span dir="rtl">7 - استخدم نفس اللوجو في</span> Task
+            <span dir="rtl">2</span></strong></h1>
+    <p><span dir="rtl">دي نقطة مهمة جدًا.</span></p>
+    <p><span dir="rtl">انا كاتب بوضوح:</span></p>
+    <p><span dir="rtl">بعد ما تعمل اللوجو،</span></p>
+    <p><span dir="rtl">استخدم <strong>نفس اللوجو</strong></span><span dir="ltr"></span> <span dir="rtl">في صفحة
+            الـ</span> <span dir="ltr">HTML</span> <span dir="rtl">اللي عملتها في</span> <span dir="ltr">Task</span>
+        <span dir="rtl">2.</span>
+    </p>
+    <p><span dir="rtl">يعني اللوجو واحد.</span></p>
+    <p><span dir="rtl">مش تعمل واحد للإعلان وواحد للموقع.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="احنا-هنقيمك-على-إيه-5"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h1>
+    <p><span dir="rtl">في النهاية هيشوف:</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ رسمت فكرتين
+            مختلفتين.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ اخترت واحدة
+            منهم.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ عملت اللوجو
+            النهائي.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ اخترت 3 ألوان
+            فقط.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ شرحت سبب اختيار
+            الألوان.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ عملت إعلان
+            افتتاح.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الإعلان فيه:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">اللوجو.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الألوان الثلاثة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">اسم المول.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تاريخ الافتتاح.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">عنوان واضح.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span><span dir="rtl">✅ استخدمت نفس اللوجو في صفحة
+            الـ</span> <span dir="ltr">HTML</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الفكرة-الأساسية-من-التاسك-1"><strong><span dir="rtl">الفكرة
+                الأساسية من التاسك</span></strong></h1>
+    <p><span dir="rtl">التاسك بيحاكي طريقة شغل أي مصمم جرافيك:</span></p>
+    <ol type="1">
+        <li>
+            <p><span dir="rtl">تبدأ بأفكار (</span><span dir="ltr">Sketches</span><span dir="rtl">).</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تختار أفضل فكرة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تحولها لتصميم نهائي.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تحدد ألوان الهوية البصرية.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">تستخدم الهوية دي في مادة دعائية
+                    (الإعلان).</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">وبعد كده تعيد استخدام نفس الهوية في باقي المشروع،
+                    زي صفحة الـ</span> <span dir="ltr">HTML</span><span dir="rtl">.</span></p>
+        </li>
+    </ol>
+    <p><span dir="rtl">يعني الهدف مش مجرد رسم لوجو، لكن إن يبقى عندك
+            <strong>هوية بصرية واحدة متناسقة</strong></span><span dir="ltr"></span>
+        <span dir="rtl">تستخدمها في أكثر من جزء من المشروع.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="task-5-smart-garage-gate-for-future-mall"><strong>Task 5: Smart
+            Garage Gate for Future Mall</strong></h1>
+    <p><a
+            href="https://chatgpt.com/s/m_6a6d2cddcf40819191abb6e5622dad64"><u>https://chatgpt.com/s/m_6a6d2cddcf40819191abb6e5622dad64</u></a>
+    </p>
+    <p><img src="assets/media/image3.png" style="width:6.26772in;height:3.52778in" /></p>
+    <p><span dir="rtl">ده أكبر وأصعب تاسك في المشروع، لأنه بيجمع بين</span>
+        <span dir="ltr"><strong>Embedded Systems</strong></span> <span dir="rtl">و</span><span
+            dir="ltr"><strong>ESP32</strong></span> <span dir="rtl">و</span><span
+            dir="ltr"><strong>MicroPython</strong></span>
+        <span dir="rtl">و</span><span dir="ltr"><strong>Wokwi</strong>.</span>
+    </p>
+    <p><span dir="rtl">الفكرة كلها إنك هتعمل <strong>جراج
+                ذكي</strong></span><span dir="ltr"></span> <span dir="rtl">يعد العربيات
+            اللي داخلة واللي خارجة، ويعرف إذا كان الجراج مليان ولا لسه فيه
+            أماكن.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الهدف-من-التاسك-3"><strong><span dir="rtl">الهدف من
+                التاسك</span></strong></h1>
+    <p><span dir="rtl">تخيل إن عندك جراج في المول.</span></p>
+    <p><span dir="rtl">كل عربية تدخل:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العدد يزيد.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">كل عربية تخرج:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العدد يقل.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">ولو الجراج امتلأ، يبقى النظام يقول إنه</span> <span dir="ltr">Full</span><span dir="rtl">.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-1---اسم-المشروع"><strong>Step <span dir="rtl">1 - اسم
+                المشروع</span></strong></h1>
+    <p><span dir="rtl">احفظ ملفات المشروع باسم:</span></p>
+    <p><span dir="ltr">StudentID-Mall</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-2---اعمل-الدائرة-في-wokwi"><strong>Step <span dir="rtl">2 -
+                اعمل الدائرة في</span> Wokwi</strong></h1>
+    <p><span dir="rtl">هتفتح</span> <span dir="ltr">Wokwi</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وتختار:</span></p>
+    <p><span dir="ltr">ESP32 Project</span></p>
+    <p><span dir="rtl">وبعدين تضيف المكونات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="المكونات-المطلوبة"><strong><span dir="rtl">المكونات
+                المطلوبة</span></strong></h2>
+    <p><span dir="rtl">انا محددها بالظبط.</span></p>
+    <h3 id="esp32"><strong>1 ESP32</strong></h3>
+    <p><span dir="rtl">وده المتحكم الرئيسي.</span></p>
+    <p><span dir="rtl">هو عقل المشروع.</span></p>
+    <p><span dir="rtl">هو اللي هيستقبل الإشارات ويشغل الليدات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="push-buttons"><strong>2 Push Buttons</strong></h3>
+    <p><span dir="rtl">الزر الأول</span></p>
+    <p><span dir="rtl">يمثل عربية داخلة.</span></p>
+    <p><span dir="rtl">الزر الثاني</span></p>
+    <p><span dir="rtl">يمثل عربية خارجة.</span></p>
+    <p><span dir="rtl">يعني بدل ما تستخدم</span> <span dir="ltr">Sensor</span><span dir="rtl">،</span></p>
+    <p><span dir="rtl">إحنا بنضغط على زر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="leds"><strong>4 LEDs</strong></h3>
+    <p><span dir="rtl">كل</span> <span dir="ltr">LED</span> <span dir="rtl">ليه وظيفة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="green-led"><strong>Green LED</strong></h2>
+    <p><span dir="rtl">معناه:</span></p>
+    <p><span dir="rtl">لسه فيه أماكن فاضية.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="red-led"><strong>Red LED</strong></h2>
+    <p><span dir="rtl">معناه:</span></p>
+    <p><span dir="rtl">الجراج</span> <span dir="ltr">Full</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="yellow-led"><strong>Yellow LED</strong></h2>
+    <p><span dir="rtl">كل مرة عربية تدخل،</span></p>
+    <p><span dir="rtl">ينور مرة واحدة.</span></p>
+    <p><span dir="rtl">يعني</span> <span dir="ltr">Blink</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="blue-led"><strong>Blue LED</strong></h2>
+    <p><span dir="rtl">كل مرة عربية تخرج،</span></p>
+    <p><span dir="rtl">ينور</span> <span dir="ltr">Blink</span> <span dir="rtl">مرة واحدة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="resistors"><strong>4 Resistors</strong></h2>
+    <p><span dir="rtl">كل</span> <span dir="ltr">LED</span> <span dir="rtl">لازم يبقى معاه مقاومة.</span></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="ltr">4 LEDs</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">4 Resistors</span></p>
+    <p><span dir="rtl">ودي لحماية الليدات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-3---اكتب-الكود"><strong>Step <span dir="rtl">3 - اكتب
+                الكود</span></strong></h1>
+    <p><span dir="rtl">هتستخدم:</span></p>
+    <p><span dir="ltr">MicroPython</span></p>
+    <p><span dir="rtl">أول حاجة تعمل متغير.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <p><span dir="ltr">car_count = 0</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده عدد العربيات الموجودة داخل الجراج.</span></p>
+    <p><span dir="rtl">في البداية مفيش عربيات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="لما-تدوس-زر-الدخول"><strong><span dir="rtl">لما تدوس زر
+                الدخول</span></strong></h2>
+    <p><span dir="rtl">كل ضغطة صحيحة:</span></p>
+    <p><span dir="rtl">تزود:</span></p>
+    <p><span dir="ltr">car_count += 1</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="لما-تدوس-زر-الخروج"><strong><span dir="rtl">لما تدوس زر
+                الخروج</span></strong></h2>
+    <p><span dir="rtl">كل ضغطة صحيحة:</span></p>
+    <p><span dir="rtl">تعمل</span></p>
+    <p><span dir="ltr">car_count -= 1</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="أقصى-عدد-للعربيات"><strong><span dir="rtl">أقصى عدد
+                للعربيات</span></strong></h1>
+    <p><span dir="rtl">انا محدده.</span></p>
+    <p><span dir="ltr">15 Cars</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني حتى لو دوست دخول 100 مرة.</span></p>
+    <p><span dir="rtl">العدد يقف عند:</span></p>
+    <p><span dir="ltr">15</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">مش يوصل 16.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="أقل-عدد"><strong><span dir="rtl">أقل عدد</span></strong></h1>
+    <p><span dir="rtl">مينفعش يبقى عندك:</span></p>
+    <p><span dir="ltr">-1</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">عربية.</span></p>
+    <p><span dir="rtl">لو العدد صفر،</span></p>
+    <p><span dir="rtl">وضغطت خروج،</span></p>
+    <p><span dir="rtl">يفضل صفر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-4---برمجة-الليدات"><strong>Step <span dir="rtl">4 - برمجة
+                الليدات</span></strong></h1>
+    <p><span dir="rtl">كل</span> <span dir="ltr">LED</span> <span dir="rtl">ليه شرط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="green-led-1"><strong>Green LED</strong></h2>
+    <p><span dir="rtl">ينور طول ما فيه مكان.</span></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="rtl">من</span></p>
+    <p><span dir="ltr">0</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">لحد</span></p>
+    <p><span dir="ltr">14</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Cars</span></p>
+    <p><span dir="rtl">الليد الأخضر شغال.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">أول ما العدد يبقى:</span></p>
+    <p><span dir="ltr">15</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يطفى.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="red-led-1"><strong>Red LED</strong></h2>
+    <p><span dir="rtl">العكس تمامًا.</span></p>
+    <p><span dir="rtl">من</span></p>
+    <p><span dir="ltr">0</span></p>
+    <p><span dir="rtl">لحد</span></p>
+    <p><span dir="ltr">14</span></p>
+    <p><span dir="rtl">يبقى مطفي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">أول ما العدد يبقى:</span></p>
+    <p><span dir="ltr">15</span></p>
+    <p><span dir="rtl">ينور.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="هل-الأخضر-والأحمر-ينوروا-مع-بعض"><strong><span dir="rtl">هل
+                الأخضر والأحمر ينوروا مع بعض؟</span></strong></h2>
+    <p><span dir="rtl">لا.</span></p>
+    <p><span dir="rtl">انا كاتب بوضوح:</span></p>
+    <p><span dir="rtl">عمرهم ما يشتغلوا مع بعض.</span></p>
+    <p><span dir="rtl">يا ده.</span></p>
+    <p><span dir="rtl">يا ده.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="yellow-led-1"><strong>Yellow LED</strong></h2>
+    <p><span dir="rtl">كل عربية تدخل بنجاح.</span></p>
+    <p><span dir="rtl">يعمل:</span></p>
+    <p><span dir="ltr">Blink</span></p>
+    <p><span dir="rtl">مرة واحدة.</span></p>
+    <p><span dir="rtl">وبعدين يطفي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="blue-led-1"><strong>Blue LED</strong></h2>
+    <p><span dir="rtl">كل عربية تخرج.</span></p>
+    <p><span dir="ltr">Blink</span></p>
+    <p><span dir="rtl">مرة واحدة.</span></p>
+    <p><span dir="rtl">ثم يطفي.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-5---ارسم-system-diagram"><strong>Step <span dir="rtl">5 -
+                ارسم</span> System Diagram</strong></h1>
+    <p><span dir="rtl">بعد الكود.</span></p>
+    <p><span dir="rtl">ترسم مخطط بسيط.</span></p>
+    <p><span dir="rtl">هيبقى بالشكل ده.</span></p>
+    <p><span dir="ltr">Entry Button</span></p>
+    <p><span dir="ltr">Exit Button</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">ESP32</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="ltr">Green LED</span></p>
+    <p><span dir="ltr">Red LED</span></p>
+    <p><span dir="ltr">Yellow LED</span></p>
+    <p><span dir="ltr">Blue LED</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">يعني:</span></p>
+    <p><span dir="ltr">Inputs</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">Processing</span></p>
+    <p><span dir="ltr">↓</span></p>
+    <p><span dir="ltr">Outputs</span></p>
+    <p><span dir="rtl">الفكرة إنه يوضح مسار البيانات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-6---اعمل-truth-table"><strong>Step <span dir="rtl">6 -
+                اعمل</span> Truth Table</strong></h1>
+    <p><span dir="rtl">يعني جدول يوضح حالة الليدات.</span></p>
+    <p><span dir="rtl">مثلاً:</span></p>
+    <table style="width:33%;">
+        <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 9%" />
+            <col style="width: 7%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr"><strong>Garage
+                            State</strong></span></td>
+                <td style="text-align: center;"><span dir="ltr"><strong>Green</strong></span></td>
+                <td style="text-align: center;"><span dir="ltr"><strong>Red</strong></span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Empty</span></td>
+                <td style="text-align: center;"><span dir="ltr">ON</span></td>
+                <td style="text-align: center;"><span dir="ltr">OFF</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Available</span></td>
+                <td style="text-align: center;"><span dir="ltr">ON</span></td>
+                <td style="text-align: center;"><span dir="ltr">OFF</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><span dir="ltr">Full</span></td>
+                <td style="text-align: center;"><span dir="ltr">OFF</span></td>
+                <td style="text-align: center;"><span dir="ltr">ON</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <p><span dir="rtl">يعني كل حالة للجراج يقابلها الليدات بتعمل
+            إيه.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-7---اختبر-المشروع"><strong>Step <span dir="rtl">7 - اختبر
+                المشروع</span></strong></h1>
+    <p><span dir="rtl">بعد ما تخلص.</span></p>
+    <p><span dir="rtl">تشغل</span> <span dir="ltr">Simulation</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">وتجرب كل الحالات.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="اختبر-زر-الدخول"><strong><span dir="rtl">اختبر زر
+                الدخول</span></strong></h2>
+    <p><span dir="rtl">كل ضغطة:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العدد يزيد واحد.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الأصفر يعمل</span> <span dir="ltr">Blink</span><span dir="rtl">.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="اختبر-زر-الخروج"><strong><span dir="rtl">اختبر زر
+                الخروج</span></strong></h2>
+    <p><span dir="rtl">كل ضغطة:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">العدد يقل واحد.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الأزرق يعمل</span> <span dir="ltr">Blink</span><span dir="rtl">.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h2 id="اختبر-الحدود"><strong><span dir="rtl">اختبر
+                الحدود</span></strong></h2>
+    <p><span dir="rtl">اضغط دخول كتير.</span></p>
+    <p><span dir="rtl">شوف هل العدد وقف عند:</span></p>
+    <p><span dir="ltr">15</span></p>
+    <p><span dir="rtl">ولا لأ.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">اضغط خروج كتير.</span></p>
+    <p><span dir="rtl">هل وقف عند:</span></p>
+    <p><span dir="ltr">0</span></p>
+    <p><span dir="rtl">ولا نزل بالسالب.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="اختبر-الليدات"><strong><span dir="rtl">اختبر
+                الليدات</span></strong></h2>
+    <p><span dir="rtl">تأكد:</span></p>
+    <p><span dir="rtl">الأخضر شغال من 0 إلى 14.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الأحمر يشتغل عند 15 فقط.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الأصفر يعمل</span> <span dir="ltr">Blink</span> <span dir="rtl">مع الدخول.</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">الأزرق يعمل</span> <span dir="ltr">Blink</span> <span dir="rtl">مع الخروج.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="step-8---الملفات-المطلوبة-للتسليم"><strong>Step <span dir="rtl">8 - الملفات المطلوبة للتسليم</span></strong>
+    </h1>
+    <p><span dir="rtl">انا طالب</span> <span dir="ltr"></span><strong><span dir="rtl">6 ملفات</span></strong><span
+            dir="ltr">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="أول-ملف"><strong><span dir="rtl">أول ملف</span></strong></h2>
+    <p><span dir="ltr">PDF</span></p>
+    <p><span dir="rtl">فيه</span> <span dir="ltr">Screenshot</span> <span dir="rtl">للـ</span> <span dir="ltr">System
+            Diagram</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ثاني-ملف"><strong><span dir="rtl">ثاني ملف</span></strong></h2>
+    <p><span dir="ltr">PDF</span></p>
+    <p><span dir="rtl">فيه</span> <span dir="ltr">Truth Table</span><span dir="rtl">.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="ثالث-ملف"><strong><span dir="rtl">ثالث ملف</span></strong></h2>
+    <p><span dir="rtl">رابط الـ</span> <span dir="ltr">Wokwi</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يعني تعمل</span> <span dir="ltr">Share</span> <span dir="rtl">للمشروع.</span></p>
+    <p><span dir="rtl">وتبعت اللينك.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="رابع-ملف"><strong><span dir="rtl">رابع ملف</span></strong></h2>
+    <p><span dir="ltr">diagram.json</span></p>
+    <p><span dir="ltr"></span></p>
+    <p><span dir="rtl">وده الملف اللي</span> <span dir="ltr">Wokwi</span>
+        <span dir="rtl">بيعمله تلقائيًا.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="خامس-ملف"><strong><span dir="rtl">خامس ملف</span></strong></h2>
+    <p><span dir="rtl">ملف</span></p>
+    <p><span dir="ltr">MicroPython</span></p>
+    <p><span dir="rtl">اللي كتبت فيه الكود.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h2 id="سادس-ملف"><strong><span dir="rtl">سادس ملف</span></strong></h2>
+    <p><span dir="ltr">PDF</span></p>
+    <p><span dir="rtl">فيه</span> <span dir="ltr">Screenshots</span><span dir="rtl">.</span></p>
+    <p><span dir="rtl">يشمل:</span></p>
+    <ul>
+        <li>
+            <p><span dir="rtl">الدائرة.</span></p>
+        </li>
+        <li>
+            <p><span dir="rtl">الكود.</span></p>
+        </li>
+    </ul>
+    <p><span dir="ltr"></span></p>
+    <h1 id="احنا-هنقيمك-على-إيه-6"><strong><span dir="rtl">احنا هنقيمك على
+                إيه؟</span></strong></h1>
+    <p><span dir="rtl">هيشوف:</span></p>
+    <h3 id="الدائرة"><strong><span dir="rtl">الدائرة</span></strong></h3>
+    <p><span dir="ltr">✅ ESP</span><span dir="rtl">32 موجود.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ زرين.</span></p>
+    <p><span dir="ltr">✅ 4 LEDs.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ كل</span> <span dir="ltr">LED</span> <span dir="rtl">عليه مقاومة.</span>
+    </p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الكود"><strong><span dir="rtl">الكود</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الدخول يزيد
+            واحد.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الخروج يقل واحد.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ العدد ميزيدش عن
+            15.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ العدد مينزلش أقل من
+            صفر.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="الليدات"><strong><span dir="rtl">الليدات</span></strong></h3>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الأخضر من 0 إلى
+            14.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الأحمر عند 15
+            فقط.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الأخضر والأحمر عمرهم ما
+            ينوروا مع بعض.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الأصفر يعمل</span> <span dir="ltr">Blink</span> <span dir="rtl">عند
+            الدخول.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ الأزرق يعمل</span> <span dir="ltr">Blink</span> <span dir="rtl">عند
+            الخروج.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h3 id="المستندات"><strong><span dir="rtl">المستندات</span></strong></h3>
+    <p><span dir="ltr">✅ System Diagram.</span></p>
+    <p><span dir="ltr">✅ Truth Table.</span></p>
+    <p><span dir="ltr"></span><span dir="rtl">✅ كل الملفات
+            المطلوبة.</span></p>
+    <p><span dir="ltr"></span></p>
+    <h1 id="الفكرة-الأساسية-من-التاسك-2"><strong><span dir="rtl">الفكرة
+                الأساسية من التاسك</span></strong></h1>
+    <p><span dir="rtl">التاسك ده عبارة عن مشروع</span> <span dir="ltr">Embedded Systems</span> <span dir="rtl">كامل لكنه
+            بسيط.</span></p>
+    <p><span dir="rtl">عندك:</span></p>
+    <ul>
+        <li>
+            <p><span dir="ltr"><strong>Inputs</strong></span><span dir="rtl">:
+                    زرين (دخول وخروج).</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr"><strong>Processing</strong></span><span dir="rtl">: الـ</span> <span
+                    dir="ltr">ESP</span><span dir="rtl">32
+                    بيحسب عدد العربيات ويقرر هيعمل إيه.</span></p>
+        </li>
+        <li>
+            <p><span dir="ltr"><strong>Outputs</strong></span><span dir="rtl">:
+                    أربع</span> <span dir="ltr">LEDs</span> <span dir="rtl">بتوضح حالة
+                    الجراج.</span></p>
+        </li>
+    </ul>
+    <p><span dir="rtl">يعني الـ</span> <span dir="ltr">ESP</span><span dir="rtl">32 بياخد مدخلات من الأزرار، يعالجها
+            بالكود، وبعدها يطلع مخرجات
+            على الليدات حسب حالة الجراج. وده هو الـ</span> <span dir="ltr"><strong>Embedded System
+                Workflow</strong></span> <span dir="rtl">اللي انا عايزك تطبقه عمليًا في المشروع</span></p>
+
+</body>
+
+</html>

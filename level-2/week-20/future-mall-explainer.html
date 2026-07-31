@@ -1138,7 +1138,8 @@
                         <div id="tmProgressWrap" style="display:none;margin-bottom:16px">
                             <div
                                 style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:4px">
-                                <span>Training...</span><span id="tmPercent">0%</span></div>
+                                <span>Training...</span><span id="tmPercent">0%</span>
+                            </div>
                             <div style="height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden">
                                 <div id="tmProgressBar"
                                     style="height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--primary));border-radius:99px;transition:width .3s">
@@ -1207,10 +1208,11 @@
                                 <span style="color:#546e7a"># اضغط "شغّل" عشان تشوف النتيجة</span>
                             </div>
                             <div class="activity-controls">
-                                <button class="replay-btn" id="aiRunBtn"
-                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="runAI()">▶
-                                    شغّل</button>
-                                <button class="replay-btn" style="font-size:13px" onclick="resetAI()">↺ إعادة</button>
+                                <button class="replay-btn" id="aiAutoBtn"
+                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="autoRunAI()">⚡ Auto-run</button>
+                                <button class="replay-btn" id="aiNextBtn"
+                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="runAI()">▶ Next Step</button>
+                                <button class="replay-btn" style="font-size:13px" onclick="resetAI()">↺ Reset</button>
                             </div>
                         </div>
                         <div class="code-panel" dir="ltr">
@@ -1501,23 +1503,28 @@
                 <div style="margin-top:20px">
                     <div class="diagram-title">نصايح للموظفين</div>
                     <div style="display:grid;gap:10px;margin-top:10px">
-                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);border-radius:10px">
+                        <div
+                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);border-radius:10px">
                             <span style="font-size:20px">🚫</span>
                             <span style="font-size:14px">متفتحش أي لينك من إيميل مجهول</span>
                         </div>
-                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.15);border-radius:10px">
+                        <div
+                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.15);border-radius:10px">
                             <span style="font-size:20px">🔑</span>
                             <span style="font-size:14px">استخدم كلمة مرور قوية</span>
                         </div>
-                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(25,60,255,.06);border:1px solid rgba(25,60,255,.15);border-radius:10px">
+                        <div
+                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(25,60,255,.06);border:1px solid rgba(25,60,255,.15);border-radius:10px">
                             <span style="font-size:20px">🔒</span>
                             <span style="font-size:14px">اقفل الكمبيوتر قبل ما تسيب مكانك</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="margin-top:20px;padding:20px;background:rgba(255,255,255,.03);border:2px solid var(--s3);border-radius:16px;text-align:center">
-                <div style="font-size:18px;font-weight:700;color:var(--s3);margin-bottom:8px">⚠️ Cybersecurity Tips</div>
+            <div
+                style="margin-top:20px;padding:20px;background:rgba(255,255,255,.03);border:2px solid var(--s3);border-radius:16px;text-align:center">
+                <div style="font-size:18px;font-weight:700;color:var(--s3);margin-bottom:8px">⚠️ Cybersecurity Tips
+                </div>
                 <div style="display:flex;flex-direction:column;gap:6px;max-width:400px;margin:0 auto;text-align:right">
                     <div style="font-size:13px;color:var(--dim)">• متفتحش أي لينك من إيميل مجهول</div>
                     <div style="font-size:13px;color:var(--dim)">• استخدم كلمة مرور قوية</div>
@@ -1539,24 +1546,28 @@
                 <div style="display:grid;gap:0">
                     <div class="step-card active" id="artStep0">
                         <h4>المرحلة 1: السكتشات</h4>
-                        <img src="assets/media/المرحلة 1 السكتشات.png" alt="سكتشات التصميم الأولية" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+                        <img src="assets/media/المرحلة 1 السكتشات.png" alt="سكتشات التصميم الأولية"
+                            style="width:60%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنبدأ بأفكار أولية بالقلم — أشكال مختلفة للشعار. بنرسم 3-5 أفكار مختلفة قبل ما نختار.</p>
                     </div>
                     <div class="step-card" id="artStep1">
                         <h4>المرحلة 2: لوحة الألوان</h4>
-                        <img src="assets/media/المرحلة 2 لوحة الألوان.png" alt="لوحة ألوان الهوية البصرية" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+                        <img src="assets/media/المرحلة 2 لوحة الألوان.png" alt="لوحة ألوان الهوية البصرية"
+                            style="width:60%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنختار 3-4 ألوان أساسية — لون رئيسي و2-3 ألوان مساعدة. لازم الألوان تكون متناسقة وتعبر عن
                             طابع المول.</p>
                     </div>
                     <div class="step-card" id="artStep2">
                         <h4>المرحلة 3: الشعار النهائي</h4>
-                        <img src="assets/media/iالمرحلة 3 الشعار النهائي.png" alt="شعار Future Mall النهائي" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+                        <img src="assets/media/iالمرحلة 3 الشعار النهائي.png" alt="شعار Future Mall النهائي"
+                            style="width:60%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنحوّل السكتش للشكل الرقمي باستخدام برنامج تصميم — بنضيف الألوان والنصوص والتفاصيل النهائية.
                         </p>
                     </div>
                     <div class="step-card" id="artStep3">
                         <h4>المرحلة 4: الإعلان</h4>
-                        <img src="assets/media/المرحلة 4 الإعلان.png" alt="إعلان Future Mall" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+                        <img src="assets/media/المرحلة 4 الإعلان.png" alt="إعلان Future Mall"
+                            style="width:30%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنستخدم الشعار والألوان في تصميم إعلان — ممكن يكون بوستر أو صورة سوشيال ميديا. لازم الرسالة
                             تكون واضحة وجذابة.</p>
                     </div>
@@ -1709,7 +1720,7 @@
                 </div>
             </div>
             <div style="text-align:center;margin-top:20px">
-                <a href="https://wokwi.com/projects/470458260598942721" class="replay-btn"
+                <a href="https://wokwi.com/projects/470458260598942721" class="replay-btn" target="_blank"
                     style="background:var(--s5);color:var(--bg);text-decoration:none;display:inline-flex">🔌 جرّب على
                     Wokwi </a>
             </div>
@@ -1990,8 +2001,8 @@
         function artStep(dir) { const next = artIdx + dir; if (next < 0 || next >= artTotal) return; document.getElementById('artStep' + artIdx).classList.remove('active'); artIdx = next; document.getElementById('artStep' + artIdx).classList.add('active'); document.getElementById('artCounter').textContent = (artIdx + 1) + ' / ' + artTotal }
 
         /* ===== PARKING SIMULATION ===== */
-        let carCount = 0; const MAX = 15;
-        function updateParkingLeds() { document.getElementById('ledGreen').className = 'bulb' + (carCount < 15 ? ' on-green' : ''); document.getElementById('ledRed').className = 'bulb' + (carCount >= 15 ? ' on-red' : ''); document.getElementById('carCount').textContent = carCount; hlCode('parkCode', carCount > 0 ? [16, 17, 18, 19, 20] : [16, 18, 19, 20], 'parkLineHint') }
+        let carCount = 0; const MAX = 15; let parkingInit = true;
+        function updateParkingLeds() { document.getElementById('ledGreen').className = 'bulb' + (carCount < 15 ? ' on-green' : ''); document.getElementById('ledRed').className = 'bulb' + (carCount >= 15 ? ' on-red' : ''); document.getElementById('carCount').textContent = carCount; if (!parkingInit) hlCode('parkCode', carCount > 0 ? [16, 17, 18, 19, 20] : [16, 18, 19, 20], 'parkLineHint'); parkingInit = false; }
         function blinkLed(id, color, cb) { const el = document.getElementById(id); el.className = 'bulb on-' + color; setTimeout(() => { el.className = 'bulb'; if (cb) cb() }, 500) }
         function parkEntry() { if (carCount >= MAX) return; carCount++; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚗 عربية دخلت — العدد: ' + carCount; hlCode('parkCode', [23, 24, 25, 26, 27, 28, 29, 30], 'parkLineHint'); blinkLed('ledYellow', 'yellow', () => updateParkingLeds()); animateIO('input') }
         function parkExit() { if (carCount <= 0) return; carCount--; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚙 عربية خرجت — العدد: ' + carCount; hlCode('parkCode', [31, 32, 33, 34, 35, 36, 37, 38], 'parkLineHint'); blinkLed('ledBlue', 'blue', () => updateParkingLeds()); animateIO('input') }
@@ -2000,9 +2011,9 @@
 
         /* ===== TEACHABLE MACHINE ===== */
         const tmClasses = [
-            { id: 'tmFruits', emojis: ['🍎','🍌','🍇','🍊','🍉','🍐','🥝','🍑'], color: 'var(--accent)' },
-            { id: 'tmVegs',   emojis: ['🥬','🥕','🧅','🥦','🌽','🥒','🫑','🍅'], color: 'var(--success)' },
-            { id: 'tmDairy',  emojis: ['🧀','🥛','🧈','🍦','酸奶','🕝','🥣','🫕'], color: 'var(--s5)' }
+            { id: 'tmFruits', emojis: ['🍎', '🍌', '🍇', '🍊', '🍉', '🍐', '🥝', '🍑'], color: 'var(--accent)' },
+            { id: 'tmVegs', emojis: ['🥬', '🥕', '🧅', '🥦', '🌽', '🥒', '🫑', '🍅'], color: 'var(--success)' },
+            { id: 'tmDairy', emojis: ['🧀', '🥛', '🧈', '🍦', '酸奶', '🕝', '🥣', '🫕'], color: 'var(--s5)' }
         ];
         function populateThumbs() {
             tmClasses.forEach(c => {
@@ -2080,7 +2091,9 @@
             { line: [12, 13], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>\n<span style="color:#546e7a">Running prediction...</span>\n<span style="color:var(--accent)">Class: Fruit</span>\n<span style="color:var(--accent)">Confidence: 0.92</span>' }
         ];
         let aiStepIdx = -1;
+        let aiAutoTimer = null;
         function runAI() {
+            if (aiAutoTimer) { clearInterval(aiAutoTimer); aiAutoTimer = null; }
             aiStepIdx++;
             if (aiStepIdx >= aiSteps.length) {
                 aiStepIdx = aiSteps.length - 1;
@@ -2090,11 +2103,24 @@
             hlCode('aiCode', s.line, 'aiLineHint');
             document.getElementById('aiConsole').innerHTML = s.console.replace(/\n/g, '<br>');
         }
+        function autoRunAI() {
+            resetAI();
+            let step = 0;
+            aiAutoTimer = setInterval(() => {
+                if (step >= aiSteps.length) { clearInterval(aiAutoTimer); aiAutoTimer = null; return; }
+                const s = aiSteps[step];
+                hlCode('aiCode', s.line, 'aiLineHint');
+                document.getElementById('aiConsole').innerHTML = s.console.replace(/\n/g, '<br>');
+                aiStepIdx = step;
+                step++;
+            }, 1200);
+        }
         function resetAI() {
+            if (aiAutoTimer) { clearInterval(aiAutoTimer); aiAutoTimer = null; }
             aiStepIdx = -1;
             clearHL('aiCode');
             document.getElementById('aiLineHint').textContent = '▶ line —';
-            document.getElementById('aiConsole').innerHTML = '<span style="color:#546e7a"># اضغط "شغّل" عشان تشوف النتيجة</span>';
+            document.getElementById('aiConsole').innerHTML = '<span style="color:#546e7a"># اضغط عشان تبدأ</span>';
         }
 
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
