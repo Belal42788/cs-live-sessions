@@ -1000,32 +1000,33 @@
             <!-- Tab 0: Cashier -->
             <div class="tab-panel active" id="s1Tab0">
                 <div class="diagram-container">
-                    <div class="diagram-title">كاشير المول — اضغط "شغّل" عشان تشوف الكود بيشتغل خطوة بخطوة</div>
+                    <div class="diagram-title">كاشير Future Mall — اختار المنتجات وشوف الحساب بيتبنى</div>
                     <div class="activity-grid">
                         <div class="demo-panel">
-                            <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 واجهة الكاشير</div>
-                            <div id="cashierUI"
-                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px">
-                                <div
-                                    style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;font-weight:600;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:8px;margin-bottom:8px">
-                                    <span>المنتج</span><span>السعر</span><span>الكمية</span>
+                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px">📦 المنتجات المتاحة</div>
+                            <div id="cashierProducts" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"></div>
+                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px">🛒 السلة</div>
+                            <div id="cashierCart"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;min-height:60px">
+                                <div id="cartEmpty" style="color:var(--dim);font-size:13px;text-align:center;padding:16px">اضغط على منتج عشان تضيفه للسلة</div>
+                                <div id="cartItems"></div>
+                            </div>
+                            <div id="cartTotals" style="display:none;margin-top:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px">
+                                <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px">
+                                    <span style="color:var(--dim)">المجموع الفرعي:</span>
+                                    <span style="font-weight:700" id="cartSubtotal">0 EGP</span>
                                 </div>
-                                <div id="cashierItems"></div>
-                                <div
-                                    style="border-top:2px solid var(--s1);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
-                                    <span style="font-weight:700;color:var(--s1)">المجموع:</span>
-                                    <span style="font-size:24px;font-weight:900;color:var(--accent)" id="cashierTotal">0
-                                        EGP</span>
+                                <div id="cartDiscountRow" style="display:none;display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--success)">
+                                    <span>الخصم (10%):</span>
+                                    <span style="font-weight:700" id="cartDiscount">0 EGP</span>
                                 </div>
-                                <div id="cashierDiscount"
-                                    style="display:none;margin-top:8px;padding:8px 12px;background:rgba(0,255,136,.1);border-radius:8px;color:var(--success);font-weight:700;font-size:13px;text-align:center">
-                                    ✅ خصم 10% — المجموع النهائي: <span id="cashierFinal">0</span> EGP
+                                <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:16px;border-top:1px solid rgba(255,255,255,.08);margin-top:6px">
+                                    <span style="font-weight:700;color:var(--s1)">المجموع النهائي:</span>
+                                    <span style="font-weight:900;color:var(--accent)" id="cartFinal">0 EGP</span>
                                 </div>
                             </div>
                             <div class="activity-controls">
-                                <button class="replay-btn" id="cashierRunBtn"
-                                    style="background:var(--s1);color:var(--bg);font-size:13px">▶ شغّل</button>
-                                <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة</button>
+                                <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة السلة</button>
                                 <span class="status" id="cashierStep">جاهز</span>
                             </div>
                         </div>
@@ -1035,40 +1036,31 @@
                                 <span class="line-hint" id="cashierLineHint">▶ سطر —</span>
                             </div>
                             <div class="code-body" id="cashierCode">
-                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم,
-                                        السعر)</span></span>
+                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم, السعر)</span></span>
                                 <span class="cl" data-line="1">products = [</span>
-                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span
-                                        class="num">15</span>),</span>
-                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span
-                                        class="num">10</span>),</span>
-                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span
-                                        class="num">20</span>),</span>
-                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span
-                                        class="num">25</span>),</span>
-                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span
-                                        class="num">5</span>)</span>
+                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span class="num">15</span>),</span>
+                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span class="num">10</span>),</span>
+                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span class="num">20</span>),</span>
+                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span class="num">25</span>),</span>
+                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span class="num">5</span>)</span>
                                 <span class="cl" data-line="7">]</span>
                                 <span class="cl" data-line="8"></span>
-                                <span class="cl" data-line="9">total = <span class="num">0</span></span>
+                                <span class="cl" data-line="9">cart = []  <span class="cm"># السلة فاضية</span></span>
                                 <span class="cl" data-line="10"></span>
-                                <span class="cl" data-line="11"><span class="kw">for</span> name, price <span
-                                        class="kw">in</span> products:</span>
-                                <span class="cl" data-line="12"> total = total + price</span>
-                                <span class="cl" data-line="13"> <span class="fn">print</span>(<span class="str">f"أضف
-                                        {name}: {price} → المجموع: {total}"</span>)</span>
-                                <span class="cl" data-line="14"></span>
-                                <span class="cl" data-line="15"><span class="cm"># خصم 10% لو المجموع أكبر من
-                                        500</span></span>
-                                <span class="cl" data-line="16"><span class="kw">if</span> total > <span
-                                        class="num">500</span>:</span>
-                                <span class="cl" data-line="17"> discount = total * <span class="num">0.1</span></span>
-                                <span class="cl" data-line="18"> total = total - discount</span>
-                                <span class="cl" data-line="19"> <span class="fn">print</span>(<span class="str">f"تم
-                                        خصم {discount} — المجموع النهائي: {total}"</span>)</span>
-                                <span class="cl" data-line="20"><span class="kw">else</span>:</span>
-                                <span class="cl" data-line="21"> <span class="fn">print</span>(<span
-                                        class="str">f"المجموع النهائي: {total}"</span>)</span>
+                                <span class="cl" data-line="11"><span class="cm"># المستخدم بيضيف منتجات للسلة</span></span>
+                                <span class="cl" data-line="12"><span class="cm"># كل منتج ليه اسم وسعر وكمية</span></span>
+                                <span class="cl" data-line="13"></span>
+                                <span class="cl" data-line="14"><span class="cm"># حساب المجموع الفرعي</span></span>
+                                <span class="cl" data-line="15">subtotal = <span class="num">0</span></span>
+                                <span class="cl" data-line="16"><span class="kw">for</span> item <span class="kw">in</span> cart:</span>
+                                <span class="cl" data-line="17"> subtotal += item[<span class="str">"price"</span>] * item[<span class="str">"qty"</span>]</span>
+                                <span class="cl" data-line="18"></span>
+                                <span class="cl" data-line="19"><span class="cm"># خصم 10% لو المجموع أكبر من 500</span></span>
+                                <span class="cl" data-line="20"><span class="kw">if</span> subtotal > <span class="num">500</span>:</span>
+                                <span class="cl" data-line="21"> discount = subtotal * <span class="num">0.1</span></span>
+                                <span class="cl" data-line="22"> final = subtotal - discount</span>
+                                <span class="cl" data-line="23"><span class="kw">else</span>:</span>
+                                <span class="cl" data-line="24"> final = subtotal</span>
                             </div>
                         </div>
                     </div>
@@ -1076,9 +1068,9 @@
                 <div class="error-box">
                     <p>⚠️ أخطاء شائعة</p>
                     <div class="detail">
-                        • نسيان تهيئة <span dir="ltr">total = 0</span> قبل الحلقة — هيطلع error<br>
+                        • نسيان تهيئة <span dir="ltr">subtotal = 0</span> قبل الحلقة — هيطلع error<br>
                         • خلط القائمة اللي فيها المنتجات بالمتغير اللي بيجمع المجموع<br>
-                        • نسيان شرط <span dir="ltr">if total > 500</span> — الخصم مش هيشتغل
+                        • نسيان شرط <span dir="ltr">if subtotal > 500</span> — الخصم مش هيشتغل
                     </div>
                 </div>
             </div>
@@ -1619,6 +1611,10 @@
         /* ===== S1 TABS ===== */
         function switchS1Tab(idx) { document.querySelectorAll('#s1Tabs .tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx)); document.querySelectorAll('#s1 > .section-inner > .tab-panel').forEach((p, i) => p.classList.toggle('active', i === idx)) }
 
+        /* ===== CODE HIGHLIGHTING ===== */
+        function hlCode(id, lines, hintId) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')); if (!lines || !lines.length) return; lines.forEach(ln => { const el = document.querySelector('#' + id + ' .cl[data-line="' + ln + '"]'); if (el) { el.classList.add('hl'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }) } }); const h = document.getElementById(hintId); if (h) { const f = lines[0], l = lines[lines.length - 1]; h.textContent = '▶ سطر ' + (f + 1) + (f !== l ? '–' + (l + 1) : '') } }
+        function clearHL(id) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')) }
+
         /* ===== VISITOR CHART ===== */
         const visitorData = [
             { day: 'السبت', val: 1240 },
@@ -1697,25 +1693,124 @@
         document.getElementById('webResetBtn').addEventListener('click', resetWeb);
 
         /* ===== CASHIER SIMULATION ===== */
-        const products = [{ name: 'تفاح', price: 15 }, { name: 'موز', price: 10 }, { name: 'عنب', price: 20 }, { name: 'حليب', price: 25 }, { name: 'عيش', price: 5 }];
-        let cashierStep = -1, cashierAuto = null, cashierIsAuto = false;
-        const cashierSteps = [
-            { lines: [0, 1, 2, 3, 4, 5, 6, 7], desc: '📦 تعريف قائمة المنتجات', total: 0, showItems: false },
-            { lines: [9], desc: '🔢 تهيئة total = 0', total: 0, showItems: false },
-            { lines: [11, 12, 13], desc: '🔄 تكرار على تفاح — الإجمالي: 15', total: 15, showItems: true, itemIdx: 0 },
-            { lines: [11, 12, 13], desc: '🔄 تكرار على موز — الإجمالي: 25', total: 25, showItems: true, itemIdx: 1 },
-            { lines: [11, 12, 13], desc: '🔄 تكرار على عنب — الإجمالي: 45', total: 45, showItems: true, itemIdx: 2 },
-            { lines: [11, 12, 13], desc: '🔄 تكرار على حليب — الإجمالي: 70', total: 70, showItems: true, itemIdx: 3 },
-            { lines: [11, 12, 13], desc: '🔄 تكرار على عيش — الإجمالي: 75', total: 75, showItems: true, itemIdx: 4 },
-            { lines: [15, 16, 20, 21], desc: '✅ المجموع 75 ≤ 500 — بدون خصم', total: 75, showItems: true, itemIdx: -1, final: true }
+        const cashierProducts = [
+            { id: 'apple', name: 'تفاح', price: 15, emoji: '🍎' },
+            { id: 'banana', name: 'موز', price: 10, emoji: '🍌' },
+            { id: 'grape', name: 'عنب', price: 20, emoji: '🍇' },
+            { id: 'milk', name: 'حليب', price: 25, emoji: '🥛' },
+            { id: 'bread', name: 'عيش', price: 5, emoji: '🍞' }
         ];
-        function hlCode(id, lines, hintId) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')); if (!lines || !lines.length) return; lines.forEach(ln => { const el = document.querySelector('#' + id + ' .cl[data-line="' + ln + '"]'); if (el) { el.classList.add('hl'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }) } }); const h = document.getElementById(hintId); if (h) { const f = lines[0], l = lines[lines.length - 1]; h.textContent = '▶ سطر ' + (f + 1) + (f !== l ? '–' + (l + 1) : '') } }
-        function clearHL(id) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')) }
-        function renderCashierItems(upTo) { const el = document.getElementById('cashierItems'); el.innerHTML = ''; for (let i = 0; i <= upTo && i < products.length; i++) { const p = products[i]; const run = products.slice(0, i + 1).reduce((s, x) => s + x.price, 0); el.innerHTML += '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-weight:600">' + p.name + '</span><span style="color:var(--dim)">' + p.price + ' EGP</span><span style="color:var(--accent);font-weight:700">' + run + ' EGP</span></div>' } }
-        function setCashierStep(s) { if (s < 0 || s >= cashierSteps.length) return; cashierStep = s; const step = cashierSteps[s]; hlCode('cashierCode', step.lines, 'cashierLineHint'); document.getElementById('cashierStep').textContent = step.desc; document.getElementById('cashierTotal').textContent = step.total + ' EGP'; const di = document.getElementById('cashierDiscount'); if (step.final) { di.style.display = 'block'; document.getElementById('cashierFinal').textContent = step.total } else { di.style.display = 'none' } if (step.showItems && step.itemIdx >= 0) renderCashierItems(step.itemIdx); else if (step.showItems) renderCashierItems(products.length - 1) }
-        function nextCashierStep() { if (cashierStep >= cashierSteps.length - 1) { if (cashierIsAuto) { cashierStep = -1; setCashierStep(0) } else { document.getElementById('cashierStep').textContent = '✅ خلصت! اضغط إعادة' } return } setCashierStep(cashierStep + 1) }
-        function resetCashier() { if (cashierAuto) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل' } cashierStep = -1; clearHL('cashierCode'); document.getElementById('cashierLineHint').textContent = '▶ سطر —'; document.getElementById('cashierStep').textContent = 'جاهز'; document.getElementById('cashierTotal').textContent = '0 EGP'; document.getElementById('cashierItems').innerHTML = ''; document.getElementById('cashierDiscount').style.display = 'none' }
-        document.getElementById('cashierRunBtn').addEventListener('click', () => { if (cashierIsAuto) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل'; return } if (cashierStep >= cashierSteps.length - 1) resetCashier(); if (cashierStep === -1) setCashierStep(0); cashierIsAuto = true; document.getElementById('cashierRunBtn').textContent = '⏹ إيقاف'; cashierAuto = setInterval(() => { if (cashierStep >= cashierSteps.length - 1) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل'; return } nextCashierStep() }, 1200) });
+        let cart = [];
+
+        /* Render product buttons */
+        function renderProducts() {
+            const el = document.getElementById('cashierProducts');
+            el.innerHTML = cashierProducts.map(p =>
+                '<button onclick="addToCart(\'' + p.id + '\')" style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;transition:all .2s;font-family:Cairo;font-size:13px;color:var(--text);text-align:right" onmouseover="this.style.borderColor=\'var(--s1)\';this.style.background=\'rgba(6,182,212,.08)\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,.08)\';this.style.background=\'rgba(255,255,255,.04)\'">' +
+                    '<span style="font-size:20px">' + p.emoji + '</span>' +
+                    '<div style="flex:1"><div style="font-weight:700">' + p.name + '</div><div style="color:var(--dim);font-size:11px">' + p.price + ' EGP</div></div>' +
+                    '<span style="background:var(--s1);color:var(--bg);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">+ إضافة</span>' +
+                '</button>'
+            ).join('');
+        }
+        renderProducts();
+
+        /* Add product to cart */
+        function addToCart(id) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                const p = cashierProducts.find(x => x.id === id);
+                cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, qty: 1 });
+            }
+            highlightCode([11, 12]);
+            updateCart();
+        }
+
+        /* Change quantity */
+        function changeQty(id, delta) {
+            const item = cart.find(x => x.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
+            updateCart();
+        }
+
+        /* Remove item */
+        function removeFromCart(id) {
+            cart = cart.filter(x => x.id !== id);
+            updateCart();
+        }
+
+        /* Update entire cart display */
+        function updateCart() {
+            const cartItemsEl = document.getElementById('cartItems');
+            const cartEmptyEl = document.getElementById('cartEmpty');
+            const cartTotalsEl = document.getElementById('cartTotals');
+            const cartDiscountRow = document.getElementById('cartDiscountRow');
+
+            if (cart.length === 0) {
+                cartEmptyEl.style.display = 'block';
+                cartItemsEl.innerHTML = '';
+                cartTotalsEl.style.display = 'none';
+                document.getElementById('cashierStep').textContent = 'السلة فاضية';
+                clearHL('cashierCode');
+                document.getElementById('cashierLineHint').textContent = '▶ سطر —';
+                return;
+            }
+
+            cartEmptyEl.style.display = 'none';
+            cartTotalsEl.style.display = 'block';
+
+            /* Render cart items: name + unit price only, with qty controls */
+            cartItemsEl.innerHTML = cart.map(item =>
+                '<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px">' +
+                    '<span style="font-size:18px">' + item.emoji + '</span>' +
+                    '<div style="flex:1">' +
+                        '<div style="font-weight:600">' + item.name + '</div>' +
+                        '<div style="color:var(--dim);font-size:11px">' + item.price + ' EGP</div>' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:6px">' +
+                        '<button onclick="changeQty(\'' + item.id + '\', -1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">-</button>' +
+                        '<span style="min-width:20px;text-align:center;font-weight:700">' + item.qty + '</span>' +
+                        '<button onclick="changeQty(\'' + item.id + '\', 1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">+</button>' +
+                    '</div>' +
+                    '<button onclick="removeFromCart(\'' + item.id + '\')" style="background:none;border:none;cursor:pointer;font-size:16px;opacity:.6;transition:opacity .2s" onmouseover="this.style.opacity=\'1\'" onmouseout="this.style.opacity=\'.6\'">🗑️</button>' +
+                '</div>'
+            ).join('');
+
+            /* Calculate totals */
+            let subtotal = 0;
+            cart.forEach(item => { subtotal += item.price * item.qty; });
+
+            document.getElementById('cartSubtotal').textContent = subtotal + ' EGP';
+
+            if (subtotal > 500) {
+                const discount = Math.round(subtotal * 0.1);
+                const finalTotal = subtotal - discount;
+                cartDiscountRow.style.display = 'flex';
+                document.getElementById('cartDiscount').textContent = discount + ' EGP';
+                document.getElementById('cartFinal').textContent = finalTotal + ' EGP';
+                highlightCode([15, 16, 17, 20, 21, 22]);
+                document.getElementById('cashierStep').textContent = 'خصم 10% — المجموع: ' + finalTotal + ' EGP';
+            } else {
+                cartDiscountRow.style.display = 'none';
+                document.getElementById('cartFinal').textContent = subtotal + ' EGP';
+                highlightCode([15, 16, 17, 23, 24]);
+                document.getElementById('cashierStep').textContent = 'المجموع: ' + subtotal + ' EGP';
+            }
+        }
+
+        /* Code highlighting for cashier (delegates to hlCode) */
+        function highlightCode(lines) { hlCode('cashierCode', lines, 'cashierLineHint') }
+
+        /* Reset cart */
+        function resetCashier() {
+            cart = [];
+            updateCart();
+            document.getElementById('cashierStep').textContent = 'جاهز';
+        }
         document.getElementById('cashierResetBtn').addEventListener('click', resetCashier);
 
         /* ===== ART STEPS ===== */
