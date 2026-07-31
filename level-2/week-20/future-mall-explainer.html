@@ -1,696 +1,1738 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مشروع Future Mall</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-<style>
-:root{--primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;--card:#111638;--card-hover:#1a2050;--text:#fff;--dim:#8892b0;--success:#00ff88;--danger:#ff4757;--warn:#ffd700;--s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444;--s7:#193cff}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-.bg-anim{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden}
-.bg-anim::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(25,60,255,.1) 0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(0,212,170,.08) 0%,transparent 40%);animation:bgF 20s ease-in-out infinite}
-@keyframes bgF{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-5%,5%) rotate(5deg)}}
-.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1}
-.particle{position:absolute;width:4px;height:4px;background:var(--primary);border-radius:50%;opacity:.3;animation:pFloat 15s infinite linear}
-@keyframes pFloat{0%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:.3}90%{opacity:.3}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
-.nav{position:fixed;top:0;left:0;right:0;background:rgba(10,14,39,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);padding:15px 30px;z-index:1000;display:flex;justify-content:space-between;align-items:center;transform:translateY(-100%);transition:transform .5s cubic-bezier(.4,0,.2,1)}
-.nav.visible{transform:translateY(0)}
-.nav-links{display:flex;gap:8px;overflow-x:auto;padding:5px}
-.nav-links::-webkit-scrollbar{display:none}
-.nav a{text-decoration:none;color:var(--dim);padding:10px 18px;border-radius:25px;font-size:13px;font-weight:600;white-space:nowrap;transition:all .3s;border:1px solid transparent}
-.nav a:hover,.nav a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
-.logo-nav{height:35px;border-radius:8px}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;position:relative}
-.hero-badge{display:inline-block;padding:8px 20px;background:rgba(25,60,255,.2);border:1px solid var(--primary);border-radius:30px;font-size:14px;margin-bottom:30px;animation:fUp .8s ease-out}
-.hero h1{font-size:clamp(36px,8vw,80px);font-weight:900;line-height:1.1;margin-bottom:20px;animation:fUp .8s ease-out .2s both}
-.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:20px;color:var(--dim);max-width:600px;animation:fUp .8s ease-out .4s both}
-.hero .start-btn{margin-top:30px;padding:15px 40px;background:var(--primary);color:var(--text);border:none;border-radius:30px;font-family:'Cairo';font-size:18px;font-weight:700;cursor:pointer;transition:all .3s;animation:fUp .8s ease-out .6s both}
-.hero .start-btn:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(25,60,255,.5)}
-@keyframes fUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(25,60,255,.3)}50%{box-shadow:0 0 40px rgba(25,60,255,.6)}}
-.section{min-height:auto;padding:60px 20px;display:flex;align-items:center;justify-content:center}
-.section-inner{max-width:1200px;width:100%;opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
-.section-inner.visible{opacity:1;transform:translateY(0)}
-.section-header{text-align:center;margin-bottom:60px}
-.section-number{display:inline-flex;width:60px;height:60px;border-radius:20px;align-items:center;justify-content:center;font-size:24px;font-weight:900;margin:0 auto 20px;animation:glow 3s infinite}
-.section-header h2{font-size:clamp(28px,5vw,48px);font-weight:900;margin-bottom:15px}
-.section-header p{color:var(--dim);font-size:18px;max-width:600px;margin:0 auto}
-.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-@media(max-width:900px){.content-grid{grid-template-columns:1fr}}
-.card{background:var(--card);border-radius:24px;padding:30px;border:1px solid rgba(255,255,255,.05);transition:all .4s}
-.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
-.card-icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px}
-.card h3{font-size:22px;margin-bottom:15px}
-.card p{color:var(--dim);line-height:1.8}
-.diagram-container{background:var(--card);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
-.diagram-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
-.diagram-title{font-size:18px;color:var(--dim);margin-bottom:25px;text-align:center}
-.replay-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--card);border:2px solid var(--primary);border-radius:12px;color:var(--text);font-family:'Cairo';font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;margin-top:20px}
-.replay-btn:hover{background:var(--primary);transform:scale(1.05)}
-.replay-btn svg{width:18px;height:18px}
-.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
-.activity-grid .demo-panel{display:flex;flex-direction:column;gap:16px;padding:20px;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
-.activity-grid .code-panel{background:#0d1a1f;border-radius:16px;padding:16px 18px;overflow:hidden;border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;max-height:460px;height:100%}
-@media(max-width:860px){.activity-grid{grid-template-columns:1fr;gap:18px}.activity-grid .demo-panel{order:1}.activity-grid .code-panel{order:2;max-height:320px}}
-.code-panel .code-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:monospace;font-size:.7rem;color:rgba(159,230,201,.5);letter-spacing:.04em;flex-wrap:wrap;gap:6px;flex-shrink:0}
-.code-panel .code-header .filename{color:rgba(159,230,201,.7)}
-.code-panel .code-header .line-hint{color:var(--warn);font-weight:600}
-.code-panel .code-body{flex:1;overflow-y:auto;overflow-x:auto;font-family:'Courier New',monospace;font-size:.8rem;line-height:2;color:#d4e6f0;white-space:pre;counter-reset:line;padding-bottom:12px;scroll-behavior:smooth}
-.code-panel .code-body::-webkit-scrollbar{width:4px;height:4px}
-.code-panel .code-body::-webkit-scrollbar-thumb{background:rgba(159,230,201,.2);border-radius:99px}
-.code-panel .code-body .cl{display:block;padding:0 6px;border-left:3px solid transparent;transition:background .25s,border-color .25s;counter-increment:line;position:relative;border-radius:2px;min-width:max-content}
-.code-panel .code-body .cl::before{content:counter(line);display:inline-block;width:28px;color:#4a5a66;font-size:.65rem;text-align:right;margin-right:16px;user-select:none;flex-shrink:0}
-.code-panel .code-body .cl.hl{background:rgba(255,177,0,.18);border-left-color:var(--warn)}
-.code-panel .code-body .cl.hl::before{color:var(--warn)}
-.kw{color:#c792ea}.fn{color:#82aaff}.cm{color:#546e7a;font-style:italic}.str{color:#c3e88d}.num{color:#f78c6c}
-.activity-controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;align-items:center}
-.activity-controls .status{font-family:monospace;font-size:.75rem;color:var(--dim);margin-left:auto;font-weight:500}
-.error-box{margin-top:15px;padding:12px;background:rgba(255,71,87,.05);border:1px solid rgba(255,71,87,.2);border-radius:10px}
-.error-box>p{color:var(--danger);font-weight:700;font-size:13px;margin-bottom:4px}
-.error-box .detail{color:var(--dim);font-size:12px;line-height:1.7}
-.tab-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.tab-btn{padding:10px 18px;border-radius:12px;border:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--dim);font-family:'Cairo';font-size:13px;font-weight:600;cursor:pointer;transition:all .3s}
-.tab-btn:hover{border-color:var(--s1);color:var(--text)}
-.tab-btn.active{border-color:var(--s1);background:rgba(6,182,212,.12);color:var(--text)}
-.tab-panel{display:none}.tab-panel.active{display:block}
-.site-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:700px){.site-map{grid-template-columns:1fr}}
-.site-item{padding:20px;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:14px;text-align:center;cursor:pointer;transition:all .3s}
-.site-item:hover{border-color:var(--s2);background:rgba(245,158,11,.08)}
-.site-item .site-icon{font-size:2rem;margin-bottom:8px}
-.site-item .site-label{font-weight:700;font-size:15px}
-.site-item .site-desc{display:none;margin-top:10px;color:var(--dim);font-size:13px;line-height:1.7;text-align:right}
-.site-item.open .site-desc{display:block}
-.attack-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px}
-.attack-table th{background:rgba(139,92,246,.15);color:var(--s3);padding:14px 16px;font-size:14px;font-weight:700;text-align:right;border-bottom:2px solid rgba(139,92,246,.3)}
-.attack-table td{padding:14px 16px;font-size:13px;color:var(--dim);line-height:1.7;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
-.attack-table tr:hover td{background:rgba(255,255,255,.02)}
-.attack-table td:first-child{color:var(--text);font-weight:600}
-@media(max-width:700px){.attack-table{font-size:12px}.attack-table th,.attack-table td{padding:10px 8px}}
-.step-card{padding:24px;background:var(--card);border:2px solid rgba(255,255,255,.06);border-radius:16px;text-align:center;display:none}
-.step-card.active{display:block}
-.step-card h4{color:var(--s4);font-size:18px;margin-bottom:10px}
-.step-card p{color:var(--dim);font-size:14px;line-height:1.8}
-.step-nav{display:flex;justify-content:center;gap:12px;margin-top:20px}
-.step-counter{text-align:center;color:var(--dim);font-family:monospace;font-size:.8rem;margin-top:10px}
-.img-placeholder{width:100%;height:200px;background:rgba(16,185,129,.08);border:2px dashed rgba(16,185,129,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:15px 0;color:var(--s4);font-size:14px}
-.parking-ui{display:flex;flex-direction:column;align-items:center;gap:16px}
-.led-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
-.led-bulb{text-align:center}
-.led-bulb .bulb{width:40px;height:40px;border-radius:50%;background:#333;margin:0 auto 6px;transition:all .3s}
-.led-bulb .bulb.on-green{background:var(--success);box-shadow:0 0 18px var(--success)}
-.led-bulb .bulb.on-red{background:var(--danger);box-shadow:0 0 18px var(--danger)}
-.led-bulb .bulb.on-yellow{background:var(--warn);box-shadow:0 0 18px var(--warn)}
-.led-bulb .bulb.on-blue{background:var(--s1);box-shadow:0 0 18px var(--s1)}
-.led-bulb .label{font-size:12px;font-weight:700;color:var(--dim)}
-.count-display{font-size:48px;font-weight:900;font-family:monospace;color:var(--accent)}
-.parking-btns{display:flex;gap:16px}
-.parking-btn{padding:14px 28px;border-radius:14px;border:2px solid var(--s5);background:rgba(236,72,153,.1);color:var(--text);font-family:'Cairo';font-size:15px;font-weight:700;cursor:pointer;transition:all .3s}
-.parking-btn:hover{background:var(--s5);transform:scale(1.05)}
-.io-diagram{display:flex;align-items:center;justify-content:center;gap:14px;margin:24px 0;flex-wrap:wrap}
-.io-box{padding:14px 22px;background:var(--card);border:2px solid var(--primary);border-radius:12px;font-weight:700;text-align:center;transition:all .3s}
-.io-box.active{background:var(--primary);transform:scale(1.08)}
-.io-arrow{font-size:22px;color:var(--accent);font-weight:700}
-footer{background:linear-gradient(180deg,var(--bg),var(--card));padding:60px 20px;text-align:center;border-top:1px solid rgba(25,60,255,.2)}
-.footer-logo{height:50px;border-radius:12px;margin-bottom:20px}
-.footer-encouragement{font-size:24px;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع Future Mall</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #193cff;
+            --accent: #00d4aa;
+            --bg: #0a0e27;
+            --card: #111638;
+            --card-hover: #1a2050;
+            --text: #fff;
+            --dim: #8892b0;
+            --success: #00ff88;
+            --danger: #ff4757;
+            --warn: #ffd700;
+            --s1: #06B6D4;
+            --s2: #F59E0B;
+            --s3: #8B5CF6;
+            --s4: #10B981;
+            --s5: #EC4899;
+            --s6: #EF4444;
+            --s7: #193cff
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden
+        }
+
+        .bg-anim {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden
+        }
+
+        .bg-anim::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(25, 60, 255, .1) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(0, 212, 170, .08) 0%, transparent 40%);
+            animation: bgF 20s ease-in-out infinite
+        }
+
+        @keyframes bgF {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0)
+            }
+
+            50% {
+                transform: translate(-5%, 5%) rotate(5deg)
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: .3;
+            animation: pFloat 15s infinite linear
+        }
+
+        @keyframes pFloat {
+            0% {
+                transform: translateY(100vh) rotate(0);
+                opacity: 0
+            }
+
+            10% {
+                opacity: .3
+            }
+
+            90% {
+                opacity: .3
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0
+            }
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, .95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(25, 60, 255, .3);
+            padding: 15px 30px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform .5s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .nav.visible {
+            transform: translateY(0)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 5px
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--dim);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all .3s;
+            border: 1px solid transparent
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--text);
+            background: rgba(25, 60, 255, .2);
+            border-color: var(--primary)
+        }
+
+        .logo-nav {
+            height: 35px;
+            border-radius: 8px
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(25, 60, 255, .2);
+            border: 1px solid var(--primary);
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            animation: fUp .8s ease-out
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 8vw, 80px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: fUp .8s ease-out .2s both
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--dim);
+            max-width: 600px;
+            animation: fUp .8s ease-out .4s both
+        }
+
+        .hero .start-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: var(--text);
+            border: none;
+            border-radius: 30px;
+            font-family: 'Cairo';
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s;
+            animation: fUp .8s ease-out .6s both
+        }
+
+        .hero .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(25, 60, 255, .5)
+        }
+
+        @keyframes fUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(25, 60, 255, .3)
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(25, 60, 255, .6)
+            }
+        }
+
+        .section {
+            min-height: auto;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .6s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .section-inner.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px
+        }
+
+        .section-number {
+            display: inline-flex;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            margin: 0 auto 20px;
+            animation: glow 3s infinite
+        }
+
+        .section-header h2 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            margin-bottom: 15px
+        }
+
+        .section-header p {
+            color: var(--dim);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start
+        }
+
+        @media(max-width:900px) {
+            .content-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, .05);
+            transition: all .4s
+        }
+
+        .card:hover {
+            background: var(--card-hover);
+            transform: translateY(-5px);
+            border-color: rgba(25, 60, 255, .3)
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 15px
+        }
+
+        .card p {
+            color: var(--dim);
+            line-height: 1.8
+        }
+
+        .diagram-container {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, .05);
+            position: relative;
+            overflow: hidden
+        }
+
+        .diagram-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent))
+        }
+
+        .diagram-title {
+            font-size: 18px;
+            color: var(--dim);
+            margin-bottom: 25px;
+            text-align: center
+        }
+
+        .replay-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--card);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: 'Cairo';
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s;
+            margin-top: 20px
+        }
+
+        .replay-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05)
+        }
+
+        .replay-btn svg {
+            width: 18px;
+            height: 18px
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 8px
+        }
+
+        .activity-grid .demo-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(255, 255, 255, .03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .activity-grid .code-panel {
+            background: #0d1a1f;
+            border-radius: 16px;
+            padding: 16px 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+            display: flex;
+            flex-direction: column;
+            max-height: 460px;
+            height: 100%
+        }
+
+        @media(max-width:860px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+                gap: 18px
+            }
+
+            .activity-grid .demo-panel {
+                order: 1
+            }
+
+            .activity-grid .code-panel {
+                order: 2;
+                max-height: 320px
+            }
+        }
+
+        .code-panel .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-family: monospace;
+            font-size: .7rem;
+            color: rgba(159, 230, 201, .5);
+            letter-spacing: .04em;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex-shrink: 0
+        }
+
+        .code-panel .code-header .filename {
+            color: rgba(159, 230, 201, .7)
+        }
+
+        .code-panel .code-header .line-hint {
+            color: var(--warn);
+            font-weight: 600
+        }
+
+        .code-panel .code-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: .8rem;
+            line-height: 2;
+            color: #d4e6f0;
+            white-space: pre;
+            counter-reset: line;
+            padding-bottom: 12px;
+            scroll-behavior: smooth
+        }
+
+        .code-panel .code-body::-webkit-scrollbar {
+            width: 4px;
+            height: 4px
+        }
+
+        .code-panel .code-body::-webkit-scrollbar-thumb {
+            background: rgba(159, 230, 201, .2);
+            border-radius: 99px
+        }
+
+        .code-panel .code-body .cl {
+            display: block;
+            padding: 0 6px;
+            border-left: 3px solid transparent;
+            transition: background .25s, border-color .25s;
+            counter-increment: line;
+            position: relative;
+            border-radius: 2px;
+            min-width: max-content
+        }
+
+        .code-panel .code-body .cl::before {
+            content: counter(line);
+            display: inline-block;
+            width: 28px;
+            color: #4a5a66;
+            font-size: .65rem;
+            text-align: right;
+            margin-right: 16px;
+            user-select: none;
+            flex-shrink: 0
+        }
+
+        .code-panel .code-body .cl.hl {
+            background: rgba(255, 177, 0, .18);
+            border-left-color: var(--warn)
+        }
+
+        .code-panel .code-body .cl.hl::before {
+            color: var(--warn)
+        }
+
+        .kw {
+            color: #c792ea
+        }
+
+        .fn {
+            color: #82aaff
+        }
+
+        .cm {
+            color: #546e7a;
+            font-style: italic
+        }
+
+        .str {
+            color: #c3e88d
+        }
+
+        .num {
+            color: #f78c6c
+        }
+
+        .activity-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            align-items: center
+        }
+
+        .activity-controls .status {
+            font-family: monospace;
+            font-size: .75rem;
+            color: var(--dim);
+            margin-left: auto;
+            font-weight: 500
+        }
+
+        .error-box {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 71, 87, .05);
+            border: 1px solid rgba(255, 71, 87, .2);
+            border-radius: 10px
+        }
+
+        .error-box>p {
+            color: var(--danger);
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 4px
+        }
+
+        .error-box .detail {
+            color: var(--dim);
+            font-size: 12px;
+            line-height: 1.7
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 20px
+        }
+
+        .tab-btn {
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .03);
+            color: var(--dim);
+            font-family: 'Cairo';
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .tab-btn:hover {
+            border-color: var(--s1);
+            color: var(--text)
+        }
+
+        .tab-btn.active {
+            border-color: var(--s1);
+            background: rgba(6, 182, 212, .12);
+            color: var(--text)
+        }
+
+        .tab-panel {
+            display: none
+        }
+
+        .tab-panel.active {
+            display: block
+        }
+
+        .site-map {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        @media(max-width:700px) {
+            .site-map {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .site-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, .03);
+            border: 2px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .site-item:hover {
+            border-color: var(--s2);
+            background: rgba(245, 158, 11, .08)
+        }
+
+        .site-item .site-icon {
+            font-size: 2rem;
+            margin-bottom: 8px
+        }
+
+        .site-item .site-label {
+            font-weight: 700;
+            font-size: 15px
+        }
+
+        .site-item .site-desc {
+            display: none;
+            margin-top: 10px;
+            color: var(--dim);
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: right
+        }
+
+        .site-item.open .site-desc {
+            display: block
+        }
+
+        .attack-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px
+        }
+
+        .attack-table th {
+            background: rgba(139, 92, 246, .15);
+            color: var(--s3);
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: right;
+            border-bottom: 2px solid rgba(139, 92, 246, .3)
+        }
+
+        .attack-table td {
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.7;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            vertical-align: top
+        }
+
+        .attack-table tr:hover td {
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .attack-table td:first-child {
+            color: var(--text);
+            font-weight: 600
+        }
+
+        @media(max-width:700px) {
+            .attack-table {
+                font-size: 12px
+            }
+
+            .attack-table th,
+            .attack-table td {
+                padding: 10px 8px
+            }
+        }
+
+        .step-card {
+            padding: 24px;
+            background: var(--card);
+            border: 2px solid rgba(255, 255, 255, .06);
+            border-radius: 16px;
+            text-align: center;
+            display: none
+        }
+
+        .step-card.active {
+            display: block
+        }
+
+        .step-card h4 {
+            color: var(--s4);
+            font-size: 18px;
+            margin-bottom: 10px
+        }
+
+        .step-card p {
+            color: var(--dim);
+            font-size: 14px;
+            line-height: 1.8
+        }
+
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px
+        }
+
+        .step-counter {
+            text-align: center;
+            color: var(--dim);
+            font-family: monospace;
+            font-size: .8rem;
+            margin-top: 10px
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(16, 185, 129, .08);
+            border: 2px dashed rgba(16, 185, 129, .3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            color: var(--s4);
+            font-size: 14px
+        }
+
+        .parking-ui {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px
+        }
+
+        .led-row {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .led-bulb {
+            text-align: center
+        }
+
+        .led-bulb .bulb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            margin: 0 auto 6px;
+            transition: all .3s
+        }
+
+        .led-bulb .bulb.on-green {
+            background: var(--success);
+            box-shadow: 0 0 18px var(--success)
+        }
+
+        .led-bulb .bulb.on-red {
+            background: var(--danger);
+            box-shadow: 0 0 18px var(--danger)
+        }
+
+        .led-bulb .bulb.on-yellow {
+            background: var(--warn);
+            box-shadow: 0 0 18px var(--warn)
+        }
+
+        .led-bulb .bulb.on-blue {
+            background: var(--s1);
+            box-shadow: 0 0 18px var(--s1)
+        }
+
+        .led-bulb .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dim)
+        }
+
+        .count-display {
+            font-size: 48px;
+            font-weight: 900;
+            font-family: monospace;
+            color: var(--accent)
+        }
+
+        .parking-btns {
+            display: flex;
+            gap: 16px
+        }
+
+        .parking-btn {
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: 2px solid var(--s5);
+            background: rgba(236, 72, 153, .1);
+            color: var(--text);
+            font-family: 'Cairo';
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .parking-btn:hover {
+            background: var(--s5);
+            transform: scale(1.05)
+        }
+
+        .io-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 24px 0;
+            flex-wrap: wrap
+        }
+
+        .io-box {
+            padding: 14px 22px;
+            background: var(--card);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+            transition: all .3s
+        }
+
+        .io-box.active {
+            background: var(--primary);
+            transform: scale(1.08)
+        }
+
+        .io-arrow {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        footer {
+            background: linear-gradient(180deg, var(--bg), var(--card));
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(25, 60, 255, .2)
+        }
+
+        .footer-logo {
+            height: 50px;
+            border-radius: 12px;
+            margin-bottom: 20px
+        }
+
+        .footer-encouragement {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="bg-anim"></div>
-<div class="particles" id="particles"></div>
+    <div class="bg-anim"></div>
+    <div class="particles" id="particles"></div>
 
-<nav class="nav" id="mainNav">
-    <img src="data:image/webp;base64,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" class="logo-nav">
-    <div class="nav-links">
-        <a href="#hero">المقدمة</a>
-        <a href="#intro">الأقسام</a>
-        <a href="#s1">البرمجة والـ AI</a>
-        <a href="#s2">تطوير المواقع</a>
-        <a href="#s3">الأمن السيبراني</a>
-        <a href="#s4">الفن الرقمي</a>
-        <a href="#s5">الأنظمة المدمجة</a>
-        <a href="#closing">الملخص</a>
-    </div>
-</nav>
-
-<section class="hero" id="hero">
-    <div class="hero-badge">المستوى التاني — Final Project</div>
-    <h1>مشروع <span dir="ltr">Future Mall</span></h1>
-    <p>هنبني مول ذكي كامل، كل مادة في المادة بتبنى جزء منه — 5 مهام، 5 أقسام، مول واحد!</p>
-    <button class="start-btn" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">ابدأ الدرس</button>
-</section>
-
-<section class="section" id="intro">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🏪</div>
-            <h2>أقسام المول — <span dir="ltr">5 Departments</span></h2>
-            <p>احنا هنبني مول ذكي كامل، كل مادة بتبني جزء منه</p>
+    <nav class="nav" id="mainNav">
+        <img src="data:image/webp;base64,UklGRsAcAABXRUJQVlA4ILQcAAAQsACdASpYAlUCPlEok0ajoqGhItWIMHAKCWdu/Eb3rSGO7W24Kxp8t/z35QbaL2P8mvy09B3LHy/76/vP/lMzu8T/Ov9N/jP3B/vn/////3R/1/qP/Uf6m/AB/Df4//kP7/+3f9m/////+rT1F/uJ6gP6r/d/+d/hf3/+a7/Jepz/JeoF/Vv7/1iHoCfsB6Yn/r/2Hwe/tJ/5v9F+//0Lfzz+7/9r8//kA9ADqx+wP9p7Rf7Z/XvPvq8+1nMHiU/Fftn+o/uftp7JfkXqBfiX8x/xP5Z8JQAD6t/6b+4+upM+yAOC8oAfpr1aP6T/6f5Pz7/of+X/ab4Dv57/aP+12E/2y///u7/uQEd8QtYY3sgthnhSjzlxsHsUNtqxsYPmY/tAnTWk3eRvx96FjeyHJvbr2WcMflxsHxsHxwNwpR5y43vhzrGX1TpNJmXt4xgkLqDmwfG99YZRGMFcyZ4Uo85gZwBbN+NllprGxSRxW1rTyCRoZg+h0Lk9hyLKBQ73OHulwtb0r7Yt5PSoBq70s+RV+vmqzZCqvAjDoiSnBwHM9u3kIwbzlxsBQO5nrVFmIT0cN4xUVTTop/in5EP7B8VPficNp4Uo9CYJ2MbGe2QcycuNhDjHYMc1hRlU7TBo7ET+m0ecuLWrsysVbJwwyW7Gwci7/f4b7eY3spo8hACO9F7eM0cndhYzBzYPjYPi2s3lloqwH/ypFHIWDg3LWx724JkPCjzlxsIARP9cmu7/ZownOm6SXZWcSrN1ionLjYPjYPdF1f9yA04STy2woP8q2ZDab97eMV4Uo8j+rxDgQtFzXmj0BexP/th4o9HZap/AcfrB8bB8bByt9LZK1LVnj6oAWMnX6h5/qUKSpGE52zPJmXt4xXhLKBMjlKRRBOFPTCBFLs0PlKB6EBul4xXhSgtMgQT6oNB3AFnhzPt44fdrVBd0wgBYJ5nkzL28YroE3NmKKreywfJTq9znjhtX1aq8EtMLlxsHuu2EKfH9FOy4j31Ko0UwYo70PeKl4jJoqMhKYlb5YktMajaS5Wc3/adyZdDaAfhhDWpYWGcPKvDaRep78mGQHCd7//L5zA9p7+w4sz5T9KoniwkKqUrmI71fQgTVtI0XVrqq7V+mYy9wK3ffqz/+Or3peC0mkpVYx955ZowcBHo6v9i29B5LQfA6DqaLpoV7SiHFmRAm0UldUDcX/ouciJah9bJ0zGUds8ApyspaVFT0aFb610bmwG8MKUciDdQbUxIc3kQgFF0BQ2+3/1twur1bsbB8bAIuNI7ctdbxiyyP8bBzhMbmYIM4b8pn03S9501OtiXK9jYPjYPjYBU0J1td0x2zWnRSj2ENErPauhSJbsbB8bB8WzQmMIoN6mSeoaPbS7xhqgz7Rm90udSbfM+/M+/M+2q5zkHwgOmW7IxrgGfnantR5bmZ/GwfGwfGwCfuyIPBLrvY17b1479hUwupcbB8bB8bAQAQPxFm5wHM/DGX2dGUTnPSSORRmBAFKPOXGwfGqnUawYBmUlb7o2gq3xIt+5qaTHReecuNg+Ng5S5VEPIKn7R5y5KdgNEP/CctFGRfdcbB8bB8bAG2kbnnjfj5oluv/gRhkt633Yzw7bkmwo85cbByF8VOjWFDUjwLg+AhHWghGXOkAj3IYK3YrIOKIEsJ2Lx5D63xJhyMnSjFi2aaOqZHGOU83UPjf+fNGyE+Z/GxpEB8bD1WDQ6zDahWy4eI+Q2GD/8t2/te3jGOtkUmvH29gn/+TICZmhiQUW7GwfLPCtqooUgpRoHcGtw3szflXEGGS3Y2D5Kdg+OQE+JVtRv+yklVIuo8dXQx116rM3el4dZCC3JvTG+pMds+GvBFYveHV3km1Cry4VeO7G9/euRjXSwAAP77d89+nafhMf4TD6F7w6ETqw/BiNp9R3MH+fjgGRkNcGuDzzJDh5wD5niJcxxptKbzbw2ZkkcLHYPDYtAgeyGavwCzeP1Hv+Jx2rSaoRfE+1+cYFN6+O2ZqnVjPDdbvv2KdVrlK5PMUvmhCbwAFqQybdpqs3k8yQvZtDTr3o6w4WQHXQz0sykl3GEA/CFxJfMOTkJ1y3/nSlwC+0naIxAJyDvxU6hMY1Kijbe/v3PVRvALgd+p4nomE6P93IUmkld97JR/G3ZE1/J8NqOg4AvmO7nptwCH3HSUoM6p/CRSrejS0vyLndCB//fmeUVLGONqwvyYyljGfrFourMOaQMXBCFRLQAyveZAUJ9JywJ+AVVD+sJNUA6GatZh4AdTxKA2dHNSOckmJRAt/7BHRHNkGj1FU7gHWJmbORZicUCUV2HnTtoWdwwJCBXehscM5VNujpC8Utn5blnaBm35pWeDb7CEt5w+HOnoOBgUZ8lMaeLgCEXlrUJpflBtRgV+gsy7lfDzZuTdBBC9bJ+WjVDLsilgNPYb2Bn4qLf9JCQJz93pPj6pXSeypSJqPO7tDcStOt7hJXjTIABlTAkEZ0ClV1T+Fk/GhKoe7jYAlVZe+AAPqHSZ/5HXWidWApbQ2UMwqybyTQme22FkskGS7op7bwWUmZEuNM5EptmdgYL/bSWxv5zSRLRzZtI7+AuJyPGu5bP91AAy63dbb2jeXmrncak0ayciOLtOOpK2k5sDSiibrh+Muv5FYYShZ3hrKRzQ8UBQ/gfQenCcUNsLynSscgfO50r8yMK9cDuaBxrBESuwTIv/Ba0OrhKBFGKoBl3qVLroHVXijv7TQvCDUoiNj6QzckInt4JNrVD40IKDUFeE+h6CHHeehl/ZG0Ad7sJ7kLTjyLucB/zjIcOzHcQucWaiZ51eTy08zaI7BEoOdEFW2o1U6cCEDY9tvkxj/0aGCk54aEKD6zCqjgQPFPLcXLVZZzkvGIJeZaXqa2WRZ/IIry/rCxb9h1PLcmZ8Wt1zX2zR9vZWfwAAJ9htLnPiA63VF7+H83NoFmLGnFiBJFoDISdaPlPU4X4+EhN0jDFe0wixZBfRJAZbnB3JEh2pivFjU96ax8UCq4Z0zsQib2CXlOVlDdgJeEzH+B4YnFVq8JzwVVUzHrUniFQI/sRaQriG+J2qKN9zH2+ilo3hKJkFjqFWNcKFPqxqK/gHQOYNWlcC3C/aIKttRqpz77PtqzMDT1f1F7c0dKBhiY3IYvx2O42at13k1Yhxf8TJeQJui1Kpa8fhmVemU1QNyk1TIm/1bghfQIAFYQF70bIV7Bpm55kEih6BcY9Uq3UjKZq1tlL5AUmpzCCXKf0Tmdp3LB48OISsYb/SME9HekTO91T31fF7Taf3f1MmICO+AWoIrVmAQmaX6h4PpP9j4/EkKrOyfSQnzitH19H/4c1yr9d0dHU3qN46Amo6Xf5Xd0Gc1FoPixuLj30doDHLcNjQkOekKELEf12Dcy+XllpnDZtzYdVQ7pYMpZ3UDCaGnKVvpzZM/NcwAAK+rG8FhSEcsLamGjV3RMDAHc/cLkPrHqti5utRJ//yFREt5ISjCeQFVrQSb90qDCwphOkX7tJk8STj9IRMoYKJStCMW0Wo0q+LTH+maNPCFUlkVFd8yT0MXTaTE1T1IYN5ZgnsayrqF0w612PjhakbgqBvk9WdsHHkfH5RlihZR+MfTG3a0eiYzaUv8ubMKwAAIqZJl705RYs2D/BSe2+dFn/APWfeDcHQm7effuGf6lb46uKXiOGwU00wIYC0biN/AsWpUy0rhg0gj85my03P7bTDm0u7TNGNcejLO85d50usVZUC/jagNbQDNiRKybMkWpqYAgWb3V99t1UzIaTDi9mhMhpda6hr6N/Zb9Drvr4p7mQ7q7VBZFypv+Mv+73DxLhb/VQAAeH0jvC/DkpFUdv9v43SCuH72zsCKB7f6um2hr77ez5P2RqJ6tv6p4hN5i3/FsTZv9bN+Nl4fv9KKUaDXnMXi7N7f/bZq4DwTNxpUnyiYDd2GQb1nCVo6Gjtzdn+HEbwtYeKBC8j1X1C4qCG30E7tvqEtjkrmhQ4PcACopAAASgT/5kXtSKi9J6EcBv8hPNt1uPaXHQeNjO2lQzqWPIZJUKdg/tFh1DmcnqHGGPFYSTQbfPsjERRa3WkpEh0Dy8sY/Yg0nhlsH0+GWPdBRPzFkd4zvkyT20zqeHtZ7JROwNGlAAvcQIlFJ9nvCvRNK38jR0rFWzvqPk6QViXkBLumJqMKlw2uOiEC9wER6v0Hflp3QYDQ25dkn/cFJ7Y5pS2kdTrLaFp0IRlr4ki2/IgDH5wxgaaybYh81w8Qt9zfoXR3UJhkhQIKIA7WAACd2f2peO5lvJ9lS7TMkCcwOMJh8v03NI4b6DBPlsKtsll+DYtgNcoarMQvauSVcU6okOjbu+Psle925mPQhZ+kV7uGVbW0Bi0jxV51h40/R5iFzu+OrHRhrCV1jBuR4GjHmrVllfL1HHLAQ+AAG2I0xcQol1N6Fk2XFP0e5tO4Y6flC0y01riBHNMDd2mT/VFHEoPb9OJoh+DNIjRmgjzjjxOrvtxOobdx8u7oAiSTWAeORxqDGj4hG5i5mAChl3tAGqbnpCu3ub5cOb+ZaSx61KYf6JuW/CdvA8o68PFWhpzD344h6IUB+RINaQBoB5kXjvYppl6LnvKobIqSlpQaNFFNdOqqRO3NdSdyp1fQiHBHfh13aAPQIr5Q0Ze+hCqrO/mkBLzeVhLmkAAVR+5qO45NgzGlNzWA98NI4zs/xTNG2ERCyHfF3xLhKeIdp97BhBIJceiMGYayZjcXNbw1msYweDmGYCT7SGL1CEPR/SqiOldqpxqfdnSA3Z5qiSmZJ4sOAlcPZvz6A28xZVTiZnZvccPSvpG7Lo3My862Kbx6Xh9nLNNxQJcFRHgZDm+cARCB7LCugHy7kbepoicKQ7UpVLr3o+YbbnvOR7BmMmIn5N3JkqnHF2Ej1bC2wMImRFvhcjsYFH3kL+zpp21DboPHPxU7uRVQM+QhrG5z5uVJ+swmIgwMT+SkqBlUuc1Flu4Uc6G2IjfoTd8N1xuw0bZVHlh8cDcK3oPJ7OxittMYz1zH8d0vZYkquEYU+i375WeraEDESfDjCgNVOE7cEnaouSNx4mciGplmk2ODV8uclKFuTRKTDs32n8XD8y7enPfBGPfMm79dvTU+yYRkTa1j5EuSBIxy2zrFLF0hD/ECUFIk5SHe2gQpcEbBX8yhF6IBZrMtEM12W8LD1Nlbr5/xY3ACw8q5OGgOFXLuYQQnlD+Uxa5ok0BLKGRWfc9wjUz4u8xGIZAhTlrq/qfnMZ2x49l9aUgULleRNw3aODmvc+6cth+WwJ5tuof2QffV5fkGtyBPKEIWD4TBHY9vaTfBAp4vzHSumXeoaM9lw+IvPtQlZr0aU1p25/az85EXf7wyzyHt0OcmzzMMiALkvXPsQAZWQ8nL+zMLA5zR96TKV9+jsoXW03yg1FbEV5URaTTKrdshYI8OUeYjZBrHIWyzETRdiEpp19H3TvGtQS/jDBHH7vf7UPvWwLXnErSl/F52L504J/TwiPNCEexYsHnIPeSn7uCfe8DQriX9WOR7wdSBBXgUZP5zmDHgIR5WC/1uecNdddnM3HbRrPs2lHbLbBAjcDNU8REL46FebHryj9KjLGsaxmS//66+KJu7Qg8e9yo34xjkn1bQYAXz7tN0O63IezR+DUQlCNWkiuuoQDLlJD8wW0bOEJihhKSJw00InMY0pxSUr5Byqxw8ou2Wbhzz4MFEjhF3eSUYnS192yMGP9pA0itiQwKOHBi7PJMk3MmA9zma7mtFiu33G4Pi5ikOyf3gxN2CMyuAyv+l8caLB8Qt/fRpbVHvVuOPXnGat3n3K+Oszq8z/bNWRqeUlgDAz/B8PtyDPZC92jHEAc+ioeNadDdUBCFplppPEhydgEgRc2KgzRwTDYg9Hx+dTopc9aXkhMM1KPddqGrHkpQP/ggLw+HGGIhPnjsksUd3QkgfVdUg8JeP8aGteK/umY6rXA+6QSvWGP7f/HJh/xDzHBfU2l90KF/aV5mp3bGD0Ms7qpju5ofDBfdIPH8bNu8rqy62u5KlnetQaULHdW7F+/zeJ5wlr9H8pls6DGH+irJngNGS82OSScvjRpENTt9XPHrlI+UN/duVQ3KnRTgEOg6GSt1ImqfBwa1Y06Oe+9YthZ4mEuY/itUjcW4Jggs+44stpmPoBHnGSOO7Lz2SCHX9FXfVPrT+QzXwveMMNhvyNwl4jpoBTsONU77voNQrD/zcveT7ckBcdT0gf1RMVqZ3GvM1mcCHgbuLT5xcAG3ZVLvKLrwiZWpDzjkOmg+/TCYuaX/PmRs2QaildfviW/Hevmw9fcUXrTPqGSG1H0GqrjyoxA23V8Bv1vcoq5T+skp8dIbcJSQWuOiEdN/9r6Wwt+ce/Owj5RMyX8svgiDy7Xia6lFiVez5+mc6+MH18/KBmUi0rBT5bMEzDB02KxSzK3qMi/OAOQbYPYfNIl59lkdsAQipp0fl0TyGTMHZ6ntmqj2l5zkJHU7TG1zdi/FIUctcz1DIEPg+NlhS9FbjN2wp3mA4pVD5nTNRsfJ8aoZDP/THBSRncKJ1B32ZKWVISad+YBO2I7HsSylu/2JAid4ONBCK+SXX0Ii5QJpT2K3qJoU5O0AEeUSCFgMH6Y0slKRny0AgFmKdd3IbCl0FGoDRgky6Kpl5nReBFLOxJS3raORhaVQNPjf6oF+EHRybCVLEr2dX0tp6of1g4ChOehyVdIHiy4yc+gbVR3W/VSagggPu3cNPok6jhStOwANbe5q7sXPijAPFAv6IzRTeO+embmWD/0qG5c0hamY1SJx7TGITr8KHQlNMLOnLk6d6hKiUFY33FuDSrU4FOK/DlA77NZOQ2DoItuiRVHrv93c3Ynvsatdiv8ltHKtG/HPn2xQ5i/+KmnggfDXrNjTme/buvA7XBzP+X4knz+wOMF/GahG7NjGP4B3LS0isYWNJlgzkv5ZfAqZmMgiDL4Uw4froX5zPClgLcuZvrSJ3LpZ0hehlg3LRhV48WBz4HdDyylIkXHc+1n8we2Bk9pRa002V390oHwHjfeG+UQzp8xz1K8/Cfw6bCvjE4aKrMJSUJ4q7/F7nFLMCzzZyEr44/A6jwLMnJ3s7RyEHPjMyGRN94cyyYkwoKb46jjdNwFExp+uDx84AAAAroJ0dGaMpTEuuEdi2qExu11QiBqZ/k52IRMSeBomwPLBUoCC8wSTtiP9HRqh7gJus94cKYgES9OiJll+Cd3eIwOD6JCQCieA/wbdylWAGytAp3nxurx9pmMhUhGTeB+MkM5BsZMrDn/2sMJOKRjjNt2g0gMbKKE6b5+Zj7Cnd+it9FsOUbY4dzXBasH8mOWkUdOI8rZbbZ5Ll0X32qlwrfJQrNejOjC88t/wEkQn0aj+6BXoSXhIqy/Og0akMBNMzvrKK+YGjEnqMgfR8Vpj0ee5n2jjWzUqk4KeO/ye62D30AACl1qF9rD6SKSdlx/s5cA4IilVP+dWfn0F78WBdIwyb//SQkDGmtdbenSegElOP6PacZhBb+i/K8WWTu9VXV3yrgDCPhPh6e1HISsrz0WbU+T58ifQfGwICXCSYKy3/m/Q75i2vmdDwxPgO8ZKBu9IGoODXA6ISUVPugBOst1nXbOPsFGCKUxkCIpAtzR0oGWylfhafGgcXX2YVelEAAGZgDheCp4xVtvY6XlUgAdaEsyBTVzlwPi/1zEK15FcNTBocGc2mwzP940f/Ashv782L8JhH49Yr5i19NOyEFc+9yVMP/6v+VKsyT4GdSWcrI4IuBItt9W0eC9/olYFePtXmHUf4orvWMA4Ok/W/DPiAUumcO3Z0vqCIn8iI0XTxO2/zE+EDIAAFuz8FhwjaiUQbn36vQuiVliQzezMSYEHFqL+njMKYWo93d8PUR898ko0xT6vUj+34B+74g4wqOCXw+Cpi7xYYwWrwcwF0nshveDXg8u+B6hLwmZwwxBeoOUIUGwH0wyzflw/31HIVK6kC5oZxg0wgAA82cHeRYUKwMf/ySi9883rB2PBjX8qg2kjev0DgFfZ1IKg9U4aUh8UT1bDFwl3sBQXGuyjBeDP8jqk45LpO+aPbW06uXAoE8nL95AopOsshrUb8sP84XohoiO/5/d08Xryx9hxWI4rLaIBcfmEfVc1NiDjAtOHWezpQb0QAACc5+bXJ/5c8ma7r1QlsmaQAHx0BfVeFYcWPOwD8qxBR4lUSO/nw6bIb6g7TWDahUxcJwuRqbh8PYZ/UtLQFpj8nXxP4U0xeR7RGm3rNZp7dgAYVm91AgbmXK2KNYeYYboTOI6Lh3nCBvAgjPDwP3JK8acBLD88RcNiUjnnXtI/wb+3ss4QXRBsBT6yAAAKLsVYaJb9tG38fU+Dy3kcwCp4xK+BxgigXzeGOjVZ1Zthw0Uot+zDRyv6/H3nGPexdydUWakaeWAvpJAFIx8fT5aJcWISdjzNts2ZCBu9xVyDQejhGxOb1sDHhs4Qk/7zoOavD7DRNkCZqWhPBXpgAAovbf2BaKv5fsKRRZIQGT5BaFjTtxayO1Vd6REt5oNcLWWuV6YaVjmIvvWr82rRWLLttX4fGSUxuQotS3+Y16SrHdinQSlfuhfvL+/uyeTARUxTmsR/AAL1vjINJMdmifKg0gVzJGIu1Z/Dkf5Y/hUzlqBcJb2osBeaSI4M4rnr8RVamVM8Z8AAGxpyQlWyeg+U2Tq5mgyuILgDWO+v8/0RzncBLV3LwOhX/Irt8x3SBRMSdvLIUn3icw4KNUhuDN5Lt+CSvxkqBG19L//adaEnZctqMCo9DEmXJl87OL/CIt6Blqbs3QvZXA9XV9ZAAA85GVkZ+1e47Id5Iy0J0PvVwLkzR2CU4xMBjk5msHJel6C8R0ziTx4LLVIaXvtaUTDd/G79Y0xDsLb6rqCzF28SD/EBTY7FtSFjUvEHAAGBNVeJtO0mdTot44rDszK8dYovrtO4nM7hzp90q6LKQol6jSi2aCdBg1acKvD1Aqv8HTsw66VaIOGvpPUYjPJxleE9cxsPm6UsFjd1dep90xrnSXr38Zz2i0Cs8PfS7DV0V/elsE4FXVUHZ8t7HYJNzeibY84HWUhoCiuWL1RVR8/DkCoD51uyMtlWbJPs/5BI+S8wTiPaQgME2YRkzJezhlvcu0BaaXWlRjPe04fYmbaCaZO4qaBheEE0tWchTr75PJV3HzhDTOdaSszkS/idII8KajAQ/lE1ia6RA3G2JaP8KQPy7Ug32nKmv29lkFjPRdgWsxgiETxNaGHPyAD5AgCXRhQFiSBDDTnAfDFmYIpfMFbI9vO2VWgP/DXKciVSHgZFCvOTrBQPSk5fktQlWoDVJLm318cOxMWCHhT4GfUZsqcA7UoBeHwIxyRbJ25xoP2E8Cyp4UIFXdIa6B5Go+OroDuZkXuw09nlRjdV4RPHCe+xM/Uw1OPHeHNhQ3Qxncojf6ikNcXmVFEqRW71oNAl6NBT7hVd+8Pjdv05Ijez2Y4Z9W2Qu0FlKO7aURS80VVzsFkSpPE2XMX69PwgCxIocOy/ulP4+hklymXG/633l6cdZBe0Or+Qm4vzJMvIFgaOslYHUvpQi1vQfq6j8SL9CNMlzK5AMhNxOYAABYD5T55OaqRumUpYFO85YMYSSAALKHSqDsuryuUgnYT+Bap4FwOS4o51LWFhi/ek4+Ah1dwLscK/+OnBM8TZ5dxmGxO0I1Ppo7wcdEXAKdaiHXyAq03+wgJDKzMcTxJ9T/QADJmGKIdThjZOeWspnLMJHUutYYH+vDPzW/BOQdz+QyyLg8AA"
+            class="logo-nav">
+        <div class="nav-links">
+            <a href="#hero">المقدمة</a>
+            <a href="#intro">الأقسام</a>
+            <a href="#s1">البرمجة والـ AI</a>
+            <a href="#s2">تطوير المواقع</a>
+            <a href="#s3">الأمن السيبراني</a>
+            <a href="#s4">الفن الرقمي</a>
+            <a href="#s5">الأنظمة المدمجة</a>
+            <a href="#closing">الملخص</a>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
-            <div class="card" style="border-left:4px solid var(--s1)"><div class="card-icon" style="background:rgba(6,182,212,.15)">🧠</div><h3 style="color:var(--s1)">البرمجة والذكاء الاصطناعي</h3><p>كاشير ذكي، تصنيف المنتجات، تحليل بيانات الزوار</p></div>
-            <div class="card" style="border-left:4px solid var(--s2)"><div class="card-icon" style="background:rgba(245,158,11,.15)">🌐</div><h3 style="color:var(--s2)">تطوير المواقع</h3><p>موقع المول على الإنترنت — تصميم وبرمجة</p></div>
-            <div class="card" style="border-left:4px solid var(--s3)"><div class="card-icon" style="background:rgba(139,92,246,.15)">🛡️</div><h3 style="color:var(--s3)">الأمن السيبراني</h3><p>حماية المول من الهجمات والاختراقات</p></div>
-            <div class="card" style="border-left:4px solid var(--s4)"><div class="card-icon" style="background:rgba(16,185,129,.15)">🎨</div><h3 style="color:var(--s4)">الفن الرقمي</h3><p>شعار المول، ألوان الهوية البصرية، إعلانات</p></div>
-            <div class="card" style="border-left:4px solid var(--s5)"><div class="card-icon" style="background:rgba(236,72,153,.15)">🔌</div><h3 style="color:var(--s5)">الأنظمة المدمجة</h3><p>نظام وقوف السيارات بالـ LEDs والزرار</p></div>
-        </div>
-    </div>
-</section>
+    </nav>
 
-<section class="section" id="s1">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">01</div>
-            <h2>البرمجة والذكاء الاصطناعي وعلوم البيانات</h2>
-            <p>كاشير ذكي، تصنيف المنتجات، وتحليل بيانات الزوار</p>
-        </div>
-        <div class="tab-bar" id="s1Tabs">
-            <button class="tab-btn active" onclick="switchS1Tab(0)">🖥️ الكاشير (Python)</button>
-            <button class="tab-btn" onclick="switchS1Tab(1)">🤖 مصنف المنتجات (AI)</button>
-            <button class="tab-btn" onclick="switchS1Tab(2)">📊 تحليل الزوار (Data)</button>
-        </div>
+    <section class="hero" id="hero">
+        <div class="hero-badge">المستوى التاني — Final Project</div>
+        <h1>مشروع <span dir="ltr">Future Mall</span></h1>
+        <p>هنبني مول ذكي كامل، كل مادة في المادة بتبنى جزء منه — 5 مهام، 5 أقسام، مول واحد!</p>
+        <button class="start-btn" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">ابدأ
+            الدرس</button>
+    </section>
 
-        <!-- Tab 0: Cashier -->
-        <div class="tab-panel active" id="s1Tab0">
-            <div class="diagram-container">
-                <div class="diagram-title">كاشير المول — اضغط "شغّل" عشان تشوف الكود بيشتغل خطوة بخطوة</div>
-                <div class="activity-grid">
-                    <div class="demo-panel">
-                        <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 واجهة الكاشير</div>
-                        <div id="cashierUI" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px">
-                            <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;font-weight:600;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:8px;margin-bottom:8px">
-                                <span>المنتج</span><span>السعر</span><span>الكمية</span>
+    <section class="section" id="intro">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🏪
+                </div>
+                <h2>أقسام المول — <span dir="ltr">5 Departments</span></h2>
+                <p>احنا هنبني مول ذكي كامل، كل مادة بتبني جزء منه</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+                <div class="card" style="border-left:4px solid var(--s1)">
+                    <div class="card-icon" style="background:rgba(6,182,212,.15)">🧠</div>
+                    <h3 style="color:var(--s1)">البرمجة والذكاء الاصطناعي</h3>
+                    <p>كاشير ذكي، تصنيف المنتجات، تحليل بيانات الزوار</p>
+                </div>
+                <div class="card" style="border-left:4px solid var(--s2)">
+                    <div class="card-icon" style="background:rgba(245,158,11,.15)">🌐</div>
+                    <h3 style="color:var(--s2)">تطوير المواقع</h3>
+                    <p>موقع المول على الإنترنت — تصميم وبرمجة</p>
+                </div>
+                <div class="card" style="border-left:4px solid var(--s3)">
+                    <div class="card-icon" style="background:rgba(139,92,246,.15)">🛡️</div>
+                    <h3 style="color:var(--s3)">الأمن السيبراني</h3>
+                    <p>حماية المول من الهجمات والاختراقات</p>
+                </div>
+                <div class="card" style="border-left:4px solid var(--s4)">
+                    <div class="card-icon" style="background:rgba(16,185,129,.15)">🎨</div>
+                    <h3 style="color:var(--s4)">الفن الرقمي</h3>
+                    <p>شعار المول، ألوان الهوية البصرية، إعلانات</p>
+                </div>
+                <div class="card" style="border-left:4px solid var(--s5)">
+                    <div class="card-icon" style="background:rgba(236,72,153,.15)">🔌</div>
+                    <h3 style="color:var(--s5)">الأنظمة المدمجة</h3>
+                    <p>نظام وقوف السيارات بالـ LEDs والزرار</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s1">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">01</div>
+                <h2>البرمجة والذكاء الاصطناعي وعلوم البيانات</h2>
+                <p>كاشير ذكي، تصنيف المنتجات، وتحليل بيانات الزوار</p>
+            </div>
+            <div class="tab-bar" id="s1Tabs">
+                <button class="tab-btn active" onclick="switchS1Tab(0)">🖥️ الكاشير (Python)</button>
+                <button class="tab-btn" onclick="switchS1Tab(1)">🤖 مصنف المنتجات (AI)</button>
+                <button class="tab-btn" onclick="switchS1Tab(2)">📊 تحليل الزوار (Data)</button>
+            </div>
+
+            <!-- Tab 0: Cashier -->
+            <div class="tab-panel active" id="s1Tab0">
+                <div class="diagram-container">
+                    <div class="diagram-title">كاشير المول — اضغط "شغّل" عشان تشوف الكود بيشتغل خطوة بخطوة</div>
+                    <div class="activity-grid">
+                        <div class="demo-panel">
+                            <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 واجهة الكاشير</div>
+                            <div id="cashierUI"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px">
+                                <div
+                                    style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;font-weight:600;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:8px;margin-bottom:8px">
+                                    <span>المنتج</span><span>السعر</span><span>الكمية</span>
+                                </div>
+                                <div id="cashierItems"></div>
+                                <div
+                                    style="border-top:2px solid var(--s1);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+                                    <span style="font-weight:700;color:var(--s1)">المجموع:</span>
+                                    <span style="font-size:24px;font-weight:900;color:var(--accent)" id="cashierTotal">0
+                                        EGP</span>
+                                </div>
+                                <div id="cashierDiscount"
+                                    style="display:none;margin-top:8px;padding:8px 12px;background:rgba(0,255,136,.1);border-radius:8px;color:var(--success);font-weight:700;font-size:13px;text-align:center">
+                                    ✅ خصم 10% — المجموع النهائي: <span id="cashierFinal">0</span> EGP
+                                </div>
                             </div>
-                            <div id="cashierItems"></div>
-                            <div style="border-top:2px solid var(--s1);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
-                                <span style="font-weight:700;color:var(--s1)">المجموع:</span>
-                                <span style="font-size:24px;font-weight:900;color:var(--accent)" id="cashierTotal">0 EGP</span>
-                            </div>
-                            <div id="cashierDiscount" style="display:none;margin-top:8px;padding:8px 12px;background:rgba(0,255,136,.1);border-radius:8px;color:var(--success);font-weight:700;font-size:13px;text-align:center">
-                                ✅ خصم 10% — المجموع النهائي: <span id="cashierFinal">0</span> EGP
+                            <div class="activity-controls">
+                                <button class="replay-btn" id="cashierRunBtn"
+                                    style="background:var(--s1);color:var(--bg);font-size:13px">▶ شغّل</button>
+                                <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة</button>
+                                <span class="status" id="cashierStep">جاهز</span>
                             </div>
                         </div>
-                        <div class="activity-controls">
-                            <button class="replay-btn" id="cashierRunBtn" style="background:var(--s1);color:var(--bg);font-size:13px">▶ شغّل</button>
-                            <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة</button>
-                            <span class="status" id="cashierStep">جاهز</span>
+                        <div class="code-panel">
+                            <div class="code-header">
+                                <span class="filename">📄 cashier.py</span>
+                                <span class="line-hint" id="cashierLineHint">▶ سطر —</span>
+                            </div>
+                            <div class="code-body" id="cashierCode">
+                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم,
+                                        السعر)</span></span>
+                                <span class="cl" data-line="1">products = [</span>
+                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span
+                                        class="num">15</span>),</span>
+                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span
+                                        class="num">10</span>),</span>
+                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span
+                                        class="num">20</span>),</span>
+                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span
+                                        class="num">25</span>),</span>
+                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span
+                                        class="num">5</span>)</span>
+                                <span class="cl" data-line="7">]</span>
+                                <span class="cl" data-line="8"></span>
+                                <span class="cl" data-line="9">total = <span class="num">0</span></span>
+                                <span class="cl" data-line="10"></span>
+                                <span class="cl" data-line="11"><span class="kw">for</span> name, price <span
+                                        class="kw">in</span> products:</span>
+                                <span class="cl" data-line="12"> total = total + price</span>
+                                <span class="cl" data-line="13"> <span class="fn">print</span>(<span class="str">f"أضف
+                                        {name}: {price} → المجموع: {total}"</span>)</span>
+                                <span class="cl" data-line="14"></span>
+                                <span class="cl" data-line="15"><span class="cm"># خصم 10% لو المجموع أكبر من
+                                        500</span></span>
+                                <span class="cl" data-line="16"><span class="kw">if</span> total > <span
+                                        class="num">500</span>:</span>
+                                <span class="cl" data-line="17"> discount = total * <span class="num">0.1</span></span>
+                                <span class="cl" data-line="18"> total = total - discount</span>
+                                <span class="cl" data-line="19"> <span class="fn">print</span>(<span class="str">f"تم
+                                        خصم {discount} — المجموع النهائي: {total}"</span>)</span>
+                                <span class="cl" data-line="20"><span class="kw">else</span>:</span>
+                                <span class="cl" data-line="21"> <span class="fn">print</span>(<span
+                                        class="str">f"المجموع النهائي: {total}"</span>)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-box">
+                    <p>⚠️ أخطاء شائعة</p>
+                    <div class="detail">
+                        • نسيان تهيئة <span dir="ltr">total = 0</span> قبل الحلقة — هيطلع error<br>
+                        • خلط القائمة اللي فيها المنتجات بالمتغير اللي بيجمع المجموع<br>
+                        • نسيان شرط <span dir="ltr">if total > 500</span> — الخصم مش هيشتغل
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 1: AI Classifier -->
+            <div class="tab-panel" id="s1Tab1">
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,var(--s1),var(--accent))">🤖
+                        </div>
+                        <h3> المنتجات بالذكاء الاصطناعي</h3>
+                        <p>الذكاء الاصطناعي <span dir="ltr">(AI)</span> ممكن يصنف المنتجات تلقائيًا حسب الصورة — يحدد هل
+                            المنتج فاكهة، مشروبات، أو أكل.</p>
+                        <p style="margin-top:12px;color:var(--accent);font-weight:600">إزاي بيشتغل؟</p>
+                        <p style="margin-top:8px">
+                            1. بنجمع صور للمنتجات<br>
+                            2. النموذج بيتعلم الأنماط (شكل، لون، حجم)<br>
+                            3. بيصنف المنتجات الجديدة تلقائيًا<br>
+                            4. ده بيحسن تجربة التسوق في المول
+                        </p>
+                    </div>
+                    <div class="diagram-container">
+                        <div class="diagram-title">صورة توضيحية — تصنيف المنتجات بالـ AI</div>
+                        <div class="img-placeholder"
+                            style="background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.3);color:var(--s1)">
+                            صورة AI — تصنيف المنتجات (هتتضاف من المعلم)
+                        </div>
+                        <p style="color:var(--dim);text-align:center;font-size:13px;margin-top:10px">النموذج بياخد صورة
+                            المنتج ويطلّع الفئة اللي بيتنتمي ليها</p>
+                    </div>
+                </div>
+                <div class="error-box">
+                    <p>⚠️ أخطاء شائعة</p>
+                    <div class="detail">
+                        • خلط بين "تدريب" النموذج و"استخدام" النموذج — التدريب محتاج بيانات كتير<br>
+                        • التفاف من edge cases — مثلاً منتج مش واضح الصورة
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Data Science — Visitors -->
+            <div class="tab-panel" id="s1Tab2">
+                <div class="diagram-container">
+                    <div class="diagram-title">تحليل بيانات زوار Future Mall — أسبوع كامل</div>
+                    <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة بسيطة: عندنا بيانات زوار <span dir="ltr">Future Mall</span> لأسبوع كامل، وعلينا نحللها ون写出结论.</p>
+                    <div style="overflow-x:auto;margin-bottom:20px">
+                        <table class="attack-table">
+                            <tr>
+                                <th>اليوم</th>
+                                <th>عدد الزوار</th>
+                            </tr>
+                            <tr><td>السبت</td><td style="font-weight:700">1,240</td></tr>
+                            <tr><td>الأحد</td><td style="font-weight:700">860</td></tr>
+                            <tr><td>الاتنين</td><td style="font-weight:700;color:var(--danger)">640</td></tr>
+                            <tr><td>التلات</td><td style="font-weight:700">705</td></tr>
+                            <tr><td>الأربع</td><td style="font-weight:700">780</td></tr>
+                            <tr><td>الخميس</td><td style="font-weight:700">1,020</td></tr>
+                            <tr><td>الجمعة</td><td style="font-weight:700;color:var(--success)">1,460</td></tr>
+                        </table>
+                    </div>
+                    <div style="margin-bottom:24px">
+                        <p style="font-weight:700;color:var(--text);margin-bottom:12px">الخطة — 5 خطوات:</p>
+                        <ol style="color:var(--dim);line-height:2;padding-right:20px;list-style:decimal">
+                            <li><strong>تحديد السؤال</strong> — مثلاً: "إيه أزحم يوم؟" / "إيه أهدى يوم؟"</li>
+                            <li><strong>تحديد البيانات</strong> — عمود الأيام + عمود عدد الزوار، لأسبوع واحد بس</li>
+                            <li><strong>تحليل البيانات</strong> — قارن القيم، لاقي الأكبر والأصغر، وابنِ عمود تشارت</li>
+                            <li><strong>عرض النتائج</strong> — أزحم يوم: الجمعة (1,460). أهدى يوم: الاتنين (640)</li>
+                            <li><strong>كتابة الخلاصة</strong> — جملة أو اتنين بي解释ّوا النتايج</li>
+                        </ol>
+                    </div>
+                    <div style="margin-bottom:20px">
+                        <p style="font-weight:700;color:var(--text);margin-bottom:12px">📊 العمود التشارت:</p>
+                        <div id="visitorChart" style="display:flex;align-items:flex-end;gap:12px;height:200px;padding:20px 0;border-bottom:2px solid rgba(255,255,255,.1)"></div>
+                        <div id="chartLabels" style="display:flex;gap:12px;margin-top:8px"></div>
+                    </div>
+                    <div class="activity-controls" style="justify-content:center">
+                        <button class="replay-btn" id="revealChartBtn" style="background:var(--accent);color:var(--bg)">🔍 اكشف التحليل</button>
+                        <button class="replay-btn" id="resetChartBtn">↺ إعادة</button>
+                    </div>
+                    <div id="chartConclusion" style="display:none;margin-top:20px;padding:16px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:12px">
+                        <p style="color:var(--accent);font-weight:700;margin-bottom:8px">📝 الخلاصة:</p>
+                        <p style="color:var(--dim);line-height:1.8">الجمعة هو أزحم يوم في <span dir="ltr">Future Mall</span>، فممكن نحتاج موظفين أكتر فيه. الاتنين هو أهدى يوم، فممكن نعمل عروض فيه لجذب زوار أكتر.</p>
+                    </div>
+                    <div class="error-box" style="margin-top:16px">
+                        <p>⚠️ أخطاء شائعة</p>
+                        <div class="detail">
+                            • الإبلاغ بالأرقام بس من غير كتابة جملة خلاصة بت解释ّ المعنى<br>
+                            • قراءة أكبر يومخطأً — راجع الأرقام كويس قبل ما تكتب النتيجة
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--s2),var(--accent))">02</div>
+                <h2>تطوير المواقع — <span dir="ltr">Web Development</span></h2>
+                <p>موقع المول على الإنترنت — التصميم والبرمجة</p>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">🌐</div>
+                    <h3>إيه اللي بيجعل موقع مول كويس؟</h3>
+                    <p>
+                        • <span dir="ltr">Responsive Design</span> — يشتغل على الموبايل والكمبيوتر<br>
+                        • سرعة التحميل — صفحات خفيفة<br>
+                        • تنقل سهل — المستخدم يعرف يلاقي اللي عايزه<br>
+                        • تصميم جذاب — ألوان متناسقة وخط واضح<br>
+                        • <span dir="ltr">SEO</span> — يظهر في نتائج البحث
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">💻</div>
+                    <h3>التقنيات اللي هنستخدمها</h3>
+                    <p>
+                        • <span dir="ltr">HTML</span> — هيكل الصفحة<br>
+                        • <span dir="ltr">CSS</span> — التصميم والألوان<br>
+                        • <span dir="ltr">JavaScript</span> — التفاعل والحركة<br>
+                        • <span dir="ltr">Git</span> — إدارة الكود
+                    </p>
+                </div>
+            </div>
+            <div class="diagram-container" style="margin-top:30px">
+                <div class="diagram-title">هيكل صفحة Future Mall — شوف الكود بيتبنى خطوة بخطوة</div>
+                <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة المطلوبة: صفحة <span dir="ltr">HTML</span> بسيطة فيها اسم المول، وصف قصير، وقائمة <span dir="ltr">5</span> محلات، والشارة، و <span dir="ltr">3</span> تغييرات <span dir="ltr">CSS</span>.</p>
+                <div id="webBuildSteps" style="display:flex;flex-direction:column;gap:12px">
+                    <div class="web-step" data-step="0" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;head&gt;</span> — الهيكل الأساسي</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            فيه عنوان الصفحة + الـ <span dir="ltr">CSS styles</span> اللي هنبني بيها التصميم.
+                        </div>
+                    </div>
+                    <div class="web-step" data-step="1" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;h1&gt;</span> — اسم المول</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">&lt;h1&gt;</span> واحدة بس — "<span dir="ltr">Future Mall</span>". ممنوع يبقى في أكتر من <span dir="ltr">&lt;h1&gt;</span> في الصفحة.
+                        </div>
+                    </div>
+                    <div class="web-step" data-step="2" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</div>
+                            <strong style="color:var(--text)">فقرة تعريفية قصيرة</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            وصف مختصر للمول — "<span dir="ltr">Future Mall is a modern shopping destination offering a wide variety of stores, restaurants, and entertainment for visitors of all ages.</span>"
+                        </div>
+                    </div>
+                    <div class="web-step" data-step="3" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">4</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;ul&gt;</span> — قائمة محلات <span dir="ltr">5</span> محلات</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">&lt;ul&gt;</span> (مش <span dir="ltr">&lt;ol&gt;</span>) — العناصر: Zara, Nike, Carrefour, Samsung, Starbucks
+                        </div>
+                    </div>
+                    <div class="web-step" data-step="4" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">5</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;img&gt;</span> — شعار المول</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            صورة الشارة اللي اتعلمتها في Digital Art.
+                        </div>
+                    </div>
+                    <div class="web-step" data-step="5" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                            <div style="background:var(--accent);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">6</div>
+                            <strong style="color:var(--text)"><span dir="ltr">CSS</span> — تغييرات المطلوبة</strong>
+                        </div>
+                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">3</span> تغييرات بس: <span dir="ltr">background-color: lightgray;</span> / <span dir="ltr">color: darkblue;</span> للعنوان / <span dir="ltr">font-family: Arial, sans-serif;</span> لكل النص
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-controls" style="justify-content:center;margin-top:16px">
+                    <button class="replay-btn" id="webBuildBtn" style="background:var(--s2);color:var(--bg)">⏭ الخطوة الجاية</button>
+                    <button class="replay-btn" id="webResetBtn">↺ إعادة</button>
+                    <span class="status" id="webStepStatus">اضغط عشان تبدأ</span>
+                </div>
+            </div>
+            <div class="error-box" style="margin-top:20px">
+                <p>⚠️ أخطاء شائعة</p>
+                <div class="detail">
+                    • استخدام <span dir="ltr">&lt;ol&gt;</span> بدل <span dir="ltr">&lt;ul&gt;</span> — المطلوب قائمة غير مرتبة<br>
+                    • أكتر من <span dir="ltr">&lt;h1&gt;</span> واحدة — الصفحة لازم يكون فيها واحدة بس<br>
+                    • نسيان واحد من الـ <span dir="ltr">3</span> تغييرات الـ <span dir="ltr">CSS</span> المطلوبة<br>
+                    • عدّ أكتر من 5 محلات أو أقل
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:20px">
+                <a href="#" class="replay-btn"
+                    style="background:var(--s2);color:var(--bg);text-decoration:none;display:inline-flex">🌐 افتح موقع
+                    المشروع (قريبًا)</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">03</div>
+                <h2>الأمن السيبراني — <span dir="ltr">Cybersecurity</span></h2>
+                <p>حماية مولنا من الهجمات الإلكترونية</p>
+            </div>
+            <div class="diagram-container">
+                <div class="diagram-title">أنواع الهجمات وإزاي Future Mall بيحمي نفسه</div>
+                <div style="overflow-x:auto">
+                    <table class="attack-table">
+                        <tr>
+                            <th>نوع الهجوم</th>
+                            <th>الوصف</th>
+                            <th>إزاي المول بيحمي نفسه</th>
+                        </tr>
+                        <tr>
+                            <td>التصيد الاحتيالي <span dir="ltr">(Phishing)</span></td>
+                            <td>رسائل إيميل أو رسائل بتبان من شركة موثوقة عشان تسرق بيانات المستخدمين</td>
+                            <td>تدريب الموظفين، فلترة الرسائل المشبوهة، استخدام <span dir="ltr">2FA</span></td>
+                        </tr>
+                        <tr>
+                            <td>البرمجيات الخبيثة <span dir="ltr">(Malware)</span></td>
+                            <td>برامج بتتثبت من غير ما المستخدم يعرف وبتسرق بيانات أو بتبوظ النظام</td>
+                            <td>برنامج حماية على كل جهاز، تحديثات أمنية دورية</td>
+                        </tr>
+                        <tr>
+                            <td>الـ Wi-Fi المتسلل <span dir="ltr">(Rogue AP)</span></td>
+                            <td>شخص بيحط شبكة Wi-Fi مزيفة عشان يسرق بيانات اللي بيتصلوا بيها</td>
+                            <td>شبكة Wi-Fi رسمية بس، تشفير <span dir="ltr">WPA3</span>، تحذير الزوار</td>
+                        </tr>
+                        <tr>
+                            <td>كلمات المرور الضعيفة <span dir="ltr">(Weak Passwords)</span></td>
+                            <td>كلمات مرور سهلة تخمين زي 123456 أو password</td>
+                            <td>سياسة كلمات مرور قوية، تغييرها كل 3 شهور، <span dir="ltr">2FA</span></td>
+                        </tr>
+                        <tr>
+                            <td>الهندسة الاجتماعية <span dir="ltr">(Social Engineering)</span></td>
+                            <td>شخص بيتصل ويقول إنه من الدعم الفني عشان يعرف كلمات السر</td>
+                            <td>تدريب الموظفين، سياسة التحقق من الهوية، تسجيل المكالمات</td>
+                        </tr>
+                        <tr>
+                            <td>اختراق الموقع <span dir="ltr">(Website Hacking)</span></td>
+                            <td>استغلال ثغرات في كود الموقع لسرقة بيانات أو تعديل محتوى</td>
+                            <td>تحديثات دورية، اختبار اختراق، حماية <span dir="ltr">SQL Injection</span> و <span
+                                    dir="ltr">XSS</span></td>
+                        </tr>
+                        <tr>
+                            <td>حجب الخدمة <span dir="ltr">(DDoS)</span></td>
+                            <td>إرسال طلبات كتير جدًا عشان الموقع يقع وما يشتغلش</td>
+                            <td>خدمات حماية <span dir="ltr">DDoS</span>، مراقبة حركة الشبكة</td>
+                        </tr>
+                        <tr>
+                            <td>برامج الفدية <span dir="ltr">(Ransomware)</span></td>
+                            <td>برنامج بيشفّر كل البيانات وبيقفلها لحد ما تدفع فدية</td>
+                            <td>نسخ احتياطي يومي، فصل النسخ الاحتياطي عن الشبكة الرئيسية</td>
+                        </tr>
+                        <tr>
+                            <td>التهديد الداخلي <span dir="ltr">(Insider Threat)</span></td>
+                            <td>موظف بيسحب بيانات أو بيعمل حرق عن عمد</td>
+                            <td>صلاحيات حسب الدور، مراقبة الأنشطة، تدريب وعي أمني</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="error-box" style="margin-top:20px">
+                <p>⚠️ أخطاء شائعة</p>
+                <div class="detail">
+                    • خلط بين <span dir="ltr">Phishing</span> و <span dir="ltr">Malware</span> — التصيد رسالة أو إيميل،
+                    الخبيث برنامج<br>
+                    • التفكير إن الموقع "صغير" فمش محتاج حماية — أي موقع ممكن يتعرض لهجمة<br>
+                    • تجاهل التحديثات الأمنية — الثغرات بتتكتشف كل يوم
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">04</div>
+                <h2>الفن الرقمي — <span dir="ltr">Digital Art</span></h2>
+                <p>تصميم الهوية البصرية للمول — من السكتش للإعلان</p>
+            </div>
+            <div class="diagram-container">
+                <div class="diagram-title">خطوات التصميم — اضغط "التالي" و"السابق" عشان تمشي في المراحل</div>
+                <div style="display:grid;gap:0">
+                    <div class="step-card active" id="artStep0">
+                        <h4>المرحلة 1: السكتشات</h4>
+                        <div class="img-placeholder">صورة — سكتشات التصميم الأولية (هتتضاف من المعلم)</div>
+                        <p>بنبدأ بأفكار أولية بالقلم — أشكال مختلفة للشعار. بنرسم 3-5 أفكار مختلفة قبل ما نختار.</p>
+                    </div>
+                    <div class="step-card" id="artStep1">
+                        <h4>المرحلة 2: لوحة الألوان</h4>
+                        <div class="img-placeholder">صورة — لوحة ألوان الهوية البصرية (هتتضاف من المعلم)</div>
+                        <p>بنختار 3-4 ألوان أساسية — لون رئيسي و2-3 ألوان مساعدة. لازم الألوان تكون متناسقة وتعبر عن
+                            طابع المول.</p>
+                    </div>
+                    <div class="step-card" id="artStep2">
+                        <h4>المرحلة 3: الشعار النهائي</h4>
+                        <div class="img-placeholder">صورة — شعار Future Mall النهائي (هتتضاف من المعلم)</div>
+                        <p>بنحوّل السكتش للشكل الرقمي باستخدام برنامج تصميم — بنضيف الألوان والنصوص والتفاصيل النهائية.
+                        </p>
+                    </div>
+                    <div class="step-card" id="artStep3">
+                        <h4>المرحلة 4: الإعلان</h4>
+                        <div class="img-placeholder">صورة — إعلان Future Mall (هتتضاف من المعلم)</div>
+                        <p>بنستخدم الشعار والألوان في تصميم إعلان — ممكن يكون بوستر أو صورة سوشيال ميديا. لازم الرسالة
+                            تكون واضحة وجذابة.</p>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="replay-btn" id="artPrevBtn" onclick="artStep(-1)" style="font-size:13px">←
+                        السابق</button>
+                    <span class="step-counter" id="artCounter">1 / 4</span>
+                    <button class="replay-btn" id="artNextBtn" onclick="artStep(1)"
+                        style="background:var(--s4);color:var(--bg);font-size:13px">التالي →</button>
+                </div>
+            </div>
+            <div class="error-box" style="margin-top:20px">
+                <p>⚠️ أخطاء شائعة</p>
+                <div class="detail">
+                    • استخدام ألوان كتير أكتر من 4 — بتعمل فوضى بصرية<br>
+                    • نسيان إن الشعار لازم يشتغل على خلفية فاتحة وغامقة<br>
+                    • القفز من السكتش للنتيجة النهائية من غير ما تمر بمرحلتين
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">05</div>
+                <h2>الأنظمة المدمجة — <span dir="ltr">Embedded Systems</span></h2>
+                <p>نظام وقوف السيارات في المول</p>
+            </div>
+            <div class="diagram-container">
+                <div class="diagram-title">محاكاة نظام وقوف السيارات — اضغط الزراير عشان تتحكم</div>
+                <div class="activity-grid">
+                    <div class="demo-panel">
+                        <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 واجهة وقوف السيارات</div>
+                        <div class="parking-ui">
+                            <div class="count-display" id="carCount">0</div>
+                            <div style="color:var(--dim);font-size:13px;font-weight:600">عدد العربيات (الحد الأقصى: 15)
+                            </div>
+                            <div class="led-row">
+                                <div class="led-bulb">
+                                    <div class="bulb on-green" id="ledGreen"></div>
+                                    <div class="label">🟢 أخضر</div>
+                                </div>
+                                <div class="led-bulb">
+                                    <div class="bulb" id="ledRed"></div>
+                                    <div class="label">🔴 أحمر</div>
+                                </div>
+                                <div class="led-bulb">
+                                    <div class="bulb" id="ledYellow"></div>
+                                    <div class="label">🟡 أصفر</div>
+                                </div>
+                                <div class="led-bulb">
+                                    <div class="bulb" id="ledBlue"></div>
+                                    <div class="label">🔵 أزرق</div>
+                                </div>
+                            </div>
+                            <div class="parking-btns">
+                                <button class="parking-btn" onclick="parkEntry()">🚗 دخول (Entry)</button>
+                                <button class="parking-btn" onclick="parkExit()">🚙 خروج (Exit)</button>
+                            </div>
+                            <div id="parkStatus"
+                                style="color:var(--dim);font-size:13px;font-weight:600;min-height:20px;text-align:center">
+                                الموقف فاضي — استقبل عربيات!</div>
+                        </div>
+                        <div class="io-diagram">
+                            <div class="io-box" id="ioInput">📥 Inputs<br><small>Entry / Exit Buttons</small></div>
+                            <div class="io-arrow">→</div>
+                            <div class="io-box" id="ioProcess">🧠 Processing<br><small>Microcontroller</small></div>
+                            <div class="io-arrow">→</div>
+                            <div class="io-box" id="ioOutput">📤 Outputs<br><small>4 LEDs</small></div>
                         </div>
                     </div>
                     <div class="code-panel">
                         <div class="code-header">
-                            <span class="filename">📄 cashier.py</span>
-                            <span class="line-hint" id="cashierLineHint">▶ سطر —</span>
+                            <span class="filename">📄 parking.py</span>
+                            <span class="line-hint" id="parkLineHint">▶ سطر —</span>
                         </div>
-                        <div class="code-body" id="cashierCode">
-                            <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم, السعر)</span></span>
-                            <span class="cl" data-line="1">products = [</span>
-                            <span class="cl" data-line="2">    (<span class="str">"تفاح"</span>, <span class="num">15</span>),</span>
-                            <span class="cl" data-line="3">    (<span class="str">"موز"</span>, <span class="num">10</span>),</span>
-                            <span class="cl" data-line="4">    (<span class="str">"عنب"</span>, <span class="num">20</span>),</span>
-                            <span class="cl" data-line="5">    (<span class="str">"حليب"</span>, <span class="num">25</span>),</span>
-                            <span class="cl" data-line="6">    (<span class="str">"عيش"</span>, <span class="num">5</span>)</span>
-                            <span class="cl" data-line="7">]</span>
-                            <span class="cl" data-line="8"></span>
-                            <span class="cl" data-line="9">total = <span class="num">0</span></span>
-                            <span class="cl" data-line="10"></span>
-                            <span class="cl" data-line="11"><span class="kw">for</span> name, price <span class="kw">in</span> products:</span>
-                            <span class="cl" data-line="12">    total = total + price</span>
-                            <span class="cl" data-line="13">    <span class="fn">print</span>(<span class="str">f"أضف {name}: {price} → المجموع: {total}"</span>)</span>
-                            <span class="cl" data-line="14"></span>
-                            <span class="cl" data-line="15"><span class="cm"># خصم 10% لو المجموع أكبر من 500</span></span>
-                            <span class="cl" data-line="16"><span class="kw">if</span> total > <span class="num">500</span>:</span>
-                            <span class="cl" data-line="17">    discount = total * <span class="num">0.1</span></span>
-                            <span class="cl" data-line="18">    total = total - discount</span>
-                            <span class="cl" data-line="19">    <span class="fn">print</span>(<span class="str">f"تم خصم {discount} — المجموع النهائي: {total}"</span>)</span>
-                            <span class="cl" data-line="20"><span class="kw">else</span>:</span>
-                            <span class="cl" data-line="21">    <span class="fn">print</span>(<span class="str">f"المجموع النهائي: {total}"</span>)</span>
+                        <div class="code-body" id="parkCode">
+                            <span class="cl" data-line="0"><span class="kw">from</span> machine <span
+                                    class="kw">import</span> Pin</span>
+                            <span class="cl" data-line="1"><span class="kw">import</span> time</span>
+                            <span class="cl" data-line="2"></span>
+                            <span class="cl" data-line="3"><span class="cm"># إعداد الأزرار (Input)</span></span>
+                            <span class="cl" data-line="4">entry_btn = Pin(<span class="num">4</span>, Pin.IN)</span>
+                            <span class="cl" data-line="5">exit_btn = Pin(<span class="num">5</span>, Pin.IN)</span>
+                            <span class="cl" data-line="6"></span>
+                            <span class="cl" data-line="7"><span class="cm"># إعداد الـ LEDs (Output)</span></span>
+                            <span class="cl" data-line="8">green = Pin(<span class="num">12</span>, Pin.OUT)</span>
+                            <span class="cl" data-line="9">red = Pin(<span class="num">13</span>, Pin.OUT)</span>
+                            <span class="cl" data-line="10">yellow = Pin(<span class="num">14</span>, Pin.OUT)</span>
+                            <span class="cl" data-line="11">blue = Pin(<span class="num">15</span>, Pin.OUT)</span>
+                            <span class="cl" data-line="12"></span>
+                            <span class="cl" data-line="13">car_count = <span class="num">0</span></span>
+                            <span class="cl" data-line="14">MAX = <span class="num">15</span></span>
+                            <span class="cl" data-line="15"></span>
+                            <span class="cl" data-line="16"><span class="kw">def</span> <span
+                                    class="fn">update_leds</span>():</span>
+                            <span class="cl" data-line="17"> <span class="cm"># أخضر: ON لو أقل من 15</span></span>
+                            <span class="cl" data-line="18"> green.<span class="fn">value</span>(<span
+                                    class="num">1</span> <span class="kw">if</span> car_count < <span class="num">
+                                    15</span> <span class="kw">else</span> <span class="num">0</span>)</span>
+                            <span class="cl" data-line="19"> <span class="cm"># أحمر: ON لو 15 (الموقف
+                                    مليان)</span></span>
+                            <span class="cl" data-line="20"> red.<span class="fn">value</span>(<span
+                                    class="num">1</span> <span class="kw">if</span> car_count == <span
+                                    class="num">15</span> <span class="kw">else</span> <span
+                                    class="num">0</span>)</span>
+                            <span class="cl" data-line="21"></span>
+                            <span class="cl" data-line="22"><span class="kw">while</span> <span
+                                    class="fn">True</span>:</span>
+                            <span class="cl" data-line="23"> <span class="cm"># فحص زرار الدخول</span></span>
+                            <span class="cl" data-line="24"> <span class="kw">if</span> entry_btn.<span
+                                    class="fn">value</span>() == <span class="num">1</span>:</span>
+                            <span class="cl" data-line="25"> <span class="kw">if</span> car_count < <span class="num">
+                                    15</span>:</span>
+                            <span class="cl" data-line="26"> car_count += <span class="num">1</span></span>
+                            <span class="cl" data-line="27"> yellow.<span class="fn">value</span>(<span
+                                    class="num">1</span>) <span class="cm"># وميض أصفر</span></span>
+                            <span class="cl" data-line="28"> time.<span class="fn">sleep</span>(<span
+                                    class="num">0.5</span>)</span>
+                            <span class="cl" data-line="29"> yellow.<span class="fn">value</span>(<span
+                                    class="num">0</span>)</span>
+                            <span class="cl" data-line="30"> <span class="fn">update_leds</span>()</span>
+                            <span class="cl" data-line="31"> <span class="cm"># فحص زرار الخروج</span></span>
+                            <span class="cl" data-line="32"> <span class="kw">if</span> exit_btn.<span
+                                    class="fn">value</span>() == <span class="num">1</span>:</span>
+                            <span class="cl" data-line="33"> <span class="kw">if</span> car_count > <span
+                                    class="num">0</span>:</span>
+                            <span class="cl" data-line="34"> car_count -= <span class="num">1</span></span>
+                            <span class="cl" data-line="35"> blue.<span class="fn">value</span>(<span
+                                    class="num">1</span>) <span class="cm"># وميض أزرق</span></span>
+                            <span class="cl" data-line="36"> time.<span class="fn">sleep</span>(<span
+                                    class="num">0.5</span>)</span>
+                            <span class="cl" data-line="37"> blue.<span class="fn">value</span>(<span
+                                    class="num">0</span>)</span>
+                            <span class="cl" data-line="38"> <span class="fn">update_leds</span>()</span>
+                            <span class="cl" data-line="39"> time.<span class="fn">sleep</span>(<span
+                                    class="num">0.1</span>)</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="error-box">
+            <div class="error-box" style="margin-top:20px">
                 <p>⚠️ أخطاء شائعة</p>
                 <div class="detail">
-                    • نسيان تهيئة <span dir="ltr">total = 0</span> قبل الحلقة — هيطلع error<br>
-                    • خلط القائمة اللي فيها المنتجات بالمتغير اللي بيجمع المجموع<br>
-                    • نسيان شرط <span dir="ltr">if total > 500</span> — الخصم مش هيشتغل
+                    • خلط شروط الـ LEDs — الأصفر والأزرق مش للحالة الدائمة، بس للوميض<br>
+                    • نسيان شرط الحد الأقصى <span dir="ltr">if car_count < 15</span> — العربيات هتزيد عن 15<br>
+                            • نسيان شرط الحد الأدنى <span dir="ltr">if car_count > 0</span> — العد هيبقى سالب
                 </div>
             </div>
+            <div style="text-align:center;margin-top:20px">
+                <a href="#" class="replay-btn"
+                    style="background:var(--s5);color:var(--bg);text-decoration:none;display:inline-flex">🔌 جرّب على
+                    Wokwi (قريبًا)</a>
+            </div>
         </div>
+    </section>
 
-        <!-- Tab 1: AI Classifier -->
-        <div class="tab-panel" id="s1Tab1">
-            <div class="content-grid">
-                <div class="card">
-                    <div class="card-icon" style="background:linear-gradient(135deg,var(--s1),var(--accent))">🤖</div>
-                    <h3>分类 المنتجات بالذكاء الاصطناعي</h3>
-                    <p>الذكاء الاصطناعي <span dir="ltr">(AI)</span> ممكن يصنف المنتجات تلقائيًا حسب الصورة — يحدد هل المنتج فاكهة، مشروبات، أو أكل.</p>
-                    <p style="margin-top:12px;color:var(--accent);font-weight:600">إزاي بيشتغل؟</p>
-                    <p style="margin-top:8px">
-                        1. بنجمع صور للمنتجات<br>
-                        2. النموذج بيتعلم الأنماط (شكل، لون، حجم)<br>
-                        3. بيصنف المنتجات الجديدة تلقائيًا<br>
-                        4. ده بيحسن تجربة التسوق في المول
-                    </p>
+    <section class="section" id="closing">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯
                 </div>
-                <div class="diagram-container">
-                    <div class="diagram-title">صورة توضيحية — تصنيف المنتجات بالـ AI</div>
-                    <div class="img-placeholder" style="background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.3);color:var(--s1)">
-                        صورة AI — تصنيف المنتجات (هتتضاف من المعلم)
-                    </div>
-                    <p style="color:var(--dim);text-align:center;font-size:13px;margin-top:10px">النموذج بياخد صورة المنتج ويطلّع الفئة اللي بيتنتمي ليها</p>
+                <h2>ملخص: Future Mall — المشروع الكامل</h2>
+                <p>كل قسم بنى جزء من المول — مع بعض، بنينا مول ذكي كامل!</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+                <div class="card" style="border-top:3px solid var(--s1)">
+                    <h3 style="color:var(--s1)">🧠 البرمجة والـ AI</h3>
+                    <p>كاشير ذكي + تصنيف المنتجات + تحليل بيانات الزوار</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--s2)">
+                    <h3 style="color:var(--s2)">🌐 تطوير المواقع</h3>
+                    <p>موقع المول على الإنترنت — تصميم وبرمجة وتجربة مستخدم</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--s3)">
+                    <h3 style="color:var(--s3)">🛡️ الأمن السيبراني</h3>
+                    <p>حماية المول من 9 أنواع مختلفة من الهجمات الإلكترونية</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--s4)">
+                    <h3 style="color:var(--s4)">🎨 الفن الرقمي</h3>
+                    <p>الهوية البصرية — من السكتش للشعار للإعلان</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--s5)">
+                    <h3 style="color:var(--s5)">🔌 الأنظمة المدمجة</h3>
+                    <p>نظام وقوف السيارات بالـ LEDs والزرار</p>
                 </div>
             </div>
-            <div class="error-box">
-                <p>⚠️ أخطاء شائعة</p>
-                <div class="detail">
-                    • خلط بين "تدريب" النموذج و"استخدام" النموذج — التدريب محتاج بيانات كتير<br>
-                    • التفاف من edge cases — مثلاً منتج مش واضح الصورة
+            <div class="diagram-container" style="margin-top:30px">
+                <div class="diagram-title">إيه اللي اتعلمناه؟</div>
+                <div class="io-diagram">
+                    <div class="io-box" style="border-color:var(--s1)">📝 التخطيط</div>
+                    <div class="io-arrow">→</div>
+                    <div class="io-box" style="border-color:var(--s2)">💻 البرمجة</div>
+                    <div class="io-arrow">→</div>
+                    <div class="io-box" style="border-color:var(--s4)">🎨 التصميم</div>
+                    <div class="io-arrow">→</div>
+                    <div class="io-box" style="border-color:var(--s3)">🛡️ الحماية</div>
+                    <div class="io-arrow">→</div>
+                    <div class="io-box" style="border-color:var(--s5)">🔌 التنفيذ</div>
                 </div>
+                <p style="text-align:center;color:var(--dim);margin-top:15px;font-size:16px">كل مشروع كبير بيبدأ بفكرة
+                    صغيرة — والمشروع ده وريّك إزاي الأقسام المختلفة بتتكامل!</p>
             </div>
         </div>
+    </section>
 
-        <!-- Tab 2: Data Science — Visitors -->
-        <div class="tab-panel" id="s1Tab2">
-            <div class="diagram-container">
-                <div class="diagram-title">تحليل بيانات زوار المول — اضغط على كل تبويب</div>
-                <div class="tab-bar" id="dataTabs">
-                    <button class="tab-btn active" onclick="switchDataTab(0)">1. جمع البيانات</button>
-                    <button class="tab-btn" onclick="switchDataTab(1)">2. تنظيف البيانات</button>
-                    <button class="tab-btn" onclick="switchDataTab(2)">3. الاكتمال</button>
-                    <button class="tab-btn" onclick="switchDataTab(3)">4. الاتساق</button>
-                    <button class="tab-btn" onclick="switchDataTab(4)">5. الدقة</button>
-                </div>
-                <div class="tab-panel active" id="dataTab0">
-                    <p style="color:var(--dim);margin-bottom:12px">الخطوة الأولى — بنجمع بيانات الزوار من كاميرات وأجهزة تسجيل:</p>
-                    <div style="overflow-x:auto">
-                        <table class="attack-table">
-                            <tr><th>الزائر</th><th>التاريخ</th><th>الوقت</th><th>القسم</th><th>المدة (دقيقة)</th></tr>
-                            <tr><td>أحمد</td><td>2026-01-15</td><td>10:30</td><td>Electronics</td><td>45</td></tr>
-                            <tr><td>سارة</td><td>2026-01-15</td><td>11:00</td><td>Fashion</td><td>60</td></tr>
-                            <tr><td>محمد</td><td>2026-01-15</td><td style="color:var(--danger)">—</td><td>Food Court</td><td>30</td></tr>
-                            <tr><td>فاطمة</td><td style="color:var(--danger)">2026/01/16</td><td>14:20</td><td>Electronics</td><td style="color:var(--danger)">—</td></tr>
-                            <tr><td>خالد</td><td>2026-01-16</td><td>15:00</td><td style="color:var(--danger)">electrnics</td><td>25</td></tr>
-                        </table>
-                    </div>
-                    <p style="color:var(--dim);font-size:13px;margin-top:10px">ملاحظة: فيه بيانات ناقصة (الوقت، المدة) وبيانات مش متسقة (формат التاريخ، إملاء Electronics)</p>
-                </div>
-                <div class="tab-panel" id="dataTab1">
-                    <p style="color:var(--dim);margin-bottom:12px">الخطوة التانية — بننظف البيانات: نملأ اللي ناقص ونصحّح الأخطاء:</p>
-                    <div style="overflow-x:auto">
-                        <table class="attack-table">
-                            <tr><th>الزائر</th><th>التاريخ</th><th>الوقت</th><th>القسم</th><th>المدة</th><th>التعديل</th></tr>
-                            <tr><td>محمد</td><td>2026-01-15</td><td style="color:var(--success);font-weight:700">12:15 ✏️</td><td>Food Court</td><td>30</td><td style="color:var(--s1)">تم ملء الوقت</td></tr>
-                            <tr><td>فاطمة</td><td style="color:var(--success);font-weight:700">2026-01-16 ✏️</td><td>14:20</td><td>Electronics</td><td style="color:var(--success);font-weight:700">35 ✏️</td><td style="color:var(--s1)">تم تصحيح التاريخ وملء المدة</td></tr>
-                            <tr><td>خالد</td><td>2026-01-16</td><td>15:00</td><td style="color:var(--success);font-weight:700">Electronics ✏️</td><td>25</td><td style="color:var(--s1)">تم تصحيح الإملاء</td></tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-panel" id="dataTab2">
-                    <p style="color:var(--dim);margin-bottom:12px">الاكتمال <span dir="ltr">(Completeness)</span> — هل كل الحقول مملومة؟</p>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-                        <div class="card">
-                            <h3 style="color:var(--success)">✅ البيانات الأصلية</h3>
-                            <p>5 سجلات، 25 خانة إجمالي</p>
-                            <p style="color:var(--danger);margin-top:8px">3 خانات فاضية = 88% اكتمال</p>
-                        </div>
-                        <div class="card">
-                            <h3 style="color:var(--s1)">📝 بعد التنظيف</h3>
-                            <p>5 سجلات، 25 خانة</p>
-                            <p style="color:var(--success);margin-top:8px">0 خانات فاضية = 100% اكتمال</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-panel" id="dataTab3">
-                    <p style="color:var(--dim);margin-bottom:12px">الاتساق <span dir="ltr">(Consistency)</span> — هل البيانات متسقة في الشكل؟</p>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-                        <div class="card" style="border:2px solid var(--danger)">
-                            <h3 style="color:var(--danger)">❌ مش متسقة</h3>
-                            <p style="font-family:monospace;font-size:13px;line-height:2">
-                                التاريخ: <span style="color:var(--danger)">2026-01-15</span> vs <span style="color:var(--danger)">2026/01/16</span><br>
-                                القسم: <span style="color:var(--danger)">ELECTRONICS</span> vs <span style="color:var(--danger)">electrnics</span> vs <span style="color:var(--danger)">Electronics</span>
-                            </p>
-                        </div>
-                        <div class="card" style="border:2px solid var(--success)">
-                            <h3 style="color:var(--success)">✅ متسقة</h3>
-                            <p style="font-family:monospace;font-size:13px;line-height:2">
-                                التاريخ: <span style="color:var(--success)">2026-01-15</span> للكل<br>
-                                القسم: <span style="color:var(--success)">Electronics</span> للكل
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-panel" id="dataTab4">
-                    <p style="color:var(--dim);margin-bottom:12px">الدقة <span dir="ltr">(Accuracy)</span> — هل البيانات صحيحة فعلاً؟</p>
-                    <div class="card">
-                        <h3 style="color:var(--warn)">🔍 أسئلة للتحقق</h3>
-                        <div style="margin-top:12px;font-size:14px;line-height:2;color:var(--dim)">
-                            • هل المدة 30 دقيقة في Food Court منطقية؟ <span style="color:var(--success)">✅ أكيد</span><br>
-                            • هل المدة 25 دقيقة في Electronics كفاية للتسوق؟ <span style="color:var(--warn)">⚠️ ممكن أكتر</span><br>
-                            • هل الوقت اللي اتملأ (12:15) منطقي مقارنة بالقسم؟ <span style="color:var(--success)">✅ أيوه</span>
-                        </div>
-                        <p style="margin-top:12px;color:var(--accent);font-weight:600">الدقة بتتحدد بمقارنة البيانات بمصادر تانية (كاميرات، كشف حساب)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="error-box">
-                <p>⚠️ أخطاء شائعة</p>
-                <div class="detail">
-                    • خلط مراحل التنظيف — لازم نجمع الأول، بعدين ننظف، بعدين نحلل<br>
-                    • تجاهل البيانات الناقصة بدل ما نملأها أو نحذفها
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <footer>
+        <img src="data:image/webp;base64,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"
+            class="footer-logo" alt="Bilal">
+        <p class="footer-encouragement">كل يوم بتتعلم حاجة جديدة، وده بيفرق معاك!</p>
+    </footer>
 
-<section class="section" id="s2">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--s2),var(--accent))">02</div>
-            <h2>تطوير المواقع — <span dir="ltr">Web Development</span></h2>
-            <p>موقع المول على الإنترنت — التصميم والبرمجة</p>
-        </div>
-        <div class="content-grid">
-            <div class="card">
-                <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">🌐</div>
-                <h3>إيه اللي بيجعل موقع مول كويس؟</h3>
-                <p>
-                    • <span dir="ltr">Responsive Design</span> — يشتغل على الموبايل والكمبيوتر<br>
-                    • سرعة التحميل — صفحات خفيفة<br>
-                    • تنقل سهل — المستخدم يعرف يلاقي اللي عايزه<br>
-                    • تصميم جذاب — ألوان متناسقة وخط واضح<br>
-                    • <span dir="ltr">SEO</span> — يظهر في نتائج البحث
-                </p>
-            </div>
-            <div class="card">
-                <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">💻</div>
-                <h3>التقنيات اللي هنستخدمها</h3>
-                <p>
-                    • <span dir="ltr">HTML</span> — هيكل الصفحة<br>
-                    • <span dir="ltr">CSS</span> — التصميم والألوان<br>
-                    • <span dir="ltr">JavaScript</span> — التفاعل والحركة<br>
-                    • <span dir="ltr">Git</span> — إدارة الكود
-                </p>
-            </div>
-        </div>
-        <div class="diagram-container" style="margin-top:30px">
-            <div class="diagram-title">هيكل موقع Future Mall — اضغط على كل عنصر عشان تعرف وظيفته</div>
-            <div class="site-map">
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">🧭</div><div class="site-label"><span dir="ltr">Nav Bar</span></div><div class="site-desc">شريط التنقل العلوي — فيه شعار المول والروابط لصفحات مختلفة. لازم يكون ثابت في كل الصفحات.</div></div>
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">🏠</div><div class="site-label"><span dir="ltr">Hero Section</span></div><div class="site-desc">أول حاجة المستخدم بيشوفها — صورة كبيرة وعنوان ووصف مختصر للمول.</div></div>
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">🛍️</div><div class="site-label">قائمة المحلات</div><div class="site-desc">صفحة بتعرض كل محلات المول — اسمها، صورتها، وموقعها.</div></div>
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">📍</div><div class="site-label">خريطة المول</div><div class="site-desc">خريطة تفاعلية بتوري المستخدمين أماكن المحلات والمرافق.</div></div>
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">📞</div><div class="site-label">تواصل معنا</div><div class="site-desc">صفحة فيها رقم التليفون والإيميل وعنوان المول وفورم للتواصل.</div></div>
-                <div class="site-item" onclick="this.classList.toggle('open')"><div class="site-icon">🦶</div><div class="site-label"><span dir="ltr">Footer</span></div><div class="site-desc">أسفل الصفحة — فيه حقوق النشر وروابط سريعة ومعلومات التواصل.</div></div>
-            </div>
-        </div>
-        <div class="error-box" style="margin-top:20px">
-            <p>⚠️ أخطاء شائعة</p>
-            <div class="detail">
-                • عدم اتساق الـ CSS بين الصفحات — كل صفحة شكلها مختلف<br>
-                • نسيان الـ <span dir="ltr">viewport meta tag</span> — الموقع مش هيشتغل كويس على الموبايل<br>
-                • استخدام ألوان كتير أكتر من 3 ألوان أساسية
-            </div>
-        </div>
-        <div style="text-align:center;margin-top:20px">
-            <a href="#" class="replay-btn" style="background:var(--s2);color:var(--bg);text-decoration:none;display:inline-flex">🌐 افتح موقع المشروع (قريبًا)</a>
-        </div>
-    </div>
-</section>
+    <script>
+        function createParticles() { const c = document.getElementById('particles'); for (let i = 0; i < 30; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 15 + 's'; p.style.animationDuration = (15 + Math.random() * 10) + 's'; c.appendChild(p) } }
+        createParticles();
+        window.addEventListener('scroll', () => { const nav = document.getElementById('mainNav'); if (window.scrollY > 100) nav.classList.add('visible'); else nav.classList.remove('visible'); const sections = document.querySelectorAll('.section, .hero'); let current = ''; sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id') }); document.querySelectorAll('.nav a').forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + current) a.classList.add('active') }) });
+        const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.05 });
+        document.querySelectorAll('.section-inner').forEach(el => observer.observe(el));
+        function checkVisibility() { document.querySelectorAll('.section-inner').forEach(el => { const rect = el.getBoundingClientRect(); if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('visible') }) }
+        window.addEventListener('scroll', checkVisibility); checkVisibility();
 
-<section class="section" id="s3">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">03</div>
-            <h2>الأمن السيبراني — <span dir="ltr">Cybersecurity</span></h2>
-            <p>حماية مولنا من الهجمات الإلكترونية</p>
-        </div>
-        <div class="diagram-container">
-            <div class="diagram-title">أنواع الهجمات وإزاي Future Mall بيحمي نفسه</div>
-            <div style="overflow-x:auto">
-                <table class="attack-table">
-                    <tr><th>نوع الهجوم</th><th>الوصف</th><th>إزاي المول بيحمي نفسه</th></tr>
-                    <tr><td>التصيد الاحتيالي <span dir="ltr">(Phishing)</span></td><td>رسائل إيميل أو رسائل بتبان من شركة موثوقة عشان تسرق بيانات المستخدمين</td><td>تدريب الموظفين، فلترة الرسائل المشبوهة، استخدام <span dir="ltr">2FA</span></td></tr>
-                    <tr><td>البرمجيات الخبيثة <span dir="ltr">(Malware)</span></td><td>برامج بتتثبت من غير ما المستخدم يعرف وبتسرق بيانات أو بتبوظ النظام</td><td>برنامج حماية على كل جهاز، تحديثات أمنية دورية</td></tr>
-                    <tr><td>الـ Wi-Fi المتسلل <span dir="ltr">(Rogue AP)</span></td><td>شخص بيحط شبكة Wi-Fi مزيفة عشان يسرق بيانات اللي بيتصلوا بيها</td><td>شبكة Wi-Fi رسمية بس، تشفير <span dir="ltr">WPA3</span>، تحذير الزوار</td></tr>
-                    <tr><td>كلمات المرور الضعيفة <span dir="ltr">(Weak Passwords)</span></td><td>كلمات مرور سهلة تخمين زي 123456 أو password</td><td>سياسة كلمات مرور قوية، تغييرها كل 3 شهور، <span dir="ltr">2FA</span></td></tr>
-                    <tr><td>الهندسة الاجتماعية <span dir="ltr">(Social Engineering)</span></td><td>شخص بيتصل ويقول إنه من الدعم الفني عشان يعرف كلمات السر</td><td>تدريب الموظفين، سياسة التحقق من الهوية، تسجيل المكالمات</td></tr>
-                    <tr><td>اختراق الموقع <span dir="ltr">(Website Hacking)</span></td><td>استغلال ثغرات في كود الموقع لسرقة بيانات أو تعديل محتوى</td><td>تحديثات دورية، اختبار اختراق، حماية <span dir="ltr">SQL Injection</span> و <span dir="ltr">XSS</span></td></tr>
-                    <tr><td>حجب الخدمة <span dir="ltr">(DDoS)</span></td><td>إرسال طلبات كتير جدًا عشان الموقع يقع وما يشتغلش</td><td>خدمات حماية <span dir="ltr">DDoS</span>، مراقبة حركة الشبكة</td></tr>
-                    <tr><td>برامج الفدية <span dir="ltr">(Ransomware)</span></td><td>برنامج بيشفّر كل البيانات وبيقفلها لحد ما تدفع فدية</td><td>نسخ احتياطي يومي، فصل النسخ الاحتياطي عن الشبكة الرئيسية</td></tr>
-                    <tr><td>التهديد الداخلي <span dir="ltr">(Insider Threat)</span></td><td>موظف بيسحب بيانات أو بيعمل حرق عن عمد</td><td>صلاحيات حسب الدور، مراقبة الأنشطة، تدريب وعي أمني</td></tr>
-                </table>
-            </div>
-        </div>
-        <div class="error-box" style="margin-top:20px">
-            <p>⚠️ أخطاء شائعة</p>
-            <div class="detail">
-                • خلط بين <span dir="ltr">Phishing</span> و <span dir="ltr">Malware</span> — التصيد رسالة أو إيميل، الخبيث برنامج<br>
-                • التفكير إن الموقع "صغير" فمش محتاج حماية — أي موقع ممكن يتعرض لهجمة<br>
-                • تجاهل التحديثات الأمنية — الثغرات بتتكتشف كل يوم
-            </div>
-        </div>
-    </div>
-</section>
+        /* ===== S1 TABS ===== */
+        function switchS1Tab(idx) { document.querySelectorAll('#s1Tabs .tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx)); document.querySelectorAll('#s1 > .section-inner > .tab-panel').forEach((p, i) => p.classList.toggle('active', i === idx)) }
 
-<section class="section" id="s4">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">04</div>
-            <h2>الفن الرقمي — <span dir="ltr">Digital Art</span></h2>
-            <p>تصميم الهوية البصرية للمول — من السكتش للإعلان</p>
-        </div>
-        <div class="diagram-container">
-            <div class="diagram-title">خطوات التصميم — اضغط "التالي" و"السابق" عشان تمشي في المراحل</div>
-            <div style="display:grid;gap:0">
-                <div class="step-card active" id="artStep0">
-                    <h4>المرحلة 1: السكتشات</h4>
-                    <div class="img-placeholder">صورة — سكتشات التصميم الأولية (هتتضاف من المعلم)</div>
-                    <p>بنبدأ بأفكار أولية بالقلم — أشكال مختلفة للشعار. بنرسم 3-5 أفكار مختلفة قبل ما نختار.</p>
-                </div>
-                <div class="step-card" id="artStep1">
-                    <h4>المرحلة 2: لوحة الألوان</h4>
-                    <div class="img-placeholder">صورة — لوحة ألوان الهوية البصرية (هتتضاف من المعلم)</div>
-                    <p>بنختار 3-4 ألوان أساسية — لون رئيسي و2-3 ألوان مساعدة. لازم الألوان تكون متناسقة وتعبر عن طابع المول.</p>
-                </div>
-                <div class="step-card" id="artStep2">
-                    <h4>المرحلة 3: الشعار النهائي</h4>
-                    <div class="img-placeholder">صورة — شعار Future Mall النهائي (هتتضاف من المعلم)</div>
-                    <p>بنحوّل السكتش للشكل الرقمي باستخدام برنامج تصميم — بنضيف الألوان والنصوص والتفاصيل النهائية.</p>
-                </div>
-                <div class="step-card" id="artStep3">
-                    <h4>المرحلة 4: الإعلان</h4>
-                    <div class="img-placeholder">صورة — إعلان Future Mall (هتتضاف من المعلم)</div>
-                    <p>بنستخدم الشعار والألوان في تصميم إعلان — ممكن يكون بوستر أو صورة سوشيال ميديا. لازم الرسالة تكون واضحة وجذابة.</p>
-                </div>
-            </div>
-            <div class="step-nav">
-                <button class="replay-btn" id="artPrevBtn" onclick="artStep(-1)" style="font-size:13px">← السابق</button>
-                <span class="step-counter" id="artCounter">1 / 4</span>
-                <button class="replay-btn" id="artNextBtn" onclick="artStep(1)" style="background:var(--s4);color:var(--bg);font-size:13px">التالي →</button>
-            </div>
-        </div>
-        <div class="error-box" style="margin-top:20px">
-            <p>⚠️ أخطاء شائعة</p>
-            <div class="detail">
-                • استخدام ألوان كتير أكتر من 4 — بتعمل فوضى بصرية<br>
-                • نسيان إن الشعار لازم يشتغل على خلفية فاتحة وغامقة<br>
-                • القفز من السكتش للنتيجة النهائية من غير ما تمر بمرحلتين
-            </div>
-        </div>
-    </div>
-</section>
+        /* ===== VISITOR CHART ===== */
+        const visitorData = [
+            { day: 'السبت', val: 1240 },
+            { day: 'الأحد', val: 860 },
+            { day: 'الاتنين', val: 640 },
+            { day: 'التلات', val: 705 },
+            { day: 'الأربع', val: 780 },
+            { day: 'الخميس', val: 1020 },
+            { day: 'الجمعة', val: 1460 }
+        ];
+        const maxVal = Math.max(...visitorData.map(d => d.val));
+        function buildChart() {
+            const chart = document.getElementById('visitorChart');
+            const labels = document.getElementById('chartLabels');
+            chart.innerHTML = ''; labels.innerHTML = '';
+            visitorData.forEach((d, i) => {
+                const h = (d.val / maxVal) * 160;
+                chart.innerHTML += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div class="bar-val" style="font-size:11px;font-weight:700;color:var(--dim);opacity:0;transition:opacity .3s">' + d.val.toLocaleString() + '</div><div class="bar" data-idx="' + i + '" style="width:100%;height:' + h + 'px;background:var(--primary);border-radius:6px 6px 0 0;transition:all .5s;cursor:pointer;opacity:.7"></div></div>';
+                labels.innerHTML += '<div style="flex:1;text-align:center;font-size:11px;color:var(--dim)">' + d.day + '</div>';
+            });
+        }
+        buildChart();
+        function revealChart() {
+            const bars = document.querySelectorAll('#visitorChart .bar');
+            const vals = document.querySelectorAll('#visitorChart .bar-val');
+            vals.forEach(v => v.style.opacity = '1');
+            bars.forEach((b, i) => { b.style.opacity = '1'; if (visitorData[i].val === maxVal) { b.style.background = 'var(--success)'; b.style.boxShadow = '0 0 15px rgba(0,255,136,.3)' } else if (visitorData[i].val === Math.min(...visitorData.map(d => d.val))) { b.style.background = 'var(--danger)'; b.style.boxShadow = '0 0 15px rgba(255,71,87,.3)' } });
+            document.getElementById('chartConclusion').style.display = 'block';
+            document.getElementById('revealChartBtn').textContent = '✅ اتكشف';
+        }
+        function resetChart() {
+            const bars = document.querySelectorAll('#visitorChart .bar');
+            const vals = document.querySelectorAll('#visitorChart .bar-val');
+            vals.forEach(v => v.style.opacity = '0');
+            bars.forEach(b => { b.style.background = 'var(--primary)'; b.style.boxShadow = 'none'; b.style.opacity = '.7' });
+            document.getElementById('chartConclusion').style.display = 'none';
+            document.getElementById('revealChartBtn').textContent = '🔍 اكشف التحليل';
+        }
+        document.getElementById('revealChartBtn').addEventListener('click', revealChart);
+        document.getElementById('resetChartBtn').addEventListener('click', resetChart);
 
-<section class="section" id="s5">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">05</div>
-            <h2>الأنظمة المدمجة — <span dir="ltr">Embedded Systems</span></h2>
-            <p>نظام وقوف السيارات في المول</p>
-        </div>
-        <div class="diagram-container">
-            <div class="diagram-title">محاكاة نظام وقوف السيارات — اضغط الزراير عشان تتحكم</div>
-            <div class="activity-grid">
-                <div class="demo-panel">
-                    <div style="font-weight:700;font-size:.85rem;color:var(--dim)">🔹 واجهة وقوف السيارات</div>
-                    <div class="parking-ui">
-                        <div class="count-display" id="carCount">0</div>
-                        <div style="color:var(--dim);font-size:13px;font-weight:600">عدد العربيات (الحد الأقصى: 15)</div>
-                        <div class="led-row">
-                            <div class="led-bulb"><div class="bulb on-green" id="ledGreen"></div><div class="label">🟢 أخضر</div></div>
-                            <div class="led-bulb"><div class="bulb" id="ledRed"></div><div class="label">🔴 أحمر</div></div>
-                            <div class="led-bulb"><div class="bulb" id="ledYellow"></div><div class="label">🟡 أصفر</div></div>
-                            <div class="led-bulb"><div class="bulb" id="ledBlue"></div><div class="label">🔵 أزرق</div></div>
-                        </div>
-                        <div class="parking-btns">
-                            <button class="parking-btn" onclick="parkEntry()">🚗 دخول (Entry)</button>
-                            <button class="parking-btn" onclick="parkExit()">🚙 خروج (Exit)</button>
-                        </div>
-                        <div id="parkStatus" style="color:var(--dim);font-size:13px;font-weight:600;min-height:20px;text-align:center">الموقف فاضي — استقبل عربيات!</div>
-                    </div>
-                    <div class="io-diagram">
-                        <div class="io-box" id="ioInput">📥 Inputs<br><small>Entry / Exit Buttons</small></div>
-                        <div class="io-arrow">→</div>
-                        <div class="io-box" id="ioProcess">🧠 Processing<br><small>Microcontroller</small></div>
-                        <div class="io-arrow">→</div>
-                        <div class="io-box" id="ioOutput">📤 Outputs<br><small>4 LEDs</small></div>
-                    </div>
-                </div>
-                <div class="code-panel">
-                    <div class="code-header">
-                        <span class="filename">📄 parking.py</span>
-                        <span class="line-hint" id="parkLineHint">▶ سطر —</span>
-                    </div>
-                    <div class="code-body" id="parkCode">
-                        <span class="cl" data-line="0"><span class="kw">from</span> machine <span class="kw">import</span> Pin</span>
-                        <span class="cl" data-line="1"><span class="kw">import</span> time</span>
-                        <span class="cl" data-line="2"></span>
-                        <span class="cl" data-line="3"><span class="cm"># إعداد الأزرار (Input)</span></span>
-                        <span class="cl" data-line="4">entry_btn = Pin(<span class="num">4</span>, Pin.IN)</span>
-                        <span class="cl" data-line="5">exit_btn = Pin(<span class="num">5</span>, Pin.IN)</span>
-                        <span class="cl" data-line="6"></span>
-                        <span class="cl" data-line="7"><span class="cm"># إعداد الـ LEDs (Output)</span></span>
-                        <span class="cl" data-line="8">green = Pin(<span class="num">12</span>, Pin.OUT)</span>
-                        <span class="cl" data-line="9">red = Pin(<span class="num">13</span>, Pin.OUT)</span>
-                        <span class="cl" data-line="10">yellow = Pin(<span class="num">14</span>, Pin.OUT)</span>
-                        <span class="cl" data-line="11">blue = Pin(<span class="num">15</span>, Pin.OUT)</span>
-                        <span class="cl" data-line="12"></span>
-                        <span class="cl" data-line="13">car_count = <span class="num">0</span></span>
-                        <span class="cl" data-line="14">MAX = <span class="num">15</span></span>
-                        <span class="cl" data-line="15"></span>
-                        <span class="cl" data-line="16"><span class="kw">def</span> <span class="fn">update_leds</span>():</span>
-                        <span class="cl" data-line="17">    <span class="cm"># أخضر: ON لو أقل من 15</span></span>
-                        <span class="cl" data-line="18">    green.<span class="fn">value</span>(<span class="num">1</span> <span class="kw">if</span> car_count < <span class="num">15</span> <span class="kw">else</span> <span class="num">0</span>)</span>
-                        <span class="cl" data-line="19">    <span class="cm"># أحمر: ON لو 15 (الموقف مليان)</span></span>
-                        <span class="cl" data-line="20">    red.<span class="fn">value</span>(<span class="num">1</span> <span class="kw">if</span> car_count == <span class="num">15</span> <span class="kw">else</span> <span class="num">0</span>)</span>
-                        <span class="cl" data-line="21"></span>
-                        <span class="cl" data-line="22"><span class="kw">while</span> <span class="fn">True</span>:</span>
-                        <span class="cl" data-line="23">    <span class="cm"># فحص زرار الدخول</span></span>
-                        <span class="cl" data-line="24">    <span class="kw">if</span> entry_btn.<span class="fn">value</span>() == <span class="num">1</span>:</span>
-                        <span class="cl" data-line="25">        <span class="kw">if</span> car_count < <span class="num">15</span>:</span>
-                        <span class="cl" data-line="26">            car_count += <span class="num">1</span></span>
-                        <span class="cl" data-line="27">            yellow.<span class="fn">value</span>(<span class="num">1</span>) <span class="cm"># وميض أصفر</span></span>
-                        <span class="cl" data-line="28">            time.<span class="fn">sleep</span>(<span class="num">0.5</span>)</span>
-                        <span class="cl" data-line="29">            yellow.<span class="fn">value</span>(<span class="num">0</span>)</span>
-                        <span class="cl" data-line="30">            <span class="fn">update_leds</span>()</span>
-                        <span class="cl" data-line="31">    <span class="cm"># فحص زرار الخروج</span></span>
-                        <span class="cl" data-line="32">    <span class="kw">if</span> exit_btn.<span class="fn">value</span>() == <span class="num">1</span>:</span>
-                        <span class="cl" data-line="33">        <span class="kw">if</span> car_count > <span class="num">0</span>:</span>
-                        <span class="cl" data-line="34">            car_count -= <span class="num">1</span></span>
-                        <span class="cl" data-line="35">            blue.<span class="fn">value</span>(<span class="num">1</span>) <span class="cm"># وميض أزرق</span></span>
-                        <span class="cl" data-line="36">            time.<span class="fn">sleep</span>(<span class="num">0.5</span>)</span>
-                        <span class="cl" data-line="37">            blue.<span class="fn">value</span>(<span class="num">0</span>)</span>
-                        <span class="cl" data-line="38">            <span class="fn">update_leds</span>()</span>
-                        <span class="cl" data-line="39">    time.<span class="fn">sleep</span>(<span class="num">0.1</span>)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="error-box" style="margin-top:20px">
-            <p>⚠️ أخطاء شائعة</p>
-            <div class="detail">
-                • خلط شروط الـ LEDs — الأصفر والأزرق مش للحالة الدائمة، بس للوميض<br>
-                • نسيان شرط الحد الأقصى <span dir="ltr">if car_count < 15</span> — العربيات هتزيد عن 15<br>
-                • نسيان شرط الحد الأدنى <span dir="ltr">if car_count > 0</span> — العد هيبقى سالب
-            </div>
-        </div>
-        <div style="text-align:center;margin-top:20px">
-            <a href="#" class="replay-btn" style="background:var(--s5);color:var(--bg);text-decoration:none;display:inline-flex">🔌 جرّب على Wokwi (قريبًا)</a>
-        </div>
-    </div>
-</section>
+        /* ===== WEB BUILD STEPS ===== */
+        let webStep = -1;
+        const webSteps = document.querySelectorAll('.web-step');
+        function setWebStep(s) {
+            webSteps.forEach((el, i) => {
+                const detail = el.querySelector('.web-step-detail');
+                if (i <= s) {
+                    el.style.borderColor = 'var(--s2)';
+                    el.style.background = 'rgba(245,158,11,.06)';
+                    if (detail) detail.style.display = 'block';
+                } else {
+                    el.style.borderColor = 'rgba(255,255,255,.08)';
+                    el.style.background = 'rgba(255,255,255,.03)';
+                    if (detail) detail.style.display = 'none';
+                }
+            });
+            document.getElementById('webStepStatus').textContent = s >= 0 ? 'خطوة ' + (s + 1) + '/' + webSteps.length : 'اضغط عشان تبدأ';
+        }
+        function nextWebStep() {
+            if (webStep >= webSteps.length - 1) { document.getElementById('webStepStatus').textContent = '✅ خلصت! اضغط إعادة'; return; }
+            webStep++;
+            setWebStep(webStep);
+        }
+        function resetWeb() {
+            webStep = -1;
+            webSteps.forEach(el => {
+                el.style.borderColor = 'rgba(255,255,255,.08)';
+                el.style.background = 'rgba(255,255,255,.03)';
+                const d = el.querySelector('.web-step-detail');
+                if (d) d.style.display = 'none';
+            });
+            document.getElementById('webStepStatus').textContent = 'اضغط عشان تبدأ';
+        }
+        document.getElementById('webBuildBtn').addEventListener('click', nextWebStep);
+        document.getElementById('webResetBtn').addEventListener('click', resetWeb);
 
-<section class="section" id="closing">
-    <div class="section-inner">
-        <div class="section-header">
-            <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯</div>
-            <h2>ملخص: Future Mall — المشروع الكامل</h2>
-            <p>كل قسم بنى جزء من المول — مع بعض، بنينا مول ذكي كامل!</p>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
-            <div class="card" style="border-top:3px solid var(--s1)"><h3 style="color:var(--s1)">🧠 البرمجة والـ AI</h3><p>كاشير ذكي + تصنيف المنتجات + تحليل بيانات الزوار</p></div>
-            <div class="card" style="border-top:3px solid var(--s2)"><h3 style="color:var(--s2)">🌐 تطوير المواقع</h3><p>موقع المول على الإنترنت — تصميم وبرمجة وتجربة مستخدم</p></div>
-            <div class="card" style="border-top:3px solid var(--s3)"><h3 style="color:var(--s3)">🛡️ الأمن السيبراني</h3><p>حماية المول من 9 أنواع مختلفة من الهجمات الإلكترونية</p></div>
-            <div class="card" style="border-top:3px solid var(--s4)"><h3 style="color:var(--s4)">🎨 الفن الرقمي</h3><p>الهوية البصرية — من السكتش للشعار للإعلان</p></div>
-            <div class="card" style="border-top:3px solid var(--s5)"><h3 style="color:var(--s5)">🔌 الأنظمة المدمجة</h3><p>نظام وقوف السيارات بالـ LEDs والزرار</p></div>
-        </div>
-        <div class="diagram-container" style="margin-top:30px">
-            <div class="diagram-title">إيه اللي اتعلمناه؟</div>
-            <div class="io-diagram">
-                <div class="io-box" style="border-color:var(--s1)">📝 التخطيط</div>
-                <div class="io-arrow">→</div>
-                <div class="io-box" style="border-color:var(--s2)">💻 البرمجة</div>
-                <div class="io-arrow">→</div>
-                <div class="io-box" style="border-color:var(--s4)">🎨 التصميم</div>
-                <div class="io-arrow">→</div>
-                <div class="io-box" style="border-color:var(--s3)">🛡️ الحماية</div>
-                <div class="io-arrow">→</div>
-                <div class="io-box" style="border-color:var(--s5)">🔌 التنفيذ</div>
-            </div>
-            <p style="text-align:center;color:var(--dim);margin-top:15px;font-size:16px">كل مشروع كبير بيبدأ بفكرة صغيرة — والمشروع ده وريّك إزاي الأقسام المختلفة بتتكامل!</p>
-        </div>
-    </div>
-</section>
+        /* ===== CASHIER SIMULATION ===== */
+        const products = [{ name: 'تفاح', price: 15 }, { name: 'موز', price: 10 }, { name: 'عنب', price: 20 }, { name: 'حليب', price: 25 }, { name: 'عيش', price: 5 }];
+        let cashierStep = -1, cashierAuto = null, cashierIsAuto = false;
+        const cashierSteps = [
+            { lines: [0, 1, 2, 3, 4, 5, 6, 7], desc: '📦 تعريف قائمة المنتجات', total: 0, showItems: false },
+            { lines: [9], desc: '🔢 تهيئة total = 0', total: 0, showItems: false },
+            { lines: [11, 12, 13], desc: '🔄 تكرار على تفاح — الإجمالي: 15', total: 15, showItems: true, itemIdx: 0 },
+            { lines: [11, 12, 13], desc: '🔄 تكرار على موز — الإجمالي: 25', total: 25, showItems: true, itemIdx: 1 },
+            { lines: [11, 12, 13], desc: '🔄 تكرار على عنب — الإجمالي: 45', total: 45, showItems: true, itemIdx: 2 },
+            { lines: [11, 12, 13], desc: '🔄 تكرار على حليب — الإجمالي: 70', total: 70, showItems: true, itemIdx: 3 },
+            { lines: [11, 12, 13], desc: '🔄 تكرار على عيش — الإجمالي: 75', total: 75, showItems: true, itemIdx: 4 },
+            { lines: [15, 16, 20, 21], desc: '✅ المجموع 75 ≤ 500 — بدون خصم', total: 75, showItems: true, itemIdx: -1, final: true }
+        ];
+        function hlCode(id, lines, hintId) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')); if (!lines || !lines.length) return; lines.forEach(ln => { const el = document.querySelector('#' + id + ' .cl[data-line="' + ln + '"]'); if (el) { el.classList.add('hl'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }) } }); const h = document.getElementById(hintId); if (h) { const f = lines[0], l = lines[lines.length - 1]; h.textContent = '▶ سطر ' + (f + 1) + (f !== l ? '–' + (l + 1) : '') } }
+        function clearHL(id) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')) }
+        function renderCashierItems(upTo) { const el = document.getElementById('cashierItems'); el.innerHTML = ''; for (let i = 0; i <= upTo && i < products.length; i++) { const p = products[i]; const run = products.slice(0, i + 1).reduce((s, x) => s + x.price, 0); el.innerHTML += '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-weight:600">' + p.name + '</span><span style="color:var(--dim)">' + p.price + ' EGP</span><span style="color:var(--accent);font-weight:700">' + run + ' EGP</span></div>' } }
+        function setCashierStep(s) { if (s < 0 || s >= cashierSteps.length) return; cashierStep = s; const step = cashierSteps[s]; hlCode('cashierCode', step.lines, 'cashierLineHint'); document.getElementById('cashierStep').textContent = step.desc; document.getElementById('cashierTotal').textContent = step.total + ' EGP'; const di = document.getElementById('cashierDiscount'); if (step.final) { di.style.display = 'block'; document.getElementById('cashierFinal').textContent = step.total } else { di.style.display = 'none' } if (step.showItems && step.itemIdx >= 0) renderCashierItems(step.itemIdx); else if (step.showItems) renderCashierItems(products.length - 1) }
+        function nextCashierStep() { if (cashierStep >= cashierSteps.length - 1) { if (cashierIsAuto) { cashierStep = -1; setCashierStep(0) } else { document.getElementById('cashierStep').textContent = '✅ خلصت! اضغط إعادة' } return } setCashierStep(cashierStep + 1) }
+        function resetCashier() { if (cashierAuto) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل' } cashierStep = -1; clearHL('cashierCode'); document.getElementById('cashierLineHint').textContent = '▶ سطر —'; document.getElementById('cashierStep').textContent = 'جاهز'; document.getElementById('cashierTotal').textContent = '0 EGP'; document.getElementById('cashierItems').innerHTML = ''; document.getElementById('cashierDiscount').style.display = 'none' }
+        document.getElementById('cashierRunBtn').addEventListener('click', () => { if (cashierIsAuto) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل'; return } if (cashierStep >= cashierSteps.length - 1) resetCashier(); if (cashierStep === -1) setCashierStep(0); cashierIsAuto = true; document.getElementById('cashierRunBtn').textContent = '⏹ إيقاف'; cashierAuto = setInterval(() => { if (cashierStep >= cashierSteps.length - 1) { clearInterval(cashierAuto); cashierAuto = null; cashierIsAuto = false; document.getElementById('cashierRunBtn').textContent = '▶ شغّل'; return } nextCashierStep() }, 1200) });
+        document.getElementById('cashierResetBtn').addEventListener('click', resetCashier);
 
-<footer>
-    <img src="data:image/webp;base64,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" class="footer-logo" alt="Bilal">
-    <p class="footer-encouragement">كل يوم بتتعلم حاجة جديدة، وده بيفرق معاك!</p>
-</footer>
+        /* ===== ART STEPS ===== */
+        let artIdx = 0; const artTotal = 4;
+        function artStep(dir) { const next = artIdx + dir; if (next < 0 || next >= artTotal) return; document.getElementById('artStep' + artIdx).classList.remove('active'); artIdx = next; document.getElementById('artStep' + artIdx).classList.add('active'); document.getElementById('artCounter').textContent = (artIdx + 1) + ' / ' + artTotal }
 
-<script>
-function createParticles(){const c=document.getElementById('particles');for(let i=0;i<30;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*15+'s';p.style.animationDuration=(15+Math.random()*10)+'s';c.appendChild(p)}}
-createParticles();
-window.addEventListener('scroll',()=>{const nav=document.getElementById('mainNav');if(window.scrollY>100)nav.classList.add('visible');else nav.classList.remove('visible');const sections=document.querySelectorAll('.section, .hero');let current='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.getAttribute('id')});document.querySelectorAll('.nav a').forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+current)a.classList.add('active')})});
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});
-document.querySelectorAll('.section-inner').forEach(el=>observer.observe(el));
-function checkVisibility(){document.querySelectorAll('.section-inner').forEach(el=>{const rect=el.getBoundingClientRect();if(rect.top<window.innerHeight&&rect.bottom>0)el.classList.add('visible')})}
-window.addEventListener('scroll',checkVisibility);checkVisibility();
+        /* ===== PARKING SIMULATION ===== */
+        let carCount = 0; const MAX = 15;
+        function updateParkingLeds() { document.getElementById('ledGreen').className = 'bulb' + (carCount < 15 ? ' on-green' : ''); document.getElementById('ledRed').className = 'bulb' + (carCount >= 15 ? ' on-red' : ''); document.getElementById('carCount').textContent = carCount; hlCode('parkCode', carCount > 0 ? [16, 17, 18, 19, 20] : [16, 18, 19, 20], 'parkLineHint') }
+        function blinkLed(id, color, cb) { const el = document.getElementById(id); el.className = 'bulb on-' + color; setTimeout(() => { el.className = 'bulb'; if (cb) cb() }, 500) }
+        function parkEntry() { if (carCount >= MAX) return; carCount++; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚗 عربية دخلت — العدد: ' + carCount; hlCode('parkCode', [23, 24, 25, 26, 27, 28, 29, 30], 'parkLineHint'); blinkLed('ledYellow', 'yellow', () => updateParkingLeds()); animateIO('input') }
+        function parkExit() { if (carCount <= 0) return; carCount--; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚙 عربية خرجت — العدد: ' + carCount; hlCode('parkCode', [31, 32, 33, 34, 35, 36, 37, 38], 'parkLineHint'); blinkLed('ledBlue', 'blue', () => updateParkingLeds()); animateIO('input') }
+        function animateIO(phase) { const input = document.getElementById('ioInput'); const process = document.getElementById('ioProcess'); const output = document.getElementById('ioOutput'); input.classList.add('active'); setTimeout(() => { input.classList.remove('active'); process.classList.add('active'); setTimeout(() => { process.classList.remove('active'); output.classList.add('active'); setTimeout(() => output.classList.remove('active'), 400) }, 300) }, 300) }
+        updateParkingLeds();
 
-/* ===== S1 TABS ===== */
-function switchS1Tab(idx){document.querySelectorAll('#s1Tabs .tab-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));document.querySelectorAll('#s1 > .section-inner > .tab-panel').forEach((p,i)=>p.classList.toggle('active',i===idx))}
-function switchDataTab(idx){document.querySelectorAll('#dataTabs .tab-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));const container=document.querySelector('#s1Tab2 .diagram-container');const panels=container.querySelectorAll(':scope > .tab-panel');panels.forEach((p,i)=>p.classList.toggle('active',i===idx))}
+        document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
+    </script>
+</body>
 
-/* ===== CASHIER SIMULATION ===== */
-const products=[{name:'تفاح',price:15},{name:'موز',price:10},{name:'عنب',price:20},{name:'حليب',price:25},{name:'عيش',price:5}];
-let cashierStep=-1,cashierAuto=null,cashierIsAuto=false;
-const cashierSteps=[
-    {lines:[0,1,2,3,4,5,6,7],desc:'📦 تعريف قائمة المنتجات',total:0,showItems:false},
-    {lines:[9],desc:'🔢 تهيئة total = 0',total:0,showItems:false},
-    {lines:[11,12,13],desc:'🔄 تكرار على تفاح — الإجمالي: 15',total:15,showItems:true,itemIdx:0},
-    {lines:[11,12,13],desc:'🔄 تكرار على موز — الإجمالي: 25',total:25,showItems:true,itemIdx:1},
-    {lines:[11,12,13],desc:'🔄 تكرار على عنب — الإجمالي: 45',total:45,showItems:true,itemIdx:2},
-    {lines:[11,12,13],desc:'🔄 تكرار على حليب — الإجمالي: 70',total:70,showItems:true,itemIdx:3},
-    {lines:[11,12,13],desc:'🔄 تكرار على عيش — الإجمالي: 75',total:75,showItems:true,itemIdx:4},
-    {lines:[15,16,20,21],desc:'✅ المجموع 75 ≤ 500 — بدون خصم',total:75,showItems:true,itemIdx:-1,final:true}
-];
-function hlCode(id,lines,hintId){document.querySelectorAll('#'+id+' .cl').forEach(e=>e.classList.remove('hl'));if(!lines||!lines.length)return;lines.forEach(ln=>{const el=document.querySelector('#'+id+' .cl[data-line="'+ln+'"]');if(el){el.classList.add('hl');el.scrollIntoView({block:'center',behavior:'smooth'})}});const h=document.getElementById(hintId);if(h){const f=lines[0],l=lines[lines.length-1];h.textContent='▶ سطر '+(f+1)+(f!==l?'–'+(l+1):'')}}
-function clearHL(id){document.querySelectorAll('#'+id+' .cl').forEach(e=>e.classList.remove('hl'))}
-function renderCashierItems(upTo){const el=document.getElementById('cashierItems');el.innerHTML='';for(let i=0;i<=upTo&&i<products.length;i++){const p=products[i];const run=products.slice(0,i+1).reduce((s,x)=>s+x.price,0);el.innerHTML+='<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-weight:600">'+p.name+'</span><span style="color:var(--dim)">'+p.price+' EGP</span><span style="color:var(--accent);font-weight:700">'+run+' EGP</span></div>'}}
-function setCashierStep(s){if(s<0||s>=cashierSteps.length)return;cashierStep=s;const step=cashierSteps[s];hlCode('cashierCode',step.lines,'cashierLineHint');document.getElementById('cashierStep').textContent=step.desc;document.getElementById('cashierTotal').textContent=step.total+' EGP';const di=document.getElementById('cashierDiscount');if(step.final){di.style.display='block';document.getElementById('cashierFinal').textContent=step.total}else{di.style.display='none'}if(step.showItems&&step.itemIdx>=0)renderCashierItems(step.itemIdx);else if(step.showItems)renderCashierItems(products.length-1)}
-function nextCashierStep(){if(cashierStep>=cashierSteps.length-1){if(cashierIsAuto){cashierStep=-1;setCashierStep(0)}else{document.getElementById('cashierStep').textContent='✅ خلصت! اضغط إعادة'}return}setCashierStep(cashierStep+1)}
-function resetCashier(){if(cashierAuto){clearInterval(cashierAuto);cashierAuto=null;cashierIsAuto=false;document.getElementById('cashierRunBtn').textContent='▶ شغّل'}cashierStep=-1;clearHL('cashierCode');document.getElementById('cashierLineHint').textContent='▶ سطر —';document.getElementById('cashierStep').textContent='جاهز';document.getElementById('cashierTotal').textContent='0 EGP';document.getElementById('cashierItems').innerHTML='';document.getElementById('cashierDiscount').style.display='none'}
-document.getElementById('cashierRunBtn').addEventListener('click',()=>{if(cashierIsAuto){clearInterval(cashierAuto);cashierAuto=null;cashierIsAuto=false;document.getElementById('cashierRunBtn').textContent='▶ شغّل';return}if(cashierStep>=cashierSteps.length-1)resetCashier();if(cashierStep===-1)setCashierStep(0);cashierIsAuto=true;document.getElementById('cashierRunBtn').textContent='⏹ إيقاف';cashierAuto=setInterval(()=>{if(cashierStep>=cashierSteps.length-1){clearInterval(cashierAuto);cashierAuto=null;cashierIsAuto=false;document.getElementById('cashierRunBtn').textContent='▶ شغّل';return}nextCashierStep()},1200)});
-document.getElementById('cashierResetBtn').addEventListener('click',resetCashier);
-
-/* ===== ART STEPS ===== */
-let artIdx=0;const artTotal=4;
-function artStep(dir){const next=artIdx+dir;if(next<0||next>=artTotal)return;document.getElementById('artStep'+artIdx).classList.remove('active');artIdx=next;document.getElementById('artStep'+artIdx).classList.add('active');document.getElementById('artCounter').textContent=(artIdx+1)+' / '+artTotal}
-
-/* ===== PARKING SIMULATION ===== */
-let carCount=0;const MAX=15;
-function updateParkingLeds(){document.getElementById('ledGreen').className='bulb'+(carCount<15?' on-green':'');document.getElementById('ledRed').className='bulb'+(carCount>=15?' on-red':'');document.getElementById('carCount').textContent=carCount;hlCode('parkCode',carCount>0?[16,17,18,19,20]:[16,18,19,20],'parkLineHint')}
-function blinkLed(id,color,cb){const el=document.getElementById(id);el.className='bulb on-'+color;setTimeout(()=>{el.className='bulb';if(cb)cb()},500)}
-function parkEntry(){if(carCount>=MAX)return;carCount++;updateParkingLeds();document.getElementById('parkStatus').textContent='🚗 عربية دخلت — العدد: '+carCount;hlCode('parkCode',[23,24,25,26,27,28,29,30],'parkLineHint');blinkLed('ledYellow','yellow',()=>updateParkingLeds());animateIO('input')}
-function parkExit(){if(carCount<=0)return;carCount--;updateParkingLeds();document.getElementById('parkStatus').textContent='🚙 عربية خرجت — العدد: '+carCount;hlCode('parkCode',[31,32,33,34,35,36,37,38],'parkLineHint');blinkLed('ledBlue','blue',()=>updateParkingLeds());animateIO('input')}
-function animateIO(phase){const input=document.getElementById('ioInput');const process=document.getElementById('ioProcess');const output=document.getElementById('ioOutput');input.classList.add('active');setTimeout(()=>{input.classList.remove('active');process.classList.add('active');setTimeout(()=>{process.classList.remove('active');output.classList.add('active');setTimeout(()=>output.classList.remove('active'),400)},300)},300)}
-updateParkingLeds();
-
-document.addEventListener('keydown',e=>{const sections=document.querySelectorAll('.section');let currentIdx=0;sections.forEach((s,i)=>{if(window.scrollY>=s.offsetTop-200)currentIdx=i});if(e.key==='ArrowDown'||e.key==='ArrowLeft'){e.preventDefault();if(currentIdx<sections.length-1)sections[currentIdx+1].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowRight'){e.preventDefault();if(currentIdx>0)sections[currentIdx-1].scrollIntoView({behavior:'smooth'})}});
-</script>
-</body></html>
+</html>
