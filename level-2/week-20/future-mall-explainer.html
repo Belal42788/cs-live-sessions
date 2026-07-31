@@ -436,7 +436,10 @@
             display: flex;
             flex-direction: column;
             max-height: 460px;
-            height: 100%
+            height: 100%;
+            direction: ltr;
+            text-align: left;
+            unicode-bidi: isolate;
         }
 
         @media(max-width:860px) {
@@ -1003,61 +1006,84 @@
                     <div class="diagram-title">كاشير Future Mall — اختار المنتجات وشوف الحساب بيتبنى</div>
                     <div class="activity-grid">
                         <div class="demo-panel">
-                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px">📦 المنتجات المتاحة</div>
-                            <div id="cashierProducts" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"></div>
-                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px">🛒 السلة</div>
+                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px">📦 المنتجات
+                                المتاحة</div>
+                            <div id="cashierProducts"
+                                style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px"></div>
+                            <div
+                                style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px">
+                                🛒 السلة</div>
                             <div id="cashierCart"
                                 style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;min-height:60px">
-                                <div id="cartEmpty" style="color:var(--dim);font-size:13px;text-align:center;padding:16px">اضغط على منتج عشان تضيفه للسلة</div>
+                                <div id="cartEmpty"
+                                    style="color:var(--dim);font-size:13px;text-align:center;padding:16px">اضغط على منتج
+                                    عشان تضيفه للسلة</div>
                                 <div id="cartItems"></div>
                             </div>
-                            <div id="cartTotals" style="display:none;margin-top:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px">
+                            <div id="cartTotals"
+                                style="display:none;margin-top:12px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px">
                                 <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px">
                                     <span style="color:var(--dim)">المجموع الفرعي:</span>
                                     <span style="font-weight:700" id="cartSubtotal">0 EGP</span>
                                 </div>
-                                <div id="cartDiscountRow" style="display:none;display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--success)">
+                                <div id="cartDiscountRow"
+                                    style="display:none;display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--success)">
                                     <span>الخصم (10%):</span>
                                     <span style="font-weight:700" id="cartDiscount">0 EGP</span>
                                 </div>
-                                <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:16px;border-top:1px solid rgba(255,255,255,.08);margin-top:6px">
+                                <div
+                                    style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:16px;border-top:1px solid rgba(255,255,255,.08);margin-top:6px">
                                     <span style="font-weight:700;color:var(--s1)">المجموع النهائي:</span>
                                     <span style="font-weight:900;color:var(--accent)" id="cartFinal">0 EGP</span>
                                 </div>
                             </div>
                             <div class="activity-controls">
-                                <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة السلة</button>
+                                <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة
+                                    السلة</button>
                                 <span class="status" id="cashierStep">جاهز</span>
                             </div>
                         </div>
-                        <div class="code-panel">
+                        <div class="code-panel" dir="ltr">
                             <div class="code-header">
                                 <span class="filename">📄 cashier.py</span>
                                 <span class="line-hint" id="cashierLineHint">▶ سطر —</span>
                             </div>
                             <div class="code-body" id="cashierCode">
-                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم, السعر)</span></span>
+                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم,
+                                        السعر)</span></span>
                                 <span class="cl" data-line="1">products = [</span>
-                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span class="num">15</span>),</span>
-                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span class="num">10</span>),</span>
-                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span class="num">20</span>),</span>
-                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span class="num">25</span>),</span>
-                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span class="num">5</span>)</span>
+                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span
+                                        class="num">15</span>),</span>
+                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span
+                                        class="num">10</span>),</span>
+                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span
+                                        class="num">20</span>),</span>
+                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span
+                                        class="num">25</span>),</span>
+                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span
+                                        class="num">5</span>)</span>
                                 <span class="cl" data-line="7">]</span>
                                 <span class="cl" data-line="8"></span>
-                                <span class="cl" data-line="9">cart = []  <span class="cm"># السلة فاضية</span></span>
+                                <span class="cl" data-line="9">cart = [] <span class="cm"># السلة فاضية</span></span>
                                 <span class="cl" data-line="10"></span>
-                                <span class="cl" data-line="11"><span class="cm"># المستخدم بيضيف منتجات للسلة</span></span>
-                                <span class="cl" data-line="12"><span class="cm"># كل منتج ليه اسم وسعر وكمية</span></span>
+                                <span class="cl" data-line="11"><span class="cm"># المستخدم بيضيف منتجات
+                                        للسلة</span></span>
+                                <span class="cl" data-line="12"><span class="cm"># كل منتج ليه اسم وسعر
+                                        وكمية</span></span>
                                 <span class="cl" data-line="13"></span>
                                 <span class="cl" data-line="14"><span class="cm"># حساب المجموع الفرعي</span></span>
                                 <span class="cl" data-line="15">subtotal = <span class="num">0</span></span>
-                                <span class="cl" data-line="16"><span class="kw">for</span> item <span class="kw">in</span> cart:</span>
-                                <span class="cl" data-line="17"> subtotal += item[<span class="str">"price"</span>] * item[<span class="str">"qty"</span>]</span>
+                                <span class="cl" data-line="16"><span class="kw">for</span> item <span
+                                        class="kw">in</span> cart:</span>
+                                <span class="cl" data-line="17"> subtotal += item[<span class="str">"price"</span>] *
+                                    item[<span class="str">"qty"</span>]</span>
                                 <span class="cl" data-line="18"></span>
-                                <span class="cl" data-line="19"><span class="cm"># خصم 10% لو المجموع أكبر من 500</span></span>
-                                <span class="cl" data-line="20"><span class="kw">if</span> subtotal > <span class="num">500</span>:</span>
-                                <span class="cl" data-line="21"> discount = subtotal * <span class="num">0.1</span></span>
+                                <span class="cl" data-line="19"><span class="cm"># خصم 10% لو المجموع أكبر من
+                                        500</span></span>
+                                <span class="cl" data-line="20"><span class="kw">if</span> subtotal > <span
+                                        class="num">500</span>:</span>
+                                <span class="cl" data-line="21"> discount = subtotal * <span
+                                        class="num">0.1</span></span>
                                 <span class="cl" data-line="22"> final = subtotal - discount</span>
                                 <span class="cl" data-line="23"><span class="kw">else</span>:</span>
                                 <span class="cl" data-line="24"> final = subtotal</span>
@@ -1077,36 +1103,147 @@
 
             <!-- Tab 1: AI Classifier -->
             <div class="tab-panel" id="s1Tab1">
-                <div class="content-grid">
-                    <div class="card">
-                        <div class="card-icon" style="background:linear-gradient(135deg,var(--s1),var(--accent))">🤖
+                <div class="diagram-container">
+                    <div class="diagram-title">تصنيف المنتجات بالـ <span dir="ltr">Google Teachable Machine</span></div>
+                    <p style="color:var(--dim);margin-bottom:16px;line-height:1.8">بنجمع صور للمنتجات، النموذج بيتعلم
+                        منها، وبعدين بنختبره على صور جديدة. الخطوة الأولى: تدريب النموذج.</p>
+                    <div id="tmTrainView">
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+                            <div class="tm-class"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center">
+                                <div style="font-weight:700;color:var(--accent);margin-bottom:8px">🍎 Fruits</div>
+                                <div id="tmFruits" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+                                </div>
+                                <div style="font-size:11px;color:var(--dim);margin-top:6px">8 صور تدريب</div>
+                            </div>
+                            <div class="tm-class"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center">
+                                <div style="font-weight:700;color:var(--success);margin-bottom:8px">🥬 Vegetables</div>
+                                <div id="tmVegs" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"></div>
+                                <div style="font-size:11px;color:var(--dim);margin-top:6px">8 صور تدريب</div>
+                            </div>
+                            <div class="tm-class"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center">
+                                <div style="font-weight:700;color:var(--s5);margin-bottom:8px">🧀 Dairy Products</div>
+                                <div id="tmDairy" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+                                </div>
+                                <div style="font-size:11px;color:var(--dim);margin-top:6px">8 صور تدريب</div>
+                            </div>
                         </div>
-                        <h3> المنتجات بالذكاء الاصطناعي</h3>
-                        <p>الذكاء الاصطناعي <span dir="ltr">(AI)</span> ممكن يصنف المنتجات تلقائيًا حسب الصورة — يحدد هل
-                            المنتج فاكهة، مشروبات، أو أكل.</p>
-                        <p style="margin-top:12px;color:var(--accent);font-weight:600">إزاي بيشتغل؟</p>
-                        <p style="margin-top:8px">
-                            1. بنجمع صور للمنتجات<br>
-                            2. النموذج بيتعلم الأنماط (شكل، لون، حجم)<br>
-                            3. بيصنف المنتجات الجديدة تلقائيًا<br>
-                            4. ده بيحسن تجربة التسوق في المول
-                        </p>
+                        <div style="text-align:center;margin-bottom:16px">
+                            <button id="tmTrainBtn" onclick="startTraining()"
+                                style="padding:12px 32px;background:var(--accent);color:var(--bg);border:none;border-radius:12px;font-family:Cairo;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s">🧠
+                                Train Model</button>
+                        </div>
+                        <div id="tmProgressWrap" style="display:none;margin-bottom:16px">
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:4px">
+                                <span>Training...</span><span id="tmPercent">0%</span></div>
+                            <div style="height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden">
+                                <div id="tmProgressBar"
+                                    style="height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--primary));border-radius:99px;transition:width .3s">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="diagram-container">
-                        <div class="diagram-title">صورة توضيحية — تصنيف المنتجات بالـ AI</div>
-                        <div class="img-placeholder"
-                            style="background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.3);color:var(--s1)">
-                            صورة AI — تصنيف المنتجات (هتتضاف من المعلم)
+                    <div id="tmTestView" style="display:none">
+                        <div style="font-weight:700;color:var(--accent);margin-bottom:12px">🧪 Test the Model</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+                            <div
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center">
+                                <div style="font-size:13px;color:var(--dim);margin-bottom:8px">صورة الاختبار</div>
+                                <div id="tmTestImg" style="font-size:3rem;margin:8px 0"></div>
+                                <div id="tmTestName" style="font-weight:700;font-size:14px"></div>
+                            </div>
+                            <div
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+                                <div style="font-size:13px;color:var(--dim);margin-bottom:10px">التنبؤات:</div>
+                                <div id="tmBars"></div>
+                            </div>
                         </div>
-                        <p style="color:var(--dim);text-align:center;font-size:13px;margin-top:10px">النموذج بياخد صورة
-                            المنتج ويطلّع الفئة اللي بيتنتمي ليها</p>
+                        <div style="overflow-x:auto">
+                            <table class="attack-table" style="margin-bottom:0">
+                                <tr>
+                                    <th>صورة</th>
+                                    <th>التنبؤ</th>
+                                    <th>الثقة</th>
+                                </tr>
+                                <tr>
+                                    <td>🍎 تفاح</td>
+                                    <td style="color:var(--success)">Fruit ✅</td>
+                                    <td>92%</td>
+                                </tr>
+                                <tr>
+                                    <td>🍅 طماطم</td>
+                                    <td style="color:var(--danger)">Fruit ❌ ( Vegetable )</td>
+                                    <td>67%</td>
+                                </tr>
+                                <tr>
+                                    <td>🧀 جبنة</td>
+                                    <td style="color:var(--success)">Dairy ✅</td>
+                                    <td>88%</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="error-box" style="margin-top:12px">
+                            <p>⚠️ أخطاء شائعة</p>
+                            <div class="detail">
+                                • استخدام نفس الصور للتدريب والاختبار — لازم صور جديدة مختلفة<br>
+                                • طماطم اتصنفت فاكهة لأن شكلها قريب — ده بيحصل فعلاً في الـ <span
+                                    dir="ltr">AI</span>!<br>
+                                • التصحيح الصريح للخطأ أهم من إخفائه — العلم الصادق بيقول "غلط" مش بيغير النتيجة
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="error-box">
-                    <p>⚠️ أخطاء شائعة</p>
-                    <div class="detail">
-                        • خلط بين "تدريب" النموذج و"استخدام" النموذج — التدريب محتاج بيانات كتير<br>
-                        • التفاف من edge cases — مثلاً منتج مش واضح الصورة
+                <div class="diagram-container" style="margin-top:20px">
+                    <div class="diagram-title">الكود — استخدام النموذج المدرب في بايثون</div>
+                    <div class="activity-grid">
+                        <div class="demo-panel">
+                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px">🖥️ مخرجات
+                                الكونسول</div>
+                            <div id="aiConsole"
+                                style="background:#0d1a1f;border-radius:10px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;min-height:80px;line-height:1.8;direction:ltr;text-align:left">
+                                <span style="color:#546e7a"># اضغط "شغّل" عشان تشوف النتيجة</span>
+                            </div>
+                            <div class="activity-controls">
+                                <button class="replay-btn" id="aiRunBtn"
+                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="runAI()">▶
+                                    شغّل</button>
+                                <button class="replay-btn" style="font-size:13px" onclick="resetAI()">↺ إعادة</button>
+                            </div>
+                        </div>
+                        <div class="code-panel" dir="ltr">
+                            <div class="code-header">
+                                <span class="filename">📄 classify.py</span>
+                                <span class="line-hint" id="aiLineHint">▶ line —</span>
+                            </div>
+                            <div class="code-body" id="aiCode">
+                                <span class="cl" data-line="0"><span class="kw">from</span> teachable_machine <span
+                                        class="kw">import</span> load_model</span>
+                                <span class="cl" data-line="1"><span class="kw">from</span> PIL <span
+                                        class="kw">import</span> Image</span>
+                                <span class="cl" data-line="2"></span>
+                                <span class="cl" data-line="3"><span class="cm"># Load the exported model</span></span>
+                                <span class="cl" data-line="4">model = <span class="fn">load_model</span>(<span
+                                        class="str">"model.keras"</span>)</span>
+                                <span class="cl" data-line="5"></span>
+                                <span class="cl" data-line="6"><span class="cm"># Load a test image</span></span>
+                                <span class="cl" data-line="7">img = Image.<span class="fn">open</span>(<span
+                                        class="str">"test_apple.jpg"</span>)</span>
+                                <span class="cl" data-line="8"></span>
+                                <span class="cl" data-line="9"><span class="cm"># Get prediction</span></span>
+                                <span class="cl" data-line="10">prediction = model.<span
+                                        class="fn">predict</span>(img)</span>
+                                <span class="cl" data-line="11"></span>
+                                <span class="cl" data-line="12"><span class="fn">print</span>(<span class="str">f"Class:
+                                    </span>{prediction[<span class="str">'class'</span>]}<span
+                                        class="str">"</span>)</span>
+                                <span class="cl" data-line="13"><span class="fn">print</span>(<span
+                                        class="str">f"Confidence: </span>{prediction[<span
+                                        class="str">'confidence'</span>]}<span class="str">"</span>)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1115,20 +1252,42 @@
             <div class="tab-panel" id="s1Tab2">
                 <div class="diagram-container">
                     <div class="diagram-title">تحليل بيانات زوار Future Mall — أسبوع كامل</div>
-                    <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة بسيطة: عندنا بيانات زوار <span dir="ltr">Future Mall</span> لأسبوع كامل، وعلينا نحللها ون写出结论.</p>
+                    <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة بسيطة: عندنا بيانات زوار <span
+                            dir="ltr">Future Mall</span> لأسبوع كامل، وعلينا نحللها ونعرضها.</p>
                     <div style="overflow-x:auto;margin-bottom:20px">
                         <table class="attack-table">
                             <tr>
                                 <th>اليوم</th>
                                 <th>عدد الزوار</th>
                             </tr>
-                            <tr><td>السبت</td><td style="font-weight:700">1,240</td></tr>
-                            <tr><td>الأحد</td><td style="font-weight:700">860</td></tr>
-                            <tr><td>الاتنين</td><td style="font-weight:700;color:var(--danger)">640</td></tr>
-                            <tr><td>التلات</td><td style="font-weight:700">705</td></tr>
-                            <tr><td>الأربع</td><td style="font-weight:700">780</td></tr>
-                            <tr><td>الخميس</td><td style="font-weight:700">1,020</td></tr>
-                            <tr><td>الجمعة</td><td style="font-weight:700;color:var(--success)">1,460</td></tr>
+                            <tr>
+                                <td>السبت</td>
+                                <td style="font-weight:700">1,240</td>
+                            </tr>
+                            <tr>
+                                <td>الأحد</td>
+                                <td style="font-weight:700">860</td>
+                            </tr>
+                            <tr>
+                                <td>الاتنين</td>
+                                <td style="font-weight:700;color:var(--danger)">640</td>
+                            </tr>
+                            <tr>
+                                <td>التلات</td>
+                                <td style="font-weight:700">705</td>
+                            </tr>
+                            <tr>
+                                <td>الأربع</td>
+                                <td style="font-weight:700">780</td>
+                            </tr>
+                            <tr>
+                                <td>الخميس</td>
+                                <td style="font-weight:700">1,020</td>
+                            </tr>
+                            <tr>
+                                <td>الجمعة</td>
+                                <td style="font-weight:700;color:var(--success)">1,460</td>
+                            </tr>
                         </table>
                     </div>
                     <div style="margin-bottom:24px">
@@ -1143,16 +1302,22 @@
                     </div>
                     <div style="margin-bottom:20px">
                         <p style="font-weight:700;color:var(--text);margin-bottom:12px">📊 العمود التشارت:</p>
-                        <div id="visitorChart" style="display:flex;align-items:flex-end;gap:12px;height:200px;padding:20px 0;border-bottom:2px solid rgba(255,255,255,.1)"></div>
+                        <div id="visitorChart"
+                            style="display:flex;align-items:flex-end;gap:12px;height:200px;padding:20px 0;border-bottom:2px solid rgba(255,255,255,.1)">
+                        </div>
                         <div id="chartLabels" style="display:flex;gap:12px;margin-top:8px"></div>
                     </div>
                     <div class="activity-controls" style="justify-content:center">
-                        <button class="replay-btn" id="revealChartBtn" style="background:var(--accent);color:var(--bg)">🔍 اكشف التحليل</button>
+                        <button class="replay-btn" id="revealChartBtn"
+                            style="background:var(--accent);color:var(--bg)">🔍 اكشف التحليل</button>
                         <button class="replay-btn" id="resetChartBtn">↺ إعادة</button>
                     </div>
-                    <div id="chartConclusion" style="display:none;margin-top:20px;padding:16px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:12px">
+                    <div id="chartConclusion"
+                        style="display:none;margin-top:20px;padding:16px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:12px">
                         <p style="color:var(--accent);font-weight:700;margin-bottom:8px">📝 الخلاصة:</p>
-                        <p style="color:var(--dim);line-height:1.8">الجمعة هو أزحم يوم في <span dir="ltr">Future Mall</span>، فممكن نحتاج موظفين أكتر فيه. الاتنين هو أهدى يوم، فممكن نعمل عروض فيه لجذب زوار أكتر.</p>
+                        <p style="color:var(--dim);line-height:1.8">الجمعة هو أزحم يوم في <span dir="ltr">Future
+                                Mall</span>، فممكن نحتاج موظفين أكتر فيه. الاتنين هو أهدى يوم، فممكن نعمل عروض فيه لجذب
+                            زوار أكتر.</p>
                     </div>
                     <div class="error-box" style="margin-top:16px">
                         <p>⚠️ أخطاء شائعة</p>
@@ -1175,88 +1340,109 @@
             </div>
             <div class="content-grid">
                 <div class="card">
-                    <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">🌐</div>
-                    <h3>إيه اللي بيجعل موقع مول كويس؟</h3>
-                    <p>
-                        • <span dir="ltr">Responsive Design</span> — يشتغل على الموبايل والكمبيوتر<br>
-                        • سرعة التحميل — صفحات خفيفة<br>
-                        • تنقل سهل — المستخدم يعرف يلاقي اللي عايزه<br>
-                        • تصميم جذاب — ألوان متناسقة وخط واضح<br>
-                        • <span dir="ltr">SEO</span> — يظهر في نتائج البحث
-                    </p>
-                </div>
-                <div class="card">
                     <div class="card-icon" style="background:linear-gradient(135deg,var(--s2),var(--accent))">💻</div>
                     <h3>التقنيات اللي هنستخدمها</h3>
                     <p>
                         • <span dir="ltr">HTML</span> — هيكل الصفحة<br>
                         • <span dir="ltr">CSS</span> — التصميم والألوان<br>
-                        • <span dir="ltr">JavaScript</span> — التفاعل والحركة<br>
-                        • <span dir="ltr">Git</span> — إدارة الكود
                     </p>
                 </div>
             </div>
             <div class="diagram-container" style="margin-top:30px">
                 <div class="diagram-title">هيكل صفحة Future Mall — شوف الكود بيتبنى خطوة بخطوة</div>
-                <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة المطلوبة: صفحة <span dir="ltr">HTML</span> بسيطة فيها اسم المول، وصف قصير، وقائمة <span dir="ltr">5</span> محلات، والشارة، و <span dir="ltr">3</span> تغييرات <span dir="ltr">CSS</span>.</p>
+                <p style="color:var(--dim);margin-bottom:20px;line-height:1.8">المهمة المطلوبة: صفحة <span
+                        dir="ltr">HTML</span> بسيطة فيها اسم المول، وصف قصير، وقائمة <span dir="ltr">5</span> محلات،
+                    والشارة، و <span dir="ltr">3</span> تغييرات <span dir="ltr">CSS</span>.</p>
                 <div id="webBuildSteps" style="display:flex;flex-direction:column;gap:12px">
-                    <div class="web-step" data-step="0" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="0"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</div>
-                            <strong style="color:var(--text)"><span dir="ltr">&lt;head&gt;</span> — الهيكل الأساسي</strong>
+                            <div
+                                style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                1</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;head&gt;</span> — الهيكل
+                                الأساسي</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
                             فيه عنوان الصفحة + الـ <span dir="ltr">CSS styles</span> اللي هنبني بيها التصميم.
                         </div>
                     </div>
-                    <div class="web-step" data-step="1" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="1"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</div>
+                            <div
+                                style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                2</div>
                             <strong style="color:var(--text)"><span dir="ltr">&lt;h1&gt;</span> — اسم المول</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
-                            <span dir="ltr">&lt;h1&gt;</span> واحدة بس — "<span dir="ltr">Future Mall</span>". ممنوع يبقى في أكتر من <span dir="ltr">&lt;h1&gt;</span> في الصفحة.
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">&lt;h1&gt;</span> واحدة بس — "<span dir="ltr">Future Mall</span>". ممنوع
+                            يبقى في أكتر من <span dir="ltr">&lt;h1&gt;</span> في الصفحة.
                         </div>
                     </div>
-                    <div class="web-step" data-step="2" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="2"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</div>
+                            <div
+                                style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                3</div>
                             <strong style="color:var(--text)">فقرة تعريفية قصيرة</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
-                            وصف مختصر للمول — "<span dir="ltr">Future Mall is a modern shopping destination offering a wide variety of stores, restaurants, and entertainment for visitors of all ages.</span>"
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            وصف مختصر للمول — "<span dir="ltr">Future Mall is a modern shopping destination offering a
+                                wide variety of stores, restaurants, and entertainment for visitors of all ages.</span>"
                         </div>
                     </div>
-                    <div class="web-step" data-step="3" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="3"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">4</div>
-                            <strong style="color:var(--text)"><span dir="ltr">&lt;ul&gt;</span> — قائمة محلات <span dir="ltr">5</span> محلات</strong>
+                            <div
+                                style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                4</div>
+                            <strong style="color:var(--text)"><span dir="ltr">&lt;ul&gt;</span> — قائمة محلات <span
+                                    dir="ltr">5</span> محلات</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
-                            <span dir="ltr">&lt;ul&gt;</span> (مش <span dir="ltr">&lt;ol&gt;</span>) — العناصر: Zara, Nike, Carrefour, Samsung, Starbucks
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">&lt;ul&gt;</span> (مش <span dir="ltr">&lt;ol&gt;</span>) — العناصر: Zara,
+                            Nike, Carrefour, Samsung, Starbucks
                         </div>
                     </div>
-                    <div class="web-step" data-step="4" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="4"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">5</div>
+                            <div
+                                style="background:var(--s2);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                5</div>
                             <strong style="color:var(--text)"><span dir="ltr">&lt;img&gt;</span> — شعار المول</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
                             صورة الشارة اللي اتعلمتها في Digital Art.
                         </div>
                     </div>
-                    <div class="web-step" data-step="5" style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
+                    <div class="web-step" data-step="5"
+                        style="background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;transition:all .4s;cursor:pointer">
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                            <div style="background:var(--accent);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">6</div>
+                            <div
+                                style="background:var(--accent);color:var(--bg);border-radius:50%;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">
+                                6</div>
                             <strong style="color:var(--text)"><span dir="ltr">CSS</span> — تغييرات المطلوبة</strong>
                         </div>
-                        <div class="web-step-detail" style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
-                            <span dir="ltr">3</span> تغييرات بس: <span dir="ltr">background-color: lightgray;</span> / <span dir="ltr">color: darkblue;</span> للعنوان / <span dir="ltr">font-family: Arial, sans-serif;</span> لكل النص
+                        <div class="web-step-detail"
+                            style="display:none;color:var(--dim);font-size:13px;line-height:1.8;padding-right:40px">
+                            <span dir="ltr">3</span> تغييرات بس: <span dir="ltr">background-color: lightgray;</span> /
+                            <span dir="ltr">color: darkblue;</span> للعنوان / <span dir="ltr">font-family: Arial,
+                                sans-serif;</span> لكل النص
                         </div>
                     </div>
                 </div>
                 <div class="activity-controls" style="justify-content:center;margin-top:16px">
-                    <button class="replay-btn" id="webBuildBtn" style="background:var(--s2);color:var(--bg)">⏭ الخطوة الجاية</button>
+                    <button class="replay-btn" id="webBuildBtn" style="background:var(--s2);color:var(--bg)">⏭ الخطوة
+                        الجاية</button>
                     <button class="replay-btn" id="webResetBtn">↺ إعادة</button>
                     <span class="status" id="webStepStatus">اضغط عشان تبدأ</span>
                 </div>
@@ -1264,7 +1450,8 @@
             <div class="error-box" style="margin-top:20px">
                 <p>⚠️ أخطاء شائعة</p>
                 <div class="detail">
-                    • استخدام <span dir="ltr">&lt;ol&gt;</span> بدل <span dir="ltr">&lt;ul&gt;</span> — المطلوب قائمة غير مرتبة<br>
+                    • استخدام <span dir="ltr">&lt;ol&gt;</span> بدل <span dir="ltr">&lt;ul&gt;</span> — المطلوب قائمة
+                    غير مرتبة<br>
                     • أكتر من <span dir="ltr">&lt;h1&gt;</span> واحدة — الصفحة لازم يكون فيها واحدة بس<br>
                     • نسيان واحد من الـ <span dir="ltr">3</span> تغييرات الـ <span dir="ltr">CSS</span> المطلوبة<br>
                     • عدّ أكتر من 5 محلات أو أقل
@@ -1286,70 +1473,55 @@
                 <p>حماية مولنا من الهجمات الإلكترونية</p>
             </div>
             <div class="diagram-container">
-                <div class="diagram-title">أنواع الهجمات وإزاي Future Mall بيحمي نفسه</div>
+                <div class="diagram-title">النظام → الخطر الممكن → طريقة الحماية</div>
                 <div style="overflow-x:auto">
                     <table class="attack-table">
                         <tr>
-                            <th>نوع الهجوم</th>
-                            <th>الوصف</th>
-                            <th>إزاي المول بيحمي نفسه</th>
+                            <th>System</th>
+                            <th>Possible Risk</th>
+                            <th>Protection Method</th>
                         </tr>
                         <tr>
-                            <td>التصيد الاحتيالي <span dir="ltr">(Phishing)</span></td>
-                            <td>رسائل إيميل أو رسائل بتبان من شركة موثوقة عشان تسرق بيانات المستخدمين</td>
-                            <td>تدريب الموظفين، فلترة الرسائل المشبوهة، استخدام <span dir="ltr">2FA</span></td>
+                            <td>Free Wi-Fi</td>
+                            <td>Unauthorized people connect to the network</td>
+                            <td>Use a strong password</td>
                         </tr>
                         <tr>
-                            <td>البرمجيات الخبيثة <span dir="ltr">(Malware)</span></td>
-                            <td>برامج بتتثبت من غير ما المستخدم يعرف وبتسرق بيانات أو بتبوظ النظام</td>
-                            <td>برنامج حماية على كل جهاز، تحديثات أمنية دورية</td>
+                            <td>Cashier Device</td>
+                            <td>Virus or Malware infects the device</td>
+                            <td>Install antivirus software and keep it updated</td>
                         </tr>
                         <tr>
-                            <td>الـ Wi-Fi المتسلل <span dir="ltr">(Rogue AP)</span></td>
-                            <td>شخص بيحط شبكة Wi-Fi مزيفة عشان يسرق بيانات اللي بيتصلوا بيها</td>
-                            <td>شبكة Wi-Fi رسمية بس، تشفير <span dir="ltr">WPA3</span>، تحذير الزوار</td>
-                        </tr>
-                        <tr>
-                            <td>كلمات المرور الضعيفة <span dir="ltr">(Weak Passwords)</span></td>
-                            <td>كلمات مرور سهلة تخمين زي 123456 أو password</td>
-                            <td>سياسة كلمات مرور قوية، تغييرها كل 3 شهور، <span dir="ltr">2FA</span></td>
-                        </tr>
-                        <tr>
-                            <td>الهندسة الاجتماعية <span dir="ltr">(Social Engineering)</span></td>
-                            <td>شخص بيتصل ويقول إنه من الدعم الفني عشان يعرف كلمات السر</td>
-                            <td>تدريب الموظفين، سياسة التحقق من الهوية، تسجيل المكالمات</td>
-                        </tr>
-                        <tr>
-                            <td>اختراق الموقع <span dir="ltr">(Website Hacking)</span></td>
-                            <td>استغلال ثغرات في كود الموقع لسرقة بيانات أو تعديل محتوى</td>
-                            <td>تحديثات دورية، اختبار اختراق، حماية <span dir="ltr">SQL Injection</span> و <span
-                                    dir="ltr">XSS</span></td>
-                        </tr>
-                        <tr>
-                            <td>حجب الخدمة <span dir="ltr">(DDoS)</span></td>
-                            <td>إرسال طلبات كتير جدًا عشان الموقع يقع وما يشتغلش</td>
-                            <td>خدمات حماية <span dir="ltr">DDoS</span>، مراقبة حركة الشبكة</td>
-                        </tr>
-                        <tr>
-                            <td>برامج الفدية <span dir="ltr">(Ransomware)</span></td>
-                            <td>برنامج بيشفّر كل البيانات وبيقفلها لحد ما تدفع فدية</td>
-                            <td>نسخ احتياطي يومي، فصل النسخ الاحتياطي عن الشبكة الرئيسية</td>
-                        </tr>
-                        <tr>
-                            <td>التهديد الداخلي <span dir="ltr">(Insider Threat)</span></td>
-                            <td>موظف بيسحب بيانات أو بيعمل حرق عن عمد</td>
-                            <td>صلاحيات حسب الدور، مراقبة الأنشطة، تدريب وعي أمني</td>
+                            <td>Mall Website</td>
+                            <td>Someone tries to hack it or change its content</td>
+                            <td>Use HTTPS and a strong administrator password</td>
                         </tr>
                     </table>
                 </div>
+                <div style="margin-top:20px">
+                    <div class="diagram-title">نصايح للموظفين</div>
+                    <div style="display:grid;gap:10px;margin-top:10px">
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);border-radius:10px">
+                            <span style="font-size:20px">🚫</span>
+                            <span style="font-size:14px">متفتحش أي لينك من إيميل مجهول</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.15);border-radius:10px">
+                            <span style="font-size:20px">🔑</span>
+                            <span style="font-size:14px">استخدم كلمة مرور قوية</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(25,60,255,.06);border:1px solid rgba(25,60,255,.15);border-radius:10px">
+                            <span style="font-size:20px">🔒</span>
+                            <span style="font-size:14px">اقفل الكمبيوتر قبل ما تسيب مكانك</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="error-box" style="margin-top:20px">
-                <p>⚠️ أخطاء شائعة</p>
-                <div class="detail">
-                    • خلط بين <span dir="ltr">Phishing</span> و <span dir="ltr">Malware</span> — التصيد رسالة أو إيميل،
-                    الخبيث برنامج<br>
-                    • التفكير إن الموقع "صغير" فمش محتاج حماية — أي موقع ممكن يتعرض لهجمة<br>
-                    • تجاهل التحديثات الأمنية — الثغرات بتتكتشف كل يوم
+            <div style="margin-top:20px;padding:20px;background:rgba(255,255,255,.03);border:2px solid var(--s3);border-radius:16px;text-align:center">
+                <div style="font-size:18px;font-weight:700;color:var(--s3);margin-bottom:8px">⚠️ Cybersecurity Tips</div>
+                <div style="display:flex;flex-direction:column;gap:6px;max-width:400px;margin:0 auto;text-align:right">
+                    <div style="font-size:13px;color:var(--dim)">• متفتحش أي لينك من إيميل مجهول</div>
+                    <div style="font-size:13px;color:var(--dim)">• استخدم كلمة مرور قوية</div>
+                    <div style="font-size:13px;color:var(--dim)">• اقفل الكمبيوتر قبل ما تسيب مكانك</div>
                 </div>
             </div>
         </div>
@@ -1367,24 +1539,24 @@
                 <div style="display:grid;gap:0">
                     <div class="step-card active" id="artStep0">
                         <h4>المرحلة 1: السكتشات</h4>
-                        <div class="img-placeholder">صورة — سكتشات التصميم الأولية (هتتضاف من المعلم)</div>
+                        <img src="assets/media/المرحلة 1 السكتشات.png" alt="سكتشات التصميم الأولية" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنبدأ بأفكار أولية بالقلم — أشكال مختلفة للشعار. بنرسم 3-5 أفكار مختلفة قبل ما نختار.</p>
                     </div>
                     <div class="step-card" id="artStep1">
                         <h4>المرحلة 2: لوحة الألوان</h4>
-                        <div class="img-placeholder">صورة — لوحة ألوان الهوية البصرية (هتتضاف من المعلم)</div>
+                        <img src="assets/media/المرحلة 2 لوحة الألوان.png" alt="لوحة ألوان الهوية البصرية" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنختار 3-4 ألوان أساسية — لون رئيسي و2-3 ألوان مساعدة. لازم الألوان تكون متناسقة وتعبر عن
                             طابع المول.</p>
                     </div>
                     <div class="step-card" id="artStep2">
                         <h4>المرحلة 3: الشعار النهائي</h4>
-                        <div class="img-placeholder">صورة — شعار Future Mall النهائي (هتتضاف من المعلم)</div>
+                        <img src="assets/media/iالمرحلة 3 الشعار النهائي.png" alt="شعار Future Mall النهائي" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنحوّل السكتش للشكل الرقمي باستخدام برنامج تصميم — بنضيف الألوان والنصوص والتفاصيل النهائية.
                         </p>
                     </div>
                     <div class="step-card" id="artStep3">
                         <h4>المرحلة 4: الإعلان</h4>
-                        <div class="img-placeholder">صورة — إعلان Future Mall (هتتضاف من المعلم)</div>
+                        <img src="assets/media/المرحلة 4 الإعلان.png" alt="إعلان Future Mall" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)">
                         <p>بنستخدم الشعار والألوان في تصميم إعلان — ممكن يكون بوستر أو صورة سوشيال ميديا. لازم الرسالة
                             تكون واضحة وجذابة.</p>
                     </div>
@@ -1458,7 +1630,7 @@
                             <div class="io-box" id="ioOutput">📤 Outputs<br><small>4 LEDs</small></div>
                         </div>
                     </div>
-                    <div class="code-panel">
+                    <div class="code-panel" dir="ltr">
                         <div class="code-header">
                             <span class="filename">📄 parking.py</span>
                             <span class="line-hint" id="parkLineHint">▶ سطر —</span>
@@ -1537,9 +1709,9 @@
                 </div>
             </div>
             <div style="text-align:center;margin-top:20px">
-                <a href="#" class="replay-btn"
+                <a href="https://wokwi.com/projects/470458260598942721" class="replay-btn"
                     style="background:var(--s5);color:var(--bg);text-decoration:none;display:inline-flex">🔌 جرّب على
-                    Wokwi (قريبًا)</a>
+                    Wokwi </a>
             </div>
         </div>
     </section>
@@ -1563,7 +1735,7 @@
                 </div>
                 <div class="card" style="border-top:3px solid var(--s3)">
                     <h3 style="color:var(--s3)">🛡️ الأمن السيبراني</h3>
-                    <p>حماية المول من 9 أنواع مختلفة من الهجمات الإلكترونية</p>
+                    <p>حماية المول من أي تهديد على الشبكة والجهاز والموقع</p>
                 </div>
                 <div class="card" style="border-top:3px solid var(--s4)">
                     <h3 style="color:var(--s4)">🎨 الفن الرقمي</h3>
@@ -1707,9 +1879,9 @@
             const el = document.getElementById('cashierProducts');
             el.innerHTML = cashierProducts.map(p =>
                 '<button onclick="addToCart(\'' + p.id + '\')" style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;transition:all .2s;font-family:Cairo;font-size:13px;color:var(--text);text-align:right" onmouseover="this.style.borderColor=\'var(--s1)\';this.style.background=\'rgba(6,182,212,.08)\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,.08)\';this.style.background=\'rgba(255,255,255,.04)\'">' +
-                    '<span style="font-size:20px">' + p.emoji + '</span>' +
-                    '<div style="flex:1"><div style="font-weight:700">' + p.name + '</div><div style="color:var(--dim);font-size:11px">' + p.price + ' EGP</div></div>' +
-                    '<span style="background:var(--s1);color:var(--bg);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">+ إضافة</span>' +
+                '<span style="font-size:20px">' + p.emoji + '</span>' +
+                '<div style="flex:1"><div style="font-weight:700">' + p.name + '</div><div style="color:var(--dim);font-size:11px">' + p.price + ' EGP</div></div>' +
+                '<span style="background:var(--s1);color:var(--bg);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">+ إضافة</span>' +
                 '</button>'
             ).join('');
         }
@@ -1766,17 +1938,17 @@
             /* Render cart items: name + unit price only, with qty controls */
             cartItemsEl.innerHTML = cart.map(item =>
                 '<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px">' +
-                    '<span style="font-size:18px">' + item.emoji + '</span>' +
-                    '<div style="flex:1">' +
-                        '<div style="font-weight:600">' + item.name + '</div>' +
-                        '<div style="color:var(--dim);font-size:11px">' + item.price + ' EGP</div>' +
-                    '</div>' +
-                    '<div style="display:flex;align-items:center;gap:6px">' +
-                        '<button onclick="changeQty(\'' + item.id + '\', -1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">-</button>' +
-                        '<span style="min-width:20px;text-align:center;font-weight:700">' + item.qty + '</span>' +
-                        '<button onclick="changeQty(\'' + item.id + '\', 1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">+</button>' +
-                    '</div>' +
-                    '<button onclick="removeFromCart(\'' + item.id + '\')" style="background:none;border:none;cursor:pointer;font-size:16px;opacity:.6;transition:opacity .2s" onmouseover="this.style.opacity=\'1\'" onmouseout="this.style.opacity=\'.6\'">🗑️</button>' +
+                '<span style="font-size:18px">' + item.emoji + '</span>' +
+                '<div style="flex:1">' +
+                '<div style="font-weight:600">' + item.name + '</div>' +
+                '<div style="color:var(--dim);font-size:11px">' + item.price + ' EGP</div>' +
+                '</div>' +
+                '<div style="display:flex;align-items:center;gap:6px">' +
+                '<button onclick="changeQty(\'' + item.id + '\', -1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">-</button>' +
+                '<span style="min-width:20px;text-align:center;font-weight:700">' + item.qty + '</span>' +
+                '<button onclick="changeQty(\'' + item.id + '\', 1)" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">+</button>' +
+                '</div>' +
+                '<button onclick="removeFromCart(\'' + item.id + '\')" style="background:none;border:none;cursor:pointer;font-size:16px;opacity:.6;transition:opacity .2s" onmouseover="this.style.opacity=\'1\'" onmouseout="this.style.opacity=\'.6\'">🗑️</button>' +
                 '</div>'
             ).join('');
 
@@ -1825,6 +1997,105 @@
         function parkExit() { if (carCount <= 0) return; carCount--; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚙 عربية خرجت — العدد: ' + carCount; hlCode('parkCode', [31, 32, 33, 34, 35, 36, 37, 38], 'parkLineHint'); blinkLed('ledBlue', 'blue', () => updateParkingLeds()); animateIO('input') }
         function animateIO(phase) { const input = document.getElementById('ioInput'); const process = document.getElementById('ioProcess'); const output = document.getElementById('ioOutput'); input.classList.add('active'); setTimeout(() => { input.classList.remove('active'); process.classList.add('active'); setTimeout(() => { process.classList.remove('active'); output.classList.add('active'); setTimeout(() => output.classList.remove('active'), 400) }, 300) }, 300) }
         updateParkingLeds();
+
+        /* ===== TEACHABLE MACHINE ===== */
+        const tmClasses = [
+            { id: 'tmFruits', emojis: ['🍎','🍌','🍇','🍊','🍉','🍐','🥝','🍑'], color: 'var(--accent)' },
+            { id: 'tmVegs',   emojis: ['🥬','🥕','🧅','🥦','🌽','🥒','🫑','🍅'], color: 'var(--success)' },
+            { id: 'tmDairy',  emojis: ['🧀','🥛','🧈','🍦','酸奶','🕝','🥣','🫕'], color: 'var(--s5)' }
+        ];
+        function populateThumbs() {
+            tmClasses.forEach(c => {
+                const el = document.getElementById(c.id);
+                if (!el) return;
+                el.innerHTML = c.emojis.map(e =>
+                    '<div style="width:100%;aspect-ratio:1;background:rgba(255,255,255,.06);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px">' + e + '</div>'
+                ).join('');
+            });
+        }
+        populateThumbs();
+
+        function startTraining() {
+            const btn = document.getElementById('tmTrainBtn');
+            const wrap = document.getElementById('tmProgressWrap');
+            const bar = document.getElementById('tmProgressBar');
+            const pct = document.getElementById('tmPercent');
+            btn.disabled = true;
+            btn.textContent = '⏳ Training...';
+            wrap.style.display = 'block';
+            let progress = 0;
+            const iv = setInterval(() => {
+                progress += Math.random() * 12 + 3;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(iv);
+                    setTimeout(() => {
+                        document.getElementById('tmTrainView').style.display = 'none';
+                        document.getElementById('tmTestView').style.display = 'block';
+                    }, 400);
+                }
+                bar.style.width = progress + '%';
+                pct.textContent = Math.round(progress) + '%';
+            }, 180);
+        }
+
+        const tmTestImages = [
+            { emoji: '🍎', name: 'تفاح — Apple', bars: [92, 5, 3], correct: true },
+            { emoji: '🍅', name: 'طماطم — Tomato', bars: [67, 28, 5], correct: false },
+            { emoji: '🧀', name: 'جبنة — Cheese', bars: [4, 8, 88], correct: true }
+        ];
+        let tmTestIdx = 0;
+
+        function renderTestBars(bars) {
+            const labels = ['Fruit', 'Vegetable', 'Dairy'];
+            const colors = ['var(--accent)', 'var(--success)', 'var(--s5)'];
+            const el = document.getElementById('tmBars');
+            el.innerHTML = bars.map((b, i) =>
+                '<div style="margin-bottom:8px">' +
+                '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:2px">' +
+                '<span>' + labels[i] + '</span><span>' + b + '%</span></div>' +
+                '<div style="height:10px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden">' +
+                '<div style="height:100%;width:0;background:' + colors[i] + ';border-radius:99px;transition:width .6s"></div>' +
+                '</div></div>'
+            ).join('');
+            setTimeout(() => {
+                el.querySelectorAll('[style*="width:0"]').forEach((bar, i) => { bar.style.width = bars[i] + '%'; });
+            }, 50);
+        }
+
+        function showTestImage() {
+            const t = tmTestImages[tmTestIdx];
+            document.getElementById('tmTestImg').textContent = t.emoji;
+            document.getElementById('tmTestName').textContent = t.name;
+            renderTestBars(t.bars);
+        }
+        showTestImage();
+
+        /* ===== AI PYTHON CODE RUNNER ===== */
+        const aiSteps = [
+            { line: [0, 1], console: '' },
+            { line: [3, 4], console: '<span style="color:#546e7a">Loading model...</span>' },
+            { line: [6, 7], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>' },
+            { line: [9, 10], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>\n<span style="color:#546e7a">Running prediction...</span>' },
+            { line: [12, 13], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>\n<span style="color:#546e7a">Running prediction...</span>\n<span style="color:var(--accent)">Class: Fruit</span>\n<span style="color:var(--accent)">Confidence: 0.92</span>' }
+        ];
+        let aiStepIdx = -1;
+        function runAI() {
+            aiStepIdx++;
+            if (aiStepIdx >= aiSteps.length) {
+                aiStepIdx = aiSteps.length - 1;
+                return;
+            }
+            const s = aiSteps[aiStepIdx];
+            hlCode('aiCode', s.line, 'aiLineHint');
+            document.getElementById('aiConsole').innerHTML = s.console.replace(/\n/g, '<br>');
+        }
+        function resetAI() {
+            aiStepIdx = -1;
+            clearHL('aiCode');
+            document.getElementById('aiLineHint').textContent = '▶ line —';
+            document.getElementById('aiConsole').innerHTML = '<span style="color:#546e7a"># اضغط "شغّل" عشان تشوف النتيجة</span>';
+        }
 
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
