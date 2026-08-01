@@ -412,7 +412,7 @@
 
         .activity-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 24px;
             margin-top: 8px
         }
@@ -427,21 +427,6 @@
             border: 1px solid rgba(255, 255, 255, .06)
         }
 
-        .activity-grid .code-panel {
-            background: #0d1a1f;
-            border-radius: 16px;
-            padding: 16px 18px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, .06);
-            display: flex;
-            flex-direction: column;
-            max-height: 460px;
-            height: 100%;
-            direction: ltr;
-            text-align: left;
-            unicode-bidi: isolate;
-        }
-
         @media(max-width:860px) {
             .activity-grid {
                 grid-template-columns: 1fr;
@@ -451,90 +436,6 @@
             .activity-grid .demo-panel {
                 order: 1
             }
-
-            .activity-grid .code-panel {
-                order: 2;
-                max-height: 320px
-            }
-        }
-
-        .code-panel .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-family: monospace;
-            font-size: .7rem;
-            color: rgba(159, 230, 201, .5);
-            letter-spacing: .04em;
-            flex-wrap: wrap;
-            gap: 6px;
-            flex-shrink: 0
-        }
-
-        .code-panel .code-header .filename {
-            color: rgba(159, 230, 201, .7)
-        }
-
-        .code-panel .code-header .line-hint {
-            color: var(--warn);
-            font-weight: 600
-        }
-
-        .code-panel .code-body {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: .8rem;
-            line-height: 2;
-            color: #d4e6f0;
-            white-space: pre;
-            counter-reset: line;
-            padding-bottom: 12px;
-            scroll-behavior: smooth
-        }
-
-        .code-panel .code-body::-webkit-scrollbar {
-            width: 4px;
-            height: 4px
-        }
-
-        .code-panel .code-body::-webkit-scrollbar-thumb {
-            background: rgba(159, 230, 201, .2);
-            border-radius: 99px
-        }
-
-        .code-panel .code-body .cl {
-            display: block;
-            padding: 0 6px;
-            border-left: 3px solid transparent;
-            transition: background .25s, border-color .25s;
-            counter-increment: line;
-            position: relative;
-            border-radius: 2px;
-            min-width: max-content
-        }
-
-        .code-panel .code-body .cl::before {
-            content: counter(line);
-            display: inline-block;
-            width: 28px;
-            color: #4a5a66;
-            font-size: .65rem;
-            text-align: right;
-            margin-right: 16px;
-            user-select: none;
-            flex-shrink: 0
-        }
-
-        .code-panel .code-body .cl.hl {
-            background: rgba(255, 177, 0, .18);
-            border-left-color: var(--warn)
-        }
-
-        .code-panel .code-body .cl.hl::before {
-            color: var(--warn)
         }
 
         .kw {
@@ -1043,52 +944,6 @@
                                 <span class="status" id="cashierStep">جاهز</span>
                             </div>
                         </div>
-                        <div class="code-panel" dir="ltr">
-                            <div class="code-header">
-                                <span class="filename">📄 cashier.py</span>
-                                <span class="line-hint" id="cashierLineHint">▶ سطر —</span>
-                            </div>
-                            <div class="code-body" id="cashierCode">
-                                <span class="cl" data-line="0"><span class="cm"># قائمة المنتجات: (الاسم,
-                                        السعر)</span></span>
-                                <span class="cl" data-line="1">products = [</span>
-                                <span class="cl" data-line="2"> (<span class="str">"تفاح"</span>, <span
-                                        class="num">15</span>),</span>
-                                <span class="cl" data-line="3"> (<span class="str">"موز"</span>, <span
-                                        class="num">10</span>),</span>
-                                <span class="cl" data-line="4"> (<span class="str">"عنب"</span>, <span
-                                        class="num">20</span>),</span>
-                                <span class="cl" data-line="5"> (<span class="str">"حليب"</span>, <span
-                                        class="num">25</span>),</span>
-                                <span class="cl" data-line="6"> (<span class="str">"عيش"</span>, <span
-                                        class="num">5</span>)</span>
-                                <span class="cl" data-line="7">]</span>
-                                <span class="cl" data-line="8"></span>
-                                <span class="cl" data-line="9">cart = [] <span class="cm"># السلة فاضية</span></span>
-                                <span class="cl" data-line="10"></span>
-                                <span class="cl" data-line="11"><span class="cm"># المستخدم بيضيف منتجات
-                                        للسلة</span></span>
-                                <span class="cl" data-line="12"><span class="cm"># كل منتج ليه اسم وسعر
-                                        وكمية</span></span>
-                                <span class="cl" data-line="13"></span>
-                                <span class="cl" data-line="14"><span class="cm"># حساب المجموع الفرعي</span></span>
-                                <span class="cl" data-line="15">subtotal = <span class="num">0</span></span>
-                                <span class="cl" data-line="16"><span class="kw">for</span> item <span
-                                        class="kw">in</span> cart:</span>
-                                <span class="cl" data-line="17"> subtotal += item[<span class="str">"price"</span>] *
-                                    item[<span class="str">"qty"</span>]</span>
-                                <span class="cl" data-line="18"></span>
-                                <span class="cl" data-line="19"><span class="cm"># خصم 10% لو المجموع أكبر من
-                                        500</span></span>
-                                <span class="cl" data-line="20"><span class="kw">if</span> subtotal > <span
-                                        class="num">500</span>:</span>
-                                <span class="cl" data-line="21"> discount = subtotal * <span
-                                        class="num">0.1</span></span>
-                                <span class="cl" data-line="22"> final = subtotal - discount</span>
-                                <span class="cl" data-line="23"><span class="kw">else</span>:</span>
-                                <span class="cl" data-line="24"> final = subtotal</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="error-box">
@@ -1193,59 +1048,6 @@
                                 • طماطم اتصنفت فاكهة لأن شكلها قريب — ده بيحصل فعلاً في الـ <span
                                     dir="ltr">AI</span>!<br>
                                 • التصحيح الصريح للخطأ أهم من إخفائه — العلم الصادق بيقول "غلط" مش بيغير النتيجة
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="diagram-container" style="margin-top:20px">
-                    <div class="diagram-title">الكود — استخدام النموذج المدرب في بايثون</div>
-                    <div class="activity-grid">
-                        <div class="demo-panel">
-                            <div style="font-weight:700;font-size:.85rem;color:var(--dim);margin-bottom:8px">🖥️ مخرجات
-                                الكونسول</div>
-                            <div id="aiConsole"
-                                style="background:#0d1a1f;border-radius:10px;padding:12px;font-family:monospace;font-size:12px;color:#d4e6f0;min-height:80px;line-height:1.8;direction:ltr;text-align:left">
-                                <span style="color:#546e7a"># اضغط "شغّل" عشان تشوف النتيجة</span>
-                            </div>
-                            <div class="activity-controls">
-                                <button class="replay-btn" id="aiAutoBtn"
-                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="autoRunAI()">⚡
-                                    Auto-run</button>
-                                <button class="replay-btn" id="aiNextBtn"
-                                    style="background:var(--s1);color:var(--bg);font-size:13px" onclick="runAI()">▶ Next
-                                    Step</button>
-                                <button class="replay-btn" style="font-size:13px" onclick="resetAI()">↺ Reset</button>
-                            </div>
-                        </div>
-                        <div class="code-panel" dir="ltr">
-                            <div class="code-header">
-                                <span class="filename">📄 classify.py</span>
-                                <span class="line-hint" id="aiLineHint">▶ line —</span>
-                            </div>
-                            <div class="code-body" id="aiCode">
-                                <span class="cl" data-line="0"><span class="kw">from</span> teachable_machine <span
-                                        class="kw">import</span> load_model</span>
-                                <span class="cl" data-line="1"><span class="kw">from</span> PIL <span
-                                        class="kw">import</span> Image</span>
-                                <span class="cl" data-line="2"></span>
-                                <span class="cl" data-line="3"><span class="cm"># Load the exported model</span></span>
-                                <span class="cl" data-line="4">model = <span class="fn">load_model</span>(<span
-                                        class="str">"model.keras"</span>)</span>
-                                <span class="cl" data-line="5"></span>
-                                <span class="cl" data-line="6"><span class="cm"># Load a test image</span></span>
-                                <span class="cl" data-line="7">img = Image.<span class="fn">open</span>(<span
-                                        class="str">"test_apple.jpg"</span>)</span>
-                                <span class="cl" data-line="8"></span>
-                                <span class="cl" data-line="9"><span class="cm"># Get prediction</span></span>
-                                <span class="cl" data-line="10">prediction = model.<span
-                                        class="fn">predict</span>(img)</span>
-                                <span class="cl" data-line="11"></span>
-                                <span class="cl" data-line="12"><span class="fn">print</span>(<span class="str">f"Class:
-                                    </span>{prediction[<span class="str">'class'</span>]}<span
-                                        class="str">"</span>)</span>
-                                <span class="cl" data-line="13"><span class="fn">print</span>(<span
-                                        class="str">f"Confidence: </span>{prediction[<span
-                                        class="str">'confidence'</span>]}<span class="str">"</span>)</span>
                             </div>
                         </div>
                     </div>
@@ -1487,50 +1289,20 @@
                         </tr>
                         <tr>
                             <td>Free Wi-Fi</td>
-                            <td>Unauthorized people connect to the network</td>
-                            <td>Use a strong password</td>
+                            <td> </td>
+                            <td> </td>
                         </tr>
                         <tr>
                             <td>Cashier Device</td>
-                            <td>Virus or Malware infects the device</td>
-                            <td>Install antivirus software and keep it updated</td>
+                            <td> </td>
+                            <td> </td>
                         </tr>
                         <tr>
                             <td>Mall Website</td>
-                            <td>Someone tries to hack it or change its content</td>
-                            <td>Use HTTPS and a strong administrator password</td>
+                            <td> </td>
+                            <td> </td>
                         </tr>
                     </table>
-                </div>
-                <div style="margin-top:20px">
-                    <div class="diagram-title">نصايح للموظفين</div>
-                    <div style="display:grid;gap:10px;margin-top:10px">
-                        <div
-                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);border-radius:10px">
-                            <span style="font-size:20px">🚫</span>
-                            <span style="font-size:14px">متفتحش أي لينك من إيميل مجهول</span>
-                        </div>
-                        <div
-                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.15);border-radius:10px">
-                            <span style="font-size:20px">🔑</span>
-                            <span style="font-size:14px">استخدم كلمة مرور قوية</span>
-                        </div>
-                        <div
-                            style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(25,60,255,.06);border:1px solid rgba(25,60,255,.15);border-radius:10px">
-                            <span style="font-size:20px">🔒</span>
-                            <span style="font-size:14px">اقفل الكمبيوتر قبل ما تسيب مكانك</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                style="margin-top:20px;padding:20px;background:rgba(255,255,255,.03);border:2px solid var(--s3);border-radius:16px;text-align:center">
-                <div style="font-size:18px;font-weight:700;color:var(--s3);margin-bottom:8px">⚠️ Cybersecurity Tips
-                </div>
-                <div style="display:flex;flex-direction:column;gap:6px;max-width:400px;margin:0 auto;text-align:right">
-                    <div style="font-size:13px;color:var(--dim)">• متفتحش أي لينك من إيميل مجهول</div>
-                    <div style="font-size:13px;color:var(--dim)">• استخدم كلمة مرور قوية</div>
-                    <div style="font-size:13px;color:var(--dim)">• اقفل الكمبيوتر قبل ما تسيب مكانك</div>
                 </div>
             </div>
         </div>
@@ -1643,74 +1415,6 @@
                             <div class="io-box" id="ioOutput">📤 Outputs<br><small>4 LEDs</small></div>
                         </div>
                     </div>
-                    <div class="code-panel" dir="ltr">
-                        <div class="code-header">
-                            <span class="filename">📄 parking.py</span>
-                            <span class="line-hint" id="parkLineHint">▶ سطر —</span>
-                        </div>
-                        <div class="code-body" id="parkCode">
-                            <span class="cl" data-line="0"><span class="kw">from</span> machine <span
-                                    class="kw">import</span> Pin</span>
-                            <span class="cl" data-line="1"><span class="kw">import</span> time</span>
-                            <span class="cl" data-line="2"></span>
-                            <span class="cl" data-line="3"><span class="cm"># إعداد الأزرار (Input)</span></span>
-                            <span class="cl" data-line="4">entry_btn = Pin(<span class="num">4</span>, Pin.IN)</span>
-                            <span class="cl" data-line="5">exit_btn = Pin(<span class="num">5</span>, Pin.IN)</span>
-                            <span class="cl" data-line="6"></span>
-                            <span class="cl" data-line="7"><span class="cm"># إعداد الـ LEDs (Output)</span></span>
-                            <span class="cl" data-line="8">green = Pin(<span class="num">12</span>, Pin.OUT)</span>
-                            <span class="cl" data-line="9">red = Pin(<span class="num">13</span>, Pin.OUT)</span>
-                            <span class="cl" data-line="10">yellow = Pin(<span class="num">14</span>, Pin.OUT)</span>
-                            <span class="cl" data-line="11">blue = Pin(<span class="num">15</span>, Pin.OUT)</span>
-                            <span class="cl" data-line="12"></span>
-                            <span class="cl" data-line="13">car_count = <span class="num">0</span></span>
-                            <span class="cl" data-line="14">MAX = <span class="num">15</span></span>
-                            <span class="cl" data-line="15"></span>
-                            <span class="cl" data-line="16"><span class="kw">def</span> <span
-                                    class="fn">update_leds</span>():</span>
-                            <span class="cl" data-line="17"> <span class="cm"># أخضر: ON لو أقل من 15</span></span>
-                            <span class="cl" data-line="18"> green.<span class="fn">value</span>(<span
-                                    class="num">1</span> <span class="kw">if</span> car_count < <span class="num">
-                                    15</span> <span class="kw">else</span> <span class="num">0</span>)</span>
-                            <span class="cl" data-line="19"> <span class="cm"># أحمر: ON لو 15 (الموقف
-                                    مليان)</span></span>
-                            <span class="cl" data-line="20"> red.<span class="fn">value</span>(<span
-                                    class="num">1</span> <span class="kw">if</span> car_count == <span
-                                    class="num">15</span> <span class="kw">else</span> <span
-                                    class="num">0</span>)</span>
-                            <span class="cl" data-line="21"></span>
-                            <span class="cl" data-line="22"><span class="kw">while</span> <span
-                                    class="fn">True</span>:</span>
-                            <span class="cl" data-line="23"> <span class="cm"># فحص زرار الدخول</span></span>
-                            <span class="cl" data-line="24"> <span class="kw">if</span> entry_btn.<span
-                                    class="fn">value</span>() == <span class="num">1</span>:</span>
-                            <span class="cl" data-line="25"> <span class="kw">if</span> car_count < <span class="num">
-                                    15</span>:</span>
-                            <span class="cl" data-line="26"> car_count += <span class="num">1</span></span>
-                            <span class="cl" data-line="27"> yellow.<span class="fn">value</span>(<span
-                                    class="num">1</span>) <span class="cm"># وميض أصفر</span></span>
-                            <span class="cl" data-line="28"> time.<span class="fn">sleep</span>(<span
-                                    class="num">0.5</span>)</span>
-                            <span class="cl" data-line="29"> yellow.<span class="fn">value</span>(<span
-                                    class="num">0</span>)</span>
-                            <span class="cl" data-line="30"> <span class="fn">update_leds</span>()</span>
-                            <span class="cl" data-line="31"> <span class="cm"># فحص زرار الخروج</span></span>
-                            <span class="cl" data-line="32"> <span class="kw">if</span> exit_btn.<span
-                                    class="fn">value</span>() == <span class="num">1</span>:</span>
-                            <span class="cl" data-line="33"> <span class="kw">if</span> car_count > <span
-                                    class="num">0</span>:</span>
-                            <span class="cl" data-line="34"> car_count -= <span class="num">1</span></span>
-                            <span class="cl" data-line="35"> blue.<span class="fn">value</span>(<span
-                                    class="num">1</span>) <span class="cm"># وميض أزرق</span></span>
-                            <span class="cl" data-line="36"> time.<span class="fn">sleep</span>(<span
-                                    class="num">0.5</span>)</span>
-                            <span class="cl" data-line="37"> blue.<span class="fn">value</span>(<span
-                                    class="num">0</span>)</span>
-                            <span class="cl" data-line="38"> <span class="fn">update_leds</span>()</span>
-                            <span class="cl" data-line="39"> time.<span class="fn">sleep</span>(<span
-                                    class="num">0.1</span>)</span>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="error-box" style="margin-top:20px">
@@ -1721,12 +1425,6 @@
                             • نسيان شرط الحد الأدنى <span dir="ltr">if car_count > 0</span> — العد هيبقى سالب
                 </div>
             </div>
-            <div style="text-align:center;margin-top:20px">
-                <a href="https://wokwi.com/projects/470458260598942721" class="replay-btn" target="_blank"
-                    style="background:var(--s5);color:var(--bg);text-decoration:none;display:inline-flex">🔌 جرّب على
-                    Wokwi </a>
-            </div>
-        </div>
     </section>
 
     <section class="section" id="closing">
@@ -1795,10 +1493,6 @@
 
         /* ===== S1 TABS ===== */
         function switchS1Tab(idx) { document.querySelectorAll('#s1Tabs .tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx)); document.querySelectorAll('#s1 > .section-inner > .tab-panel').forEach((p, i) => p.classList.toggle('active', i === idx)) }
-
-        /* ===== CODE HIGHLIGHTING ===== */
-        function hlCode(id, lines, hintId) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')); if (!lines || !lines.length) return; lines.forEach(ln => { const el = document.querySelector('#' + id + ' .cl[data-line="' + ln + '"]'); if (el) { el.classList.add('hl'); el.scrollIntoView({ block: 'center', behavior: 'smooth' }) } }); const h = document.getElementById(hintId); if (h) { const f = lines[0], l = lines[lines.length - 1]; h.textContent = '▶ سطر ' + (f + 1) + (f !== l ? '–' + (l + 1) : '') } }
-        function clearHL(id) { document.querySelectorAll('#' + id + ' .cl').forEach(e => e.classList.remove('hl')) }
 
         /* ===== VISITOR CHART ===== */
         const visitorData = [
@@ -1909,7 +1603,6 @@
                 const p = cashierProducts.find(x => x.id === id);
                 cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, qty: 1 });
             }
-            highlightCode([11, 12]);
             updateCart();
         }
 
@@ -1940,8 +1633,6 @@
                 cartItemsEl.innerHTML = '';
                 cartTotalsEl.style.display = 'none';
                 document.getElementById('cashierStep').textContent = 'السلة فاضية';
-                clearHL('cashierCode');
-                document.getElementById('cashierLineHint').textContent = '▶ سطر —';
                 return;
             }
 
@@ -1977,18 +1668,13 @@
                 cartDiscountRow.style.display = 'flex';
                 document.getElementById('cartDiscount').textContent = discount + ' EGP';
                 document.getElementById('cartFinal').textContent = finalTotal + ' EGP';
-                highlightCode([15, 16, 17, 20, 21, 22]);
                 document.getElementById('cashierStep').textContent = 'خصم 10% — المجموع: ' + finalTotal + ' EGP';
             } else {
                 cartDiscountRow.style.display = 'none';
                 document.getElementById('cartFinal').textContent = subtotal + ' EGP';
-                highlightCode([15, 16, 17, 23, 24]);
                 document.getElementById('cashierStep').textContent = 'المجموع: ' + subtotal + ' EGP';
             }
         }
-
-        /* Code highlighting for cashier (delegates to hlCode) */
-        function highlightCode(lines) { hlCode('cashierCode', lines, 'cashierLineHint') }
 
         /* Reset cart */
         function resetCashier() {
@@ -2003,11 +1689,11 @@
         function artStep(dir) { const next = artIdx + dir; if (next < 0 || next >= artTotal) return; document.getElementById('artStep' + artIdx).classList.remove('active'); artIdx = next; document.getElementById('artStep' + artIdx).classList.add('active'); document.getElementById('artCounter').textContent = (artIdx + 1) + ' / ' + artTotal }
 
         /* ===== PARKING SIMULATION ===== */
-        let carCount = 0; const MAX = 15; let parkingInit = true;
-        function updateParkingLeds() { document.getElementById('ledGreen').className = 'bulb' + (carCount < 15 ? ' on-green' : ''); document.getElementById('ledRed').className = 'bulb' + (carCount >= 15 ? ' on-red' : ''); document.getElementById('carCount').textContent = carCount; if (!parkingInit) hlCode('parkCode', carCount > 0 ? [16, 17, 18, 19, 20] : [16, 18, 19, 20], 'parkLineHint'); parkingInit = false; }
+        let carCount = 0; const MAX = 15;
+        function updateParkingLeds() { document.getElementById('ledGreen').className = 'bulb' + (carCount < 15 ? ' on-green' : ''); document.getElementById('ledRed').className = 'bulb' + (carCount >= 15 ? ' on-red' : ''); document.getElementById('carCount').textContent = carCount; }
         function blinkLed(id, color, cb) { const el = document.getElementById(id); el.className = 'bulb on-' + color; setTimeout(() => { el.className = 'bulb'; if (cb) cb() }, 500) }
-        function parkEntry() { if (carCount >= MAX) return; carCount++; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚗 عربية دخلت — العدد: ' + carCount; hlCode('parkCode', [23, 24, 25, 26, 27, 28, 29, 30], 'parkLineHint'); blinkLed('ledYellow', 'yellow', () => updateParkingLeds()); animateIO('input') }
-        function parkExit() { if (carCount <= 0) return; carCount--; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚙 عربية خرجت — العدد: ' + carCount; hlCode('parkCode', [31, 32, 33, 34, 35, 36, 37, 38], 'parkLineHint'); blinkLed('ledBlue', 'blue', () => updateParkingLeds()); animateIO('input') }
+        function parkEntry() { if (carCount >= MAX) return; carCount++; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚗 عربية دخلت — العدد: ' + carCount; blinkLed('ledYellow', 'yellow', () => updateParkingLeds()); animateIO('input') }
+        function parkExit() { if (carCount <= 0) return; carCount--; updateParkingLeds(); document.getElementById('parkStatus').textContent = '🚙 عربية خرجت — العدد: ' + carCount; blinkLed('ledBlue', 'blue', () => updateParkingLeds()); animateIO('input') }
         function animateIO(phase) { const input = document.getElementById('ioInput'); const process = document.getElementById('ioProcess'); const output = document.getElementById('ioOutput'); input.classList.add('active'); setTimeout(() => { input.classList.remove('active'); process.classList.add('active'); setTimeout(() => { process.classList.remove('active'); output.classList.add('active'); setTimeout(() => output.classList.remove('active'), 400) }, 300) }, 300) }
         updateParkingLeds();
 
@@ -2083,47 +1769,6 @@
             renderTestBars(t.bars);
         }
         showTestImage();
-
-        /* ===== AI PYTHON CODE RUNNER ===== */
-        const aiSteps = [
-            { line: [0, 1], console: '' },
-            { line: [3, 4], console: '<span style="color:#546e7a">Loading model...</span>' },
-            { line: [6, 7], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>' },
-            { line: [9, 10], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>\n<span style="color:#546e7a">Running prediction...</span>' },
-            { line: [12, 13], console: '<span style="color:#546e7a">Loading model...</span>\n<span style="color:#546e7a">Loading test image: test_apple.jpg</span>\n<span style="color:#546e7a">Running prediction...</span>\n<span style="color:var(--accent)">Class: Fruit</span>\n<span style="color:var(--accent)">Confidence: 0.92</span>' }
-        ];
-        let aiStepIdx = -1;
-        let aiAutoTimer = null;
-        function runAI() {
-            if (aiAutoTimer) { clearInterval(aiAutoTimer); aiAutoTimer = null; }
-            aiStepIdx++;
-            if (aiStepIdx >= aiSteps.length) {
-                aiStepIdx = aiSteps.length - 1;
-                return;
-            }
-            const s = aiSteps[aiStepIdx];
-            hlCode('aiCode', s.line, 'aiLineHint');
-            document.getElementById('aiConsole').innerHTML = s.console.replace(/\n/g, '<br>');
-        }
-        function autoRunAI() {
-            resetAI();
-            let step = 0;
-            aiAutoTimer = setInterval(() => {
-                if (step >= aiSteps.length) { clearInterval(aiAutoTimer); aiAutoTimer = null; return; }
-                const s = aiSteps[step];
-                hlCode('aiCode', s.line, 'aiLineHint');
-                document.getElementById('aiConsole').innerHTML = s.console.replace(/\n/g, '<br>');
-                aiStepIdx = step;
-                step++;
-            }, 1200);
-        }
-        function resetAI() {
-            if (aiAutoTimer) { clearInterval(aiAutoTimer); aiAutoTimer = null; }
-            aiStepIdx = -1;
-            clearHL('aiCode');
-            document.getElementById('aiLineHint').textContent = '▶ line —';
-            document.getElementById('aiConsole').innerHTML = '<span style="color:#546e7a"># اضغط عشان تبدأ</span>';
-        }
 
         document.addEventListener('keydown', e => { const sections = document.querySelectorAll('.section'); let currentIdx = 0; sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i }); if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' }) } if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' }) } });
     </script>
