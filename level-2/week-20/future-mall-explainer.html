@@ -941,7 +941,21 @@
                             <div class="activity-controls">
                                 <button class="replay-btn" id="cashierResetBtn" style="font-size:13px">↺ إعادة
                                     السلة</button>
+                                <button class="replay-btn" id="cashierReceiptBtn"
+                                    style="background:var(--s1);color:var(--bg);font-size:13px">🧾 Print Receipt</button>
                                 <span class="status" id="cashierStep">جاهز</span>
+                            </div>
+                            <div id="receiptWrap" style="display:none;margin-top:12px;background:#0d1a1f;border:2px dashed rgba(255,255,255,.15);border-radius:12px;padding:20px;font-family:'Courier New',monospace;color:#d4e6f0;direction:ltr;text-align:center">
+                                <div style="font-size:16px;font-weight:700;letter-spacing:2px;margin-bottom:6px;color:var(--accent)">Future Mall</div>
+                                <div style="border-top:1px dashed rgba(255,255,255,.2);margin:8px 0"></div>
+                                <div id="receiptItems" style="text-align:left;font-size:13px;line-height:2"></div>
+                                <div style="border-top:1px dashed rgba(255,255,255,.2);margin:8px 0"></div>
+                                <div id="receiptOriginal" style="text-align:left;font-size:13px;line-height:2"></div>
+                                <div id="receiptDiscount" style="text-align:left;font-size:13px;line-height:2;color:var(--success)"></div>
+                                <div style="border-top:1px dashed rgba(255,255,255,.2);margin:8px 0"></div>
+                                <div id="receiptFinal" style="text-align:left;font-size:15px;font-weight:700;line-height:2;color:var(--accent)"></div>
+                                <div style="border-top:1px dashed rgba(255,255,255,.2);margin:8px 0"></div>
+                                <div style="font-size:14px;color:var(--dim);margin-top:4px">Thank you!</div>
                             </div>
                         </div>
                     </div>
@@ -1681,8 +1695,31 @@
             cart = [];
             updateCart();
             document.getElementById('cashierStep').textContent = 'جاهز';
+            document.getElementById('receiptWrap').style.display = 'none';
         }
         document.getElementById('cashierResetBtn').addEventListener('click', resetCashier);
+
+        /* Print Receipt */
+        function printReceipt() {
+            if (cart.length === 0) return;
+            let subtotal = 0;
+            cart.forEach(item => { subtotal += item.price * item.qty; });
+            const hasDiscount = subtotal > 500;
+            const discount = hasDiscount ? Math.round(subtotal * 0.1) : 0;
+            const finalTotal = subtotal - discount;
+
+            const itemsHtml = cart.map(item =>
+                item.name + ' ' + item.price + ' × ' + item.qty
+            ).join('<br>');
+
+            document.getElementById('receiptItems').innerHTML = itemsHtml;
+            document.getElementById('receiptOriginal').innerHTML = 'Original Total: ' + subtotal;
+            document.getElementById('receiptDiscount').innerHTML = hasDiscount ? 'Discount: -' + discount : '';
+            document.getElementById('receiptDiscount').style.display = hasDiscount ? 'block' : 'none';
+            document.getElementById('receiptFinal').innerHTML = 'Final Total: ' + finalTotal;
+            document.getElementById('receiptWrap').style.display = 'block';
+        }
+        document.getElementById('cashierReceiptBtn').addEventListener('click', printReceipt);
 
         /* ===== ART STEPS ===== */
         let artIdx = 0; const artTotal = 4;
