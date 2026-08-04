@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,10 +57,12 @@
         }
 
         @keyframes bgShift {
+
             0%,
             100% {
                 transform: translate(0, 0)
             }
+
             50% {
                 transform: translate(-40px, -30px)
             }
@@ -216,6 +219,7 @@
                 opacity: 1;
                 transform: translateY(0)
             }
+
             from {
                 opacity: 0;
                 transform: translateY(40px)
@@ -265,10 +269,12 @@
         }
 
         @keyframes floatCircle {
+
             0%,
             100% {
                 transform: translateY(0)
             }
+
             50% {
                 transform: translateY(-30px)
             }
@@ -324,10 +330,12 @@
         }
 
         @keyframes badgeGlow {
+
             0%,
             100% {
                 box-shadow: 0 0 20px rgba(25, 60, 255, .3)
             }
+
             50% {
                 box-shadow: 0 0 40px rgba(25, 60, 255, .6)
             }
@@ -720,10 +728,12 @@
         }
 
         @keyframes dangerFlash {
+
             0%,
             100% {
                 box-shadow: 0 0 0 rgba(255, 71, 87, 0)
             }
+
             50% {
                 box-shadow: 0 0 25px rgba(255, 71, 87, .6)
             }
@@ -870,7 +880,7 @@
         .house-svg .entry.closed .entrance-box {
             fill: rgba(255, 71, 87, .15);
             stroke: var(--danger);
-            transform: rotate(0deg) translateY(0)!important
+            transform: rotate(0deg) translateY(0) !important
         }
 
         .house-svg .entry .lock-icon {
@@ -1257,25 +1267,30 @@
             .nav-links {
                 display: none
             }
+
             .stool-seat {
                 width: 80%
             }
+
             .journey-step {
                 min-width: 260px
             }
+
             .house {
                 transform: scale(.85)
             }
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-anim"></div>
     <div class="particles" id="particles"></div>
 
     <nav class="nav" id="mainNav">
-        <img src="data:image/webp;base64,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" class="logo-nav" alt="Bilal">
+        <img src="data:image/webp;base64,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"
+            class="logo-nav" alt="Bilal">
         <div class="nav-links">
             <a href="#hero">المقدمة</a>
             <a href="#s1">العالم الرقمي</a>
@@ -1293,11 +1308,17 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" id="hero">
-        <div class="hero-circles"><div></div><div></div><div></div></div>
+        <div class="hero-circles">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div class="hero-badge">Cybersecurity Foundations</div>
         <h1>اساسيات <span class="grad" dir="ltr">Cybersecurity</span></h1>
-        <p>احنا عايشين في عالم رقمي... كل حاجة حوالينا بقت إلكترونية. خد بالك من أصولك الرقمية، افهم إزاي تحمي نفسك، واختار مسارك المهني في عالم الحماية.</p>
-        <button class="start-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">ابدأ الدرس</button>
+        <p>احنا عايشين في عالم رقمي... كل حاجة حوالينا بقت إلكترونية. خد بالك من أصولك الرقمية، افهم إزاي تحمي نفسك،
+            واختار مسارك المهني في عالم الحماية.</p>
+        <button class="start-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">ابدأ
+            الدرس</button>
     </section>
 
     <!-- ================= SECTION 1 ================= -->
@@ -1314,26 +1335,41 @@
                 <div class="grid-4" id="transformGrid">
                     <div class="flip-card" data-id="tf-school">
                         <div class="flip-inner">
-                            <div class="flip-face flip-front">🏫<br><strong>المدرسة</strong><br><span style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
-                            <div class="flip-face flip-back"><span dir="ltr">سبورة طباشير</span> 👉 <span dir="ltr">Google Classroom</span><br><span style="font-size:12px;color:var(--dim)">من الورق والقلم للتابلت والواجبات أونلاين</span></div>
+                            <div class="flip-face flip-front">🏫<br><strong>المدرسة</strong><br><span
+                                    style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
+                            <div class="flip-face flip-back"><span dir="ltr">سبورة طباشير</span> 👉 <span
+                                    dir="ltr">Google Classroom</span><br><span
+                                    style="font-size:12px;color:var(--dim)">من الورق والقلم للتابلت والواجبات
+                                    أونلاين</span></div>
                         </div>
                     </div>
                     <div class="flip-card" data-id="tf-bank">
                         <div class="flip-inner">
-                            <div class="flip-face flip-front">🏦<br><strong>البنوك</strong><br><span style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
-                            <div class="flip-face flip-back"><span dir="ltr">الشباك والكشف</span> 👉 <span dir="ltr">تطبيق الموبايل</span><br><span style="font-size:12px;color:var(--dim)">تحويلات فورية من الموبايل من غير ما تروح البنك</span></div>
+                            <div class="flip-face flip-front">🏦<br><strong>البنوك</strong><br><span
+                                    style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
+                            <div class="flip-face flip-back"><span dir="ltr">الشباك والكشف</span> 👉 <span
+                                    dir="ltr">تطبيق الموبايل</span><br><span
+                                    style="font-size:12px;color:var(--dim)">تحويلات فورية من الموبايل من غير ما تروح
+                                    البنك</span></div>
                         </div>
                     </div>
                     <div class="flip-card" data-id="tf-shopping">
                         <div class="flip-inner">
-                            <div class="flip-face flip-front">🛒<br><strong>التسوق</strong><br><span style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
-                            <div class="flip-face flip-back"><span dir="ltr">المحل</span> 👉 <span dir="ltr">Amazon</span><br><span style="font-size:12px;color:var(--dim)">طلبات أونلاين بتوصل لحد باب البيت</span></div>
+                            <div class="flip-face flip-front">🛒<br><strong>التسوق</strong><br><span
+                                    style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
+                            <div class="flip-face flip-back"><span dir="ltr">المحل</span> 👉 <span
+                                    dir="ltr">Amazon</span><br><span style="font-size:12px;color:var(--dim)">طلبات
+                                    أونلاين بتوصل لحد باب البيت</span></div>
                         </div>
                     </div>
                     <div class="flip-card" data-id="tf-health">
                         <div class="flip-inner">
-                            <div class="flip-face flip-front">🏥<br><strong>الرعاية الصحية</strong><br><span style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
-                            <div class="flip-face flip-back"><span dir="ltr">الملفات الورقية</span> 👉 <span dir="ltr">السجلات الرقمية</span><br><span style="font-size:12px;color:var(--dim)">الدكتور يشوف تاريخك كله على الشاشة</span></div>
+                            <div class="flip-face flip-front">🏥<br><strong>الرعاية الصحية</strong><br><span
+                                    style="font-size:12px;color:var(--dim)">اضغط للمقارنة</span></div>
+                            <div class="flip-face flip-back"><span dir="ltr">الملفات الورقية</span> 👉 <span
+                                    dir="ltr">السجلات الرقمية</span><br><span
+                                    style="font-size:12px;color:var(--dim)">الدكتور يشوف تاريخك كله على الشاشة</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1348,7 +1384,8 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">الأصول الرقمية — صُنّف كل أصل: شخصي، مؤسسي، ولا ألعاب؟</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">الأصل الرقمي هو أي حاجة ليها قيمة وموجودة رقميًا. اضغط على العنصر وبعدين على الفئة الصح.</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">الأصل الرقمي هو أي حاجة ليها قيمة وموجودة
+                    رقميًا. اضغط على العنصر وبعدين على الفئة الصح.</p>
                 <div class="sort-items" id="sortItems">
                     <div class="sort-item" data-id="asset-photos">📷 صورك الشخصية</div>
                     <div class="sort-item" data-id="asset-smedia">📱 حسابك على السوشيال</div>
@@ -1357,9 +1394,18 @@
                     <div class="sort-item" data-id="asset-docs">📄 ملفات الشركة</div>
                 </div>
                 <div class="sort-zones" id="sortZones">
-                    <div class="sort-zone" data-zone="personal">👤<div>شخصي</div><div class="zone-tag">Personal</div><div class="zone-feedback"></div></div>
-                    <div class="sort-zone" data-zone="business">🏢<div>مؤسسي</div><div class="zone-tag">Business</div><div class="zone-feedback"></div></div>
-                    <div class="sort-zone" data-zone="gaming">🎮<div>ألعاب</div><div class="zone-tag">Gaming</div><div class="zone-feedback"></div></div>
+                    <div class="sort-zone" data-zone="personal">👤<div>شخصي</div>
+                        <div class="zone-tag">Personal</div>
+                        <div class="zone-feedback"></div>
+                    </div>
+                    <div class="sort-zone" data-zone="business">🏢<div>مؤسسي</div>
+                        <div class="zone-tag">Business</div>
+                        <div class="zone-feedback"></div>
+                    </div>
+                    <div class="sort-zone" data-zone="gaming">🎮<div>ألعاب</div>
+                        <div class="zone-tag">Gaming</div>
+                        <div class="zone-feedback"></div>
+                    </div>
                 </div>
                 <div class="activity-controls">
                     <button class="replay-btn" data-id="sort-reset">↺ إعادة</button>
@@ -1369,7 +1415,8 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">البيانات الشخصية ولا المؤسسية؟ — كويز سريع</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"سجل حضور الطلاب في المدرسة" — ده مثال على إيه؟</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"سجل حضور الطلاب في المدرسة" — ده مثال على
+                    إيه؟</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q1-a" style="border-color:var(--s1)">بيانات شخصية</button>
                     <button class="replay-btn" data-id="q1-b" style="border-color:var(--s1)">بيانات مؤسسية</button>
@@ -1400,50 +1447,56 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">مثال واقعي</div>
-                <p style="color:var(--dim)">حد بيحاول يسرق حساب ألعابك؟ الـ <span dir="ltr">Cybersecurity</span> بتحميك بكلمة سر قوية، و<span dir="ltr">Two-Factor Authentication</span>، ومراقبة محاولات الدخول الغريبة.</p>
+                <p style="color:var(--dim)">حد بيحاول يسرق حساب ألعابك؟ الـ <span dir="ltr">Cybersecurity</span> بتحميك
+                    بكلمة سر قوية، و<span dir="ltr">Two-Factor Authentication</span>، ومراقبة محاولات الدخول الغريبة.
+                </p>
             </div>
 
-<div class="diagram-container reveal">
-                 <div class="diagram-title">كرسي الأمان — الأرجل الثلاثة</div>
-                 <p style="color:var(--dim);font-size:14px;margin-bottom:10px">اضغط على أي رجل عشان تتعلم إيه بيحصل لو انقطع.</p>
-                 <div class="stool" id="stool">
-                     <div class="stool-seat">🛡️ الأمان</div>
-                     <div style="display:flex;gap:26px;margin-top:0">
-                         <div class="stool-leg active" data-id="leg-people">
-                             <span class="leg-icon">👥</span>
-                             <span class="leg-label">People</span>
-                         </div>
-                         <div class="stool-leg" data-id="leg-process">
-                             <span class="leg-icon">📋</span>
-                             <span class="leg-label">Process</span>
-                         </div>
-                         <div class="stool-leg" data-id="leg-tech">
-                             <span class="leg-icon">💻</span>
-                             <span class="leg-label">Technology</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="stool-impact" id="stoolImpact">
-                     <div class="impact-icon">👥</div>
-                     <div class="impact-title">People — الناس</div>
-                     <div class="impact-desc">أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم يعرفوا إيه الخطر وإزاي يتعاملوا معاه.</div>
-                 </div>
-                 <div class="activity-controls">
-                     <button class="replay-btn" data-id="stool-reset">↺ رجّع للافتراضي</button>
-                 </div>
-                 <div class="legend">
-                     <span><span class="swatch" style="background:var(--s2)"></span>People</span>
-                     <span><span class="swatch" style="background:var(--s2)"></span>Process</span>
-                     <span><span class="swatch" style="background:var(--s2)"></span>Technology</span>
-                 </div>
-             </div>
+            <div class="diagram-container reveal">
+                <div class="diagram-title">كرسي الأمان — الأرجل الثلاثة</div>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:10px">اضغط على أي رجل عشان تتعلم إيه بيحصل لو
+                    انقطع.</p>
+                <div class="stool" id="stool">
+                    <div class="stool-seat">🛡️ الأمان</div>
+                    <div style="display:flex;gap:26px;margin-top:0">
+                        <div class="stool-leg active" data-id="leg-people">
+                            <span class="leg-icon">👥</span>
+                            <span class="leg-label">People</span>
+                        </div>
+                        <div class="stool-leg" data-id="leg-process">
+                            <span class="leg-icon">📋</span>
+                            <span class="leg-label">Process</span>
+                        </div>
+                        <div class="stool-leg" data-id="leg-tech">
+                            <span class="leg-icon">💻</span>
+                            <span class="leg-label">Technology</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stool-impact" id="stoolImpact">
+                    <div class="impact-icon">👥</div>
+                    <div class="impact-title">People — الناس</div>
+                    <div class="impact-desc">أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو
+                        بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم
+                        يعرفوا إيه الخطر وإزاي يتعاملوا معاه.</div>
+                </div>
+                <div class="activity-controls">
+                    <button class="replay-btn" data-id="stool-reset">↺ رجّع للافتراضي</button>
+                </div>
+                <div class="legend">
+                    <span><span class="swatch" style="background:var(--s2)"></span>People</span>
+                    <span><span class="swatch" style="background:var(--s2)"></span>Process</span>
+                    <span><span class="swatch" style="background:var(--s2)"></span>Technology</span>
+                </div>
+            </div>
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">Cybersecurity ولا Information Security؟ — كويز سريع</div>
                 <p style="color:var(--dim);font-size:14px;margin-bottom:14px">أيهما الأشمل والأوسع؟</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q2-a" style="border-color:var(--s2)">Cybersecurity</button>
-                    <button class="replay-btn" data-id="q2-b" style="border-color:var(--s2)">Information Security</button>
+                    <button class="replay-btn" data-id="q2-b" style="border-color:var(--s2)">Information
+                        Security</button>
                     <span class="status" id="q2fb" style="min-height:24px"></span>
                 </div>
                 <button class="replay-btn" data-id="q2-skip" style="margin-top:10px;font-size:12px">تخطي</button>
@@ -1453,7 +1506,8 @@
                 <p>⚠️ أخطاء شائعة</p>
                 <div class="detail">
                     • التفكير إن الأمان = تكنولوجيا بس — الناس والعمليات أهم<br>
-                    • الخلط بين الـ Cybersecurity وInformation Security — الأول بيحمي الفضاء الرقمي كله، التاني بيهتم بالبيانات في كل صورها سواء رقمية او ملموسة<br>
+                    • الخلط بين الـ Cybersecurity وInformation Security — الأول بيحمي الفضاء الرقمي كله، التاني بيهتم
+                    بالبيانات في كل صورها سواء رقمية او ملموسة<br>
                     • إهمال الـ <span dir="ltr">2FA</span> بحجة إنه مضيعة وقت
                 </div>
             </div>
@@ -1481,7 +1535,8 @@
                             </div>
                             <div class="flip-face flip-back">
                                 <strong style="margin-bottom:6px">Ransomware</strong>
-                                <span style="font-size:12px;color:var(--dim)">أوقف خط أنابيب وقود رئيسي. الشركة دفعت 4.4 مليون دولار، ومحطات بنزين فضلت من غير وقود.</span>
+                                <span style="font-size:12px;color:var(--dim)">أوقف خط أنابيب وقود رئيسي. الشركة دفعت 4.4
+                                    مليون دولار، ومحطات بنزين فضلت من غير وقود.</span>
                             </div>
                         </div>
                     </div>
@@ -1494,7 +1549,8 @@
                             </div>
                             <div class="flip-face flip-back">
                                 <strong style="margin-bottom:6px">3 مليار حساب اتسرق</strong>
-                                <span style="font-size:12px;color:var(--dim)">أكبر اختراق في التاريخ — بيانات مستخدمين كلهم اتكشفت.</span>
+                                <span style="font-size:12px;color:var(--dim)">أكبر اختراق في التاريخ — بيانات مستخدمين
+                                    كلهم اتكشفت.</span>
                             </div>
                         </div>
                     </div>
@@ -1507,7 +1563,8 @@
                             </div>
                             <div class="flip-face flip-back">
                                 <strong style="margin-bottom:6px">أكتر من 200 دولة</strong>
-                                <span style="font-size:12px;color:var(--dim)">عطّل مستشفيات وأوقف عمليات جراحية. خسائر تجاوزت 10 مليار دولار.</span>
+                                <span style="font-size:12px;color:var(--dim)">عطّل مستشفيات وأوقف عمليات جراحية. خسائر
+                                    تجاوزت 10 مليار دولار.</span>
                             </div>
                         </div>
                     </div>
@@ -1523,7 +1580,8 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">نوع التأثير — كويز سريع</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">هجوم <span dir="ltr">WannaCry</span> عطّل مستشفيات وأوقف عمليات — ده تأثير من نوع:</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">هجوم <span dir="ltr">WannaCry</span> عطّل
+                    مستشفيات وأوقف عمليات — ده تأثير من نوع:</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q3-a" style="border-color:var(--s3)">مادي — Financial</button>
                     <button class="replay-btn" data-id="q3-b" style="border-color:var(--s3)">خصوصية — Privacy</button>
@@ -1576,7 +1634,8 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">كويز: إيه المبدأ؟</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">هاكر غيّر جرعة الدوا في نظام مستشفى من 50mg لـ 500mg — ده كسر لمبدأ:</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">هاكر غيّر جرعة الدوا في نظام مستشفى من
+                    50mg لـ 500mg — ده كسر لمبدأ:</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q4-a" style="border-color:var(--s4)">Confidentiality</button>
                     <button class="replay-btn" data-id="q4-b" style="border-color:var(--s4)">Integrity</button>
@@ -1613,7 +1672,8 @@
                         <div class="step-num">1</div>
                         <div>
                             <div class="step-title">Authentication — "أنت مين؟"</div>
-                            <div class="step-detail">النظام بيتأكد إنك <span dir="ltr">Sarah Johnson</span> بالباسورد + البصمة.</div>
+                            <div class="step-detail">النظام بيتأكد إنك <span dir="ltr">Sarah Johnson</span> بالباسورد +
+                                البصمة.</div>
                         </div>
                     </div>
                     <div class="bank-step" data-id="bk-2">
@@ -1639,7 +1699,8 @@
                     </div>
                 </div>
                 <div class="activity-controls">
-                    <button class="replay-btn" data-id="bank-next" style="background:var(--s5);color:var(--bg)">▶ الخطوة الجاية</button>
+                    <button class="replay-btn" data-id="bank-next" style="background:var(--s5);color:var(--bg)">▶ الخطوة
+                        الجاية</button>
                     <button class="replay-btn" data-id="bank-reset">↺ إعادة</button>
                     <span class="status" id="bankStepStatus">1 / 4</span>
                 </div>
@@ -1651,14 +1712,20 @@
                     <div class="pwd-box weak" data-id="pwd-weak">
                         <strong style="font-size:13px;color:var(--danger)">ضعيفة</strong>
                         <div class="pwd-text">password123</div>
-                        <div class="meter"><div class="fill" style="width:25%;background:var(--danger)"></div></div>
-                        <div style="font-size:12px;color:var(--dim);margin-top:6px">سهلة التخمين — الهكر بيفتحها في ثواني</div>
+                        <div class="meter">
+                            <div class="fill" style="width:25%;background:var(--danger)"></div>
+                        </div>
+                        <div style="font-size:12px;color:var(--dim);margin-top:6px">سهلة التخمين — الهكر بيفتحها في
+                            ثواني</div>
                     </div>
                     <div class="pwd-box strong" data-id="pwd-strong">
                         <strong style="font-size:13px;color:var(--success)">قوية</strong>
                         <div class="pwd-text">BlueMountain$Guitar42</div>
-                        <div class="meter"><div class="fill" style="width:95%;background:var(--success)"></div></div>
-                        <div style="font-size:12px;color:var(--dim);margin-top:6px">حروف كبيرة وصغيرة + أرقام + رموز</div>
+                        <div class="meter">
+                            <div class="fill" style="width:95%;background:var(--success)"></div>
+                        </div>
+                        <div style="font-size:12px;color:var(--dim);margin-top:6px">حروف كبيرة وصغيرة + أرقام + رموز
+                        </div>
                     </div>
                 </div>
                 <div class="legend">
@@ -1669,7 +1736,8 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">كويز: المفهوم الصحيح</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"النظام سجّل إن <span dir="ltr">Sarah</span> حوّلت 5,000 جنيه الساعة 3 مساءً" — ده مثال على:</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"النظام سجّل إن <span
+                        dir="ltr">Sarah</span> حوّلت 5,000 جنيه الساعة 3 مساءً" — ده مثال على:</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q5-a" style="border-color:var(--s5)">Authentication</button>
                     <button class="replay-btn" data-id="q5-b" style="border-color:var(--s5)">Authorization</button>
@@ -1702,62 +1770,85 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">البيت وسطح الهجوم — قفل المداخل وشوف السطح بيصغر</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:12px">البيت بأبواب وشبابيك كتير = سطح هجوم كبير. اضغط على أي مدخل عشان تقفله.</p>
-<div class="house-wrap">
-                     <svg class="house-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                         <!-- Roof -->
-                         <polygon points="200,12 28,108 372,108" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-                         <!-- Wall -->
-                         <rect x="28" y="108" width="344" height="152" rx="4" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-                         <!-- Left Window (open by default) -->
-                         <g class="entry" data-id="entry-win1" style="cursor:pointer">
-                             <rect x="52" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <rect class="entrance-box" x="54" y="130" width="48" height="44" rx="2" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5" style="transform-origin:104px 152px;transition:transform .4s ease,fill .3s,stroke .3s"/>
-                             <line x1="78" y1="130" x2="78" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-                             <line x1="54" y1="152" x2="102" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-                             <text class="lock-icon" x="78" y="146" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
-                             <text class="entrance-label" x="78" y="196">شباك</text>
-                         </g>
-                         <!-- Right Window (open by default) -->
-                         <g class="entry" data-id="entry-win2" style="cursor:pointer">
-                             <rect x="296" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <rect class="entrance-box" x="298" y="130" width="48" height="44" rx="2" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5" style="transform-origin:296px 152px;transition:transform .4s ease,fill .3s,stroke .3s"/>
-                             <line x1="322" y1="130" x2="322" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-                             <line x1="296" y1="152" x2="344" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-                             <text class="lock-icon" x="322" y="146" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
-                             <text class="entrance-label" x="322" y="196">شباك</text>
-                         </g>
-                         <!-- Door (open by default, slightly ajar) -->
-                         <g class="entry" data-id="entry-door" style="cursor:pointer">
-                             <rect x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <rect class="entrance-box" x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2" style="transform-origin:148px 228px;transition:transform .4s ease,fill .3s,stroke .3s"/>
-                             <circle cx="200" cy="228" r="3" fill="rgba(255,255,255,.25)"/>
-                             <text class="lock-icon" x="178" y="222" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
-                             <text class="entrance-label" x="178" y="272">باب</text>
-                         </g>
-                         <!-- Garage (open by default, door up) -->
-                         <g class="entry" data-id="entry-garage" style="cursor:pointer">
-                             <rect x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <rect class="entrance-box" x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2" style="transform-origin:266px 158px;transition:transform .4s ease,fill .3s,stroke .3s"/>
-                             <line x1="266" y1="158" x2="266" y2="260" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-                             <text class="lock-icon" x="266" y="172" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
-                             <text class="entrance-label" x="266" y="274">جراج</text>
-                         </g>
-                         <!-- Attack Zone (outside house) -->
-                         <circle class="attack-zone" id="attackZone" cx="370" cy="60" r="36" fill="rgba(255,71,87,.12)" stroke="var(--danger)" stroke-width="2" stroke-dasharray="6 4"/>
-                         <text id="attackLabel" x="370" y="56" text-anchor="middle" fill="var(--danger)" font-family="Cairo,sans-serif" font-size="10" font-weight="700">سطح الهجوم</text>
-                         <text x="370" y="70" text-anchor="middle" fill="var(--dim)" font-family="Cairo,sans-serif" font-size="9">اضغط المداخل</text>
-                     </svg>
-                 </div>
-                 <div class="activity-controls">
-                     <button class="replay-btn" data-id="house-reset">↺ افتح كل المداخل</button>
-                     <span class="status" id="houseStatus">مداخل مفتوحة: 4 / 4</span>
-                 </div>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:12px">البيت بأبواب وشبابيك كتير = سطح هجوم كبير.
+                    اضغط على أي مدخل عشان تقفله.</p>
+                <div class="house-wrap">
+                    <svg class="house-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Roof -->
+                        <polygon points="200,12 28,108 372,108" fill="rgba(255,255,255,.07)"
+                            stroke="rgba(255,255,255,.15)" stroke-width="2" />
+                        <!-- Wall -->
+                        <rect x="28" y="108" width="344" height="152" rx="4" fill="rgba(255,255,255,.04)"
+                            stroke="rgba(255,255,255,.15)" stroke-width="2" />
+                        <!-- Left Window (open by default) -->
+                        <g class="entry" data-id="entry-win1" style="cursor:pointer">
+                            <rect x="52" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)"
+                                stroke="rgba(255,255,255,.2)" stroke-width="2" />
+                            <rect class="entrance-box" x="54" y="130" width="48" height="44" rx="2"
+                                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5"
+                                style="transform-origin:104px 152px;transition:transform .4s ease,fill .3s,stroke .3s" />
+                            <line x1="78" y1="130" x2="78" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+                            <line x1="54" y1="152" x2="102" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+                            <text class="lock-icon" x="78" y="146" text-anchor="middle" font-size="12"
+                                fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
+                            <text class="entrance-label" x="78" y="196">شباك</text>
+                        </g>
+                        <!-- Right Window (open by default) -->
+                        <g class="entry" data-id="entry-win2" style="cursor:pointer">
+                            <rect x="296" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)"
+                                stroke="rgba(255,255,255,.2)" stroke-width="2" />
+                            <rect class="entrance-box" x="298" y="130" width="48" height="44" rx="2"
+                                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5"
+                                style="transform-origin:296px 152px;transition:transform .4s ease,fill .3s,stroke .3s" />
+                            <line x1="322" y1="130" x2="322" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+                            <line x1="296" y1="152" x2="344" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+                            <text class="lock-icon" x="322" y="146" text-anchor="middle" font-size="12"
+                                fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
+                            <text class="entrance-label" x="322" y="196">شباك</text>
+                        </g>
+                        <!-- Door (open by default, slightly ajar) -->
+                        <g class="entry" data-id="entry-door" style="cursor:pointer">
+                            <rect x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.04)"
+                                stroke="rgba(255,255,255,.2)" stroke-width="2" />
+                            <rect class="entrance-box" x="148" y="196" width="60" height="64" rx="3"
+                                fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2"
+                                style="transform-origin:148px 228px;transition:transform .4s ease,fill .3s,stroke .3s" />
+                            <circle cx="200" cy="228" r="3" fill="rgba(255,255,255,.25)" />
+                            <text class="lock-icon" x="178" y="222" text-anchor="middle" font-size="12"
+                                fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
+                            <text class="entrance-label" x="178" y="272">باب</text>
+                        </g>
+                        <!-- Garage (open by default, door up) -->
+                        <g class="entry" data-id="entry-garage" style="cursor:pointer">
+                            <rect x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.04)"
+                                stroke="rgba(255,255,255,.2)" stroke-width="2" />
+                            <rect class="entrance-box" x="236" y="158" width="60" height="102" rx="3"
+                                fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2"
+                                style="transform-origin:266px 158px;transition:transform .4s ease,fill .3s,stroke .3s" />
+                            <line x1="266" y1="158" x2="266" y2="260" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+                            <text class="lock-icon" x="266" y="172" text-anchor="middle" font-size="12"
+                                fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
+                            <text class="entrance-label" x="266" y="274">جراج</text>
+                        </g>
+                        <!-- Attack Zone (outside house) -->
+                        <circle class="attack-zone" id="attackZone" cx="370" cy="60" r="36" fill="rgba(255,71,87,.12)"
+                            stroke="var(--danger)" stroke-width="2" stroke-dasharray="6 4" />
+                        <text id="attackLabel" x="370" y="56" text-anchor="middle" fill="var(--danger)"
+                            font-family="Cairo,sans-serif" font-size="10" font-weight="700">سطح الهجوم</text>
+                        <text x="370" y="70" text-anchor="middle" fill="var(--dim)" font-family="Cairo,sans-serif"
+                            font-size="9">اضغط المداخل</text>
+                    </svg>
+                </div>
+                <div class="activity-controls">
+                    <button class="replay-btn" data-id="house-reset">↺ افتح كل المداخل</button>
+                    <span class="status" id="houseStatus">مداخل مفتوحة: 4 / 4</span>
+                </div>
             </div>
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">كويز: نوع الأصل</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"سمعة الشركة ومكانتها في السوق" — ده أصل من نوع:</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"سمعة الشركة ومكانتها في السوق" — ده أصل
+                    من نوع:</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q6-a" style="border-color:var(--s6)">Information</button>
                     <button class="replay-btn" data-id="q6-b" style="border-color:var(--s6)">People</button>
@@ -1791,7 +1882,8 @@
             <div class="activity-card reveal">
                 <div class="activity-header">🗺️ خريطة أمانك الرقمي — ضيف أصولك بنفسك</div>
                 <div class="activity-body">
-                    <p style="color:var(--dim);font-size:14px;margin-bottom:12px">اكتب أصولك الرقمية في الجدول. عندك صفّين جاهزين كمثال — ضيف 3 صفوف على الأقل عشان تفتح الجزء التاني.</p>
+                    <p style="color:var(--dim);font-size:14px;margin-bottom:12px">اكتب أصولك الرقمية في الجدول. عندك
+                        صفّين جاهزين كمثال — ضيف 3 صفوف على الأقل عشان تفتح الجزء التاني.</p>
                     <div style="overflow-x:auto">
                         <table class="map-table" id="mapTable">
                             <thead>
@@ -1808,22 +1900,26 @@
                         </table>
                     </div>
                     <div class="activity-controls">
-                        <button class="replay-btn" data-id="map-add" style="background:var(--s7);color:var(--bg)">+ ضيف أصل رقمي</button>
+                        <button class="replay-btn" data-id="map-add" style="background:var(--s7);color:var(--bg)">+ ضيف
+                            أصل رقمي</button>
                         <button class="replay-btn" data-id="map-reset">↺ إعادة</button>
                         <span class="status" id="mapStatus">0 صف</span>
                     </div>
                     <div class="map-followup" id="mapFollowup">
                         <div style="font-weight:700;color:var(--s7);margin-bottom:10px">اختر أهم أصل عندك 👇</div>
                         <p style="font-size:13px;color:var(--dim)">أهم أصل عندك: <span id="mapTopAsset">—</span></p>
-                        <div style="margin:8px 0;font-size:13px;color:var(--dim)">مبدأ الـ <span dir="ltr">CIA</span> اللي أهم حاجة فيه:</div>
-<select id="mapCia" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif">
-                             <option value="">اختار مبدأ...</option>
-                             <option value="conf">Confidentiality</option>
-                             <option value="integ">Integrity</option>
-                             <option value="avail">Availability</option>
-                         </select>
+                        <div style="margin:8px 0;font-size:13px;color:var(--dim)">مبدأ الـ <span dir="ltr">CIA</span>
+                            اللي أهم حاجة فيه:</div>
+                        <select id="mapCia"
+                            style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif">
+                            <option value="">اختار مبدأ...</option>
+                            <option value="conf">Confidentiality</option>
+                            <option value="integ">Integrity</option>
+                            <option value="avail">Availability</option>
+                        </select>
                         <div style="margin:10px 0 6px;font-size:13px;color:var(--dim)">إجراء حماية هتعمله:</div>
-                        <input type="text" id="mapAction" placeholder="مثال: هعمل نسخة احتياطية كل أسبوع" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif">
+                        <input type="text" id="mapAction" placeholder="مثال: هعمل نسخة احتياطية كل أسبوع"
+                            style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif">
                     </div>
                 </div>
             </div>
@@ -1856,10 +1952,12 @@
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">كويز: اربط الشغل بالمسار</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"بيراقب الشبكة على مدار الساعة وبيستجيب للتنبيهات فورًا" — ده شغل:</p>
+                <p style="color:var(--dim);font-size:14px;margin-bottom:14px">"بيراقب الشبكة على مدار الساعة وبيستجيب
+                    للتنبيهات فورًا" — ده شغل:</p>
                 <div class="activity-controls" style="margin-top:0">
                     <button class="replay-btn" data-id="q7-a" style="border-color:var(--s8)">SOC Analyst</button>
-                    <button class="replay-btn" data-id="q7-b" style="border-color:var(--s8)">Penetration Testing</button>
+                    <button class="replay-btn" data-id="q7-b" style="border-color:var(--s8)">Penetration
+                        Testing</button>
                     <button class="replay-btn" data-id="q7-c" style="border-color:var(--s8)">GRC</button>
                     <span class="status" id="q7fb" style="min-height:24px"></span>
                 </div>
@@ -1870,7 +1968,8 @@
                 <p>⚠️ أخطاء شائعة</p>
                 <div class="detail">
                     • التفكير إن كل المسارات "هاكرز" — فيه شغل تحليل وإدارة وامتثال<br>
-                    • الخلط بين الـ <span dir="ltr">Incident Response</span> و<span dir="ltr">Digital Forensics</span> — الأول استجابة فورية، التاني تحقيق بعد الحدث<br>
+                    • الخلط بين الـ <span dir="ltr">Incident Response</span> و<span dir="ltr">Digital Forensics</span> —
+                    الأول استجابة فورية، التاني تحقيق بعد الحدث<br>
                     • تجاهل شغلك المناسب — كل شخصية ليها مسار بيليق بيه
                 </div>
             </div>
@@ -1896,7 +1995,8 @@
                             <div class="match-options" id="matchOptions"></div>
                             <div class="match-feedback" id="matchFeedback"></div>
                             <div class="activity-controls" style="margin-top:4px">
-                                <button class="replay-btn" data-id="match-next" style="background:var(--s9);color:var(--bg)">▶ التالي</button>
+                                <button class="replay-btn" data-id="match-next"
+                                    style="background:var(--s9);color:var(--bg)">▶ التالي</button>
                                 <button class="replay-btn" data-id="match-reset">↺ إعادة اللعبة</button>
                             </div>
                         </div>
@@ -1904,7 +2004,9 @@
                     <div class="map-followup" id="matchReflect" style="display:block;margin-top:16px">
                         <div style="font-weight:700;color:var(--s9);margin-bottom:8px">🤔 فكر مع نفسك</div>
                         <p style="font-size:14px;color:var(--dim)">أنهي مسارين عجبوك أكتر، وليه؟ اكتب بإيدك.</p>
-                        <textarea id="matchNote" rows="3" style="width:100%;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px;color:var(--text);font-family:'Cairo',sans-serif" placeholder="أنا بحب المسار بتاع... لأن..."></textarea>
+                        <textarea id="matchNote" rows="3"
+                            style="width:100%;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px;color:var(--text);font-family:'Cairo',sans-serif"
+                            placeholder="أنا بحب المسار بتاع... لأن..."></textarea>
                     </div>
                 </div>
             </div>
@@ -1924,29 +2026,57 @@
     <section class="section" id="closing">
         <div class="section-inner">
             <div class="section-header reveal">
-                <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯</div>
+                <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯
+                </div>
                 <h2>رحلة الأمن السيبراني الكاملة</h2>
                 <p>كل خطوة بنيناها النهارده بتوصل للي بعده</p>
             </div>
             <div class="diagram-container reveal">
                 <div class="journey" id="journey">
-                    <div class="journey-step lit" data-id="j-1"><div class="j-num">1</div><div>العالم الرقمي وأصوله الرقمية</div></div>
+                    <div class="journey-step lit" data-id="j-1">
+                        <div class="j-num">1</div>
+                        <div>العالم الرقمي وأصوله الرقمية</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-2"><div class="j-num">2</div><div>إيه هو الـ Cybersecurity</div></div>
+                    <div class="journey-step" data-id="j-2">
+                        <div class="j-num">2</div>
+                        <div>إيه هو الـ Cybersecurity</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-3"><div class="j-num">3</div><div>ليه الـ Cybersecurity مهم</div></div>
+                    <div class="journey-step" data-id="j-3">
+                        <div class="j-num">3</div>
+                        <div>ليه الـ Cybersecurity مهم</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-4"><div class="j-num">4</div><div>مثلث الـ CIA</div></div>
+                    <div class="journey-step" data-id="j-4">
+                        <div class="j-num">4</div>
+                        <div>مثلث الـ CIA</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-5"><div class="j-num">5</div><div>Authentication / Authorization / Accountability / Non-Repudiation</div></div>
+                    <div class="journey-step" data-id="j-5">
+                        <div class="j-num">5</div>
+                        <div>Authentication / Authorization / Accountability / Non-Repudiation</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-6"><div class="j-num">6</div><div>الأصول وسطح الهجوم</div></div>
+                    <div class="journey-step" data-id="j-6">
+                        <div class="j-num">6</div>
+                        <div>الأصول وسطح الهجوم</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-7"><div class="j-num">7</div><div>خريطة أمانك الرقمي</div></div>
+                    <div class="journey-step" data-id="j-7">
+                        <div class="j-num">7</div>
+                        <div>خريطة أمانك الرقمي</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-8"><div class="j-num">8</div><div>مسارات المهن</div></div>
+                    <div class="journey-step" data-id="j-8">
+                        <div class="j-num">8</div>
+                        <div>مسارات المهن</div>
+                    </div>
                     <div class="journey-arrow">↓</div>
-                    <div class="journey-step" data-id="j-9"><div class="j-num">9</div><div>مسارك انت</div></div>
+                    <div class="journey-step" data-id="j-9">
+                        <div class="j-num">9</div>
+                        <div>مسارك انت</div>
+                    </div>
                 </div>
                 <div class="activity-controls">
                     <button class="replay-btn" data-id="journey-next">▶ أضيئ الخطوة الجاية</button>
@@ -1958,7 +2088,7 @@
     </section>
 
     <footer>
-        <img src="data:image/webp;base64,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" class="footer-logo" alt="Bilal">
+        <img src="data:image/webp;base64,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"        class="footer-logo" alt="Bilal">
         <p class="footer-encouragement">معلومة النهارده أمان بكرة! 🛡️</p>
     </footer>
 
@@ -2093,42 +2223,42 @@
             if (skip) skip.addEventListener('click', () => setFeedback(id + 'fb', 'تخطيت السؤال — الإجابة الصح: ' + fbText, null));
         }
 
-/* ===== Section 2: Stool ===== */
-         const stoolData = {
-             'leg-people': { icon: '👥', title: 'People — الناس', desc: 'أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم يعرفوا إيه الخطر وإزاي يتعاملوا معاه.' },
-             'leg-process': { icon: '📋', title: 'Process — العمليات', desc: 'السياسات والإجراءات بتحدد إزاي الشغل بيتعمل بأمان. من مين بيأخذ القرار؟ إيه الإجراءات اللي لازم تتتبع لو حصل اختراق؟ الـ Incident Response plan والـ Access Control policies هي أمثلة على Process اللي بتحمي المنظمة.' },
-             'leg-tech': { icon: '💻', title: 'Technology — التكنولوجيا', desc: 'الأدوات والأنظمة اللي بتمنع الهجمات: Firewalls, Antivirus, Encryption, Two-Factor Authentication, وحدات الشبكة. لو التكنولوجيا شغالة صح، بتعمل حاجز قوي بين المهاجم والبيانات.' }
-         };
-         let activeStoolLeg = 'leg-people';
-         function updateStool(legId, animate) {
-             activeStoolLeg = legId;
-             const data = stoolData[legId];
-             const impact = qs('#stoolImpact');
-             if (animate) {
-                 impact.classList.add('fading');
-                 setTimeout(() => {
-                     impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
-                     impact.classList.remove('fading');
-                 }, 350);
-             } else {
-                 impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
-             }
-         }
-         function initStool() {
-             qsa('.stool-leg').forEach(leg => {
-                 leg.addEventListener('click', () => {
-                     qsa('.stool-leg').forEach(l => l.classList.remove('active'));
-                     leg.classList.add('active');
-                     updateStool(leg.dataset.id, true);
-                 });
-             });
-             updateStool('leg-people', false);
-         }
-         function resetStool() {
-             qsa('.stool-leg').forEach(l => l.classList.remove('active'));
-             qs('[data-id="leg-people"]').classList.add('active');
-             updateStool('leg-people', true);
-         }
+        /* ===== Section 2: Stool ===== */
+        const stoolData = {
+            'leg-people': { icon: '👥', title: 'People — الناس', desc: 'أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم يعرفوا إيه الخطر وإزاي يتعاملوا معاه.' },
+            'leg-process': { icon: '📋', title: 'Process — العمليات', desc: 'السياسات والإجراءات بتحدد إزاي الشغل بيتعمل بأمان. من مين بيأخذ القرار؟ إيه الإجراءات اللي لازم تتتبع لو حصل اختراق؟ الـ Incident Response plan والـ Access Control policies هي أمثلة على Process اللي بتحمي المنظمة.' },
+            'leg-tech': { icon: '💻', title: 'Technology — التكنولوجيا', desc: 'الأدوات والأنظمة اللي بتمنع الهجمات: Firewalls, Antivirus, Encryption, Two-Factor Authentication, وحدات الشبكة. لو التكنولوجيا شغالة صح، بتعمل حاجز قوي بين المهاجم والبيانات.' }
+        };
+        let activeStoolLeg = 'leg-people';
+        function updateStool(legId, animate) {
+            activeStoolLeg = legId;
+            const data = stoolData[legId];
+            const impact = qs('#stoolImpact');
+            if (animate) {
+                impact.classList.add('fading');
+                setTimeout(() => {
+                    impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
+                    impact.classList.remove('fading');
+                }, 350);
+            } else {
+                impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
+            }
+        }
+        function initStool() {
+            qsa('.stool-leg').forEach(leg => {
+                leg.addEventListener('click', () => {
+                    qsa('.stool-leg').forEach(l => l.classList.remove('active'));
+                    leg.classList.add('active');
+                    updateStool(leg.dataset.id, true);
+                });
+            });
+            updateStool('leg-people', false);
+        }
+        function resetStool() {
+            qsa('.stool-leg').forEach(l => l.classList.remove('active'));
+            qs('[data-id="leg-people"]').classList.add('active');
+            updateStool('leg-people', true);
+        }
 
         /* ===== Section 4: CIA ===== */
         const ciaData = {
@@ -2204,81 +2334,81 @@
             });
             updateHouse();
         }
-function updateHouse() {
-             const closed = qsa('.entry.closed').length;
-             const total = qsa('.entry').length;
-             qs('#houseStatus').textContent = 'مداخل مفتوحة: ' + (total - closed) + ' / ' + total;
-             const zone = qs('#attackZone');
-             const label = qs('#attackLabel');
-             const size = Math.max(12, 36 - closed * 6);
-             zone.setAttribute('r', size);
-             zone.setAttribute('opacity', closed >= 3 ? '.3' : '.6');
-             if (label) {
-                 label.textContent = closed >= 3 ? 'سطح هجوم صغير 🎯' : (closed > 0 ? 'سطح الهجوم صغر' : 'سطح الهجوم');
-             }
-         }
+        function updateHouse() {
+            const closed = qsa('.entry.closed').length;
+            const total = qsa('.entry').length;
+            qs('#houseStatus').textContent = 'مداخل مفتوحة: ' + (total - closed) + ' / ' + total;
+            const zone = qs('#attackZone');
+            const label = qs('#attackLabel');
+            const size = Math.max(12, 36 - closed * 6);
+            zone.setAttribute('r', size);
+            zone.setAttribute('opacity', closed >= 3 ? '.3' : '.6');
+            if (label) {
+                label.textContent = closed >= 3 ? 'سطح هجوم صغير 🎯' : (closed > 0 ? 'سطح الهجوم صغر' : 'سطح الهجوم');
+            }
+        }
         function resetHouse() {
             qsa('.entry').forEach(e => e.classList.remove('closed'));
             updateHouse();
         }
 
-/* ===== Activity 1: Security Map ===== */
-         const defaultMap = [
-             { asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' },
-             { asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' }
-         ];
-         let mapSeed = (function() {
-             try { const s = localStorage.getItem('cyber_map'); return s ? JSON.parse(s) : defaultMap; } catch(e) { return defaultMap; }
-         })();
-         let mapRows = 0;
-         function saveMap() {
-             try { localStorage.setItem('cyber_map', JSON.stringify(mapSeed)); } catch(e) {}
-         }
-         function renderMap() {
-             const tbody = qs('#mapBody');
-             tbody.innerHTML = '';
-             mapRows = mapSeed.length;
-             mapSeed.forEach((row, idx) => {
-                 const tr = document.createElement('tr');
-                 tr.innerHTML = '<td><input type="text" value="' + row.asset + '" data-field="asset"></td>' +
-                     '<td><select data-field="type"><option>Information</option><option>Technology</option><option>People</option><option>Reputation</option><option>Physical</option></select></td>' +
-                     '<td><select data-field="personal"><option>نعم</option><option>لا</option></select></td>' +
-                     '<td><input type="text" value="' + row.surface + '" data-field="surface"></td>' +
-                     '<td><input type="text" value="' + row.foot + '" data-field="foot"></td>' +
-                     '<td><button class="del-row" data-idx="' + idx + '">🗑️</button></td>';
-                 tr.querySelector('select[data-field="type"]').value = row.type;
-                 tr.querySelector('select[data-field="personal"]').value = row.personal;
-                 tr.querySelectorAll('input,select').forEach(el => {
-                     el.addEventListener('change', () => {
-                         mapSeed[idx][el.dataset.field] = el.value;
-                         saveMap();
-                         renderMap();
-                     });
-                 });
-                 tr.querySelector('.del-row').addEventListener('click', () => {
-                     mapSeed.splice(idx, 1);
-                     saveMap();
-                     renderMap();
-                 });
-                 tbody.appendChild(tr);
-             });
-             const extra = mapRows - mapSeed.length;
-             qs('#mapStatus').textContent = mapSeed.length + ' صف' + (mapSeed.length >= 3 ? ' — الجزء التاني ظهر! ✅' : '');
-             qs('#mapFollowup').style.display = mapSeed.length >= 3 ? 'block' : 'none';
-             qs('#mapTopAsset').textContent = mapSeed.length ? mapSeed[0].asset : '—';
-         }
-         function addMapRow() {
-             mapSeed.push({ asset: 'أصل جديد', type: 'Information', personal: 'نعم', surface: '', foot: '' });
-             saveMap();
-             renderMap();
-         }
-         function resetMap() {
-             mapSeed.length = 0;
-             mapSeed.push({ asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' });
-             mapSeed.push({ asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' });
-             saveMap();
-             renderMap();
-         }
+        /* ===== Activity 1: Security Map ===== */
+        const defaultMap = [
+            { asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' },
+            { asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' }
+        ];
+        let mapSeed = (function () {
+            try { const s = localStorage.getItem('cyber_map'); return s ? JSON.parse(s) : defaultMap; } catch (e) { return defaultMap; }
+        })();
+        let mapRows = 0;
+        function saveMap() {
+            try { localStorage.setItem('cyber_map', JSON.stringify(mapSeed)); } catch (e) { }
+        }
+        function renderMap() {
+            const tbody = qs('#mapBody');
+            tbody.innerHTML = '';
+            mapRows = mapSeed.length;
+            mapSeed.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="text" value="' + row.asset + '" data-field="asset"></td>' +
+                    '<td><select data-field="type"><option>Information</option><option>Technology</option><option>People</option><option>Reputation</option><option>Physical</option></select></td>' +
+                    '<td><select data-field="personal"><option>نعم</option><option>لا</option></select></td>' +
+                    '<td><input type="text" value="' + row.surface + '" data-field="surface"></td>' +
+                    '<td><input type="text" value="' + row.foot + '" data-field="foot"></td>' +
+                    '<td><button class="del-row" data-idx="' + idx + '">🗑️</button></td>';
+                tr.querySelector('select[data-field="type"]').value = row.type;
+                tr.querySelector('select[data-field="personal"]').value = row.personal;
+                tr.querySelectorAll('input,select').forEach(el => {
+                    el.addEventListener('change', () => {
+                        mapSeed[idx][el.dataset.field] = el.value;
+                        saveMap();
+                        renderMap();
+                    });
+                });
+                tr.querySelector('.del-row').addEventListener('click', () => {
+                    mapSeed.splice(idx, 1);
+                    saveMap();
+                    renderMap();
+                });
+                tbody.appendChild(tr);
+            });
+            const extra = mapRows - mapSeed.length;
+            qs('#mapStatus').textContent = mapSeed.length + ' صف' + (mapSeed.length >= 3 ? ' — الجزء التاني ظهر! ✅' : '');
+            qs('#mapFollowup').style.display = mapSeed.length >= 3 ? 'block' : 'none';
+            qs('#mapTopAsset').textContent = mapSeed.length ? mapSeed[0].asset : '—';
+        }
+        function addMapRow() {
+            mapSeed.push({ asset: 'أصل جديد', type: 'Information', personal: 'نعم', surface: '', foot: '' });
+            saveMap();
+            renderMap();
+        }
+        function resetMap() {
+            mapSeed.length = 0;
+            mapSeed.push({ asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' });
+            mapSeed.push({ asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' });
+            saveMap();
+            renderMap();
+        }
         function addMapRow() {
             mapSeed.push({ asset: '', type: 'Information', personal: 'نعم', surface: '', foot: '' });
             renderMap();
@@ -2463,4 +2593,5 @@ function updateHouse() {
         });
     </script>
 </body>
+
 </html>
