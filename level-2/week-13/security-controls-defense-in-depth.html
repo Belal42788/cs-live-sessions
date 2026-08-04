@@ -8,249 +8,129 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary: #193cff; --accent: #00d4aa; --bg: #0a0e27;
-  --card: #111638; --card-hover: #1a2050; --text: #fff; --dim: #8892b0;
-  --success: #00ff88; --danger: #ff4757; --warn: #ffd700;
-  --s1: #06B6D4; --s2: #F59E0B; --s3: #8B5CF6; --s4: #10B981; --s5: #EC4899; --s6: #EF4444;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Cairo', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.9;
-  overflow-x: hidden;
-  padding-bottom: 80px;
-}
-:is(h1,h2,h3,h4) { font-weight: 900; }
-a { color: var(--accent); text-decoration: none; }
-/* ---------- animated background ---------- */
-.bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-.bg-gradient {
-  position: absolute; inset: -20%;
-  background:
-    radial-gradient(600px 400px at 30% 50%, rgba(25,60,255,0.28), transparent 70%),
-    radial-gradient(600px 400px at 70% 80%, rgba(0,212,170,0.22), transparent 70%);
-  animation: bgmove 20s ease-in-out infinite;
-}
-@keyframes bgmove {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(-3%, 4%) scale(1.06); }
-}
-.particle { position: absolute; bottom: -10px; width: 4px; height: 4px; background: var(--primary); border-radius: 50%; opacity: 0.3; animation: floatup 15s linear infinite; }
-@keyframes floatup {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-110vh); }
-}
-/* ---------- nav ---------- */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; gap: 18px;
-  padding: 12px 24px;
-  background: rgba(10,14,39,0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(25,60,255,0.3);
-  transform: translateY(-100%);
-  transition: transform 0.4s ease;
-  flex-wrap: wrap;
-}
-.nav.visible { transform: translateY(0); }
-.nav-logo { width: 36px; height: 36px; border-radius: 10px; object-fit: contain; flex-shrink: 0; }
-.nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
-.nav-links a {
-  padding: 6px 14px; border-radius: 25px; color: var(--dim);
-  border: 1px solid transparent; font-size: 13px; font-weight: 600; cursor: pointer;
-  white-space: nowrap;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(25,60,255,0.2); border-color: var(--primary); }
-/* ---------- layout ---------- */
-main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-section { margin: 60px 0; }
-.section-inner {
-  opacity: 0; transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
-}
-.section-inner.visible { opacity: 1; transform: translateY(0); }
-.card {
-  background: var(--card); border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 24px; padding: 24px; margin: 18px 0;
-  transition: all 0.3s ease;
-}
-.card:hover { background: var(--card-hover); transform: translateY(-5px); border-color: rgba(25,60,255,0.3); }
-.card-sm { border-radius: 16px; padding: 18px; }
-.diagram-box { border-radius: 24px; overflow: hidden; margin: 18px 0; }
-.diagram-box .top-bar { height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-.diagram-box .inner { background: var(--card); border: 1px solid rgba(255,255,255,0.05); border-top: 0; padding: 24px; }
-.section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
-.section-number {
-  width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 18px; color: var(--bg); flex-shrink: 0;
-  animation: glow 3s infinite;
-}
-@keyframes glow {
-  0%,100% { box-shadow: 0 0 20px rgba(25,60,255,0.3); }
-  50% { box-shadow: 0 0 40px rgba(25,60,255,0.6); }
-}
-.section-head h2 { font-size: 26px; }
-.section-intro { font-size: 17px; color: var(--dim); }
-/* accent helpers */
-.ac-1 .section-number { background: var(--s1); }
-.ac-2 .section-number { background: var(--s2); }
-.ac-3 .section-number { background: var(--s3); }
-.ac-4 .section-number { background: var(--s4); }
-.ac-5 .section-number { background: var(--s5); }
-.ac-6 .section-number { background: var(--s6); }
-/* text helpers */
-.dir-ltr { direction: ltr; unicode-bidi: isolate; }
-.code-panel, .code-panel .code-body, .code-panel .code-header { direction: ltr; text-align: left; unicode-bidi: isolate; }
-.highlight { color: var(--accent); font-weight: 700; }
-.gradient-text { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-/* ---------- hero ---------- */
-.hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 20px; position: relative; }
-.hero-badge {
-  padding: 8px 18px; border-radius: 25px; border: 1px solid rgba(0,212,170,0.4);
-  color: var(--accent); font-size: 14px; font-weight: 700; letter-spacing: 1px;
-  animation: fadeup 0.8s ease-out both; animation-delay: 0.2s;
-}
-.hero h1 { font-size: clamp(36px, 8vw, 80px); margin-top: 10px; animation: fadeup 0.8s ease-out both; animation-delay: 0.4s; }
-.hero .subtitle { font-size: 19px; color: var(--dim); max-width: 640px; animation: fadeup 0.8s ease-out both; animation-delay: 0.6s; }
-.hero .start-btn {
-  margin-top: 12px; padding: 14px 34px; border-radius: 30px; border: none; cursor: pointer;
-  background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff;
-  font-family: 'Cairo', sans-serif; font-size: 17px; font-weight: 700;
-  animation: fadeup 0.8s ease-out both; animation-delay: 0.8s;
-}
-.start-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(25,60,255,0.4); }
-.hero-circle { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.3; pointer-events: none; animation: bob 6s ease-in-out infinite; }
-@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-22px); } }
-@keyframes fadeup { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-/* ---------- buttons ---------- */
-.btn {
-  padding: 10px 22px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(25,60,255,0.12); color: var(--text); cursor: pointer;
-  font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; transition: all 0.2s;
-}
-.btn:hover { background: rgba(25,60,255,0.3); }
-.btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); border: none; color: #fff; }
-.btn-primary:hover { box-shadow: 0 6px 20px rgba(25,60,255,0.4); }
-.btn-ghost { background: transparent; }
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; align-items: center; }
-/* ---------- house analogy ---------- */
-.house-stage { position: relative; min-height: 340px; display: flex; align-items: center; justify-content: center; }
-.house-icon { font-size: 110px; line-height: 1; }
-.layer-badge {
-  position: absolute; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
-  background: rgba(0,212,170,0.15); border: 1px solid rgba(0,212,170,0.4); color: var(--accent);
-  opacity: 0; transform: scale(0.8); transition: all 0.4s ease;
-}
-.layer-badge.show { opacity: 1; transform: scale(1); }
-.protect-chip {
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 20px;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); margin: 5px;
-  cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; color: var(--text); transition: all 0.2s;
-}
-.protect-chip:hover { transform: translateY(-3px); border-color: var(--s1); }
-.protect-chip.done { background: rgba(0,212,170,0.15); border-color: rgba(0,212,170,0.4); }
-/* ---------- sorting board ---------- */
-.sort-pool { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px; margin: 12px 0; background: rgba(255,255,255,0.03); border-radius: 16px; }
-.sort-chip {
-  padding: 9px 16px; border-radius: 20px; background: var(--card-hover); border: 1px solid rgba(255,255,255,0.15);
-  cursor: grab; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; color: var(--text);
-  user-select: none; transition: all 0.2s;
-}
-.sort-chip:hover { border-color: var(--primary); }
-.sort-chip.used { opacity: 0.25; pointer-events: none; }
-.sort-columns { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 14px 0; }
-.sort-col { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.15); border-radius: 16px; padding: 12px; min-height: 200px; }
-.sort-col h4 { text-align: center; margin-bottom: 10px; font-size: 15px; }
-.sort-col .placed { padding: 8px 12px; margin: 6px; border-radius: 12px; background: rgba(25,60,255,0.15); border: 1px solid rgba(25,60,255,0.3); font-size: 13px; font-weight: 700; }
-.sort-msg { font-weight: 700; font-size: 15px; min-height: 24px; }
-/* ---------- matrix ---------- */
-.matrix-wrap { overflow-x: auto; }
-.matrix { border-collapse: collapse; width: 100%; min-width: 640px; }
-.matrix th, .matrix td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; text-align: center; font-size: 14px; }
-.matrix th { background: rgba(25,60,255,0.15); }
-.matrix .row-head { background: rgba(255,255,255,0.04); font-weight: 700; }
-.matrix td.active { background: rgba(0,212,170,0.18); border-color: var(--accent); animation: pulse 1.4s infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-.control-list { display: flex; flex-wrap: wrap; gap: 10px; }
-.control-pill {
-  padding: 9px 16px; border-radius: 20px; background: var(--card-hover); border: 1px solid rgba(255,255,255,0.15);
-  cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; transition: all 0.2s;
-}
-.control-pill:hover { border-color: var(--s3); }
-.control-pill.picked { background: rgba(139,92,246,0.25); border-color: var(--s3); }
-.matrix-readout { margin-top: 12px; font-size: 16px; font-weight: 700; min-height: 28px; }
-/* ---------- stepper ---------- */
-.steps { position: relative; }
-.step-card { display: none; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid rgba(255,255,255,0.06); }
-.step-card.active { display: block; animation: fadein 0.4s ease; }
-@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
-.step-card h4 { margin-bottom: 8px; font-size: 18px; }
-.step-count { color: var(--dim); font-weight: 700; }
-.step-progress { height: 6px; background: rgba(255,255,255,0.08); border-radius: 6px; margin: 12px 0; overflow: hidden; }
-.step-progress .fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 6px; transition: width 0.4s ease; }
-/* ---------- layer stack ---------- */
-.layer-stack { display: flex; flex-direction: column; align-items: stretch; gap: 10px; margin: 14px 0; }
-.layer {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 14px 18px; border-radius: 14px;
-  background: linear-gradient(270deg, rgba(16,185,129,0.18), rgba(255,255,255,0.03));
-  border: 1px solid rgba(16,185,129,0.35); cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 15px;
-  transition: all 0.2s;
-}
-.layer .state { font-size: 13px; color: var(--dim); }
-.layer.off { background: rgba(255,71,87,0.12); border-color: rgba(255,71,87,0.4); opacity: 0.75; }
-.layer.off .state { color: var(--danger); }
-.layer .tgl { min-width: 42px; text-align: center; }
-.attacker-run { margin-top: 14px; padding: 14px; border-radius: 14px; background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.25); text-align: center; font-size: 15px; }
-.attacker-run .attacker { display: inline-block; animation: attackmove 1.6s ease-in-out infinite; }
-@keyframes attackmove { 0% { transform: translateX(0); } 50% { transform: translateX(-24px); } 100% { transform: translateX(0); } }
-.stopped { font-weight: 700; color: var(--success); }
-.breached { font-weight: 700; color: var(--danger); }
-/* ---------- quiz ---------- */
-.quiz-box { margin-top: 14px; }
-.quiz-reveal-btn { display: block; }
-.quiz-hidden { display: none; }
-.quiz-q { display: block; width: 100%; text-align: right; margin: 8px 0; padding: 14px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: var(--card); color: var(--text); cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 15px; transition: all 0.2s; }
-.quiz-q:hover { border-color: var(--primary); }
-.quiz-q.correct { background: rgba(0,255,136,0.12); border-color: var(--success); }
-.quiz-q.wrong { background: rgba(255,71,87,0.12); border-color: var(--danger); }
-.quiz-feedback { margin-top: 10px; padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 15px; display: block; }
-.quiz-feedback.good { background: rgba(0,255,136,0.08); color: var(--success); border: 1px solid rgba(0,255,136,0.3); }
-.quiz-feedback.bad { background: rgba(255,71,87,0.08); color: var(--danger); border: 1px solid rgba(255,71,87,0.3); }
-/* ---------- activity ---------- */
-.activity-card { border: 1px dashed rgba(255,255,255,0.25); border-radius: 24px; padding: 24px; margin: 18px 0; background: var(--card); }
-.activity-stage { padding: 12px 16px; margin: 8px 0; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
-.activity-stage h4 { font-size: 15px; }
-.activity-answers { display: none; }
-.activity-answers.show { display: block; animation: fadein 0.5s ease; }
-.answer-row { padding: 10px 14px; margin: 6px 0; border-radius: 10px; background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.25); font-size: 14px; }
-/* ---------- error box ---------- */
-.error-box { border: 1px solid rgba(255,71,87,.2); background: rgba(255,71,87,.05); border-radius: 12px; padding: 16px; }
-.error-box h4 { color: var(--danger); margin-bottom: 8px; }
-.error-box li { color: var(--dim); }
-/* ---------- legend ---------- */
-.legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 12px 16px; margin: 12px 0; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: var(--dim); }
-.legend .lg-item { display: inline-flex; align-items: center; gap: 7px; }
-.legend .swatch { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
-/* ---------- footer ---------- */
-footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; padding: 30px 20px; }
-.footer-logo { height: 40px; border-radius: 8px; }
-.footer-line { color: var(--dim); margin-top: 12px; font-size: 16px; }
-.recap-list li { margin: 6px 0; }
-@media (max-width: 860px) {
-  .sort-columns, .activity-grid { grid-template-columns: 1fr !important; }
-  .nav-links a { font-size: 12px; padding: 5px 10px; }
-}
+:root{--primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;--card:#111638;--card-hover:#1a2050;--text:#fff;--dim:#8892b0;--success:#00ff88;--danger:#ff4757;--warn:#ffd700;--s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-height:1.9;overflow-x:hidden;padding-bottom:80px}
+h1,h2,h3,h4{font-weight:900}
+a{color:var(--accent);text-decoration:none}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-gradient{position:absolute;inset:-20%;background:radial-gradient(600px 400px at 30% 50%,rgba(25,60,255,.28),transparent 70%),radial-gradient(600px 400px at 70% 80%,rgba(0,212,170,.22),transparent 70%);animation:bgmove 20s ease-in-out infinite}
+@keyframes bgmove{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-3%,4%) scale(1.06)}}
+.particle{position:absolute;bottom:-10px;width:4px;height:4px;background:var(--primary);border-radius:50%;opacity:.3;animation:floatup 15s linear infinite}
+@keyframes floatup{0%{transform:translateY(0)}100%{transform:translateY(-110vh)}}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:18px;padding:12px 24px;background:rgba(10,14,39,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);transform:translateY(-100%);transition:transform .4s ease;flex-wrap:wrap}
+.nav.visible{transform:translateY(0)}
+.nav-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;flex-shrink:0}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{padding:6px 14px;border-radius:25px;color:var(--dim);border:1px solid transparent;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px}
+section{margin:60px 0}
+.section-inner{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.section-inner.visible{opacity:1;transform:translateY(0)}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:24px;margin:18px 0;transition:all .3s ease}
+.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
+.diagram-box{border-radius:24px;overflow:hidden;margin:18px 0}
+.diagram-box .top-bar{height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.diagram-box .inner{background:var(--card);border:1px solid rgba(255,255,255,.05);border-top:0;padding:24px}
+.section-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.section-number{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--bg);flex-shrink:0;animation:glow 3s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(25,60,255,.3)}50%{box-shadow:0 0 40px rgba(25,60,255,.6)}}
+.ac-1 .section-number{background:var(--s1)}.ac-2 .section-number{background:var(--s2)}.ac-3 .section-number{background:var(--s3)}.ac-4 .section-number{background:var(--s4)}.ac-5 .section-number{background:var(--s5)}.ac-6 .section-number{background:var(--s6)}
+.dir-ltr{direction:ltr;unicode-bidi:isolate}
+.highlight{color:var(--accent);font-weight:700}
+.gradient-text{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:20px;position:relative}
+.hero-badge{padding:8px 18px;border-radius:25px;border:1px solid rgba(0,212,170,.4);color:var(--accent);font-size:14px;font-weight:700;letter-spacing:1px;animation:fadeup .8s ease-out both;animation-delay:.2s}
+.hero h1{font-size:clamp(36px,8vw,80px);margin-top:10px;animation:fadeup .8s ease-out both;animation-delay:.4s}
+.hero .subtitle{font-size:19px;color:var(--dim);max-width:640px;animation:fadeup .8s ease-out both;animation-delay:.6s}
+.hero .start-btn{margin-top:12px;padding:14px 34px;border-radius:30px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-family:'Cairo',sans-serif;font-size:17px;font-weight:700;animation:fadeup .8s ease-out both;animation-delay:.8s}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(25,60,255,.4)}
+.hero-circle{position:absolute;border-radius:50%;filter:blur(60px);opacity:.3;pointer-events:none;animation:bob 6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+@keyframes fadeup{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.btn{padding:10px 22px;border-radius:25px;border:1px solid rgba(255,255,255,.15);background:rgba(25,60,255,.12);color:var(--text);cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;transition:all .2s}
+.btn:hover{background:rgba(25,60,255,.3)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));border:none;color:#fff}
+.btn-primary:hover{box-shadow:0 6px 20px rgba(25,60,255,.4)}
+.btn-ghost{background:transparent}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center}
+.protect-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);margin:5px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--text);transition:all .2s}
+.protect-chip:hover{transform:translateY(-3px);border-color:var(--s1)}
+.protect-chip.done{background:rgba(0,212,170,.15);border-color:rgba(0,212,170,.4)}
+.house-stage{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center}
+.house-icon{font-size:110px;line-height:1}
+.layer-badge{position:absolute;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;background:rgba(0,212,170,.15);border:1px solid rgba(0,212,170,.4);color:var(--accent);opacity:0;transform:scale(.8);transition:all .4s ease}
+.layer-badge.show{opacity:1;transform:scale(1)}
+.sort-pool{display:flex;flex-wrap:wrap;gap:10px;padding:14px;margin:12px 0;background:rgba(255,255,255,.03);border-radius:16px}
+.sort-chip{padding:9px 16px;border-radius:20px;background:var(--card-hover);border:1px solid rgba(255,255,255,.15);cursor:grab;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--text);user-select:none;transition:all .2s}
+.sort-chip:hover{border-color:var(--primary)}
+.sort-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.sort-col{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.15);border-radius:16px;padding:12px;min-height:200px;cursor:pointer}
+.sort-col h4{text-align:center;margin-bottom:10px;font-size:15px}
+.sort-col .placed{padding:8px 12px;margin:6px;border-radius:12px;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);font-size:13px;font-weight:700;cursor:pointer}
+.sort-msg{font-weight:700;font-size:15px;min-height:24px}
+.matrix-wrap{overflow-x:auto}
+.matrix{border-collapse:collapse;width:100%;min-width:640px}
+.matrix th,.matrix td{border:1px solid rgba(255,255,255,.1);padding:12px;text-align:center;font-size:14px}
+.matrix th{background:rgba(25,60,255,.15)}
+.matrix .row-head{background:rgba(255,255,255,.04);font-weight:700}
+.matrix td.active{background:rgba(0,212,170,.18);border-color:var(--accent);animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.control-list{display:flex;flex-wrap:wrap;gap:10px}
+.control-pill{padding:9px 16px;border-radius:20px;background:var(--card-hover);border:1px solid rgba(255,255,255,.15);cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:14px;transition:all .2s}
+.control-pill:hover{border-color:var(--s3)}
+.control-pill.picked{background:rgba(139,92,246,.25);border-color:var(--s3)}
+.matrix-readout{margin-top:12px;font-size:16px;font-weight:700;min-height:28px}
+.step-card{display:none;padding:20px;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
+.step-card.active{display:block;animation:fadein .4s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.step-card h4{margin-bottom:8px;font-size:18px}
+.step-count{color:var(--dim);font-weight:700}
+.step-progress{height:6px;background:rgba(255,255,255,.08);border-radius:6px;margin:12px 0;overflow:hidden}
+.step-progress .fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:6px;transition:width .4s ease}
+.layer-stack{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin:14px 0}
+.layer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:14px;background:linear-gradient(270deg,rgba(16,185,129,.18),rgba(255,255,255,.03));border:1px solid rgba(16,185,129,.35);cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:15px;transition:all .2s}
+.layer .state{font-size:13px;color:var(--dim)}
+.layer.off{background:rgba(255,71,87,.12);border-color:rgba(255,71,87,.4);opacity:.75}
+.layer.off .state{color:var(--danger)}
+.layer .tgl{min-width:42px;text-align:center}
+.attacker-run{margin-top:14px;padding:14px;border-radius:14px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.25);text-align:center;font-size:15px}
+.attacker-run .attacker{display:inline-block;animation:attackmove 1.6s ease-in-out infinite}
+@keyframes attackmove{0%{transform:translateX(0)}50%{transform:translateX(-24px)}100%{transform:translateX(0)}}
+.stopped{font-weight:700;color:var(--success)}
+.breached{font-weight:700;color:var(--danger)}
+.quiz-box{margin-top:14px}
+.quiz-hidden{display:none}
+.quiz-q{display:block;width:100%;text-align:right;margin:8px 0;padding:14px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:var(--card);color:var(--text);cursor:pointer;font-family:'Cairo',sans-serif;font-size:15px;transition:all .2s}
+.quiz-q:hover{border-color:var(--primary)}
+.quiz-q.correct{background:rgba(0,255,136,.12);border-color:var(--success)}
+.quiz-q.wrong{background:rgba(255,71,87,.12);border-color:var(--danger)}
+.quiz-feedback{margin-top:10px;padding:12px 16px;border-radius:12px;font-weight:700;font-size:15px;display:block}
+.quiz-feedback.good{background:rgba(0,255,136,.08);color:var(--success);border:1px solid rgba(0,255,136,.3)}
+.quiz-feedback.bad{background:rgba(255,71,87,.08);color:var(--danger);border:1px solid rgba(255,71,87,.3)}
+.activity-card{border:1px dashed rgba(255,255,255,.25);border-radius:24px;padding:24px;margin:18px 0;background:var(--card)}
+.activity-stage{padding:12px 16px;margin:8px 0;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+.activity-stage h4{font-size:15px}
+.activity-answers{display:none}
+.activity-answers.show{display:block;animation:fadein .5s ease}
+.answer-row{padding:10px 14px;margin:6px 0;border-radius:10px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);font-size:14px}
+.error-box{border:1px solid rgba(255,71,87,.2);background:rgba(255,71,87,.05);border-radius:12px;padding:16px}
+.error-box h4{color:var(--danger);margin-bottom:8px}
+.error-box li{color:var(--dim)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:12px 16px;margin:12px 0;background:rgba(255,255,255,.03);border-radius:12px;font-size:13px;color:var(--dim)}
+.legend .lg-item{display:inline-flex;align-items:center;gap:7px}
+.legend .swatch{width:14px;height:14px;border-radius:4px;display:inline-block}
+footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30px 20px}
+.footer-logo{height:40px;border-radius:8px}
+.footer-line{color:var(--dim);margin-top:12px;font-size:16px}
+.recap-list li{margin:6px 0}
+@media(max-width:860px){.sort-columns{grid-template-columns:1fr!important}.nav-links a{font-size:12px;padding:5px 10px}}
 </style>
 </head>
 <body>
-<div class="bg-layer">
-  <div class="bg-gradient"></div>
-</div>
+<div class="bg-layer"><div class="bg-gradient"></div></div>
 
 <nav class="nav" id="mainNav">
   <img class="nav-logo" src="data:image/webp;base64,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" alt="Bilal">
@@ -269,411 +149,337 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 </nav>
 
 <main>
-  <!-- ============ HERO ============ -->
-  <section class="hero section-inner" id="hero">
-    <div class="hero-circle" style="width:300px;height:300px;background:rgba(25,60,255,0.5);top:8%;right:12%;"></div>
-    <div class="hero-circle" style="width:220px;height:220px;background:rgba(0,212,170,0.5);bottom:18%;left:10%;animation-delay:1.5s;"></div>
-    <div class="hero-circle" style="width:160px;height:160px;background:rgba(139,92,246,0.5);top:20%;left:30%;animation-delay:3s;"></div>
-    <div class="hero-badge">Security Controls</div>
-    <h1><span class="gradient-text">Security Controls</span> &amp; Defense in Depth</h1>
-    <p class="subtitle">إزاي نحمي نفسنا؟ وإذا طبقة حماية فشلت، إيه اللي بيمسك الموقف؟</p>
-    <button class="start-btn" data-id="hero-start">ابدأ الدرس</button>
-  </section>
 
-  <!-- ============ INTRO ============ -->
-  <section id="intro">
-    <div class="section-head ac-1 section-inner">
-      <div class="section-number">✦</div>
-      <h2>إيه هي الـ <span class="dir-ltr">Security Controls</span>؟</h2>
-    </div>
-    <div class="section-inner card">
-      <p>الـ <span class="dir-ltr">Security Controls</span> هي مجموعة وسائل بتشتغل مع بعض لتقليل فرصة الهجوم واكتشافه بسرعة لو حصل — مش أداة واحدة سحرية. قبل ما ندخل، نراجع بسرعة ثلاث حاجات مهمة:</p>
-      <ul class="recap-list" style="margin:14px 0;padding-right:20px;">
-        <li><span class="highlight">Cyber Threats</span> — أي حاجة ممكن تسبب ضرر لجهازك أو بياناتك.</li>
-        <li><span class="highlight">Security Risks</span> — احتمال إن التهديد ينجح فعلاً ويسبب ضرر.</li>
-        <li><span class="highlight">Layered Protection</span> — طبقات حماية متعددة، بحيث لو طبقة فشلت اللي بعدها تمسك الموقف.</li>
-      </ul>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">تشبيه البيت</h4>
-        <p style="color:var(--dim);">اضغط على كل أداة تحميات واحدة واحدة — كل ضغطة تضيف طبقة حماية للبيت:</p>
-        <div class="btn-row" style="justify-content:center;">
-          <button class="protect-chip" data-id="house-door">🚪 الباب</button>
-          <button class="protect-chip" data-id="house-lock">🔒 القفل</button>
-          <button class="protect-chip" data-id="house-cam">📷 الكاميرا</button>
-          <button class="protect-chip" data-id="house-alarm">🚨 الإنذار</button>
-          <button class="protect-chip" data-id="house-guard">🕴️ الحارس</button>
-          <button class="btn btn-ghost" data-id="house-reset">↩️ إعادة</button>
-        </div>
-        <div class="house-stage">
-          <div class="house-icon" style="filter:drop-shadow(0 0 25px rgba(0,212,170,0.4))">🏠</div>
-          <div class="layer-badge" style="top:8%;right:22%;" data-badge="door">+ الباب: أول نقطة دخول</div>
-          <div class="layer-badge" style="top:20%;left:14%;" data-badge="lock">+ القفل: مينفعش تدخل غير بإذن</div>
-          <div class="layer-badge" style="bottom:22%;right:16%;" data-badge="cam">+ الكاميرا: بتراقب اللي حواليك</div>
-          <div class="layer-badge" style="bottom:8%;left:24%;" data-badge="alarm">+ الإنذار: بينبه لو حصل خطر</div>
-          <div class="layer-badge" style="top:6%;left:34%;" data-badge="guard">+ الحارس: يحمي ويواجه الخطر</div>
-        </div>
-        <div style="text-align:center;font-weight:700;font-size:16px;color:var(--accent);min-height:26px;" id="house-out"></div>
-        <div class="legend">
-          <span class="lg-item"><span class="swatch" style="background:var(--s1)"></span> طبقة حماية مضافة</span>
-          <span class="lg-item"><span class="swatch" style="background:rgba(255,255,255,0.15)"></span> لسه مش مضافة</span>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>مظنش إن حماية واحدة كفاية — حتى لو الهاكر عرف الباسورد، هيقف عند الـ MFA.</li>
-        <li>مظنش إن Security Controls حاجة واحدة؛ دي مجموعة وسائل مكملة لبعضها.</li>
-      </ul>
-    </div>
-  </section>
+<section class="hero section-inner" id="hero">
+  <div class="hero-circle" style="width:300px;height:300px;background:rgba(25,60,255,.5);top:8%;right:12%"></div>
+  <div class="hero-circle" style="width:220px;height:220px;background:rgba(0,212,170,.5);bottom:18%;left:10%;animation-delay:1.5s"></div>
+  <div class="hero-circle" style="width:160px;height:160px;background:rgba(139,92,246,.5);top:20%;left:30%;animation-delay:3s"></div>
+  <div class="hero-badge">Security Controls</div>
+  <h1><span class="gradient-text">Security Controls</span> &amp; Defense in Depth</h1>
+  <p class="subtitle">إزاي نحمي نفسنا؟ وإذا طبقة حماية فشلت، إيه اللي بيمسك الموقف؟</p>
+  <button class="start-btn" id="heroStart">ابدأ الدرس</button>
+</section>
 
-  <!-- ============ SEC 1 ============ -->
-  <section id="sec1">
-    <div class="section-head ac-2 section-inner">
-      <div class="section-number">01</div>
-      <h2>الضوابط الثلاثة: إدارية، تقنية، مادية</h2>
-    </div>
-    <div class="section-inner card">
-      <p>أي Control بنقسمه حسب <span class="highlight">نوعه</span> لواحد من تلاتة:</p>
-      <ul class="recap-list" style="padding-right:20px;margin:12px 0;">
-        <li><span class="highlight">Administrative</span> — سياسات وتدريب: Policies, Procedures, Standards, Awareness Training.</li>
-        <li><span class="highlight">Technical</span> — برامج وأجهزة: Firewall, Antivirus, EDR, MFA, SIEM.</li>
-        <li><span class="highlight">Physical</span> — حماية المكان: Guards, CCTV, Locks, Access Badges.</li>
-      </ul>
-    </div>
-    <div class="section-inner card">
-      <h4 style="margin-bottom:8px;">أمثلة من الواقع</h4>
-      <ul class="recap-list" style="padding-right:20px;">
-        <li><span class="highlight">Administrative:</span> سياسة تمنع مشاركة الباسورد، معيار "12 حرف على الأقل".</li>
-        <li><span class="highlight">Technical (Antivirus):</span> بيدور على Signature معروفة — وممكن يفوت Malware جديد أو سلوك غريب بعد التشغيل.</li>
-        <li><span class="highlight">Technical (EDR):</span> بيراقب سلوك الجهاز باستمرار (برامج شغالة، ملفات بتتغير، اتصالات خارجة، PowerShell) ويقدر يعزل الجهاز بنفسه.</li>
-        <li><span class="highlight">Physical:</span> بطاقة دخول لموظف HR بتفتحله قسمه بس، مش غرفة السيرفرات.</li>
-      </ul>
-    </div>
-    <div class="section-inner card">
-      <h4 style="margin-bottom:8px;">الفرق بين EDR و SIEM</h4>
-      <table style="width:100%;border-collapse:collapse;font-size:14px;">
-        <tr style="background:rgba(25,60,255,0.15);">
-          <th style="padding:10px;border:1px solid rgba(255,255,255,0.1);">الأداة</th>
-          <th style="padding:10px;border:1px solid rgba(255,255,255,0.1);">نطاق الحماية</th>
-          <th style="padding:10px;border:1px solid rgba(255,255,255,0.1);">القدرة الخاصة</th>
-        </tr>
-        <tr>
-          <td class="dir-ltr" style="padding:10px;border:1px solid rgba(255,255,255,0.1);font-weight:700;">EDR</td>
-          <td style="padding:10px;border:1px solid rgba(255,255,255,0.1);">Endpoint واحد</td>
-          <td style="padding:10px;border:1px solid rgba(255,255,255,0.1);">يقدر يعزل الجهاز</td>
-        </tr>
-        <tr>
-          <td class="dir-ltr" style="padding:10px;border:1px solid rgba(255,255,255,0.1);font-weight:700;">SIEM</td>
-          <td style="padding:10px;border:1px solid rgba(255,255,255,0.1);">المؤسسة كلها</td>
-          <td style="padding:10px;border:1px solid rgba(255,255,255,0.1);">بيجمع logs من كل الأجهزة ويعمل Correlation</td>
-        </tr>
-      </table>
-      <p style="margin-top:10px;color:var(--dim);font-size:14px;">مثال: نفس اليوزر دخل من القاهرة، وبعدها بدقيقتين من ألمانيا، مع تنزيل ضخم — الـ <span class="dir-ltr">SIEM</span> يربطهم ويقول "دي Incident واحدة".</p>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">المعركة: صُنّف كل Control</h4>
-        <p style="color:var(--dim);font-size:14px;">اضغط على كل أداة لوضعها في العمود الصح (Administrative / Technical / Physical):</p>
-        <div class="sort-pool" id="sortPool"></div>
-        <div class="sort-columns" id="sortCols"></div>
-        <div class="sort-msg" id="sortMsg"></div>
-        <div class="btn-row">
-          <button class="btn btn-ghost" data-id="sort-reset">↩️ إعادة</button>
-          <button class="btn btn-primary" data-id="sort-check">تحقق من الحل</button>
-        </div>
+<section id="intro">
+  <div class="section-head ac-1 section-inner"><div class="section-number">✦</div><h2>إيه هي الـ <span class="dir-ltr">Security Controls</span>؟</h2></div>
+  <div class="section-inner card">
+    <p>الـ <span class="dir-ltr">Security Controls</span> هي مجموعة وسائل بتشتغل مع بعض لتقليل فرصة الهجوم واكتشافه بسرعة لو حصل — مش أداة واحدة سحرية. قبل ما ندخل، نراجع بسرعة ثلاث حاجات مهمة:</p>
+    <ul class="recap-list" style="margin:14px 0;padding-right:20px">
+      <li><span class="highlight">Cyber Threats</span> — أي حاجة ممكن تسبب ضرر لجهازك أو بياناتك.</li>
+      <li><span class="highlight">Security Risks</span> — احتمال إن التهديد ينجح فعلاً ويسبب ضرر.</li>
+      <li><span class="highlight">Layered Protection</span> — طبقات حماية متعددة، بحيث لو طبقة فشلت اللي بعدها تمسك الموقف.</li>
+    </ul>
+  </div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">تشبيه البيت</h4>
+      <p style="color:var(--dim)">اضغط على كل أداة تحميات واحدة واحدة — كل ضغطة تضيف طبقة حماية للبيت:</p>
+      <div class="btn-row" style="justify-content:center">
+        <button class="protect-chip" data-key="door">🚪 الباب</button>
+        <button class="protect-chip" data-key="lock">🔒 القفل</button>
+        <button class="protect-chip" data-key="cam">📷 الكاميرا</button>
+        <button class="protect-chip" data-key="alarm">🚨 الإنذار</button>
+        <button class="protect-chip" data-key="guard">🕴️ الحارس</button>
+        <button class="btn btn-ghost" id="houseReset">↩️ إعادة</button>
+      </div>
+      <div class="house-stage">
+        <div class="house-icon" style="filter:drop-shadow(0 0 25px rgba(0,212,170,.4))">🏠</div>
+        <div class="layer-badge" style="top:8%;right:22%" data-badge="door">+ الباب: أول نقطة دخول</div>
+        <div class="layer-badge" style="top:20%;left:14%" data-badge="lock">+ القفل: مينفعش تدخل غير بإذن</div>
+        <div class="layer-badge" style="bottom:22%;right:16%" data-badge="cam">+ الكاميرا: بتراقب اللي حواليك</div>
+        <div class="layer-badge" style="bottom:8%;left:24%" data-badge="alarm">+ الإنذار: بينبه لو حصل خطر</div>
+        <div class="layer-badge" style="top:6%;left:34%" data-badge="guard">+ الحارس: يحمي ويواجه الخطر</div>
+      </div>
+      <div style="text-align:center;font-weight:700;font-size:16px;color:var(--accent);min-height:26px" id="houseOut"></div>
+      <div class="legend">
+        <span class="lg-item"><span class="swatch" style="background:var(--s1)"></span> طبقة حماية مضافة</span>
+        <span class="lg-item"><span class="swatch" style="background:rgba(255,255,255,.15)"></span> لسه مش مضافة</span>
       </div>
     </div>
-    <div class="section-inner card">
-      <div class="quiz-box">
-        <button class="btn btn-ghost quiz-reveal-btn" data-id="q1-reveal">🧠 سؤال سريع (اضغط للإظهار)</button>
-        <div class="quiz-hidden" data-quiz="q1">
-          <p style="margin-bottom:8px;">"سياسة بتطالب كل موظف إنه يغيّر باسورده كل 90 يوم" — ده نوع إيه؟</p>
-          <button class="quiz-q" data-q1="data:Administrative">الإدارية Administrative</button>
-          <button class="quiz-q" data-q1="data:Technical">التقنية Technical</button>
-          <button class="quiz-q" data-q1="data:Physical">المادية Physical</button>
-          <span class="quiz-feedback" data-fb="q1"></span>
-          <div class="btn-row"><button class="btn btn-ghost" data-id="q1-skip">تخطي</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>الخلط بين نوع الـ Control ووظيفته — النوع بيجاوب "إيه هو؟" والوظيفة بتجاوب "بيعمل إيه؟".</li>
-        <li>الناس بتظن إن التدريب والـ Policies مش Controls؛ بيفضلوا الأدوات التقنية بس.</li>
-      </ul>
-    </div>
-  </section>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>مظنش إن حماية واحدة كفاية — حتى لو الهاكر عرف الباسورد، هيقف عند الـ MFA.</li>
+      <li>مظنش إن Security Controls حاجة واحدة؛ دي مجموعة وسائل مكملة لبعضها.</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- ============ SEC 2 ============ -->
-  <section id="sec2">
-    <div class="section-head ac-3 section-inner">
-      <div class="section-number">02</div>
-      <h2>وظائف الضوابط: تمنع، تكتشف، تصلح، تسترجع</h2>
-    </div>
-    <div class="section-inner card">
-      <p>مهم نفهم إن الـ <span class="highlight">Control Function</span> مختلفة عن الـ <span class="highlight">Control Type</span>:</p>
-      <ul class="recap-list" style="padding-right:20px;margin:12px 0;">
-        <li><span class="highlight">Type</span> بيجاوب "إيه هو؟" → Technical / Administrative / Physical.</li>
-        <li><span class="highlight">Function</span> بيجاوب "بيعمل إيه؟" → Preventive / Detective / Corrective / Recovery.</li>
-      </ul>
-    </div>
-    <div class="section-inner card">
-      <h4 style="margin-bottom:8px;">الوظائف الأربع</h4>
-      <ul class="recap-list" style="padding-right:20px;">
-        <li><span class="highlight">Preventive</span> — يمنع من البداية، زي MFA وقفت مهاجم عرف الباسورد الغلط.</li>
-        <li><span class="highlight">Detective</span> — بيكتشف بعد ما يحصل، زي SIEM لاحظ Login غريب وبعت Alert.</li>
-        <li><span class="highlight">Corrective</span> — بيصلح بعد الحادثة، زي IT حذف Malware وسطب Patch.</li>
-        <li><span class="highlight">Recovery</span> — بيرجع الأمور لطبيعتها، زي استرجاع Backup بعد Ransomware.</li>
-      </ul>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">مصفوفة النوع × الوظيفة</h4>
-        <p style="color:var(--dim);font-size:14px;">اختر Control من القائمة ليشوفك مكانه في المصفوفة (نوعه + وظيفته سوا):</p>
-        <div class="control-list" id="matrixCtrls"></div>
-        <div style="margin-top:14px;">
-          <div class="matrix-wrap">
-            <table class="matrix">
-              <thead>
-                <tr>
-                  <th style="background:rgba(255,255,255,0.06);">النوع \ الوظيفة</th>
-                  <th>Preventive</th>
-                  <th>Detective</th>
-                  <th>Corrective</th>
-                  <th>Recovery</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td class="row-head">Technical</td><td data-cell="t-p">ت</td><td data-cell="t-d">ت</td><td data-cell="t-c">ت</td><td data-cell="t-r">ت</td></tr>
-                <tr><td class="row-head">Administrative</td><td data-cell="a-p">إ</td><td data-cell="a-d">إ</td><td data-cell="a-c">إ</td><td data-cell="a-r">إ</td></tr>
-                <tr><td class="row-head">Physical</td><td data-cell="p-p">م</td><td data-cell="p-d">م</td><td data-cell="p-c">م</td><td data-cell="p-r">م</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="matrix-readout" id="matrixOut" style="font-size:var(--text);">اضغط على أي Control من فوق 👆</div>
-        <div class="legend">
-          <span class="lg-item"><span class="swatch" style="background:var(--s3)"></span> نوع الـ Control</span>
-          <span class="lg-item"><span class="swatch" style="background:var(--accent)"></span> وظيفة الـ Control</span>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner card">
-      <div class="quiz-box">
-        <button class="btn btn-ghost quiz-reveal-btn" data-id="q2-reveal">🧠 سؤال سريع (اضغط للإظهار)</button>
-        <div class="quiz-hidden" data-quiz="q2">
-          <p style="margin-bottom:8px;">الـ <span class="dir-ltr">SIEM</span> لاحظ دخول غريب من مكان مختلف وبعت Alert — دي وظيفة إيه؟</p>
-          <button class="quiz-q" data-q2="data:Preventive">Preventive (تمنع)</button>
-          <button class="quiz-q" data-q2="data:Detective">Detective (تكتشف)</button>
-          <button class="quiz-q" data-q2="data:Corrective">Corrective (تصلح)</button>
-          <button class="quiz-q" data-q2="data:Recovery">Recovery (تسترجع)</button>
-          <span class="quiz-feedback" data-fb="q2"></span>
-          <div class="btn-row"><button class="btn btn-ghost" data-id="q2-skip">تخطي</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>الخلط بين Control Type و Control Function — السؤال الأسئلة: "إيه هو؟" مش "بيعمل إيه؟".</li>
-        <li>ظن إن أي أداة تقنية وظيفتها Preventive فقط — ممكن تكون Detective زي SIEM.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ SEC 3 ============ -->
-  <section id="sec3">
-    <div class="section-head ac-4 section-inner">
-      <div class="section-number">03</div>
-      <h2>المراقبة، الاكتشاف، ومركز العمليات الأمنية (SOC)</h2>
-    </div>
-    <div class="section-inner card">
-      <p>وجود الـ Controls لوحده مش كفاية — لازم <span class="highlight">مراقبة مستمرة</span> (Logging, Alerting, Monitoring, Threat Detection). وفيه فريق متخصص اسمه <span class="highlight">SOC</span> بيراقب 24/7 ويتعامل مع الحوادث. شغل الـ SOC بيمشي بخطوات ثابتة:</p>
-      <div class="card-sm" style="background:rgba(255,255,255,0.03);margin-top:12px;">
-        <p style="font-size:14px;"><span class="highlight">مثال:</span> نظام لاحظ آلاف محاولات تسجيل دخول في دقيقة واحدة → Alert لفريق الـ SOC.</p>
-      </div>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">خطوات عمل الـ SOC</h4>
-        <div class="step-progress"><div class="fill" id="sec3bar" style="width:20%"></div></div>
-        <div class="step-count" id="sec3count">1 / 5</div>
-        <div class="steps" id="sec3steps"></div>
-        <div class="btn-row">
-          <button class="btn btn-ghost" data-id="sec3-prev">السابق</button>
-          <button class="btn btn-primary" data-id="sec3-next">التالي</button>
-          <button class="btn btn-ghost" data-id="sec3-reset">↩️ إعادة</button>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner card">
-      <h4 style="margin-bottom:8px;">دور الـ Security Analyst</h4>
-      <ul class="recap-list" style="padding-right:20px;">
-        <li>Monitor Alerts — يراقب التنبيهات باستمرار.</li>
-        <li>Investigate — يحقق في الحوادث.</li>
-        <li>Analyze — يحلل الأدلة والسبب.</li>
-        <li>Respond — يستجيب ويعالج.</li>
-        <li>Protect Assets — يحمي أصول المؤسسة.</li>
-      </ul>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>الاعتقاد إن تثبيت الأدوات كفاية من غير مراقبة مستمرة.</li>
-        <li>الخلط بين الـ SOC (الفريق اللي بيراقب) والـ SIEM (الأداة اللي بتجمع الـ Logs).</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ SEC 4 ============ -->
-  <section id="sec4">
-    <div class="section-head ac-5 section-inner">
-      <div class="section-number">04</div>
-      <h2>الدفاع متعدد الطبقات (Defense in Depth)</h2>
-    </div>
-    <div class="section-inner card">
-      <p>الأمان الحقيقي مش أداة واحدة، لكن <span class="highlight">طبقات بتشتغل مع بعض</span>: <span class="dir-ltr">People + Administrative + Technical + Physical + Monitoring = Secure Organization</span>. لو طبقة فشلت، الطبقة اللي بعدها تمسك الموقف.</p>
-      <div class="card-sm" style="background:rgba(255,255,255,0.03);margin-top:12px;">
-        <p style="font-size:14px;">مثال: حتى لو الهاكر عرف الباسورد، هيقابله MFA، ولو دخل هيكتشفه الـ SIEM، ولو بدأ يهاجم الجهاز الـ EDR هيعزله.</p>
-      </div>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">المجموعة: أوقف أي طبقة وشوف إيه بيحصل</h4>
-        <p style="color:var(--dim);font-size:14px;">اضغط على أي طبقة لتشغيلها/إيقافها — شيوف إزاي الهاكر بياخد خطوات أكتر لو طبقة وقعت:</p>
-        <div class="layer-stack" id="layerStack"></div>
-        <div class="attacker-run">
-          <span class="attacker">🕵️</span>
-          <span id="layerOut">الهاكر بيحاول يعدي من الشمال للجنوب...</span>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-ghost" data-id="layers-reset">↩️ إعادة الكل على</button>
-        </div>
-        <div class="legend">
-          <span class="lg-item"><span class="swatch" style="background:rgba(16,185,129,0.5)"></span> طبقة شغالة</span>
-          <span class="lg-item"><span class="swatch" style="background:rgba(255,71,87,0.5)"></span> طبقة واقعة</span>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>الاعتماد على طبقة واحدة فقط والظن إنها كافية — عشان كده بنبني طبقات.</li>
-        <li>الإهمال في المراقبة؛ الطبقات مش مفيدة لو حد مش بيراقبها.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ SEC 5 ============ -->
-  <section id="sec5">
-    <div class="section-head ac-6 section-inner">
-      <div class="section-number">05</div>
-      <h2>رحلة هجوم Phishing عبر كل طبقات الدفاع</h2>
-    </div>
-    <div class="section-inner card">
-      <p>خلينا نربط كل حاجة اتعلمناها في مثال واحد متكامل — نفس هجوم الـ <span class="dir-ltr">Phishing</span> بيتقابل بطبقة دفاع مختلفة في كل مرحلة:</p>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <div class="step-progress"><div class="fill" id="sec5bar" style="width:16.66%"></div></div>
-        <div class="step-count" id="sec5count">1 / 6</div>
-        <div class="steps" id="sec5steps"></div>
-        <div class="btn-row">
-          <button class="btn btn-ghost" data-id="sec5-prev">السابق</button>
-          <button class="btn btn-primary" data-id="sec5-next">التالي</button>
-          <button class="btn btn-ghost" data-id="sec5-reset">↩️ رجعل للبداية</button>
-        </div>
-      </div>
-    </div>
-    <div class="section-inner error-box">
-      <h4>⚠️ أخطاء شائعة</h4>
-      <ul style="padding-right:18px;">
-        <li>ظن إن مفيش دفاع بيوقف الـ Phishing من الأول — الـ Awareness Training بيمنع أغلب الهجمات.</li>
-        <li>عدم ربط المراحل ببعضها؛ كل طبقة بتتعامل مع مرحلة مختلفة من الهجوم.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ ACTIVITY 1 ============ -->
-  <section id="act1">
-    <div class="section-head ac-1 section-inner">
-      <div class="section-number">A1</div>
-      <h2>ابني دفاعك السيبراني</h2>
-    </div>
-    <div class="section-inner activity-card">
-      <p>الشركة: ناشئة فيها 30 موظف، مكتب واحد، Cloud Email، Company Laptops، Customer Database، Wi-Fi Network. المطلوب: تختار على الأقل Control إداري واحد، وControl تقني واحد، وControl مادي واحد، وتشرح ليه اخترت كل واحد، وتجاوب: <span class="highlight">"أنهي Control بيقلل المخاطر أكتر؟"</span></p>
+<section id="sec1">
+  <div class="section-head ac-2 section-inner"><div class="section-number">01</div><h2>الضوابط الثلاثة: إدارية، تقنية، مادية</h2></div>
+  <div class="section-inner card">
+    <p>أي Control بنقسمه حسب <span class="highlight">نوعه</span> لواحد من تلاتة:</p>
+    <ul class="recap-list" style="padding-right:20px;margin:12px 0">
+      <li><span class="highlight">Administrative</span> — سياسات وتدريب: Policies, Procedures, Standards, Awareness Training.</li>
+      <li><span class="highlight">Technical</span> — برامج وأجهزة: Firewall, Antivirus, EDR, MFA, SIEM.</li>
+      <li><span class="highlight">Physical</span> — حماية المكان: Guards, CCTV, Locks, Access Badges.</li>
+    </ul>
+  </div>
+  <div class="section-inner card">
+    <h4 style="margin-bottom:8px">أمثلة من الواقع</h4>
+    <ul class="recap-list" style="padding-right:20px">
+      <li><span class="highlight">Administrative:</span> سياسة تمنع مشاركة الباسورد، معيار "12 حرف على الأقل".</li>
+      <li><span class="highlight">Technical (Antivirus):</span> بيدور على Signature معروفة — وممكن يفوت Malware جديد أو سلوك غريب بعد التشغيل.</li>
+      <li><span class="highlight">Technical (EDR):</span> بيراقب سلوك الجهاز باستمرار (برامج شغالة، ملفات بتتغير، اتصالات خارجة، PowerShell) ويقدر يعزل الجهاز بنفسه.</li>
+      <li><span class="highlight">Physical:</span> بطاقة دخول لموظف HR بتفتحله قسمه بس، مش غرفة السيرفرات.</li>
+    </ul>
+  </div>
+  <div class="section-inner card">
+    <h4 style="margin-bottom:8px">الفرق بين EDR و SIEM</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <tr style="background:rgba(25,60,255,.15)"><th style="padding:10px;border:1px solid rgba(255,255,255,.1)">الأداة</th><th style="padding:10px;border:1px solid rgba(255,255,255,.1)">نطاق الحماية</th><th style="padding:10px;border:1px solid rgba(255,255,255,.1)">القدرة الخاصة</th></tr>
+      <tr><td class="dir-ltr" style="padding:10px;border:1px solid rgba(255,255,255,.1);font-weight:700">EDR</td><td style="padding:10px;border:1px solid rgba(255,255,255,.1)">Endpoint واحد</td><td style="padding:10px;border:1px solid rgba(255,255,255,.1)">يقدر يعزل الجهاز</td></tr>
+      <tr><td class="dir-ltr" style="padding:10px;border:1px solid rgba(255,255,255,.1);font-weight:700">SIEM</td><td style="padding:10px;border:1px solid rgba(255,255,255,.1)">المؤسسة كلها</td><td style="padding:10px;border:1px solid rgba(255,255,255,.1)">بيجمع logs من كل الأجهزة ويعمل Correlation</td></tr>
+    </table>
+    <p style="margin-top:10px;color:var(--dim);font-size:14px">مثال: نفس اليوزر دخل من القاهرة، وبعدها بدقيقتين من ألمانيا، مع تنزيل ضخم — الـ <span class="dir-ltr">SIEM</span> يربطهم ويقول "دي Incident واحدة".</p>
+  </div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">المعركة: صُنّف كل Control</h4>
+      <p style="color:var(--dim);font-size:14px">اضغط على كل أداة لوضعها في العمود الصح (Administrative / Technical / Physical):</p>
+      <div class="sort-pool" id="sortPool"></div>
+      <div class="sort-columns" id="sortCols"></div>
+      <div class="sort-msg" id="sortMsg"></div>
       <div class="btn-row">
-        <button class="btn btn-ghost quiz-reveal-btn" data-id="act1-reveal">اعرض كل الإجابات</button>
-      </div>
-      <div class="activity-answers" data-answers="act1">
-        <div class="answer-row"><b>Administrative:</b> Security Awareness Training — بيمنع أغلب الهجمات من الأساس لأنها بتبدأ بإنسان.</div>
-        <div class="answer-row"><b>Technical:</b> MFA — لو الباسورد اتسرق، المهاجم لسه محتاج العامل التاني.</div>
-        <div class="answer-row"><b>Physical:</b> Access Badges — يمنع أي حد غريب من الوصول.</div>
-        <div class="answer-row"><b>الجواب النهائي:</b> مفيش إجابة واحدة صح، بس لشركات صغيرة، Security Awareness Training غالبًا بيحقق أكبر تأثير.</div>
+        <button class="btn btn-ghost" id="sortReset">↩️ إعادة</button>
+        <button class="btn btn-primary" id="sortCheck">تحقق من الحل</button>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="section-inner card">
+    <div class="quiz-box">
+      <button class="btn btn-ghost" id="q1Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
+      <div class="quiz-hidden" id="q1Box">
+        <p style="margin-bottom:8px">"سياسة بتطالب كل موظف إنه يغيّر باسورده كل 90 يوم" — ده نوع إيه؟</p>
+        <button class="quiz-q" data-q="q1" data-val="Administrative">الإدارية Administrative</button>
+        <button class="quiz-q" data-q="q1" data-val="Technical">التقنية Technical</button>
+        <button class="quiz-q" data-q="q1" data-val="Physical">المادية Physical</button>
+        <span class="quiz-feedback" id="q1Fb"></span>
+        <div class="btn-row"><button class="btn btn-ghost" id="q1Skip">تخطي</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>الخلط بين نوع الـ Control ووظيفته — النوع بيجاوب "إيه هو؟" والوظيفة بتجاوب "بيعمل إيه؟".</li>
+      <li>الناس بتظن إن التدريب والـ Policies مش Controls؛ بيفضلوا الأدوات التقنية بس.</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- ============ ACTIVITY 2 ============ -->
-  <section id="act2">
-    <div class="section-head ac-3 section-inner">
-      <div class="section-number">A2</div>
-      <h2>تحدي الدفاع السيبراني</h2>
+<section id="sec2">
+  <div class="section-head ac-3 section-inner"><div class="section-number">02</div><h2>وظائف الضوابط: تمنع، تكتشف، تصلح، تسترجع</h2></div>
+  <div class="section-inner card">
+    <p>مهم نفهم إن الـ <span class="highlight">Control Function</span> مختلفة عن الـ <span class="highlight">Control Type</span>:</p>
+    <ul class="recap-list" style="padding-right:20px;margin:12px 0">
+      <li><span class="highlight">Type</span> بيجاوب "إيه هو؟" → Technical / Administrative / Physical.</li>
+      <li><span class="highlight">Function</span> بيجاوب "بيعمل إيه؟" → Preventive / Detective / Corrective / Recovery.</li>
+    </ul>
+  </div>
+  <div class="section-inner card">
+    <h4 style="margin-bottom:8px">الوظائف الأربع</h4>
+    <ul class="recap-list" style="padding-right:20px">
+      <li><span class="highlight">Preventive</span> — يمنع من البداية، زي MFA وقفت مهاجم عرف الباسورد الغلط.</li>
+      <li><span class="highlight">Detective</span> — بيكتشف بعد ما يحصل، زي SIEM لاحظ Login غريب وبعت Alert.</li>
+      <li><span class="highlight">Corrective</span> — بيصلح بعد الحادثة، زي IT حذف Malware وسطب Patch.</li>
+      <li><span class="highlight">Recovery</span> — بيرجع الأمور لطبيعتها، زي استرجاع Backup بعد Ransomware.</li>
+    </ul>
+  </div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">مصفوفة النوع × الوظيفة</h4>
+      <p style="color:var(--dim);font-size:14px">اختر Control من القائمة ليشوفك مكانه في المصفوفة (نوعه + وظيفته سوا):</p>
+      <div class="control-list" id="matrixCtrls"></div>
+      <div style="margin-top:14px"><div class="matrix-wrap">
+        <table class="matrix">
+          <thead><tr><th style="background:rgba(255,255,255,.06)">النوع \ الوظيفة</th><th>Preventive</th><th>Detective</th><th>Corrective</th><th>Recovery</th></tr></thead>
+          <tbody>
+            <tr><td class="row-head">Technical</td><td data-cell="t-p">ت</td><td data-cell="t-d">ت</td><td data-cell="t-c">ت</td><td data-cell="t-r">ت</td></tr>
+            <tr><td class="row-head">Administrative</td><td data-cell="a-p">إ</td><td data-cell="a-d">إ</td><td data-cell="a-c">إ</td><td data-cell="a-r">إ</td></tr>
+            <tr><td class="row-head">Physical</td><td data-cell="p-p">م</td><td data-cell="p-d">م</td><td data-cell="p-c">م</td><td data-cell="p-r">م</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+      <div class="matrix-readout" id="matrixOut">اضغط على أي Control من فوق 👆</div>
+      <div class="legend">
+        <span class="lg-item"><span class="swatch" style="background:var(--s3)"></span> نوع الـ Control</span>
+        <span class="lg-item"><span class="swatch" style="background:var(--accent)"></span> وظيفة الـ Control</span>
+      </div>
     </div>
-    <div class="section-inner activity-card">
-      <p>مراحل الهجوم السِتة — فكر في أفضل Control لكل مرحلة:</p>
-      <div class="activity-stage"><h4>1. الموظف يضغط على إيميل Phishing</h4></div>
-      <div class="activity-stage"><h4>2. بيانات الدخول اتسرقت</h4></div>
-      <div class="activity-stage"><h4>3. Malware اتنزل على الجهاز</h4></div>
-      <div class="activity-stage"><h4>4. الهاكر وصل للسيرفر</h4></div>
-      <div class="activity-stage"><h4>5. بيانات العملاء اتسرقت</h4></div>
-      <div class="activity-stage"><h4>6. حصل Security Incident</h4></div>
+  </div>
+  <div class="section-inner card">
+    <div class="quiz-box">
+      <button class="btn btn-ghost" id="q2Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
+      <div class="quiz-hidden" id="q2Box">
+        <p style="margin-bottom:8px">الـ <span class="dir-ltr">SIEM</span> لاحظ دخول غريب من مكان مختلف وبعت Alert — دي وظيفة إيه؟</p>
+        <button class="quiz-q" data-q="q2" data-val="Preventive">Preventive (تمنع)</button>
+        <button class="quiz-q" data-q="q2" data-val="Detective">Detective (تكتشف)</button>
+        <button class="quiz-q" data-q="q2" data-val="Corrective">Corrective (تصلح)</button>
+        <button class="quiz-q" data-q="q2" data-val="Recovery">Recovery (تسترجع)</button>
+        <span class="quiz-feedback" id="q2Fb"></span>
+        <div class="btn-row"><button class="btn btn-ghost" id="q2Skip">تخطي</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>الخلط بين Control Type و Control Function — السؤال: "إيه هو؟" مش "بيعمل إيه؟".</li>
+      <li>ظن إن أي أداة تقنية وظيفتها Preventive فقط — ممكن تكون Detective زي SIEM.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sec3">
+  <div class="section-head ac-4 section-inner"><div class="section-number">03</div><h2>المراقبة، الاكتشاف، ومركز العمليات الأمنية (SOC)</h2></div>
+  <div class="section-inner card">
+    <p>وجود الـ Controls لوحده مش كفاية — لازم <span class="highlight">مراقبة مستمرة</span> (Logging, Alerting, Monitoring, Threat Detection). وفيه فريق متخصص اسمه <span class="highlight">SOC</span> بيراقب 24/7 ويتعامل مع الحوادث.</p>
+    <div class="card-sm" style="background:rgba(255,255,255,.03);margin-top:12px"><p style="font-size:14px"><span class="highlight">مثال:</span> نظام لاحظ آلاف محاولات تسجيل دخول في دقيقة واحدة → Alert لفريق الـ SOC.</p></div>
+  </div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">خطوات عمل الـ SOC</h4>
+      <div class="step-progress"><div class="fill" id="sec3bar" style="width:20%"></div></div>
+      <div class="step-count" id="sec3count">1 / 5</div>
+      <div id="sec3steps"></div>
       <div class="btn-row">
-        <button class="btn btn-ghost quiz-reveal-btn" data-id="act2-reveal">اعرض كل الإجابات</button>
-      </div>
-      <div class="activity-answers" data-answers="act2">
-        <div class="answer-row"><b>1</b> → Security Awareness Training</div>
-        <div class="answer-row"><b>2</b> → MFA</div>
-        <div class="answer-row"><b>3</b> → Antivirus / EDR</div>
-        <div class="answer-row"><b>4</b> → Firewall</div>
-        <div class="answer-row"><b>5</b> → SIEM + Continuous Monitoring</div>
-        <div class="answer-row"><b>6</b> → SOC</div>
-        <div class="answer-row"><b>هل Control واحد يقدر يوقف الهجوم كله؟</b> لأ، كل Control بيحمي مرحلة مختلفة، عشان كده Defense in Depth.</div>
-        <div class="answer-row"><b>ليه الـ MFA مهمة لو الباسورد اتسرق؟</b> لأن الباسورد لوحده مش كفاية.</div>
-        <div class="answer-row"><b>أنهي Control بيساعد قبل ما الهجوم يبدأ؟</b> Security Awareness Training.</div>
-        <div class="answer-row"><b>أنهي Control بيساعد بعد الاكتشاف؟</b> SOC / SIEM / EDR حسب المرحلة.</div>
+        <button class="btn btn-ghost" id="sec3prev">السابق</button>
+        <button class="btn btn-primary" id="sec3next">التالي</button>
+        <button class="btn btn-ghost" id="sec3reset">↩️ إعادة</button>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="section-inner card">
+    <h4 style="margin-bottom:8px">دور الـ Security Analyst</h4>
+    <ul class="recap-list" style="padding-right:20px">
+      <li>Monitor Alerts — يراقب التنبيهات باستمرار.</li>
+      <li>Investigate — يحقق في الحوادث.</li>
+      <li>Analyze — يحلل الأدلة والسبب.</li>
+      <li>Respond — يستجيب ويعالج.</li>
+      <li>Protect Assets — يحمي أصول المؤسسة.</li>
+    </ul>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>الاعتقاد إن تثبيت الأدوات كفاية من غير مراقبة مستمرة.</li>
+      <li>الخلط بين الـ SOC (الفريق اللي بيراقب) والـ SIEM (الأداة اللي بتجمع الـ Logs).</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- ============ CLOSING ============ -->
-  <section id="closing">
-    <div class="section-head ac-2 section-inner">
-      <div class="section-number">✓</div>
-      <h2>الدرس كله في جملة واحدة</h2>
-    </div>
-    <div class="section-inner card">
-      <p style="font-size:19px;">الهجوم الحقيقي مبيتوقفش بسبب Tool واحدة — الشركات الكبيرة بتبني <span class="highlight">Layers</span> من الحماية (Training + MFA + Firewall + EDR + SIEM + SOC)، وده اسمه <span class="gradient-text">Defense in Depth</span>.</p>
-    </div>
-    <div class="section-inner diagram-box">
-      <div class="top-bar"></div>
-      <div class="inner">
-        <h4 style="margin-bottom:6px;">كل الطبقات شغالة ✓</h4>
-        <div class="layer-stack" id="closingLayers"></div>
+<section id="sec4">
+  <div class="section-head ac-5 section-inner"><div class="section-number">04</div><h2>الدفاع متعدد الطبقات (Defense in Depth)</h2></div>
+  <div class="section-inner card">
+    <p>الأمان الحقيقي مش أداة واحدة، لكن <span class="highlight">طبقات بتشتغل مع بعض</span>: <span class="dir-ltr">People + Administrative + Technical + Physical + Monitoring = Secure Organization</span>. لو طبقة فشلت، الطبقة اللي بعدها تمسك الموقف.</p>
+    <div class="card-sm" style="background:rgba(255,255,255,.03);margin-top:12px"><p style="font-size:14px">مثال: حتى لو الهاكر عرف الباسورد، هيقابله MFA، ولو دخل هيكتشفه الـ SIEM، ولو بدأ يهاجم الجهاز الـ EDR هيعزله.</p></div>
+  </div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">المجموعة: أوقف أي طبقة وشوف إيه بيحصل</h4>
+      <p style="color:var(--dim);font-size:14px">اضغط على أي طبقة لتشغيلها/إيقافها:</p>
+      <div class="layer-stack" id="layerStack"></div>
+      <div class="attacker-run"><span class="attacker">🕵️</span> <span id="layerOut">الهاكر بيحاول يعدي...</span></div>
+      <div class="btn-row"><button class="btn btn-ghost" id="layersReset">↩️ إعادة الكل على</button></div>
+      <div class="legend">
+        <span class="lg-item"><span class="swatch" style="background:rgba(16,185,129,.5)"></span> طبقة شغالة</span>
+        <span class="lg-item"><span class="swatch" style="background:rgba(255,71,87,.5)"></span> طبقة واقعة</span>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>الاعتماد على طبقة واحدة فقط — عشان كده بنبني طبقات.</li>
+      <li>الإهمال في المراقبة؛ الطبقات مش مفيدة لو حد مش بيراقبها.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sec5">
+  <div class="section-head ac-6 section-inner"><div class="section-number">05</div><h2>رحلة هجوم Phishing عبر كل طبقات الدفاع</h2></div>
+  <div class="section-inner card"><p>خلينا نربط كل حاجة اتعلمناها في مثال واحد متكامل — نفس هجوم الـ <span class="dir-ltr">Phishing</span> بيتقابل بطبقة دفاع مختلفة في كل مرحلة:</p></div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <div class="step-progress"><div class="fill" id="sec5bar" style="width:16.66%"></div></div>
+      <div class="step-count" id="sec5count">1 / 6</div>
+      <div id="sec5steps"></div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="sec5prev">السابق</button>
+        <button class="btn btn-primary" id="sec5next">التالي</button>
+        <button class="btn btn-ghost" id="sec5reset">↩️ رجعل للبداية</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-inner error-box">
+    <h4>⚠️ أخطاء شائعة</h4>
+    <ul style="padding-right:18px">
+      <li>ظن إن مفيش دفاع بيوقف الـ Phishing من الأول — الـ Awareness Training بيمنع أغلب الهجمات.</li>
+      <li>عدم ربط المراحل ببعضها؛ كل طبقة بتتعامل مع مرحلة مختلفة من الهجوم.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="act1">
+  <div class="section-head ac-1 section-inner"><div class="section-number">A1</div><h2>ابني دفاعك السيبراني</h2></div>
+  <div class="section-inner activity-card">
+    <p>الشركة: ناشئة فيها 30 موظف، مكتب واحد، Cloud Email، Company Laptops، Customer Database، Wi-Fi Network. المطلوب: تختار على الأقل Control إداري واحد، وControl تقني واحد، وControl مادي واحد، وتشرح ليه اخترت كل واحد، وتجاوب: <span class="highlight">"أنهي Control بيقلل المخاطر أكتر؟"</span></p>
+    <div class="btn-row"><button class="btn btn-ghost" id="act1reveal">اعرض كل الإجابات</button></div>
+    <div class="activity-answers" id="act1ans">
+      <div class="answer-row"><b>Administrative:</b> Security Awareness Training — بيمنع أغلب الهجمات من الأساس لأنها بتبدأ بإنسان.</div>
+      <div class="answer-row"><b>Technical:</b> MFA — لو الباسورد اتسرق، المهاجم لسه محتاج العامل التاني.</div>
+      <div class="answer-row"><b>Physical:</b> Access Badges — يمنع أي حد غريب من الوصول.</div>
+      <div class="answer-row"><b>الجواب النهائي:</b> مفيش إجابة واحدة صح، بس لشركات صغيرة، Security Awareness Training غالبًا بيحقق أكبر تأثير.</div>
+    </div>
+  </div>
+</section>
+
+<section id="act2">
+  <div class="section-head ac-3 section-inner"><div class="section-number">A2</div><h2>تحدي الدفاع السيبراني</h2></div>
+  <div class="section-inner activity-card">
+    <p>مراحل الهجوم السِتة — فكر في أفضل Control لكل مرحلة:</p>
+    <div class="activity-stage"><h4>1. الموظف يضغط على إيميل Phishing</h4></div>
+    <div class="activity-stage"><h4>2. بيانات الدخول اتسرقت</h4></div>
+    <div class="activity-stage"><h4>3. Malware اتنزل على الجهاز</h4></div>
+    <div class="activity-stage"><h4>4. الهاكر وصل للسيرفر</h4></div>
+    <div class="activity-stage"><h4>5. بيانات العملاء اتسرقت</h4></div>
+    <div class="activity-stage"><h4>6. حصل Security Incident</h4></div>
+    <div class="btn-row"><button class="btn btn-ghost" id="act2reveal">اعرض كل الإجابات</button></div>
+    <div class="activity-answers" id="act2ans">
+      <div class="answer-row"><b>1</b> → Security Awareness Training</div>
+      <div class="answer-row"><b>2</b> → MFA</div>
+      <div class="answer-row"><b>3</b> → Antivirus / EDR</div>
+      <div class="answer-row"><b>4</b> → Firewall</div>
+      <div class="answer-row"><b>5</b> → SIEM + Continuous Monitoring</div>
+      <div class="answer-row"><b>6</b> → SOC</div>
+      <div class="answer-row"><b>هل Control واحد يقدر يوقف الهجوم كله؟</b> لأ، كل Control بيحمي مرحلة مختلفة، عشان كده Defense in Depth.</div>
+      <div class="answer-row"><b>ليه الـ MFA مهمة لو الباسورد اتسرق؟</b> لأن الباسورد لوحده مش كفاية.</div>
+      <div class="answer-row"><b>أنهي Control بيساعد قبل ما الهجوم يبدأ؟</b> Security Awareness Training.</div>
+      <div class="answer-row"><b>أنهي Control بيساعد بعد الاكتشاف؟</b> SOC / SIEM / EDR حسب المرحلة.</div>
+    </div>
+  </div>
+</section>
+
+<section id="closing">
+  <div class="section-head ac-2 section-inner"><div class="section-number">✓</div><h2>الدرس كله في جملة واحدة</h2></div>
+  <div class="section-inner card"><p style="font-size:19px">الهجوم الحقيقي مبيتوقفش بسبب Tool واحدة — الشركات الكبيرة بتبني <span class="highlight">Layers</span> من الحماية (Training + MFA + Firewall + EDR + SIEM + SOC)، وده اسمه <span class="gradient-text">Defense in Depth</span>.</p></div>
+  <div class="section-inner diagram-box">
+    <div class="top-bar"></div>
+    <div class="inner">
+      <h4 style="margin-bottom:6px">كل الطبقات شغالة ✓</h4>
+      <div class="layer-stack" id="closingLayers"></div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -683,11 +489,9 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  function $(id) { return document.getElementById(id); }
-  function $q(sel) { return document.querySelector(sel); }
 
-  // particles
-  var bg = $q('.bg-layer');
+  /* --- particles --- */
+  var bg = document.querySelector('.bg-layer');
   for (var i = 0; i < 30; i++) {
     var p = document.createElement('div');
     p.className = 'particle';
@@ -697,201 +501,215 @@ document.addEventListener('DOMContentLoaded', function () {
     bg.appendChild(p);
   }
 
-  // nav show on scroll
-  var nav = $('mainNav');
+  /* --- nav --- */
+  var nav = document.getElementById('mainNav');
   window.addEventListener('scroll', function () {
-    if (window.scrollY > 100) nav.classList.add('visible');
-    else nav.classList.remove('visible');
+    nav.classList.toggle('visible', window.scrollY > 100);
   });
 
-  // hero start
-  var heroBtn = $q('[data-id="hero-start"]');
-  if (heroBtn) heroBtn.addEventListener('click', function () {
-    $('intro').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  // reveal on scroll
-  var els = document.querySelectorAll('.section-inner');
+  /* --- scroll reveal --- */
+  var allInner = document.querySelectorAll('.section-inner');
+  function checkVis() {
+    for (var i = 0; i < allInner.length; i++) {
+      var r = allInner[i].getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) allInner[i].classList.add('visible');
+    }
+  }
   if (typeof IntersectionObserver !== 'undefined') {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    var obs = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) entries[i].target.classList.add('visible');
+      }
     }, { threshold: 0.05 });
-    els.forEach(function (el) { io.observe(el); });
+    for (var i = 0; i < allInner.length; i++) obs.observe(allInner[i]);
   }
-  function checkVisibility() {
-    els.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
-    });
-  }
-  window.addEventListener('scroll', checkVisibility);
-  checkVisibility();
+  window.addEventListener('scroll', checkVis);
+  checkVis();
 
-  // ===== HOUSE =====
-  var houseBadges = { door: 1, lock: 1, cam: 1, alarm: 1, guard: 1 };
-  var houseOrder = ['door', 'lock', 'cam', 'alarm', 'guard'];
-  var houseOut = $('house-out');
+  /* --- hero start --- */
+  document.getElementById('heroStart').onclick = function () {
+    document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  /* ===== HOUSE ===== */
+  var hOn = { door: true, lock: true, cam: true, alarm: true, guard: true };
+  var hOrder = ['door', 'lock', 'cam', 'alarm', 'guard'];
+  var hOut = document.getElementById('houseOut');
   function renderHouse() {
-    document.querySelectorAll('.layer-badge').forEach(function (b) {
-      b.classList.toggle('show', !!houseBadges[b.getAttribute('data-badge')]);
-    });
-    document.querySelectorAll('.protect-chip').forEach(function (c) {
-      var id = c.getAttribute('data-id').replace('house-', '');
-      c.classList.toggle('done', id !== 'reset' && !!houseBadges[id]);
-    });
-    var on = houseOrder.filter(function (k) { return houseBadges[k]; }).length;
-    if (on === 0) houseOut.textContent = '\u0627\u0644\u0628\u064A\u062A \u0645\u0646 \u063A\u064A\u0631 \u062D\u0645\u0627\u064A\u0629 \u2014 \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \u0627\u0644\u0623\u062F\u0648\u0627\u062A \u0639\u0634\u0627\u0646 \u062A\u0628\u0646\u064A \u0637\u0642\u0627\u062A!';
-    else if (on < houseOrder.length) houseOut.textContent = '\u0623\u062D\u0633\u0646\u062A! \u0639\u0634\u0627\u0646 \u0643\u062F\u0629 \u0637\u0628\u0642\u0629 \u0648\u0627\u062D\u062F\u0629 \u0645\u0634 \u0643\u0641\u0627\u064A\u0629 \u2014 \u0643\u0645\u0644 \u0627\u0636\u063A\u0637 \u0644\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0643\u0627\u0645\u0644 \uD83D\uDEE1\uFE0F';
-    else houseOut.textContent = '\u0627\u0644\u0628\u064A\u062A \u0645\u062D\u0645\u064A \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u0628\u0643\u0644 \u0627\u0644\u0637\u0642\u0627\u062A! \u062F\u0647\u0648 \u0647\u0648 \u0645\u0641\u0647\u0648\u0645 \u0627\u0644\u062A\u0631\u0627\u062E\u0645 \u0641\u064A \u0627\u0644\u0639\u0645\u0642 \u2705';
+    var badges = document.querySelectorAll('.layer-badge');
+    for (var i = 0; i < badges.length; i++) {
+      var b = badges[i];
+      b.classList.toggle('show', !!hOn[b.getAttribute('data-badge')]);
+    }
+    var chips = document.querySelectorAll('.protect-chip');
+    for (var i = 0; i < chips.length; i++) {
+      var k = chips[i].getAttribute('data-key');
+      if (k) chips[i].classList.toggle('done', !!hOn[k]);
+    }
+    var cnt = 0;
+    for (var i = 0; i < hOrder.length; i++) if (hOn[hOrder[i]]) cnt++;
+    if (cnt === 0) hOut.textContent = 'البيت من غير حماية — اضغط على الأدوات عشان تبني طبقات!';
+    else if (cnt < hOrder.length) hOut.textContent = 'أحسنت! عشان كده طبقة واحدة مش كفاية — كمل للأمان الكامل 🛡️';
+    else hOut.textContent = 'البيت محمي بالكامل بكل الطبقات! ده هو مفهوم Defense in Depth ✅';
   }
-  document.querySelectorAll('.protect-chip').forEach(function (c) {
-    c.addEventListener('click', function () {
-      var id = c.getAttribute('data-id');
-      if (id === 'house-reset') { houseBadges = { door: 1, lock: 1, cam: 1, alarm: 1, guard: 1 }; }
-      else houseBadges[id.replace('house-', '')] = 1;
-      renderHouse();
-    });
-  });
+  var chips = document.querySelectorAll('.protect-chip');
+  for (var i = 0; i < chips.length; i++) {
+    (function (chip) {
+      chip.onclick = function () {
+        var k = chip.getAttribute('data-key');
+        hOn[k] = true;
+        renderHouse();
+      };
+    })(chips[i]);
+  }
+  document.getElementById('houseReset').onclick = function () {
+    hOn = { door: true, lock: true, cam: true, alarm: true, guard: true };
+    renderHouse();
+  };
   renderHouse();
 
-  // ===== SORTING BOARD =====
+  /* ===== SORT BOARD ===== */
   var sortData = [
-    ['Firewall', 'Technical'], ['Antivirus', 'Technical'], ['EDR', 'Technical'], ['MFA', 'Technical'], ['SIEM', 'Technical'],
-    ['Policy', 'Administrative'], ['Training', 'Administrative'], ['Standards', 'Administrative'],
-    ['Guards', 'Physical'], ['CCTV', 'Physical'], ['Locks', 'Physical'], ['Badges', 'Physical']
+    ['Firewall','Technical'],['Antivirus','Technical'],['EDR','Technical'],['MFA','Technical'],['SIEM','Technical'],
+    ['Policy','Administrative'],['Training','Administrative'],['Standards','Administrative'],
+    ['Guards','Physical'],['CCTV','Physical'],['Locks','Physical'],['Badges','Physical']
   ];
-  var cols = [
-    { type: 'Administrative', label: '\u0627\u0644\u0625\u062F\u0627\u0631\u064A\u0629 Administrative' },
-    { type: 'Technical', label: '\u0627\u0644\u062A\u0642\u0646\u064A\u0629 Technical' },
-    { type: 'Physical', label: '\u0627\u0644\u0645\u0627\u062F\u064A\u0629 Physical' }
-  ];
-  var sortPlacements = {};
-  var selectedSort = null;
-  function showSortMsg(t) { $('sortMsg').textContent = t; }
+  var colTypes = ['Administrative','Technical','Physical'];
+  var colLabels = { Administrative: 'الإدارية', Technical: 'التقنية', Physical: 'المادية' };
+  var sPlace = {};
+  var sSel = null;
+  var sortMsg = document.getElementById('sortMsg');
   function renderSort() {
-    var pool = $('sortPool');
+    var pool = document.getElementById('sortPool');
     pool.innerHTML = '';
-    sortData.forEach(function (s) {
-      if (sortPlacements[s[0]]) return;
-      var c = document.createElement('div');
-      c.className = 'sort-chip' + (selectedSort === s[0] ? ' selected' : '');
-      c.textContent = s[0];
-      c.addEventListener('click', function () { selectedSort = s[0]; renderSort(); showSortMsg('\u0627\u0644\u0622\u0646 \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \u0627\u0644\u0639\u0645\u0648\u062F \u0627\u0644\u0635\u062D \uD83D\uDC47'); });
-      pool.appendChild(c);
-    });
-    var sortColsEl = $('sortCols');
-    sortColsEl.innerHTML = '';
-    cols.forEach(function (col) {
-      var div = document.createElement('div');
-      div.className = 'sort-col';
+    for (var i = 0; i < sortData.length; i++) {
+      if (sPlace[sortData[i][0]]) continue;
+      var d = document.createElement('div');
+      d.className = 'sort-chip';
+      d.textContent = sortData[i][0];
+      (function (name) {
+        d.onclick = function () { sSel = name; renderSort(); sortMsg.textContent = 'الآن اضغط على العمود الصح 👇'; };
+      })(sortData[i][0]);
+      pool.appendChild(d);
+    }
+    var cols = document.getElementById('sortCols');
+    cols.innerHTML = '';
+    for (var c = 0; c < colTypes.length; c++) {
+      var col = document.createElement('div');
+      col.className = 'sort-col';
       var h = document.createElement('h4');
-      h.textContent = col.label;
-      div.appendChild(h);
-      if (!selectedSort) {
-        var hint = document.createElement('div');
-        hint.style.fontSize = '12px'; hint.style.color = 'var(--dim)';
-        hint.textContent = '\u0627\u0636\u063A\u0637 \u0647\u0646\u0627 \u0644\u0648\u0636\u0639 \u0627\u0644\u0627\u062E\u062A\u064A\u0627\u0631';
-        div.appendChild(hint);
-      }
-      div.addEventListener('click', function () {
-        if (!selectedSort) { showSortMsg('\u0627\u062E\u062A\u0631 \u0623\u062F\u0627\u0629 \u0645\u0646 \u0627\u0644\u0635\u0646\u062F\u0648\u0642 \u0641\u0648\u0642 \u0627\u0644\u0623\u0648\u0644.'); return; }
-        sortPlacements[selectedSort] = col.type;
-        showSortMsg('\u062A\u0645 \u0648\u0636\u0639 ' + selectedSort + ' \u0641\u064A ' + col.type);
-        selectedSort = null;
-        renderSort();
-      });
-      sortData.forEach(function (s) {
-        if (sortPlacements[s[0]] === col.type) {
+      h.textContent = colLabels[colTypes[c]] + ' ' + colTypes[c];
+      col.appendChild(h);
+      (function (ct) {
+        col.onclick = function () {
+          if (!sSel) { sortMsg.textContent = 'اختر أداة من الصندوق فوق الأول.'; return; }
+          sPlace[sSel] = ct;
+          sortMsg.textContent = 'تم وضع ' + sSel + ' في ' + ct;
+          sSel = null;
+          renderSort();
+        };
+      })(colTypes[c]);
+      for (var j = 0; j < sortData.length; j++) {
+        if (sPlace[sortData[j][0]] === colTypes[c]) {
           var row = document.createElement('div');
           row.className = 'placed';
-          row.textContent = s[0];
-          row.addEventListener('click', function (ev) {
-            ev.stopPropagation();
-            delete sortPlacements[s[0]];
-            showSortMsg('\u0631\u062C\u0639 ' + s[0] + ' \u2014 \u0627\u0636\u063A\u0637 \u0639\u0644\u064A\u0647 \u064A\u0631\u0648\u062D \u062A\u0627\u0646\u064A.');
-            renderSort();
-          });
-          div.appendChild(row);
+          row.textContent = sortData[j][0];
+          (function (name) {
+            row.onclick = function (ev) {
+              ev.stopPropagation();
+              delete sPlace[name];
+              sortMsg.textContent = 'رجّع ' + name;
+              renderSort();
+            };
+          })(sortData[j][0]);
+          col.appendChild(row);
         }
-      });
-      sortColsEl.appendChild(div);
-    });
-    var unplaced = sortData.filter(function (s) { return !sortPlacements[s[0]]; });
-    if (unplaced.length === 0) showSortMsg('\u062A\u0645\u0627\u0645! \u0643\u0644 \u0627\u0644\u0623\u062F\u0648\u0627\u062A \u0627\u062A\u0635\u0646\u0651\u0641\u062A. \u0627\u0636\u063A\u0637 "\u062A\u062D\u0642\u0642 \u0645\u0646 \u0627\u0644\u062D\u0644" \uD83C\uDF1F');
-  }
-  var sortReset = $q('[data-id="sort-reset"]');
-  if (sortReset) sortReset.addEventListener('click', function () {
-    sortPlacements = {}; selectedSort = null; showSortMsg('');
-    renderSort();
-  });
-  var sortCheck = $q('[data-id="sort-check"]');
-  if (sortCheck) sortCheck.addEventListener('click', function () {
-    var wrong = 0;
-    sortData.forEach(function (s) {
-      if (sortPlacements[s[0]] !== s[1]) wrong++;
-    });
-    document.querySelectorAll('.sort-col .placed').forEach(function (p) {
-      var name = p.textContent;
-      var match = sortData.find(function (s) { return s[0] === name; });
-      if (match && sortPlacements[name] === match[1]) {
-        p.style.borderColor = 'var(--success)'; p.style.background = 'rgba(0,255,136,0.1)';
-      } else {
-        p.style.borderColor = 'var(--danger)'; p.style.background = 'rgba(255,71,87,0.1)';
       }
-    });
-    if (wrong === 0) showSortMsg('\u2705 \u0645\u0628\u0631\u0648\u0643! \u0643\u0644 \u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0635\u062D\u064A\u062D\u0629.');
-    else showSortMsg('\u274C \u0641\u064A \u0623\u062E\u0637\u0627\u0621 \u0628\u0633\u064A\u0637\u0629 \u2014 \u0627\u0644\u0644\u064A \u0644\u0648\u0646\u0647 \u0623\u062D\u0645\u0631 \u0645\u062D\u062A\u0627\u062C \u062A\u0639\u062F\u064A\u0644. \u062C\u0631\u0628 \u062A\u0627\u0646\u064A!');
-  });
+      cols.appendChild(col);
+    }
+    var unplaced = 0;
+    for (var i = 0; i < sortData.length; i++) if (!sPlace[sortData[i][0]]) unplaced++;
+    if (unplaced === 0) sortMsg.textContent = 'تمام! كل الأدوات اتصنّفت. اضغط "تحقق من الحل" 🎯';
+  }
+  document.getElementById('sortReset').onclick = function () { sPlace = {}; sSel = null; sortMsg.textContent = ''; renderSort(); };
+  document.getElementById('sortCheck').onclick = function () {
+    var wrong = 0;
+    for (var i = 0; i < sortData.length; i++) {
+      if (sPlace[sortData[i][0]] !== sortData[i][1]) wrong++;
+    }
+    var placed = document.querySelectorAll('.sort-col .placed');
+    for (var i = 0; i < placed.length; i++) {
+      var name = placed[i].textContent;
+      for (var j = 0; j < sortData.length; j++) {
+        if (sortData[j][0] === name) {
+          if (sPlace[name] === sortData[j][1]) {
+            placed[i].style.borderColor = 'var(--success)';
+            placed[i].style.background = 'rgba(0,255,136,0.1)';
+          } else {
+            placed[i].style.borderColor = 'var(--danger)';
+            placed[i].style.background = 'rgba(255,71,87,0.1)';
+          }
+        }
+      }
+    }
+    sortMsg.textContent = wrong === 0 ? '✅ مبروك! كل الإجابات صحيحة.' : '❌ في أخطاء — اللي لونه أحمر محتاج تعديل.';
+  };
   renderSort();
 
-  // ===== MATRIX =====
-  var matrixCtrls = [
+  /* ===== MATRIX ===== */
+  var mCtrls = [
     { name: 'Firewall', type: 'Technical', func: 'Preventive' },
     { name: 'SIEM', type: 'Technical', func: 'Detective' },
     { name: 'Awareness Training', type: 'Administrative', func: 'Preventive' },
     { name: 'Backup', type: 'Technical', func: 'Recovery' },
     { name: 'Door Lock', type: 'Physical', func: 'Preventive' }
   ];
-  var mc = $('matrixCtrls');
-  matrixCtrls.forEach(function (c) {
-    var pill = document.createElement('div');
-    pill.className = 'control-pill';
-    pill.textContent = c.name;
-    pill.addEventListener('click', function () {
-      document.querySelectorAll('.control-pill').forEach(function (x) { x.classList.remove('picked'); });
-      pill.classList.add('picked');
-      document.querySelectorAll('.matrix td').forEach(function (td) { td.classList.remove('active'); });
-      var prefix = { Technical: 't', Administrative: 'a', Physical: 'p' }[c.type];
-      var suffix = { Preventive: 'p', Detective: 'd', Corrective: 'c', Recovery: 'r' }[c.func];
-      var td = $q('[data-cell="' + prefix + '-' + suffix + '"]');
-      if (td) td.classList.add('active');
-      $('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> \u2192 \u0627\u0644\u0646\u0648\u0639: <span class="highlight">' + c.type + '</span> + \u0627\u0644\u0648\u0638\u064A\u0641\u0629: <span class="highlight">' + c.func + '</span>';
-    });
-    mc.appendChild(pill);
-  });
+  var pMap = { Technical: 't', Administrative: 'a', Physical: 'p' };
+  var fMap = { Preventive: 'p', Detective: 'd', Corrective: 'c', Recovery: 'r' };
+  var mc = document.getElementById('matrixCtrls');
+  for (var i = 0; i < mCtrls.length; i++) {
+    (function (c) {
+      var pill = document.createElement('div');
+      pill.className = 'control-pill';
+      pill.textContent = c.name;
+      pill.onclick = function () {
+        var pills = document.querySelectorAll('.control-pill');
+        for (var j = 0; j < pills.length; j++) pills[j].classList.remove('picked');
+        pill.classList.add('picked');
+        var tds = document.querySelectorAll('.matrix td');
+        for (var j = 0; j < tds.length; j++) tds[j].classList.remove('active');
+        var cell = document.querySelector('[data-cell="' + pMap[c.type] + '-' + fMap[c.func] + '"]');
+        if (cell) cell.classList.add('active');
+        document.getElementById('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> → النوع: <span class="highlight">' + c.type + '</span> + الوظيفة: <span class="highlight">' + c.func + '</span>';
+      };
+      mc.appendChild(pill);
+    })(mCtrls[i]);
+  }
 
-  // ===== STEPPER helper =====
-  function makeStepper(id, barId, countId, nextId, prevId, resetId, steps) {
+  /* ===== STEPPER ===== */
+  function makeStepper(wrapId, barId, countId, nextId, prevId, resetId, steps) {
     var idx = 0;
-    var wrap = $(id);
+    var wrap = document.getElementById(wrapId);
+    var bar = document.getElementById(barId);
+    var cnt = document.getElementById(countId);
     function render() {
       wrap.innerHTML = '';
       var s = steps[idx];
       var card = document.createElement('div');
       card.className = 'step-card active';
-      var h = document.createElement('h4');
-      h.textContent = s.title;
-      card.appendChild(h);
-      var body = document.createElement('p');
-      body.innerHTML = s.body;
-      card.appendChild(body);
+      var h4 = document.createElement('h4');
+      h4.textContent = s.title;
+      card.appendChild(h4);
+      var p = document.createElement('p');
+      p.innerHTML = s.body;
+      card.appendChild(p);
       wrap.appendChild(card);
-      $(barId).style.width = ((idx + 1) / steps.length * 100) + '%';
-      $(countId).textContent = (idx + 1) + ' / ' + steps.length;
+      bar.style.width = ((idx + 1) / steps.length * 100) + '%';
+      cnt.textContent = (idx + 1) + ' / ' + steps.length;
     }
-    $(nextId).addEventListener('click', function () { if (idx < steps.length - 1) { idx++; render(); } });
-    $(prevId).addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
-    $(resetId).addEventListener('click', function () { idx = 0; render(); });
+    document.getElementById(nextId).onclick = function () { if (idx < steps.length - 1) { idx++; render(); } };
+    document.getElementById(prevId).onclick = function () { if (idx > 0) { idx--; render(); } };
+    document.getElementById(resetId).onclick = function () { idx = 0; render(); };
     render();
     return {
       next: function () { if (idx < steps.length - 1) { idx++; render(); } },
@@ -899,141 +717,139 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  // ===== SEC 3 SOC STEPS =====
-  var sec3 = makeStepper('sec3steps', 'sec3bar', 'sec3count', 'sec3-next', 'sec3-prev', 'sec3-reset', [
-    { title: 'Monitor (\u0645\u0631\u0627\u0642\u0628\u0629 \u0645\u0633\u062A\u0645\u0631\u0629)', body: '\u0627\u0644\u0640 SOC \u0628\u064A\u0631\u0627\u0642\u0628 \u0643\u0644 \u0627\u0644\u0640 Logs \u0648\u0627\u0644\u0640 Alerts \u0639\u0644\u0649 \u0637\u0648\u0644.' },
-    { title: 'Detect (\u062A\u062D\u062F\u064A\u062F)', body: '\u064A\u062D\u062F\u062F: \u0647\u0644 \u062F\u0647 \u062A\u0647\u062F\u064A\u062F \u062D\u0642\u064A\u0642\u064A \u0648\u0644\u0627 \u0625\u0646\u0630\u0627\u0631 \u0643\u0627\u0630\u0628\u061F' },
-    { title: 'Investigate (\u062A\u062D\u0642\u0642)', body: '\u062C\u0645\u0639 \u0627\u0644\u0623\u062F\u0644\u0629 \u0648\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0633\u0628\u0628 \u0627\u0644\u062D\u0642\u064A\u0642\u064A.' },
-    { title: 'Respond (\u0627\u0633\u062C\u0627\u0628\u0629)', body: '\u0639\u0632\u0644 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0625\u064A\u0642\u0627\u0641\u0629 \u0627\u0644\u062D\u0633\u0627\u0628\u060C \u0623\u0648 \u062D\u0630\u0641 \u0627\u0644\u0645\u0644\u0641.' },
-    { title: 'Recover (\u0627\u0633\u062A\u0631\u062C\u0627\u0639)', body: '\u0631\u062C\u0639 \u0627\u0644\u0623\u0646\u0638\u0627\u0645 \u062A\u0634\u062A\u063A\u0644 \u0637\u0628\u064A\u0639\u064A \u062A\u0627\u0646\u064A.' }
+  var sec3 = makeStepper('sec3steps','sec3bar','sec3count','sec3next','sec3prev','sec3reset',[
+    {title:'Monitor (مراقبة مستمرة)',body:'الـ SOC بيراقب كل الـ Logs والـ Alerts على طول.'},
+    {title:'Detect (تحديد)',body:'يحدد: هل ده تهديد حقيقي ولا إنذار كاذب؟'},
+    {title:'Investigate (تحقيق)',body:'جمع الأدلة وتحليل السبب الحقيقي.'},
+    {title:'Respond (استجابة)',body:'عزل الجهاز، إيقاف الحساب، أو حذف الملف.'},
+    {title:'Recover (استرجاع)',body:'رجع الأنظمة تشتغل طبيعي تاني.'}
   ]);
 
-  // ===== SEC 5 PHISHING STEPS =====
-  var sec5 = makeStepper('sec5steps', 'sec5bar', 'sec5count', 'sec5-next', 'sec5-prev', 'sec5-reset', [
-    { title: '1. Phishing Email', body: '\u0625\u0645\u064A\u0644 \u064A\u0648\u0635\u0644 \u0644\u0644\u0645\u0648\u0638\u0641: <span class="dir-ltr">"Your account will expire... click here"</span>.' },
-    { title: '2. Awareness Training', body: '\u0627\u0644\u0645\u0648\u0638\u0641 \u064A\u0644\u0627\u062D\u0638 \u0625\u0646 \u0627\u0644\u0625\u0645\u064A\u0644 \u0645\u0646 Gmail \u0645\u0634 \u0645\u0646 \u0627\u0644\u062F\u0648\u0645\u064A\u0646 \u0627\u0644\u0631\u0633\u0645\u064A\u060C \u064A\u0645\u0633\u062D \u0627\u0644\u0631\u0633\u0627\u0644\u0629. <em>(\u0644\u0648 \u0641\u0634\u0644\u062A \u0647\u0630\u0647 \u0627\u0644\u0637\u0628\u0642\u0629\u060C \u0627\u0644\u0647\u062C\u0648\u0645 \u064A\u0643\u0645\u0644.)</em>' },
-    { title: '3. MFA', body: '\u0644\u0648 \u0627\u0644\u0645\u0648\u0638\u0641 \u0643\u062A\u0628 \u0627\u0644\u0628\u0627\u0633\u0648\u0631\u062F \u063A\u0644\u0637\u060C \u0627\u0644\u0645\u0647\u0627\u062C\u0645 \u0644\u0633\u0647 \u0645\u062A\u062D\u0627\u062C \u0643\u0648\u062F \u0645\u0646 \u0645\u0648\u0628\u0627\u064A\u0644 \u0627\u0644\u0645\u0648\u0638\u0641.' },
-    { title: '4. EDR', body: '\u0644\u0648 \u0645\u0644\u0641 \u062E\u0628\u064A\u062B \u062D\u0627\u0648\u0644 \u064A\u0634\u062A\u063A\u0644 \u0639\u0644\u0649 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0627\u0644\u0640 EDR \u064A\u0648\u0642\u0641 \u0627\u0644\u0639\u0645\u0644\u064A\u0629.' },
-    { title: '5. SIEM', body: '\u0628\u064A\u062C\u0645\u0639 \u0627\u0644\u0640 Alerts \u0645\u0646 \u0627\u0644\u0625\u0645\u064A\u0644 \u0648\u0627\u0644\u0644\u0627\u0628\u062A\u0648\u0628 \u0648\u0627\u0644\u0640 Firewall\u060C \u0648\u064A\u0631\u0628\u0637\u0647\u0645 \u0628\u0639\u0636.' },
-    { title: '6. SOC', body: '\u064A\u0633\u062A\u0644\u0645 \u0643\u0644 \u062F\u0647\u060C \u064A\u062D\u0642\u0642\u060C \u064A\u0639\u0632\u0644 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0648\u064A\u063A\u064A\u0651\u0631 \u0627\u0644\u0628\u0627\u0633\u0648\u0631\u062F \u0642\u0628\u0644 \u0645\u0627 \u0627\u0644\u0647\u062C\u0648\u0645 \u064A\u0646\u062A\u0634\u0631.' }
+  var sec5 = makeStepper('sec5steps','sec5bar','sec5count','sec5next','sec5prev','sec5reset',[
+    {title:'1. Phishing Email',body:'إيميل يوصل للموظف: <span class="dir-ltr">"Your account will expire... click here"</span>.'},
+    {title:'2. Awareness Training',body:'الموظف يلاحظ إن الإيميل من Gmail مش من الدومين الرسمي، يمسح الرسالة. <em>(لو فشلت الطبقة، الهجوم يكمل.)</em>'},
+    {title:'3. MFA',body:'لو الموظف كتب الباسورد غلط، المهاجم لسه محتاج كود من موبايل الموظف.'},
+    {title:'4. EDR',body:'لو ملف خبيث حاول يشتغل على الجهاز، الـ EDR يوقف العملية.'},
+    {title:'5. SIEM',body:'بيجمع الـ Alerts من الإيميل واللابتوب والـ Firewall، ويربطهم ببعض.'},
+    {title:'6. SOC',body:'يستلم كل ده، يحقق، يعزل الجهاز، ويغيّر الباسورد قبل ما الهجوم ينتشر.'}
   ]);
 
-  // ===== LAYER STACK (sec4) =====
+  /* ===== LAYER STACK ===== */
   var layers = [
-    { key: 'people', label: 'People (\u0627\u0644\u0646\u0627\u0633)', on: true },
-    { key: 'admin', label: 'Administrative', on: true },
-    { key: 'tech', label: 'Technical', on: true },
-    { key: 'phys', label: 'Physical', on: true },
-    { key: 'monitor', label: 'Monitoring', on: true }
+    {label:'People (الناس)',on:true},
+    {label:'Administrative',on:true},
+    {label:'Technical',on:true},
+    {label:'Physical',on:true},
+    {label:'Monitoring',on:true}
   ];
-  var layerOut = $('layerOut');
+  var layerOut = document.getElementById('layerOut');
   function renderLayers() {
-    var stack = $('layerStack');
+    var stack = document.getElementById('layerStack');
     stack.innerHTML = '';
-    layers.forEach(function (L) {
-      var d = document.createElement('div');
-      d.className = 'layer' + (L.on ? '' : ' off');
-      var label = document.createElement('span');
-      label.textContent = L.label;
-      label.style.flexGrow = '1';
-      var tgl = document.createElement('span');
-      tgl.className = 'tgl';
-      tgl.textContent = L.on ? '\u2705' : '\u26D4';
-      var state = document.createElement('span');
-      state.className = 'state';
-      state.textContent = L.on ? '\u0634\u063A\u0627\u0644\u0629' : '\u0648\u0627\u0642\u0639\u0629';
-      d.appendChild(label);
-      d.appendChild(state);
-      d.appendChild(tgl);
-      d.addEventListener('click', function () { L.on = !L.on; renderLayers(); });
-      stack.appendChild(d);
-    });
-    var stoppedAt = layers.find(function (L) { return L.on; });
-    if (!stoppedAt) {
-      layerOut.innerHTML = '<span class="breached">\u0643\u0644 \u0627\u0644\u0637\u0642\u0627\u062A \u0648\u0642\u0639\u062A \uD83D\uDE31 \u2014 \u0627\u0644\u0647\u0627\u0643\u0631 \u062E\u064E\u0631\u0642 \u0627\u0644\u0645\u0648\u0642\u0641 \u0628\u0627\u0644\u0643\u0627\u0645\u0644.</span>';
-    } else {
-      layerOut.innerHTML = '<span class="stopped">\u0627\u0644\u0647\u0627\u0643\u0631 \u0627\u062A\u0645 \u0648\u0642\u0641 \u0639\u0646\u0637 \u0637\u0628\u0642\u0629: ' + stoppedAt.label + ' \uD83D\uDEE1\uFE0F</span>';
+    for (var i = 0; i < layers.length; i++) {
+      (function (L) {
+        var d = document.createElement('div');
+        d.className = 'layer' + (L.on ? '' : ' off');
+        var lbl = document.createElement('span');
+        lbl.textContent = L.label;
+        lbl.style.flexGrow = '1';
+        var st = document.createElement('span');
+        st.className = 'state';
+        st.textContent = L.on ? 'شغالة' : 'واقعة';
+        var tg = document.createElement('span');
+        tg.className = 'tgl';
+        tg.textContent = L.on ? '✅' : '⛔';
+        d.appendChild(lbl);
+        d.appendChild(st);
+        d.appendChild(tg);
+        d.onclick = function () { L.on = !L.on; renderLayers(); };
+        stack.appendChild(d);
+      })(layers[i]);
     }
-    var ch = $('closingLayers');
+    var stopped = null;
+    for (var i = 0; i < layers.length; i++) { if (layers[i].on) { stopped = layers[i]; break; } }
+    layerOut.innerHTML = stopped
+      ? '<span class="stopped">الهاكر اتم وقف عند طبقة: ' + stopped.label + ' 🛡️</span>'
+      : '<span class="breached">كل الطبقات وقعت 😱 — الهاكر خَرق الموقف بالكامل.</span>';
+    var ch = document.getElementById('closingLayers');
     if (ch) {
       ch.innerHTML = '';
-      layers.forEach(function (L) {
+      for (var i = 0; i < layers.length; i++) {
         var d = document.createElement('div');
         d.className = 'layer';
         d.style.cursor = 'default';
         var lb = document.createElement('span');
-        lb.textContent = L.label;
+        lb.textContent = layers[i].label;
         lb.style.flexGrow = '1';
         var tg = document.createElement('span');
         tg.className = 'tgl';
-        tg.textContent = '\u2705';
+        tg.textContent = '✅';
         d.appendChild(lb);
         d.appendChild(tg);
         ch.appendChild(d);
-      });
+      }
     }
   }
-  var layersReset = $q('[data-id="layers-reset"]');
-  if (layersReset) layersReset.addEventListener('click', function () {
-    layers.forEach(function (L) { L.on = true; });
+  document.getElementById('layersReset').onclick = function () {
+    for (var i = 0; i < layers.length; i++) layers[i].on = true;
     renderLayers();
-  });
+  };
   renderLayers();
 
-  // ===== QUIZ helper =====
-  function makeQuiz(revealId, quizName, answers) {
-    var revealBtn = $q('[data-id="' + revealId + '"]');
-    var fb = $q('[data-fb="' + quizName + '"]');
-    var box = $q('[data-quiz="' + quizName + '"]');
+  /* ===== QUIZZES ===== */
+  function setupQuiz(revealId, boxId, fbId, skipId, answer) {
+    var btn = document.getElementById(revealId);
+    var box = document.getElementById(boxId);
+    var fb = document.getElementById(fbId);
+    var skip = document.getElementById(skipId);
     var done = false;
-    if (!revealBtn || !fb || !box) return;
-    revealBtn.addEventListener('click', function () { box.style.display = 'block'; revealBtn.style.display = 'none'; });
-    document.querySelectorAll('[data-' + quizName + ']').forEach(function (b) {
-      b.addEventListener('click', function () {
-        if (done) return;
-        document.querySelectorAll('[data-' + quizName + ']').forEach(function (x) {
-          if (x.getAttribute('data-' + quizName) === 'data:' + answers) x.classList.add('correct');
-          else x.classList.add('wrong');
-        });
-        done = true;
-        var val = b.getAttribute('data-' + quizName).replace('data:', '');
-        if (val === answers) {
-          fb.className = 'quiz-feedback good';
-          fb.textContent = '\u2705 \u0635\u062D! \u0625\u062C\u0627\u0628\u0629 \u0645\u0645\u062A\u0627\u0632\u0629.';
-        } else {
-          fb.className = 'quiz-feedback bad';
-          fb.textContent = '\u274C \u0644\u0633\u0647 \u0644\u0623 \u2014 \u0627\u0644\u0625\u062C\u0627\u0628\u0629 \u0627\u0644\u0635\u062D \u0647\u064A: ' + answers + '.';
-        }
-      });
-    });
-    var skip = $q('[data-id="' + quizName + '-skip"]');
-    if (skip) skip.addEventListener('click', function () {
-      box.style.display = 'none'; revealBtn.style.display = 'block';
+    btn.onclick = function () { box.style.display = 'block'; btn.style.display = 'none'; };
+    var qs = box.querySelectorAll('.quiz-q');
+    for (var i = 0; i < qs.length; i++) {
+      (function (q) {
+        q.onclick = function () {
+          if (done) return;
+          done = true;
+          for (var j = 0; j < qs.length; j++) {
+            if (qs[j].getAttribute('data-val') === answer) qs[j].classList.add('correct');
+            else qs[j].classList.add('wrong');
+          }
+          var val = q.getAttribute('data-val');
+          fb.className = 'quiz-feedback ' + (val === answer ? 'good' : 'bad');
+          fb.textContent = val === answer ? '✅ صح! إجابة ممتازة.' : '❌ الإجابة الصح هي: ' + answer;
+        };
+      })(qs[i]);
+    }
+    skip.onclick = function () {
+      box.style.display = 'none';
+      btn.style.display = 'block';
       done = false;
-      document.querySelectorAll('[data-' + quizName + ']').forEach(function (b) {
-        b.classList.remove('correct', 'wrong');
-      });
-      fb.className = 'quiz-feedback'; fb.textContent = '';
-    });
+      for (var j = 0; j < qs.length; j++) qs[j].className = 'quiz-q';
+      fb.className = 'quiz-feedback';
+      fb.textContent = '';
+    };
   }
-  makeQuiz('q1-reveal', 'q1', 'Administrative');
-  makeQuiz('q2-reveal', 'q2', 'Detective');
+  setupQuiz('q1Reveal','q1Box','q1Fb','q1Skip','Administrative');
+  setupQuiz('q2Reveal','q2Box','q2Fb','q2Skip','Detective');
 
-  // ===== ACTIVITY reveal =====
-  function makeActivity(btnId, ansName) {
-    var btn = $q('[data-id="' + btnId + '"]');
-    var box = $q('[data-answers="' + ansName + '"]');
-    if (!btn || !box) return;
-    btn.addEventListener('click', function () { box.classList.add('show'); btn.style.pointerEvents = 'none'; btn.style.opacity = 0.5; });
-  }
-  makeActivity('act1-reveal', 'act1');
-  makeActivity('act2-reveal', 'act2');
+  /* ===== ACTIVITIES ===== */
+  document.getElementById('act1reveal').onclick = function () {
+    document.getElementById('act1ans').classList.add('show');
+    this.style.pointerEvents = 'none';
+    this.style.opacity = 0.5;
+  };
+  document.getElementById('act2reveal').onclick = function () {
+    document.getElementById('act2ans').classList.add('show');
+    this.style.pointerEvents = 'none';
+    this.style.opacity = 0.5;
+  };
 
-  // ===== keyboard nav =====
-  document.addEventListener('keydown', function (e) {
+  /* ===== keyboard ===== */
+  document.onkeydown = function (e) {
     if (e.key === 'ArrowRight') sec5.next();
     if (e.key === 'ArrowLeft') sec5.prev();
-  });
+  };
+
 });
 </script>
 </body>
