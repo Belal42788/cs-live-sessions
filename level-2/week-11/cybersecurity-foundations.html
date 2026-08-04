@@ -838,18 +838,47 @@
             height: auto
         }
 
-        .house-svg .entry {
-            cursor: pointer;
-            transition: opacity .3s
+        .house-svg .entry .entrance-box {
+            transition: transform .4s ease, fill .3s, stroke .3s;
+            transform-box: fill-box
         }
 
-        .house-svg .entry .entrance-box {
-            transition: fill .3s, stroke .3s
+        .house-svg .entry:not(.closed) .entrance-box {
+            transform: rotate(0deg)
+        }
+
+        .house-svg .entry[data-id="entry-door"]:not(.closed) .entrance-box {
+            transform: rotate(-12deg);
+            transform-origin: 148px 228px
+        }
+
+        .house-svg .entry[data-id="entry-win1"]:not(.closed) .entrance-box {
+            transform: rotate(-10deg);
+            transform-origin: 104px 152px
+        }
+
+        .house-svg .entry[data-id="entry-win2"]:not(.closed) .entrance-box {
+            transform: rotate(10deg);
+            transform-origin: 296px 152px
+        }
+
+        .house-svg .entry[data-id="entry-garage"]:not(.closed) .entrance-box {
+            transform: translateY(-102px);
+            transform-origin: 266px 158px
         }
 
         .house-svg .entry.closed .entrance-box {
             fill: rgba(255, 71, 87, .15);
-            stroke: var(--danger)
+            stroke: var(--danger);
+            transform: rotate(0deg) translateY(0)!important
+        }
+
+        .house-svg .entry .lock-icon {
+            transition: opacity .3s
+        }
+
+        .house-svg .entry.closed .lock-icon {
+            opacity: 1
         }
 
         .house-svg .entry .entrance-label {
@@ -923,6 +952,23 @@
             border: 1px solid rgba(0, 212, 170, .3);
             background: rgba(0, 212, 170, .08);
             color: var(--text)
+        }
+
+        .map-followup select {
+            width: 100%;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 8px;
+            padding: 9px;
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            color-scheme: dark
+        }
+
+        .map-followup select option {
+            background: var(--card);
+            color: var(--text);
+            padding: 4px
         }
 
         /* ===== Career tabs ===== */
@@ -1663,30 +1709,38 @@
                          <polygon points="200,12 28,108 372,108" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
                          <!-- Wall -->
                          <rect x="28" y="108" width="344" height="152" rx="4" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-                         <!-- Left Window -->
+                         <!-- Left Window (open by default) -->
                          <g class="entry" data-id="entry-win1" style="cursor:pointer">
-                             <rect class="entrance-box" x="52" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <line x1="78" y1="128" x2="78" y2="176" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
-                             <line x1="52" y1="152" x2="104" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+                             <rect x="52" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+                             <rect class="entrance-box" x="54" y="130" width="48" height="44" rx="2" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5" style="transform-origin:104px 152px;transition:transform .4s ease,fill .3s,stroke .3s"/>
+                             <line x1="78" y1="130" x2="78" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+                             <line x1="54" y1="152" x2="102" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+                             <text class="lock-icon" x="78" y="146" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
                              <text class="entrance-label" x="78" y="196">شباك</text>
                          </g>
-                         <!-- Right Window -->
+                         <!-- Right Window (open by default) -->
                          <g class="entry" data-id="entry-win2" style="cursor:pointer">
-                             <rect class="entrance-box" x="296" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <line x1="322" y1="128" x2="322" y2="176" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
-                             <line x1="296" y1="152" x2="348" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+                             <rect x="296" y="128" width="52" height="48" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+                             <rect class="entrance-box" x="298" y="130" width="48" height="44" rx="2" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width="1.5" style="transform-origin:296px 152px;transition:transform .4s ease,fill .3s,stroke .3s"/>
+                             <line x1="322" y1="130" x2="322" y2="174" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+                             <line x1="296" y1="152" x2="344" y2="152" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+                             <text class="lock-icon" x="322" y="146" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
                              <text class="entrance-label" x="322" y="196">شباك</text>
                          </g>
-                         <!-- Door -->
+                         <!-- Door (open by default, slightly ajar) -->
                          <g class="entry" data-id="entry-door" style="cursor:pointer">
-                             <rect class="entrance-box" x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <circle cx="180" cy="228" r="3" fill="rgba(255,255,255,.25)"/>
+                             <rect x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+                             <rect class="entrance-box" x="148" y="196" width="60" height="64" rx="3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2" style="transform-origin:148px 228px;transition:transform .4s ease,fill .3s,stroke .3s"/>
+                             <circle cx="200" cy="228" r="3" fill="rgba(255,255,255,.25)"/>
+                             <text class="lock-icon" x="178" y="222" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
                              <text class="entrance-label" x="178" y="272">باب</text>
                          </g>
-                         <!-- Garage -->
+                         <!-- Garage (open by default, door up) -->
                          <g class="entry" data-id="entry-garage" style="cursor:pointer">
-                             <rect class="entrance-box" x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-                             <line x1="266" y1="158" x2="266" y2="260" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+                             <rect x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+                             <rect class="entrance-box" x="236" y="158" width="60" height="102" rx="3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="2" style="transform-origin:266px 158px;transition:transform .4s ease,fill .3s,stroke .3s"/>
+                             <line x1="266" y1="158" x2="266" y2="260" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+                             <text class="lock-icon" x="266" y="172" text-anchor="middle" font-size="12" fill="var(--success)" opacity="0" style="transition:opacity .3s">🔒</text>
                              <text class="entrance-label" x="266" y="274">جراج</text>
                          </g>
                          <!-- Attack Zone (outside house) -->
@@ -1762,7 +1816,7 @@
                         <div style="font-weight:700;color:var(--s7);margin-bottom:10px">اختر أهم أصل عندك 👇</div>
                         <p style="font-size:13px;color:var(--dim)">أهم أصل عندك: <span id="mapTopAsset">—</span></p>
                         <div style="margin:8px 0;font-size:13px;color:var(--dim)">مبدأ الـ <span dir="ltr">CIA</span> اللي أهم حاجة فيه:</div>
-<select id="mapCia" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif;color-scheme:dark">
+<select id="mapCia" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px;color:var(--text);font-family:'Cairo',sans-serif">
                              <option value="">اختار مبدأ...</option>
                              <option value="conf">Confidentiality</option>
                              <option value="integ">Integrity</option>
