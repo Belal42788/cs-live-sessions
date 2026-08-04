@@ -2114,22 +2114,20 @@
 
         /* ===== Section 5: Bank walkthrough ===== */
         let bankIdx = 0;
-        function setBank(idx) {
+        function setBank(idx, doScroll) {
             bankIdx = idx;
-            qsa('.bank-step').forEach((s, i) => {
-                s.classList.toggle('active', i === bankIdx);
-                s.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            });
+            qsa('.bank-step').forEach((s, i) => s.classList.toggle('active', i === bankIdx));
             qs('#bankStepStatus').textContent = (bankIdx + 1) + ' / 4';
+            if (doScroll) qs('.bank-step.active').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
         function nextBank() {
             if (bankIdx >= 3) { setFeedback('bankStepStatus', '✅ وصلت لآخر خطوة', true); return; }
-            setBank(bankIdx + 1);
+            setBank(bankIdx + 1, true);
         }
-        function resetBank() { setBank(0); qs('#bankStepStatus').style.color = ''; }
+        function resetBank() { setBank(0, true); qs('#bankStepStatus').style.color = ''; }
         function initBank() {
-            qsa('.bank-step').forEach((s, i) => s.addEventListener('click', () => setBank(i)));
-            setBank(0);
+            qsa('.bank-step').forEach((s, i) => s.addEventListener('click', () => setBank(i, true)));
+            setBank(0, false);
         }
 
         /* ===== Section 6: House ===== */
