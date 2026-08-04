@@ -682,7 +682,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+(function () {
   // particles
   var bg = document.querySelector('.bg-layer');
   for (var i = 0; i < 30; i++) {
@@ -712,7 +712,6 @@ document.addEventListener('DOMContentLoaded', function () {
     entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.05 });
   els.forEach(function (el) { io.observe(el); });
-
   function checkVisibility() {
     els.forEach(function (el) {
       var r = el.getBoundingClientRect();
@@ -747,8 +746,6 @@ document.addEventListener('DOMContentLoaded', function () {
       renderHouse();
     });
   });
-  // mark all chips done by default (house fully protected as intro baseline)
-  houseBadges = { door: 1, lock: 1, cam: 1, alarm: 1, guard: 1 };
   renderHouse();
 
   // ===== SORTING BOARD =====
@@ -762,71 +759,77 @@ document.addEventListener('DOMContentLoaded', function () {
     { type: 'Technical', label: 'التقنية Technical' },
     { type: 'Physical', label: 'المادية Physical' }
   ];
-  var placements = {};
+  var sortPlacements = {};
+  var selectedSort = null;
+  function showSortMsg(t) { document.getElementById('sortMsg').textContent = t; }
   function renderSort() {
     var pool = document.getElementById('sortPool');
     pool.innerHTML = '';
     sortData.forEach(function (s) {
-      if (placements[s[0]]) return;
+      if (sortPlacements[s[0]]) return;
       var c = document.createElement('div');
-      c.className = 'sort-chip';
+      c.className = 'sort-chip' + (selectedSort === s[0] ? ' selected' : '');
       c.textContent = s[0];
-      c.onclick = function () { placements[s[0]] = null; renderSort(); showSortMsg('الآن اضغط على العمود الصح 👇'); };
+      c.addEventListener('click', function () { selectedSort = s[0]; renderSort(); showSortMsg('الآن اضغط على العمود الصح 👇'); });
       pool.appendChild(c);
     });
-    document.getElementById('sortCols').innerHTML = '';
+    var sortColsEl = document.getElementById('sortCols');
+    sortColsEl.innerHTML = '';
     cols.forEach(function (col) {
       var div = document.createElement('div');
       div.className = 'sort-col';
       var h = document.createElement('h4');
       h.textContent = col.label;
       div.appendChild(h);
-      var msg = document.createElement('div');
-      msg.style.fontSize = '12px'; msg.style.color = 'var(--dim)';
-      msg.textContent = 'اضغط هنا لوضع الاختيار';
-      div.appendChild(msg);
-      div.onclick = function () { placeChip(col.type); };
-      document.getElementById('sortCols').appendChild(div);
-    });
-    // show placed items
-    cols.forEach(function (col) {
+      if (!selectedSort) {
+        var hint = document.createElement('div');
+        hint.style.fontSize = '12px'; hint.style.color = 'var(--dim)';
+        hint.textContent = 'اضغط هنا لوضع الاختيار';
+        div.appendChild(hint);
+      }
+      div.addEventListener('click', function () {
+        if (!selectedSort) { showSortMsg('اختر أداة من الصندوق فوق الأول.'); return; }
+        sortPlacements[selectedSort] = col.type;
+        showSortMsg('تم وضع ' + selectedSort + ' في ' + col.type);
+        selectedSort = null;
+        renderSort();
+      });
       sortData.forEach(function (s) {
-        if (placements[s[0]] === col.type) {
+        if (sortPlacements[s[0]] === col.type) {
           var row = document.createElement('div');
           row.className = 'placed';
-          row.dataset.answer = s[0];
           row.textContent = s[0];
-          row.onclick = function () { delete placements[s[0]]; renderSort(); showSortMsg('رجّع إيه؟ اللي حطيته غلط؟ اضغط عليه يروح تاني.'); };
-          var heads = document.querySelectorAll('.sort-col h4');
-          heads.forEach(function (h) { if (h.textContent === col.label) h.parentNode.appendChild(row); });
+          row.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            delete sortPlacements[s[0]];
+            showSortMsg('رجّع ' + s[0] + ' — اضغط عليه يروح تاني.');
+            renderSort();
+          });
+          div.appendChild(row);
         }
       });
+      sortColsEl.appendChild(div);
     });
-    var unplaced = sortData.filter(function (s) { return !placements[s[0]]; });
+    var unplaced = sortData.filter(function (s) { return !sortPlacements[s[0]]; });
     if (unplaced.length === 0) showSortMsg('تمام! كل الأدوات اتصنّفت. اضغط "تحقق من الحل" 🎯');
   }
-  function placeChip(ctype) {
-    var sel = sortData.filter(function (s) { return placements[s[0]] === null; })[0];
-    if (!sel) { showSortMsg('اختر أداة من الصندوق فوق الأول.'); return; }
-    placements[sel[0]] = ctype;
-    showSortMsg('تم وضع ' + sel[0] + ' في ' + ctype);
-    renderSort();
-  }
-  function showSortMsg(t) { document.getElementById('sortMsg').textContent = t; }
   document.querySelector('[data-id="sort-reset"]').addEventListener('click', function () {
-    placements = {}; document.getElementById('sortMsg').textContent = '';
+    sortPlacements = {}; selectedSort = null; showSortMsg('');
     renderSort();
   });
   document.querySelector('[data-id="sort-check"]').addEventListener('click', function () {
     var wrong = 0;
     sortData.forEach(function (s) {
-      if (placements[s[0]] !== s[1]) wrong++;
-      document.querySelectorAll('.placed').forEach(function (p) {
-        if (p.textContent === s[0]) {
-          if (placements[s[0]] === s[1]) { p.style.borderColor = 'var(--success)'; p.style.background = 'rgba(0,255,136,0.1)'; }
-          else { p.style.borderColor = 'var(--danger)'; p.style.background = 'rgba(255,71,87,0.1)'; }
-        }
-      });
+      if (sortPlacements[s[0]] !== s[1]) wrong++;
+    });
+    document.querySelectorAll('.sort-col .placed').forEach(function (p) {
+      var name = p.textContent;
+      var match = sortData.find(function (s) { return s[0] === name; });
+      if (match && sortPlacements[name] === match[1]) {
+        p.style.borderColor = 'var(--success)'; p.style.background = 'rgba(0,255,136,0.1)';
+      } else {
+        p.style.borderColor = 'var(--danger)'; p.style.background = 'rgba(255,71,87,0.1)';
+      }
     });
     if (wrong === 0) showSortMsg('✅ مبروك! كل الإجابات صحيحة.');
     else showSortMsg('❌ في أخطاء بسيطة — اللي لونه أحمر محتاج تعديل. جرب تاني!');
@@ -841,35 +844,28 @@ document.addEventListener('DOMContentLoaded', function () {
     { name: 'Backup', type: 'Technical', func: 'Recovery' },
     { name: 'Door Lock', type: 'Physical', func: 'Preventive' }
   ];
-  function resetMatrix() {
-    document.querySelectorAll('.matrix td').forEach(function (td) { td.classList.remove('active'); });
-  }
   var mc = document.getElementById('matrixCtrls');
   matrixCtrls.forEach(function (c) {
     var pill = document.createElement('div');
     pill.className = 'control-pill';
     pill.textContent = c.name;
-    pill.onclick = function () {
+    pill.addEventListener('click', function () {
       document.querySelectorAll('.control-pill').forEach(function (x) { x.classList.remove('picked'); });
       pill.classList.add('picked');
-      resetMatrix();
-      var cell = { 't-p': 'Technical+Preventive', 't-d': 'Technical+Detective', 't-c': 'Technical+Corrective', 't-r': 'Technical+Recovery',
-        'a-p': 'Administrative+Preventive', 'a-d': 'Administrative+Detective', 'a-c': 'Administrative+Corrective', 'a-r': 'Administrative+Recovery',
-        'p-p': 'Physical+Preventive', 'p-d': 'Physical+Detective', 'p-c': 'Physical+Corrective', 'p-r': 'Physical+Recovery' };
+      document.querySelectorAll('.matrix td').forEach(function (td) { td.classList.remove('active'); });
       var prefix = { Technical: 't', Administrative: 'a', Physical: 'p' }[c.type];
       var suffix = { Preventive: 'p', Detective: 'd', Corrective: 'c', Recovery: 'r' }[c.func];
-      var key = prefix + '-' + suffix;
-      var td = document.querySelector('[data-cell="' + key + '"]');
+      var td = document.querySelector('[data-cell="' + prefix + '-' + suffix + '"]');
       if (td) td.classList.add('active');
-      document.getElementById('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> → النوع: <span class="highlight">' + c.type + '</span> + الوظيفة: <span class="highlight">' + c.func + '</span>';
-    };
+      document.getElementById('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> \u2192 النوع: <span class="highlight">' + c.type + '</span> + الوظيفة: <span class="highlight">' + c.func + '</span>';
+    });
     mc.appendChild(pill);
   });
 
   // ===== STEPPER helper =====
   function makeStepper(id, barId, countId, nextId, prevId, resetId, steps) {
     var idx = 0;
-    var wrap;
+    var wrap = document.getElementById(id);
     function render() {
       wrap.innerHTML = '';
       var s = steps[idx];
@@ -878,20 +874,21 @@ document.addEventListener('DOMContentLoaded', function () {
       var h = document.createElement('h4');
       h.textContent = s.title;
       card.appendChild(h);
-      var p = document.createElement('p');
-      p.innerHTML = s.body;
-      card.appendChild(p);
+      var body = document.createElement('p');
+      body.innerHTML = s.body;
+      card.appendChild(body);
       wrap.appendChild(card);
       document.getElementById(barId).style.width = ((idx + 1) / steps.length * 100) + '%';
       document.getElementById(countId).textContent = (idx + 1) + ' / ' + steps.length;
     }
-    document.addEventListener('DOMContentLoaded', function () {});
-    wrap = document.getElementById(id);
     document.getElementById(nextId).addEventListener('click', function () { if (idx < steps.length - 1) { idx++; render(); } });
     document.getElementById(prevId).addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
     document.getElementById(resetId).addEventListener('click', function () { idx = 0; render(); });
     render();
-    return { render: render, next: function () { if (idx < steps.length - 1) { idx++; render(); } }, prev: function () { if (idx > 0) { idx--; render(); } }, reset: function () { idx = 0; render(); } };
+    return {
+      next: function () { if (idx < steps.length - 1) { idx++; render(); } },
+      prev: function () { if (idx > 0) { idx--; render(); } }
+    };
   }
 
   // ===== SEC 3 SOC STEPS =====
@@ -924,8 +921,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var layerOut = document.getElementById('layerOut');
   function renderLayers() {
     var stack = document.getElementById('layerStack');
-    var host = document.getElementById('closingLayers');
-    document.querySelectorAll('.layer-stack').forEach(function (s) { s.innerHTML = ''; });
+    stack.innerHTML = '';
     layers.forEach(function (L) {
       var d = document.createElement('div');
       d.className = 'layer' + (L.on ? '' : ' off');
@@ -934,23 +930,22 @@ document.addEventListener('DOMContentLoaded', function () {
       label.style.flexGrow = '1';
       var tgl = document.createElement('span');
       tgl.className = 'tgl';
-      tgl.textContent = L.on ? '✅' : '⛔';
+      tgl.textContent = L.on ? '\u2705' : '\u26D4';
       var state = document.createElement('span');
       state.className = 'state';
       state.textContent = L.on ? 'شغالة' : 'واقعة';
       d.appendChild(label);
       d.appendChild(state);
       d.appendChild(tgl);
-      d.onclick = function () { L.on = !L.on; renderLayers(); };
+      d.addEventListener('click', function () { L.on = !L.on; renderLayers(); });
       stack.appendChild(d);
     });
     var stoppedAt = layers.find(function (L) { return L.on; });
     if (!stoppedAt) {
-      layerOut.innerHTML = '<span class="breached">كل الطبقات وقعت 😱 — الهاكر خَرق الموقف بالكامل.</span>';
+      layerOut.innerHTML = '<span class="breached">كل الطبقات وقعت \uD83D\uDE31 \u2014 الهاكر خَرق الموقف بالكامل.</span>';
     } else {
-      layerOut.innerHTML = '<span class="stopped">الهاكر اتم وقف عند طبقة: ' + stoppedAt.label + ' 🛡️</span>';
+      layerOut.innerHTML = '<span class="stopped">الهاكر اتم وقف عند طبقة: ' + stoppedAt.label + ' \uD83D\uDEE1\uFE0F</span>';
     }
-    // closing: all on with checkmarks static
     var ch = document.getElementById('closingLayers');
     if (ch) {
       ch.innerHTML = '';
@@ -958,14 +953,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var d = document.createElement('div');
         d.className = 'layer';
         d.style.cursor = 'default';
-        var label = document.createElement('span');
-        label.textContent = L.label;
-        label.style.flexGrow = '1';
-        var tgl = document.createElement('span');
-        tgl.className = 'tgl';
-        tgl.textContent = '✅';
-        d.appendChild(label);
-        d.appendChild(tgl);
+        var lb = document.createElement('span');
+        lb.textContent = L.label;
+        lb.style.flexGrow = '1';
+        var tg = document.createElement('span');
+        tg.className = 'tgl';
+        tg.textContent = '\u2705';
+        d.appendChild(lb);
+        d.appendChild(tg);
         ch.appendChild(d);
       });
     }
@@ -981,25 +976,31 @@ document.addEventListener('DOMContentLoaded', function () {
     revealBtn.addEventListener('click', function () { box.style.display = 'block'; revealBtn.style.display = 'none'; });
     document.querySelectorAll('[data-' + quizName + ']').forEach(function (b) {
       b.addEventListener('click', function () {
-        if (done && !b.classList.contains('correct')) return;
-        if (done && b.classList.contains('correct')) return;
+        if (done) return;
         document.querySelectorAll('[data-' + quizName + ']').forEach(function (x) {
           if (x.getAttribute('data-' + quizName) === 'data:' + answers) x.classList.add('correct');
-          else if (!x.classList.contains('correct')) x.classList.add('wrong');
+          else x.classList.add('wrong');
         });
         done = true;
         var val = b.getAttribute('data-' + quizName).replace('data:', '');
         if (val === answers) {
           fb.className = 'quiz-feedback good';
-          fb.textContent = '✅ صح! إجابة ممتازة.';
+          fb.textContent = '\u2705 صح! إجابة ممتازة.';
         } else {
           fb.className = 'quiz-feedback bad';
-          fb.textContent = '❌ لسه لأ — الإجابة الصح هي: ' + answers + '.';
+          fb.textContent = '\u274C لسه لأ \u2014 الإجابة الصح هي: ' + answers + '.';
         }
       });
     });
     var skip = document.querySelector('[data-id="' + quizName + '-skip"]');
-    if (skip) skip.addEventListener('click', function () { box.style.display = 'none'; revealBtn.style.display = 'block'; });
+    if (skip) skip.addEventListener('click', function () {
+      box.style.display = 'none'; revealBtn.style.display = 'block';
+      done = false;
+      document.querySelectorAll('[data-' + quizName + ']').forEach(function (b) {
+        b.classList.remove('correct', 'wrong');
+      });
+      fb.className = 'quiz-feedback'; fb.textContent = '';
+    });
   }
   makeQuiz('q1-reveal', 'q1', 'Administrative');
   makeQuiz('q2-reveal', 'q2', 'Detective');
@@ -1015,10 +1016,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== keyboard nav =====
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') { var n = sec5; n.next(); }
-    if (e.key === 'ArrowLeft') { var p = sec5; p.prev(); }
+    if (e.key === 'ArrowRight') sec5.next();
+    if (e.key === 'ArrowLeft') sec5.prev();
   });
-});
+})();
 </script>
 </body>
 </html>
