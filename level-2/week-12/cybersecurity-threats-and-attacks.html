@@ -1,1355 +1,2231 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Threats & Attacks — Cybersecurity</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-<style>
-:root {
-  --primary: #193cff; --accent: #00d4aa; --bg: #0a0e27;
-  --card: #111638; --card-hover: #1a2050; --text: #fff; --dim: #8892b0;
-  --success: #00ff88; --danger: #ff4757; --warn: #ffd700;
-  --s1: #06B6D4; --s2: #F59E0B; --s3: #8B5CF6; --s4: #10B981; --s5: #EC4899; --s6: #EF4444;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Cairo', sans-serif; color: var(--text); background: var(--bg);
-  overflow-x: hidden; line-height: 1.7;
-}
-.bg-anim {
-  position: fixed; inset: 0; z-index: -1;
-  background: radial-gradient(circle at 30% 50%, rgba(25,60,255,.12) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(0,212,170,.08) 0%, transparent 50%);
-  animation: bgShift 20s ease-in-out infinite alternate;
-}
-@keyframes bgShift { 0%{transform:translate(0,0)} 100%{transform:translate(30px,-20px)} }
-.particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.particle {
-  position: absolute; width: 4px; height: 4px; border-radius: 50%;
-  background: var(--primary); opacity: .3;
-  animation: floatUp 15s linear infinite;
-}
-@keyframes floatUp { 0%{transform:translateY(100vh) scale(1);opacity:0} 10%{opacity:.3} 90%{opacity:.3} 100%{transform:translateY(-10vh) scale(.5);opacity:0} }
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10,14,39,.95); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(25,60,255,.3);
-  padding: 10px 24px; display: flex; align-items: center; gap: 16px;
-  transform: translateY(-100%); transition: transform .3s;
-}
-.nav.visible { transform: translateY(0); }
-.nav-logo { width: 36px; height: 36px; border-radius: 10px; object-fit: contain; }
-.nav-links { display: flex; gap: 8px; flex-wrap: wrap; margin-right: auto; }
-.nav-links a {
-  color: var(--dim); text-decoration: none; font-size: 13px; padding: 6px 14px;
-  border-radius: 25px; border: 1px solid transparent; transition: all .2s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(25,60,255,.2); border-color: var(--primary); }
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center; padding: 80px 20px 40px;
-  position: relative;
-}
-.hero-badge {
-  display: inline-block; padding: 8px 20px; border-radius: 25px;
-  background: rgba(25,60,255,.15); border: 1px solid rgba(25,60,255,.3);
-  color: var(--primary); font-weight: 700; font-size: 14px; margin-bottom: 20px;
-  opacity: 0; animation: fadeUp .8s ease-out .2s forwards;
-}
-.hero h1 {
-  font-size: clamp(36px, 8vw, 80px); font-weight: 900; margin-bottom: 16px;
-  opacity: 0; animation: fadeUp .8s ease-out .4s forwards;
-}
-.hero h1 .grad {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hero p {
-  font-size: 18px; color: var(--dim); max-width: 600px; margin-bottom: 30px;
-  opacity: 0; animation: fadeUp .8s ease-out .6s forwards;
-}
-.hero .start-btn {
-  padding: 14px 36px; border-radius: 14px; border: none;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: var(--bg); font-weight: 900; font-size: 16px; cursor: pointer;
-  font-family: 'Cairo', sans-serif; opacity: 0; animation: fadeUp .8s ease-out .8s forwards;
-}
-.hero .start-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(25,60,255,.4); }
-@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
-.hero-circles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.hero-circles div {
-  position: absolute; border-radius: 50%; opacity: .08;
-  animation: circleFloat 6s ease-in-out infinite;
-}
-.hero-circles div:nth-child(1) { width: 300px; height: 300px; background: var(--primary); top: 10%; left: 10%; animation-delay: 0s; }
-.hero-circles div:nth-child(2) { width: 200px; height: 200px; background: var(--accent); bottom: 20%; right: 15%; animation-delay: 2s; }
-.hero-circles div:nth-child(3) { width: 150px; height: 150px; background: var(--s3); top: 50%; left: 60%; animation-delay: 4s; }
-@keyframes circleFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threats & Attacks — Cybersecurity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #193cff;
+      --accent: #00d4aa;
+      --bg: #0a0e27;
+      --card: #111638;
+      --card-hover: #1a2050;
+      --text: #fff;
+      --dim: #8892b0;
+      --success: #00ff88;
+      --danger: #ff4757;
+      --warn: #ffd700;
+      --s1: #06B6D4;
+      --s2: #F59E0B;
+      --s3: #8B5CF6;
+      --s4: #10B981;
+      --s5: #EC4899;
+      --s6: #EF4444;
+    }
 
-section { padding: 60px 20px; }
-.section { max-width: 900px; margin: 0 auto; }
-.section-inner { opacity: 0; transform: translateY(30px); transition: all .6s cubic-bezier(.4,0,.2,1); }
-.section-inner.visible { opacity: 1; transform: translateY(0); }
-.section-header { margin-bottom: 30px; }
-.section-number {
-  width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; font-weight: 900; font-size: 18px; color: var(--bg);
-  margin-bottom: 12px; animation: badgeGlow 3s infinite;
-}
-@keyframes badgeGlow { 0%,100%{box-shadow:0 0 20px rgba(25,60,255,.3)} 50%{box-shadow:0 0 40px rgba(25,60,255,.6)} }
-.section-header h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
-.section-header p { color: var(--dim); font-size: 15px; }
-.diagram-container {
-  background: var(--card); border: 1px solid rgba(255,255,255,.05);
-  border-radius: 24px; padding: 24px; margin: 20px 0; position: relative;
-  overflow: hidden;
-}
-.diagram-container::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-}
-.diagram-title { font-weight: 900; font-size: 16px; margin-bottom: 12px; color: var(--text); }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Flip cards */
-.flip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 16px 0; }
-.flip-card {
-  perspective: 800px; cursor: pointer; min-height: 160px;
-}
-.flip-inner {
-  position: relative; width: 100%; height: 100%; min-height: 160px;
-  transition: transform .6s; transform-style: preserve-3d;
-}
-.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-.flip-face {
-  position: absolute; inset: 0; backface-visibility: hidden;
-  border-radius: 16px; padding: 20px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 10px; text-align: center;
-}
-.flip-front { background: var(--card-hover); border: 1px solid rgba(255,255,255,.08); }
-.flip-front span { font-size: 32px; }
-.flip-front strong { font-size: 15px; }
-.flip-front .flip-hint { font-size: 12px; color: var(--dim); }
-.flip-back {
-  background: var(--card); border: 1px solid rgba(255,255,255,.1);
-  transform: rotateY(180deg); font-size: 14px; text-align: right; padding: 16px;
-}
-.flip-back .flip-example { color: var(--accent); font-size: 13px; margin-top: 8px; padding: 8px; background: rgba(0,212,170,.06); border-radius: 8px; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
 
-/* Buttons */
-.btn {
-  padding: 10px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
-  background: var(--card-hover); color: var(--text); font-family: 'Cairo', sans-serif;
-  font-weight: 700; cursor: pointer; transition: all .2s; font-size: 14px;
-}
-.btn:hover { background: var(--primary); color: var(--bg); border-color: var(--primary); transform: translateY(-2px); }
-.replay-btn {
-  padding: 8px 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
-  background: rgba(255,255,255,.04); color: var(--text); font-family: 'Cairo', sans-serif;
-  font-weight: 700; cursor: pointer; transition: all .2s; font-size: 13px;
-}
-.replay-btn:hover { background: var(--primary); color: var(--bg); }
+    .bg-anim {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 30% 50%, rgba(25, 60, 255, .12) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(0, 212, 170, .08) 0%, transparent 50%);
+      animation: bgShift 20s ease-in-out infinite alternate;
+    }
 
-/* Tabs */
-.tab-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.tab-btn {
-  padding: 8px 16px; border-radius: 25px; border: 1px solid rgba(255,255,255,.1);
-  background: transparent; color: var(--dim); font-family: 'Cairo', sans-serif;
-  font-weight: 700; cursor: pointer; transition: all .2s; font-size: 13px;
-}
-.tab-btn.active { background: var(--primary); color: var(--bg); border-color: var(--primary); }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+    @keyframes bgShift {
+      0% {
+        transform: translate(0, 0)
+      }
 
-/* Quiz */
-.quiz-option {
-  display: block; width: 100%; text-align: right; padding: 12px 18px;
-  border-radius: 12px; border: 2px solid rgba(255,255,255,.1);
-  background: var(--card); color: var(--text); font-family: 'Cairo', sans-serif;
-  font-size: 14px; cursor: pointer; transition: all .2s; margin-bottom: 8px;
-}
-.quiz-option:hover { border-color: var(--primary); background: var(--card-hover); }
-.quiz-option.correct { border-color: var(--success); background: rgba(0,255,136,.1); color: var(--success); }
-.quiz-option.wrong { border-color: var(--danger); background: rgba(255,71,87,.1); color: var(--danger); }
-.quiz-feedback { min-height: 24px; margin-top: 8px; font-size: 14px; font-weight: 700; }
-.quiz-skip { margin-top: 10px; font-size: 12px; padding: 6px 14px; }
+      100% {
+        transform: translate(30px, -20px)
+      }
+    }
 
-/* Activity controls */
-.activity-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
-.status { font-size: 14px; color: var(--dim); font-weight: 700; }
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-/* Error box */
-.error-box {
-  border: 1px solid rgba(255,71,87,.2); background: rgba(255,71,87,.05);
-  border-radius: 12px; padding: 16px; margin-top: 20px;
-}
-.error-box p { font-weight: 900; margin-bottom: 8px; color: var(--danger); }
-.error-box .detail { font-size: 14px; color: var(--dim); line-height: 1.8; }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: .3;
+      animation: floatUp 15s linear infinite;
+    }
 
-/* Slider */
-.slider-row { display: flex; gap: 20px; align-items: center; margin: 16px 0; flex-wrap: wrap; }
-.slider-group { flex: 1; min-width: 140px; text-align: center; }
-.slider-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 14px; }
-.slider-group input[type=range] { width: 100%; accent-color: var(--primary); }
-.slider-value { font-size: 24px; font-weight: 900; margin-top: 4px; }
-.risk-indicator {
-  width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; font-weight: 900; font-size: 14px; text-align: center;
-  border: 3px solid var(--dim); transition: all .4s; margin: 0 auto;
-}
-.risk-indicator.high { border-color: var(--danger); background: rgba(255,71,87,.15); color: var(--danger); }
-.risk-indicator.low { border-color: var(--dim); background: rgba(255,255,255,.03); color: var(--dim); }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0
+      }
 
-/* Step reveal */
-.step-card {
-  background: var(--card); border: 1px solid rgba(255,255,255,.06);
-  border-radius: 16px; padding: 20px; margin: 10px 0;
-  display: none; border-right: 4px solid var(--primary);
-}
-.step-card.active { display: block; animation: fadeUp .5s ease-out; }
-.step-counter { font-size: 13px; color: var(--dim); margin-bottom: 8px; }
-.step-title { font-weight: 900; font-size: 16px; margin-bottom: 6px; }
-.step-desc { font-size: 14px; color: var(--dim); }
-.step-example { font-size: 13px; color: var(--accent); margin-top: 8px; padding: 8px; background: rgba(0,212,170,.06); border-radius: 8px; }
-.step-nav { display: flex; gap: 10px; margin-top: 16px; }
-.step-connector { width: 2px; height: 20px; background: var(--primary); margin: 0 auto; opacity: .3; }
+      10% {
+        opacity: .3
+      }
 
-/* Profile cards */
-.profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
-.profile-card {
-  background: var(--card); border: 1px solid rgba(255,255,255,.06);
-  border-radius: 16px; padding: 16px; text-align: center; cursor: pointer;
-  transition: all .3s;
-}
-.profile-card:hover { border-color: var(--primary); transform: translateY(-3px); }
-.profile-card.active { border-color: var(--primary); box-shadow: 0 0 20px rgba(25,60,255,.2); }
-.profile-icon { font-size: 28px; margin-bottom: 8px; }
-.profile-name { font-weight: 900; font-size: 13px; margin-bottom: 4px; }
-.profile-motivation { font-size: 12px; color: var(--dim); }
-.profile-question { margin-top: 10px; font-size: 12px; color: var(--warn); font-weight: 700; }
+      90% {
+        opacity: .3
+      }
 
-/* Channel matcher */
-.channel-match { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
-.channel-chip {
-  padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,.1);
-  background: var(--card); cursor: pointer; transition: all .2s; font-size: 13px;
-}
-.channel-chip:hover { border-color: var(--primary); }
-.channel-chip.matched { background: rgba(0,212,170,.15); border-color: var(--accent); color: var(--accent); }
+      100% {
+        transform: translateY(-10vh) scale(.5);
+        opacity: 0
+      }
+    }
 
-/* Message path */
-.message-path { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 16px 0; }
-.path-node {
-  padding: 10px 16px; border-radius: 10px; background: var(--card);
-  border: 2px solid rgba(255,255,255,.1); font-size: 13px; font-weight: 700;
-  transition: all .3s;
-}
-.path-node.active-node { border-color: var(--primary); background: rgba(25,60,255,.1); }
-.path-node.attack-node { border-color: var(--danger); background: rgba(255,71,87,.1); }
-.path-arrow { color: var(--dim); font-size: 18px; }
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 14, 39, .95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(25, 60, 255, .3);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transform: translateY(-100%);
+      transition: transform .3s;
+    }
 
-/* Legend */
-.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 12px; color: var(--dim); }
-.legend span { display: flex; align-items: center; gap: 4px; }
-.swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .nav.visible {
+      transform: translateY(0);
+    }
 
-/* Activity card (dashed) */
-.activity-card {
-  border: 2px dashed rgba(255,255,255,.1); border-radius: 16px;
-  padding: 20px; margin: 12px 0; background: rgba(255,255,255,.02);
-}
-.activity-card h4 { font-size: 14px; margin-bottom: 8px; }
-.activity-card p { font-size: 13px; color: var(--dim); line-height: 1.6; }
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
 
-/* Table */
-.map-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
-.map-table th, .map-table td { border: 1px solid rgba(255,255,255,.1); padding: 10px; text-align: right; vertical-align: middle; }
-.map-table th { background: rgba(255,255,255,.05); font-size: 12px; color: var(--dim); }
-.map-table td input, .map-table td select { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 6px 10px; color: var(--text); font-family: 'Cairo', sans-serif; font-size: 13px; }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-right: auto;
+    }
 
-/* Journey */
-.journey { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0; }
-.journey-step {
-  display: flex; align-items: center; gap: 10px; padding: 8px 14px;
-  border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03); min-width: 260px; opacity: .4;
-  transition: all .4s; cursor: pointer; font-size: 13px;
-}
-.journey-step.lit { opacity: 1; border-color: var(--primary); background: rgba(25,60,255,.1); }
-.journey-step .j-num {
-  width: 24px; height: 24px; border-radius: 50%; background: var(--primary);
-  color: var(--bg); font-weight: 900; display: flex; align-items: center;
-  justify-content: center; flex-shrink: 0; font-size: 11px;
-}
-.journey-arrow { color: var(--dim); font-size: 14px; line-height: 1; margin: 0; padding: 0; }
+    .nav-links a {
+      color: var(--dim);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 25px;
+      border: 1px solid transparent;
+      transition: all .2s;
+    }
 
-/* Profile grid for Activity 1 */
-.report-card {
-  background: var(--card); border: 1px solid rgba(255,255,255,.06);
-  border-radius: 16px; padding: 16px; margin: 10px 0;
-}
-.report-card h4 { font-size: 14px; margin-bottom: 6px; }
-.report-card p { font-size: 13px; color: var(--dim); line-height: 1.6; }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(25, 60, 255, .2);
+      border-color: var(--primary);
+    }
 
-/* Footer */
-footer {
-  background: linear-gradient(180deg, var(--bg), var(--card));
-  padding: 40px 20px; text-align: center; border-top: 1px solid rgba(25,60,255,.2);
-}
-.footer-logo { height: 40px; border-radius: 10px; margin-bottom: 12px; }
-footer p { color: var(--dim); font-size: 14px; }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px 40px;
+      position: relative;
+    }
 
-/* Responsive */
-@media (max-width: 860px) {
-  .nav-links { display: none; }
-  .profile-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
-  .journey-step { min-width: 200px; font-size: 12px; }
-}
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 25px;
+      background: rgba(25, 60, 255, .15);
+      border: 1px solid rgba(25, 60, 255, .3);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp .8s ease-out .2s forwards;
+    }
 
-/* Reveal base */
-.reveal { opacity: 0; transform: translateY(30px); transition: all .6s cubic-bezier(.4,0,.2,1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+    .hero h1 {
+      font-size: clamp(36px, 8vw, 80px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp .8s ease-out .4s forwards;
+    }
 
-/* LTR for English terms */
-[dir="ltr"], .ltr { direction: ltr; unicode-bidi: isolate; }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* Pulse animation for active elements */
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-.pulse { animation: pulse 2s infinite; }
+    .hero p {
+      font-size: 18px;
+      color: var(--dim);
+      max-width: 600px;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeUp .8s ease-out .6s forwards;
+    }
 
-/* Blink */
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-.blink { animation: blink 1.5s infinite; }
-</style>
+    .hero .start-btn {
+      padding: 14px 36px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: var(--bg);
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      opacity: 0;
+      animation: fadeUp .8s ease-out .8s forwards;
+    }
+
+    .hero .start-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(25, 60, 255, .4);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .hero-circles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-circles div {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .08;
+      animation: circleFloat 6s ease-in-out infinite;
+    }
+
+    .hero-circles div:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .hero-circles div:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      background: var(--accent);
+      bottom: 20%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .hero-circles div:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      background: var(--s3);
+      top: 50%;
+      left: 60%;
+      animation-delay: 4s;
+    }
+
+    @keyframes circleFloat {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-30px)
+      }
+    }
+
+    section {
+      padding: 60px 20px;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-inner {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .6s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .section-inner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-header {
+      margin-bottom: 30px;
+    }
+
+    .section-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--bg);
+      margin-bottom: 12px;
+      animation: badgeGlow 3s infinite;
+    }
+
+    @keyframes badgeGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(25, 60, 255, .3)
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(25, 60, 255, .6)
+      }
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--dim);
+      font-size: 15px;
+    }
+
+    .diagram-container {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .05);
+      border-radius: 24px;
+      padding: 24px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diagram-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .diagram-title {
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    /* Flip cards */
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .flip-card {
+      perspective: 800px;
+      cursor: pointer;
+      min-height: 160px;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 160px;
+      transition: transform .6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .flip-front {
+      background: var(--card-hover);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .flip-front span {
+      font-size: 32px;
+    }
+
+    .flip-front strong {
+      font-size: 15px;
+    }
+
+    .flip-front .flip-hint {
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .flip-back {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .1);
+      transform: rotateY(180deg);
+      font-size: 14px;
+      text-align: right;
+      padding: 16px;
+    }
+
+    .flip-back .flip-example {
+      color: var(--accent);
+      font-size: 13px;
+      margin-top: 8px;
+      padding: 8px;
+      background: rgba(0, 212, 170, .06);
+      border-radius: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: var(--card-hover);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .replay-btn {
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(255, 255, 255, .04);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 13px;
+    }
+
+    .replay-btn:hover {
+      background: var(--primary);
+      color: var(--bg);
+    }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: transparent;
+      color: var(--dim);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 13px;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: var(--primary);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Quiz */
+    .quiz-option {
+      display: block;
+      width: 100%;
+      text-align: right;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, .1);
+      background: var(--card);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .2s;
+      margin-bottom: 8px;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--primary);
+      background: var(--card-hover);
+    }
+
+    .quiz-option.correct {
+      border-color: var(--success);
+      background: rgba(0, 255, 136, .1);
+      color: var(--success);
+    }
+
+    .quiz-option.wrong {
+      border-color: var(--danger);
+      background: rgba(255, 71, 87, .1);
+      color: var(--danger);
+    }
+
+    .quiz-feedback {
+      min-height: 24px;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .quiz-skip {
+      margin-top: 10px;
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+
+    /* Activity controls */
+    .activity-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .status {
+      font-size: 14px;
+      color: var(--dim);
+      font-weight: 700;
+    }
+
+    /* Error box */
+    .error-box {
+      border: 1px solid rgba(255, 71, 87, .2);
+      background: rgba(255, 71, 87, .05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+
+    .error-box p {
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: var(--danger);
+    }
+
+    .error-box .detail {
+      font-size: 14px;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+
+    /* Slider */
+    .slider-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .slider-group {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .slider-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .slider-group input[type=range] {
+      width: 100%;
+      accent-color: var(--primary);
+    }
+
+    .slider-value {
+      font-size: 24px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .risk-indicator {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      text-align: center;
+      border: 3px solid var(--dim);
+      transition: all .4s;
+      margin: 0 auto;
+    }
+
+    .risk-indicator.high {
+      border-color: var(--danger);
+      background: rgba(255, 71, 87, .15);
+      color: var(--danger);
+    }
+
+    .risk-indicator.low {
+      border-color: var(--dim);
+      background: rgba(255, 255, 255, .03);
+      color: var(--dim);
+    }
+
+    /* Step reveal */
+    .step-card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 10px 0;
+      display: none;
+      border-right: 4px solid var(--primary);
+    }
+
+    .step-card.active {
+      display: block;
+      animation: fadeUp .5s ease-out;
+    }
+
+    .step-counter {
+      font-size: 13px;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--dim);
+    }
+
+    .step-example {
+      font-size: 13px;
+      color: var(--accent);
+      margin-top: 8px;
+      padding: 8px;
+      background: rgba(0, 212, 170, .06);
+      border-radius: 8px;
+    }
+
+    .step-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .step-connector {
+      width: 2px;
+      height: 20px;
+      background: var(--primary);
+      margin: 0 auto;
+      opacity: .3;
+    }
+
+    /* Profile cards */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .profile-card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .profile-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .profile-card.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(25, 60, 255, .2);
+    }
+
+    .profile-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .profile-name {
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .profile-motivation {
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .profile-question {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--warn);
+      font-weight: 700;
+    }
+
+    /* Channel matcher */
+    .channel-match {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .channel-chip {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: var(--card);
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 13px;
+    }
+
+    .channel-chip:hover {
+      border-color: var(--primary);
+    }
+
+    .channel-chip.matched {
+      background: rgba(0, 212, 170, .15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Message path */
+    .message-path {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 16px 0;
+    }
+
+    .path-node {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 2px solid rgba(255, 255, 255, .1);
+      font-size: 13px;
+      font-weight: 700;
+      transition: all .3s;
+    }
+
+    .path-node.active-node {
+      border-color: var(--primary);
+      background: rgba(25, 60, 255, .1);
+    }
+
+    .path-node.attack-node {
+      border-color: var(--danger);
+      background: rgba(255, 71, 87, .1);
+    }
+
+    .path-arrow {
+      color: var(--dim);
+      font-size: 18px;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* Activity card (dashed) */
+    .activity-card {
+      border: 2px dashed rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 12px 0;
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .activity-card h4 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .activity-card p {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* Table */
+    .map-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .map-table th,
+    .map-table td {
+      border: 1px solid rgba(255, 255, 255, .1);
+      padding: 10px;
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    .map-table th {
+      background: rgba(255, 255, 255, .05);
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .map-table td input,
+    .map-table td select {
+      width: 100%;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+    }
+
+    /* Journey */
+    .journey {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 0;
+    }
+
+    .journey-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .03);
+      min-width: 260px;
+      opacity: .4;
+      transition: all .4s;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .journey-step.lit {
+      opacity: 1;
+      border-color: var(--primary);
+      background: rgba(25, 60, 255, .1);
+    }
+
+    .journey-step .j-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--bg);
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+    }
+
+    .journey-arrow {
+      color: var(--dim);
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Profile grid for Activity 1 */
+    .report-card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 10px 0;
+    }
+
+    .report-card h4 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .report-card p {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(180deg, var(--bg), var(--card));
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(25, 60, 255, .2);
+    }
+
+    .footer-logo {
+      height: 40px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      color: var(--dim);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .profile-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+
+      .journey-step {
+        min-width: 200px;
+        font-size: 12px;
+      }
+    }
+
+    /* Reveal base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .6s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* LTR for English terms */
+    [dir="ltr"],
+    .ltr {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    /* Pulse animation for active elements */
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.05)
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    /* Blink */
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .25
+      }
+    }
+
+    .blink {
+      animation: blink 1.5s infinite;
+    }
+  </style>
 </head>
+
 <body>
-<div class="bg-anim"></div>
-<div class="particles" id="particles"></div>
+  <div class="bg-anim"></div>
+  <div class="particles" id="particles"></div>
 
-<nav class="nav" id="mainNav">
-  <img src="data:image/webp;base64,UklGRsAcAABXRUJQVlA4ILQcAAAQsACdASpYAlUCPlEok0ajoqGhItWIMHAKCWdu/Eb3rSGO7W24Kxp8t/z35QbaL2P8mvy09B3LHy/76/vP/lMzu8T/Ov9N/jP3B/vn/////3R/1/qP/Uf6m/AB/Df4//kP7/+3f9m/////+rT1F/uJ6gP6r/d/+d/hf3/+a7/Jepz/JeoF/Vv7/1iHoCfsB6Yn/r/2Hwe/tJ/5v9F+//0Lfzz+7/9r8//kA9ADqx+wP9p7Rf7Z/XvPvq8+1nMHiU/Fftn+o/uftp7JfkXqBfiX8x/xP5Z8JQAD6t/6b+4+upM+yAOC8oAfpr1aP6T/6f5Pz7/of+X/ab4Dv57/aP+12E/2y///u7/uQEd8QtYY3sgthnhSjzlxsHsUNtqxsYPmY/tAnTWk3eRvx96FjeyHJvbr2WcMflxsHxsHxwNwpR5y43vhzrGX1TpNJmXt4xgkLqDmwfG99YZRGMFcyZ4Uo85gZwBbN+NllprGxSRxW1rTyCRoZg+h0Lk9hyLKBQ73OHulwtb0r7Yt5PSoBq70s+RV+vmqzZCqvAjDoiSnBwHM9u3kIwbzlxsBQO5nrVFmIT0cN4xUVTTop/in5EP7B8VPficNp4Uo9CYJ2MbGe2QcycuNhDjHYMc1hRlU7TBo7ET+m0ecuLWrsysVbJwwyW7Gwci7/f4b7eY3spo8hACO9F7eM0cndhYzBzYPjYPi2s3lloqwH/ypFHIWDg3LWx724JkPCjzlxsIARP9cmu7/ZownOm6SXZWcSrN1ionLjYPjYPdF1f9yA04STy2woP8q2ZDab97eMV4Uo8j+rxDgQtFzXmj0BexP/th4o9HZap/AcfrB8bB8bByt9LZK1LVnj6oAWMnX6h5/qUKSpGE52zPJmXt4xXhLKBMjlKRRBOFPTCBFLs0PlKB6EBul4xXhSgtMgQT6oNB3AFnhzPt44fdrVBd0wgBYJ5nkzL28YroE3NmKKreywfJTq9znjhtX1aq8EtMLlxsHuu2EKfH9FOy4j31Ko0UwYo70PeKl4jJoqMhKYlb5YktMajaS5Wc3/adyZdDaAfhhDWpYWGcPKvDaRep78mGQHCd7//L5zA9p7+w4sz5T9KoniwkKqUrmI71fQgTVtI0XVrqq7V+mYy9wK3ffqz/+Or3peC0mkpVYx955ZowcBHo6v9i29B5LQfA6DqaLpoV7SiHFmRAm0UldUDcX/ouciJah9bJ0zGUds8ApyspaVFT0aFb610bmwG8MKUciDdQbUxIc3kQgFF0BQ2+3/1twur1bsbB8bAIuNI7ctdbxiyyP8bBzhMbmYIM4b8pn03S9501OtiXK9jYPjYPjYBU0J1td0x2zWnRSj2ENErPauhSJbsbB8bB8WzQmMIoN6mSeoaPbS7xhqgz7Rm90udSbfM+/M+/M+2q5zkHwgOmW7IxrgGfnantR5bmZ/GwfGwfGwCfuyIPBLrvY17b1479hUwupcbB8bB8bAQAQPxFm5wHM/DGX2dGUTnPSSORRmBAFKPOXGwfGqnUawYBmUlb7o2gq3xIt+5qaTHReecuNg+Ng5S5VEPIKn7R5y5KdgNEP/CctFGRfdcbB8bB8bAG2kbnnjfj5oluv/gRhkt633Yzw7bkmwo85cbByF8VOjWFDUjwLg+AhHWghGXOkAj3IYK3YrIOKIEsJ2Lx5D63xJhyMnSjFi2aaOqZHGOU83UPjf+fNGyE+Z/GxpEB8bD1WDQ6zDahWy4eI+Q2GD/8t2/te3jGOtkUmvH29gn/+TICZmhiQUW7GwfLPCtqooUgpRoHcGtw3szflXEGGS3Y2D5Kdg+OQE+JVtRv+yklVIuo8dXQx116rM3el4dZCC3JvTG+pMds+GvBFYveHV3km1Cry4VeO7G9/euRjXSwAAP77d89+nafhMf4TD6F7w6ETqw/BiNp9R3MH+fjgGRk=" class="logo-nav" alt="Bilal">
-  <div class="nav-links">
-    <a href="#hero">المقدمة</a>
-    <a href="#intro">المراجعة</a>
-    <a href="#s1">المعادلة الأساسية</a>
-    <a href="#s2">المهاجمين</a>
-    <a href="#s3">دورة الهجوم</a>
-    <a href="#s4">الهندسة الاجتماعية</a>
-    <a href="#s5">البرمجيات الخبيثة</a>
-    <a href="#s6">هجمات الشبكة</a>
-    <a href="#a1">تحليل المهاجم</a>
-    <a href="#a2">خريطة الهجوم</a>
-    <a href="#closing">الرحلة</a>
-  </div>
-</nav>
-
-<!-- ==================== HERO ==================== -->
-<section class="hero" id="hero">
-  <div class="hero-circles">
-    <div></div><div></div><div></div>
-  </div>
-  <div class="hero-badge">Threats & Attacks</div>
-  <h1>مين <span class="grad">بيهاجمنا</span>؟<br>وإزاي بيحصل؟</h1>
-  <p>من أنواع المهاجمين لده، لإن هجمات بتحصل خطوة بخطوة — هنتعلم كل حاجة من الأساس</p>
-  <button class="start-btn" id="startBtn">ابدأ الدرس ↓</button>
-</section>
-
-<!-- ==================== INTRO ==================== -->
-<section id="intro">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">00</div>
-        <h2>مراجعة سريعة: الأصول وأنواع البيانات</h2>
-        <p>قبل ما نتعمق في التهديدات — لازم نعرف إيه اللي بنحميه</p>
-      </div>
+  <nav class="nav" id="mainNav">
+    <img
+      src="data:image/webp;base64,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"
+      class="logo-nav" alt="Bilal">
+    <div class="nav-links">
+      <a href="#hero">المقدمة</a>
+      <a href="#intro">المراجعة</a>
+      <a href="#s1">المعادلة الأساسية</a>
+      <a href="#s2">المهاجمين</a>
+      <a href="#s3">دورة الهجوم</a>
+      <a href="#s4">الهندسة الاجتماعية</a>
+      <a href="#s5">البرمجيات الخبيثة</a>
+      <a href="#s6">هجمات الشبكة</a>
+      <a href="#a1">تحليل المهاجم</a>
+      <a href="#a2">خريطة الهجوم</a>
+      <a href="#closing">الرحلة</a>
     </div>
+  </nav>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">أنواع الأصول الرقمية</div>
-        <div class="flip-grid">
-          <div class="flip-card" data-id="flip-data-rest">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>💾</span><strong>Data at Rest</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">البيانات المخزنة على سطح المكتب أو سيرفر — زي ملفات Excel على القرص الصلب. لو حد دخل السيرفر بدون إذن، البيانات دي ممكن يتسرقوا.</div>
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-circles">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="hero-badge">Threats & Attacks</div>
+    <h1>مين <span class="grad">بيهاجمنا</span>؟<br>وإزاي بيحصل؟</h1>
+    <p>من أنواع المهاجمين لده، لإن هجمات بتحصل خطوة بخطوة — هنتعلم كل حاجة من الأساس</p>
+    <button class="start-btn" id="startBtn">ابدأ الدرس ↓</button>
+  </section>
+
+  <!-- ==================== INTRO ==================== -->
+  <section id="intro">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">00</div>
+          <h2>مراجعة سريعة: الأصول وأنواع البيانات</h2>
+          <p>قبل ما نتعمق في التهديدات — لازم نعرف إيه اللي بنحميه</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">أنواع الأصول الرقمية</div>
+          <div class="flip-grid">
+            <div class="flip-card" data-id="flip-data-rest">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>💾</span><strong>Data at Rest</strong><span
+                    class="flip-hint">اضغط للمقارنة</span></div>
+                <div class="flip-face flip-back">البيانات المخزنة على سطح المكتب أو سيرفر — زي ملفات Excel على القرص
+                  الصلب. لو حد دخل السيرفر بدون إذن، البيانات دي ممكن يتسرقوا.</div>
+              </div>
+            </div>
+            <div class="flip-card" data-id="flip-data-transit">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>📤</span><strong>Data in Transit</strong><span
+                    class="flip-hint">اضغط للمقارنة</span></div>
+                <div class="flip-face flip-back">البيانات اللي بتتحرك من مكان لمكان — زي رسالة واتساب بتتبعت من جهازك
+                  للسيرفر. لو حد اعترضها (MitM)، ممكن يقرأها أو يعدّلها.</div>
+              </div>
+            </div>
+            <div class="flip-card" data-id="flip-data-use">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>📊</span><strong>Data in Use</strong><span
+                    class="flip-hint">اضغط للمقارنة</span></div>
+                <div class="flip-face flip-back">البيانات اللي بتتعمل عليها لحظة — زي ملف Excel مفتوح وشغال عليه. لو حد
+                  قريب من الشاشة ممكن يشوف البيانات أو يسرقها.</div>
+              </div>
+            </div>
+            <div class="flip-card" data-id="flip-systems">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>🖥️</span><strong>Systems</strong><span class="flip-hint">اضغط
+                    للمقارنة</span></div>
+                <div class="flip-face flip-back">الخوادم والشبكات والأنظمة التشغيلية — كل واحد فيهم ممكن يكون ثغرة لو مش
+                  محدّث أو محمي.</div>
+              </div>
+            </div>
+            <div class="flip-card" data-id="flip-apps">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>📱</span><strong>Applications</strong><span
+                    class="flip-hint">اضغط للمقارنة</span></div>
+                <div class="flip-face flip-back">التطبيقات والمواقع والبرامج — لو فيها ثغرة (مثل SQL injection)، المهاجم
+                  ممكن يستغلها.</div>
+              </div>
+            </div>
+            <div class="flip-card" data-id="flip-human">
+              <div class="flip-inner">
+                <div class="flip-face flip-front"><span>👤</span><strong>Human Assets</strong><span
+                    class="flip-hint">اضغط للمقارنة</span></div>
+                <div class="flip-face flip-back">الناس نفسهم — الموظفين، الطلاب، الإدارة. أضعف حلقة في الأمان دي الإنسان
+                  (Social Engineering).</div>
+              </div>
             </div>
           </div>
-          <div class="flip-card" data-id="flip-data-transit">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>📤</span><strong>Data in Transit</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">البيانات اللي بتتحرك من مكان لمكان — زي رسالة واتساب بتتبعت من جهازك للسيرفر. لو حد اعترضها (MitM)، ممكن يقرأها أو يعدّلها.</div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">لمحة سريعة عن ثغرات شائعة</div>
+          <p style="color:var(--dim);font-size:14px">بعض الثغرات اللي هنتعمق فيها: <span dir="ltr">Broken
+              Authentication</span> (أنظمة تسجيل دخول ضعيفة)، <span dir="ltr">Unpatched Systems</span> (أنظمة من غير
+            تحديثات)، و<span dir="ltr">Lateral Movement</span> (التنقل بين الأجهزة بعد الاختراق).</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن الأصول الرقمية بس هي المهمة — البيانات نفسها (ولو مش رقمية) أصل قيّم<br>
+          • الخلط بين Data at Rest و Data in Transit — كل نوع محتاج حماية مختلفة<br>
+          • إهمال العنصر البشري — أغلب الهجمات بتبدأ من إنسان مش من تكنولوجيا
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 1 ==================== -->
+  <section id="s1">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s2),var(--accent))">01</div>
+          <h2>Threat, Vulnerability, Risk, Attack</h2>
+          <p>المعادلة الأساسية — ليه كل مصطلح مهم ومختلف</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">المفهوم الأساسي</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Threat</strong> (تهديد) — حاجة
+            ممكن تضر بس لسه ما حصلتش. مثال: مجموعة Ransomware أعلنت نيتها هجوم بنك، لسه ما هاجمتش.</p>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Vulnerability</strong> (ثغرة)
+            — نقطة ضعف ممكن تتاستغل. مثال: سيرفر Apache من غير تحديث أمني — زي باب مفتوح.</p>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Risk</strong> (مخاطرة) — لما
+            الـ Threat والـ Vulnerability يجتمعوا مع بعض. Risk = Threat × Vulnerability × Impact.</p>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Attack</strong> (هجوم) —
+            اللحظة اللي المهاجم يستغل فيها الثغرة فعلًا. مثال: ضغطت على لينك مزيف وكتبت الباسورد.</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">لو Threat لوحده، ولو Vulnerability لوحدها... مفيش Risk</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">جرب غيّر الأزرار وشوف إيه بيحصل:</p>
+          <div class="slider-row">
+            <div class="slider-group">
+              <label>Threat موجود؟</label>
+              <button class="btn" data-id="threat-yes" style="margin:4px">نعم</button>
+              <button class="btn" data-id="threat-no" style="margin:4px">لأ</button>
+              <div class="slider-value" id="threatVal" style="color:var(--s2)">—</div>
+            </div>
+            <div class="slider-group">
+              <label>Vulnerability موجودة؟</label>
+              <button class="btn" data-id="vuln-yes" style="margin:4px">نعم</button>
+              <button class="btn" data-id="vuln-no" style="margin:4px">لأ</button>
+              <div class="slider-value" id="vulnVal" style="color:var(--s2)">—</div>
             </div>
           </div>
-          <div class="flip-card" data-id="flip-data-use">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>📊</span><strong>Data in Use</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">البيانات اللي بتتعمل عليها لحظة — زي ملف Excel مفتوح وشغال عليه. لو حد قريب من الشاشة ممكن يشوف البيانات أو يسرقها.</div>
+          <div class="risk-indicator low" id="riskIndicator">مفيش Risk</div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">مثال واقعي</div>
+          <p style="color:var(--dim);font-size:14px">مجموعة <span dir="ltr">Lazarus</span> استغلت ثغرة في مكتبة
+            JavaScript، استهدفت منصة عملات رقمية، وسرقت حوالي 625 مليون دولار. الثغرة كانت موجودة (Vulnerability)
+            والتهديد كان حقيقي (Threat) فبقى الـ Risk عالي جداً والهجوم حصل (Attack).</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">كويز سريع</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">الفرق الصحيح بين Threat و Vulnerability هو إيه؟
+          </p>
+          <div class="activity-controls" style="margin-top:0">
+            <button class="quiz-option" data-id="q1-a">A) Threat = الباب المفتوح، Vulnerability = اللي بيحاول
+              يدخل</button>
+            <button class="quiz-option" data-id="q1-b">B) Threat = اللي بيهاجم (الإمكانية)، Vulnerability = الباب
+              المفتوح (الضعف)</button>
+            <button class="quiz-option" data-id="q1-c">C) الاثنين نفس الحاجة</button>
+            <button class="quiz-option" data-id="q1-d">D) Threat = الضرر، Vulnerability = الخسارة المالية</button>
+            <span class="quiz-feedback" id="q1fb" style="min-height:24px"></span>
+          </div>
+          <button class="replay-btn quiz-skip" data-id="q1-skip">تخطي</button>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • الخلط بين Threat و Risk — التهديد ممكن يكون موجود بس لو مفيش ثغرة، مفيش Risk<br>
+          • التفكير إن الـ Attack هو نفسه الـ Threat — الهجوم هو التنفيذ الفعلي، التهديد ممكن يكون بس كلام<br>
+          • إهمال الـ Impact — Risk مش بس Threat × Vulnerability، التأثير بيزوده
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 2 ==================== -->
+  <section id="s2">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">02</div>
+          <h2>أنواع المهاجمين (Threat Actors)</h2>
+          <p>مين بيهاجمنا؟ — 5 أنواع حسب الدافع</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">الأنواع الخمسة</div>
+          <div class="profile-grid" id="threatProfiles">
+            <div class="profile-card" data-id="profile-cyber">
+              <div class="profile-icon">💰</div>
+              <div class="profile-name">Cybercriminals</div>
+              <div class="profile-motivation">دافعهم: فلوس</div>
+              <div class="profile-question">مين ممكن يهاجم بنك علشان فلوس بس؟</div>
+            </div>
+            <div class="profile-card" data-id="profile-nation">
+              <div class="profile-icon">🏛️</div>
+              <div class="profile-name">Nation-State Actors</div>
+              <div class="profile-motivation">دافعهم: تجسس / دعم حكومي</div>
+              <div class="profile-question">مجموعة مدعومة من دولة قاعدة 8 شهور بدون اكتشاف → أنهي نوع؟</div>
+            </div>
+            <div class="profile-card" data-id="profile-hack">
+              <div class="profile-icon">✊</div>
+              <div class="profile-name">Hacktivists</div>
+              <div class="profile-motivation">دافعهم: رسالة سياسية / احتجاج</div>
+              <div class="profile-question">مين بيدّعي إنه قرصان أخلاقي بس عايز يظهّر رسالة؟</div>
+            </div>
+            <div class="profile-card" data-id="profile-insider">
+              <div class="profile-icon">🏢</div>
+              <div class="profile-name">Insider Threats</div>
+              <div class="profile-motivation">دافعهم: متعمد أو غير متعمد</div>
+              <div class="profile-question">موظف سابق يصدّر بيانات العملاء لفلول — Insider متعمد ولا غير متعمد؟</div>
+            </div>
+            <div class="profile-card" data-id="profile-script">
+              <div class="profile-icon">🧑‍💻</div>
+              <div class="profile-name">Script Kiddies</div>
+              <div class="profile-motivation">دافعهم: فضول / أدوات جاهزة</div>
+              <div class="profile-question">حد بيحمّل أداة DDoS جاهزة ويضغط زر — مين ده؟</div>
             </div>
           </div>
-          <div class="flip-card" data-id="flip-systems">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>🖥️</span><strong>Systems</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">الخوادم والشبكات والأنظمة التشغيلية — كل واحد فيهم ممكن يكون ثغرة لو مش محدّث أو محمي.</div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">كويز</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">مجموعة مدعومة من دولة قاعدة 8 شهور بدون اكتشاف،
+            واستخدمت أدوات مخصصة مش موجودة في أي مكان — إيه نوع المهاجم؟</p>
+          <div class="activity-controls" style="margin-top:0">
+            <button class="quiz-option" data-id="q2-a">Cybercriminal</button>
+            <button class="quiz-option" data-id="q2-b">Nation-State Actor</button>
+            <button class="quiz-option" data-id="q2-c">Hacktivist</button>
+            <button class="quiz-option" data-id="q2-d">Script Kiddie</button>
+            <span class="quiz-feedback" id="q2fb" style="min-height:24px"></span>
+          </div>
+          <button class="replay-btn quiz-skip" data-id="q2-skip">تخطي</button>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن كل المهاجمين بتحكمهم دول — في الحقيقة في نطاق بينهم<br>
+          • الخلط بين Insider Threat متعمد وغير متعمد — التاني ممكن يكون موظف ضغط فيشنج بالغلط<br>
+          • إهمال Script Kiddies — رغم إنهم أقل تطوراً، بيستخدموا أدوات جاهزة ممكن تسبب ضرر كبير
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 3 ==================== -->
+  <section id="s3">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">03</div>
+          <h2>دورة حياة الهجوم (Attack Lifecycle)</h2>
+          <p>أي هجوم بيمر بمراحل متسلسلة — هنتعلم كل مرحلة</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">المراحل الست</div>
+          <div class="step-card active" data-step="0">
+            <div class="step-counter">المرحلة 1 / 6</div>
+            <div class="step-title">🔍 Reconnaissance — الاستطلاع</div>
+            <div class="step-desc">الهاكر بيجمع معلومات عن الهدف: أسماء الموظفين، البنية التحتية، الثغرات المحتملة.
+            </div>
+            <div class="step-example">مثال: الهاكر يجمع أسماء الموظفين من LinkedIn عشان يعرف يستهدف مين.</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-card" data-step="1">
+            <div class="step-counter">المرحلة 2 / 6</div>
+            <div class="step-title">🚪 Initial Access — الدخول الأولي</div>
+            <div class="step-desc">الهاكر بيحصل على أول نقطة دخول للنظام.</div>
+            <div class="step-example">مثال: موظف فتح ملف Word فيه ماكرو خبيث فالماكرو نفّذ كود ضار.</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-card" data-step="2">
+            <div class="step-counter">المرحلة 3 / 6</div>
+            <div class="step-title">⚡ Execution — التنفيذ</div>
+            <div class="step-desc">الهاكر بيشغّل الكود الضار على النظام المستهدف.</div>
+            <div class="step-example">مثال: تشغيل برنامج Ransomware بيشفّر كل الملفات.</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-card" data-step="3">
+            <div class="step-counter">المرحلة 4 / 6</div>
+            <div class="step-title">🔑 Persistence — البقاء</div>
+            <div class="step-desc">الهاكر بيخلي طريقة تانيه يدخل فيها حتى لو اكتشفوا الطريقة الأولى.</div>
+            <div class="step-example">مثال: عمل Backdoor account أو RAT أو Scheduled Task — زي مفتاح إضافي مخفي حتى لو
+              غيرت القفل.</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-card" data-step="4">
+            <div class="step-counter">المرحلة 5 / 6</div>
+            <div class="step-title">↔️ Lateral Movement — التحرك الجانبي</div>
+            <div class="step-desc">الهاكر بينتقل من جهاز لآخر عشان يوصل لأهداف أكتر قيمة.</div>
+            <div class="step-example">مثال: التنقل بين أجهزة الشركة من مكتب لمكتب لحد السيرفر الرئيسي.</div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-card" data-step="5">
+            <div class="step-counter">المرحلة 6 / 6</div>
+            <div class="step-title">📤 Exfiltration — سرقة البيانات</div>
+            <div class="step-desc">الهاكر بياخد البيانات المسروقة بره من الشبكة.</div>
+            <div class="step-example">مثال: رفع البيانات على Cloud أو نقلها ببطء عشان ما تتكشفش، وربما مع Double
+              Extortion (طلب فدية + تهديد بنشر البيانات).</div>
+          </div>
+          <div class="step-nav">
+            <button class="replay-btn" data-id="step-back">◀ السابق</button>
+            <span class="status" id="stepStatus">1 / 6</span>
+            <button class="replay-btn" data-id="step-next">التالي ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">كويز</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">المهاجم دخل بفيشنج وعمل admin account جديد على
+            سيرفر — أي مرحلة من دورة الحياة؟</p>
+          <div class="activity-controls" style="margin-top:0">
+            <button class="quiz-option" data-id="q3-a">Reconnaissance</button>
+            <button class="quiz-option" data-id="q3-b">Initial Access</button>
+            <button class="quiz-option" data-id="q3-c">Execution</button>
+            <button class="quiz-option" data-id="q3-d">Persistence</button>
+            <span class="quiz-feedback" id="q3fb" style="min-height:24px"></span>
+          </div>
+          <button class="replay-btn quiz-skip" data-id="q3-skip">تخطي</button>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن الهجوم بيبدأ من التنفيذ — في الغالب بيبدأ من الاستطلاع (Reconnaissance)<br>
+          • إهمال مرحلة Persistence — لو المش هيلقوا الـ Backdoor، بيقدروا يرجعوا بعد ما يمسحوه<br>
+          • الخلط بين Lateral Movement و Exfiltration — الأول حركة جانبية داخل الشبكة، التاني خروج بالبيانات
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 4 ==================== -->
+  <section id="s4">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">04</div>
+          <h2>هجمات الهندسة الاجتماعية (Social Engineering)</h2>
+          <p>الخداع البشري — أسهل طريقة للاختراق</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">الأنواع الخمسة</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">كل نوع بيستخدم قناة مختلفة عشان يخدع الضحية:</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div
+              style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
+              <strong dir="ltr">Phishing</strong> — إيميل عام بيحاول يخوّف أو يغري أي حد. مثال: "Your account is locked,
+              click here to verify."
+            </div>
+            <div
+              style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
+              <strong dir="ltr">Spear Phishing</strong> — إيميل موجه لشخص معين بيعرف عنه. مثال: إيميل باسم موظف معين
+              بيتكلم عن اجتماع حقيقي.
+            </div>
+            <div
+              style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
+              <strong dir="ltr">Vishing</strong> — مكالمة صوتية. مثال: "أنا من البنك، محتاج الـ OTP بتاعك."
+            </div>
+            <div
+              style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
+              <strong dir="ltr">Smishing</strong> — رسالة SMS. مثال: "طردك اتأخر، اضغط هنا."
+            </div>
+            <div
+              style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
+              <strong dir="ltr">Pretexting</strong> — سيناريو/قصة كاملة. مثال: حد بيدّعي إنه موظف IT جديد وعايز بيانات
+              الدخول.
             </div>
           </div>
-          <div class="flip-card" data-id="flip-apps">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>📱</span><strong>Applications</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">التطبيقات والمواقع والبرامج — لو فيها ثغرة (مثل SQL injection)، المهاجم ممكن يستغلها.</div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">Channel Matcher — اختار القناة الصح</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">اضغط على القناة اللي تتناسب مع الرسالة:</p>
+          <div class="channel-match" id="channelMatch">
+            <div class="channel-chip" data-channel="email">📧 إيميل</div>
+            <div class="channel-chip" data-channel="phone">📞 مكالمة</div>
+            <div class="channel-chip" data-channel="sms">💬 SMS</div>
+            <div class="channel-chip" data-channel="story">📖 قصة/سيناريو</div>
+          </div>
+          <div id="channelQuestion" style="margin-top:12px;font-size:14px;color:var(--warn);font-weight:700"></div>
+          <div id="channelFeedback" style="margin-top:8px;min-height:24px"></div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">كويز</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">رسالة SMS فيها لينك مزيف بيقول "طردك اتأخر، اضغط
+            هنا" — ده إيه من أنواع الهندسة الاجتماعية؟</p>
+          <div class="activity-controls" style="margin-top:0">
+            <button class="quiz-option" data-id="q4-a">Phishing</button>
+            <button class="quiz-option" data-id="q4-b">Vishing</button>
+            <button class="quiz-option" data-id="q4-c">Smishing</button>
+            <button class="quiz-option" data-id="q4-d">Pretexting</button>
+            <span class="quiz-feedback" id="q4fb" style="min-height:24px"></span>
+          </div>
+          <button class="replay-btn quiz-skip" data-id="q4-skip">تخطي</button>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن الهندسة الاجتماعية بس بتكون إيميل — في الحقيقة فيها مكالمات ورسائل وسيناريوهات<br>
+          • الخلط بين Smishing و Pretexting — Smishing قناة (SMS)، Pretexting أسلوب (سيناريو)<br>
+          • التفكير إن بس الأشخاص غير التقنيين بيوقعوا في الهندسة الاجتماعية — المهندسين كمان بيقعوا
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 5 ==================== -->
+  <section id="s5">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s6),var(--danger))">05</div>
+          <h2>أنواع البرمجيات الخبيثة (Malware Types)</h2>
+          <p>الفرق بين كل نوع ومثال واقعي</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">المدرسة — تشبيه بسيط</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">تخيل المدرسة:</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+            <div
+              style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+              <strong>Virus 📝</strong> — ورقة غش. مش هتأثر غير لو الطالب فتحها بنفسه (يحتاج تشغيل من المستخدم).
+            </div>
+            <div
+              style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+              <strong>Worm 🦠</strong> — طالب عنده برد معدي. العدوى تنتشر لوحدها من طالب لطالب (بدون ضغطة مستخدم).
+            </div>
+            <div
+              style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
+              <strong>Trojan 🎁</strong> — هدية شكلها جميل. تكتشف المشكلة بعد ما تفتحها (مش بيعمل نسخ من نفسه).
             </div>
           </div>
-          <div class="flip-card" data-id="flip-human">
-            <div class="flip-inner">
-              <div class="flip-face flip-front"><span>👤</span><strong>Human Assets</strong><span class="flip-hint">اضغط للمقارنة</span></div>
-              <div class="flip-face flip-back">الناس نفسهم — الموظفين، الطلاب، الإدارة. أضعف حلقة في الأمان دي الإنسان (Social Engineering).</div>
-            </div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">اختار النوع</div>
+          <div class="tab-bar" id="malwareTabs">
+            <button class="tab-btn active" data-tab="virus">Virus</button>
+            <button class="tab-btn" data-tab="worm">Worm</button>
+            <button class="tab-btn" data-tab="trojan">Trojan</button>
+            <button class="tab-btn" data-tab="spyware">Spyware</button>
+            <button class="tab-btn" data-tab="ransomware">Ransomware</button>
+          </div>
+          <div class="tab-panel active" data-tab="virus">
+            <p style="font-size:14px"><strong dir="ltr">Virus → Infects Files</strong></p>
+            <p style="color:var(--dim);font-size:13px;margin-top:6px">بيصيب ملفات ومحتاج تشغيل من المستخدم عشان ينتشر.
+              مثال: مرفق إيميل فيه ماكرو خبيث.</p>
+          </div>
+          <div class="tab-panel" data-tab="worm">
+            <p style="font-size:14px"><strong dir="ltr">Worm → Spreads Alone</strong></p>
+            <p style="color:var(--dim);font-size:13px;margin-top:6px">بينتشر لوحده عبر الشبكة من غير ما المستخدم يعمل أي
+              حاجة. مثال: <span dir="ltr">WannaCry</span> (Ransomware + Worm).</p>
+          </div>
+          <div class="tab-panel" data-tab="trojan">
+            <p style="font-size:14px"><strong dir="ltr">Trojan → Disguised as Legit</strong></p>
+            <p style="color:var(--dim);font-size:13px;margin-top:6px">بيتنكر كبرنامج شرعي. مش بيعمل Replication (نسخ من
+              نفسه). مثال: لعبة مجانية فيها باب خلفي.</p>
+          </div>
+          <div class="tab-panel" data-tab="spyware">
+            <p style="font-size:14px"><strong dir="ltr">Spyware → Silent Spy</strong></p>
+            <p style="color:var(--dim);font-size:13px;margin-top:6px">بيراقب ويجمع معلومات بهدوء من غير ما الضحية تعرف.
+              مثال: Keylogger بيكلّم كل ضغطة.</p>
+          </div>
+          <div class="tab-panel" data-tab="ransomware">
+            <p style="font-size:14px"><strong dir="ltr">Ransomware → Locks & Demands</strong></p>
+            <p style="color:var(--dim);font-size:13px;margin-top:6px">بيشفر الملفات ويطلب فدية. أحيانًا مع Double
+              Extortion (يشفر + يهدد بنشر البيانات). مثال: <span dir="ltr">WannaCry</span>.</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">لمحة سريعة عن ثغرات شائعة</div>
-        <p style="color:var(--dim);font-size:14px">بعض الثغرات اللي هنتعمق فيها: <span dir="ltr">Broken Authentication</span> (أنظمة تسجيل دخول ضعيفة)، <span dir="ltr">Unpatched Systems</span> (أنظمة من غير تحديثات)، و<span dir="ltr">Lateral Movement</span> (التنقل بين الأجهزة بعد الاختراق).</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن الأصول الرقمية بس هي المهمة — البيانات نفسها (ولو مش رقمية) أصل قيّم<br>
-        • الخلط بين Data at Rest و Data in Transit — كل نوع محتاج حماية مختلفة<br>
-        • إهمال العنصر البشري — أغلب الهجمات بتبدأ من إنسان مش من تكنولوجيا
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== SECTION 1 ==================== -->
-<section id="s1">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s2),var(--accent))">01</div>
-        <h2>Threat, Vulnerability, Risk, Attack</h2>
-        <p>المعادلة الأساسية — ليه كل مصطلح مهم ومختلف</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">المفهوم الأساسي</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Threat</strong> (تهديد) — حاجة ممكن تضر بس لسه ما حصلتش. مثال: مجموعة Ransomware أعلنت نيتها هجوم بنك، لسه ما هاجمتش.</p>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Vulnerability</strong> (ثغرة) — نقطة ضعف ممكن تتاستغل. مثال: سيرفر Apache من غير تحديث أمني — زي باب مفتوح.</p>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Risk</strong> (مخاطرة) — لما الـ Threat والـ Vulnerability يجتمعوا مع بعض. Risk = Threat × Vulnerability × Impact.</p>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><strong dir="ltr">Attack</strong> (هجوم) — اللحظة اللي المهاجم يستغل فيها الثغرة فعلًا. مثال: ضغطت على لينك مزيف وكتبت الباسورد.</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">لو Threat لوحده، ولو Vulnerability لوحدها... مفيش Risk</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">جرب غيّر الأزرار وشوف إيه بيحصل:</p>
-        <div class="slider-row">
-          <div class="slider-group">
-            <label>Threat موجود؟</label>
-            <button class="btn" data-id="threat-yes" style="margin:4px">نعم</button>
-            <button class="btn" data-id="threat-no" style="margin:4px">لأ</button>
-            <div class="slider-value" id="threatVal" style="color:var(--s2)">—</div>
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">كويز</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><span dir="ltr">WannaCry</span> انتشر في 24 ساعة
+            من غير أي ضغطة مستخدم — ده أي نوع من Malware؟</p>
+          <div class="activity-controls" style="margin-top:0">
+            <button class="quiz-option" data-id="q5-a">Virus</button>
+            <button class="quiz-option" data-id="q5-b">Trojan</button>
+            <button class="quiz-option" data-id="q5-c">Worm</button>
+            <button class="quiz-option" data-id="q5-d">Spyware</button>
+            <span class="quiz-feedback" id="q5fb" style="min-height:24px"></span>
           </div>
-          <div class="slider-group">
-            <label>Vulnerability موجودة؟</label>
-            <button class="btn" data-id="vuln-yes" style="margin:4px">نعم</button>
-            <button class="btn" data-id="vuln-no" style="margin:4px">لأ</button>
-            <div class="slider-value" id="vulnVal" style="color:var(--s2)">—</div>
-          </div>
+          <button class="replay-btn quiz-skip" data-id="q5-skip">تخطي</button>
         </div>
-        <div class="risk-indicator low" id="riskIndicator">مفيش Risk</div>
       </div>
-    </div>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">مثال واقعي</div>
-        <p style="color:var(--dim);font-size:14px">مجموعة <span dir="ltr">Lazarus</span> استغلت ثغرة في مكتبة JavaScript، استهدفت منصة عملات رقمية، وسرقت حوالي 625 مليون دولار. الثغرة كانت موجودة (Vulnerability) والتهديد كان حقيقي (Threat) فبقى الـ Risk عالي جداً والهجوم حصل (Attack).</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">كويز سريع</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">الفرق الصحيح بين Threat و Vulnerability هو إيه؟</p>
-        <div class="activity-controls" style="margin-top:0">
-          <button class="quiz-option" data-id="q1-a">A) Threat = الباب المفتوح، Vulnerability = اللي بيحاول يدخل</button>
-          <button class="quiz-option" data-id="q1-b">B) Threat = اللي بيهاجم (الإمكانية)، Vulnerability = الباب المفتوح (الضعف)</button>
-          <button class="quiz-option" data-id="q1-c">C) الاثنين نفس الحاجة</button>
-          <button class="quiz-option" data-id="q1-d">D) Threat = الضرر، Vulnerability = الخسارة المالية</button>
-          <span class="quiz-feedback" id="q1fb" style="min-height:24px"></span>
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن الـ Worm بيعمل نسخ من نفسه زي الفيروس — الفرق إنه بينتشر لوحده بدون تدخل المستخدم<br>
+          • الخلط بين Trojan و Ransomware — Trojan ما بيشفرش، بس بيتنكر<br>
+          • إهمال Spyware — بيكون صامت وممكن يكون موجود فترة طويلة من غير ما يُكتشف
         </div>
-        <button class="replay-btn quiz-skip" data-id="q1-skip">تخطي</button>
       </div>
     </div>
+  </section>
 
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • الخلط بين Threat و Risk — التهديد ممكن يكون موجود بس لو مفيش ثغرة، مفيش Risk<br>
-        • التفكير إن الـ Attack هو نفسه الـ Threat — الهجوم هو التنفيذ الفعلي، التهديد ممكن يكون بس كلام<br>
-        • إهمال الـ Impact — Risk مش بس Threat × Vulnerability، التأثير بيزوده
+  <!-- ==================== SECTION 6 ==================== -->
+  <section id="s6">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">06</div>
+          <h2>DDoS، Man-in-the-Middle، وهجمات الشبكة</h2>
+          <p>هجمات البنية التحتية والتنقل في الشبكة</p>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ==================== SECTION 2 ==================== -->
-<section id="s2">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">02</div>
-        <h2>أنواع المهاجمين (Threat Actors)</h2>
-        <p>مين بيهاجمنا؟ — 5 أنواع حسب الدافع</p>
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">DDoS — إغراق السيرفر</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">تشبيه: مطعم فيه 50 كرسي فجأة 5000 شخص دخلوا
+            مقعدوش يطلبوا بس احتلوا المكان. السيرفر مش قادر يخدم العملاء الحقيقيين.</p>
+          <p style="color:var(--dim);font-size:14px">الهجوم بيأتي من Botnet — شبكة أجهزة مخترقة بتابع أمر واحد.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">الأنواع الخمسة</div>
-        <div class="profile-grid" id="threatProfiles">
-          <div class="profile-card" data-id="profile-cyber">
-            <div class="profile-icon">💰</div>
-            <div class="profile-name">Cybercriminals</div>
-            <div class="profile-motivation">دافعهم: فلوس</div>
-            <div class="profile-question">مين ممكن يهاجم بنك علشان فلوس بس؟</div>
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">MitM vs Packet Sniffing — الفرق الجوهري</div>
+          <p style="color:var(--dim);font-size:14px;margin-bottom:14px">المفتاح: <strong dir="ltr">MitM = أنا بقيت في
+              النص</strong> مقابل <strong dir="ltr">Packet Sniffing = أنا بتفرج بس</strong></p>
+          <div class="message-path" id="msgPath">
+            <div class="path-node" id="nodeA">👤 الشخص أ</div>
+            <div class="path-arrow">→</div>
+            <div class="path-node" id="nodeB">👤 الشخص ب</div>
           </div>
-          <div class="profile-card" data-id="profile-nation">
-            <div class="profile-icon">🏛️</div>
-            <div class="profile-name">Nation-State Actors</div>
-            <div class="profile-motivation">دافعهم: تجسس / دعم حكومي</div>
-            <div class="profile-question">مجموعة مدعومة من دولة قاعدة 8 شهور بدون اكتشاف → أنهي نوع؟</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px">
+            <button class="btn" data-id="toggle-mitm">🎭 فعّل MitM</button>
+            <button class="btn" data-id="toggle-sniffer">👁️ فعّل Packet Sniffer</button>
+            <button class="replay-btn" data-id="reset-path">↺ رجّع</button>
           </div>
-          <div class="profile-card" data-id="profile-hack">
-            <div class="profile-icon">✊</div>
-            <div class="profile-name">Hacktivists</div>
-            <div class="profile-motivation">دافعهم: رسالة سياسية / احتجاج</div>
-            <div class="profile-question">مين بيدّعي إنه قرصان أخلاقي بس عايز يظهّر رسالة؟</div>
+          <div id="mitmDetail"
+            style="margin-top:12px;display:none;padding:12px;background:rgba(255,71,87,.08);border-radius:10px;border:1px solid rgba(255,71,87,.2)">
+            <strong style="color:var(--danger)">🎭 MitM Active</strong>
+            <p style="color:var(--dim);font-size:13px;margin-top:4px">الرسالة بتعدي على المهاجم اللي بيقرأها ويقدر
+              يعدّلها. أنت بقيت في النص!</p>
           </div>
-          <div class="profile-card" data-id="profile-insider">
-            <div class="profile-icon">🏢</div>
-            <div class="profile-name">Insider Threats</div>
-            <div class="profile-motivation">دافعهم: متعمد أو غير متعمد</div>
-            <div class="profile-question">موظف سابق يصدّر بيانات العملاء لفلول — Insider متعمد ولا غير متعمد؟</div>
-          </div>
-          <div class="profile-card" data-id="profile-script">
-            <div class="profile-icon">🧑‍💻</div>
-            <div class="profile-name">Script Kiddies</div>
-            <div class="profile-motivation">دافعهم: فضول / أدوات جاهزة</div>
-            <div class="profile-question">حد بيحمّل أداة DDoS جاهزة ويضغط زر — مين ده؟</div>
+          <div id="sniffDetail"
+            style="margin-top:12px;display:none;padding:12px;background:rgba(0,212,170,.08);border-radius:10px;border:1px solid rgba(0,212,170,.2)">
+            <strong style="color:var(--accent)">👁️ Sniffer Active</strong>
+            <p style="color:var(--dim);font-size:13px;margin-top:4px">المهاجم بيستمع على نفس المسار المباشر من غير ما
+              يتدخل. بتفرج بس!</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">كويز</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">مجموعة مدعومة من دولة قاعدة 8 شهور بدون اكتشاف، واستخدمت أدوات مخصصة مش موجودة في أي مكان — إيه نوع المهاجم؟</p>
-        <div class="activity-controls" style="margin-top:0">
-          <button class="quiz-option" data-id="q2-a">Cybercriminal</button>
-          <button class="quiz-option" data-id="q2-b">Nation-State Actor</button>
-          <button class="quiz-option" data-id="q2-c">Hacktivist</button>
-          <button class="quiz-option" data-id="q2-d">Script Kiddie</button>
-          <span class="quiz-feedback" id="q2fb" style="min-height:24px"></span>
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">لمحة عن DNS Attack</div>
+          <p style="color:var(--dim);font-size:14px">الهاكر بيغيّر إعدادات DNS عشان يحوّل حركة المرور لموقع ضار. مثلاً:
+            بدل ما تروح لـ google.com، رايح لموقع تصيد.</p>
         </div>
-        <button class="replay-btn quiz-skip" data-id="q2-skip">تخطي</button>
       </div>
-    </div>
 
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن كل المهاجمين بتحكمهم دول — في الحقيقة في نطاق بينهم<br>
-        • الخلط بين Insider Threat متعمد وغير متعمد — التاني ممكن يكون موظف ضغط فيشنج بالغلط<br>
-        • إهمال Script Kiddies — رغم إنهم أقل تطوراً، بيستخدموا أدوات جاهزة ممكن تسبب ضرر كبير
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== SECTION 3 ==================== -->
-<section id="s3">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">03</div>
-        <h2>دورة حياة الهجوم (Attack Lifecycle)</h2>
-        <p>أي هجوم بيمر بمراحل متسلسلة — هنتعلم كل مرحلة</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">المراحل الست</div>
-        <div class="step-card active" data-step="0">
-          <div class="step-counter">المرحلة 1 / 6</div>
-          <div class="step-title">🔍 Reconnaissance — الاستطلاع</div>
-          <div class="step-desc">الهاكر بيجمع معلومات عن الهدف: أسماء الموظفين، البنية التحتية، الثغرات المحتملة.</div>
-          <div class="step-example">مثال: الهاكر يجمع أسماء الموظفين من LinkedIn عشان يعرف يستهدف مين.</div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step-card" data-step="1">
-          <div class="step-counter">المرحلة 2 / 6</div>
-          <div class="step-title">🚪 Initial Access — الدخول الأولي</div>
-          <div class="step-desc">الهاكر بيحصل على أول نقطة دخول للنظام.</div>
-          <div class="step-example">مثال: موظف فتح ملف Word فيه ماكرو خبيث فالماكرو نفّذ كود ضار.</div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step-card" data-step="2">
-          <div class="step-counter">المرحلة 3 / 6</div>
-          <div class="step-title">⚡ Execution — التنفيذ</div>
-          <div class="step-desc">الهاكر بيشغّل الكود الضار على النظام المستهدف.</div>
-          <div class="step-example">مثال: تشغيل برنامج Ransomware بيشفّر كل الملفات.</div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step-card" data-step="3">
-          <div class="step-counter">المرحلة 4 / 6</div>
-          <div class="step-title">🔑 Persistence — البقاء</div>
-          <div class="step-desc">الهاكر بيخلي طريقة تانيه يدخل فيها حتى لو اكتشفوا الطريقة الأولى.</div>
-          <div class="step-example">مثال: عمل Backdoor account أو RAT أو Scheduled Task — زي مفتاح إضافي مخفي حتى لو غيرت القفل.</div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step-card" data-step="4">
-          <div class="step-counter">المرحلة 5 / 6</div>
-          <div class="step-title">↔️ Lateral Movement — التحرك الجانبي</div>
-          <div class="step-desc">الهاكر بينتقل من جهاز لآخر عشان يوصل لأهداف أكتر قيمة.</div>
-          <div class="step-example">مثال: التنقل بين أجهزة الشركة من مكتب لمكتب لحد السيرفر الرئيسي.</div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step-card" data-step="5">
-          <div class="step-counter">المرحلة 6 / 6</div>
-          <div class="step-title">📤 Exfiltration — سرقة البيانات</div>
-          <div class="step-desc">الهاكر بياخد البيانات المسروقة بره من الشبكة.</div>
-          <div class="step-example">مثال: رفع البيانات على Cloud أو نقلها ببطء عشان ما تتكشفش، وربما مع Double Extortion (طلب فدية + تهديد بنشر البيانات).</div>
-        </div>
-        <div class="step-nav">
-          <button class="replay-btn" data-id="step-back">◀ السابق</button>
-          <span class="status" id="stepStatus">1 / 6</span>
-          <button class="replay-btn" data-id="step-next">التالي ▶</button>
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن DDoS بتعمله شركة كبيرة بس — في الحقيقة أي جهاز متصل بالإنترنت ممكن يتحول لـ Botnet<br>
+          • الخلط بين MitM و Packet Sniffing — الأول تدخل فعلي، التاني مراقبة فقط<br>
+          • إهمال DNS Attack — بيبدو تقني بس ممكن يأثر على أي مستخدم
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">كويز</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">المهاجم دخل بفيشنج وعمل admin account جديد على سيرفر — أي مرحلة من دورة الحياة؟</p>
-        <div class="activity-controls" style="margin-top:0">
-          <button class="quiz-option" data-id="q3-a">Reconnaissance</button>
-          <button class="quiz-option" data-id="q3-b">Initial Access</button>
-          <button class="quiz-option" data-id="q3-c">Execution</button>
-          <button class="quiz-option" data-id="q3-d">Persistence</button>
-          <span class="quiz-feedback" id="q3fb" style="min-height:24px"></span>
-        </div>
-        <button class="replay-btn quiz-skip" data-id="q3-skip">تخطي</button>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن الهجوم بيبدأ من التنفيذ — في الغالب بيبدأ من الاستطلاع (Reconnaissance)<br>
-        • إهمال مرحلة Persistence — لو المش هيلقوا الـ Backdoor، بيقدروا يرجعوا بعد ما يمسحوه<br>
-        • الخلط بين Lateral Movement و Exfiltration — الأول حركة جانبية داخل الشبكة، التاني خروج بالبيانات
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== SECTION 4 ==================== -->
-<section id="s4">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s5),var(--accent))">04</div>
-        <h2>هجمات الهندسة الاجتماعية (Social Engineering)</h2>
-        <p>الخداع البشري — أسهل طريقة للاختراق</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">الأنواع الخمسة</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">كل نوع بيستخدم قناة مختلفة عشان يخدع الضحية:</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-            <strong dir="ltr">Phishing</strong> — إيميل عام بيحاول يخوّف أو يغري أي حد. مثال: "Your account is locked, click here to verify."
-          </div>
-          <div style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-            <strong dir="ltr">Spear Phishing</strong> — إيميل موجه لشخص معين بيعرف عنه. مثال: إيميل باسم موظف معين بيتكلم عن اجتماع حقيقي.
-          </div>
-          <div style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-            <strong dir="ltr">Vishing</strong> — مكالمة صوتية. مثال: "أنا من البنك، محتاج الـ OTP بتاعك."
-          </div>
-          <div style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-            <strong dir="ltr">Smishing</strong> — رسالة SMS. مثال: "طردك اتأخر، اضغط هنا."
-          </div>
-          <div style="padding:12px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-            <strong dir="ltr">Pretexting</strong> — سيناريو/قصة كاملة. مثال: حد بيدّعي إنه موظف IT جديد وعايز بيانات الدخول.
-          </div>
+  <!-- ==================== ACTIVITY 1 ==================== -->
+  <section id="a1">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">A1</div>
+          <h2>تحليل نوع المهاجم</h2>
+          <p>اقرأ كل تقرير وحدد نوع المهاجم وأفضل دفاع — بعد ما تخلص كلهم، اعرض الإجابات</p>
         </div>
       </div>
-    </div>
 
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">Channel Matcher — اختار القناة الصح</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">اضغط على القناة اللي تتناسب مع الرسالة:</p>
-        <div class="channel-match" id="channelMatch">
-          <div class="channel-chip" data-channel="email">📧 إيميل</div>
-          <div class="channel-chip" data-channel="phone">📞 مكالمة</div>
-          <div class="channel-chip" data-channel="sms">💬 SMS</div>
-          <div class="channel-chip" data-channel="story">📖 قصة/سيناريو</div>
-        </div>
-        <div id="channelQuestion" style="margin-top:12px;font-size:14px;color:var(--warn);font-weight:700"></div>
-        <div id="channelFeedback" style="margin-top:8px;min-height:24px"></div>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">كويز</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">رسالة SMS فيها لينك مزيف بيقول "طردك اتأخر، اضغط هنا" — ده إيه من أنواع الهندسة الاجتماعية؟</p>
-        <div class="activity-controls" style="margin-top:0">
-          <button class="quiz-option" data-id="q4-a">Phishing</button>
-          <button class="quiz-option" data-id="q4-b">Vishing</button>
-          <button class="quiz-option" data-id="q4-c">Smishing</button>
-          <button class="quiz-option" data-id="q4-d">Pretexting</button>
-          <span class="quiz-feedback" id="q4fb" style="min-height:24px"></span>
-        </div>
-        <button class="replay-btn quiz-skip" data-id="q4-skip">تخطي</button>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن الهندسة الاجتماعية بس بتكون إيميل — في الحقيقة فيها مكالمات ورسائل وسيناريوهات<br>
-        • الخلط بين Smishing و Pretexting — Smishing قناة (SMS)، Pretexting أسلوب (سيناريو)<br>
-        • التفكير إن بس الأشخاص غير التقنيين بيوقعوا في الهندسة الاجتماعية — المهندسين كمان بيقعوا
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== SECTION 5 ==================== -->
-<section id="s5">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s6),var(--danger))">05</div>
-        <h2>أنواع البرمجيات الخبيثة (Malware Types)</h2>
-        <p>الفرق بين كل نوع ومثال واقعي</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">المدرسة — تشبيه بسيط</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">تخيل المدرسة:</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-          <div style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
-            <strong>Virus 📝</strong> — ورقة غش. مش هتأثر غير لو الطالب فتحها بنفسه (يحتاج تشغيل من المستخدم).
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
-            <strong>Worm 🦠</strong> — طالب عنده برد معدي. العدوى تنتشر لوحدها من طالب لطالب (بدون ضغطة مستخدم).
-          </div>
-          <div style="padding:10px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)">
-            <strong>Trojan 🎁</strong> — هدية شكلها جميل. تكتشف المشكلة بعد ما تفتحها (مش بيعمل نسخ من نفسه).
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">اختار النوع</div>
-        <div class="tab-bar" id="malwareTabs">
-          <button class="tab-btn active" data-tab="virus">Virus</button>
-          <button class="tab-btn" data-tab="worm">Worm</button>
-          <button class="tab-btn" data-tab="trojan">Trojan</button>
-          <button class="tab-btn" data-tab="spyware">Spyware</button>
-          <button class="tab-btn" data-tab="ransomware">Ransomware</button>
-        </div>
-        <div class="tab-panel active" data-tab="virus">
-          <p style="font-size:14px"><strong dir="ltr">Virus → Infects Files</strong></p>
-          <p style="color:var(--dim);font-size:13px;margin-top:6px">بيصيب ملفات ومحتاج تشغيل من المستخدم عشان ينتشر. مثال: مرفق إيميل فيه ماكرو خبيث.</p>
-        </div>
-        <div class="tab-panel" data-tab="worm">
-          <p style="font-size:14px"><strong dir="ltr">Worm → Spreads Alone</strong></p>
-          <p style="color:var(--dim);font-size:13px;margin-top:6px">بينتشر لوحده عبر الشبكة من غير ما المستخدم يعمل أي حاجة. مثال: <span dir="ltr">WannaCry</span> (Ransomware + Worm).</p>
-        </div>
-        <div class="tab-panel" data-tab="trojan">
-          <p style="font-size:14px"><strong dir="ltr">Trojan → Disguised as Legit</strong></p>
-          <p style="color:var(--dim);font-size:13px;margin-top:6px">بيتنكر كبرنامج شرعي. مش بيعمل Replication (نسخ من نفسه). مثال: لعبة مجانية فيها باب خلفي.</p>
-        </div>
-        <div class="tab-panel" data-tab="spyware">
-          <p style="font-size:14px"><strong dir="ltr">Spyware → Silent Spy</strong></p>
-          <p style="color:var(--dim);font-size:13px;margin-top:6px">بيراقب ويجمع معلومات بهدوء من غير ما الضحية تعرف. مثال: Keylogger بيكلّم كل ضغطة.</p>
-        </div>
-        <div class="tab-panel" data-tab="ransomware">
-          <p style="font-size:14px"><strong dir="ltr">Ransomware → Locks & Demands</strong></p>
-          <p style="color:var(--dim);font-size:13px;margin-top:6px">بيشفر الملفات ويطلب فدية. أحيانًا مع Double Extortion (يشفر + يهدد بنشر البيانات). مثال: <span dir="ltr">WannaCry</span>.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">كويز</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px"><span dir="ltr">WannaCry</span> انتشر في 24 ساعة من غير أي ضغطة مستخدم — ده أي نوع من Malware؟</p>
-        <div class="activity-controls" style="margin-top:0">
-          <button class="quiz-option" data-id="q5-a">Virus</button>
-          <button class="quiz-option" data-id="q5-b">Trojan</button>
-          <button class="quiz-option" data-id="q5-c">Worm</button>
-          <button class="quiz-option" data-id="q5-d">Spyware</button>
-          <span class="quiz-feedback" id="q5fb" style="min-height:24px"></span>
-        </div>
-        <button class="replay-btn quiz-skip" data-id="q5-skip">تخطي</button>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن الـ Worm بيعمل نسخ من نفسه زي الفيروس — الفرق إنه بينتشر لوحده بدون تدخل المستخدم<br>
-        • الخلط بين Trojan و Ransomware — Trojan ما بيشفرش، بس بيتنكر<br>
-        • إهمال Spyware — بيكون صامت وممكن يكون موجود فترة طويلة من غير ما يُكتشف
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== SECTION 6 ==================== -->
-<section id="s6">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s1),var(--accent))">06</div>
-        <h2>DDoS، Man-in-the-Middle، وهجمات الشبكة</h2>
-        <p>هجمات البنية التحتية والتنقل في الشبكة</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">DDoS — إغراق السيرفر</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">تشبيه: مطعم فيه 50 كرسي فجأة 5000 شخص دخلوا مقعدوش يطلبوا بس احتلوا المكان. السيرفر مش قادر يخدم العملاء الحقيقيين.</p>
-        <p style="color:var(--dim);font-size:14px">الهجوم بيأتي من Botnet — شبكة أجهزة مخترقة بتابع أمر واحد.</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">MitM vs Packet Sniffing — الفرق الجوهري</div>
-        <p style="color:var(--dim);font-size:14px;margin-bottom:14px">المفتاح: <strong dir="ltr">MitM = أنا بقيت في النص</strong> مقابل <strong dir="ltr">Packet Sniffing = أنا بتفرج بس</strong></p>
-        <div class="message-path" id="msgPath">
-          <div class="path-node" id="nodeA">👤 الشخص أ</div>
-          <div class="path-arrow">→</div>
-          <div class="path-node" id="nodeB">👤 الشخص ب</div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px">
-          <button class="btn" data-id="toggle-mitm">🎭 فعّل MitM</button>
-          <button class="btn" data-id="toggle-sniffer">👁️ فعّل Packet Sniffer</button>
-          <button class="replay-btn" data-id="reset-path">↺ رجّع</button>
-        </div>
-        <div id="mitmDetail" style="margin-top:12px;display:none;padding:12px;background:rgba(255,71,87,.08);border-radius:10px;border:1px solid rgba(255,71,87,.2)">
-          <strong style="color:var(--danger)">🎭 MitM Active</strong>
-          <p style="color:var(--dim);font-size:13px;margin-top:4px">الرسالة بتعدي على المهاجم اللي بيقرأها ويقدر يعدّلها. أنت بقيت في النص!</p>
-        </div>
-        <div id="sniffDetail" style="margin-top:12px;display:none;padding:12px;background:rgba(0,212,170,.08);border-radius:10px;border:1px solid rgba(0,212,170,.2)">
-          <strong style="color:var(--accent)">👁️ Sniffer Active</strong>
-          <p style="color:var(--dim);font-size:13px;margin-top:4px">المهاجم بيستمع على نفس المسار المباشر من غير ما يتدخل. بتفرج بس!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">لمحة عن DNS Attack</div>
-        <p style="color:var(--dim);font-size:14px">الهاكر بيغيّر إعدادات DNS عشان يحوّل حركة المرور لموقع ضار. مثلاً: بدل ما تروح لـ google.com، رايح لموقع تصيد.</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن DDoS بتعمله شركة كبيرة بس — في الحقيقة أي جهاز متصل بالإنترنت ممكن يتحول لـ Botnet<br>
-        • الخلط بين MitM و Packet Sniffing — الأول تدخل فعلي، التاني مراقبة فقط<br>
-        • إهمال DNS Attack — بيبدو تقني بس ممكن يأثر على أي مستخدم
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== ACTIVITY 1 ==================== -->
-<section id="a1">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s3),var(--accent))">A1</div>
-        <h2>تحليل نوع المهاجم</h2>
-        <p>اقرأ كل تقرير وحدد نوع المهاجم وأفضل دفاع — بعد ما تخلص كلهم، اعرض الإجابات</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="activity-card">
-        <h4>📋 التقرير 1</h4>
-        <p>شركة تعرضت لهجوم <strong dir="ltr">Phishing</strong> أدى لـ Ransomware. طالبوا فدية 2.3 مليون دولار بالـ Bitcoin. المفاوضات تمت عبر بوابة على الداكن نت.</p>
-      </div>
-      <div class="activity-card">
-        <h4>📋 التقرير 2</h4>
-        <p>مجموعة وصلت لنظام بنك وقاعدة 9 شهور بدون اكتشاف. شافوا بيانات بس ما لمسوش حاجة. استخدموا أدوات مخصصة مش موجودة في أي مكان.</p>
-      </div>
-      <div class="activity-card">
-        <h4>📋 التقرير 3</h4>
-        <p>موقع شركة اتشّف برسالة سياسية. المجموعة طلعت باسمها علنًا خلال ساعات.</p>
-      </div>
-      <div class="activity-card">
-        <h4>📋 التقرير 4</h4>
-        <p>محلل بيانات (DBA) صدّر جدول عملاء كامل لـ USB بعد ما استقال، في ساعات العمل العادية، من غير إذن.</p>
-      </div>
-      <div class="activity-card">
-        <h4>📋 التقرير 5</h4>
-        <p>أداة آلية بتجرب كلمات سر على حساب الشركة بإعدادات افتراضية، بدون إخفاء IP، وقفت لما حظرتها الشركة.</p>
-      </div>
-
-      <div class="activity-controls" style="margin-top:20px">
-        <button class="btn" data-id="show-answers-1">اعرض كل الإجابات</button>
-      </div>
-      <div id="answers1" style="display:none;margin-top:16px">
-        <div style="padding:12px;background:rgba(0,255,136,.06);border-radius:10px;border:1px solid rgba(0,255,136,.2);margin-bottom:8px">
-          <strong style="color:var(--success)">1. Cybercriminal</strong> — دافعهم فلوس (فدية 2.3M). الدفاع: تدريب على التوعية بـ Phishing + Email filtering + Multi-factor authentication.
-        </div>
-        <div style="padding:12px;background:rgba(139,92,246,.06);border-radius:10px;border:1px solid rgba(139,92,246,.2);margin-bottom:8px">
-          <strong style="color:var(--s3)">2. Nation-State Actor</strong> — وصول طويل بدون اكتشاف + أدوات مخصصة. الدفاع: Threat intelligence + Network segmentation + SIEM monitoring.
-        </div>
-        <div style="padding:12px;background:rgba(236,72,153,.06);border-radius:10px;border:1px solid rgba(236,72,153,.2);margin-bottom:8px">
-          <strong style="color:var(--s5)">3. Hacktivist</strong> — رسالة سياسية + مطالبة علنية. الدفاع: Web application firewall + Incident response plan + Public communication strategy.
-        </div>
-        <div style="padding:12px;background:rgba(255,71,87,.06);border-radius:10px;border:1px solid rgba(255,71,87,.2);margin-bottom:8px">
-          <strong style="color:var(--danger)">4. Insider Threat (Malicious)</strong> — موظف سابق صدّر بيانات. الدفاع: Data loss prevention + Least privilege + Offboarding procedures.
-        </div>
-        <div style="padding:12px;background:rgba(245,158,11,.06);border-radius:10px;border:1px solid rgba(245,158,11,.2)">
-          <strong style="color:var(--s2)">5. Script Kiddie</strong> — أداة جاهزة + إعدادات افتراضية + بدون إخفاء IP. الدفاع: Rate limiting + CAPTCHA + Account lockout after failed attempts.
-        </div>
-      </div>
-    </div>
-
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن كل المهاجمين بتحكمهم دول — في الحقيقة في نطاق بينهم<br>
-        • الخلط بين Insider Threat متعمد وغير متعمد — التاني ممكن يكون موظف ضغط فيشنج بالغلط<br>
-        • إهمال Script Kiddies — رغم إنهم أقل تطوراً، بيستخدموا أدوات جاهزة ممكن تسبب ضرر كبير
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== ACTIVITY 2 ==================== -->
-<section id="a2">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">A2</div>
-        <h2>رسم خريطة دورة حياة الهجوم</h2>
-        <p>كل حدث من الجدول الزمني — حدد أنهي مرحلة من دورة الحياة</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="diagram-title">الجدول الزمني (3 أسابيع، 6 أحداث)</div>
+      <div class="section-inner reveal">
         <div class="activity-card">
-          <h4>الحدث 1</h4>
-          <p>موظف فتح مرفق PDF خبيث <span style="color:var(--dim)">(الأسبوع 1، اليوم 2)</span></p>
+          <h4>📋 التقرير 1</h4>
+          <p>شركة تعرضت لهجوم <strong dir="ltr">Phishing</strong> أدى لـ Ransomware. طالبوا فدية 2.3 مليون دولار بالـ
+            Bitcoin. المفاوضات تمت عبر بوابة على الداكن نت.</p>
         </div>
         <div class="activity-card">
-          <h4>الحدث 2</h4>
-          <p>ظهور Scheduled Task جديد <span style="color:var(--dim)">(الأسبوع 1، اليوم 2)</span></p>
+          <h4>📋 التقرير 2</h4>
+          <p>مجموعة وصلت لنظام بنك وقاعدة 9 شهور بدون اكتشاف. شافوا بيانات بس ما لمسوش حاجة. استخدموا أدوات مخصصة مش
+            موجودة في أي مكان.</p>
         </div>
         <div class="activity-card">
-          <h4>الحدث 3</h4>
-          <p>مكالمات HTTPS كل ساعة لـ IP خارجي <span style="color:var(--dim)">(الأسبوع 1، اليوم 3)</span></p>
+          <h4>📋 التقرير 3</h4>
+          <p>موقع شركة اتشّف برسالة سياسية. المجموعة طلعت باسمها علنًا خلال ساعات.</p>
         </div>
         <div class="activity-card">
-          <h4>الحدث 4</h4>
-          <p>بيانات اعتماد استُخدمت للدخول على 3 سيرفرات تانية بالليل <span style="color:var(--dim)">(الأسبوع 2، اليوم 1)</span></p>
+          <h4>📋 التقرير 4</h4>
+          <p>محلل بيانات (DBA) صدّر جدول عملاء كامل لـ USB بعد ما استقال، في ساعات العمل العادية، من غير إذن.</p>
         </div>
         <div class="activity-card">
-          <h4>الحدث 5</h4>
-          <p>بروفايل LinkedIn لمقاول IT اتحلل <span style="color:var(--dim)">(الأسبوع 2، اليوم 4)</span></p>
-        </div>
-        <div class="activity-card">
-          <h4>الحدث 6</h4>
-          <p>4.2GB اترفعت على Dropbox الساعة 3 صباحاً <span style="color:var(--dim)">(الأسبوع 3، اليوم 1)</span></p>
+          <h4>📋 التقرير 5</h4>
+          <p>أداة آلية بتجرب كلمات سر على حساب الشركة بإعدادات افتراضية، بدون إخفاء IP، وقفت لما حظرتها الشركة.</p>
         </div>
 
         <div class="activity-controls" style="margin-top:20px">
-          <button class="btn" data-id="show-answers-2">اعرض كل الإجابات</button>
+          <button class="btn" data-id="show-answers-1">اعرض كل الإجابات</button>
         </div>
-        <div id="answers2" style="display:none;margin-top:16px">
-          <table class="map-table">
-            <thead><tr><th>الحدث</th><th>المرحلة</th><th>أفضل دفاع</th></tr></thead>
-            <tbody>
-              <tr><td>1. فتح PDF خبيث</td><td>Initial Access</td><td>Email filtering + User training + Disable macros</td></tr>
-              <tr><td>2. Scheduled Task جديد</td><td>Persistence</td><td>Endpoint detection + Monitor scheduled tasks</td></tr>
-              <tr><td>3. مكالمات HTTPS كل ساعة</td><td>Exfiltration</td><td>Network monitoring + Egress filtering + DLP</td></tr>
-              <tr><td>4. بيانات اعتماد على 3 سيرفرات</td><td>Lateral Movement</td><td>Network segmentation + Least privilege + MFA</td></tr>
-              <tr><td>5. بروفايل LinkedIn اتحلل</td><td>Reconnaissance</td><td>OSINT monitoring + Limit public info + Security awareness</td></tr>
-              <tr><td>6. 4.2GB على Dropbox الساعة 3 صباحاً</td><td>Exfiltration</td><td>DLP + Egress filtering + Alerting on unusual upload times</td></tr>
-            </tbody>
-          </table>
-          <div style="margin-top:16px;padding:12px;background:rgba(0,212,170,.06);border-radius:10px;border:1px solid rgba(0,212,170,.2)">
-            <strong style="color:var(--accent)">أ earliest Detection Opportunity:</strong> الأسبوع 1 اليوم 2 — Initial Access (الحدث 1 و 2)<br>
-            <strong style="color:var(--danger)">أخطر مرحلة:</strong> Lateral Movement — لأن المهاجم بيكون داخل الشبكة وبيتنقل بين الأجهزة، وأصعب بكتشفه وأكبر تأثير له.
+        <div id="answers1" style="display:none;margin-top:16px">
+          <div
+            style="padding:12px;background:rgba(0,255,136,.06);border-radius:10px;border:1px solid rgba(0,255,136,.2);margin-bottom:8px">
+            <strong style="color:var(--success)">1. Cybercriminal</strong> — دافعهم فلوس (فدية 2.3M). الدفاع: تدريب على
+            التوعية بـ Phishing + Email filtering + Multi-factor authentication.
+          </div>
+          <div
+            style="padding:12px;background:rgba(139,92,246,.06);border-radius:10px;border:1px solid rgba(139,92,246,.2);margin-bottom:8px">
+            <strong style="color:var(--s3)">2. Nation-State Actor</strong> — وصول طويل بدون اكتشاف + أدوات مخصصة.
+            الدفاع: Threat intelligence + Network segmentation + SIEM monitoring.
+          </div>
+          <div
+            style="padding:12px;background:rgba(236,72,153,.06);border-radius:10px;border:1px solid rgba(236,72,153,.2);margin-bottom:8px">
+            <strong style="color:var(--s5)">3. Hacktivist</strong> — رسالة سياسية + مطالبة علنية. الدفاع: Web
+            application firewall + Incident response plan + Public communication strategy.
+          </div>
+          <div
+            style="padding:12px;background:rgba(255,71,87,.06);border-radius:10px;border:1px solid rgba(255,71,87,.2);margin-bottom:8px">
+            <strong style="color:var(--danger)">4. Insider Threat (Malicious)</strong> — موظف سابق صدّر بيانات. الدفاع:
+            Data loss prevention + Least privilege + Offboarding procedures.
+          </div>
+          <div
+            style="padding:12px;background:rgba(245,158,11,.06);border-radius:10px;border:1px solid rgba(245,158,11,.2)">
+            <strong style="color:var(--s2)">5. Script Kiddie</strong> — أداة جاهزة + إعدادات افتراضية + بدون إخفاء IP.
+            الدفاع: Rate limiting + CAPTCHA + Account lockout after failed attempts.
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن أبكر اكتشاف ممكن يكون في أي مرحلة — في الحقيقة الأفضل هو اكتشافه في Initial Access قبل ما ينتشر<br>
-        • إهمال إن Lateral Movement هي أخطر مرحلة — المهاجم بيكون داخل الشبكة وبيستغل الثقة بين الأجهزة<br>
-        • التفكير إن Exfiltration هي آخر مرحلة بس — ممكن تبدأ من أول يوم لو الـ Attacker حط Backdoor من البداية
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== CLOSING ==================== -->
-<section id="closing">
-  <div class="section">
-    <div class="section-inner reveal">
-      <div class="section-header">
-        <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯</div>
-        <h2>الرحلة الكاملة</h2>
-        <p>من التهديد لحد الدفاع — الرحلة كلها</p>
-      </div>
-    </div>
-
-    <div class="section-inner reveal">
-      <div class="diagram-container">
-        <div class="journey" id="journey">
-          <div class="journey-step lit" data-id="j-1"><div class="j-num">1</div><div>Threat + Vulnerability → Risk</div></div>
-          <div class="journey-arrow">↓</div>
-          <div class="journey-step" data-id="j-2"><div class="j-num">2</div><div>التهديد يحدث → Attack</div></div>
-          <div class="journey-arrow">↓</div>
-          <div class="journey-step" data-id="j-3"><div class="j-num">3</div><div>نوع المهاجم → Threat Actor</div></div>
-          <div class="journey-arrow">↓</div>
-          <div class="journey-step" data-id="j-4"><div class="j-num">4</div><div>دورة حياة الهجوم → 6 مراحل</div></div>
-          <div class="journey-arrow">↓</div>
-          <div class="journey-step" data-id="j-5"><div class="j-num">5</div><div>الأدوات المستخدمة → Social Engineering / Malware / Network Attacks</div></div>
-          <div class="journey-arrow">↓</div>
-          <div class="journey-step" data-id="j-6"><div class="j-num">6</div><div>الدفاع يبدأ من أول نقطة اكتشاف</div></div>
-        </div>
-        <div class="activity-controls">
-          <button class="replay-btn" data-id="journey-next">▶ أضيئ الخطوة الجاية</button>
-          <button class="replay-btn" data-id="journey-reset">↺ إعادة</button>
-          <span class="status" id="journeyStatus">1 / 6</span>
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن كل المهاجمين بتحكمهم دول — في الحقيقة في نطاق بينهم<br>
+          • الخلط بين Insider Threat متعمد وغير متعمد — التاني ممكن يكون موظف ضغط فيشنج بالغلط<br>
+          • إهمال Script Kiddies — رغم إنهم أقل تطوراً، بيستخدموا أدوات جاهزة ممكن تسبب ضرر كبير
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="section-inner reveal error-box">
-      <p>⚠️ أخطاء شائعة</p>
-      <div class="detail">
-        • التفكير إن الأمان مشكلة تقنية بس — العنصر البشري أهم من التكنولوجيا في أغلب الحالات<br>
-        • الخلط بين الـ Threat والـ Risk — التهديد ممكن يكون موجود بس لو مفيش ثغرة، مفيش Risk<br>
-        • إهمال إن الدفاع يبدأ من أول نقطة اكتشاف — كل مرحلة متأخرة بتكلف أكتر
+  <!-- ==================== ACTIVITY 2 ==================== -->
+  <section id="a2">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--s4),var(--accent))">A2</div>
+          <h2>رسم خريطة دورة حياة الهجوم</h2>
+          <p>كل حدث من الجدول الزمني — حدد أنهي مرحلة من دورة الحياة</p>
+        </div>
+      </div>
+
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="diagram-title">الجدول الزمني (3 أسابيع، 6 أحداث)</div>
+          <div class="activity-card">
+            <h4>الحدث 1</h4>
+            <p>موظف فتح مرفق PDF خبيث <span style="color:var(--dim)">(الأسبوع 1، اليوم 2)</span></p>
+          </div>
+          <div class="activity-card">
+            <h4>الحدث 2</h4>
+            <p>ظهور Scheduled Task جديد <span style="color:var(--dim)">(الأسبوع 1، اليوم 2)</span></p>
+          </div>
+          <div class="activity-card">
+            <h4>الحدث 3</h4>
+            <p>مكالمات HTTPS كل ساعة لـ IP خارجي <span style="color:var(--dim)">(الأسبوع 1، اليوم 3)</span></p>
+          </div>
+          <div class="activity-card">
+            <h4>الحدث 4</h4>
+            <p>بيانات اعتماد استُخدمت للدخول على 3 سيرفرات تانية بالليل <span style="color:var(--dim)">(الأسبوع 2، اليوم
+                1)</span></p>
+          </div>
+          <div class="activity-card">
+            <h4>الحدث 5</h4>
+            <p>بروفايل LinkedIn لمقاول IT اتحلل <span style="color:var(--dim)">(الأسبوع 2، اليوم 4)</span></p>
+          </div>
+          <div class="activity-card">
+            <h4>الحدث 6</h4>
+            <p>4.2GB اترفعت على Dropbox الساعة 3 صباحاً <span style="color:var(--dim)">(الأسبوع 3، اليوم 1)</span></p>
+          </div>
+
+          <div class="activity-controls" style="margin-top:20px">
+            <button class="btn" data-id="show-answers-2">اعرض كل الإجابات</button>
+          </div>
+          <div id="answers2" style="display:none;margin-top:16px">
+            <table class="map-table">
+              <thead>
+                <tr>
+                  <th>الحدث</th>
+                  <th>المرحلة</th>
+                  <th>أفضل دفاع</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. فتح PDF خبيث</td>
+                  <td>Initial Access</td>
+                  <td>Email filtering + User training + Disable macros</td>
+                </tr>
+                <tr>
+                  <td>2. Scheduled Task جديد</td>
+                  <td>Persistence</td>
+                  <td>Endpoint detection + Monitor scheduled tasks</td>
+                </tr>
+                <tr>
+                  <td>3. مكالمات HTTPS كل ساعة</td>
+                  <td>Exfiltration</td>
+                  <td>Network monitoring + Egress filtering + DLP</td>
+                </tr>
+                <tr>
+                  <td>4. بيانات اعتماد على 3 سيرفرات</td>
+                  <td>Lateral Movement</td>
+                  <td>Network segmentation + Least privilege + MFA</td>
+                </tr>
+                <tr>
+                  <td>5. بروفايل LinkedIn اتحلل</td>
+                  <td>Reconnaissance</td>
+                  <td>OSINT monitoring + Limit public info + Security awareness</td>
+                </tr>
+                <tr>
+                  <td>6. 4.2GB على Dropbox الساعة 3 صباحاً</td>
+                  <td>Exfiltration</td>
+                  <td>DLP + Egress filtering + Alerting on unusual upload times</td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              style="margin-top:16px;padding:12px;background:rgba(0,212,170,.06);border-radius:10px;border:1px solid rgba(0,212,170,.2)">
+              <strong style="color:var(--accent)">أ earliest Detection Opportunity:</strong> الأسبوع 1 اليوم 2 — Initial
+              Access (الحدث 1 و 2)<br>
+              <strong style="color:var(--danger)">أخطر مرحلة:</strong> Lateral Movement — لأن المهاجم بيكون داخل الشبكة
+              وبيتنقل بين الأجهزة، وأصعب بكتشفه وأكبر تأثير له.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن أبكر اكتشاف ممكن يكون في أي مرحلة — في الحقيقة الأفضل هو اكتشافه في Initial Access قبل ما
+          ينتشر<br>
+          • إهمال إن Lateral Movement هي أخطر مرحلة — المهاجم بيكون داخل الشبكة وبيستغل الثقة بين الأجهزة<br>
+          • التفكير إن Exfiltration هي آخر مرحلة بس — ممكن تبدأ من أول يوم لو الـ Attacker حط Backdoor من البداية
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <img src="data:image/webp;base64,UklGRsAcAABXRUJQVlA4ILQcAAAQsACdASpYAlUCPlEok0ajoqGhItWIMHAKCWdu/Eb3rSGO7W24Kxp8t/z35QbaL2P8mvy09B3LHy/76/vP/lMzu8T/Ov9N/jP3B/vn/////3R/1/qP/Uf6m/AB/Df4//kP7/+3f9m/////+rT1F/uJ6gP6r/d/+d/hf3/+a7/Jepz/JeoF/Vv7/1iHoCfsB6Yn/r/2Hwe/tJ/5v9F+//0Lfzz+7/9r8//kA9ADqx+wP9p7Rf7Z/XvPvq8+1nMHiU/Fftn+o/uftp7JfkXqBfiX8x/xP5Z8JQAD6t/6b+4+upM+yAOC8oAfpr1aP6T/6f5Pz7/of+X/ab4Dv57/aP+12E/2y///u7/uQEd8QtYY3sgthnhSjzlxsHsUNtqxsYPmY/tAnTWk3eRvx96FjeyHJvbr2WcMflxsHxsHxwNwpR5y43vhzrGX1TpNJmXt4xgkLqDmwfG99YZRGMFcyZ4Uo85gZwBbN+NllprGxSRxW1rTyCRoZg+h0Lk9hyLKBQ73OHulwtb0r7Yt5PSoBq70s+RV+vmqzZCqvAjDoiSnBwHM9u3kIwbzlxsBQO5nrVFmIT0cN4xUVTTop/in5EP7B8VPficNp4Uo9CYJ2MbGe2QcycuNhDjHYMc1hRlU7TBo7ET+m0ecuLWrsysVbJwwyW7Gwci7/f4b7eY3spo8hACO9F7eM0cndhYzBzYPjYPi2s3lloqwH/ypFHIWDg3LWx724JkPCjzlxsIARP9cmu7/ZownOm6SXZWcSrN1ionLjYPjYPdF1f9yA04STy2woP8q2ZDab97eMV4Uo8j+rxDgQtFzXmj0BexP/th4o9HZap/AcfrB8bB8bByt9LZK1LVnj6oAWMnX6h5/qUKSpGE52zPJmXt4xXhLKBMjlKRRBOFPTCBFLs0PlKB6EBul4xXhSgtMgQT6oNB3AFnhzPt44fdrVBd0wgBYJ5nkzL28YroE3NmKKreywfJTq9znjhtX1aq8EtMLlxsHuu2EKfH9FOy4j31Ko0UwYo70PeKl4jJoqMhKYlb5YktMajaS5Wc3/adyZdDaAfhhDWpYWGcPKvDaRep78mGQHCd7//L5zA9p7+w4sz5T9KoniwkKqUrmI71fQgTVtI0XVrqq7V+mYy9wK3ffqz/+Or3peC0mkpVYx955ZowcBHo6v9i29B5LQfA6DqaLpoV7SiHFmRAm0UldUDcX/ouciJah9bJ0zGUds8ApyspaVFT0aFb610bmwG8MKUciDdQbUxIc3kQgFF0BQ2+3/1twur1bsbB8bAIuNI7ctdbxiyyP8bBzhMbmYIM4b8pn03S9501OtiXK9jYPjYPjYBU0J1td0x2zWnRSj2ENErPauhSJbsbB8bB8WzQmMIoN6mSeoaPbS7xhqgz7Rm90udSbfM+/M+/M+2q5zkHwgOmW7IxrgGfnantR5bmZ/GwfGwfGwCfuyIPBLrvY17b1479hUwupcbB8bB8bAQAQPxFm5wHM/DGX2dGUTnPSSORRmBAFKPOXGwfGqnUawYBmUlb7o2gq3xIt+5qaTHReecuNg+Ng5S5VEPIKn7R5y5KdgNEP/CctFGRfdcbB8bB8bAG2kbnnjfj5oluv/gRhkt633Yzw7bkmwo85cbByF8VOjWFDUjwLg+AhHWghGXOkAj3IYK3YrIOKIEsJ2Lx5D63xJhyMnSjFi2aaOqZHGOU83UPjf+fNGyE+Z/GxpEB8bD1WDQ6zDahWy4eI+Q2GD/8t2/te3jGOtkUmvH29gn/+TICZmhiQUW7GwfLPCtqooUgpRoHcGtw3szflXEGGS3Y2D5Kdg+OQE+JVtRv+yklVIuo8dXQx116rM3el4dZCC3JvTG+pMds+GvBFYveHV3km1Cry4VeO7G9/euRjXSwAAP77d89+nafhMf4TD6F7w6ETqw/BiNp9R3MH+fjgGRk=" class="footer-logo" alt="Bilal">
-  <p>💪 أنت دلوقتي عرفت إزاي بيحصل الهجوم — دفاعك بيبدأ من أول نقطة اكتشاف!</p>
-</footer>
+  <!-- ==================== CLOSING ==================== -->
+  <section id="closing">
+    <div class="section">
+      <div class="section-inner reveal">
+        <div class="section-header">
+          <div class="section-number" style="background:linear-gradient(135deg,var(--primary),var(--accent))">🎯</div>
+          <h2>الرحلة الكاملة</h2>
+          <p>من التهديد لحد الدفاع — الرحلة كلها</p>
+        </div>
+      </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const qs = s => document.querySelector(s);
-  const qsa = s => Array.from(document.querySelectorAll(s));
+      <div class="section-inner reveal">
+        <div class="diagram-container">
+          <div class="journey" id="journey">
+            <div class="journey-step lit" data-id="j-1">
+              <div class="j-num">1</div>
+              <div>Threat + Vulnerability → Risk</div>
+            </div>
+            <div class="journey-arrow">↓</div>
+            <div class="journey-step" data-id="j-2">
+              <div class="j-num">2</div>
+              <div>التهديد يحدث → Attack</div>
+            </div>
+            <div class="journey-arrow">↓</div>
+            <div class="journey-step" data-id="j-3">
+              <div class="j-num">3</div>
+              <div>نوع المهاجم → Threat Actor</div>
+            </div>
+            <div class="journey-arrow">↓</div>
+            <div class="journey-step" data-id="j-4">
+              <div class="j-num">4</div>
+              <div>دورة حياة الهجوم → 6 مراحل</div>
+            </div>
+            <div class="journey-arrow">↓</div>
+            <div class="journey-step" data-id="j-5">
+              <div class="j-num">5</div>
+              <div>الأدوات المستخدمة → Social Engineering / Malware / Network Attacks</div>
+            </div>
+            <div class="journey-arrow">↓</div>
+            <div class="journey-step" data-id="j-6">
+              <div class="j-num">6</div>
+              <div>الدفاع يبدأ من أول نقطة اكتشاف</div>
+            </div>
+          </div>
+          <div class="activity-controls">
+            <button class="replay-btn" data-id="journey-next">▶ أضيئ الخطوة الجاية</button>
+            <button class="replay-btn" data-id="journey-reset">↺ إعادة</button>
+            <span class="status" id="journeyStatus">1 / 6</span>
+          </div>
+        </div>
+      </div>
 
-  /* ===== Particles ===== */
-  const pc = document.getElementById('particles');
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 15 + 's';
-    p.style.animationDuration = (15 + Math.random() * 10) + 's';
-    pc.appendChild(p);
-  }
+      <div class="section-inner reveal error-box">
+        <p>⚠️ أخطاء شائعة</p>
+        <div class="detail">
+          • التفكير إن الأمان مشكلة تقنية بس — العنصر البشري أهم من التكنولوجيا في أغلب الحالات<br>
+          • الخلط بين الـ Threat والـ Risk — التهديد ممكن يكون موجود بس لو مفيش ثغرة، مفيش Risk<br>
+          • إهمال إن الدفاع يبدأ من أول نقطة اكتشاف — كل مرحلة متأخرة بتكلف أكتر
+        </div>
+      </div>
+    </div>
+  </section>
 
-  /* ===== Nav scroll ===== */
-  const nav = qs('#mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > 100);
-    qsa('.section, .hero').forEach(s => {
-      if (window.scrollY >= s.offsetTop - 200) {
-        qsa('.nav-links a').forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + s.id);
+  <footer>
+    <img
+      src="data:image/webp;base64,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"
+      class="footer-logo" alt="Bilal">
+    <p>💪 أنت دلوقتي عرفت إزاي بيحصل الهجوم — دفاعك بيبدأ من أول نقطة اكتشاف!</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const qs = s => document.querySelector(s);
+      const qsa = s => Array.from(document.querySelectorAll(s));
+
+      /* ===== Particles ===== */
+      const pc = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 15 + 's';
+        p.style.animationDuration = (15 + Math.random() * 10) + 's';
+        pc.appendChild(p);
+      }
+
+      /* ===== Nav scroll ===== */
+      const nav = qs('#mainNav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('visible', window.scrollY > 100);
+        qsa('.section, .hero').forEach(s => {
+          if (window.scrollY >= s.offsetTop - 200) {
+            qsa('.nav-links a').forEach(a => {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + s.id);
+            });
+          }
+        });
+      });
+
+      /* ===== Scroll reveal ===== */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.05 });
+      qsa('.section-inner, .reveal').forEach(el => observer.observe(el));
+      function checkRev() {
+        qsa('.section-inner, .reveal').forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
         });
       }
-    });
-  });
+      window.addEventListener('scroll', checkRev);
+      checkRev();
 
-  /* ===== Scroll reveal ===== */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.05 });
-  qsa('.section-inner, .reveal').forEach(el => observer.observe(el));
-  function checkRev() {
-    qsa('.section-inner, .reveal').forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
-    });
-  }
-  window.addEventListener('scroll', checkRev);
-  checkRev();
+      /* ===== Hero start button ===== */
+      qs('#startBtn').addEventListener('click', () => {
+        qs('#intro').scrollIntoView({ behavior: 'smooth' });
+      });
 
-  /* ===== Hero start button ===== */
-  qs('#startBtn').addEventListener('click', () => {
-    qs('#intro').scrollIntoView({ behavior: 'smooth' });
-  });
+      /* ===== Flip cards ===== */
+      qsa('.flip-card').forEach(card => {
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+      });
 
-  /* ===== Flip cards ===== */
-  qsa('.flip-card').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
-  });
+      /* ===== Risk sliders (Section 1) ===== */
+      let threatOn = false, vulnOn = false;
+      function updateRisk() {
+        const ind = qs('#riskIndicator');
+        if (threatOn && vulnOn) { ind.className = 'risk-indicator high'; ind.textContent = 'Risk!'; }
+        else { ind.className = 'risk-indicator low'; ind.textContent = 'مفيش Risk'; }
+      }
+      qs('[data-id="threat-yes"]').addEventListener('click', () => { threatOn = true; qs('#threatVal').textContent = '✓ موجود'; updateRisk(); });
+      qs('[data-id="threat-no"]').addEventListener('click', () => { threatOn = false; qs('#threatVal').textContent = '—'; updateRisk(); });
+      qs('[data-id="vuln-yes"]').addEventListener('click', () => { vulnOn = true; qs('#vulnVal').textContent = '✓ موجودة'; updateRisk(); });
+      qs('[data-id="vuln-no"]').addEventListener('click', () => { vulnOn = false; qs('#vulnVal').textContent = '—'; updateRisk(); });
 
-  /* ===== Risk sliders (Section 1) ===== */
-  let threatOn = false, vulnOn = false;
-  function updateRisk() {
-    const ind = qs('#riskIndicator');
-    if (threatOn && vulnOn) { ind.className = 'risk-indicator high'; ind.textContent = 'Risk!'; }
-    else { ind.className = 'risk-indicator low'; ind.textContent = 'مفيش Risk'; }
-  }
-  qs('[data-id="threat-yes"]').addEventListener('click', () => { threatOn = true; qs('#threatVal').textContent = '✓ موجود'; updateRisk(); });
-  qs('[data-id="threat-no"]').addEventListener('click', () => { threatOn = false; qs('#threatVal').textContent = '—'; updateRisk(); });
-  qs('[data-id="vuln-yes"]').addEventListener('click', () => { vulnOn = true; qs('#vulnVal').textContent = '✓ موجودة'; updateRisk(); });
-  qs('[data-id="vuln-no"]').addEventListener('click', () => { vulnOn = false; qs('#vulnVal').textContent = '—'; updateRisk(); });
+      /* ===== Quiz helper ===== */
+      function setupQuiz(id, correctBtn, fbText, explanation, wrongBtnText) {
+        const fbEl = qs('#' + id + 'fb');
+        qsa('[data-id="' + id + '-a"],[data-id="' + id + '-b"],[data-id="' + id + '-c"],[data-id="' + id + '-d"]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const isCorrect = btn.dataset.id === correctBtn;
+            btn.style.borderColor = isCorrect ? 'var(--success)' : 'var(--danger)';
+            btn.style.background = isCorrect ? 'rgba(0,255,136,.1)' : 'rgba(255,71,87,.1)';
+            if (isCorrect) {
+              fbEl.textContent = '✅ صح! ' + fbText;
+              fbEl.style.color = 'var(--success)';
+            } else {
+              const label = wrongBtnText || btn.textContent;
+              fbEl.textContent = '❌ غلط — ' + label + ' مش الإجابة. ' + explanation;
+              fbEl.style.color = 'var(--danger)';
+            }
+          });
+        });
+        const skip = qs('[data-id="' + id + '-skip"]');
+        if (skip) skip.addEventListener('click', () => { fbEl.textContent = 'تخطيت السؤال — الإجابة الصح: ' + fbText; fbEl.style.color = 'var(--dim)'; });
+      }
 
-  /* ===== Quiz helper ===== */
-  function setupQuiz(id, correctBtn, fbText, explanation, wrongBtnText) {
-    const fbEl = qs('#' + id + 'fb');
-    qsa('[data-id="' + id + '-a"],[data-id="' + id + '-b"],[data-id="' + id + '-c"],[data-id="' + id + '-d"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isCorrect = btn.dataset.id === correctBtn;
-        btn.style.borderColor = isCorrect ? 'var(--success)' : 'var(--danger)';
-        btn.style.background = isCorrect ? 'rgba(0,255,136,.1)' : 'rgba(255,71,87,.1)';
-        if (isCorrect) {
-          fbEl.textContent = '✅ صح! ' + fbText;
-          fbEl.style.color = 'var(--success)';
+      /* ===== Q1 ===== */
+      setupQuiz('q1', 'q1-b', 'Threat = اللي بيهاجم (الإمكانية)، Vulnerability = الباب المفتوح (الضعف).', 'الـ Threat هو التهديد نفسه (اللي بيهدد)، الـ Vulnerability هي الثغرة (الضعف).', 'الخيارات التانية');
+
+      /* ===== Q2 ===== */
+      setupQuiz('q2', 'q2-b', 'Nation-State Actor — مدعوم من دولة وقاعد 8 شهور بدون اكتشاف.', 'Cybercriminals بيحموا فلوس بس ومش بيشتغلوا 8 شهور بدون اكتشاف. Hacktivist بيدّعي رسالة مش تجسس. Script Kiddie بيستخدم أدوات جاهزة ومش أدوات مخصصة.', 'الخيارات التانية');
+
+      /* ===== Q3 ===== */
+      setupQuiz('q3', 'q3-d', 'Persistence — عمل admin account جديد بعد الدخول عشان يبقى موجود.', 'الـ Persistence معناها إن المهاجم بيخلي طريقة تانية يدخل فيها. الـ Initial Access هو الدخول الأول بس. الـ Execution هو تشغيل الكود. الـ Reconnaissance هو الاستطلاع.', 'الخيارات التانية');
+
+      /* ===== Q4 ===== */
+      setupQuiz('q4', 'q4-c', 'Smishing — رسالة SMS فيها لينك مزيف.', 'Phishing إيميل، Vishing مكالمة صوتية، Pretexting سيناريو/قصة كاملة. Smising خصوصي لـ SMS.', 'الخيارات التانية');
+
+      /* ===== Q5 ===== */
+      setupQuiz('q5', 'q5-c', 'Worm — انتشر لوحده من غير ضغطة مستخدم.', 'Virus محتاج تشغيل من المستخدم. Trojan بيتنكر بس مش بينتشر. Spyware بيراقب بس مش بينتشر. Worm بينتشر لوحده.', 'الخيارات التانية');
+
+      /* ===== Step-by-step reveal (Section 3) ===== */
+      let stepIdx = 0;
+      function showStep(idx) {
+        stepIdx = idx;
+        qsa('.step-card').forEach((s, i) => s.classList.toggle('active', i === idx));
+        qs('#stepStatus').textContent = (idx + 1) + ' / 6';
+      }
+      qs('[data-id="step-next"]').addEventListener('click', () => { if (stepIdx < 5) showStep(stepIdx + 1); });
+      qs('[data-id="step-back"]').addEventListener('click', () => { if (stepIdx > 0) showStep(stepIdx - 1); });
+      showStep(0);
+
+      /* ===== Channel matcher (Section 4) ===== */
+      const channelQuestions = [
+        { msg: 'طردك اتأخر، اضغط هنا لمتابعة الشحنة 💬', answer: 'sms' },
+        { msg: 'أنا من البنك، محتاج الـ OTP بتاعك عشان أأكد هويتك 📞', answer: 'phone' },
+        { msg: 'Your account is locked, click here to verify 📧', answer: 'email' },
+        { msg: 'أنا موظف IT جديد، عايز بيانات الدخول عشان أبدأ شغلي 📖', answer: 'story' }
+      ];
+      let channelQIdx = 0;
+      function showChannelQuestion() {
+        if (channelQIdx >= channelQuestions.length) {
+          qs('#channelQuestion').textContent = '✅ خلصت كل الأسئلة!';
+          return;
+        }
+        const q = channelQuestions[channelQIdx];
+        qs('#channelQuestion').textContent = q.msg;
+        qs('#channelFeedback').textContent = '';
+        qsa('.channel-chip').forEach(c => c.classList.remove('matched'));
+      }
+      qsa('.channel-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const q = channelQuestions[channelQIdx];
+          if (!q) return;
+          if (chip.dataset.channel === q.answer) {
+            chip.classList.add('matched');
+            qs('#channelFeedback').textContent = '✅ صح!';
+            qs('#channelFeedback').style.color = 'var(--success)';
+            channelQIdx++;
+            setTimeout(showChannelQuestion, 1000);
+          } else {
+            qs('#channelFeedback').textContent = '❌ غلط — جرّب تاني';
+            qs('#channelFeedback').style.color = 'var(--danger)';
+          }
+        });
+      });
+      showChannelQuestion();
+
+      /* ===== Malware tabs (Section 5) ===== */
+      qsa('#malwareTabs .tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          qsa('#malwareTabs .tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          qsa('.tab-panel').forEach(p => p.classList.remove('active'));
+          qs('.tab-panel[data-tab="' + btn.dataset.tab + '"]').classList.add('active');
+        });
+      });
+
+      /* ===== Message path toggle (Section 6) ===== */
+      let mitmOn = false, sniffOn = false;
+      qs('[data-id="toggle-mitm"]').addEventListener('click', () => {
+        mitmOn = !mitmOn;
+        const detail = qs('#mitmDetail');
+        const nodeA = qs('#nodeA');
+        const nodeB = qs('#nodeB');
+        if (mitmOn) {
+          detail.style.display = 'block';
+          nodeA.classList.add('active-node');
+          nodeB.classList.add('active-node');
+          if (!sniffOn) {
+            const attacker = document.createElement('div');
+            attacker.className = 'path-node attack-node';
+            attacker.textContent = '🎭 المهاجم';
+            attacker.id = 'mitmNode';
+            const arrow1 = document.createElement('div');
+            arrow1.className = 'path-arrow';
+            arrow1.textContent = '→';
+            const arrow2 = document.createElement('div');
+            arrow2.className = 'path-arrow';
+            arrow2.textContent = '→';
+            const path = qs('#msgPath');
+            path.insertBefore(arrow1, nodeB);
+            path.insertBefore(attacker, nodeB);
+            path.insertBefore(arrow2, nodeB);
+          }
         } else {
-          const label = wrongBtnText || btn.textContent;
-          fbEl.textContent = '❌ غلط — ' + label + ' مش الإجابة. ' + explanation;
-          fbEl.style.color = 'var(--danger)';
+          detail.style.display = 'none';
+          nodeA.classList.remove('active-node');
+          nodeB.classList.remove('active-node');
+          const mn = qs('#mitmNode');
+          if (mn) { mn.remove(); }
+          const arrows = qsa('#msgPath .path-arrow');
+          if (arrows.length > 1) { arrows[0].remove(); arrows[1].remove(); }
+        }
+      });
+      qs('[data-id="toggle-sniffer"]').addEventListener('click', () => {
+        sniffOn = !sniffOn;
+        qs('#sniffDetail').style.display = sniffOn ? 'block' : 'none';
+      });
+      qs('[data-id="reset-path"]').addEventListener('click', () => {
+        mitmOn = false; sniffOn = false;
+        qs('#mitmDetail').style.display = 'none';
+        qs('#sniffDetail').style.display = 'none';
+        qs('#nodeA').classList.remove('active-node');
+        qs('#nodeB').classList.remove('active-node');
+        const mn = qs('#mitmNode');
+        if (mn) mn.remove();
+        qsa('#msgPath .path-arrow').forEach(a => a.remove());
+        const path = qs('#msgPath');
+        const a1 = document.createElement('div');
+        a1.className = 'path-arrow';
+        a1.textContent = '→';
+        const a2 = document.createElement('div');
+        a2.className = 'path-arrow';
+        a2.textContent = '→';
+        path.insertBefore(a1, qs('#nodeB'));
+        path.insertBefore(a2, qs('#nodeB'));
+      });
+
+      /* ===== Profile cards (Section 2) ===== */
+      qsa('.profile-card').forEach(card => {
+        card.addEventListener('click', () => {
+          qsa('.profile-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+        });
+      });
+
+      /* ===== Activity 1: Show answers ===== */
+      qs('[data-id="show-answers-1"]').addEventListener('click', () => {
+        const el = qs('#answers1');
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      });
+
+      /* ===== Activity 2: Show answers ===== */
+      qs('[data-id="show-answers-2"]').addEventListener('click', () => {
+        const el = qs('#answers2');
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      });
+
+      /* ===== Journey (Closing) ===== */
+      let journeyIdx = 0;
+      function setJourney(idx) {
+        journeyIdx = idx;
+        qsa('.journey-step').forEach((s, i) => s.classList.toggle('lit', i <= idx));
+        qs('#journeyStatus').textContent = (idx + 1) + ' / 6';
+      }
+      function nextJourney() { if (journeyIdx >= 5) { setJourney(5); return; } setJourney(journeyIdx + 1); }
+      function resetJourney() { setJourney(0); }
+      qs('[data-id="journey-next"]').addEventListener('click', nextJourney);
+      qs('[data-id="journey-reset"]').addEventListener('click', resetJourney);
+      setJourney(0);
+
+      /* ===== Keyboard nav ===== */
+      document.addEventListener('keydown', e => {
+        const sections = qsa('.section');
+        let currentIdx = 0;
+        sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i; });
+        if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' });
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
-    const skip = qs('[data-id="' + id + '-skip"]');
-    if (skip) skip.addEventListener('click', () => { fbEl.textContent = 'تخطيت السؤال — الإجابة الصح: ' + fbText; fbEl.style.color = 'var(--dim)'; });
-  }
-
-  /* ===== Q1 ===== */
-  setupQuiz('q1', 'q1-b', 'Threat = اللي بيهاجم (الإمكانية)، Vulnerability = الباب المفتوح (الضعف).', 'الـ Threat هو التهديد نفسه (اللي بيهدد)، الـ Vulnerability هي الثغرة (الضعف).', 'الخيارات التانية');
-
-  /* ===== Q2 ===== */
-  setupQuiz('q2', 'q2-b', 'Nation-State Actor — مدعوم من دولة وقاعد 8 شهور بدون اكتشاف.', 'Cybercriminals بيحموا فلوس بس ومش بيشتغلوا 8 شهور بدون اكتشاف. Hacktivist بيدّعي رسالة مش تجسس. Script Kiddie بيستخدم أدوات جاهزة ومش أدوات مخصصة.', 'الخيارات التانية');
-
-  /* ===== Q3 ===== */
-  setupQuiz('q3', 'q3-d', 'Persistence — عمل admin account جديد بعد الدخول عشان يبقى موجود.', 'الـ Persistence معناها إن المهاجم بيخلي طريقة تانية يدخل فيها. الـ Initial Access هو الدخول الأول بس. الـ Execution هو تشغيل الكود. الـ Reconnaissance هو الاستطلاع.', 'الخيارات التانية');
-
-  /* ===== Q4 ===== */
-  setupQuiz('q4', 'q4-c', 'Smishing — رسالة SMS فيها لينك مزيف.', 'Phishing إيميل، Vishing مكالمة صوتية، Pretexting سيناريو/قصة كاملة. Smising خصوصي لـ SMS.', 'الخيارات التانية');
-
-  /* ===== Q5 ===== */
-  setupQuiz('q5', 'q5-c', 'Worm — انتشر لوحده من غير ضغطة مستخدم.', 'Virus محتاج تشغيل من المستخدم. Trojan بيتنكر بس مش بينتشر. Spyware بيراقب بس مش بينتشر. Worm بينتشر لوحده.', 'الخيارات التانية');
-
-  /* ===== Step-by-step reveal (Section 3) ===== */
-  let stepIdx = 0;
-  function showStep(idx) {
-    stepIdx = idx;
-    qsa('.step-card').forEach((s, i) => s.classList.toggle('active', i === idx));
-    qs('#stepStatus').textContent = (idx + 1) + ' / 6';
-  }
-  qs('[data-id="step-next"]').addEventListener('click', () => { if (stepIdx < 5) showStep(stepIdx + 1); });
-  qs('[data-id="step-back"]').addEventListener('click', () => { if (stepIdx > 0) showStep(stepIdx - 1); });
-  showStep(0);
-
-  /* ===== Channel matcher (Section 4) ===== */
-  const channelQuestions = [
-    { msg: 'طردك اتأخر، اضغط هنا لمتابعة الشحنة 💬', answer: 'sms' },
-    { msg: 'أنا من البنك، محتاج الـ OTP بتاعك عشان أأكد هويتك 📞', answer: 'phone' },
-    { msg: 'Your account is locked, click here to verify 📧', answer: 'email' },
-    { msg: 'أنا موظف IT جديد، عايز بيانات الدخول عشان أبدأ شغلي 📖', answer: 'story' }
-  ];
-  let channelQIdx = 0;
-  function showChannelQuestion() {
-    if (channelQIdx >= channelQuestions.length) {
-      qs('#channelQuestion').textContent = '✅ خلصت كل الأسئلة!';
-      return;
-    }
-    const q = channelQuestions[channelQIdx];
-    qs('#channelQuestion').textContent = q.msg;
-    qs('#channelFeedback').textContent = '';
-    qsa('.channel-chip').forEach(c => c.classList.remove('matched'));
-  }
-  qsa('.channel-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const q = channelQuestions[channelQIdx];
-      if (!q) return;
-      if (chip.dataset.channel === q.answer) {
-        chip.classList.add('matched');
-        qs('#channelFeedback').textContent = '✅ صح!';
-        qs('#channelFeedback').style.color = 'var(--success)';
-        channelQIdx++;
-        setTimeout(showChannelQuestion, 1000);
-      } else {
-        qs('#channelFeedback').textContent = '❌ غلط — جرّب تاني';
-        qs('#channelFeedback').style.color = 'var(--danger)';
-      }
-    });
-  });
-  showChannelQuestion();
-
-  /* ===== Malware tabs (Section 5) ===== */
-  qsa('#malwareTabs .tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      qsa('#malwareTabs .tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      qsa('.tab-panel').forEach(p => p.classList.remove('active'));
-      qs('.tab-panel[data-tab="' + btn.dataset.tab + '"]').classList.add('active');
-    });
-  });
-
-  /* ===== Message path toggle (Section 6) ===== */
-  let mitmOn = false, sniffOn = false;
-  qs('[data-id="toggle-mitm"]').addEventListener('click', () => {
-    mitmOn = !mitmOn;
-    const detail = qs('#mitmDetail');
-    const nodeA = qs('#nodeA');
-    const nodeB = qs('#nodeB');
-    if (mitmOn) {
-      detail.style.display = 'block';
-      nodeA.classList.add('active-node');
-      nodeB.classList.add('active-node');
-      if (!sniffOn) {
-        const attacker = document.createElement('div');
-        attacker.className = 'path-node attack-node';
-        attacker.textContent = '🎭 المهاجم';
-        attacker.id = 'mitmNode';
-        const arrow1 = document.createElement('div');
-        arrow1.className = 'path-arrow';
-        arrow1.textContent = '→';
-        const arrow2 = document.createElement('div');
-        arrow2.className = 'path-arrow';
-        arrow2.textContent = '→';
-        const path = qs('#msgPath');
-        path.insertBefore(arrow1, nodeB);
-        path.insertBefore(attacker, nodeB);
-        path.insertBefore(arrow2, nodeB);
-      }
-    } else {
-      detail.style.display = 'none';
-      nodeA.classList.remove('active-node');
-      nodeB.classList.remove('active-node');
-      const mn = qs('#mitmNode');
-      if (mn) { mn.remove(); }
-      const arrows = qsa('#msgPath .path-arrow');
-      if (arrows.length > 1) { arrows[0].remove(); arrows[1].remove(); }
-    }
-  });
-  qs('[data-id="toggle-sniffer"]').addEventListener('click', () => {
-    sniffOn = !sniffOn;
-    qs('#sniffDetail').style.display = sniffOn ? 'block' : 'none';
-  });
-  qs('[data-id="reset-path"]').addEventListener('click', () => {
-    mitmOn = false; sniffOn = false;
-    qs('#mitmDetail').style.display = 'none';
-    qs('#sniffDetail').style.display = 'none';
-    qs('#nodeA').classList.remove('active-node');
-    qs('#nodeB').classList.remove('active-node');
-    const mn = qs('#mitmNode');
-    if (mn) mn.remove();
-    qsa('#msgPath .path-arrow').forEach(a => a.remove());
-    const path = qs('#msgPath');
-    const a1 = document.createElement('div');
-    a1.className = 'path-arrow';
-    a1.textContent = '→';
-    const a2 = document.createElement('div');
-    a2.className = 'path-arrow';
-    a2.textContent = '→';
-    path.insertBefore(a1, qs('#nodeB'));
-    path.insertBefore(a2, qs('#nodeB'));
-  });
-
-  /* ===== Profile cards (Section 2) ===== */
-  qsa('.profile-card').forEach(card => {
-    card.addEventListener('click', () => {
-      qsa('.profile-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    });
-  });
-
-  /* ===== Activity 1: Show answers ===== */
-  qs('[data-id="show-answers-1"]').addEventListener('click', () => {
-    const el = qs('#answers1');
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-  });
-
-  /* ===== Activity 2: Show answers ===== */
-  qs('[data-id="show-answers-2"]').addEventListener('click', () => {
-    const el = qs('#answers2');
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-  });
-
-  /* ===== Journey (Closing) ===== */
-  let journeyIdx = 0;
-  function setJourney(idx) {
-    journeyIdx = idx;
-    qsa('.journey-step').forEach((s, i) => s.classList.toggle('lit', i <= idx));
-    qs('#journeyStatus').textContent = (idx + 1) + ' / 6';
-  }
-  function nextJourney() { if (journeyIdx >= 5) { setJourney(5); return; } setJourney(journeyIdx + 1); }
-  function resetJourney() { setJourney(0); }
-  qs('[data-id="journey-next"]').addEventListener('click', nextJourney);
-  qs('[data-id="journey-reset"]').addEventListener('click', resetJourney);
-  setJourney(0);
-
-  /* ===== Keyboard nav ===== */
-  document.addEventListener('keydown', e => {
-    const sections = qsa('.section');
-    let currentIdx = 0;
-    sections.forEach((s, i) => { if (window.scrollY >= s.offsetTop - 200) currentIdx = i; });
-    if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      if (currentIdx < sections.length - 1) sections[currentIdx + 1].scrollIntoView({ behavior: 'smooth' });
-    }
-    if (e.key === 'ArrowUp' || e.key === 'ArrowRight') {
-      e.preventDefault();
-      if (currentIdx > 0) sections[currentIdx - 1].scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
-</script>
+  </script>
 </body>
+
 </html>
