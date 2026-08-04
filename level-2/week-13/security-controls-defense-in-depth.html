@@ -682,9 +682,12 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 </footer>
 
 <script>
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
+  function $(id) { return document.getElementById(id); }
+  function $q(sel) { return document.querySelector(sel); }
+
   // particles
-  var bg = document.querySelector('.bg-layer');
+  var bg = $q('.bg-layer');
   for (var i = 0; i < 30; i++) {
     var p = document.createElement('div');
     p.className = 'particle';
@@ -695,23 +698,26 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
   }
 
   // nav show on scroll
-  var nav = document.getElementById('mainNav');
+  var nav = $('mainNav');
   window.addEventListener('scroll', function () {
     if (window.scrollY > 100) nav.classList.add('visible');
     else nav.classList.remove('visible');
   });
 
   // hero start
-  document.querySelector('[data-id="hero-start"]').addEventListener('click', function () {
-    document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
+  var heroBtn = $q('[data-id="hero-start"]');
+  if (heroBtn) heroBtn.addEventListener('click', function () {
+    $('intro').scrollIntoView({ behavior: 'smooth' });
   });
 
   // reveal on scroll
   var els = document.querySelectorAll('.section-inner');
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.05 });
-  els.forEach(function (el) { io.observe(el); });
+  if (typeof IntersectionObserver !== 'undefined') {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+  }
   function checkVisibility() {
     els.forEach(function (el) {
       var r = el.getBoundingClientRect();
@@ -724,7 +730,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
   // ===== HOUSE =====
   var houseBadges = { door: 1, lock: 1, cam: 1, alarm: 1, guard: 1 };
   var houseOrder = ['door', 'lock', 'cam', 'alarm', 'guard'];
-  var houseOut = document.getElementById('house-out');
+  var houseOut = $('house-out');
   function renderHouse() {
     document.querySelectorAll('.layer-badge').forEach(function (b) {
       b.classList.toggle('show', !!houseBadges[b.getAttribute('data-badge')]);
@@ -734,9 +740,9 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       c.classList.toggle('done', id !== 'reset' && !!houseBadges[id]);
     });
     var on = houseOrder.filter(function (k) { return houseBadges[k]; }).length;
-    if (on === 0) houseOut.textContent = 'البيت من غير حماية — اضغط على الأدوات عشان تبني طبقات!';
-    else if (on < houseOrder.length) houseOut.textContent = 'أحسنت! عشان كده طبقة واحدة مش كفاية — كمل اضغط للأمان الكامل 🛡️';
-    else houseOut.textContent = 'البيت محمي بالكامل بكل الطبقات! ده هو مفهوم Defense in Depth ✅';
+    if (on === 0) houseOut.textContent = '\u0627\u0644\u0628\u064A\u062A \u0645\u0646 \u063A\u064A\u0631 \u062D\u0645\u0627\u064A\u0629 \u2014 \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \u0627\u0644\u0623\u062F\u0648\u0627\u062A \u0639\u0634\u0627\u0646 \u062A\u0628\u0646\u064A \u0637\u0642\u0627\u062A!';
+    else if (on < houseOrder.length) houseOut.textContent = '\u0623\u062D\u0633\u0646\u062A! \u0639\u0634\u0627\u0646 \u0643\u062F\u0629 \u0637\u0628\u0642\u0629 \u0648\u0627\u062D\u062F\u0629 \u0645\u0634 \u0643\u0641\u0627\u064A\u0629 \u2014 \u0643\u0645\u0644 \u0627\u0636\u063A\u0637 \u0644\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0643\u0627\u0645\u0644 \uD83D\uDEE1\uFE0F';
+    else houseOut.textContent = '\u0627\u0644\u0628\u064A\u062A \u0645\u062D\u0645\u064A \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u0628\u0643\u0644 \u0627\u0644\u0637\u0642\u0627\u062A! \u062F\u0647\u0648 \u0647\u0648 \u0645\u0641\u0647\u0648\u0645 \u0627\u0644\u062A\u0631\u0627\u062E\u0645 \u0641\u064A \u0627\u0644\u0639\u0645\u0642 \u2705';
   }
   document.querySelectorAll('.protect-chip').forEach(function (c) {
     c.addEventListener('click', function () {
@@ -755,25 +761,25 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
     ['Guards', 'Physical'], ['CCTV', 'Physical'], ['Locks', 'Physical'], ['Badges', 'Physical']
   ];
   var cols = [
-    { type: 'Administrative', label: 'الإدارية Administrative' },
-    { type: 'Technical', label: 'التقنية Technical' },
-    { type: 'Physical', label: 'المادية Physical' }
+    { type: 'Administrative', label: '\u0627\u0644\u0625\u062F\u0627\u0631\u064A\u0629 Administrative' },
+    { type: 'Technical', label: '\u0627\u0644\u062A\u0642\u0646\u064A\u0629 Technical' },
+    { type: 'Physical', label: '\u0627\u0644\u0645\u0627\u062F\u064A\u0629 Physical' }
   ];
   var sortPlacements = {};
   var selectedSort = null;
-  function showSortMsg(t) { document.getElementById('sortMsg').textContent = t; }
+  function showSortMsg(t) { $('sortMsg').textContent = t; }
   function renderSort() {
-    var pool = document.getElementById('sortPool');
+    var pool = $('sortPool');
     pool.innerHTML = '';
     sortData.forEach(function (s) {
       if (sortPlacements[s[0]]) return;
       var c = document.createElement('div');
       c.className = 'sort-chip' + (selectedSort === s[0] ? ' selected' : '');
       c.textContent = s[0];
-      c.addEventListener('click', function () { selectedSort = s[0]; renderSort(); showSortMsg('الآن اضغط على العمود الصح 👇'); });
+      c.addEventListener('click', function () { selectedSort = s[0]; renderSort(); showSortMsg('\u0627\u0644\u0622\u0646 \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \u0627\u0644\u0639\u0645\u0648\u062F \u0627\u0644\u0635\u062D \uD83D\uDC47'); });
       pool.appendChild(c);
     });
-    var sortColsEl = document.getElementById('sortCols');
+    var sortColsEl = $('sortCols');
     sortColsEl.innerHTML = '';
     cols.forEach(function (col) {
       var div = document.createElement('div');
@@ -784,13 +790,13 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       if (!selectedSort) {
         var hint = document.createElement('div');
         hint.style.fontSize = '12px'; hint.style.color = 'var(--dim)';
-        hint.textContent = 'اضغط هنا لوضع الاختيار';
+        hint.textContent = '\u0627\u0636\u063A\u0637 \u0647\u0646\u0627 \u0644\u0648\u0636\u0639 \u0627\u0644\u0627\u062E\u062A\u064A\u0627\u0631';
         div.appendChild(hint);
       }
       div.addEventListener('click', function () {
-        if (!selectedSort) { showSortMsg('اختر أداة من الصندوق فوق الأول.'); return; }
+        if (!selectedSort) { showSortMsg('\u0627\u062E\u062A\u0631 \u0623\u062F\u0627\u0629 \u0645\u0646 \u0627\u0644\u0635\u0646\u062F\u0648\u0642 \u0641\u0648\u0642 \u0627\u0644\u0623\u0648\u0644.'); return; }
         sortPlacements[selectedSort] = col.type;
-        showSortMsg('تم وضع ' + selectedSort + ' في ' + col.type);
+        showSortMsg('\u062A\u0645 \u0648\u0636\u0639 ' + selectedSort + ' \u0641\u064A ' + col.type);
         selectedSort = null;
         renderSort();
       });
@@ -802,7 +808,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
           row.addEventListener('click', function (ev) {
             ev.stopPropagation();
             delete sortPlacements[s[0]];
-            showSortMsg('رجّع ' + s[0] + ' — اضغط عليه يروح تاني.');
+            showSortMsg('\u0631\u062C\u0639 ' + s[0] + ' \u2014 \u0627\u0636\u063A\u0637 \u0639\u0644\u064A\u0647 \u064A\u0631\u0648\u062D \u062A\u0627\u0646\u064A.');
             renderSort();
           });
           div.appendChild(row);
@@ -811,13 +817,15 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       sortColsEl.appendChild(div);
     });
     var unplaced = sortData.filter(function (s) { return !sortPlacements[s[0]]; });
-    if (unplaced.length === 0) showSortMsg('تمام! كل الأدوات اتصنّفت. اضغط "تحقق من الحل" 🎯');
+    if (unplaced.length === 0) showSortMsg('\u062A\u0645\u0627\u0645! \u0643\u0644 \u0627\u0644\u0623\u062F\u0648\u0627\u062A \u0627\u062A\u0635\u0646\u0651\u0641\u062A. \u0627\u0636\u063A\u0637 "\u062A\u062D\u0642\u0642 \u0645\u0646 \u0627\u0644\u062D\u0644" \uD83C\uDF1F');
   }
-  document.querySelector('[data-id="sort-reset"]').addEventListener('click', function () {
+  var sortReset = $q('[data-id="sort-reset"]');
+  if (sortReset) sortReset.addEventListener('click', function () {
     sortPlacements = {}; selectedSort = null; showSortMsg('');
     renderSort();
   });
-  document.querySelector('[data-id="sort-check"]').addEventListener('click', function () {
+  var sortCheck = $q('[data-id="sort-check"]');
+  if (sortCheck) sortCheck.addEventListener('click', function () {
     var wrong = 0;
     sortData.forEach(function (s) {
       if (sortPlacements[s[0]] !== s[1]) wrong++;
@@ -831,8 +839,8 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
         p.style.borderColor = 'var(--danger)'; p.style.background = 'rgba(255,71,87,0.1)';
       }
     });
-    if (wrong === 0) showSortMsg('✅ مبروك! كل الإجابات صحيحة.');
-    else showSortMsg('❌ في أخطاء بسيطة — اللي لونه أحمر محتاج تعديل. جرب تاني!');
+    if (wrong === 0) showSortMsg('\u2705 \u0645\u0628\u0631\u0648\u0643! \u0643\u0644 \u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0635\u062D\u064A\u062D\u0629.');
+    else showSortMsg('\u274C \u0641\u064A \u0623\u062E\u0637\u0627\u0621 \u0628\u0633\u064A\u0637\u0629 \u2014 \u0627\u0644\u0644\u064A \u0644\u0648\u0646\u0647 \u0623\u062D\u0645\u0631 \u0645\u062D\u062A\u0627\u062C \u062A\u0639\u062F\u064A\u0644. \u062C\u0631\u0628 \u062A\u0627\u0646\u064A!');
   });
   renderSort();
 
@@ -844,7 +852,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
     { name: 'Backup', type: 'Technical', func: 'Recovery' },
     { name: 'Door Lock', type: 'Physical', func: 'Preventive' }
   ];
-  var mc = document.getElementById('matrixCtrls');
+  var mc = $('matrixCtrls');
   matrixCtrls.forEach(function (c) {
     var pill = document.createElement('div');
     pill.className = 'control-pill';
@@ -855,9 +863,9 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       document.querySelectorAll('.matrix td').forEach(function (td) { td.classList.remove('active'); });
       var prefix = { Technical: 't', Administrative: 'a', Physical: 'p' }[c.type];
       var suffix = { Preventive: 'p', Detective: 'd', Corrective: 'c', Recovery: 'r' }[c.func];
-      var td = document.querySelector('[data-cell="' + prefix + '-' + suffix + '"]');
+      var td = $q('[data-cell="' + prefix + '-' + suffix + '"]');
       if (td) td.classList.add('active');
-      document.getElementById('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> \u2192 النوع: <span class="highlight">' + c.type + '</span> + الوظيفة: <span class="highlight">' + c.func + '</span>';
+      $('matrixOut').innerHTML = '<span class="dir-ltr">' + c.name + '</span> \u2192 \u0627\u0644\u0646\u0648\u0639: <span class="highlight">' + c.type + '</span> + \u0627\u0644\u0648\u0638\u064A\u0641\u0629: <span class="highlight">' + c.func + '</span>';
     });
     mc.appendChild(pill);
   });
@@ -865,7 +873,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
   // ===== STEPPER helper =====
   function makeStepper(id, barId, countId, nextId, prevId, resetId, steps) {
     var idx = 0;
-    var wrap = document.getElementById(id);
+    var wrap = $(id);
     function render() {
       wrap.innerHTML = '';
       var s = steps[idx];
@@ -878,12 +886,12 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       body.innerHTML = s.body;
       card.appendChild(body);
       wrap.appendChild(card);
-      document.getElementById(barId).style.width = ((idx + 1) / steps.length * 100) + '%';
-      document.getElementById(countId).textContent = (idx + 1) + ' / ' + steps.length;
+      $(barId).style.width = ((idx + 1) / steps.length * 100) + '%';
+      $(countId).textContent = (idx + 1) + ' / ' + steps.length;
     }
-    document.getElementById(nextId).addEventListener('click', function () { if (idx < steps.length - 1) { idx++; render(); } });
-    document.getElementById(prevId).addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
-    document.getElementById(resetId).addEventListener('click', function () { idx = 0; render(); });
+    $(nextId).addEventListener('click', function () { if (idx < steps.length - 1) { idx++; render(); } });
+    $(prevId).addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+    $(resetId).addEventListener('click', function () { idx = 0; render(); });
     render();
     return {
       next: function () { if (idx < steps.length - 1) { idx++; render(); } },
@@ -893,34 +901,34 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 
   // ===== SEC 3 SOC STEPS =====
   var sec3 = makeStepper('sec3steps', 'sec3bar', 'sec3count', 'sec3-next', 'sec3-prev', 'sec3-reset', [
-    { title: 'Monitor (مراقبة مستمرة)', body: 'الـ SOC بيراقب كل الـ Logs والـ Alerts على طول.' },
-    { title: 'Detect (تحديد)', body: 'يحدد: هل ده تهديد حقيقي ولا إنذار كاذب؟' },
-    { title: 'Investigate (تحقيق)', body: 'جمع الأدلة وتحليل السبب الحقيقي.' },
-    { title: 'Respond (استجابة)', body: 'عزل الجهاز، إيقاف الحساب، أو حذف الملف.' },
-    { title: 'Recover (استرجاع)', body: 'رجع الأنظمة تشتغل طبيعي تاني.' }
+    { title: 'Monitor (\u0645\u0631\u0627\u0642\u0628\u0629 \u0645\u0633\u062A\u0645\u0631\u0629)', body: '\u0627\u0644\u0640 SOC \u0628\u064A\u0631\u0627\u0642\u0628 \u0643\u0644 \u0627\u0644\u0640 Logs \u0648\u0627\u0644\u0640 Alerts \u0639\u0644\u0649 \u0637\u0648\u0644.' },
+    { title: 'Detect (\u062A\u062D\u062F\u064A\u062F)', body: '\u064A\u062D\u062F\u062F: \u0647\u0644 \u062F\u0647 \u062A\u0647\u062F\u064A\u062F \u062D\u0642\u064A\u0642\u064A \u0648\u0644\u0627 \u0625\u0646\u0630\u0627\u0631 \u0643\u0627\u0630\u0628\u061F' },
+    { title: 'Investigate (\u062A\u062D\u0642\u0642)', body: '\u062C\u0645\u0639 \u0627\u0644\u0623\u062F\u0644\u0629 \u0648\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0633\u0628\u0628 \u0627\u0644\u062D\u0642\u064A\u0642\u064A.' },
+    { title: 'Respond (\u0627\u0633\u062C\u0627\u0628\u0629)', body: '\u0639\u0632\u0644 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0625\u064A\u0642\u0627\u0641\u0629 \u0627\u0644\u062D\u0633\u0627\u0628\u060C \u0623\u0648 \u062D\u0630\u0641 \u0627\u0644\u0645\u0644\u0641.' },
+    { title: 'Recover (\u0627\u0633\u062A\u0631\u062C\u0627\u0639)', body: '\u0631\u062C\u0639 \u0627\u0644\u0623\u0646\u0638\u0627\u0645 \u062A\u0634\u062A\u063A\u0644 \u0637\u0628\u064A\u0639\u064A \u062A\u0627\u0646\u064A.' }
   ]);
 
   // ===== SEC 5 PHISHING STEPS =====
   var sec5 = makeStepper('sec5steps', 'sec5bar', 'sec5count', 'sec5-next', 'sec5-prev', 'sec5-reset', [
-    { title: '1. Phishing Email', body: 'إيميل يوصل للموظف: <span class="dir-ltr">"Your account will expire... click here"</span>.' },
-    { title: '2. Awareness Training', body: 'الموظف يلاحظ إن الإيميل من Gmail مش من الدومين الرسمي، يمسح الرسالة. <em>(لو فشلت الطبقة، الهجوم يكمل.)</em>' },
-    { title: '3. MFA', body: 'لو الموظف كتب الباسورد غلط، المهاجم لسه محتاج كود من موبايل الموظف.' },
-    { title: '4. EDR', body: 'لو ملف خبيث حاول يشتغل على الجهاز، الـ EDR يوقف العملية.' },
-    { title: '5. SIEM', body: 'بيجمع الـ Alerts من الإيميل واللابتوب والـ Firewall، ويربطهم ببعض.' },
-    { title: '6. SOC', body: 'يستلم كل ده، يحقق، يعزل الجهاز، ويغيّر الباسورد قبل ما الهجوم ينتشر.' }
+    { title: '1. Phishing Email', body: '\u0625\u0645\u064A\u0644 \u064A\u0648\u0635\u0644 \u0644\u0644\u0645\u0648\u0638\u0641: <span class="dir-ltr">"Your account will expire... click here"</span>.' },
+    { title: '2. Awareness Training', body: '\u0627\u0644\u0645\u0648\u0638\u0641 \u064A\u0644\u0627\u062D\u0638 \u0625\u0646 \u0627\u0644\u0625\u0645\u064A\u0644 \u0645\u0646 Gmail \u0645\u0634 \u0645\u0646 \u0627\u0644\u062F\u0648\u0645\u064A\u0646 \u0627\u0644\u0631\u0633\u0645\u064A\u060C \u064A\u0645\u0633\u062D \u0627\u0644\u0631\u0633\u0627\u0644\u0629. <em>(\u0644\u0648 \u0641\u0634\u0644\u062A \u0647\u0630\u0647 \u0627\u0644\u0637\u0628\u0642\u0629\u060C \u0627\u0644\u0647\u062C\u0648\u0645 \u064A\u0643\u0645\u0644.)</em>' },
+    { title: '3. MFA', body: '\u0644\u0648 \u0627\u0644\u0645\u0648\u0638\u0641 \u0643\u062A\u0628 \u0627\u0644\u0628\u0627\u0633\u0648\u0631\u062F \u063A\u0644\u0637\u060C \u0627\u0644\u0645\u0647\u0627\u062C\u0645 \u0644\u0633\u0647 \u0645\u062A\u062D\u0627\u062C \u0643\u0648\u062F \u0645\u0646 \u0645\u0648\u0628\u0627\u064A\u0644 \u0627\u0644\u0645\u0648\u0638\u0641.' },
+    { title: '4. EDR', body: '\u0644\u0648 \u0645\u0644\u0641 \u062E\u0628\u064A\u062B \u062D\u0627\u0648\u0644 \u064A\u0634\u062A\u063A\u0644 \u0639\u0644\u0649 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0627\u0644\u0640 EDR \u064A\u0648\u0642\u0641 \u0627\u0644\u0639\u0645\u0644\u064A\u0629.' },
+    { title: '5. SIEM', body: '\u0628\u064A\u062C\u0645\u0639 \u0627\u0644\u0640 Alerts \u0645\u0646 \u0627\u0644\u0625\u0645\u064A\u0644 \u0648\u0627\u0644\u0644\u0627\u0628\u062A\u0648\u0628 \u0648\u0627\u0644\u0640 Firewall\u060C \u0648\u064A\u0631\u0628\u0637\u0647\u0645 \u0628\u0639\u0636.' },
+    { title: '6. SOC', body: '\u064A\u0633\u062A\u0644\u0645 \u0643\u0644 \u062F\u0647\u060C \u064A\u062D\u0642\u0642\u060C \u064A\u0639\u0632\u0644 \u0627\u0644\u062C\u0647\u0627\u0632\u060C \u0648\u064A\u063A\u064A\u0651\u0631 \u0627\u0644\u0628\u0627\u0633\u0648\u0631\u062F \u0642\u0628\u0644 \u0645\u0627 \u0627\u0644\u0647\u062C\u0648\u0645 \u064A\u0646\u062A\u0634\u0631.' }
   ]);
 
   // ===== LAYER STACK (sec4) =====
   var layers = [
-    { key: 'people', label: 'People (الناس)', on: true },
+    { key: 'people', label: 'People (\u0627\u0644\u0646\u0627\u0633)', on: true },
     { key: 'admin', label: 'Administrative', on: true },
     { key: 'tech', label: 'Technical', on: true },
     { key: 'phys', label: 'Physical', on: true },
     { key: 'monitor', label: 'Monitoring', on: true }
   ];
-  var layerOut = document.getElementById('layerOut');
+  var layerOut = $('layerOut');
   function renderLayers() {
-    var stack = document.getElementById('layerStack');
+    var stack = $('layerStack');
     stack.innerHTML = '';
     layers.forEach(function (L) {
       var d = document.createElement('div');
@@ -933,7 +941,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       tgl.textContent = L.on ? '\u2705' : '\u26D4';
       var state = document.createElement('span');
       state.className = 'state';
-      state.textContent = L.on ? 'شغالة' : 'واقعة';
+      state.textContent = L.on ? '\u0634\u063A\u0627\u0644\u0629' : '\u0648\u0627\u0642\u0639\u0629';
       d.appendChild(label);
       d.appendChild(state);
       d.appendChild(tgl);
@@ -942,11 +950,11 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
     });
     var stoppedAt = layers.find(function (L) { return L.on; });
     if (!stoppedAt) {
-      layerOut.innerHTML = '<span class="breached">كل الطبقات وقعت \uD83D\uDE31 \u2014 الهاكر خَرق الموقف بالكامل.</span>';
+      layerOut.innerHTML = '<span class="breached">\u0643\u0644 \u0627\u0644\u0637\u0642\u0627\u062A \u0648\u0642\u0639\u062A \uD83D\uDE31 \u2014 \u0627\u0644\u0647\u0627\u0643\u0631 \u062E\u064E\u0631\u0642 \u0627\u0644\u0645\u0648\u0642\u0641 \u0628\u0627\u0644\u0643\u0627\u0645\u0644.</span>';
     } else {
-      layerOut.innerHTML = '<span class="stopped">الهاكر اتم وقف عند طبقة: ' + stoppedAt.label + ' \uD83D\uDEE1\uFE0F</span>';
+      layerOut.innerHTML = '<span class="stopped">\u0627\u0644\u0647\u0627\u0643\u0631 \u0627\u062A\u0645 \u0648\u0642\u0641 \u0639\u0646\u0637 \u0637\u0628\u0642\u0629: ' + stoppedAt.label + ' \uD83D\uDEE1\uFE0F</span>';
     }
-    var ch = document.getElementById('closingLayers');
+    var ch = $('closingLayers');
     if (ch) {
       ch.innerHTML = '';
       layers.forEach(function (L) {
@@ -965,14 +973,20 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
       });
     }
   }
+  var layersReset = $q('[data-id="layers-reset"]');
+  if (layersReset) layersReset.addEventListener('click', function () {
+    layers.forEach(function (L) { L.on = true; });
+    renderLayers();
+  });
   renderLayers();
 
   // ===== QUIZ helper =====
   function makeQuiz(revealId, quizName, answers) {
-    var revealBtn = document.querySelector('[data-id="' + revealId + '"]');
-    var fb = document.querySelector('[data-fb="' + quizName + '"]');
-    var box = document.querySelector('[data-quiz="' + quizName + '"]');
+    var revealBtn = $q('[data-id="' + revealId + '"]');
+    var fb = $q('[data-fb="' + quizName + '"]');
+    var box = $q('[data-quiz="' + quizName + '"]');
     var done = false;
+    if (!revealBtn || !fb || !box) return;
     revealBtn.addEventListener('click', function () { box.style.display = 'block'; revealBtn.style.display = 'none'; });
     document.querySelectorAll('[data-' + quizName + ']').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -985,14 +999,14 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
         var val = b.getAttribute('data-' + quizName).replace('data:', '');
         if (val === answers) {
           fb.className = 'quiz-feedback good';
-          fb.textContent = '\u2705 صح! إجابة ممتازة.';
+          fb.textContent = '\u2705 \u0635\u062D! \u0625\u062C\u0627\u0628\u0629 \u0645\u0645\u062A\u0627\u0632\u0629.';
         } else {
           fb.className = 'quiz-feedback bad';
-          fb.textContent = '\u274C لسه لأ \u2014 الإجابة الصح هي: ' + answers + '.';
+          fb.textContent = '\u274C \u0644\u0633\u0647 \u0644\u0623 \u2014 \u0627\u0644\u0625\u062C\u0627\u0628\u0629 \u0627\u0644\u0635\u062D \u0647\u064A: ' + answers + '.';
         }
       });
     });
-    var skip = document.querySelector('[data-id="' + quizName + '-skip"]');
+    var skip = $q('[data-id="' + quizName + '-skip"]');
     if (skip) skip.addEventListener('click', function () {
       box.style.display = 'none'; revealBtn.style.display = 'block';
       done = false;
@@ -1007,8 +1021,9 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
 
   // ===== ACTIVITY reveal =====
   function makeActivity(btnId, ansName) {
-    var btn = document.querySelector('[data-id="' + btnId + '"]');
-    var box = document.querySelector('[data-answers="' + ansName + '"]');
+    var btn = $q('[data-id="' + btnId + '"]');
+    var box = $q('[data-answers="' + ansName + '"]');
+    if (!btn || !box) return;
     btn.addEventListener('click', function () { box.classList.add('show'); btn.style.pointerEvents = 'none'; btn.style.opacity = 0.5; });
   }
   makeActivity('act1-reveal', 'act1');
@@ -1019,7 +1034,7 @@ footer { position: relative; z-index: 1; text-align: center; margin-top: 60px; p
     if (e.key === 'ArrowRight') sec5.next();
     if (e.key === 'ArrowLeft') sec5.prev();
   });
-})();
+});
 </script>
 </body>
 </html>
