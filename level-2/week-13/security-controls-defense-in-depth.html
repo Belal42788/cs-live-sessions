@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   /* ===== HOUSE ===== */
-  var hOn = { door: true, lock: true, cam: true, alarm: true, guard: true };
+  var hOn = { door: false, lock: false, cam: false, alarm: false, guard: false };
   var hOrder = ['door', 'lock', 'cam', 'alarm', 'guard'];
   var hOut = document.getElementById('houseOut');
   function renderHouse() {
@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })(chips[i]);
   }
   document.getElementById('houseReset').onclick = function () {
-    hOn = { door: true, lock: true, cam: true, alarm: true, guard: true };
+    hOn = { door: false, lock: false, cam: false, alarm: false, guard: false };
     renderHouse();
   };
   renderHouse();
