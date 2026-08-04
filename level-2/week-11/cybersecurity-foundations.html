@@ -618,39 +618,66 @@
             justify-content: flex-start;
             gap: 8px;
             padding-top: 12px;
-            transition: all .5s;
-            position: relative
+            transition: all .4s;
+            position: relative;
+            cursor: pointer;
+            border-radius: 0 0 8px 8px
         }
 
-        .stool-leg.missing {
-            transform: rotate(18deg) translateY(20px);
-            opacity: .25;
-            border-color: var(--danger)
+        .stool-leg.active {
+            border-color: var(--s2);
+            box-shadow: 0 0 18px rgba(0, 212, 170, .35);
+            background: linear-gradient(180deg, #0f1a3a, #0d1233)
         }
 
-        .stool-leg .leg-btn {
+        .stool-leg .leg-icon {
+            font-size: 22px;
+            line-height: 1
+        }
+
+        .stool-leg .leg-label {
             font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, .15);
-            background: rgba(255, 255, 255, .06);
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer
-        }
-
-        .stool-leg.missing .leg-btn {
-            background: rgba(255, 71, 87, .2);
-            border-color: var(--danger)
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2
         }
 
         .stool-impact {
-            min-height: 60px;
+            min-height: 100px;
             margin-top: 10px;
-            color: var(--warn);
+            padding: 14px;
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 10px;
+            color: var(--text);
             font-size: 14px;
-            font-weight: 700;
-            text-align: center
+            line-height: 1.7;
+            text-align: right;
+            transition: opacity .35s ease, transform .35s ease;
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .stool-impact.fading {
+            opacity: 0;
+            transform: translateY(6px)
+        }
+
+        .stool-impact .impact-icon {
+            font-size: 26px;
+            margin-bottom: 6px
+        }
+
+        .stool-impact .impact-title {
+            font-weight: 900;
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: var(--s2)
+        }
+
+        .stool-impact .impact-desc {
+            color: var(--dim);
+            font-size: 13px
         }
 
         /* ===== CIA tabs ===== */
@@ -1366,36 +1393,40 @@
                 <p style="color:var(--dim)">حد بيحاول يسرق حساب ألعابك؟ الـ <span dir="ltr">Cybersecurity</span> بتحميك بكلمة سر قوية، و<span dir="ltr">Two-Factor Authentication</span>، ومراقبة محاولات الدخول الغريبة.</p>
             </div>
 
-            <div class="diagram-container reveal">
-                <div class="diagram-title">كرسي الأمان — الأرجل الثلاثة</div>
-                <p style="color:var(--dim);font-size:14px;margin-bottom:10px">الأمان زي كرسي بثلاث أرجل. اضغط "اقلع" جنب أي رجل وشوف إيه اللي بيحصل.</p>
-                <div class="stool" id="stool">
-                    <div class="stool-seat">🛡️ الأمان</div>
-                    <div style="display:flex;gap:26px;margin-top:0">
-                        <div class="stool-leg" data-id="leg-people">
-                            <span>👥 People</span>
-                            <button class="leg-btn" data-action="toggle">اقلع</button>
-                        </div>
-                        <div class="stool-leg" data-id="leg-process">
-                            <span>📋 Process</span>
-                            <button class="leg-btn" data-action="toggle">اقلع</button>
-                        </div>
-                        <div class="stool-leg" data-id="leg-tech">
-                            <span>💻 Technology</span>
-                            <button class="leg-btn" data-action="toggle">اقلع</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="stool-impact" id="stoolImpact">كل الأرجل موجودة — الأمان ماشي.</div>
-                <div class="activity-controls">
-                    <button class="replay-btn" data-id="stool-reset">↺ رجّع الأرجل</button>
-                </div>
-                <div class="legend">
-                    <span><span class="swatch" style="background:var(--s2)"></span>People</span>
-                    <span><span class="swatch" style="background:var(--s2)"></span>Process</span>
-                    <span><span class="swatch" style="background:var(--s2)"></span>Technology</span>
-                </div>
-            </div>
+<div class="diagram-container reveal">
+                 <div class="diagram-title">كرسي الأمان — الأرجل الثلاثة</div>
+                 <p style="color:var(--dim);font-size:14px;margin-bottom:10px">اضغط على أي رجل عشان تتعلم إيه بيحصل لو انقطع.</p>
+                 <div class="stool" id="stool">
+                     <div class="stool-seat">🛡️ الأمان</div>
+                     <div style="display:flex;gap:26px;margin-top:0">
+                         <div class="stool-leg active" data-id="leg-people">
+                             <span class="leg-icon">👥</span>
+                             <span class="leg-label">People</span>
+                         </div>
+                         <div class="stool-leg" data-id="leg-process">
+                             <span class="leg-icon">📋</span>
+                             <span class="leg-label">Process</span>
+                         </div>
+                         <div class="stool-leg" data-id="leg-tech">
+                             <span class="leg-icon">💻</span>
+                             <span class="leg-label">Technology</span>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="stool-impact" id="stoolImpact">
+                     <div class="impact-icon">👥</div>
+                     <div class="impact-title">People — الناس</div>
+                     <div class="impact-desc">أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم يعرفوا إيه الخطر وإزاي يتعاملوا معاه.</div>
+                 </div>
+                 <div class="activity-controls">
+                     <button class="replay-btn" data-id="stool-reset">↺ رجّع للافتراضي</button>
+                 </div>
+                 <div class="legend">
+                     <span><span class="swatch" style="background:var(--s2)"></span>People</span>
+                     <span><span class="swatch" style="background:var(--s2)"></span>Process</span>
+                     <span><span class="swatch" style="background:var(--s2)"></span>Technology</span>
+                 </div>
+             </div>
 
             <div class="diagram-container reveal">
                 <div class="diagram-title">Cybersecurity ولا Information Security؟ — كويز سريع</div>
@@ -2029,42 +2060,42 @@
             if (skip) skip.addEventListener('click', () => setFeedback(id + 'fb', 'تخطيت السؤال — الإجابة الصح: ' + fbText, null));
         }
 
-        /* ===== Section 2: Stool ===== */
-        function initStool() {
-            qsa('.stool-leg').forEach(leg => {
-                leg.addEventListener('click', e => {
-                    const btn = leg.querySelector('.leg-btn');
-                    if (e.target !== btn) return;
-                    leg.classList.toggle('missing');
-                    updateStool();
-                });
-            });
-        }
-        function updateStool() {
-            const legs = qsa('.stool-leg');
-            const missing = legs.filter(l => l.classList.contains('missing')).map(l => l.dataset.id);
-            const impact = qs('#stoolImpact');
-            const seat = qs('.stool-seat');
-            if (missing.length === 0) {
-                impact.textContent = 'كل الأرجل موجودة — الأمان ماشي.';
-                impact.style.color = 'var(--success)';
-                seat.style.transform = 'rotate(0)';
-            } else if (missing.length === 1) {
-                seat.style.transform = 'rotate(-6deg)';
-                impact.style.color = 'var(--warn)';
-                if (missing[0] === 'leg-people') impact.textContent = '⚠️ نقص التدريب → الموظف بيقع في الـ Phishing';
-                else if (missing[0] === 'leg-process') impact.textContent = '⚠️ مفيش Process → أي حد يفتح البيانات';
-                else impact.textContent = '⚠️ مفيش Technology → الـ Firewall مكسور';
-            } else {
-                seat.style.transform = 'rotate(14deg)';
-                impact.style.color = 'var(--danger)';
-                impact.textContent = '💥 الأمان وقع! الأرجل التلاتة شرط أساسي.';
-            }
-        }
-        function resetStool() {
-            qsa('.stool-leg').forEach(l => l.classList.remove('missing'));
-            updateStool();
-        }
+/* ===== Section 2: Stool ===== */
+         const stoolData = {
+             'leg-people': { icon: '👥', title: 'People — الناس', desc: 'أضعف حلقة في الأمان دي الإنسان. موظف بيضغط على رابط خداع (Phishing)، أو بيستخدم باسورد ضعيف، أو بيشارك بياناته مع حد مش مصرّحله. التدريب والتوعية هي الحل — الناس لازم يعرفوا إيه الخطر وإزاي يتعاملوا معاه.' },
+             'leg-process': { icon: '📋', title: 'Process — العمليات', desc: 'السياسات والإجراءات بتحدد إزاي الشغل بيتعمل بأمان. من مين بيأخذ القرار؟ إيه الإجراءات اللي لازم تتتبع لو حصل اختراق؟ الـ Incident Response plan والـ Access Control policies هي أمثلة على Process اللي بتحمي المنظمة.' },
+             'leg-tech': { icon: '💻', title: 'Technology — التكنولوجيا', desc: 'الأدوات والأنظمة اللي بتمنع الهجمات: Firewalls, Antivirus, Encryption, Two-Factor Authentication, وحدات الشبكة. لو التكنولوجيا شغالة صح، بتعمل حاجز قوي بين المهاجم والبيانات.' }
+         };
+         let activeStoolLeg = 'leg-people';
+         function updateStool(legId, animate) {
+             activeStoolLeg = legId;
+             const data = stoolData[legId];
+             const impact = qs('#stoolImpact');
+             if (animate) {
+                 impact.classList.add('fading');
+                 setTimeout(() => {
+                     impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
+                     impact.classList.remove('fading');
+                 }, 350);
+             } else {
+                 impact.innerHTML = '<div class="impact-icon">' + data.icon + '</div><div class="impact-title">' + data.title + '</div><div class="impact-desc">' + data.desc + '</div>';
+             }
+         }
+         function initStool() {
+             qsa('.stool-leg').forEach(leg => {
+                 leg.addEventListener('click', () => {
+                     qsa('.stool-leg').forEach(l => l.classList.remove('active'));
+                     leg.classList.add('active');
+                     updateStool(leg.dataset.id, true);
+                 });
+             });
+             updateStool('leg-people', false);
+         }
+         function resetStool() {
+             qsa('.stool-leg').forEach(l => l.classList.remove('active'));
+             qs('[data-id="leg-people"]').classList.add('active');
+             updateStool('leg-people', true);
+         }
 
         /* ===== Section 4: CIA ===== */
         const ciaData = {
