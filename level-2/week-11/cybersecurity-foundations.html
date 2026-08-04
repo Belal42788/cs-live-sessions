@@ -958,10 +958,11 @@
         .map-followup {
             display: none;
             margin-top: 20px;
-            padding: 18px;
+            padding: 14px;
             border-radius: 14px;
             border: 1px solid rgba(0, 212, 170, .3);
-            background: rgba(0, 212, 170, .06)
+            background: rgba(0, 212, 170, .08);
+            color: var(--text)
         }
 
         /* ===== Career tabs ===== */
@@ -1177,22 +1178,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            padding: 10px 0
+            gap: 2px;
+            padding: 6px 0
         }
 
         .journey-step {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 12px 20px;
-            border-radius: 12px;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, .08);
             background: rgba(255, 255, 255, .03);
-            min-width: 320px;
+            min-width: 260px;
             opacity: .5;
             transition: all .4s;
-            cursor: pointer
+            cursor: pointer;
+            font-size: 13px
         }
 
         .journey-step.lit {
@@ -1202,8 +1204,8 @@
         }
 
         .journey-step .j-num {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--primary);
             color: var(--bg);
@@ -1212,13 +1214,15 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 13px
+            font-size: 11px
         }
 
         .journey-arrow {
             color: var(--dim);
-            font-size: 18px;
-            line-height: 1
+            font-size: 14px;
+            line-height: 1;
+            margin: 0;
+            padding: 0
         }
 
         footer {
@@ -1443,7 +1447,7 @@
                 <p>⚠️ أخطاء شائعة</p>
                 <div class="detail">
                     • التفكير إن الأمان = تكنولوجيا بس — الناس والعمليات أهم<br>
-                    • الخلط بين الـ Cybersecurity وInformation Security — الأول بيحمي الفضاء الرقمي كله، التاني بيهتم بالبيانات تحديدًا<br>
+                    • الخلط بين الـ Cybersecurity وInformation Security — الأول بيحمي الفضاء الرقمي كله، التاني بيهتم بالبيانات في كل صورها سواء رقمية او ملموسة<br>
                     • إهمال الـ <span dir="ltr">2FA</span> بحجة إنه مضيعة وقت
                 </div>
             </div>
@@ -1999,7 +2003,7 @@
             'asset-photos': 'personal',
             'asset-smedia': 'personal',
             'asset-games': 'gaming',
-            'asset-crypto': 'business',
+            'asset-crypto': 'personal',
             'asset-docs': 'business'
         };
         function initSort() {
@@ -2189,39 +2193,65 @@
             updateHouse();
         }
 
-        /* ===== Activity 1: Security Map ===== */
-        const mapSeed = [
-            { asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' },
-            { asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' }
-        ];
-        let mapRows = 0;
-        function renderMap() {
-            const tbody = qs('#mapBody');
-            tbody.innerHTML = '';
-            mapRows = mapSeed.length;
-            mapSeed.forEach((row, idx) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = '<td><input type="text" value="' + row.asset + '" data-field="asset"></td>' +
-                    '<td><select data-field="type"><option>Information</option><option>Technology</option><option>People</option><option>Reputation</option><option>Physical</option></select></td>' +
-                    '<td><select data-field="personal"><option>نعم</option><option>لا</option></select></td>' +
-                    '<td><input type="text" value="' + row.surface + '" data-field="surface"></td>' +
-                    '<td><input type="text" value="' + row.foot + '" data-field="foot"></td>' +
-                    '<td><button class="del-row" data-idx="' + idx + '">🗑️</button></td>';
-                tr.querySelector('select[data-field="type"]').value = row.type;
-                tr.querySelector('select[data-field="personal"]').value = row.personal;
-                tr.querySelector('.del-row').addEventListener('click', () => {
-                    mapSeed.splice(idx, 1);
-                    renderMap();
-                });
-                tbody.appendChild(tr);
-            });
-            const extra = mapRows - mapSeed.length;
-            qs('#mapStatus').textContent = mapSeed.length + ' صف' + (mapSeed.length >= 3 ? ' — الجزء التاني ظهر! ✅' : '');
-            qs('#mapFollowup').style.display = mapSeed.length >= 3 ? 'block' : 'none';
-            qs('#mapTopAsset').textContent = mapSeed.length ? mapSeed[0].asset : '—';
-        }
+/* ===== Activity 1: Security Map ===== */
+         const defaultMap = [
+             { asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' },
+             { asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' }
+         ];
+         let mapSeed = (function() {
+             try { const s = localStorage.getItem('cyber_map'); return s ? JSON.parse(s) : defaultMap; } catch(e) { return defaultMap; }
+         })();
+         let mapRows = 0;
+         function saveMap() {
+             try { localStorage.setItem('cyber_map', JSON.stringify(mapSeed)); } catch(e) {}
+         }
+         function renderMap() {
+             const tbody = qs('#mapBody');
+             tbody.innerHTML = '';
+             mapRows = mapSeed.length;
+             mapSeed.forEach((row, idx) => {
+                 const tr = document.createElement('tr');
+                 tr.innerHTML = '<td><input type="text" value="' + row.asset + '" data-field="asset"></td>' +
+                     '<td><select data-field="type"><option>Information</option><option>Technology</option><option>People</option><option>Reputation</option><option>Physical</option></select></td>' +
+                     '<td><select data-field="personal"><option>نعم</option><option>لا</option></select></td>' +
+                     '<td><input type="text" value="' + row.surface + '" data-field="surface"></td>' +
+                     '<td><input type="text" value="' + row.foot + '" data-field="foot"></td>' +
+                     '<td><button class="del-row" data-idx="' + idx + '">🗑️</button></td>';
+                 tr.querySelector('select[data-field="type"]').value = row.type;
+                 tr.querySelector('select[data-field="personal"]').value = row.personal;
+                 tr.querySelectorAll('input,select').forEach(el => {
+                     el.addEventListener('change', () => {
+                         mapSeed[idx][el.dataset.field] = el.value;
+                         saveMap();
+                         renderMap();
+                     });
+                 });
+                 tr.querySelector('.del-row').addEventListener('click', () => {
+                     mapSeed.splice(idx, 1);
+                     saveMap();
+                     renderMap();
+                 });
+                 tbody.appendChild(tr);
+             });
+             const extra = mapRows - mapSeed.length;
+             qs('#mapStatus').textContent = mapSeed.length + ' صف' + (mapSeed.length >= 3 ? ' — الجزء التاني ظهر! ✅' : '');
+             qs('#mapFollowup').style.display = mapSeed.length >= 3 ? 'block' : 'none';
+             qs('#mapTopAsset').textContent = mapSeed.length ? mapSeed[0].asset : '—';
+         }
+         function addMapRow() {
+             mapSeed.push({ asset: 'أصل جديد', type: 'Information', personal: 'نعم', surface: '', foot: '' });
+             saveMap();
+             renderMap();
+         }
+         function resetMap() {
+             mapSeed.length = 0;
+             mapSeed.push({ asset: 'صور الموبايل', type: 'Information', personal: 'نعم', surface: 'الموبايل ضايع أو مسروق', foot: 'صور شاركتها على السوشيال' });
+             mapSeed.push({ asset: 'حساب السوشيال ميديا', type: 'Information', personal: 'نعم', surface: 'باسورد ضعيف', foot: 'كل البوستات واللايكات' });
+             saveMap();
+             renderMap();
+         }
         function addMapRow() {
-            mapSeed.push({ asset: 'أصل جديد', type: 'Information', personal: 'نعم', surface: '', foot: '' });
+            mapSeed.push({ asset: '', type: 'Information', personal: 'نعم', surface: '', foot: '' });
             renderMap();
         }
         function resetMap() {
@@ -2380,7 +2410,7 @@
 
             /* Quizzes */
             setupQuiz('q1', 'q1-b', 'سجل حضور الطلاب بيانات مؤسسية لأنها ملك المدرسة.', 'البيانات المؤسسية بترجع للمنظمة مش للفرد.', 'بيانات شخصية');
-            setupQuiz('q2', 'q2-a', 'Cybersecurity أوسع لأنه بيحمي الفضاء الرقمي كله.', 'Information Security بيهتم بالبيانات تحديدًا.', 'Information Security');
+            setupQuiz('q2', 'q2-b', 'Information Security بيهتم بالبيانات تحديدًا.', 'Cybersecurity أوسع لأنه بيحمي الفضاء الرقمي كله.', 'Cybersecurity');
             setupQuiz('q3', 'q3-c', 'تعطيل المستشفيات بيوقف خدمة حيوية — استمرارية الأعمال.', 'الإجابة: استمرارية الأعمال.', 'الخيارات التانية');
             setupQuiz('q4', 'q4-b', 'تغيير الجرعة كسر للدقة Integrity.', 'Integrity يعني البيانات ما تتعدلش.', 'Confidentiality / Availability');
             setupQuiz('q5', 'q5-c', 'تسجيل مين وإمتى عمل إيه = Accountability.', 'الإجابة: Accountability.', 'الخيارات التانية');
