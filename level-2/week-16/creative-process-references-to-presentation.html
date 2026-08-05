@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الرحلة الإبداعية: من الـ References للعرض النهائي — CS Live Sessions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;--card:#111638;
+  --card-hover:#1a2050;--text:#fff;--dim:#8892b0;--success:#00ff88;--danger:#ff4757;--warn:#ffd700;
+  --s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444;--s7:#193cff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;direction:rtl;
+  line-height:1.8;overflow-x:hidden;
+}
+/* animated background */
+.bg-glow{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(600px 500px at 30% 50%,rgba(25,60,255,.18),transparent 70%),
+  radial-gradient(600px 500px at 70% 80%,rgba(0,212,170,.12),transparent 70%);
+  animation:bgShift 20s ease-in-out infinite;
+}
+@keyframes bgShift{
+  0%,100%{background-position:0% 0%,0% 0%}
+  50%{background-position:8% 6%,-8% -6%}
+}
+.particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.particles span{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;
+  background:var(--primary);opacity:.3;animation:floatUp 15s linear infinite}
+@keyframes floatUp{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  10%{opacity:.3}
+  90%{opacity:.3}
+  100%{transform:translateY(-105vh) translateX(30px);opacity:0}
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,39,.95);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);
+  transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.nav.visible{transform:translateY(0)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;background:#193cff}
+.nav-pills{display:flex;gap:6px;flex-wrap:wrap;flex:1;justify-content:flex-end}
+.nav-pills a{color:var(--dim);text-decoration:none;font-size:.78rem;padding:6px 12px;border-radius:25px;border:1px solid transparent;transition:all .2s}
+.nav-pills a:hover,.nav-pills a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:100px 20px}
+.hero .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;pointer-events:none;animation:bob 6s ease-in-out infinite}
+.orb.o1{width:260px;height:260px;background:var(--primary);top:12%;right:10%;animation-delay:0s}
+.orb.o2{width:200px;height:200px;background:var(--accent);bottom:15%;left:8%;animation-delay:1.5s}
+.orb.o3{width:150px;height:150px;background:var(--s5);top:20%;left:25%;animation-delay:3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+.hero-el{opacity:0;transform:translateY(40px);animation:fadeUp .8s ease-out forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-block;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.4);color:var(--accent);padding:6px 18px;border-radius:25px;font-size:.85rem;font-weight:700;animation-delay:.1s}
+.hero h1{font-size:clamp(34px,7vw,72px);font-weight:900;margin:20px 0;animation-delay:.3s}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero p{font-size:clamp(16px,2.4vw,22px);color:var(--dim);max-width:720px;margin:0 auto;animation-delay:.5s}
+.hero-btn{margin-top:34px;animation-delay:.7s}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:12px 30px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1rem;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(25,60,255,.35)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,212,170,.35)}
+/* sections */
+.section{margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.sec-num{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--bg);flex-shrink:0;animation:glow 3s infinite}
+@keyframes glow{0%{box-shadow:0 0 15px rgba(25,60,255,.3)}50%{box-shadow:0 0 35px rgba(25,60,255,.6)}100%{box-shadow:0 0 15px rgba(25,60,255,.3)}}
+.sec-head h2{font-size:clamp(20px,3.2vw,28px);font-weight:900}
+.sec-badge{font-size:.75rem;color:var(--dim);background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:1rem}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:26px;margin:1.4rem 0;transition:all .3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.card p{color:var(--dim);font-size:.95rem}
+.card-inner{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;margin:1.2rem 0}
+.card-inner p{color:var(--dim);font-size:.95rem;margin-bottom:.4rem}
+/* reveal chunks */
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* error box */
+.error-box{border:1px solid rgba(255,71,87,.2);background:rgba(255,71,87,.05);border-radius:12px;padding:16px;margin-top:1.6rem}
+.error-box h4{color:var(--danger);font-size:.95rem;margin-bottom:.5rem}
+.error-box li{color:var(--dim);font-size:.88rem;margin-bottom:.35rem;list-style:disc;margin-right:1.2rem}
+/* activity card */
+.activity-card{background:rgba(139,92,246,.04);border:2px dashed rgba(139,92,246,.35);border-radius:24px;padding:26px;margin:1.4rem 0}
+.activity-card h3{font-size:1.15rem;font-weight:900;margin-bottom:.6rem}
+.activity-card p{color:var(--dim);font-size:.95rem}
+/* quiz */
+.quiz-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:1.4rem 0}
+.quiz-box h4{color:var(--accent);font-size:1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:8px}
+.quiz-q{margin-bottom:1rem}
+.quiz-q p{font-weight:700;font-size:.95rem;margin-bottom:.7rem}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opts button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:11px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.9rem;text-align:right;transition:all .2s}
+.quiz-opts button:hover{background:rgba(25,60,255,.15);border-color:var(--primary)}
+.quiz-opts button.correct{background:rgba(0,255,136,.15);border-color:var(--success);color:var(--success)}
+.quiz-opts button.wrong{background:rgba(255,71,87,.15);border-color:var(--danger);color:var(--danger)}
+.quiz-opts button:disabled{cursor:default;opacity:.85}
+.quiz-fb{display:none;margin-top:.6rem;padding:.7rem .9rem;border-radius:10px;font-size:.85rem}
+.quiz-reveal-btn{background:rgba(0,212,170,.1);border:1px solid var(--accent);color:var(--accent);padding:9px 20px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-bottom:1rem;transition:all .2s}
+.quiz-reveal-btn:hover{background:rgba(0,212,170,.2)}
+.quiz-skip{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.8rem;margin-top:.6rem;transition:all .2s}
+.quiz-skip:hover{color:var(--text);border-color:var(--dim)}
+/* buttons */
+.toggle-btn,.replay-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:9px 18px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s}
+.toggle-btn:hover,.replay-btn:hover{background:rgba(25,60,255,.2);border-color:var(--primary)}
+.replay-btn{margin-top:1rem}
+/* grids */
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.activity-grid .demo-panel{display:flex;flex-direction:column;gap:16px;padding:20px;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
+@media(max-width:860px){.activity-grid{grid-template-columns:1fr}}
+.canvas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1rem 0}
+.tag{display:inline-block;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.35);color:var(--accent);padding:2px 12px;border-radius:20px;font-size:.72rem;font-weight:700;margin:2px 3px}
+.hidden{display:none!important}
+/* My Project panel */
+.project-fab{position:fixed;bottom:24px;left:24px;z-index:90;background:linear-gradient(135deg,var(--s5),var(--primary));color:#fff;border:none;width:58px;height:58px;border-radius:50%;font-size:1.6rem;cursor:pointer;box-shadow:0 10px 30px rgba(236,72,153,.4);transition:transform .2s;display:flex;align-items:center;justify-content:center}
+.project-fab:hover{transform:scale(1.08)}
+.project-panel{position:fixed;bottom:96px;left:24px;z-index:89;width:340px;max-height:70vh;overflow-y:auto;background:var(--card);border:1px solid rgba(236,72,153,.3);border-radius:20px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);display:none}
+.project-panel.open{display:block}
+.project-panel h3{color:var(--s5);font-size:1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:8px}
+.project-panel label{display:block;font-size:.75rem;color:var(--dim);margin:10px 0 4px}
+.project-panel input,.project-panel textarea,.project-panel select{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);border-radius:10px;padding:8px 12px;font-family:inherit;font-size:.85rem}
+.project-panel textarea{min-height:52px;resize:vertical}
+.project-summary{background:rgba(0,212,170,.06);border:1px solid var(--accent);border-radius:16px;padding:18px;margin-top:1.2rem}
+.project-summary h4{color:var(--accent);margin-bottom:.5rem}
+.project-summary p{font-size:.85rem;color:var(--dim);margin-bottom:.3rem}
+/* sorting game */
+.sort-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.sort-cols{grid-template-columns:1fr}}
+.sort-col{border-radius:16px;padding:16px;min-height:120px}
+.sort-col.safe{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.3)}
+.sort-col.risky{background:rgba(255,71,87,.05);border:1px solid rgba(255,71,87,.3)}
+.sort-col h4{font-size:.9rem;margin-bottom:.5rem}
+.sort-card{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 14px;margin:6px 0;cursor:pointer;font-size:.85rem;transition:all .2s;color:var(--text)}
+.sort-card:hover{transform:translateY(-2px)}
+.sort-card.placed{cursor:default;opacity:.9}
+.sort-card.placed.ok{border-color:var(--success);background:rgba(0,255,136,.12)}
+.sort-card.placed.no{border-color:var(--danger);background:rgba(255,71,87,.12)}
+/* steps */
+.step-card{display:none}
+.step-card.active{display:block;animation:fadeUp .5s ease-out}
+.step-nav{display:flex;gap:10px;align-items:center;margin-top:1rem}
+.step-nav button{background:rgba(25,60,255,.2);border:1px solid var(--primary);color:var(--text);padding:8px 18px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.85rem}
+.step-nav .step-count{color:var(--dim);font-size:.85rem;margin:0 10px}
+/* mockup card */
+.mock-card{width:230px;height:300px;border-radius:16px;padding:22px;margin:10px auto;color:#fff;transition:background .5s,box-shadow .5s;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.mock-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.25),transparent 60%)}
+.mock-card h4{position:relative;z-index:1}
+.mock-card p{position:relative;z-index:1;font-size:.8rem;opacity:.9}
+.palette-strip{display:flex;gap:4px;height:38px;border-radius:10px;overflow:hidden;margin:.8rem 0;border:1px solid rgba(255,255,255,.1)}
+.palette-strip div{flex:1}
+/* mind map */
+.mindmap{position:relative;height:430px;margin:1rem 0;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
+.mindmap .node{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:14px;font-size:.78rem;padding:8px 10px;z-index:2;box-shadow:0 4px 18px rgba(0,0,0,.3)}
+.mindmap .node.center{background:linear-gradient(135deg,var(--s5),var(--primary));color:#fff;font-weight:900;font-size:.95rem;width:150px;height:60px}
+.mindmap .node.branch{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);color:var(--text);width:128px;min-height:54px}
+.mindmap .node.branch input,.mindmap .node.branch textarea{width:100%;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:.72rem;text-align:center}
+/* what-if */
+.whatif-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:.8rem 0}
+.whatif-chip{background:rgba(25,60,255,.15);border:1px solid var(--primary);color:var(--text);padding:10px 18px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:all .2s}
+.whatif-chip:hover,.whatif-chip.on{background:var(--primary);color:#fff}
+.whatif-plus{font-size:1.6rem;color:var(--accent)}
+.whatif-result{background:linear-gradient(135deg,rgba(25,60,255,.2),rgba(0,212,170,.15));border:1px solid var(--accent);border-radius:16px;padding:18px;text-align:center;font-size:1.05rem;font-weight:700;margin-top:1rem}
+/* feedback tool */
+.fb-weak{background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.3);border-radius:12px;padding:14px;font-size:.9rem;margin:.6rem 0}
+.fb-good{background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);border-radius:12px;padding:14px;font-size:.9rem;margin:.6rem 0}
+/* checklist */
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;margin:.4rem 0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer;font-size:.88rem;color:var(--dim);transition:all .2s}
+.checklist li:hover{border-color:var(--s3)}
+.checklist li.done{background:rgba(0,255,136,.08);border-color:var(--success);color:var(--text)}
+.checklist li.done .check{color:var(--success)}
+.checklist .check{color:var(--dim);font-weight:900}
+/* journey */
+.journey{display:flex;flex-direction:column;align-items:center;gap:0;margin:2rem 0}
+.jnode{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:.8rem 1.4rem;width:88%;max-width:460px;text-align:center;position:relative;font-weight:700;font-size:.9rem}
+.jnode .step-arrow{display:block;color:var(--accent);font-size:1.4rem;margin:.3rem 0}
+/* misc */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:.8rem 0}
+.legend span{font-size:.75rem;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--dim)}
+img{max-width:100%}
+.footer{background:rgba(10,14,39,.7);border-top:1px solid rgba(25,60,255,.3);padding:40px 20px;text-align:center;margin-top:3rem}
+.footer-logo{height:40px;border-radius:8px;background:#193cff}
+.footer p{color:var(--dim);font-size:.9rem;margin-top:14px}
+.center{text-align:center}
+.mt{margin-top:1.2rem}
+code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:1px 8px;border-radius:6px;font-size:.85em;direction:ltr;unicode-bidi:isolate}
+[dir="ltr"]{direction:ltr;unicode-bidi:isolate}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <img class="nav-logo" src="" alt="Bilal" width="36" height="36">
+    <div class="nav-pills" id="navPills"></div>
+  </div>
+</nav>
+
+<button class="project-fab" data-id="projectFab" title="مشروعي">🎨</button>
+<div class="project-panel" data-id="projectPanel">
+  <h3>🎨 مشروعي</h3>
+  <p style="font-size:.78rem;color:var(--dim);margin-bottom:.4rem">املا البيانات دي مرة واحدة — وهتفضل معاك طول الرحلة كلها.</p>
+  <label>اسم المشروع</label>
+  <input type="text" data-field="title" placeholder="مثال: مغامرة الفضاء">
+  <label>الـ Theme (الموضوع)</label>
+  <input type="text" data-field="theme" placeholder="مثال: الغابة الهادئة">
+  <label>الشخصية الرئيسية</label>
+  <input type="text" data-field="char" placeholder="مثال: رائد فضاء صغير">
+  <label>المكان / البيئة</label>
+  <input type="text" data-field="env" placeholder="مثال: كوكب المريخ">
+  <label>الـ Mood (الإحساس)</label>
+  <input type="text" data-field="mood" placeholder="مثال: مغامرة وحماس">
+  <label>الألوان (٣-٥ ألوان)</label>
+  <input type="text" data-field="colors" placeholder="مثال: أحمر، برتقالي، ذهبي">
+  <label>أشياء مهمة</label>
+  <input type="text" data-field="objects" placeholder="مثال: خوذة، صاروخ، كائن غريب">
+  <label>فكرة القصة</label>
+  <textarea data-field="story" placeholder="مثال: رائد فضاء بيستكشف كوكب جديد..."></textarea>
+  <button class="toggle-btn" data-id="projectSave" style="margin-top:14px;width:100%">حفظ المشروع</button>
+</div>
+
+<header class="hero">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="wrap">
+    <span class="hero-el hero-badge">The Creative Process</span>
+    <h1 class="hero-el">الرحلة الإبداعية:<br><span>من الـ References للعرض النهائي</span></h1>
+    <p class="hero-el">من أول صورة Reference لحد ما تقف تشرح مشروعك — رحلة كل مصمم محترف. ابدأ من هنا واتحرك معانا خطوة بخطوة.</p>
+    <div class="hero-el hero-btn"><a class="btn" href="#sec-intro">🚀 نبدأ الرحلة</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- SECTIONS -->
+<section class="section" id="sec-intro" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١</div>
+    <h2>ليه بنستخدم الـ <span dir="ltr">References</span>، وإزاي نجمعها أخلاقيًا</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ Reference مش غش — هو أداة المحترفين</h3>
+      <p>كتير من الطلبة بيفكر إن الـ <span dir="ltr">Reference</span> (مرجع/صورة مرجعية) يعني غش أو إنك "مش بتعرف ترسم". الحقيقة إنه العكس تمامًا: كل الفنانين المحترفين بيستخدمونها. الـ Reference أداة تعلم أساسية بتخليك <strong>تفهم الأول عشان ترسم صح</strong>، وبتزود دقة رسمك. إحنا مش بنحفظ شكل من غير ما نفهم — بنفهم وبنرسم بدقة أعلى.</p>
+      <p class="mt">بندرس بالـ Reference خمسة حاجات أساسية: <span class="tag">Light</span><span class="tag">Color</span><span class="tag">Shapes</span><span class="tag">Texture</span><span class="tag">Composition</span></p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>نوعين رئيسيين من الـ References</h3>
+      <div class="activity-grid">
+        <div class="demo-panel">
+          <h4 style="color:var(--s1)">① <span dir="ltr">Subject Reference</span> (مرجع الموضوع)</h4>
+          <p>الحاجة نفسها من زوايا مختلفة — بناخد منها معلومات عن شكلها الحقيقي. مثال: لو هترسم أسد، بندور على صور أسد حقيقي من الأمام والجنب والحركة.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s2)">② <span dir="ltr">Style Reference</span> — مرجع الأسلوب</h4>
+          <p>بناخد منه طريقة الرسم أو الإحساس مش الشكل نفسه. مثال: نسر إنستقرام فنان بيرسم بأسلوب معين عشان نستلهم طريقة تظليله أو ألوانه.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🎮 لعبة ترتيب: الـ Safe ولا الـ Risky؟</h3>
+      <p class="mt">اضغط على كل سلوك بعدين اختار: هل هو استخدام أخلاقي (<span dir="ltr">Safe</span>) ولا غير أخلاقي (<span dir="ltr">Risky</span>)؟</p>
+      <div class="sort-cols">
+        <div class="sort-col safe" data-id="safeCol">
+          <h4 style="color:var(--success)">✓ Safe — استخدام أخلاقي</h4>
+          <div class="sort-slot" data-id="safeSlots"></div>
+        </div>
+        <div class="sort-col risky" data-id="riskyCol">
+          <h4 style="color:var(--danger)">✗ Risky — غير أخلاقي</h4>
+          <div class="sort-slot" data-id="riskySlots"></div>
+        </div>
+      </div>
+      <div class="sort-bank" data-id="sortBank" style="margin-top:1rem"></div>
+      <p style="font-size:.85rem;color:var(--dim);margin-top:.8rem">اضغط على السلوك، حدد safe/risky بالزرين تحت، ولو صح هينزل في العمود الصح.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz1">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz1" style="display:none">
+        <p>لو بنشوف خريطة ألوان رسمة معينة علشان ناخد فكرة بألوانها — دي بنستخدم نوع إيه من الـ References؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — ده Style Reference لأننا بناخد منه طريقة/إحساس زي الألوان، مش بننسخ الموضوع نفسه."><span dir="ltr">Style Reference</span> — أسلوب وإحساس</button>
+          <button data-correct="false" data-exp="غلط — Subject Reference بياخد شكل الموضوع نفسه من زوايا مختلفة."><span dir="ltr">Subject Reference</span> — الموضوع نفسه</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>ظن إن الـ Reference غش — وهو أداة تعلم أساسية لكل المحترفين.</li>
+        <li>نسخ الصورة مباشرة (Tracing) من غير تحويل — ده بيبقى Risky.</li>
+        <li>مسح اسم الفنان الأصلي — لازم دايمًا <strong>Credit Sources</strong>.</li>
+        <li>خلط Subject مع Style — الواحد بياخد الشكل، والتاني بياخد الأسلوب.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-s1" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">٢</div>
+    <h2>الـ <span dir="ltr">Mood Board</span>: تجميع كل حاجة في مكان واحد</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>إيه هو الـ Mood Board؟</h3>
+      <p>الـ <span dir="ltr">Mood Board</span> لوحة بنجمع فيها كل مراجع المشروع — صور، ألوان، ملاحظات — في مكان واحد، بدل ما تبقى متفرقة في جوجل وخيالك. لما كل حاجة تكون قدامك، بتاخد قرارات أسرع وأوضح. هو أساسًا "جدار أفكارك" اللي بيساعدك تشوف المشروع كامل قبل ما يبدأ.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🎨 لوحة الـ Reference — املا بيانات مشروعك</h3>
+      <p>افتح لوحة <strong>🎨 مشروعي</strong> (الزر في الأسفل) واملا البيانات دي — دي هتفضل معاك طول الرحلة:</p>
+      <div class="card-inner">
+        <p>اسم المشروع • الـ <span dir="ltr">Theme</span> • الشخصية • المكان • الـ <span dir="ltr">Mood</span> • الألوان • الأشياء المهمة • فكرة القصة.</p>
+      </div>
+      <h4 class="mt">اختار الـ Theme بتاعك:</h4>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" data-id="themePicks">
+        <button class="toggle-btn" data-theme="غابة هادئة">🌲 غابة هادئة</button>
+        <button class="toggle-btn" data-theme="مدينة المستقبل">🌃 مدينة المستقبل</button>
+        <button class="toggle-btn" data-theme="أوضة دافية">🛋️ أوضة دافية</button>
+        <button class="toggle-btn" data-theme="كهف غامض">🕳️ كهف غامض</button>
+        <button class="toggle-btn" data-theme="رحلة بطولية">🦁 رحلة بطولية</button>
+      </div>
+      <button class="replay-btn" data-id="openProjectPanel" style="margin-top:1rem">🎨 افتح لوحة مشروعي</button>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>ابنِ لوحة من ٥ مراجع</h3>
+      <p>الـ <span dir="ltr">Mood Board</span> بيحوي مراجع كل واحد يمثل عنصر معين من مشروعك:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem">
+        <div><label style="font-size:.8rem;color:var(--dim)">الشخصية</label><input type="text" data-id="ref1" placeholder="اخترنا الصورة دي علشان..."></div>
+        <div><label style="font-size:.8rem;color:var(--dim)">المكان</label><input type="text" data-id="ref2" placeholder="اخترنا الصورة دي علشان..."></div>
+        <div><label style="font-size:.8rem;color:var(--dim)">الـ Mood</label><input type="text" data-id="ref3" placeholder="اخترنا الصورة دي علشان..."></div>
+        <div><label style="font-size:.8rem;color:var(--dim)">الألوان</label><input type="text" data-id="ref4" placeholder="اخترنا الصورة دي علشان..."></div>
+        <div><label style="font-size:.8rem;color:var(--dim)">الـ Texture</label><input type="text" data-id="ref5" placeholder="اخترنا الصورة دي علشان..."></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--dim);margin-top:1rem">اكتب جملة "اخترنا الصورة دي علشان..." لكل مرجع.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>ضم كل صور شفتها على النت من غير اختيار — لازم كل صورة ليها سبب.</li>
+        <li>نسيان الألوان في الـ Mood Board — الألوان جزء أساسي من الإحساس.</li>
+        <li>اللوحة مليانة جدًا — اختيارات مرتبة أفضل من كومة صور.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s2" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">٣</div>
+    <h2>مصادر الإلهام وتحليل المراجع بعين مصمم</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>٤ مصادر إلهام حواليك في كل مكان</h3>
+      <div class="activity-grid">
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">① الحياة اليومية</h4>
+          <p>المدرسة، الشارع، الحيوانات، الناس. أجمل الأفكار مش شرط تكون بعيدة — غالبًا واقفة قدامك.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">② الثقافة الرقمية</h4>
+          <p>ألعاب، تطبيقات، سوشيال ميديا. بنشوف فيها تصميمات كل يوم من غير ما ناخد بالنا.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">③ الفن الاحترافي</h4>
+          <p>نشوف شغل فنانين محترفين <strong>نتعلم منه مش نقلده</strong>. المهم الطريقة مش النسخ.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">④ اهتماماتك الشخصية</h4>
+          <p>كل واحد شغال بحاجة مختلفة — الاهتمام الشخصي بيدي مشروعك شخصية مميزة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🔍 اقرأ الصورة بعين مصمم</h3>
+      <p>قبل ما نرسم من صورة، نسأل نفسنا ٥ أسئلة. اضغط على كل سؤال علشان تشوف إجابة المصمم:</p>
+      <div style="display:grid;gap:10px;margin-top:1rem">
+        <button class="toggle-btn" data-id="q1" style="text-align:right">١ — أول حاجة شوفتها في الصورة؟</button>
+        <div class="reveal-txt" data-id="a1" style="display:none;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;font-size:.88rem;color:var(--dim)">
+          ده هو الـ <strong><span dir="ltr">Focal Point</span></strong> — أول حاجة العين بتروح لها، عشان كده المصمم بيخليه أوضح حاجة في اللوحة.
+        </div>
+        <button class="toggle-btn" data-id="q2" style="text-align:right">٢ — اللون الأساسي إيه؟</button>
+        <div class="reveal-txt" data-id="a2" style="display:none;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;font-size:.88rem;color:var(--dim)">
+          الألوان هي اللي بتحكم الـ <strong>Mood</strong> — ألوان دافية = إحساس مريح، ألوان باردة = هدوء أو غموض.
+        </div>
+        <button class="toggle-btn" data-id="q3" style="text-align:right">٣ — النور جاي منين؟</button>
+        <div class="reveal-txt" data-id="a3" style="display:none;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;font-size:.88rem;color:var(--dim)">
+          لما نعرف الـ <strong>Light Source</strong>، نعرف نطبق الظلال في الجهة الصح — دي سر الواقعية.
+        </div>
+        <button class="toggle-btn" data-id="q4" style="text-align:right">٤ — فيه أشكال متكررة؟</button>
+        <div class="reveal-txt" data-id="a4" style="display:none;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;font-size:.88rem;color:var(--dim)">
+          تكرار الشكل بيدي اللوحة <strong>إيقاع</strong> ويمنع الشتت — لاحظ إزاي العناصر المكررة بتوحد التكوين.
+        </div>
+        <button class="toggle-btn" data-id="q5" style="text-align:right">٥ — عينك مشيت إزاي في اللوحة؟</button>
+        <div class="reveal-txt" data-id="a5" style="display:none;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;font-size:.88rem;color:var(--dim)">
+          ده الـ <strong>Composition</strong> — إزاي العناصر موزعة عشان توصّل العين من نقطة لنقطة بشكل متعمد.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz2">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz2" style="display:none">
+        <p>زملاؤك في الفريق بيفتحوا لعبة فورتنايت علشان ياخدوا منها أفكار لخلفية مدينة المستقبل — ده إلهام من نوع إيه؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الألعاب من الثقافة الرقمية، واحدة من أهم ٤ مصادر إلهام.">الثقافة الرقمية (ألعاب)</button>
+          <button data-correct="false" data-exp="غلط — الحياة اليومية هي المدرسة والشارع والحيوانات، مش الألعاب.">الحياة اليومية</button>
+          <button data-correct="false" data-exp="غلط — الفن الاحترافي يعني نشوف شغل فنانين عشان نتعلم الطريقة، مش علشان ناخد صور.">الفن الاحترافي</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>النظر للوحة بشكل سطحي من غير ما نسأل عن الـ Focal Point أو مصدر النور.</li>
+        <li>أخذ شغل فنان ونسخه كما هو بدل ما نتعلم منه طريقة التظليل والتكوين.</li>
+        <li>نسيان إن الألوان عندها وظيفة — مش مجرد تلوين عشوائي.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s3" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">٤</div>
+    <h2>الموضوع، الإحساس، والرسالة <span dir="ltr">(Theme, Mood &amp; Message)</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>أي تصميم ناجح بيجاوب على ٤ أسئلة</h3>
+      <div class="activity-grid">
+        <div class="demo-panel">
+          <h4 style="color:var(--s4)"><span dir="ltr">Theme</span> — بيتكلم عن إيه؟</h4>
+          <p>الفكرة الأساسية. مثال: غابة، مدينة، رحلة.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s4)"><span dir="ltr">Mood</span> — عايز المشاهد يحس بإيه؟</h4>
+          <p>فرح؟ خوف؟ هدوء؟ الغموض؟</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s4)"><span dir="ltr">Message</span> — إيه الرسالة؟</h4>
+          <p>إيه اللي عايز يقوله التصميم للناس.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s4)"><span dir="ltr">Audience</span> — مين الجمهور؟</h4>
+          <p>طفل صغير؟ مراهق؟ هما مين اللي هيشوفوا الشغل؟</p>
+        </div>
+      </div>
+      <p class="mt">الإحساس مش بيتقال — بيتحس بالـ <strong>Visual Clues</strong> مجتمعة: الألوان، الإضاءة، الأشكال، الخامات، التكوين.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🎛️ جرّب بنفسك: نفس الموضوع، إحساس مختلف</h3>
+      <p class="mt">نفس الـ Theme (بيتك من مشروعك) بيطلع بإحساس مختلف حسب الـ Mood. اضغط علشان تشوف الفرق:</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:1.2rem 0" data-id="moodPicks">
+        <button class="toggle-btn" data-mood="هادئ" style="background:rgba(0,212,170,.15);border-color:#0aa">😌 هادئ</button>
+        <button class="toggle-btn" data-mood="دافئ" style="background:rgba(245,158,11,.15);border-color:#f59e0b">🌞 دافئ</button>
+        <button class="toggle-btn" data-mood="غامض" style="background:rgba(139,92,246,.15);border-color:#8b5cf6">🌫️ غامض</button>
+        <button class="toggle-btn" data-mood="ناري" style="background:rgba(236,72,153,.15);border-color:#ec4899">🔥 ناري</button>
+      </div>
+      <div class="mock-card" data-id="moodMock">
+        <h4>بيت الغابة</h4>
+        <p>نفس الموضوع — بس الإحساس بيتغير مع كل لون ونور.</p>
+      </div>
+      <p style="font-size:.85rem;color:var(--dim)">لاحظ إزاي نفس الـ Theme بيغير إحساسه لما الألوان والإضاءة بتتغير.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz3">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz3" style="display:none">
+        <p>بنصمم رسالة لأولاد صغار (٤-٦ سنين) عن حب الطبيعة. إيه الخيار الأنسب؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الألوان المبهجة والأشكال البسيطة مناسبة لعمر الجمهور الصغير.">ألوان مبهجة + أشكال بسيطة + شخصية حيوان</button>
+          <button data-correct="false" data-exp="غلط — ألوان داكنة ومشاهد غامضة ممكن تخلّي الأطفال مش مرتاحين.">ألوان داكنة + إضاءة غامضة</button>
+          <button data-correct="false" data-exp="غلط — تناسب أكبر من الجمهور المستهدف (٤-٦ سنين).">كلمات صعبة ورسالة معقدة جدًا</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>خلط الـ Message بالـ Theme — الموضوع بيتكلم عن إيه، والرسالة اللي عايز أوصلها.</li>
+        <li>نسيان الجمهور — التصميم اللي يناسب طفل مش مناسب لمنشور لمحترفين.</li>
+        <li>الاعتماد على كلام يشرح الإحساس بدل ما نخليه باين من الألوان والنور.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-a1" style="--sn:var(--s5)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s5)">٥</div>
+    <h2>🎯 تحدي خريطة الإلهام <span dir="ltr">(Inspiration Map)</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="activity-card">
+      <h3>فرق من ٣ أفراد — ٢٠ لـ ٢٥ دقيقة</h3>
+      <div class="legend">
+        <span>💡 قائد الأفكار</span>
+        <span>🔍 خبير المراجع</span>
+        <span>🎤 المقدّم</span>
+      </div>
+      <p class="mt">المطلوب: خريطة مركزها الـ Theme وتتحط حواليها ٦ فروع. الاملا الفروع بالنقر عليها وتعديل النص — ولو فضّلت لوحة مشروعي، هتنزل تلقائيًا.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="mindmap" data-id="mindmap" data-theme="رحلة فضائية"></div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🚀 ولّد ٣ اتجاهات لنفس الموضوع</h3>
+      <p style="color:var(--s5);font-weight:700;text-align:center;font-size:1.05rem;margin-top:.8rem">Space Adventure →</p>
+      <div class="activity-grid mt">
+        <div class="demo-panel"><h4>فكرة ١: رائد على المريخ</h4><p>مغامرة رائد فضاء على سطح كوكب المريخ.</p></div>
+        <div class="demo-panel"><h4>فكرة ٢: مدينة الروبوتات</h4><p>مدينة كاملة فيها روبوتات بتخدم البشر.</p></div>
+        <div class="demo-panel"><h4>فكرة ٣: الغابة الفضائية</h4><p>كوكب كله نباتات كائنات فضائية غريبة.</p></div>
+      </div>
+      <p class="mt">الـ <strong>Original Mix</strong> = مزيج جديد، مش نسخ — إنت بتخلّط عناصر بأسلوبك.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>✅ شيك ليست التحدي</h3>
+      <ul class="checklist">
+        <li data-check="1"><span class="check">✓</span><span><strong>Clear Theme</strong> — الموضوع واضح في النص.</span></li>
+        <li data-check="2"><span class="check">✓</span><span><strong>Mood Clues</strong> — كل العناصر بتدي نفس الإحساس.</span></li>
+        <li data-check="3"><span class="check">✓</span><span><strong>Three Concepts</strong> — جربت أكتر من فكرة فعلاً.</span></li>
+        <li data-check="4"><span class="check">✓</span><span><strong>Original Mix</strong> — مزيج جديد، مش نسخ.</span></li>
+      </ul>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="replay-btn" data-id="showModel1">📄 اعرض النموذج</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" style="display:none" data-id="model1">
+    <div class="project-summary">
+      <h4>🌟 نموذج المصدر — Space Adventure</h4>
+      <p><strong>الـ Theme:</strong> رومانسية الفضاء (Space Adventure)</p>
+      <p><strong>Character:</strong> رائد فضاء صغير</p>
+      <p><strong>Place:</strong> سطح المريخ</p>
+      <p><strong>Mood:</strong> إثارة + غموض</p>
+      <p><strong>Colors:</strong> برتقالي، أحمر، أزرق معتم</p>
+      <p><strong>Objects:</strong> خوذة، كواكب، صخور</p>
+      <p><strong>Story:</strong> رائد فضاء ضل طريقه وبيكتشف كوكب جديد</p>
+      <p class="mt" style="color:var(--s5);font-weight:700">مثال جاهز — شغّال كويس لأن كل الفرعة مرتبطة بالـ Theme وليها سبب واضح.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>جعل الخريطة مليانة أفكار متناقضة من غير Theme واضح في النص.</li>
+        <li>الاقتصار على فكرة واحدة من غير ما يجرب أكتر من اتجاه (Three Concepts).</li>
+        <li>نسخ مثال المصدر حرفيًا بدل ما يطلع بمزيج أصلي.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s4" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">٦</div>
+    <h2>توليد الأفكار: عصف ذهني وخرائط ذهنية</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🧠 العصف الذهني <span dir="ltr">(Brainstorming)</span></h3>
+      <div class="activity-grid">
+        <div class="demo-panel">
+          <h4 style="color:var(--s1)">① الكمية الأول</h4>
+          <p>اكتب أي فكرة تيجي في دماغك، صح أو غلط — لسه ما فيش تقييم في اللحظة دي.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s1)">② ادمج الأفكار</h4>
+          <p>اجمع حاجتين: روبوت + غابة = روبوتات بين الأشجار. الدمج بينتج جديد.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s1)">③ اسأل "What If?"</h4>
+          <p>What if the city was underwater? — غيّر قاعدة من قواعد العالم وشوف إيه اللي هيحصل.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🎲 مولد "What If?"</h3>
+      <p class="mt">اختار عنصر من القايمتين، وسيب الموقع يدمجهم في فكرة جديدة:</p>
+      <div class="whatif-row">
+        <button class="whatif-chip" data-id="w1">روبوت</button>
+        <button class="whatif-chip" data-id="w2">غابة</button>
+        <button class="whatif-chip" data-id="w3">قرصان</button>
+        <button class="whatif-chip" data-id="w4">الفضاء</button>
+        <button class="whatif-chip" data-id="w5">قلعة</button>
+        <button class="whatif-chip" data-id="w6">السايبربانك</button>
+      </div>
+      <span class="whatif-plus">＋</span>
+      <div class="whatif-row">
+        <button class="whatif-chip" data-id="w7">كافيه</button>
+        <button class="whatif-chip" data-id="w8">بحيرة</button>
+        <button class="whatif-chip" data-id="w9">محطة فضائية</button>
+        <button class="whatif-chip" data-id="w10">مدرسة</button>
+        <button class="whatif-chip" data-id="w11">مكتبة</button>
+      </div>
+      <div class="whatif-result" data-id="wResult">← اختار عنصر من كل قايمة</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🪜 سُلّم Safe / Creative / Bold</h3>
+      <p style="color:var(--dim);font-size:.9rem" class="mt">من فكرة سهلة لفكرة جريئة — مثال "روبوت":</p>
+      <div class="activity-grid mt">
+        <div class="demo-panel">
+          <h4 style="color:var(--success)">Safe — فكرة ١</h4>
+          <p>روبوت بيقدم قهوة (سهلة وواضحة).</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s4)">Creative — فكرة ٢</h4>
+          <p>كافيه في الفضاء (غيّر الـ Setting).</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--danger)">Bold — فكرة ٣</h4>
+          <p>مدينة كاملة كلها روبوتات بتخدم البشر (تغيير جريء في الـ Setting).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>تقييم الأفكار أثناء توليدها — بيكستم العصف الذهني.</li>
+        <li>اكتفاء بفكرة واحدة فقط من غير ما يجرب Safe/Creative/Bold.</li>
+        <li>نسيان خريطة ذهنية برموز سريعة بدل جمل طويلة.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s5" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">٧</div>
+    <h2>من الفكرة للـ <span dir="ltr">Thumbnail</span>: التجربة والتكرار</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ Thumbnail هو التفكير، مش الإنتاج</h3>
+      <p class="mt">الـ <span dir="ltr">Thumbnail Sketches</span> رسمات صغيرة سريعة — مش شرط تكون جميلة. هدفها تجربة أماكن مختلفة للـ <strong>Focal Point</strong> والـ Fore/Mid/Background قبل ما نختار. قبل ما نلتزم بفكرة، نسأل ٣ أسئلة:</p>
+      <div class="activity-grid mt">
+        <div class="demo-panel"><h4>✅ Clear Message?</h4><p>هل الفكرة رسالتها واضحة؟</p></div>
+        <div class="demo-panel"><h4>✅ Strong Mood?</h4><p>هل الفكرة بتدي الإحساس المطلوب؟</p></div>
+        <div class="demo-panel"><h4>✅ Possible to Finish?</h4><p>هل تقدر تكمّلها بالوقت/الأدوات/المهارات المتاحة؟</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🔄 التكرار <span dir="ltr">(Iteration)</span> في ٣ خطوات</h3>
+      <p class="mt">نفس الرسمة بتتحسن خطوة بخطوة. التنقل بالزرارين:</p>
+      <div class="step-card active" data-step="1">
+        <h4 style="color:var(--s2)">الخطوة ١ — Rough Idea</h4>
+        <p style="color:var(--dim)">تشكيلات كبيرة بس، الشكل العام مش واضح.</p>
+        <div style="height:170px;background:rgba(255,255,255,.04);border-radius:16px;display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:20px;margin-top:1rem">
+          <div style="width:70px;height:90px;background:linear-gradient(135deg,#06b6d4,#0284a0);border-radius:14px"></div>
+          <div style="width:50px;height:120px;background:linear-gradient(135deg,#06b6d4,#0284a0);border-radius:14px"></div>
+          <div style="width:80px;height:70px;background:linear-gradient(135deg,#06b6d4,#0284a0);border-radius:14px"></div>
+        </div>
+      </div>
+      <div class="step-card" data-step="2">
+        <h4 style="color:var(--s2)">الخطوة ٢ — Better Design</h4>
+        <p style="color:var(--dim)">العناصر اترتبت أحسن: Focal Point واضح، تركيبة أدق.</p>
+        <div style="height:170px;background:rgba(255,255,255,.04);border-radius:16px;display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:20px;margin-top:1rem">
+          <div style="width:70px;height:100px;background:linear-gradient(135deg,#06b6d4,#0e7490);border-radius:14px"></div>
+          <div style="width:55px;height:130px;background:linear-gradient(135deg,#06b6d4,#0e7490);border-radius:14px"></div>
+          <div style="width:85px;height:80px;background:linear-gradient(135deg,#06b6d4,#0e7490);border-radius:14px"></div>
+        </div>
+      </div>
+      <div class="step-card" data-step="3">
+        <h4 style="color:var(--s2)">الخطوة ٣ — Final Polish</h4>
+        <p style="color:var(--dim)">حواف، تفاصيل، إضاءة، جودة العرض — اكتمل.</p>
+        <div style="height:170px;background:rgba(255,255,255,.04);border-radius:16px;display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:20px;margin-top:1rem">
+          <div style="width:70px;height:110px;background:linear-gradient(135deg,#06b6d4,#0369a1);border-radius:14px 14px 4px 4px;box-shadow:inset 0 -8px 16px rgba(0,0,0,.3)"></div>
+          <div style="width:55px;height:140px;background:linear-gradient(135deg,#06b6d4,#0369a1);border-radius:14px 14px 4px 4px;box-shadow:inset 0 -8px 16px rgba(0,0,0,.3)"></div>
+          <div style="width:85px;height:90px;background:linear-gradient(135deg,#06b6d4,#0369a1);border-radius:14px 14px 4px 4px;box-shadow:inset 0 -8px 16px rgba(0,0,0,.3)"></div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button data-id="prevStep">→ السابق</button>
+        <span class="step-count" data-id="stepCount">١ / ٣</span>
+        <button data-id="nextStep">التالي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz5">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz5" style="display:none">
+        <p>رسمة فيها أكتر من ٤٠ تفصيلة صغيرة، بس رايحكم ٣٠ دقيقة بس لو الباقي من الحصة. هل بتعدي شرط "Possible to Finish"؟</p>
+        <div class="quiz-opts">
+          <button data-correct="false" data-exp="غلط — رسالة قوية بس ٤٠ تفصيلة صغيرة مش ممكن تخلص في ٣٠ دقيقة.">أيوه، الرسالة قوية.</button>
+          <button data-correct="true" data-exp="صحيح — شرط الـ Finish عنده وقت/أدوات/مهارات، والرسمة دي مش ممكنة تخلص في الوقت المتاح.">لأ، غالبًا مش هتقدر تكمّلها في الوقت المتاح</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>قفز للتلوين والتفاصيل قبل ما يثبّت التكوين في Thumbnail سريع.</li>
+        <li>التزام أول فكرة في غير ما يجرب إزاحة الـ Focal Point.</li>
+        <li>تخطي خطوة Rough وبدء بـ Final مباشرة.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s6" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">٨</div>
+    <h2>إعطاء واستقبال الـ <span dir="ltr">Feedback</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>💬 إزاي تدي Feedback مفيد؟</h3>
+      <div class="activity-grid">
+        <div class="demo-panel">
+          <h4 style="color:var(--success)">① ابدأ بإيجابية</h4>
+          <p>ابدأ بحاجة كويسة في الشغل قبل أي نقد.</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">② كن محددًا</h4>
+          <p>"العنوان صغير ومش باين" — مش "مش حلو".</p>
+        </div>
+        <div class="demo-panel">
+          <h4 style="color:var(--s3)">③ اقترح خطوة تالية</h4>
+          <p>اقترح حل، مش بس تذكر المشكلة.</p>
+        </div>
+      </div>
+      <div class="fb-weak mt">
+        <strong>ملحوظة ضعيفة:</strong> "مش حلو."
+      </div>
+      <button class="replay-btn" data-id="showGoodFb">🪄 حوّلها لملحوظة مفيدة</button>
+      <div class="fb-good" data-id="goodFb" style="display:none">
+        <strong>ملحوظة مفيدة:</strong> "عجبتني فكرة وجود العنصر الرئيسي في النص — بس العنوان صغير ومش باين؛ جرّب تكبّره ويزوّد التباين حوالينه علشان العين تروحله فورًا."
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>👂 إزاي تستقبل الـ Feedback؟</h3>
+      <ul style="color:var(--dim);font-size:.92rem;list-style:disc;margin-right:1.2rem;line-height:1.9">
+        <li>الـ Feedback مش هجوم شخصي — فهو عن الشغل مش عنك.</li>
+        <li>اسمع الأول (Listen First) — متقاطعش.</li>
+        <li>اسأل لو مش واضح (Ask Questions).</li>
+        <li>اكتب الملاحظات المتكررة (Write Down Repeated Comments) — لو أكتر من واحد قال نفس الحاجة، دي إشارة مهمة.</li>
+        <li>اختار الملاحظات المفيدة (Choose Useful Feedback) — إنت صاحب القرار النهائي.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🗣️ لما تعرض شغلك اشرح قراراتك</h3>
+      <div class="legend">
+        <span>🎯 <span dir="ltr">Theme</span> — ليه اخترت الموضوع</span>
+        <span>🔧 <span dir="ltr">Process</span> — References/Mood Board/Thumbnails/Iterations</span>
+        <span>🤔 <span dir="ltr">Decision</span> — ليه الألوان دي، ليه المكان ده</span>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz6">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz6" style="display:none">
+        <p>قالوا ليك: "الألوان حلوة، بس مش حلو إني مش فاهم الشخصية لوحدها." — أيه الخطوة الناقصة من الـ ٣ خطوات لإعطاء الفيدباك؟</p>
+        <div class="quiz-opts">
+          <button data-correct="false" data-exp="غلط — فيه إيجابية: 'الألوان حلوة'.">البدء بإيجابية</button>
+          <button data-correct="false" data-exp="غلط — 'مش فاهم الشخصية' تعتبر ملحوظة عن شيء محدد فعلًا.">كن محددًا</button>
+          <button data-correct="true" data-exp="صحيح — الملحوظة ذكرت المشكلة بس مش اقترحت حل أو خطوة تالية.">اقتراح خطوة تالية</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>فيدباك عام زي "مش حلو" من غير ما يكون محددًا.</li>
+        <li>أخذ كل اقتراح والتنفيذ حرفيًا — مش كل الاقتراحات لازم تنفذ.</li>
+        <li>العصبية عند تلقي الـ Feedback بدل اعتباره فرصة للتحسن.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-a2" style="--sn:var(--s6)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s6)">٩</div>
+    <h2>🤝 تحدي المراجعة الجماعية <span dir="ltr">(Peer Critique)</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="activity-card">
+      <h3>فرق من ٤ أفراد</h3>
+      <div class="legend">
+        <span>🎨 الفنان</span>
+        <span>🗣️ متحدث الفيدباك</span>
+        <span>📝 مدون الملاحظات</span>
+        <span>⏱️ ضابط الوقت</span>
+      </div>
+      <p class="mt">املا النموذج ده لشغل نفسك أو شغل زميل — اقرأ بيانات مشروعه من لوحة مشروعي عشان الفيدباك يكون مظبوط.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>📋 نموذج الـ ٤ خطوات</h3>
+      <div style="display:grid;gap:14px;margin-top:1rem">
+        <div>
+          <label style="font-size:.8rem;color:var(--s3);font-weight:700">① قوة واحدة (One Strength)</label>
+          <input type="text" data-id="crit1" placeholder="اختيار الألوان ممتاز...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s3);font-weight:700">② سؤال واحد (One Question)</label>
+          <input type="text" data-id="crit2" placeholder="ليه اخترت تخلي الشخصية صغيرة جدًا؟">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s3);font-weight:700">③ اقتراح واحد (One Suggestion)</label>
+          <input type="text" data-id="crit3" placeholder="جرّب تزود التباين حوالين العنصر الرئيسي...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s3);font-weight:700">④ تحسين واحد يكتبه الفنان (Artist Writes One Improvement)</label>
+          <input type="text" data-id="crit4" placeholder="هزوّد حجم الشخصية وبنفس مقاس الألوان...">
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="replay-btn" data-id="showModel2">📄 اعرض النموذج</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" style="display:none" data-id="model2">
+    <div class="project-summary">
+      <h4>🌟 نموذج المصدر — مجرى الفيدباك</h4>
+      <p><strong>Strength:</strong> "اختيار الألوان ممتاز، بتدي إحساس غابة هادئة حقيقي."</p>
+      <p><strong>Question:</strong> "ليه اخترت تخلي الشخصية صغيرة جدًا في الصورة؟"</p>
+      <p><strong>Suggestion:</strong> "جرّب تزود التباين حوالين العنصر الرئيسي علشان يلفت نظر المشاهد."</p>
+      <p><strong>Improvement:</strong> "كبّرت الشخصية وزودت التباين حوالينها في النسخة v2."</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>تحويل السؤال لنقد مباشر — السؤال بيفتح تفكير مش بيحكم.</li>
+        <li>أكتر من اقتراح واحد — اقتراح واحد قابل للتنفيذ أحسن.</li>
+        <li>الفنان يرد بدل ما يكتب التحسين بعد ما يسمع الجميع.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-s7" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">١٠</div>
+    <h2>من الخطة للتنفيذ النهائي</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🏗️ حوّل الخطة لشغل كامل</h3>
+      <ul style="color:var(--dim);font-size:.92rem;list-style:disc;margin-right:1.2rem;line-height:1.9">
+        <li>ابنِ على المواد اللي جهزتها (Mood Board, Thumbnails) — <strong>متبدأش من الصفر</strong>.</li>
+        <li>ابدأ بالأشكال الكبيرة قبل التفاصيل.</li>
+        <li>طبّق كل حاجة اتعلمتها: <span dir="ltr">Perspective, Light, Shadow, Color, Focal Point, Hierarchy</span>.</li>
+        <li>احفظ نسخ مختلفة <span dir="ltr">v1, v2, v3</span> — عشان تقدر ترجع لنسخة قديمة لو حاجة غلطت.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>⚖️ الـ Refinement: Fix First قبل Polish Last</h3>
+      <p class="mt">الـ Refinement مش معناه تفاصيل أكتر. معناه نصلّح المشاكل الأساسية الأول، وبعدين نلمّع. جرّب: أي واحدة أقرب للوضع الصح؟</p>
+      <div class="activity-grid mt" style="cursor:pointer">
+        <div class="demo-panel" data-id="pickA" style="text-align:center">
+          <h4 style="color:var(--s4)">النسخة أ</h4>
+          <p style="font-size:.8rem">العنصر الرئيسي واضح جدًا + تباين قوي، لكن من غير تفاصيل صغيرة.</p>
+          <div style="height:150px;background:rgba(255,255,255,.04);border-radius:14px;margin-top:.8rem;display:flex;align-items:center;justify-content:center;position:relative">
+            <div style="width:80px;height:80px;background:linear-gradient(135deg,#10b981,#047857);border-radius:50%;box-shadow:0 0 0 4px rgba(16,185,129,.4)"></div>
+          </div>
+        </div>
+        <div class="demo-panel" data-id="pickB" style="text-align:center">
+          <h4 style="color:var(--s4)">النسخة ب</h4>
+          <p style="font-size:.8rem">تفاصيل دقيقة كتير، لكن العنصر الرئيسي ضعيف ومش باين.</p>
+          <div style="height:150px;background:rgba(255,255,255,.04);border-radius:14px;margin-top:.8rem;display:flex;align-items:center;justify-content:center">
+            <div style="width:80px;height:80px;background:linear-gradient(135deg,#10b981,#047857);border-radius:50%;opacity:.35"></div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="replay-btn" data-id="showFix">💡 شوف الإجابة</button>
+      </div>
+      <div class="project-summary" data-id="fixAns" style="display:none">
+        <h4>الإجابة: النسخة أ</h4>
+        <p>النسخة أ أقرب للوضع الصح — وضحت العنصر الرئيسي والتباين الأول (Fix First). النسخة ب فيها تفاصيل كتير بس التكوين ضعيف. التفاصيل مش معناها إنجاز.</p>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🧠 طبّق الفيدباك بذكاء</h3>
+      <div class="activity-grid">
+        <div class="demo-panel"><h4 style="color:var(--s4)">قارن كل تعليق بهدفك</h4><p>هل التعديل ده بيخدم الرسالة ولا بينحرف عنها؟</p></div>
+        <div class="demo-panel"><h4 style="color:var(--s4)">ابدأ بالمشاكل المتكررة</h4><p>لو أكتر من واحد قال نفس الحاجة، ابدأ بيها.</p></div>
+        <div class="demo-panel"><h4 style="color:var(--s4)">جرّب تعديل واحد في المرة</h4><p>ده بيساعدك تفهم تأثير كل تغيير.</p></div>
+        <div class="demo-panel"><h4 style="color:var(--s4)">احتفظ بنسخة قبل أي تعديل كبير</h4><p>الحفظ بمسمى واضح بيحميك من الندم.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>بدء التنفيذ من الصفر مع إهمال كل المواد اللي اتعملت.</li>
+        <li>تفاصيل زايدة على حساب وضوح العنصر الرئيسي.</li>
+        <li>تنفيذ كل الملاحظات من غير ما يقيّمها بنفسه.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-a3" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١١</div>
+    <h2>بيان الفنان والتحضير للعرض النهائي</h2>
+  </div>
+  <div class="reveal">
+    <div class="activity-card">
+      <h3>🎤 اكتب بيان الفنان الخاص بك</h3>
+      <p class="mt">بيان الفنان (<span dir="ltr">Artist Statement</span>) شرح بسيط لشغلك للجمهور. اكتب ٥ أجزاء، ولو فضّلت لوحة مشروعي هتلقى تلميحات جاهزة:</p>
+      <div style="display:grid;gap:14px;margin-top:1rem">
+        <div>
+          <label style="font-size:.8rem;color:var(--s2);font-weight:700">① Theme — بيتكلم عن إيه؟</label>
+          <input type="text" data-id="as1" placeholder="مشروعي بيتكلم عن...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s2);font-weight:700">② Process — إزاي عملته؟ (References، Thumbnails، إزاي الفيدباك ساعد)</label>
+          <input type="text" data-id="as2" placeholder="جمعت مراجع من... ورسمت Thumbnails وبعدين...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s2);font-weight:700">③ Decisions — ليه اللون/الإضاءة/المكان ده؟</label>
+          <input type="text" data-id="as3" placeholder="استخدمت ألوان... علشان أوصل إحساس...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s2);font-weight:700">④ Challenge — أصعب حاجة قابلتك وإزاي تعاملت معاها؟</label>
+          <input type="text" data-id="as4" placeholder="أصعب حاجة كانت... وطلعت منها بـ...">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--s2);font-weight:700">⑤ Reflection — لو عندك وقت أكتر كنت هتعمل إيه؟</label>
+          <input type="text" data-id="as5" placeholder="لو عندي وقت أكتر كنت هزوّد...">
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="replay-btn" data-id="showModel3">📄 اعرض المثال</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" style="display:none" data-id="model3">
+    <div class="project-summary">
+      <h4>🌟 مثال بيان الفنان</h4>
+      <p>"استخدمت ألوان باردة وإضاءة هادئة علشان أوصل إحساس بالوحدة والغموض. بدأت بجمع مراجع من الحياة اليومية، وساعدني الفيدباك على تكبير العنصر الرئيسي في النسخة الأخيرة."</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>✅ شيك ليست تجهيز العرض النهائي</h3>
+      <ul class="checklist">
+        <li data-check="1"><span class="check">✓</span><span>اختار عنوان واضح وسهل التذكر.</span></li>
+        <li data-check="2"><span class="check">✓</span><span>اكتب الـ Artist Statement في ٣ جمل بس.</span></li>
+        <li data-check="3"><span class="check">✓</span><span>جهّز موادك: الـ Mood Board، أفضل Thumbnail، الشغل النهائي، تعديل بسبب الفيدباك.</span></li>
+        <li data-check="4"><span class="check">✓</span><span>اتدرّب تشرح أهم قرار تصميم.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>عرض الشغل من غير ما تشرح ليه عملت القرارات اللي عملتها.</li>
+        <li>بيان فنان أطول من اللازم — ٣ جمل واضحة أحسن من ٣ فقرات مبهمة.</li>
+        <li>الوصول للعرض من غير تجهيز المواد اللي بتورّي رحلتك (Mood Board, Thumbnails, الفيدباك).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="section" id="sec-closing" style="--sn:var(--s6)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s6)">١٢</div>
+    <h2>الرحلة الكاملة: من صورة واحدة لعرض متكامل</h2>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🗺️ رحلتك من الـ Reference للعرض النهائي</h3>
+      <div class="journey" data-id="journey"></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="project-summary" data-id="finalSummary">
+      <h4>📌 ملخص مشروعك الكامل</h4>
+      <p id="finalTheme">الـ Theme: —</p>
+      <p id="finalChar">الشخصية: —</p>
+      <p id="finalEnv">المكان: —</p>
+      <p id="finalMood">الـ Mood: —</p>
+      <p id="finalColors">الألوان: —</p>
+      <p id="finalObjects">الأشياء: —</p>
+      <p id="finalStory">القصة: —</p>
+      <p class="mt" style="color:var(--s6);font-weight:700">ده مشروعك النهائي — اطبعه أو احفظه واعرضه بكل فخر! 🎉</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ تذكير أخير</h4>
+      <ul>
+        <li>الـ Reference أداة تعلم، مش غش — استخدمه لتفهم الأول.</li>
+        <li>كل مرحلة في الرحلة مبنية على اللي قبلها — متبصّش على مراحل كويسة وتمشي لحد التالت.</li>
+        <li>انتهى الـ Feedback للعرض النهائي، احتفظ بنسخ من شغلك في كل مرحلة.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <img class="footer-logo" src="" alt="Bilal" width="40" height="40">
+  <p>كل فنان محترف بدأ من صورة واحدة... إنت كمان تقدر! 🌟</p>
+</footer>
+
+<script>
+(function(){
+var ICON_B64='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';
+var WORD_B64='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';
+document.querySelectorAll('.nav-logo, .footer-logo').forEach(function(img){
+  if(img.classList.contains('nav-logo')){img.src='data:image/webp;base64,'+ICON_B64}
+  else{img.src='data:image/webp;base64,'+WORD_B64}
+});
+// particles
+(function(){var p=document.getElementById('particles');for(var i=0;i<30;i++){var s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.width=s.style.height=(Math.random()*3+2)+'px';s.style.animationDuration=(Math.random()*10+10)+'s';s.style.animationDelay=(Math.random()*12)+'s';p.appendChild(s)}})();
+// nav + observer
+var nav=document.getElementById('mainNav'),pills=document.getElementById('navPills');
+var sections=document.querySelectorAll('.section[id]');
+sections.forEach(function(s){
+  var a=document.createElement('a');
+  a.href='#'+s.id;
+  var badge=s.querySelector('.sec-head h2');
+  a.textContent=badge?badge.textContent.trim():s.id;
+  a.dataset.nav=s.id;
+  pills.appendChild(a);
+});
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});
+document.querySelectorAll('.section, .reveal, .hero-el, .jnode').forEach(function(el){observer.observe(el)});
+window.addEventListener('scroll',function(){
+  nav.classList.toggle('visible',window.scrollY>100);
+  var cur='';
+  sections.forEach(function(s){if(window.scrollY>=s.offsetTop-220)cur=s.id});
+  pills.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.dataset.nav===cur)});
+});
+// My Project panel
+(function(){
+  var fab=document.querySelector('[data-id="projectFab"]'),panel=document.querySelector('[data-id="projectPanel"]');
+  if(fab&&panel){fab.addEventListener('click',function(){panel.classList.toggle('open')})}
+  var save=document.querySelector('[data-id="projectSave"]');
+  var fields={title:'',theme:'',char:'',env:'',mood:'',colors:'',objects:'',story:''};
+  try{var saved=JSON.parse(localStorage.getItem('cs_myproject')||'{}');for(var k in fields){if(saved[k])fields[k]=saved[k]}}catch(e){}
+  Object.keys(fields).forEach(function(k){
+    var el=document.querySelector('[data-field="'+k+'"]');
+    if(el){el.value=fields[k];el.addEventListener('input',function(){fields[k]=el.value})}
+  });
+  if(save)save.addEventListener('click',function(){
+    try{localStorage.setItem('cs_myproject',JSON.stringify(fields))}catch(e){}
+    var btn=save;btn.textContent='تم الحفظ ✓';setTimeout(function(){btn.textContent='حفظ المشروع'},1500);
+  });
+  window.__project=function(){return fields};
+})();
+// keyboard nav
+(function(){
+  var ids=[];sections.forEach(function(s){ids.push(s.id)});
+  window.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    var cur='',ci=0;
+    sections.forEach(function(s,i){if(window.scrollY>=s.offsetTop-220){cur=s.id;ci=i}});
+    var ni=(e.key==='ArrowRight')?Math.min(ids.length-1,ci+1):Math.max(0,ci-1);
+    if(ni!==ci){document.getElementById(ids[ni]).scrollIntoView({behavior:'smooth'})}
+  });
+})();
+// ---------- quizzes ----------
+(function(){
+  document.querySelectorAll('.quiz-box').forEach(function(box){
+    var rev=box.querySelector('.quiz-reveal-btn');
+    var q=box.querySelector('.quiz-q');
+    var skip=box.querySelector('.quiz-skip');
+    var fb=box.querySelector('.quiz-fb');
+    if(rev&&q)rev.addEventListener('click',function(){q.style.display='block';rev.style.display='none'});
+    if(skip&&q)skip.addEventListener('click',function(){q.style.display='none';if(rev)rev.style.display='inline-block'});
+    if(q)q.querySelectorAll('.quiz-opts button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var correct=btn.getAttribute('data-correct')==='true';
+        btn.classList.add(correct?'correct':'wrong');
+        btn.disabled=true;
+        if(fb){
+          fb.style.display='block';
+          fb.style.background=correct?'rgba(0,255,136,.08)':'rgba(255,71,87,.08)';
+          fb.style.border='1px solid '+(correct?'var(--success)':'var(--danger)');
+          fb.style.color=correct?'var(--success)':'var(--danger)';
+          fb.textContent=correct?'✓ '+btn.getAttribute('data-exp'):'✗ '+btn.getAttribute('data-exp');
+        }
+        if(!correct){
+          q.querySelectorAll('.quiz-opts button').forEach(function(b){
+            if(b!==btn&&b.getAttribute('data-correct')==='true'){b.classList.add('correct');b.disabled=true}
+          });
+        }
+      });
+    });
+  });
+})();
+// ---------- sorting game ----------
+(function(){
+  var bank=document.querySelector('[data-id="sortBank"]');
+  if(!bank)return;
+  var behaviors=[
+    {t:'أدرس الصورة (Study)',c:'safe'},
+    {t:'أدمج صور كتير في فكرة جديدة (Combine)',c:'safe'},
+    {t:'أحوّل الصورة لشكل مختلف (Transform)',c:'safe'},
+    {t:'أنسب المصدر (Credit Sources)',c:'safe'},
+    {t:'أعمل حاجة أصلية جديدة (Create Your Own)',c:'safe'},
+    {t:'أتتبع الخطوط (Tracing)',c:'risky'},
+    {t:'أنسخ الصورة زي ما هي (Copying)',c:'risky'},
+    {t:'أشيل اسم الفنان (Removing Credit)',c:'risky'},
+    {t:'أنسب فكرة فنان تاني ليا (Claiming Idea)',c:'risky'}
+  ];
+  var safeSlots=document.querySelector('[data-id="safeSlots"]');
+  var riskySlots=document.querySelector('[data-id="riskySlots"]');
+  var selected=null;
+  behaviors.forEach(function(b){
+    var card=document.createElement('div');
+    card.className='sort-card';
+    card.textContent=b.t;
+    card.addEventListener('click',function(){
+      bank.querySelectorAll('.sort-card').forEach(function(c){c.style.outline='none';c.style.outlineOffset='0'});
+      selected=card;card.style.outline='2px solid var(--accent)';card.style.outlineOffset='2px';
+    });
+    bank.appendChild(card);
+  });
+  function place(col){
+    if(!selected||selected.dataset.placed)return;
+    var b=behaviors.find(function(x){return x.t===selected.textContent});
+    var target=(col==='safe')?safeSlots:riskySlots;
+    selected.dataset.placed='1';
+    selected.style.outline='none';
+    selected.classList.add('placed');
+    selected.classList.add(b.c===col?'ok':'no');
+    target.appendChild(selected);
+  }
+  var sc=document.querySelector('[data-id="safeCol"]'),rc=document.querySelector('[data-id="riskyCol"]');
+  if(sc)sc.addEventListener('click',function(){place('safe')});
+  if(rc)rc.addEventListener('click',function(){place('risky')});
+})();
+// ---------- project theme picks + open panel ----------
+(function(){
+  var picks=document.querySelector('[data-id="themePicks"]');
+  if(picks)picks.addEventListener('click',function(e){
+    var b=e.target.closest('.toggle-btn');if(!b)return;
+    picks.querySelectorAll('.toggle-btn').forEach(function(x){x.style.outline='none'});
+    b.style.outline='2px solid var(--accent)';
+    var f=window.__project?window.__project():{};
+    var el=document.querySelector('[data-field="theme"]');
+    if(el&&f){el.value=b.getAttribute('data-theme')}
+    try{var saved=JSON.parse(localStorage.getItem('cs_myproject')||'{}');saved.theme=b.getAttribute('data-theme');localStorage.setItem('cs_myproject',JSON.stringify(saved))}catch(err){}
+  });
+  var op=document.querySelector('[data-id="openProjectPanel"]');
+  if(op)op.addEventListener('click',function(){var p=document.querySelector('[data-id="projectPanel"]');if(p)p.classList.add('open')});
+})();
+// ---------- reveal-txt toggles ----------
+(function(){
+  document.querySelectorAll('[data-id^="q"]').forEach(function(btn){
+    var id=btn.getAttribute('data-id');
+    if(!/^q\d+$/.test(id))return;
+    var ans=document.querySelector('[data-id="a'+id.slice(1)+'"]');
+    if(!ans)return;
+    btn.addEventListener('click',function(){ans.style.display=ans.style.display==='none'?'block':'none'});
+  });
+})();
+// ---------- mood mockup ----------
+(function(){
+  var mock=document.querySelector('[data-id="moodMock"]');
+  if(!mock)return;
+  var moods={
+    'هادئ':{bg:'linear-gradient(160deg,#0f766e,#0a0e27)',glow:'rgba(0,212,170,.4)',title:'بيت الغابة — هدوء'},
+    'دافئ':{bg:'linear-gradient(160deg,#f59e0b,#7c2d12)',glow:'rgba(245,158,11,.4)',title:'بيت الغابة — دفء'},
+    'غامض':{bg:'linear-gradient(160deg,#4c1d95,#0a0e27)',glow:'rgba(139,92,246,.4)',title:'بيت الغابة — غموض'},
+    'ناري':{bg:'linear-gradient(160deg,#ec4899,#450a0a)',glow:'rgba(236,72,153,.4)',title:'بيت الغابة — نار'}
+  };
+  document.querySelectorAll('[data-id="moodPicks"] .toggle-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('[data-id="moodPicks"] .toggle-btn').forEach(function(x){x.style.outline='none'});
+      btn.style.outline='2px solid var(--accent)';
+      var m=moods[btn.getAttribute('data-mood')];
+      if(!m)return;
+      mock.style.background=m.bg;
+      mock.style.boxShadow='0 20px 60px '+m.glow;
+      mock.querySelector('h4').textContent=m.title;
+    });
+  });
+})();
+// ---------- mind map ----------
+(function(){
+  var mm=document.querySelector('[data-id="mindmap"]');
+  if(!mm)return;
+  var f=window.__project?window.__project():{};
+  var branches=[
+    {key:'char',label:'الشخصية'},
+    {key:'env',label:'المكان'},
+    {key:'mood',label:'الـ Mood'},
+    {key:'colors',label:'الألوان'},
+    {key:'objects',label:'الأشياء'},
+    {key:'story',label:'القصة'}
+  ];
+  var theme=(f&&f.theme)?f.theme:'رحلة فضائية';
+  var center=document.createElement('div');
+  center.className='node center';
+  var ci=document.createElement('input');
+  ci.value=theme;ci.style.cssText='width:100%;background:transparent;border:none;color:#fff;font-weight:900;font-family:inherit;text-align:center;font-size:.95rem';
+  center.appendChild(ci);mm.appendChild(center);
+  var w=mm.clientWidth||600,h=430;
+  var cx=w/2,cy=h/2-10;
+  var n=branches.length;
+  branches.forEach(function(b,idx){
+    var angle=-Math.PI/2+idx*(2*Math.PI/n);
+    var rx=Math.min(w/2-110,150),ry=Math.min(h/2-70,120);
+    var x=cx+Math.cos(angle)*rx, y=cy+Math.sin(angle)*ry;
+    var node=document.createElement('div');
+    node.className='node branch';
+    node.style.left=(x-64)+'px';node.style.top=(y-27)+'px';
+    var lab=document.createElement('div');
+    lab.style.cssText='font-size:.68rem;color:var(--dim);margin-bottom:2px';
+    lab.textContent=b.label;
+    var inp=document.createElement('textarea');
+    inp.rows=2;
+    inp.value=(f&&f[b.key])?f[b.key]:'';
+    inp.addEventListener('input',function(){if(f)f[b.key]=inp.value});
+    node.appendChild(lab);node.appendChild(inp);
+    mm.appendChild(node);
+  });
+})();
+// ---------- model reveal buttons ----------
+(function(){
+  [['showModel1','model1'],['showModel2','model2'],['showModel3','model3']].forEach(function(pair){
+    var b=document.querySelector('[data-id="'+pair[0]+'"]');
+    var m=document.querySelector('[data-id="'+pair[1]+'"]');
+    if(b&&m)b.addEventListener('click',function(){m.style.display=m.style.display==='none'?'block':'none'});
+  });
+})();
+// ---------- checklists ----------
+(function(){
+  document.querySelectorAll('.checklist li').forEach(function(li){
+    li.addEventListener('click',function(){li.classList.toggle('done')});
+  });
+})();
+// ---------- what-if generator ----------
+(function(){
+  var chips=document.querySelectorAll('.whatif-chip');
+  if(!chips.length)return;
+  var result=document.querySelector('[data-id="wResult"]');
+  var selA=null,selB=null;
+  var map={'w1':'روبوت','w2':'غابة','w3':'قرصان','w4':'الفضاء','w5':'قلعة','w6':'السايبربانك','w7':'كافيه','w8':'بحيرة','w9':'محطة فضائية','w10':'مدرسة','w11':'مكتبة'};
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var id=c.getAttribute('data-id');
+      var n=parseInt(id.slice(1),10);
+      var a=(n<=6);
+      if(a){selA=c;document.querySelectorAll('.whatif-chip').forEach(function(x){if(parseInt(x.getAttribute('data-id').slice(1),10)<=6)x.classList.remove('on')})}
+      else{selB=c;document.querySelectorAll('.whatif-chip').forEach(function(x){if(parseInt(x.getAttribute('data-id').slice(1),10)>6)x.classList.remove('on')})}
+      c.classList.add('on');
+      if(selA&&selB){
+        var A=map[selA.getAttribute('data-id')],B=map[selB.getAttribute('data-id')];
+        result.textContent='What if '+A+' في وسط '+B+'؟ 🚀 — ابدأ ارسم و شوف هيطلع إيه!';
+      }
+    });
+  });
+})();
+// ---------- step navigation (iteration) ----------
+(function(){
+  var prev=document.querySelector('[data-id="prevStep"]'),next=document.querySelector('[data-id="nextStep"]');
+  if(!prev||!next)return;
+  var cards=[].slice.call(document.querySelectorAll('.step-card'));
+  var count=document.querySelector('[data-id="stepCount"]');
+  var idx=0;
+  function show(){
+    cards.forEach(function(c,i){c.classList.toggle('active',i===idx)});
+    if(count)count.textContent=(idx+1)+' / '+cards.length;
+    prev.disabled=(idx===0);next.disabled=(idx===cards.length-1);
+  }
+  prev.addEventListener('click',function(){if(idx>0){idx--;show()}});
+  next.addEventListener('click',function(){if(idx<cards.length-1){idx++;show()}});
+  show();
+})();
+// ---------- fix first vs polish last ----------
+(function(){
+  var a=document.querySelector('[data-id="pickA"]'),b=document.querySelector('[data-id="pickB"]');
+  var show=document.querySelector('[data-id="showFix"]'),ans=document.querySelector('[data-id="fixAns"]');
+  if(a&&b){a.addEventListener('click',function(){ans.style.display='block'});b.addEventListener('click',function(){ans.style.display='block'})}
+  if(show&&ans)show.addEventListener('click',function(){ans.style.display='block'});
+})();
+// ---------- good feedback transform ----------
+(function(){
+  var b=document.querySelector('[data-id="showGoodFb"]'),g=document.querySelector('[data-id="goodFb"]');
+  if(b&&g)b.addEventListener('click',function(){g.style.display=g.style.display==='none'?'block':'none'});
+})();
+// ---------- journey ----------
+(function(){
+  var j=document.querySelector('[data-id="journey"]');
+  if(!j)return;
+  var steps=['References','Mood Board','Inspiration & Analysis','Theme & Mood','Inspiration Map (3 Concepts)','Brainstorming & Iteration','Thumbnails','Feedback (Give & Receive)','Peer Critique','Final Production','Refinement','Artist Statement','العرض النهائي 🎉'];
+  steps.forEach(function(s){
+    var n=document.createElement('div');
+    n.className='jnode';
+    n.innerHTML=s;
+    j.appendChild(n);
+    if(s!==steps[steps.length-1]){var a=document.createElement('span');a.className='step-arrow';a.textContent='▼';n.appendChild(a)}
+  });
+})();
+// ---------- final summary ----------
+(function(){
+  var f=window.__project?window.__project():{};
+  var els={theme:'finalTheme',char:'finalChar',env:'finalEnv',mood:'finalMood',colors:'finalColors',objects:'finalObjects',story:'finalStory'};
+  var labels={theme:'الـ Theme',char:'الشخصية',env:'المكان',mood:'الـ Mood',colors:'الألوان',objects:'الأشياء',story:'القصة'};
+  Object.keys(els).forEach(function(k){
+    var el=document.getElementById(els[k]);
+    if(el)el.textContent=labels[k]+': '+(f&&f[k]?f[k]:'—');
+  });
+})();
+})();
+</script>
+</body>
+</html>
