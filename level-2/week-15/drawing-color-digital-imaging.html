@@ -284,8 +284,124 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <button class="toggle-btn" data-id="revealModel1" style="margin-top:1rem">اعرض النموذج</button>
 <div class="obj-decomp" id="model1Reveal" style="margin-top:1rem;display:none">
 <p style="font-weight:700;margin-bottom:.5rem">النموذج:</p>
-<canvas data-id="modelCanvas1" width="500" height="300" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"></canvas>
-<p style="margin-top:.5rem;font-size:.88rem;color:var(--dim)">كرة + مكعب + أسطوانة + مخروط — كلهم بنفس اتجاه الضوء (من أعلى اليمين)، كل شكل فيه ٥ درجات واضحة، والظل الساقط لامس الأرض.</p>
+<svg viewBox="0 0 700 340" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:block" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="shadowBlur"><feGaussianBlur stdDeviation="8"/></filter>
+<filter id="softGlow"><feGaussianBlur stdDeviation="2"/></filter>
+<radialGradient id="sphereGrad" cx="35%" cy="30%" r="55%">
+<stop offset="0%" stop-color="#e8e8e8"/>
+<stop offset="25%" stop-color="#c0c0c0"/>
+<stop offset="55%" stop-color="#888"/>
+<stop offset="80%" stop-color="#555"/>
+<stop offset="100%" stop-color="#333"/>
+</radialGradient>
+<radialGradient id="sphereReflect" cx="65%" cy="75%" r="30%">
+<stop offset="0%" stop-color="rgba(180,180,180,.35)"/>
+<stop offset="100%" stop-color="rgba(180,180,180,0)"/>
+</radialGradient>
+<linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#d0d0d0"/>
+<stop offset="100%" stop-color="#b8b8b8"/>
+</linearGradient>
+<linearGradient id="cubeFront" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#999"/>
+<stop offset="100%" stop-color="#777"/>
+</linearGradient>
+<linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#666"/>
+<stop offset="100%" stop-color="#444"/>
+</linearGradient>
+<linearGradient id="cylBody" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#555"/>
+<stop offset="15%" stop-color="#888"/>
+<stop offset="40%" stop-color="#bbb"/>
+<stop offset="60%" stop-color="#aaa"/>
+<stop offset="85%" stop-color="#777"/>
+<stop offset="100%" stop-color="#444"/>
+</linearGradient>
+<radialGradient id="cylTop" cx="40%" cy="40%" r="55%">
+<stop offset="0%" stop-color="#ddd"/>
+<stop offset="50%" stop-color="#bbb"/>
+<stop offset="100%" stop-color="#999"/>
+</radialGradient>
+<linearGradient id="coneBody" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#555"/>
+<stop offset="20%" stop-color="#999"/>
+<stop offset="45%" stop-color="#ccc"/>
+<stop offset="65%" stop-color="#aaa"/>
+<stop offset="85%" stop-color="#777"/>
+<stop offset="100%" stop-color="#444"/>
+</linearGradient>
+</defs>
+
+<!-- Ground line hint -->
+<line x1="30" y1="270" x2="670" y2="270" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+<!-- === SHADOWS === -->
+<ellipse cx="130" cy="272" rx="52" ry="10" fill="rgba(0,0,0,.22)" filter="url(#shadowBlur)"/>
+<ellipse cx="310" cy="272" rx="58" ry="12" fill="rgba(0,0,0,.22)" filter="url(#shadowBlur)"/>
+<ellipse cx="480" cy="272" rx="48" ry="10" fill="rgba(0,0,0,.22)" filter="url(#shadowBlur)"/>
+<ellipse cx="620" cy="272" rx="42" ry="9" fill="rgba(0,0,0,.22)" filter="url(#shadowBlur)"/>
+
+<!-- === SPHERE === -->
+<circle cx="130" cy="180" r="68" fill="url(#sphereGrad)"/>
+<circle cx="130" cy="180" r="68" fill="url(#sphereReflect)"/>
+<!-- highlight -->
+<ellipse cx="108" cy="155" rx="18" ry="14" fill="rgba(255,255,255,.45)" filter="url(#softGlow)"/>
+<!-- subtle rim light -->
+<circle cx="130" cy="180" r="67" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+<text x="130" y="300" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="13" font-family="Cairo">كرة — Sphere</text>
+
+<!-- === CUBE === -->
+<!-- Front face -->
+<polygon points="258,175 318,175 318,245 258,245" fill="url(#cubeFront)"/>
+<!-- Top face -->
+<polygon points="258,175 288,150 348,150 318,175" fill="url(#cubeTop)"/>
+<!-- Right face -->
+<polygon points="318,175 348,150 348,220 318,245" fill="url(#cubeRight)"/>
+<!-- Edge highlights -->
+<line x1="258" y1="175" x2="318" y2="175" stroke="rgba(255,255,255,.15)" stroke-width="0.8"/>
+<line x1="318" y1="175" x2="348" y2="150" stroke="rgba(255,255,255,.12)" stroke-width="0.8"/>
+<line x1="258" y1="175" x2="288" y2="150" stroke="rgba(255,255,255,.18)" stroke-width="0.8"/>
+<text x="303" y="300" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="13" font-family="Cairo">مكعب — Cube</text>
+
+<!-- === CYLINDER === -->
+<!-- Body -->
+<rect x="443" y="165" width="74" height="100" fill="url(#cylBody)" rx="0"/>
+<!-- Top ellipse -->
+<ellipse cx="480" cy="165" rx="37" ry="14" fill="url(#cylTop)"/>
+<!-- Bottom ellipse (shading only) -->
+<ellipse cx="480" cy="265" rx="37" ry="14" fill="#444" opacity=".5"/>
+<!-- Subtle side shading lines -->
+<line x1="443" y1="165" x2="443" y2="265" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+<line x1="517" y1="165" x2="517" y2="265" stroke="rgba(0,0,0,.25)" stroke-width="1.5"/>
+<!-- Top highlight -->
+<ellipse cx="472" cy="162" rx="16" ry="6" fill="rgba(255,255,255,.3)" filter="url(#softGlow)"/>
+<text x="480" y="300" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="13" font-family="Cairo">أسطوانة — Cylinder</text>
+
+<!-- === CONE === -->
+<!-- Body -->
+<polygon points="620,130 578,265 662,265" fill="url(#coneBody)"/>
+<!-- Highlight edge -->
+<line x1="620" y1="130" x2="595" y2="265" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+<!-- Dark edge -->
+<line x1="620" y1="130" x2="648" y2="265" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
+<!-- Base ellipse -->
+<ellipse cx="620" cy="265" rx="42" ry="12" fill="#555" opacity=".6"/>
+<!-- Apex highlight -->
+<circle cx="620" cy="132" r="4" fill="rgba(255,255,255,.5)" filter="url(#softGlow)"/>
+<text x="620" y="300" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="13" font-family="Cairo">مخروط — Cone</text>
+
+<!-- Light direction indicator -->
+<defs>
+<marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+<polygon points="0 0, 8 3, 0 6" fill="rgba(255,215,0,.5)"/>
+</marker>
+</defs>
+<line x1="55" y1="55" x2="95" y2="85" stroke="rgba(255,215,0,.4)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<text x="40" y="50" fill="rgba(255,215,0,.5)" font-size="11" font-family="Cairo">مصدر الضوء ☀</text>
+</svg>
+<p style="margin-top:.5rem;font-size:.88rem;color:var(--dim)">كرة + مكعب + أسطوانة + مخروط — كلهم بنفس اتجاه الضوء (من أعلى اليسار)، كل شكل فيه ٥ درجات واضحة، والظل الساقط لامس الأرض.</p>
 </div></div></section>
 <section class="section" id="sec-s4" data-accent="var(--s6)">
 <div class="section-badge"><span class="num" style="background:var(--s6)">4</span> المنظور</div>
@@ -584,9 +700,7 @@ var zoomSlider=document.querySelector('[data-id="zoomSlider"]');if(zoomSlider)zo
 document.querySelector('[data-id="revealAnswers"]').onclick=function(){document.querySelectorAll('.match-ans').forEach(function(el){el.classList.add('show')})};
 document.querySelectorAll('#checklist1 li').forEach(function(li){li.addEventListener('click',function(){this.classList.toggle('done')})});
 document.querySelector('[data-id="revealModel1"]').onclick=function(){var el=document.getElementById('model1Reveal');if(el)el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'اعرض النموذج':'أخفي النموذج'};
-var mc1=document.querySelector('[data-id="modelCanvas1"]');
-if(mc1){var mctx=mc1.getContext('2d');mctx.fillStyle='#111638';mctx.fillRect(0,0,500,300);var shapes=[{x:80,y:150,r:40,type:'sphere'},{x:200,y:150,r:35,type:'cube'},{x:320,y:150,r:35,type:'cylinder'},{x:430,y:150,r:30,type:'cone'}];
-shapes.forEach(function(s){mctx.fillStyle='#555';if(s.type==='sphere'){mctx.beginPath();mctx.arc(s.x,s.y,s.r,0,Math.PI*2);mctx.fill();var g=mctx.createRadialGradient(s.x-10,s.y-10,5,s.x,s.y,s.r);g.addColorStop(0,'#fff');g.addColorStop(.3,'#ccc');g.addColorStop(.7,'#666');g.addColorStop(1,'#222');mctx.fillStyle=g;mctx.beginPath();mctx.arc(s.x,s.y,s.r,0,Math.PI*2);mctx.fill();mctx.fillStyle='rgba(255,255,255,.3)';mctx.beginPath();mctx.arc(s.x-10,s.y-10,5,0,Math.PI*2);mctx.fill();mctx.fillStyle='rgba(0,0,0,.4)';mctx.fillRect(s.x-2,s.y+s.r+5,s.r*2+10,6)}else if(s.type==='cube'){mctx.fillStyle='#888';mctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);mctx.fillStyle='#666';mctx.fillRect(s.x+s.r,s.y-s.r+5,10,s.r*2-5);mctx.fillStyle='#aaa';mctx.fillRect(s.x-s.r,s.y-s.r-5,s.r*2,8);mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x+5,s.y+s.r+5,s.r*2,6)}else if(s.type==='cylinder'){mctx.fillStyle='#777';mctx.fillRect(s.x-s.r,s.y-s.r/2,s.r*2,s.r);mctx.beginPath();mctx.ellipse(s.x,s.y-s.r/2,s.r,s.r/4,0,0,Math.PI*2);mctx.fillStyle='#999';mctx.fill();mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x+5,s.y+s.r/2+5,s.r*2,6)}else{mctx.beginPath();mctx.moveTo(s.x,s.y-s.r);mctx.lineTo(s.x+s.r,s.y+s.r);mctx.lineTo(s.x-s.r,s.y+s.r);mctx.closePath();var g2=mctx.createLinearGradient(s.x-s.r,s.y,s.x+s.r,s.y);g2.addColorStop(0,'#555');g2.addColorStop(.5,'#999');g2.addColorStop(1,'#555');mctx.fillStyle=g2;mctx.fill();mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x-5,s.y+s.r+5,s.r+10,6)}mctx.fillStyle='rgba(255,255,255,.6)';mctx.font='11px Cairo';mctx.textAlign='center';mctx.fillText(s.type,s.x,s.y+s.r+25)})}
+
 var roomCanvas=document.querySelector('[data-id="roomCanvas"]');var roomFurniture=[];var vanishingX=350,vanishingY=150;var roomPlaced=false;var currentFurniture='bed';
 if(roomCanvas){var rctx=roomCanvas.getContext('2d');function drawRoom(){rctx.clearRect(0,0,700,450);rctx.fillStyle='rgba(255,255,255,.03)';rctx.fillRect(0,0,700,450);rctx.strokeStyle='rgba(255,255,255,.2)';rctx.lineWidth=1;rctx.setLineDash([5,5]);rctx.beginPath();rctx.moveTo(0,vanishingY);rctx.lineTo(700,vanishingY);rctx.stroke();rctx.setLineDash([]);rctx.fillStyle='#EF4444';rctx.beginPath();rctx.arc(vanishingX,vanishingY,6,0,Math.PI*2);rctx.fill();rctx.fillStyle='rgba(255,255,255,.5)';rctx.font='11px Cairo';rctx.textAlign='center';rctx.fillText('Vanishing Point',vanishingX,vanishingY-12);if(roomPlaced){rctx.strokeStyle='rgba(255,255,255,.12)';rctx.lineWidth=1;rctx.beginPath();rctx.moveTo(100,100);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.beginPath();rctx.moveTo(600,100);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.beginPath();rctx.moveTo(100,350);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.beginPath();rctx.moveTo(600,350);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.strokeRect(100,100,500,250)}roomFurniture.forEach(function(f){rctx.fillStyle=f.color;rctx.fillRect(f.x,f.y,f.w,f.h);rctx.strokeStyle='rgba(255,255,255,.3)';rctx.lineWidth=1;rctx.beginPath();rctx.moveTo(f.x+f.w,f.y);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.beginPath();rctx.moveTo(f.x,f.y);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();rctx.fillStyle='rgba(255,255,255,.6)';rctx.font='10px Cairo';rctx.textAlign='center';rctx.fillText(f.label,f.x+f.w/2,f.y+f.h+12)})}
 roomCanvas.addEventListener('click',function(e){var rect=roomCanvas.getBoundingClientRect();var scaleX=roomCanvas.width/rect.width;var scaleY=roomCanvas.height/rect.height;var x=(e.clientX-rect.left)*scaleX;var y=(e.clientY-rect.top)*scaleY;if(!roomPlaced){vanishingX=x;vanishingY=y;roomPlaced=true;drawRoom();return}var colors={bed:'#06B6D4',desk:'#F59E0B',shelf:'#8B5CF6'};var labels={bed:'Bed',desk:'Desk',shelf:'Shelf'};var sizes={bed:{w:80,h:40},desk:{w:60,h:35},shelf:{w:50,h:50}};var s=sizes[currentFurniture];roomFurniture.push({x:x-s.w/2,y:y-s.h/2,w:s.w,h:s.h,color:colors[currentFurniture],label:labels[currentFurniture]});drawRoom()})}
