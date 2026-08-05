@@ -5,7 +5,9 @@ Build a single self-contained HTML file for a teacher (Bilal) to present a Digit
 
 ## Hard requirements — deliverable format
 - ONE `.html` file. All CSS/JS inline. Google Fonts link only external dependency.
-- Two logo images provided separately (`bilal-icon.webp`, `bilal-wordmark.webp`, solid `#193cff` background baked in). Convert to base64, embed as `<img>` inside a small rounded badge.
+- Two logo images provided separately (`bilal-icon.webp`, `bilal-wordmark.webp`, solid `#193cff` background baked in). Convert to base64, embed in header and footer.
+  - Header: `<div class="nav-logo"><img src="data:image/webp;base64,..." alt="Logo" width="36" height="36"></div>` — CSS must match exactly: `.nav-logo img { width: 36px; height: 36px; border-radius: 50%; }`
+  - Footer: `<img class="footer-logo" src="data:image/webp;base64,..." alt="Logo" width="40" height="40">` — CSS must match exactly: `.footer-logo { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 12px; }`
 - Filename: `drawing-color-digital-imaging.html`.
 
 ## Visual design system — Dark Animated Theme (reuse exactly)
@@ -24,13 +26,17 @@ Animated radial-gradient background + ~30 floating particles. Cards rounded (24p
 `dir="rtl"`, UI in فصحى, explanations in Egyptian Arabic matching the source's warm, direct, teacher-narrating tone. English art terms (Hue, Vanishing Point, Raster, etc.) wrapped `<span dir="ltr">`, "الـ" prefix rule at line/heading/list/table-cell start.
 
 ## Mandatory SVG / interactivity rules
-No native SVG `<text>` (self-check via grep before finishing each section). Any diagram with 4+ connections built from a JS data lookup, never hand-typed coordinates. Stable `data-id` + `DOMContentLoaded` binding. Checkpoint after each section. Staged build: skeleton → each section → final review.
+No native SVG `<text>` (self-check via grep before finishing each section). Any diagram with 4+ connections built from a JS data lookup, never hand-typed coordinates. All interactive elements must use `data-id` attributes + `id` on the element + `document.getElementById(...).onclick` inside `DOMContentLoaded` (do NOT use querySelector with `data-id` — it fails). Every interactive section must include a "إعادة تشغيل" replay button styled as an outline pill to reset the animation/interaction to its initial state. Checkpoint after each section. Staged build: skeleton → each section → final review.
 
 ## Quiz behavior
 Hidden by default, revealed by click. Immediate color feedback (green/red) + short explanation. Skip button always available.
 
 ## Activity behavior — IMPORTANT
-For the two major labeled Activities (Shading Challenge, Mood Palette Challenge): present the full task up front, let students work through it themselves, then a single "اعرض النموذج" button reveals the model answer. The smaller "mini activities" embedded within sections below (Object-into-Forms, One-Point Room practice, File Format Match) are lighter-touch — build them as the section's main hands-on interaction rather than separate quiz-style items, each still ending with a way to reveal the model answer/solution.
+For the two major labeled Activities (Shading Challenge, Mood Palette Challenge): present the full task up front, let students work through it themselves, then a single "اعرض النموذج" button reveals the model answer. The smaller "mini activities" embedded within sections below (Object-into-Forms, One-Point Room practice, File Format Match) are lighter-touch — build them as the section's main hands-on interaction rather than separate quiz-style items, each still ending with a single "اعرض الإجابات" button that reveals all answers at once (NOT click-per-question reveal).
+
+## Logo classes (must match exactly between CSS and HTML)
+- Header: `<div class="nav-logo">` wrapping `<img>` — CSS: `.nav-logo { display: inline-block; margin-left: 12px; vertical-align: middle; }` + `.nav-logo img { width: 36px; height: 36px; border-radius: 50%; }`
+- Footer: `<img class="footer-logo" ...>` — CSS: `.footer-logo { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 12px; }`
 
 ---
 

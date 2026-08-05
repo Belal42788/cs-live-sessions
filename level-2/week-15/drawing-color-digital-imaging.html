@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ø§Ù„Ø±Ø³Ù… ÙˆØ§Ù„Ø£Ù„ÙˆØ§Ù† ÙˆØ§Ù„ØªØµÙˆÙŠØ± Ø§Ù„Ø±Ù‚Ù…ÙŠ â€” CS Live Sessions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;--card:#111638;--card-hover:#1a2050;--text:#fff;--dim:#8892b0;--success:#00ff88;--danger:#ff4757;--warn:#ffd700;--s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;overflow-x:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem}
+.hero-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:8px 24px;font-size:.85rem;color:var(--dim);margin-bottom:1.5rem;letter-spacing:1px}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.3;margin-bottom:1rem}
+.hero h1 .hl{background:linear-gradient(135deg,var(--s1),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:1.15rem;color:var(--dim);max-width:700px;margin:0 auto 2rem}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 24px;display:flex;align-items:center;gap:12px;transform:translateY(-100%);transition:transform .3s;background:rgba(10,14,39,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav.visible{transform:translateY(0)}
+.nav-logo{display:inline-block;margin-left:12px;vertical-align:middle}
+.nav-logo img{width:36px;height:36px;border-radius:50%}
+.nav-pills{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.nav-pills a{color:var(--dim);text-decoration:none;font-size:.75rem;padding:4px 12px;border-radius:999px;transition:all .2s;white-space:nowrap}
+.nav-pills a:hover,.nav-pills a.active{background:rgba(255,255,255,.1);color:var(--text)}
+.main-content{max-width:900px;margin:0 auto;padding:2rem 24px}
+.section{margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.section-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:6px 16px;font-size:.8rem;color:var(--dim);margin-bottom:1rem}
+.section-badge .num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff}
+.section h2{font-size:1.8rem;font-weight:900;margin-bottom:1rem;line-height:1.4}
+.section h3{font-size:1.2rem;font-weight:700;margin:1.5rem 0 .75rem;color:var(--accent)}
+.card{background:var(--card);border-radius:24px;padding:2rem;margin:1.5rem 0;border:1px solid rgba(255,255,255,.06);transition:all .3s}
+.card:hover{background:var(--card-hover);border-color:rgba(255,255,255,.12);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.card-inner{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:1.25rem;margin:1rem 0}
+.tip-box{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);border-radius:16px;padding:1.25rem;margin:1.5rem 0;font-size:.92rem}
+.tip-box::before{content:"ðŸ’¡";margin-left:8px}
+.mistakes-box{background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.25);border-radius:16px;padding:1.25rem;margin:1.5rem 0}
+.mistakes-box::before{content:"âš ï¸ Ø£Ø®Ø·Ø§Ø¡ Ø´Ø§Ø¦Ø¹Ø©";display:block;font-weight:700;color:var(--danger);margin-bottom:.5rem}
+.quiz-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;margin:1.5rem 0}
+.quiz-box h4{font-size:1rem;margin-bottom:1rem;color:var(--warn)}
+.quiz-q{margin-bottom:1rem}
+.quiz-q p{font-weight:600;margin-bottom:.75rem}
+.quiz-opts{display:flex;flex-direction:column;gap:.5rem}
+.quiz-opts button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:10px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.9rem;text-align:right;transition:all .2s}
+.quiz-opts button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.quiz-opts button.correct{background:rgba(0,255,136,.15);border-color:var(--success);color:var(--success)}
+.quiz-opts button.wrong{background:rgba(255,71,87,.15);border-color:var(--danger);color:var(--danger)}
+.quiz-opts button:disabled{opacity:.6;cursor:default}
+.quiz-fb{margin-top:.75rem;padding:.75rem;border-radius:10px;font-size:.88rem;display:none}
+.quiz-skip{margin-top:.5rem;background:none;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:6px 14px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.8rem}
+.replay-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:8px 18px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-top:1rem;transition:all .2s}
+.replay-btn:hover{border-color:var(--accent);color:var(--accent)}
+.activity-card{border:2px dashed rgba(139,92,246,.4);background:rgba(139,92,246,.06);border-radius:24px;padding:2rem;margin:1.5rem 0}
+.activity-card h3{color:var(--s3)}
+.checklist{list-style:none;margin:1rem 0}
+.checklist li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;display:flex;align-items:center;gap:10px}
+.checklist li .check{width:22px;height:22px;border:2px solid rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;flex-shrink:0}
+.checklist li.done .check{background:var(--success);border-color:var(--success);color:#000}
+.closing{text-align:center;padding:4rem 0}
+.closing h2{font-size:2rem;margin-bottom:2rem}
+.footer{text-align:center;padding:3rem 0;border-top:1px solid rgba(255,255,255,.06)}
+.footer-logo{width:40px;height:40px;border-radius:50%;margin-bottom:12px}
+.footer p{color:var(--dim);font-size:.9rem}
+.warm-canvas{display:inline-block;width:100px;height:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:crosshair;margin:4px}
+.warm-canvas:hover{border-color:var(--accent)}
+.canvas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin:1rem 0}
+.canvas-label{text-align:center;font-size:.8rem;color:var(--dim);margin-top:.5rem}
+.slider-row{display:flex;align-items:center;gap:12px;margin:8px 0}
+.slider-row label{min-width:100px;font-size:.85rem;color:var(--dim)}
+.slider-row input[type=range]{flex:1;accent-color:var(--accent)}
+.swatch{width:80px;height:80px;border-radius:12px;border:2px solid rgba(255,255,255,.12);display:inline-block;margin:4px}
+.toggle-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:8px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s}
+.toggle-btn:hover{background:rgba(255,255,255,.1)}
+.toggle-btn.active{background:rgba(0,212,170,.15);border-color:var(--accent);color:var(--accent)}
+.obj-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin:1rem 0}
+.obj-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .3s}
+.obj-card:hover{background:rgba(139,92,246,.1);border-color:var(--s3);transform:translateY(-3px)}
+.obj-card.active{background:rgba(139,92,246,.15);border-color:var(--s3)}
+.obj-icon{font-size:2.5rem;margin-bottom:.5rem}
+.obj-name{font-size:.9rem;font-weight:600}
+.obj-decomp{margin-top:1rem;padding:1rem;background:rgba(139,92,246,.08);border-radius:12px;display:none;font-size:.88rem;line-height:1.7}
+.obj-card.active .obj-decomp{display:block}
+.light-sphere{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 60% 35%,#fff,#ccc 30%,#888 60%,#333 85%,#111);position:relative;margin:2rem auto;transition:background .3s}
+.light-dot{width:24px;height:24px;background:var(--warn);border-radius:50%;position:absolute;cursor:grab;box-shadow:0 0 20px rgba(255,215,0,.6);z-index:2}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.legend span{font-size:.8rem;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.color-wheel-wrap{position:relative;width:260px;height:260px;margin:1.5rem auto}
+.color-wheel{width:260px;height:260px;border-radius:50%;position:relative}
+.harmony-dot{width:16px;height:16px;border-radius:50%;border:3px solid #fff;position:absolute;transform:translate(-50%,-50%);box-shadow:0 0 6px rgba(0,0,0,.5);z-index:2;cursor:pointer;transition:all .3s}
+.piano-connector{position:absolute;pointer-events:none;z-index:1}
+.raster-grid{display:inline-grid;gap:1px;margin:1rem auto}
+.raster-cell{width:100%;aspect-ratio:1;border:1px solid rgba(255,255,255,.03)}
+.vec-shape{display:flex;align-items:center;justify-content:center}
+.zoom-slider{width:100%;accent-color:var(--accent);margin:1rem 0}
+.format-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+.format-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.25rem;text-align:center;cursor:pointer;transition:all .3s}
+.format-card:hover{background:rgba(236,72,153,.1);border-color:var(--s5)}
+.format-card.selected{background:rgba(236,72,153,.15);border-color:var(--s5)}
+.format-card .fmt-icon{font-size:1.8rem;margin-bottom:.5rem}
+.format-card .fmt-name{font-weight:700;font-size:1rem}
+.format-card .fmt-desc{font-size:.78rem;color:var(--dim);margin-top:.25rem}
+.match-q{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1rem;margin:.75rem 0}
+.match-q p{font-weight:600;margin-bottom:.5rem}
+.match-q .match-ans{display:none;margin-top:.5rem;padding:.5rem;background:rgba(0,255,136,.08);border-radius:8px;font-size:.88rem}
+.match-q .match-ans.show{display:block}
+.palette-strip{display:flex;gap:4px;height:48px;border-radius:12px;overflow:hidden;margin:1rem 0;border:1px solid rgba(255,255,255,.1)}
+.palette-strip div{flex:1;transition:background .3s}
+.room-canvas{width:100%;max-width:600px;margin:1.5rem auto;display:block}
+.step-chain{display:flex;flex-direction:column;align-items:center;gap:0;margin:2rem 0}
+.step-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem 1.5rem;text-align:center;width:90%;max-width:400px;position:relative;opacity:0;transform:translateY(20px);transition:all .5s}
+.step-item.visible{opacity:1;transform:translateY(0)}
+.step-arrow{font-size:1.5rem;color:var(--accent);margin:4px 0}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+<div class="nav-logo"><img src="" alt="Logo" width="36" height="36"></div>
+<div class="nav-pills" id="navPills"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="sec-hero">
+<div class="hero-badge">Drawing & Design Fundamentals</div>
+<h1>Ø§Ù„Ø±Ø³Ù… ÙˆØ§Ù„Ø£Ù„ÙˆØ§Ù†<br><span class="hl">ÙˆØ§Ù„ØªØµÙˆÙŠØ± Ø§Ù„Ø±Ù‚Ù…ÙŠ</span></h1>
+<p class="subtitle">Ù…Ù† Ø®Ø· ÙˆØ§Ø«Ù‚ ÙˆØ§Ø­Ø¯ØŒ Ù„ØµÙˆØ±Ø© ÙÙŠÙ‡Ø§ Ø¹Ù…Ù‚ØŒ Ø¸Ù„ØŒ ÙˆÙ„ÙˆÙ† Ù…Ù‚ØµÙˆØ¯.</p>
+<div class="step-chain" id="heroChain">
+<div class="step-item" data-id="step1"><span>Ø®Ø· ÙˆØ§Ø«Ù‚</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step2"><span>Ù…Ù„Ø§Ø­Ø¸Ø© ÙˆØ¨Ù†Ø§Ø¡</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step3"><span>ØªÙ†Ø§Ø³Ø¨ ÙˆÙ…Ø³Ø§Ø­Ø© Ø³Ø§Ù„Ø¨Ø©</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step4"><span>Ø£Ø´ÙƒØ§Ù„ Ø£Ø³Ø§Ø³ÙŠØ©</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step5"><span>Ø¥Ø¶Ø§Ø¡Ø© ÙˆØ¸Ù„</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step6"><span>Ù…Ù†Ø¸ÙˆØ± ÙˆØ¹Ù…Ù‚</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step7"><span>Ù„ÙˆÙ† ÙˆØªÙ†Ø§ØºÙ…</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="step8"><span>ØµÙˆØ±Ø© Ø±Ù‚Ù…ÙŠØ© Ø¬Ø§Ù‡Ø²Ø©</span></div>
+</div>
+</section>
+
+<div class="main-content">
+
+<!-- INTRO -->
+<section class="section" id="sec-intro" data-accent="var(--s1)">
+<div class="section-badge"><span class="num" style="background:var(--s1)">T</span> Ù…Ù‚Ø¯Ù…Ø©</div>
+<h2>Ø§Ù„Ø±Ø³Ù… Ø¨Ø«Ù‚Ø©: Ø§Ù„ØªØ³Ø®ÙŠÙ† ÙˆØ§Ù„Ù…Ù„Ø§Ø­Ø¸Ø©</h2>
+<p>Ù‚Ø¨Ù„ Ù…Ø§ ØªÙ…Ø³Ùƒ Ø§Ù„Ù‚Ù„Ù…ØŒ Ù„Ø§Ø²Ù… ØªÙÙ‡Ù… Ø­Ø§Ø¬Ø© Ù…Ù‡Ù…Ø©: Ø§Ù„Ø®Ø· Ø§Ù„ÙˆØ§Ø«Ù‚ Ù…Ø´ Ø¨ÙŠÙŠØ¬ÙŠ Ù…Ù† Ø§Ù„Ø±Ø³Øº â€” Ø¨ÙŠÙŠØ¬ÙŠ Ù…Ù† Ø§Ù„Ø¯Ø±Ø§Ø¹ ÙƒÙ„Ù‡. Ø§Ù„Ø­Ø±ÙƒØ© Ø§Ù„Ù‡Ø§Ø¯ÙŠØ© Ø§Ù„ÙƒØ§Ù…Ù„Ø© Ù‡ÙŠ Ø§Ù„Ù„ÙŠ Ø¨ØªØ¹Ø·ÙŠ Ø§Ù„Ø®Ø· Ø§Ù„Ø«Ø¨Ø§Øª. Ù…Ø´ Ù„Ø§Ø²Ù… ÙŠÙƒÙˆÙ† Ù…Ø¸Ø¨ÙˆØ· Ù…Ù† Ø£ÙˆÙ„ Ù…Ø±Ø© â€” Ù„Ø§Ø²Ù… ÙŠÙƒÙˆÙ† ÙˆØ§Ø«Ù‚.</p>
+<h3>Ø§Ù„ØªØ³Ø®ÙŠÙ† Ù‚Ø¨Ù„ Ø§Ù„Ø±Ø³Ù…</h3>
+<p>Ø²ÙŠ Ù…Ø§ Ø£ÙŠ Ø±ÙŠØ§Ø¶ÙŠ Ø¨ÙŠØ³Ø®Ù† Ù‚Ø¨Ù„ Ø§Ù„Ù…Ø§ØªØ´ØŒ Ø§Ù„Ø±Ø³Ø§Ù… Ù„Ø§Ø²Ù… ÙŠØ³Ø®Ù† Ø¥ÙŠØ¯Ù‡:</p>
+<div class="canvas-grid">
+<div><canvas class="warm-canvas" data-id="warm1" width="200" height="200"></canvas><div class="canvas-label">Ø®Ø·ÙˆØ· Ù…Ø³ØªÙ‚ÙŠÙ…Ø©</div></div>
+<div><canvas class="warm-canvas" data-id="warm2" width="200" height="200"></canvas><div class="canvas-label">Ù…Ù†Ø­Ù†ÙŠØ§Øª</div></div>
+<div><canvas class="warm-canvas" data-id="warm3" width="200" height="200"></canvas><div class="canvas-label">Ø¯ÙˆØ§Ø¦Ø±</div></div>
+<div><canvas class="warm-canvas" data-id="warm4" width="200" height="200"></canvas><div class="canvas-label">Ø£Ù‡Ù„ÙŠØ¬</div></div>
+</div>
+<div class="tip-box">Ø§Ø±Ø³Ù… Ø¨Ø³Ø±Ø¹Ø© ÙˆØ§Ø«Ù‚Ø© â€” Ø§Ù„Ø¯Ù‚Ø© Ù…Ø´ Ø§Ù„Ù…Ø·Ù„ÙˆØ¨ Ù‡Ù†Ø§ØŒ Ø§Ù„Ù…Ø·Ù„ÙˆØ¨ Ù‡Ùˆ Ø«Ø¨Ø§Øª Ø§Ù„Ø®Ø·à¹à¸¥à¸°à¸„à¸§à¸²à¸¡è‡ªä¿¡ ÙÙŠ Ø§Ù„Ø­Ø±ÙƒØ©.</div>
+<h3>Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© Ù‚Ø¨Ù„ Ø§Ù„Ø±Ø³Ù…</h3>
+<p>Ù‚Ø¨Ù„ Ù…Ø§ ØªØ¨Ø¯Ø£ØŒ Ø§Ø³Ø£Ù„ Ù†ÙØ³Ùƒ: Ø§Ù„Ø´ÙƒÙ„ Ø¯Ù‡ Ø¹Ø¨Ø§Ø±Ø© Ø¹Ù† Ø¥ÙŠÙ‡ ÙÙŠ Ø§Ù„Ø­Ù‚ÙŠÙ‚Ø©ØŸ Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© = <span dir="ltr">Cylinder</span>ØŒ Ø§Ù„ÙƒØªØ§Ø¨ = <span dir="ltr">Box</span>. Ù‚Ø§Ø±Ù† Ø§Ù„Ø§Ø±ØªÙØ§Ø¹ ÙˆØ§Ù„Ø¹Ø±Ø¶ ÙˆØ§Ù„Ø²ÙˆØ§ÙŠØ§ ÙˆØ§Ù„Ù…Ø³Ø§ÙØ§Øª Ø¨Ø§Ù„Ø¹ÙŠÙ† Ù‚Ø¨Ù„ Ù…Ø§ ØªÙ…Ø³Ùƒ Ø§Ù„Ù…Ø³Ø·Ø±Ø©.</p>
+<h3>Ø§Ù„Ø­Ø±ÙƒØ§Øª Ø§Ù„ÙƒØ§Ù…Ù„Ø© Ù…Ù‚Ø§Ø¨Ù„ Ø§Ù„Ø±Ø³Øº</h3>
+<div class="card">
+<div style="display:flex;gap:1rem;flex-wrap:wrap">
+<div style="flex:1;min-width:200px">
+<div class="card-inner">
+<p style="font-weight:700;color:var(--danger);margin-bottom:.5rem">âŒ Ø§Ù„Ø±Ø³Øº Ø¨Ø³</p>
+<canvas data-id="lineDemo1" width="300" height="80" style="width:100%;border-radius:8px;background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.2)"></canvas>
+<p style="font-size:.82rem;color:var(--dim);margin-top:.5rem">Ø®Ø· Ù…ØªØ¹Ø±Ø¬ ÙˆÙ…Ø´ Ø«Ø§Ø¨Øª â€” Ø§Ù„Ø±Ø³Øº Ù„ÙˆØ­Ø¯Ù‡ Ù…Ø´ Ø¨ÙŠØ³ÙŠØ·Ø±</p>
+</div>
+</div>
+<div style="flex:1;min-width:200px">
+<div class="card-inner">
+<p style="font-weight:700;color:var(--success);margin-bottom:.5rem">âœ… Ø§Ù„Ø¯Ø±Ø§Ø¹ ÙƒÙ„Ù‡</p>
+<canvas data-id="lineDemo2" width="300" height="80" style="width:100%;border-radius:8px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2)"></canvas>
+<p style="font-size:.82rem;color:var(--dim);margin-top:.5rem">Ø®Ø· Ø£Ù†Ø¹Ù… ÙˆØ£ÙˆØ¶Ø­ â€” Ø§Ù„Ø­Ø±ÙƒØ© Ù…Ù† Ø§Ù„ÙƒØªÙ</p>
+</div>
+</div>
+</div>
+</div>
+<button class="replay-btn" data-id="replayIntro">ðŸ”„ Ø¥Ø¹Ø§Ø¯Ø© ØªØ´ØºÙŠÙ„</button>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø±Ø³Ù… ÙƒÙ„ Ø´ÙŠØ¡ Ø¨Ø§Ù„Ø±Ø³Øº Ø¨Ø¯Ù„ Ø§Ù„Ø¯Ø±Ø§Ø¹ â€” Ø§Ù„Ø®Ø· Ù‡Ø§ ÙŠÙƒÙˆÙ† Ù…ØªØ¹Ø±Ø¬ ÙˆØ¶Ø¹ÙŠÙ</li>
+<li style="margin-bottom:.5rem">â€¢ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ù„Ø¯Ù‚Ø© Ù…Ù† Ø£ÙˆÙ„ Ù…Ø±Ø© Ø¨Ø¯Ù„ Ø§Ù„Ø«Ø¨Ø§Øª â€” Ø§Ù„Ø®Ø· Ø§Ù„ÙˆØ§Ø«Ù‚ Ø£Ù‡Ù… Ù…Ù† Ø§Ù„Ø®Ø· Ø§Ù„Ù…Ø¸Ø¨ÙˆØ·</li>
+<li style="margin-bottom:.5rem">â€¢ Ø§Ù„ØªØ®Ø·ÙŠ Ø¨Ø¯ÙˆÙ† Ù…Ù„Ø§Ø­Ø¸Ø© â€” "Ù†Ù„Ø§Ø­Ø¸ Ù‚Ø¨Ù„ Ù…Ø§ Ù†Ø­Ø±Ùƒ Ø§Ù„Ù‚Ù„Ù…"</li>
+<li>â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ù…Ø³Ø·Ø±Ø© Ø£Ùˆ Ø§Ù„Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø±Ù‚Ù…ÙŠØ© ÙƒÙ…Ù„Ø§Ø° Ø¢Ù…Ù† Ø¨Ø¯Ù„ Ø§Ù„ØªØ¯Ø±ÙŠØ¨ Ø¨Ø§Ù„ÙŠØ¯</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 1: Proportions & Negative Space -->
+<section class="section" id="sec-s1" data-accent="var(--s2)">
+<div class="section-badge"><span class="num" style="background:var(--s2)">1</span> Ø§Ù„ØªÙ†Ø§Ø³Ø¨ ÙˆØ§Ù„Ù…Ø³Ø§Ø­Ø© Ø§Ù„Ø³Ø§Ù„Ø¨Ø©</div>
+<h2>Proportions & Negative Space</h2>
+<p>Ø§Ù„ØªÙ†Ø§Ø³Ø¨ Ù‡Ùˆ Ø§Ù„Ø¹Ù„Ø§Ù‚Ø© Ø¨ÙŠÙ† Ø£Ø­Ø¬Ø§Ù… Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡ â€” Ù‚Ø§Ø±Ù† Ø¨Ø§Ù„Ø¹ÙŠÙ† Ù…Ø´ Ø¨Ø§Ù„Ù…Ø³Ø·Ø±Ø©. "Ø§Ù„ÙƒØªØ§Ø¨ Ø¹Ø±Ø¶Ù‡ Ø¶Ø¹Ù Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ©". ÙˆØ§Ù„Ù…Ø³Ø§Ø­Ø© Ø§Ù„Ø³Ø§Ù„Ø¨Ø© Ù‡ÙŠ Ø§Ù„ÙØ±Ø§Øº Ø­ÙˆØ§Ù„ÙŠÙ† Ø§Ù„Ø¬Ø³Ù… â€” Ø£Ø¯Ø§Ø© Ø³Ø±ÙŠØ¹Ø© Ù„Ø§ÙƒØªØ´Ø§Ù Ø£Ø®Ø·Ø§Ø¡ Ø§Ù„Ø±Ø³Ù….</p>
+<div class="card">
+<h3>Ø¬Ø±Ù‘Ø¨: ØºÙŠÙ‘Ø± Ø§Ù„ØªÙ†Ø§Ø³Ø¨</h3>
+<div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start">
+<div style="flex:1;min-width:250px">
+<div class="slider-row">
+<label>Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ©</label>
+<input type="range" min="30" max="150" value="80" data-id="cupW">
+</div>
+<div class="slider-row">
+<label>Ø¹Ø±Ø¶ Ø§Ù„ÙƒØªØ§Ø¨</label>
+<input type="range" min="60" max="250" value="160" data-id="bookW">
+</div>
+<canvas data-id="propCanvas" width="400" height="250" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"></canvas>
+</div>
+<div style="flex:0 0 200px">
+<div class="toggle-btn" data-id="toggleNeg">Ø¥Ø¸Ù‡Ø§Ø± Ø§Ù„Ù…Ø³Ø§Ø­Ø© Ø§Ù„Ø³Ø§Ù„Ø¨Ø©</div>
+<canvas data-id="negCanvas" width="400" height="250" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-top:.5rem"></canvas>
+</div>
+</div>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ</h4>
+<div class="quiz-q" data-id="q1">
+<p>Ù„Ùˆ Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© Ø¹Ø±Ø¶Ù‡Ø§ Ù¨ Ø³Ù… ÙˆØ§Ù„ÙƒØªØ§Ø¨ Ø¹Ø±Ø¶Ù‡ Ù¡Ù¥ Ø³Ù…ØŒ Ø£ÙŠ Ù…Ù† Ø§Ù„ÙƒÙ„Ø§Ù… Ø¯Ù‡ ØµØ­ÙŠØ­ØŸ</p>
+<div class="quiz-opts" data-g="g1">
+<button data-a="0">Ø§Ù„ÙƒØªØ§Ø¨ ØªÙ‚Ø±ÙŠØ¨Ù‹Ø§ Ø¶Ø¹Ù Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© â€” Ø§Ù„ØªÙ†Ø§Ø³Ø¨ Ù…Ø¸Ø¨ÙˆØ·</button>
+<button data-a="1">Ø§Ù„ÙƒØªØ§Ø¨ Ø£ÙƒØªØ± Ù…Ù† triple Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© â€” Ù„Ø§Ø²Ù… Ù†Ø±Ø§Ø¬Ø¹</button>
+<button data-a="2">Ù…ÙÙŠØ´ Ø¹Ù„Ø§Ù‚Ø© Ø¨ÙŠÙ†Ù‡Ù…</button>
+</div>
+<div class="quiz-fb" data-fb="g1"></div>
+</div>
+<button class="quiz-skip" data-gskip="g1">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø±Ø³Ù… Ø§Ù„Ø£Ø´ÙŠØ§Ø¡ ÙƒÙ„ ÙˆØ§Ø­Ø¯Ø© Ù„ÙˆØ­Ø¯Ù‡Ø§ Ù…Ù† ØºÙŠØ± Ù…Ù‚Ø§Ø±Ù†Ø© â€” Ø§Ù„ØªÙ†Ø§Ø³Ø¨ Ø¨ÙŠÙ† Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡ Ø£Ù‡Ù… Ù…Ù† Ø´ÙƒÙ„ ÙƒÙ„ Ø¬Ø²Ø¡</li>
+<li style="margin-bottom:.5rem">â€¢ ØªØ¬Ø§Ù‡Ù„ Ø§Ù„Ù…Ø³Ø§Ø­Ø© Ø§Ù„Ø³Ø§Ù„Ø¨Ø© â€” Ø§Ù„ÙØ±Ø§Øº Ø­ÙˆØ§Ù„ÙŠÙ† Ø§Ù„Ø¬Ø³Ù… Ø¨ÙŠØ³Ø§Ø¹Ø¯Ùƒ ØªØ´ÙˆÙ Ø§Ù„ØºÙ„Ø·</li>
+<li>â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ù…Ø³Ø·Ø±Ø© Ù…Ù† Ø§Ù„Ø¨Ø¯Ø§ÙŠØ© â€” Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© Ø¨Ø§Ù„Ø¹ÙŠÙ† Ø£ÙˆÙ„Ø§Ù‹</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 2: Simplify Objects Into Forms -->
+<section class="section" id="sec-s2" data-accent="var(--s3)">
+<div class="section-badge"><span class="num" style="background:var(--s3)">2</span> ØªØ¨Ø³ÙŠØ· Ø§Ù„Ø£Ø¬Ø³Ø§Ù…</div>
+<h2>Ø§Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ© Ø§Ù„Ø£Ø±Ø¨Ø¹Ø©</h2>
+<p>Ø£ÙŠ Ø¬Ø³Ù… Ù…Ø¹Ù‚Ø¯ Ù…Ù…ÙƒÙ† ÙŠØªØ¨Ø³Ø· Ù„Ø£Ø±Ø¨Ø¹Ø© Ø£Ø´ÙƒØ§Ù„ Ø£Ø³Ø§Ø³ÙŠØ©: <span dir="ltr">Sphere</span> (ÙƒÙˆØ±Ø©)ØŒ <span dir="ltr">Cube</span> (Ù…ÙƒØ¹Ø¨)ØŒ <span dir="ltr">Cylinder</span> (Ø£Ø³Ø·ÙˆØ§Ù†Ø©)ØŒ <span dir="ltr">Cone</span> (Ù…Ø®Ø±ÙˆØ·). Ø§Ù„Ù…ÙØªØ§Ø­ Ù‡Ùˆ Ø¥Ù†Ùƒ ØªØ´ÙˆÙ Ø§Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ© Ø¬ÙˆÙ‘Ø§ Ø£ÙŠ Ø¬Ø³Ù….</p>
+<div class="card">
+<h3>Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ù…ØµØºÙ‘Ø±: Ø­Ù„Ù‘Ù„ Ø§Ù„Ø£Ø¬Ø³Ø§Ù…</h3>
+<p>Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ Ø£ÙŠ Ø¬Ø³Ù… Ø¹Ø´Ø§Ù† ØªØ´ÙˆÙÙ‡ Ù…ØªØ¨Ø³Ø· Ù„Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ© Ø§Ù„Ù„ÙŠ Ù…Ø¨Ù†ÙŠØ© Ù…Ù†Ù‡Ø§:</p>
+<div class="obj-gallery" data-id="objGallery">
+<div class="obj-card" data-id="obj0">
+<div class="obj-icon">ðŸ¶</div>
+<div class="obj-name">Ø²Ø¬Ø§Ø¬Ø©</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Cylinder</span> (Ø§Ù„Ø¬Ø³Ù…) + <span dir="ltr">Cylinder</span> ØµØºÙŠØ± (Ø§Ù„Ø±Ù‚Ø¨Ø©) + <span dir="ltr">Sphere</span> Ù†ØµÙ (Ø§Ù„ê•¢)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ø§Ù„Ø¬Ø²Ø¡ Ø§Ù„Ø£Ø¹Ø±Ø¶ Ù‡Ùˆ Ø§Ù„Ø¬Ø³Ù… Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØŒ ÙˆØ§Ù„Ø±Ù‚Ø¨Ø© Ø£Ø¶ÙŠÙ‚ Ø¨ÙƒØªÙŠØ±</div>
+</div>
+<div class="obj-card" data-id="obj1">
+<div class="obj-icon">â˜•</div>
+<div class="obj-name">ÙƒÙˆØ¨Ø§ÙŠØ©</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Cylinder</span> (Ø§Ù„Ø¬Ø³Ù…) + <span dir="ltr">Ellipse</span> (Ø§Ù„ÙÙˆÙ‡Ø©) + Ù…Ù†Ø­Ù†Ù‰ (Ø§Ù„ÙØ±Ø´Ø§Ø©)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ø§Ù„ÙÙˆÙ‡Ø© Ø¨ÙŠØ¶Ø§ Ù…Ø´ Ø¯Ø§Ø¦Ø±Ø© Ø¨Ø³Ø¨Ø¨ Ø§Ù„Ø²Ø§ÙˆÙŠØ©</div>
+</div>
+<div class="obj-card" data-id="obj2">
+<div class="obj-icon">ðŸ“¦</div>
+<div class="obj-name">Ø¹Ù„Ø¨Ø© Ù‚Ù„Ù…</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Box</span> (Ø§Ù„Ø¬Ø³Ù… Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠ)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ù…ÙƒØ¹Ø¨ Ù…Ø³ØªØ·ÙŠÙ„ Ø¨Ø³ÙŠØ· â€” Ø§Ù„Ø£Ø¶Ù„Ø§Ø¹ Ø§Ù„Ø£Ø±Ø¨Ø¹Ø© Ù…ØªØ´Ø§Ø¨Ù‡Ø© ØªÙ‚Ø±ÙŠØ¨Ù‹Ø§</div>
+</div>
+<div class="obj-card" data-id="obj3">
+<div class="obj-icon">ðŸ“•</div>
+<div class="obj-name">ÙƒØªØ§Ø¨</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Box</span> (Ø§Ù„Ø¬Ø³Ù…) + <span dir="ltr">Cylinder</span> Ù†ØµÙ ØµØºÙŠØ± (Ø§Ù„Ø¸Ù‡Ø± Ø§Ù„Ù…Ù‚ÙˆÙ‘Ø³)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ø§Ù„ÙƒØªØ§Ø¨ Ø§Ù„Ù…ÙØªÙˆØ­ Ø¹Ù†Ø¯Ù‡ Ù…Ù†Ø­Ù†Ù‰ ÙÙŠ Ø§Ù„Ù†Øµ â€” Ù…Ø´ Ù…ÙƒØ¹Ø¨ ØµØ±Ù</div>
+</div>
+<div class="obj-card" data-id="obj4">
+<div class="obj-icon">ðŸŽ§</div>
+<div class="obj-name">Ø³Ù…Ø§Ø¹Ø§Øª</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Sphere</span>/<span dir="ltr">Cylinder</span> (Ø§Ù„Ø³Ù…Ø§Ø¹ØªÙŠÙ†) + Ù…Ù†Ø­Ù†Ù‰ (Ø§Ù„Ø·ÙˆÙ‚) + <span dir="ltr">Cylinder</span> ØµØºÙŠØ±Ø© (Ø§Ù„ÙˆØ³Ø§Ø¯Ø§Øª)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ù†ÙØ³ Ù…Ø«Ø§Ù„ Ø§Ù„Ø¯Ø±Ø³ â€” Ø§Ù„Ø³Ù…Ø§Ø¹ØªÙŠÙ† ÙƒÙˆØ±ØªÙŠÙ†ØŒ Ø§Ù„Ø·ÙˆÙ‚ Ù…Ù†Ø­Ù†Ù‰ØŒ ÙˆØ§Ù„ÙˆØ³Ø§Ø¯Ø§Øª Ø£Ø³Ø·ÙˆØ§Ù†Ø§Øª ØµØºÙŠØ±Ø©</div>
+</div>
+<div class="obj-card" data-id="obj5">
+<div class="obj-icon">ðŸŽ’</div>
+<div class="obj-name">Ø­Ù‚ÙŠØ¨Ø©</div>
+<div class="obj-decomp"><strong>Ø§Ù„Ø£Ø´ÙƒØ§Ù„:</strong> <span dir="ltr">Box</span> (Ø§Ù„Ø¬Ø³Ù… Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠ) + <span dir="ltr">Cylinder</span> (Ø§Ù„Ù…Ù‚Ø¨Ø¶)<br><strong>Ù…Ù„Ø§Ø­Ø¸Ø©:</strong> Ø­ØªÙ‰ Ø§Ù„Ø£Ø¬Ø³Ø§Ù… Ø§Ù„Ù…Ù„ÙˆÙ†Ø© Ø¨Ø³ÙŠØ·Ø© Ø¬ÙˆÙ‘Ø§Ù‡Ø§</div>
+</div>
+</div>
+</div>
+<div class="tip-box">Ù„Ù…Ø§ ØªØ¨Øµ Ù„Ø£ÙŠ Ø¬Ø³Ù…ØŒ Ø§Ø³Ø£Ù„: "Ø¯Ù‡ Ø¹Ø¨Ø§Ø±Ø© Ø¹Ù† Ù…ÙƒØ¹Ø¨ØŒ Ø£Ø³Ø·ÙˆØ§Ù†Ø©ØŒ ÙƒÙˆØ±Ø©ØŒ ÙˆÙ„Ø§ Ù…Ø®Ø±ÙˆØ·ØŸ" â€” Ù‡ØªÙ„Ø§Ù‚ÙŠ Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø© Ø¯Ø§ÙŠÙ…Ù‹Ø§ Ù…ÙƒÙˆÙ†Ø© Ù…Ù† Ø¯ÙˆÙ„.</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø±Ø³Ù… Ø§Ù„ØªÙØ§ØµÙŠÙ„ Ø§Ù„ØµØºÙŠØ±Ø© Ù‚Ø¨Ù„ Ø§Ù„ØªØ¨Ø³ÙŠØ· â€” Ø§Ø¨Ø¯Ø£ Ø¨Ø§Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„ÙƒØ¨ÙŠØ±Ø© Ø§Ù„Ø£ÙˆÙ„</li>
+<li style="margin-bottom:.5rem">â€¢ ØªØ¬Ø§Ù‡Ù„ Ø¥Ù† Ø§Ù„Ø¬Ø³Ù… Ù…Ù…ÙƒÙ† ÙŠÙƒÙˆÙ† Ù…Ø²ÙŠØ¬ Ù…Ù† Ø£Ø´ÙƒØ§Ù„ â€” Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© Ù…Ø´ Ø¨Ø³ Ø£Ø³Ø·ÙˆØ§Ù†Ø©</li>
+<li>â€¢ Ø±Ø³Ù… ÙƒÙ„ Ø¬Ø³Ù… Ø¨Ø´ÙƒÙ„ Ù…Ù†ÙØµÙ„ â€” Ù‚Ø§Ø±Ù† Ø£Ø­Ø¬Ø§Ù…Ù‡Ù… Ø¨Ø¨Ø¹Ø¶</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 3: Light & Shadow -->
+<section class="section" id="sec-s3" data-accent="var(--s4)">
+<div class="section-badge"><span class="num" style="background:var(--s4)">3</span> Ø§Ù„Ø¥Ø¶Ø§Ø¡Ø© ÙˆØ§Ù„Ø¸Ù„</div>
+<h2>Light Direction Controls Value</h2>
+<p>Ø§Ù„Ø¬Ù‡Ø© Ø§Ù„Ù…ÙˆØ§Ø¬Ù‡Ø© Ù„Ù„Ø¶ÙˆØ¡ Ø£ÙØªØ­ØŒ ÙˆØ§Ù„Ø¨Ø¹ÙŠØ¯Ø© Ø£ØºÙ…Ù‚. Ø§Ù„Ø¸Ù„ Ø¨ÙŠÙˆØ¶Ø­ ÙÙŠÙ† Ø§Ù„Ø¶ÙˆØ¡ Ø§ØªÙ…Ù†Ø¹. Ù„Ø§Ø²Ù… ÙŠÙƒÙˆÙ† Ù…ØµØ¯Ø± Ø¶ÙˆØ¡ ÙˆØ§Ø­Ø¯ Ø«Ø§Ø¨Øª Ù„ÙƒÙ„ Ø¹Ù†Ø§ØµØ± Ø§Ù„Ø±Ø³Ù…Ø©.</p>
+<h3>Ø§Ù„Ù…ØµØ·Ù„Ø­Ø§Øª Ø§Ù„Ø®Ù…Ø³Ø©</h3>
+<div class="legend">
+<span style="background:rgba(255,255,255,.15);color:#fff">â‘  Highlight â€” Ø£Ù„Ù…Ø¹ Ù†Ù‚Ø·Ø©</span>
+<span style="background:rgba(200,200,200,.15);color:#ddd">â‘¡ Light Side â€” Ø¬Ø§Ù†Ø¨ Ø§Ù„Ø¶ÙˆØ¡</span>
+<span style="background:rgba(100,100,100,.15);color:#aaa">â‘¢ Core Shadow â€” Ø§Ù„Ø¸Ù„ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ</span>
+<span style="background:rgba(180,180,180,.15);color:#ccc">â‘£ Reflected Light â€” Ø¶ÙˆØ¡ Ù…Ù†Ø¹ÙƒØ³</span>
+<span style="background:rgba(50,50,50,.15);color:#888">â‘¤ Cast Shadow â€” Ø§Ù„Ø¸Ù„ Ø§Ù„Ø³Ø§Ù‚Ø·</span>
+</div>
+<div class="card">
+<h3>Ù…ÙØ­Ø§ÙƒØ§Ø© Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ø¥Ø¶Ø§Ø¡Ø©</h3>
+<p>Ø­Ø±Ù‘Ùƒ Ù†Ù‚Ø·Ø© Ø§Ù„Ø¶ÙˆØ¡ Ø§Ù„Ù…ÙØªÙˆÙ‡Ø¬Ø© Ø­ÙˆÙ„ Ø§Ù„ÙƒØ±Ø© Ø¹Ø´Ø§Ù† ØªØ´ÙˆÙ Ø§Ù„Ø¸Ù„Ø§Ù„ Ø¨ØªØªØ­Ø±Ùƒ Ù…Ø¹Ø§Ù‡Ø§:</p>
+<div style="position:relative;width:260px;height:260px;margin:1.5rem auto" data-id="lightZone">
+<div class="light-sphere" id="lightSphere"></div>
+<div class="light-dot" id="lightDot" style="top:10px;left:180px"></div>
+</div>
+<div class="legend" id="lightLabels">
+<span data-id="lbl0" style="cursor:pointer">â‘  Highlight</span>
+<span data-id="lbl1" style="cursor:pointer">â‘¡ Light Side</span>
+<span data-id="lbl2" style="cursor:pointer">â‘¢ Core Shadow</span>
+<span data-id="lbl3" style="cursor:pointer">â‘£ Reflected Light</span>
+<span data-id="lbl4" style="cursor:pointer">â‘¤ Cast Shadow</span>
+</div>
+<button class="replay-btn" data-id="replayLight">ðŸ”„ Ø¥Ø¹Ø§Ø¯Ø© ØªØ´ØºÙŠÙ„</button>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ</h4>
+<div class="quiz-q" data-id="q2">
+<p>Ø§Ù„Ø¸Ù„ Ø§Ù„Ù„ÙŠ Ø¨ÙŠØªÙƒÙˆÙ† Ø¹Ù„Ù‰ Ø§Ù„Ø£Ø±Ø¶ ÙÙŠ Ø§Ù„Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ù…Ø¹Ø§ÙƒØ³ Ù„Ù„Ø¶ÙˆØ¡ØŒ Ø§Ø³Ù…Ù‡ Ø¥ÙŠÙ‡ØŸ</p>
+<div class="quiz-opts" data-g="g2">
+<button data-a="0">Highlight</button>
+<button data-a="1">Core Shadow</button>
+<button data-a="2">Cast Shadow</button>
+<button data-a="3">Reflected Light</button>
+</div>
+<div class="quiz-fb" data-fb="g2"></div>
+</div>
+<button class="quiz-skip" data-gskip="g2">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£ÙƒØªØ± Ù…Ù† Ù…ØµØ¯Ø± Ø¶ÙˆØ¡ â€” Ù„Ø§Ø²Ù… Ù…ØµØ¯Ø± ÙˆØ§Ø­Ø¯ Ø«Ø§Ø¨Øª</li>
+<li style="margin-bottom:.5rem">â€¢ Ù†Ø³ÙŠØ§Ù† Reflected Light â€” Ø§Ù„Ø¶ÙˆØ¡ Ø§Ù„Ù…Ù†Ø¹ÙƒØ³ Ù…Ù† Ø§Ù„Ø£Ø±Ø¶ Ø¨ÙŠØ®Ù„ÙŠ Ø§Ù„Ø¸Ù„ Ù…Ø´ Ø£Ø³ÙˆØ¯ ØµØ±Ù</li>
+<li>â€¢ Ø±Ø³Ù… Cast Shadow ÙÙŠ Ø£ÙŠ Ø§ØªØ¬Ø§Ù‡ â€” Ù„Ø§Ø²Ù… ÙŠÙƒÙˆÙ† ÙÙŠ Ø§Ù„Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ù…Ø¹Ø§ÙƒØ³ Ù„Ù„Ø¶ÙˆØ¡</li>
+</ul>
+</div>
+</section>
+
+<!-- ACTIVITY 1: Shading Challenge -->
+<section class="section" id="sec-a1">
+<div class="activity-card">
+<div class="section-badge"><span class="num" style="background:var(--s5)">A1</span> Ù†Ø´Ø§Ø· ØªØ·Ø¨ÙŠÙ‚ÙŠ</div>
+<h3>ØªØ­Ø¯ÙŠ ØªØ¸Ù„ÙŠÙ„ Ø§Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„Ø£Ø±Ø¨Ø¹Ø© â€” Four Forms Shading Challenge</h3>
+<p>Ø§Ø±Ø³Ù… Ø§Ù„Ø£Ø´ÙƒØ§Ù„ Ø§Ù„Ø£Ø±Ø¨Ø¹Ø© (Sphere, Cube, Cylinder, Cone) ÙˆØ§Ø®ØªØ§Ø± Ø§ØªØ¬Ø§Ù‡ Ø¥Ø¶Ø§Ø¡Ø© ÙˆØ§Ø­Ø¯ ÙˆØ«Ø§Ø¨Øª Ù„ÙƒÙ„ Ø§Ù„Ø£Ø´ÙƒØ§Ù„. Ø¶ÙŠÙ Ø§Ù„Ø®Ù…Ø³ Ø£Ø¬Ø²Ø§Ø¡ (Highlight, Core Shadow, Reflected Light, Cast Shadow, Light Side) ÙˆØ§Ø³ØªØ®Ø¯Ù… Ø¯Ø±Ø¬Ø§Øª Ø§Ù„Ø±Ù…Ø§Ø¯ÙŠ Ø¨Ø³.</p>
+<h4>Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ØªØ­Ù‚Ù‚:</h4>
+<ul class="checklist" data-id="checklist1">
+<li data-id="ck1"><span class="check">âœ“</span> Ù…ØµØ¯Ø± Ø¥Ø¶Ø§Ø¡Ø© ÙˆØ§Ø­Ø¯ ÙˆØ§Ø¶Ø­</li>
+<li data-id="ck2"><span class="check">âœ“</span> Ù¤ Ø¯Ø±Ø¬Ø§Øª Ø±Ù…Ø§Ø¯ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ø£Ù‚Ù„ (Ø£Ø¨ÙŠØ¶/Ø±Ù…Ø§Ø¯ÙŠ ÙØ§ØªØ­/Ø±Ù…Ø§Ø¯ÙŠ ØºØ§Ù…Ù‚/Ø£Ø³ÙˆØ¯)</li>
+<li data-id="ck3"><span class="check">âœ“</span> Ø§Ù„Ø¸Ù„ Ø§Ù„Ø³Ø§Ù‚Ø· Ù„Ø§Ù…Ø³ Ø§Ù„Ø£Ø±Ø¶ ÙˆÙÙŠ Ø§Ù„Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ø¹ÙƒØ³ÙŠ Ù„Ù„Ø¶ÙˆØ¡</li>
+<li data-id="ck4"><span class="check">âœ“</span> Ø§Ù„Ø´ÙƒÙ„ Ø­Ø§Ø³Ø³ Ø¥Ù†Ù‡ 3D Ù…Ø´ Ù…Ø³Ø·Ø­</li>
+</ul>
+<button class="toggle-btn" data-id="revealModel1" style="margin-top:1rem">Ø§Ø¹Ø±Ø¶ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬</button>
+<div class="obj-decomp" id="model1Reveal" style="margin-top:1rem;display:none">
+<p style="font-weight:700;margin-bottom:.5rem">Ø§Ù„Ù†Ù…ÙˆØ°Ø¬:</p>
+<canvas data-id="modelCanvas1" width="500" height="300" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"></canvas>
+<p style="margin-top:.5rem;font-size:.88rem;color:var(--dim)">ÙƒØ±Ø© + Ù…ÙƒØ¹Ø¨ + Ø£Ø³Ø·ÙˆØ§Ù†Ø© + Ù…Ø®Ø±ÙˆØ· â€” ÙƒÙ„Ù‡Ù… Ø¨Ù†ÙØ³ Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ø¶ÙˆØ¡ (Ù…Ù† Ø£Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†)ØŒ ÙƒÙ„ Ø´ÙƒÙ„ ÙÙŠÙ‡ Ù¥ Ø¯Ø±Ø¬Ø§Øª ÙˆØ§Ø¶Ø­Ø©ØŒ ÙˆØ§Ù„Ø¸Ù„ Ø§Ù„Ø³Ø§Ù‚Ø· Ù„Ø§Ù…Ø³ Ø§Ù„Ø£Ø±Ø¶.</p>
+</div>
+</div>
+</section>
+
+<!-- SECTION 4: Perspective -->
+<section class="section" id="sec-s4" data-accent="var(--s6)">
+<div class="section-badge"><span class="num" style="background:var(--s6)">4</span> Ø§Ù„Ù…Ù†Ø¸ÙˆØ±</div>
+<h2>Horizon Line, Eye Level & Vanishing Point</h2>
+<p><span dir="ltr">Horizon Line</span> Ø®Ø· Ø¨ÙŠÙ…Ø«Ù„ Ù…Ø³ØªÙˆÙ‰ Ø¹ÙŠÙ† Ø§Ù„Ù…Ø´Ø§Ù‡Ø¯. <span dir="ltr">Eye Level</span> Ø§Ø±ØªÙØ§Ø¹ Ø¹ÙŠÙ† Ø§Ù„Ø´Ø®Øµ. <span dir="ltr">Vanishing Point</span> Ø§Ù„Ù†Ù‚Ø·Ø© Ø§Ù„Ù„ÙŠ Ø§Ù„Ø®Ø·ÙˆØ· Ø§Ù„Ù…ØªÙˆØ§Ø²ÙŠØ© ÙƒØ£Ù†Ù‡Ø§ Ø¨ØªØªØ¬Ù…Ø¹ ÙÙŠÙ‡Ø§.</p>
+<h3>Ø§Ù„nisayDepth Tools Ø¨Ø¯ÙˆÙ† Ù…Ù†Ø¸ÙˆØ±</h3>
+<div class="card-inner">
+<p><strong>Scale:</strong> Ø§Ù„Ø¨Ø¹ÙŠØ¯ Ø£ØµØºØ±. <strong>Overlap:</strong> Ø§Ù„Ù„ÙŠ Ø¨ÙŠØºØ·ÙŠ Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„ØªØ§Ù†ÙŠ Ø£Ù‚Ø±Ø¨. <strong>Placement:</strong> Ø§Ù„Ù„ÙŠ ØªØ­Øª Ø£Ù‚Ø±Ø¨.</p>
+</div>
+<div class="card">
+<h3>Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ù…ØµØºÙ‘Ø±: Ø§Ø¨Ù†Ù ØºØ±ÙØ© Ø¨Ù†Ù‚Ø·Ø© ØªÙ„Ø§Ø´ÙŠ ÙˆØ§Ø­Ø¯Ø©</h3>
+<p>Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ Ø®Ø· Ø§Ù„Ø£ÙÙ‚ Ø¹Ø´Ø§Ù† ØªØ­Ø· Ù†Ù‚Ø·Ø© Ø§Ù„ØªÙ„Ø§Ø´ÙŠØŒ Ø«Ù… Ø§Ø¶ØºØ· ØªØ§Ù†ÙŠ Ø¹Ø´Ø§Ù† ØªØ¶ÙŠÙ Ø£Ø«Ø§Ø« (Ø³Ø±ÙŠØ±/ØªØ±ÙŠØ²Ø©/Ø±Ù) Ø¨ÙŠØªØ¨Ø¹ Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ø®Ø·ÙˆØ·:</p>
+<canvas data-id="roomCanvas" width="700" height="450" style="width:100%;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);cursor:crosshair"></canvas>
+<div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
+<button class="toggle-btn" data-id="addBed">ðŸ› Ø³Ø±ÙŠØ±</button>
+<button class="toggle-btn" data-id="addDesk">ðŸª‘ ØªØ±ÙŠØ²Ø©</button>
+<button class="toggle-btn" data-id="addShelf">ðŸ“š Ø±Ù</button>
+<button class="toggle-btn" data-id="clearRoom">ðŸ—‘ Ù…Ø³Ø­</button>
+</div>
+<button class="replay-btn" data-id="replayRoom">ðŸ”„ Ø¥Ø¹Ø§Ø¯Ø© ØªØ´ØºÙŠÙ„</button>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ</h4>
+<div class="quiz-q" data-id="q3">
+<p>Ù„Ùˆ Ø§Ù„Ø´ÙŠØ¡ Ø£Ø¨Ø¹Ø¯ Ù…Ù†ÙƒØŒ Ù‡ØªÙ„Ø§Ù‚ÙŠÙ‡ Ø£ØµØºØ±. Ø¯Ù‡ Ø§Ø³Ù…Ù‡ Ø¥ÙŠÙ‡ØŸ</p>
+<div class="quiz-opts" data-g="g3">
+<button data-a="0">Overlap</button>
+<button data-a="1">Scale</button>
+<button data-a="2">Placement</button>
+</div>
+<div class="quiz-fb" data-fb="g3"></div>
+</div>
+<button class="quiz-skip" data-gskip="g3">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ù†Ø³ÙŠØ§Ù† ØªØ­Ø¯ÙŠØ¯ Ù†Ù‚Ø·Ø© Ø§Ù„ØªÙ„Ø§Ø´ÙŠ â€” ÙƒÙ„ Ø®Ø·ÙˆØ· Ø§Ù„Ù…Ù†Ø¸ÙˆØ± Ù„Ø§Ø²Ù… ØªØªØ¬Ù…Ø¹ ÙÙŠÙ‡Ø§</li>
+<li style="margin-bottom:.5rem">â€¢ Ø±Ø³Ù… Ø§Ù„Ø®Ø·ÙˆØ· ÙÙŠ Ø§ØªØ¬Ø§Ù‡Ø§Øª Ù…Ø®ØªÙ„ÙØ© â€” ÙƒÙ„ Ø§Ù„Ø£Ø±ÙƒØ§Ù† Ø¨ØªØªØ¨Ø§Ø¹ Ù†ÙØ³ Ù†Ù‚Ø·Ø© Ø§Ù„ØªÙ„Ø§Ø´ÙŠ</li>
+<li>â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£ÙƒØªØ± Ù…Ù† Ù†Ù‚Ø·Ø© ØªÙ„Ø§Ø´ÙŠ ÙÙŠ Ù…Ù†Ø¸ÙˆØ± Ù†Ù‚Ø·Ø© ÙˆØ§Ø­Ø¯Ø©</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 5: Color Theory -->
+<section class="section" id="sec-s5" data-accent="var(--s1)">
+<div class="section-badge"><span class="num" style="background:var(--s1)">5</span> Ù†Ø¸Ø±ÙŠØ© Ø§Ù„Ø£Ù„ÙˆØ§Ù†</div>
+<h2>Color Theory Fundamentals</h2>
+<p>Ø§Ù„Ø¹Ø¬Ù„Ø© ÙÙŠÙ‡Ø§ Ù£ Ø£Ù„ÙˆØ§Ù† Ø£Ø³Ø§Ø³ÙŠØ© (Ø£Ø­Ù…Ø±/Ø£Ø²Ø±Ù‚/Ø£ØµÙØ± â€” Ù†Ø¸Ø§Ù… <span dir="ltr">RYB</span> Ø§Ù„Ù„ÙŠ Ø¨ÙŠØ³ØªØ®Ø¯Ù…Ù‡ Ø§Ù„ÙÙ†Ø§Ù†ÙŠÙ†ØŒ Ù…Ø®ØªÙ„Ù Ø¹Ù† <span dir="ltr">RGB</span>)ØŒ ÙˆÙ£ Ø«Ø§Ù†ÙˆÙŠØ© (Ø®Ù„Ø· Ù„ÙˆÙ†ÙŠÙ† Ø£Ø³Ø§Ø³ÙŠÙŠÙ†)ØŒ ÙˆÙ¦ Ø«Ø§Ù„Ø«ÙŠØ©.</p>
+<h3><span dir="ltr">HSV</span>: Hue, Saturation, Value</h3>
+<div class="card">
+<div class="slider-row">
+<label><span dir="ltr">Hue</span> (0-360Â°)</label>
+<input type="range" min="0" max="360" value="180" data-id="hueSlider">
+<span data-id="hueVal" style="min-width:40px;text-align:center">180Â°</span>
+</div>
+<div class="slider-row">
+<label><span dir="ltr">Saturation</span> (0-100%)</label>
+<input type="range" min="0" max="100" value="100" data-id="satSlider">
+<span data-id="satVal" style="min-width:40px;text-align:center">100%</span>
+</div>
+<div class="slider-row">
+<label><span dir="ltr">Value</span> (0-100%)</label>
+<input type="range" min="0" max="100" value="100" data-id="valSlider">
+<span data-id="valVal" style="min-width:40px;text-align:center">100%</span>
+</div>
+<div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+<div class="swatch" id="hsvSwatch" style="width:100px;height:100px"></div>
+<div>
+<p style="font-size:.9rem" data-id="hsvDesc">ÙƒÙ„ Ø§Ù„Ø£Ø¨Ø¹Ø§Ø¯ Ù…ØªÙˆØ³Ø·Ø© â€” Ø§Ù„Ù„ÙˆÙ† ÙÙŠ Ø£Ù‚ØµÙ‰ Ù‚ÙˆØªÙ‡.</p>
+</div>
+</div>
+<button class="replay-btn" data-id="replayHsv">ðŸ”„ Ø¥Ø¹Ø§Ø¯Ø© ØªØ´ØºÙŠÙ„</button>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ</h4>
+<div class="quiz-q" data-id="q4">
+<p>Ù„Ùˆ ØºÙŠØ±Øª Ø§Ù„Ù„ÙˆÙ† Ù…Ù† Ø§Ù„Ø£Ø²Ø±Ù‚ Ù„Ù„Ø¨Ù†ÙØ³Ø¬ÙŠØŒ Ø£ÙŠ Ø¨ÙØ¹Ø¯ ÙÙŠ Ø§Ù„Ù€ HSV Ø§ØªØºÙŠØ±ØŸ</p>
+<div class="quiz-opts" data-g="g4">
+<button data-a="0"><span dir="ltr">Hue</span> â€” Ø¹Ø§Ø¦Ù„Ø© Ø§Ù„Ù„ÙˆÙ†</button>
+<button data-a="1"><span dir="ltr">Saturation</span> â€” Ù‚ÙˆØ© Ø§Ù„Ù„ÙˆÙ†</button>
+<button data-a="2"><span dir="ltr">Value</span> â€” Ø¯Ø±Ø¬Ø© Ø§Ù„Ø³Ø·ÙˆØ¹</button>
+</div>
+<div class="quiz-fb" data-fb="g4"></div>
+</div>
+<button class="quiz-skip" data-gskip="g4">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø®Ù„Ø· Ù†Ø¸Ø§Ù… <span dir="ltr">RYB</span> Ù…Ø¹ <span dir="ltr">RGB</span> â€” Ø§Ù„ÙÙ†Ø§Ù†ÙŠÙ† Ø¨ÙŠØ³ØªØ®Ø¯Ù…ÙˆØ§ <span dir="ltr">RYB</span> (Ø£Ø­Ù…Ø±/Ø£Ø²Ø±Ù‚/Ø£ØµÙØ±)</li>
+<li style="margin-bottom:.5rem">â€¢ Ø§Ù„ØªÙÙƒÙŠØ± Ø¥Ù† <span dir="ltr">Saturation</span> Ùˆ <span dir="ltr">Value</span> Ù†ÙØ³Ù‡Ù… â€” Ø§Ù„Ø£ÙˆÙ„Ù‰ Ù‚ÙˆØ© Ø§Ù„Ù„ÙˆÙ†ØŒ Ø§Ù„ØªØ§Ù†ÙŠØ© Ø§Ù„Ø³Ø·ÙˆØ¹</li>
+<li>â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£Ù„ÙˆØ§Ù† Ø¨ <span dir="ltr">Saturation</span> Ø¹Ø§Ù„ÙŠØ© ÙƒÙ„Ù‡Ø§ â€” Ø¯Ù‡ Ø¨ÙŠØ³Ø¨Ø¨ Ø¹ÙŠÙ† ØªØ¹Ø¨Ø§Ù†Ø©</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 6: Color Harmony & Mood -->
+<section class="section" id="sec-s6" data-accent="var(--s2)">
+<div class="section-badge"><span class="num" style="background:var(--s2)">6</span> ØªÙ†Ø§ØºÙ… Ø§Ù„Ø£Ù„ÙˆØ§Ù† ÙˆØ§Ù„Ø¥Ø­Ø³Ø§Ø³</div>
+<h2>Color Harmonies & Mood</h2>
+<h3>Ø«Ù„Ø§Ø«Ø© Ø£Ù†ÙˆØ§Ø¹ ØªÙ†Ø§ØºÙ…</h3>
+<div class="card-inner">
+<p><strong>Complementary:</strong> Ù…ØªÙ‚Ø§Ø¨Ù„ÙŠÙ† ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø© â€” ØªØ¨Ø§ÙŠÙ† Ù‚ÙˆÙŠØŒ Ù„Ù„ÙØª Ø§Ù„Ø§Ù†ØªØ¨Ø§Ù‡.</p>
+<p><strong>Analogous:</strong> Ù…ØªØ¬Ø§ÙˆØ±ÙŠÙ† â€” Ù‡Ø§Ø¯ÙŠ ÙˆÙ…Ø±ÙŠØ­.</p>
+<p><strong>Monochromatic:</strong> Ù„ÙˆÙ† ÙˆØ§Ø­Ø¯ Ø¨Ø¯Ø±Ø¬Ø§Øª â€” Ø¨Ø³ÙŠØ· ÙˆØ£Ù†ÙŠÙ‚.</p>
+</div>
+<div class="card">
+<h3>Ø¹Ø¬Ù„Ø© Ø§Ù„Ø£Ù„ÙˆØ§Ù† Ø§Ù„ØªÙØ§Ø¹Ù„ÙŠØ©</h3>
+<p>Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ Ø£ÙŠ Ù„ÙˆÙ† ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø© Ø¹Ø´Ø§Ù† ØªØ´ÙˆÙ Ø¹Ù„Ø§Ù‚Ø§ØªÙ‡ Ø­Ø³Ø¨ Ù†ÙˆØ¹ Ø§Ù„ØªÙ†Ø§ØºÙ…:</p>
+<div style="position:relative;width:260px;height:260px;margin:1.5rem auto">
+<canvas data-id="wheelCanvas" width="260" height="260" style="border-radius:50%;cursor:pointer"></canvas>
+<div data-id="harmonyDots"></div>
+</div>
+<div style="display:flex;gap:.5rem;justify-content:center;margin:1rem 0;flex-wrap:wrap">
+<button class="toggle-btn" data-harmony="comp" data-id="btnComp">Complementary</button>
+<button class="toggle-btn" data-harmony="analog" data-id="btnAnalog">Analogous</button>
+<button class="toggle-btn" data-harmony="mono" data-id="btnMono">Monochromatic</button>
+</div>
+</div>
+<div class="card">
+<h3>Ù†Ø§Ø´Ø¯Palette Builder</h3>
+<p>Ø§Ø®ØªØ§Ø± Ù„ÙˆÙ†Ø§Øª ÙˆØ£çœ‹å¥¹ applying a mockup card â€” Ù„Ùˆ Ø£ÙƒØªØ± Ù…Ù† Ù£ Ø£Ù„ÙˆØ§Ù† Ù…Ø´ Ù…ØªÙ†Ø§ØºÙ…Ø© Ù‡ØªØ¸Ù‡Ø± ØªØ­Ø°ÙŠØ±:</p>
+<div class="palette-strip" id="paletteStrip">
+<div style="background:#193cff"></div>
+<div style="background:#00d4aa"></div>
+<div style="background:#fff"></div>
+<div style="background:#888"></div>
+<div style="background:#333"></div>
+</div>
+<div style="display:flex;gap:.5rem;margin:1rem 0;flex-wrap:wrap">
+<button class="toggle-btn" data-palette="#193cff,#00d4aa,#ffffff" data-id="pal1">Ø£Ø²Ø±Ù‚ + ÙÙŠØ±ÙˆØ²ÙŠ + Ø£Ø¨ÙŠØ¶</button>
+<button class="toggle-btn" data-palette="#ff4757,#ffd700,#ff6b81" data-id="pal2">Ø£Ø­Ù…Ø± + Ø£ØµÙØ± + ÙˆØ±Ø¯ÙŠ</button>
+<button class="toggle-btn" data-palette="#8B5CF6,#EC4899,#06B6D4" data-id="pal3">Ø¨Ù†ÙØ³Ø¬ÙŠ + ÙˆØ±Ø¯ÙŠ + Ø³Ù…Ø§ÙˆÙŠ</button>
+</div>
+<div data-id="paletteWarn" style="display:none;padding:.75rem;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:10px;font-size:.85rem;color:var(--warn);margin-top:.5rem">
+âš ï¸ ØªØ­Ø°ÙŠØ±: Ø§Ù„Ø£Ù„ÙˆØ§Ù† Ø¯ÙŠ Ù…Ø´ Ù…ØªÙ†Ø§ØºÙ…Ø© â€” "Ø´ÙƒÙ„ Ù‚ÙˆØ³ Ù‚Ø²Ø­". Ø¬Ø±Ù‘Ø¨ ØªÙ†Ù‚Øµ Ø£Ùˆ ØªØ³ØªØ®Ø¯Ù… Ù†ÙØ³ Ø§Ù„Ù„ÙˆÙ† ÙÙŠ Ø£ÙƒØªØ± Ù…Ù† Ù…ÙƒØ§Ù†.
+</div>
+</div>
+<h3>Ø¹Ù„Ù… Ù†ÙØ³ Ø§Ù„Ø£Ù„ÙˆØ§Ù†</h3>
+<div class="card-inner">
+<p><strong style="color:#ff4757">Warm</strong> (Ø£Ø­Ù…Ø±/Ø¨Ø±ØªÙ‚Ø§Ù„ÙŠ/Ø£ØµÙØ±): Ø·Ø§Ù‚Ø© ÙˆØ­Ù…Ø§Ø³ ÙˆØ£Ø­ÙŠØ§Ù†Ù‹Ø§ Ø®Ø·Ø±.</p>
+<p><strong style="color:#06B6D4">Cool</strong> (Ø£Ø²Ø±Ù‚/Ø£Ø®Ø¶Ø±/Ø¨Ù†ÙØ³Ø¬ÙŠ): Ù‡Ø¯ÙˆØ¡ ÙˆØºÙ…ÙˆØ¶.</p>
+<p><strong style="color:#8892b0">Neutral</strong> (Ø£Ø¨ÙŠØ¶/Ø±Ù…Ø§Ø¯ÙŠ/Ø£Ø³ÙˆØ¯): Ø¨Ø³Ø§Ø·Ø© ÙˆØ§Ø­ØªØ±Ø§ÙÙŠØ©.</p>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ (Ø³Ø¤Ø§Ù„Ø§Ù†)</h4>
+<div class="quiz-q" data-id="q5">
+<p>Ø£Ù„ÙˆØ§Ù† Ù…ØªØ¬Ø§ÙˆØ±Ø© ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø© (Ø²ÙŠ Ø§Ù„Ø£Ø²Ø±Ù‚ ÙˆØ§Ù„Ø¨Ù†ÙØ³Ø¬ÙŠ ÙˆØ§Ù„Ø£Ø®Ø¶Ø±) Ø§Ø³Ù…Ù‡Ø§ Ø¥ÙŠÙ‡ØŸ</p>
+<div class="quiz-opts" data-g="g5">
+<button data-a="0">Complementary</button>
+<button data-a="1">Analogous</button>
+<button data-a="2">Monochromatic</button>
+</div>
+<div class="quiz-fb" data-fb="g5"></div>
+</div>
+<div class="quiz-q" data-id="q6">
+<p>Ø§Ù„Ù„ÙˆÙ† Ø§Ù„Ø£Ø­Ù…Ø± ÙŠÙ†ÙØ¹ ÙŠÙˆØµÙŽÙ Ø¨Ø¥ÙŠÙ‡ Ù…Ù† Ø¯ÙˆÙ„ØŸ</p>
+<div class="quiz-opts" data-g="g6">
+<button data-a="0">Warm â€” Ø·Ø§Ù‚Ø© ÙˆØ­Ù…Ø§Ø³</button>
+<button data-a="1">Cool â€” Ù‡Ø¯ÙˆØ¡ ÙˆØºÙ…ÙˆØ¶</button>
+<button data-a="2">Neutral â€” Ø¨Ø³Ø§Ø·Ø© ÙˆØ§Ø­ØªØ±Ø§ÙÙŠØ©</button>
+</div>
+<div class="quiz-fb" data-fb="g6"></div>
+</div>
+<button class="quiz-skip" data-gskip="g5">ØªØ®Ø·ÙŠ â†</button>
+<button class="quiz-skip" data-gskip="g6">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… ÙƒÙ„ Ø§Ù„Ø£Ù„ÙˆØ§Ù† ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø© â€” Palette Ù…Ø­Ø¯ÙˆØ¯Ø© (Ù£-Ù¦ Ø£Ù„ÙˆØ§Ù†) Ø£Ø­Ø³Ù†</li>
+<li style="margin-bottom:.5rem">â€¢ Ù†Ø³ÙŠØ§Ù† Ø¥Ù† ÙƒÙ„ Ø§Ù„Ø£Ù„ÙˆØ§Ù† Ù„Ø§Ø²Ù… ØªØªÙƒØ±Ø± ÙÙŠ Ø§Ù„ØªØµÙ…ÙŠÙ… â€” "Accent Color ÙˆØ§Ø­Ø¯ Ø¨Ø³"</li>
+<li>â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£Ù„ÙˆØ§Ù† Warm ÙƒÙ„Ù‡Ø§ Ø£Ùˆ Cool ÙƒÙ„Ù‡Ø§ Ø¨Ø¯ÙˆÙ† ØªÙˆØ§Ø²Ù†</li>
+</ul>
+</div>
+</section>
+
+<!-- ACTIVITY 2: Mood Palette Challenge -->
+<section class="section" id="sec-a2">
+<div class="activity-card">
+<div class="section-badge"><span class="num" style="background:var(--s3)">A2</span> Ù†Ø´Ø§Ø· ØªØ·Ø¨ÙŠÙ‚ÙŠ</div>
+<h3>ØªØ­Ø¯ÙŠ Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø­Ø³Ø§Ø³ â€” Mood Palette Challenge</h3>
+<p>ÙƒÙ„ Ù…Ø¬Ù…ÙˆØ¹Ø© (Ù£-Ù¥ Ø·Ù„Ø§Ø¨) ØªØ®ØªØ§Ø± Ø¥Ø­Ø³Ø§Ø³ ÙˆØ§Ø­Ø¯ (Calm, Energy, Mystery, Cozy, Lonely, Heroic, Futuristic)ØŒ ØªØ¹Ù…Ù„ Palette Ù…Ù† Ù¥ Ø£Ù„ÙˆØ§Ù† ØªØ®Ø¯Ù… Ø§Ù„Ø¥Ø­Ø³Ø§Ø³ Ø¯Ù‡ØŒ ØªØ­Ø¯Ø¯ Ù†ÙˆØ¹ Ø§Ù„Ù€ Harmony Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ØŒ ÙˆØªØ´Ø±Ø­ Ø³Ø¨Ø¨ Ø§Ø®ØªÙŠØ§Ø±Ù‡Ø§.</p>
+<div class="card" style="margin-top:1rem">
+<h4>Ø§Ø¨Ù†Ù Ø§Ù„Ù€ Palette Ø¨ØªØ§Ø¹ØªÙƒ:</h4>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0">
+<button class="toggle-btn" data-mood="calm" data-id="moodCalm">Calm</button>
+<button class="toggle-btn" data-mood="energy" data-id="moodEnergy">Energy</button>
+<button class="toggle-btn" data-mood="mystery" data-id="moodMystery">Mystery</button>
+<button class="toggle-btn" data-mood="cozy" data-id="moodCozy">Cozy</button>
+<button class="toggle-btn" data-mood="lonely" data-id="moodLonely">Lonely</button>
+<button class="toggle-btn" data-mood="heroic" data-id="moodHeroic">Heroic</button>
+<button class="toggle-btn" data-mood="futuristic" data-id="moodFuturistic">Futuristic</button>
+</div>
+<div class="palette-strip" id="moodPalette">
+<div style="background:#87CEEB"></div>
+<div style="background:#ADD8E6"></div>
+<div style="background:#FFFFFF"></div>
+<div style="background:#D3D3D3"></div>
+<div style="background:#98FB98"></div>
+</div>
+<p style="font-size:.85rem;color:var(--dim)" data-id="moodDesc">Calm: Ø£Ù„ÙˆØ§Ù† Ù‡Ø§Ø¯ÙŠØ© â€” Light Blue, Sky Blue, White, Soft Gray, Mint Green â€” Analogous</p>
+<button class="toggle-btn" data-id="revealModel2" style="margin-top:1rem">Ø§Ø¹Ø±Ø¶ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬</button>
+<div class="obj-decomp" id="model2Reveal" style="margin-top:1rem;display:none">
+<p style="font-weight:700;margin-bottom:.5rem">Ø§Ù„Ù†Ù…ÙˆØ°Ø¬ â€” Calm:</p>
+<div class="palette-strip">
+<div style="background:#87CEEB"></div>
+<div style="background:#ADD8E6"></div>
+<div style="background:#FFFFFF"></div>
+<div style="background:#D3D3D3"></div>
+<div style="background:#98FB98"></div>
+</div>
+<p style="font-size:.88rem;color:var(--dim)">Light Blue + Sky Blue + White + Soft Gray + Mint Green â€” Analogous harmonyØŒ ÙƒÙ„Ù‡Ø§ Cool tones Ø¨ØªØ®Ø¯Ù… Ø¥Ø­Ø³Ø§Ø³ Ø§Ù„Ù‡Ø¯ÙˆØ¡.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 7: Raster vs Vector -->
+<section class="section" id="sec-s7" data-accent="var(--s4)">
+<div class="section-badge"><span class="num" style="background:var(--s4)">7</span> Ø§Ù„ØµÙˆØ± Ø§Ù„Ø±Ù‚Ù…ÙŠØ©</div>
+<h2>Raster vs Vector</h2>
+<p>Ø§Ù„ØµÙˆØ± Ø§Ù„Ø±Ù‚Ù…ÙŠØ© Ù†ÙˆØ¹ÙŠÙ†: <span dir="ltr">Raster</span> (Ù…Ø¹Ù…ÙˆÙ„Ø© Ù…Ù†_pixelsØŒ Ù…Ù…ØªØ§Ø²Ø© Ù„Ù„ØµÙˆØ± Ø§Ù„ÙÙˆØªÙˆØºØ±Ø§ÙÙŠØ©ØŒ Ø¨ØªØªØ´ÙˆØ´ Ù„Ùˆ ÙƒØ¨Ø±Ù†Ø§Ù‡Ø§) Ùˆ <span dir="ltr">Vector</span> (Ù…Ø¹Ù…ÙˆÙ„Ø© Ù…Ù† paths/Ù…Ø¹Ø§Ø¯Ù„Ø§Øª Ø±ÙŠØ§Ø¶ÙŠØ©ØŒ Ù…Ù…ØªØ§Ø²Ø© Ù„Ù„ÙˆØ¬ÙˆÙ‡Ø§Øª ÙˆØ§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø§ØªØŒ Ø¨ØªÙØ¶Ù„ ÙˆØ§Ø¶Ø­Ø© Ø£ÙŠ Ø­Ø¬Ù…).</p>
+<div class="card">
+<h3>Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ù…ØµØºÙ‘Ø±: Ù…Ù‚Ø§Ø±Ù†Ø© Ø§Ù„ØªÙƒØ¨ÙŠØ±</h3>
+<p>Ø­Ø±Ù‘Ùƒ Ø§Ù„Ø³Ù„Ø§ÙŠØ¯Ø± Ø¹Ø´Ø§Ù† ØªÙƒØ¨Ù‘Ø± â€” Ø§Ù„Ø±Ø³ØªØ± Ø¨ÙŠØªØ´ÙˆØ´ ÙˆØ§Ù„ÙÙŠÙƒØªÙˆØ± Ø¨ÙŠÙØ¶Ù„ ÙˆØ§Ø¶Ø­:</p>
+<div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center">
+<div style="text-align:center">
+<p style="font-weight:700;margin-bottom:.5rem">Raster (Pixels)</p>
+<canvas data-id="rasterCanvas" width="200" height="200" style="width:200px;height:200px;border-radius:12px;border:1px solid rgba(255,255,255,.1);image-rendering:pixelated"></canvas>
+</div>
+<div style="text-align:center">
+<p style="font-weight:700;margin-bottom:.5rem">Vector (Paths)</p>
+<canvas data-id="vectorCanvas" width="200" height="200" style="width:200px;height:200px;border-radius:12px;border:1px solid rgba(255,255,255,.1)"></canvas>
+</div>
+</div>
+<div class="slider-row" style="margin-top:1rem">
+<label>Ù…Ø³ØªÙˆÙ‰ Ø§Ù„ØªÙƒØ¨ÙŠØ±</label>
+<input type="range" min="1" max="10" value="1" data-id="zoomSlider" class="zoom-slider">
+<span data-id="zoomVal">1x</span>
+</div>
+</div>
+<div class="quiz-box">
+<h4>ðŸ“ Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ</h4>
+<div class="quiz-q" data-id="q7">
+<p>Ø¹Ù†Ø¯Ùƒ Ù„ÙˆØ¬Ùˆ Ù„Ø´Ø±Ø·Ø© Ù…Ø­ØªØ§Ø¬Ø© ØªØ·Ø¨Ø¹Ù‡ Ø¹Ù„Ù‰ Ø¨Ø§Ù†Ø± Ø¶Ø®Ù…. Ø£ÙŠ ØµÙŠØºØ© ØªØ®ØªØ§Ø±ØŸ</p>
+<div class="quiz-opts" data-g="g7">
+<button data-a="0"><span dir="ltr">Raster</span> â€” ØµÙˆØ±Ø© ÙÙˆØªÙˆØºØ±Ø§ÙÙŠØ©</button>
+<button data-a="1"><span dir="ltr">Vector</span> â€” path Ø±ÙŠØ§Ø¶ÙŠ</button>
+</div>
+<div class="quiz-fb" data-fb="g7"></div>
+</div>
+<button class="quiz-skip" data-gskip="g7">ØªØ®Ø·ÙŠ â†</button>
+</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Raster Ù„Ù„ÙˆØ¬ÙˆÙ‡Ø§Øª â€” Ù„Ø§Ø²Ù… Vector Ø¹Ø´Ø§Ù† ØªÙØ¶Ù„ ÙˆØ§Ø¶Ø­Ø© Ø£ÙŠ Ø­Ø¬Ù…</li>
+<li style="margin-bottom:.5rem">â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… Vector Ù„ØµÙˆØ± ÙÙˆØªÙˆØºØ±Ø§ÙÙŠØ© â€” Ø§Ù„Ù€ Raster Ø£Ø­Ø³Ù† Ù„Ù„ØªÙØ§ØµÙŠÙ„ Ø§Ù„Ù…Ø¹Ù‚Ø¯Ø©</li>
+<li>â€¢ Ù†Ø³ÙŠØ§Ù† ØªØ­Ø¯ÙŠØ¯ Ø­Ø¬Ù… Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ù‚Ø¨Ù„ Ù…Ø§ ØªØ¨Ø¯Ø£ â€” Resolution Ù…Ù‡Ù… Ù…Ù† Ø§Ù„Ø£ÙˆÙ„</li>
+</ul>
+</div>
+</section>
+
+<!-- SECTION 8: File Formats -->
+<section class="section" id="sec-s8" data-accent="var(--s5)">
+<div class="section-badge"><span class="num" style="background:var(--s5)">8</span> ØµÙŠØº Ø§Ù„Ù…Ù„ÙØ§Øª</div>
+<h2>Common File Formats</h2>
+<p>ÙƒÙ„ ØµÙŠØºØ© Ù„ÙŠÙ‡Ø§ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…Ø¹ÙŠÙ†. Ù„Ø§Ø²Ù… ØªØ¹Ø±Ù Ø§Ù„ÙØ±Ù‚ Ø¹Ø´Ø§Ù† ØªØ®ØªØ§Ø± Ø§Ù„ØµØ­.</p>
+<div class="format-cards" data-id="fmtCards">
+<div class="format-card" data-id="fmt0"><div class="fmt-icon">ðŸ–¼</div><div class="fmt-name">JPG</div><div class="fmt-desc">ÙÙˆØªÙˆØºØ±Ø§ÙÙŠØŒ Ø¨Ø¯ÙˆÙ† Ø´ÙØ§ÙÙŠØ©</div></div>
+<div class="format-card" data-id="fmt1"><div class="fmt-icon">ðŸŽ­</div><div class="fmt-name">PNG</div><div class="fmt-desc">Ø¨ÙŠØ¯Ø¹Ù… TransparencyØŒ Ù…Ù†Ø§Ø³Ø¨ Ù„Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø§Øª</div></div>
+<div class="format-card" data-id="fmt2"><div class="fmt-icon">âœ¨</div><div class="fmt-name">SVG</div><div class="fmt-desc">VectorØŒ Ù„Ù„ÙˆØ¬ÙˆÙ‡Ø§ØªØŒ Ø£ÙŠ Ø­Ø¬Ù… Ø¨Ø¯ÙˆÙ† ÙÙ‚Ø¯Ø§Ù† Ø¬ÙˆØ¯Ø©</div></div>
+<div class="format-card" data-id="fmt3"><div class="fmt-icon">ðŸ“</div><div class="fmt-name">PSD</div><div class="fmt-desc">Ù…Ù„Ù Ø§Ù„Ø¹Ù…Ù„ Ø¨Ø·Ø¨Ù‚Ø§Øª PhotoshopØŒ Ù…Ø´ Ù„Ù„Ù…Ø´Ø§Ø±ÙƒØ©</div></div>
+<div class="format-card" data-id="fmt4"><div class="fmt-icon">ðŸŽ¬</div><div class="fmt-name">MP4</div><div class="fmt-desc">ÙÙŠØ¯ÙŠÙˆ / Animation</div></div>
+</div>
+<div class="card">
+<h3>Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ù…ØµØºÙ‘Ø±: ÙˆØµÙ‘Ù„ ÙƒÙ„ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø¨Ø§Ù„ØµÙŠØºØ© Ø§Ù„Ù…Ù†Ø§Ø³Ø¨Ø©</h3>
+<div class="match-q" data-id="mq0">
+<p>Ø£ÙŠÙ‚ÙˆÙ†Ø© Ø´ÙØ§ÙØ© Ù„Ø´Ø®ØµÙŠØ© ÙÙŠ Ù„Ø¹Ø¨Ø© â†</p>
+<div class="match-ans" data-mq="mq0"><span dir="ltr">PNG</span> â€” Ø¨ÙŠØ¯Ø¹Ù… Ø§Ù„Ø´ÙØ§ÙÙŠØ©</div>
+</div>
+<div class="match-q" data-id="mq1">
+<p>Ù…Ù„Ù Ø·Ø¨ÙˆØ±Ø© Ù„Ø¹Ù…Ù„ ÙÙ†ÙŠ Ù…Ø·Ø¨Ù‚Ø§Øª â†</p>
+<div class="match-ans" data-mq="mq1"><span dir="ltr">PSD</span> â€” Ù…Ù„Ù Ø§Ù„Ø¹Ù…Ù„ Ø¨Ø·Ø¨Ù‚Ø§Øª</div>
+</div>
+<div class="match-q" data-id="mq2">
+<p>ØªØµØ¯ÙŠØ± Ø£Ù†ÙŠÙ…ÙŠØ´Ù† Ù‚ØµÙŠØ± â†</p>
+<div class="match-ans" data-mq="mq2"><span dir="ltr">MP4</span> â€” ÙÙŠØ¯ÙŠÙˆ / Animation</div>
+</div>
+<div class="match-q" data-id="mq3">
+<p>Ù„ÙˆØ¬Ùˆ Ù„Ø´Ø±Ø·Ø© Ù…Ø­ØªØ§Ø¬Ø© ØªØ·Ø¨Ø¹Ù‡ Ø¨Ø­Ø¬Ù… Ø¶Ø®Ù… â€” ØªØ¬Ù†Ù‘Ø¨ Ø§Ù„ØµÙŠØºØ© Ø¯ÙŠØŒ Ø§Ø³ØªØ®Ø¯Ù… <span dir="ltr">SVG</span> Ø¨Ø¯Ø§Ù„Ù‡Ø§ â†</p>
+<div class="match-ans" data-mq="mq3"><span dir="ltr">JPG</span> â€” Ø¨ÙŠØªØ¶Ø±Ø¨ Ù„Ùˆ ÙƒØ¨Ø±Ù†Ø§Ù‡ØŒ ÙˆØ§Ù„Ù€ SVG Ù‡Ùˆ Ø§Ù„ØµØ­ Ù„Ù„ÙˆØ¬ÙˆÙ‡Ø§Øª</div>
+</div>
+<button class="toggle-btn" data-id="revealAnswers" style="margin-top:1rem">Ø§Ø¹Ø±Ø¶ Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø§Øª</button>
+</div>
+<div class="tip-box">ØªØ°ÙƒÙŠØ± Ù…Ù‡Ù…: Working File ØºÙŠØ± Sharing File. Ù…ØªØ¨Ø¹ØªØ´ Ù…Ù„Ù Ø§Ù„Ù€ PSD Ù„Ù„Ø¹Ù…ÙŠÙ„ â€” Ø§Ø¨Ø¹Øª JPG Ø£Ùˆ PNG.</div>
+<div class="mistakes-box">
+<ul style="list-style:none;padding:0">
+<li style="margin-bottom:.5rem">â€¢ Ø§Ø³ØªØ®Ø¯Ø§Ù… JPG Ù„Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø§Øª â€” Ù…Ø´ Ø¨ÙŠØ¯Ø¹Ù… Ø§Ù„Ø´ÙØ§ÙÙŠØ©</li>
+<li style="margin-bottom:.5rem">â€¢ Ø¥Ø±Ø³Ø§Ù„ Ù…Ù„Ù PSD ÙƒØµÙˆØ±Ø© Ù†Ù‡Ø§Ø¦ÙŠØ© â€” Ø¯Ù‡ Ù…Ù„Ù Ø§Ù„Ø¹Ù…Ù„ Ù…Ø´ Ø§Ù„Ù†ØªÙŠØ¬Ø©</li>
+<li>â€¢ Ù†Ø³ÙŠØ§Ù† Ø§Ù„ÙØ±Ù‚ Ø¨ÙŠÙ† Working File Ùˆ Sharing File</li>
+</ul>
+</div>
+</section>
+
+<!-- CLOSING -->
+<section class="section" id="sec-closing">
+<div class="closing">
+<h2>Ù…Ù† Ø§Ù„Ø®Ø· Ø§Ù„Ø£ÙˆÙ„ Ù„Ù„ØµÙˆØ±Ø© Ø§Ù„ÙƒØ§Ù…Ù„Ø©</h2>
+<div class="step-chain" id="closingChain">
+<div class="step-item" data-id="cs1"><span>Ø®Ø· ÙˆØ§Ø«Ù‚</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs2"><span>Ù…Ù„Ø§Ø­Ø¸Ø© ÙˆØ¨Ù†Ø§Ø¡</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs3"><span>ØªÙ†Ø§Ø³Ø¨ ÙˆÙ…Ø³Ø§Ø­Ø© Ø³Ø§Ù„Ø¨Ø©</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs4"><span>Ø£Ø´ÙƒØ§Ù„ Ø£Ø³Ø§Ø³ÙŠØ©</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs5"><span>Ø¥Ø¶Ø§Ø¡Ø© ÙˆØ¸Ù„</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs6"><span>Ù…Ù†Ø¸ÙˆØ± ÙˆØ¹Ù…Ù‚</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs7"><span>Ù„ÙˆÙ† ÙˆØªÙ†Ø§ØºÙ…</span></div>
+<div class="step-arrow">â†“</div>
+<div class="step-item" data-id="cs8"><span>ØµÙˆØ±Ø© Ø±Ù‚Ù…ÙŠØ© Ø¬Ø§Ù‡Ø²Ø©</span></div>
+</div>
+<p style="font-size:1.1rem;color:var(--accent);margin-top:2rem;font-weight:700">ÙƒÙ„ Ø±Ø³Ù…Ø© Ø§Ø­ØªØ±Ø§ÙÙŠØ©ØŒ Ù…Ù‡Ù…Ø§ ÙƒØ§Ù†Øª Ù…Ø¹Ù‚Ø¯Ø©ØŒ Ø¨ØªØ¨Ø¯Ø£ Ø¨Ù†ÙØ³ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ§Øª Ø§Ù„Ù„ÙŠ Ø§ØªØ¹Ù„Ù…Ù†Ø§Ù‡Ø§ Ø§Ù„Ù†Ù‡Ø§Ø±Ø¯Ù‡.</p>
+</div>
+</section>
+
+</div><!-- .main-content -->
+
+<footer class="footer">
+<img class="footer-logo" src="" alt="Logo" width="40" height="40">
+<p>ÙƒÙ„ Ø®Ø·ÙˆØ© ÙˆØ§Ø«Ù‚Ø© Ø¨ØªÙ‚Ø±Ø¨Ùƒ Ù…Ù† Ø§Ù„Ø§Ø­ØªØ±Ø§Ù.</p>
+</footer>
+
+<script>
+(function(){
+/* ---- Logo placeholders ---- */
+var ICON_B64='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';
+var WORD_B64='UklGRmIZAABXRUJQVlA4IFYZAADQsQCdASpYAlgCPlEokkajoqGhIxN4IHAKCWdu4WG+iOAIi7fWjpTT92/Jvb9ev/3D9gfyn6yndHvn/S/+z/lfweYI/Hf0H/Qf2T9o/8Z/////94/9L6lf0B/wfcA/Sf/Ff3L/B/7f+zf////+CHzAf1P+wf8X/Ge8H/jv1i9yP+m/zP+g9wD+uf3nrOPQH/ln+K9MT/x/6P4Uf2r/9H+T+Bj+Z/3X/y+wB6AHVz9jP6x20/3Dlr1DL459mP1v914weAF+Q/yr/A/mP/TeNnAB+c/1X/jf2bkL8QDg2KAn8y/tXn1/TvoP+lP/Z/k/gP/mn9s/7P967TP7UezH+4ARCn4aFsm7ycsw0OkCh6OnWO0ljeyC2TD2RjPBOFKahbxjyFPy442HDGnTDsMPOXMh0M29I77peMnqebB2b3wdmwf+xRhjc59+gwZLd2UI5n3/MClHnLy43twkehcbB4f0F/3WhvQ8bm7k5buAHA5Gq8y2wghxveuj+f1bnjDip0UDyNR4t4lRmSZGcmUKk2aI0WjDgxJyydBsVLr1M+tx7CxVPAQww8LvYIKXCNT2i0FTZOBxxsd4CiUo88B2Jm1cL7uYrlwwTMHDhspjK8fqfZq88JijzlA76su0n2b21KnTEgfs2Ds2JBNno4/PpN7LMnva6ABT+GolKPJx3Ws24Hk1DUGOLsLJL2hUNGYWckFKPJg3Qid8fEWShnRLbjOsN9uyISEppPypDq52GMALFRHim+kOMN4iQLVo6XLPqwEeXI/3zWsQ3iKsi9uViB6dJ0m7fWKNygiVQNujzwekXieGpj9xqveyjky431h2ZxfMm/7PwoBkebcE+3JuThG3dRTg5PRCzFrMjflZCLh0I5hcavfDZk+ML3BK5boN61ooOYu6xPA5BeH5pTneTvKp9QZEvRMYRHIDokEy28OXsADX+v/akeGeoC6xUjFoK+ahL29ZIErONImMq55LegYbmnlPYA0WFMEFEfPSiA3Ddje2pU/9kTJtpyRs9uI6xTcKRbaIT2yNObt7u0WuTlAEtHMHvFdLimoxF8quagfy6J+3aGNMBr8WCzmhw6ohUf7VUgF3i99GHJaukSOCti0YKLPJNEvc7qUzpBAnVGL2zVnCEQXpTK0kuRgZZiQ+ybSH2pm2K5ZzUlvzH4zvQihoI3HjM5JC8QeG0h0SCaYvziC5aQCKSaFN2XlcreJu+KT13i1AC9+OYT3PY4Utun//MNqTOElrnsxZnHlZzX270w1DPwccXESbDl+xXgHHYMuv4qojN3i0dIRdFgsolwFJ4H/3UaG9SNUaP0OxrjSBZD3ZdIkKMOZz+ykYqJV1lCkIBAkSMPdo1+hwmspD9vFd/6FQVM7xpj7ge36FYuUzDegB2jvGl1015W0uNLGHKTtWPBRgCZdyTc1/9tEAcEjuOXFnHZuFTsqk45MX3/c+89FIAy3B/KFKCDQK7R3IbIRRRS/P3mRZfMTTgqwKwIp8TmmMOFQJ8LS7IweAm+ZYMdduv8l6DY27VDcvb3teJ4mj+aMkxLhK+z5IyD24ThSjzlmP7QNZoKfYPTiggfDNPvzPvpwluxsJY60hs9DdSI0lhQU1lz/Shxy702xc07T/I0dZc/0qjyVF2occuyDI846xhuwq77VWmHrae7mOtfWwuYPQ45d6jtV82Nkn3sfKRp5lt9uG9U4MIw5EKDT7+rCHxM+ooGFXaZu4XvIM/pRGXt77edMKTMlW+5OwSt2+q8/0oqu3Y1cNtS24oD5LdduiXA+3YQN454rUOPgUtzHRQaoffmffme0HoccygG5EGqv0+ahUSeW9TbvzPvzPuA0jhRGXtrnmitqTKLF9neFKEXYmOLsKHN13WWrUAKxMxLLC9RIcEsbzwjVjeyC04hGrG6AMQgAA/voZ/j8v4wX+MFNS+7HLHGPSs3Z7T3eqUnLLze598IhYMMKtW1fNcadelMTeuDuTfl+qARJyC5yOkZfo5ISHwlQgMzw98WrB1S2t+0dPCKmeq22aBAmsi3E9pi3vl+XOAtSvFLWLMQdz6QdFQkYCarsnCYfVLDE0qEQ89GIg0UoaBE1lgFVdW+UxxQfVqlRQmvfaF2kRdzjTI0WxIlAx+v6Ojrg06aJPvqUFC1T5Qx8fqzfgHkAowR6XVhKcQxgAUaFlfSYsP5PcO+i68RJxI02oZ08XbzcmBaveiHzpEI5XMmFtHQWB0zjFR4OY+NEKv9DpKwGb50qtEkOypgfWFLUWle+GSaH0QwElHVDIZVTXQiQsH8JQ4Ivh3WQNAl0HbQVnv06MRLOigfOX8GUwcYKfr3wyFmQ0xp5Bgs6M/gOPzsoIF/0Z9I8Sk4kxxqdaaZxXrnbJ+8XTRddN5iPiZ/aSZGjf1FZ8XVGJ4n76e0zFvSVtGdxNVn3IHd1BX+FYuKCoK2eXrRXSkXxkWZDnLVw7oP7OoZ+UBPfC+J2THnX8dZIQOIVzMJy8OWgBSaeK9NGoW/HtLCr/Pwy/M7r7VC+i1qKk3l4TpbAEePb7Bj44tV8W99z7NBmwIoo0eer/L39qXm/FDFv/QmqH2W7QzvL036x/xd5OSds8MQ8qjXN59ySxkXhdM3Wx230Ds/EQO2W17uwCEb0MqCPjYR+uNkVA/MiiDLqIH+dAjBTTzvcKQN+esFX20xfZUFpF4cuRICL7oSbujD9BF8ggXmaJ3irDvJiZOoXvIplnVmifFqHLhEaRII/n2YQzSjOF0zauy4pu+u8bunw0oxiIxEkAkwPJ5ZM0NuWHcxxaKEpQheQL/3vurOlJXaSBPxsf5X45ZNs30eMVr/VZcM56YPAANHDs+SGIFJyXnMeHbOnVluq+uubfP55gLxb4TWfpt7UDMBK4Yzj+BYPyhSEQpOAg951JvxTqPM9aqtWLVItVE5LfjRTqrEzb4zYUnZ4UD94m1StwtdkzbuN/cuaJtPlz1fADAKehlEogVgFqE4KxihmDpkxFajuVPeOyEOEGKVfifLfgHUHste35RgI1tQaArgS/aW3BUbkaGUNMooOMzFYVR2LJHCY7+UCwY07DRDAU9ootMYrktYB7QyYwCfUnaY3y+vCXnqoBzSbcWcesme1AOlkLKY/Z6xMa9y540nyLrSI5URUnzXLb7ZFR6JDaMnETocV+I5HqSEhj0dKID37uuLt7af3T8lBMHhciwKL0+FXhJxK1n98HbflZse8bCdMl2O1uQHgXnkDsrzhX6JuUrFBoQlta/BtiS8PyevD9P6EHvND1rYc8pRg2/QSjN7ag5AQjsj07FKSPNnQGIL8SfRNtayPEmA+ISBahOZDzpM1qXiTr1XzhsAmUjZbewIpY9xZ7f31Zrv5oIbs0Wer3SSErDG/dBa+T7IczuhiXn67/By96aa+eSItdpx9iTdJ3gBDd2wolwYbrXyOZH+dbPWvEmZ4ArZWmZDJW1m17RtPA2XT2ahMIbC0aK/ATJKd8sGEFUOsX8zbzcO5AN9tWeZrp8v1iLM/b2X25c5IdeJ73282T0K/Zvff695hbt46z61Ujtp8A7k0p2HmS7quRgR6lZFsl6VYp4+Wk9B+tJroTDQQZo0GzgAw/om72foy8s238RmWOCUlQhLthmvXpyO/BEgbHBmxCwRq7dgMwq3LzOsSQIAaZLNJum1/Kt2/b8zabfkisX+GIPo4V6pqhXkRcbcqO8s4a5Cv0TNltiywGTQwnRVC2RVJ/6JUX9lDsUs5aHdy7/gXWS44r/R15Y7FezlSKJY6hnt1Y3J+OqN4kC8Kg7wL+S3pw28tfZDKvBd8KZW+ywg4yA6/wt/kYhqOz0zcF+j3SjZdLe8vGzwOYyqHy17dyi8nctvXzj8eQuvwOSCpUx6iP8rIX/Dd93K1bfhFMKfP5NkCHzQYAMn0+nn8aDoykQ+crOygBOOcAhpMQrO9IRDHgVmFdZwiLBo6CRZbq/q1O3+z11ju0Vfc4ia3XqxqxJAXX4yKd1w8RJVkxBxmUY92XlbnYPl0NTfCHEpZftgVtuNMWX8NojFHBqCS1BzCP/X1unyad3mTsFehZgYy1jm9VM4JI8iwqkzmTP2WEZzPpBkR4/Fn52yKJORuL+iQzc8bG+Sx5tX2n5PLR+YEQ2+x8jlW+5PwVspia0GpfrU0muooL8Mgip1yM7juTuKLU6PCmzoUXCr14W5zbLL1fPHLGLvYvYCoQ6VCHGUeZPJ/ITYUWy8XyxRp6JWgbNrplsd39+hVu+3jcgD4VsixzPme5V1SNqDBWwTs2thujnzT9vf8oWGaIkW+iubEoeDBa9PcWhNXc3aoK2tTs3xKIhbFHhDt357VjH8MGslaG6padtTAguzvVdWPhT0jw+VEB8sK0uu0H7E+H/WiV0ucTRPfdobvuEZJJurmAoE6eX3gZ6awwRT8eNAOvp//1t4s7oO2sl9wJyOtMhSIFGSNj1CY6QDXcm845HM5DPHtibZnSIm0zKp1TViv8U79qBeCOWk265QZiURcIBBWQdxLDziOM5hKus1FhaA1lExKrWyUvhNw7WjVG9lgZW05iHTnRAwy78Ly6OlTGfMPP55yVStJusajThvw/RClnt5EUnSq/Ac4Fmik3lYwKXq+v48oTFZGKDELOtoDGzrcgE3fpEu4Ev51UM9BwbJMe06hdqjyMI8nrvemd6NV4zsA2VXCRSFvDxBLA7CtoczsyOafMpmi+QJ3xxFz1Pk07KzBGLjib73e1AYp3FObudtp5T4pFax8TT8JhfWVwqiFBlX0LHhiirh/vgLPUBfG9tuUV4u6QgLlRy28/NY3wZMTcYRpmWVhNN1rKn/BZMPbhFWLhGE75mNkisSAyuPxjHGYt6Rp29kZmNw+V4zmdPzHlhnuFFq18syOtscFJTpu5ARbBafxwgOYDi0Y98ducJVkFVG10FeEtmuHF4y/tUbJ9gFkph7UFoacsQ5XyuRuTshtmSuo/fnvlSVGrRMLpV+LDU09cnc8aRKT/XDc7QvP4TbQIiaITxBGEoJeSCgRfrliHIfLz9WFCyo6uTHyn9uAfA1LZO/2XnZ4iAzo5mUq6ydmVZASGlkkt6CJaWqaYcLnBMxUydqhMKd+d4/OIYUeCllCWvE0Ms3WB7MNU+ocMiIdQs75LgY119+rFER0z6hRoWqkwXLF1ES5HfQ3w4/xy7tccQkn+hgxqGwfaAnae7kfkCu2Xuymw39kQhoudxpw7EmWvpOYGNlffxvwaNonjKz1Sy7j+QZYRDz5NOLzY4mQBEfQSzoUt7Sc2DU6BWV+WtBd9VLHu1f8qu/A5GKFhrbwfFuVn/YxxlFyC+Efs0TGLhXJB0Jl/T9EG/B4cbOfXhv164jES0oXDgIR1s2XWF5twexX+BCAKF837BJHDjw44BkyRUhIoblVMMQU3/qbeqh0rfNlDVxJH9qNJxgNUWuLETS2aJGDMt95igx3DeD+Xe6FWDLtFB5ZArnTfRxOvCBciDz7dNJq3QpG/8ii6GypVL1hxgVlyeNNXnGD5flqcFszNZqGQ1OFMbKQ6DKePGVOwukVPmAsbSaWBkk35Dv/JNzP0cqx0O99tNZ4LwJROqj5FYgbZKRkCF1zGBlxja8/1ryG+3h8YJFcE+zay6jTPPC5Kapalrypidnm5GAsAxGF0gc7nirBUwGkO3t3pENrYhWkMdNJ+gOUCQ/2iD2fs2ueBxoJFQYKjundr5OfY4too01e6QrNNMJz+7ZEkFZSNjzzQH6qCFGgun6yMW7rOhSSs+rkr3cqO6p/4mQZBrv728EOCdO2JftNPt3h4+oTfdKCjStstHfPPCeXLhIHuOq6ljMyeaxD4Wb3dNC4BMhX5MRKRoM16AdbmE8VDHQ5p1zIJOZTnE478NCWszKklX56i5jSSTDjPqqiYq8ru134Xe8HTGc0G1oR7wgabgP3gNzj5yHrRhWrSBv0+VRs0FPEtLKLYaKqwUpXpu4lLTDeJAZhd101/t4m7t9rHRtLnU2P2N9j6M+2vr7qbSHhImsGLhaSB9ITOCVc99HtOBzp8w/0iVvoiNdYsJqmtg/0G9LhK1COO/+dN/J+f45biTdFpFN1HAFWG2FPI4x09ICMBvWPHMs3lVF1nBh9o4RokJxx1IXNCMc88SvISZq+xS4Wo/teEpC5flHzpPI8OHD4igf9Fvr0QDEpsfwGN8KejwjKHQvK6dT8wCkTt0Q6qHxOUL3DoOQQd02v8SPRBn9yJodSNZamTBvDzffhOOk93xIX6vICD1XpTAADjTxkkHYQ/fH8cvT9Y92G3BVgBdNXX+xLXjv9UZbYsyK3b7BSME6rvEuIwppVx9qTtz4UInSKB14Wv3BqLLjrLVptc8MvjQydetXYvEBC+GxIexY91WGExCBDjBwpHOgM9owIA7ywEp4g6aV15yFBjUO5muGgrK95W1+SZU4gHpKo5kCUCTHAo162fHJ2+XIk2Tr8pqWOWzcRQdaP4AzlFKXToC+sRDWUCoMFtabYepmNU8vAjbyyX2fYIFb5jul9PO9oNJQTxVZpHsKNgW/6T7uVUkaLABx5/3IWuD3RNTnje8vpP1+wJ1OkSvtncq2a09emGx4cEkzfyuiEZ9B9xgyeAYlGS+5Eg6lIsAzDPjnDWB7wINumDq6Te9FvOnV8ZvQBTbH482zKnQbaQAFnccXE82l3sBEjhvt5H9xwifxQkawTAY/wHdAerTOhS/h7JrYTGtOuunAE+TQzdHvB6RlouXngoj76g3PguFzEtJ2Un6N9vUkTJru7SEdBKii28MH4cvOLBZ7sNvj+0ehYi6L0VGhG5pDavKCtbr2DgGzvtam2szTVkKkuy+kTaztA4sUvcEDI/B3ZYnr3/iBwJBey8HVXvwqULpAn3MgZds4FLbZ5Gd2n6Bty8SwEFjf4KuTb19FhPVnrp5+ON2fgdb378jSOoYhrJAFR9YizFhVi8XvCboQUHQVDbyOQqwVQ6P9YeoKMWc4LFaSKKFzH5umxbL7zMOBUMkE7FJTe3fQBSx30zFM98XDXVBDoRyKgYQC8IojCmMV7oaWikBpmkf7LED1xwh5gtyYSFAHPa1PzEvaHEfM1caeXpqmBotBDoxDY1up34naqeD1J9BGGfcqhijuUgx2wLVL/1e9v2yGsrRDknRlJcHmXVYVtD0aMFFMuFZViuWwXAI/7xHmREKJQ+TaoC6tzwJZFokqQLOSSHo32G0ItXPi6DBlvaFCCQXQJqlsgCPIcIsuMGHo0RNE6zr05+AC3DstsmJRHoXLYOSIxaJ/thfAnaihIJ/syG9OPNWT6x+dlDP0s6YZ5JPrX3KCGVXrW21TGqHfNeYV+prkJovBakMwEh38NsZgJmSBn7xINRoOidA0gUGAO3uY+vcYTnzXWnoLs5FRzwH/n+ClcwTji4ClzMFjS++HMvyO+OnZCMb0X6TJ98Q9nvlN57uxkEVKXWuXbX3xOZJKpyZtl2W8aexSqKKrdii5eG7vfsYDZjDFdighBl0OCtAHKgOfvaHGWT4RBtMLOJlt1rBDUv/rmEKCSV7EQwYPGduq3UXBhqa74Ld86z5rETXfXug0yhIPxUwSdeswBUMSuj3Jrj7VPD+C+PJL1dctJpm7vivk7t6uo9TYWEaaMUdkWvijHtBF4yeq+XLVzOrHS+6yIsal1ZVLajObRBiWwUz2oOV/hROJIRXHAOaExRGk9IIjQmr62jcH/AulZk/+jezdBvqIwo0tyfeX/qmt9J6vDKOJRwEO8AAktEd6j0Q6HC+S4KN5n5r7z/ieA5V1KWO4CCMvInJYM+sbO7BhTBdPZiAsAKIoTwAsub9RfDjMA/1QqujhWqpSMF0gFjhV+3NczqMR81o4mQaQrcHrijNDYEAb7lq+2MwW4I2tFtSWZAudgihwv0XCv5PzD/67BI8DG3OdF9nZ2mOczKmzaDJa+9WYdPr1uAy8GI4yfFzCim5Zd8UAUocTOa/BsmCV3ko4Hr1xRaBRtd2y7OYyPjXomJOXUUTt1+dImLZiBqlhDVdVN/+RLrw+HdLh8O1TvdvVqVjx1w/h/cKH3EU1SgC7oxrv84XcMCtMyihKFIyFRSxxikkRoU74YO00AB8fyTDD8mtrGHdPW+p7xZmd0HvG4rR990lp9VOLuFM8JouMnen5fx5mBni6kvoayLaR3POfnMBfLLNhq/BiWOnt0POR96gZ95aezM56mL/MYCtY6MYE+qDgJAowUP1ijyrGRnTL9v65hypSy+zkkxeEGNQxSKGL6xNo4xYNawQ5mqkSLpStOlE/7qperpvG3jmPi4NNsFapAIGkKX2az3K6tNWCxRG72l5YggGLrThYg1coAEUhy5ADjFtBvHYoADvgGnpKYAbRPbYAAAmyyqf9JkAxIAKpPdQfJOVDw1SWgK7d3+prHP3sOX8CrR44xikagYJQhVx9Q2u9b3h7YSv8Mz1fdpUuVLY2+FH8Je/gyjF3J5DE3lkhBpzcB3niIOIE03UvUt1n0/kAKvcs3Po4cMuQYSxi1heNQYBrBPN+ATixBNR+93No7cAAJEZD8VdueSNMkZ+pXADcADTrFREKL/wv9hfrDfOAQUz22EUoMgWuk6PhBrmCIARyP07xcYuZQixQ/b2TkjQ4XbTjuP9SR19+Opi6sJGaN7xGPSmvmBUa0mowT0IAA=';
+document.querySelectorAll('.nav-logo img, .footer-logo').forEach(function(img){img.src='data:image/webp;base64,'+ICON_B64});
+
+/* ---- Particles ---- */
+(function(){var c=document.createElement('canvas');c.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1';document.body.appendChild(c);var ctx=c.getContext('2d'),p=[];function resize(){c.width=window.innerWidth;c.height=window.innerHeight}resize();window.addEventListener('resize',resize);for(var i=0;i<30;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,o:Math.random()*.3+.1});function draw(){ctx.clearRect(0,0,c.width,c.height);p.forEach(function(d){d.x+=d.dx;d.y+=d.dy;if(d.x<0||d.x>c.width)d.dx*=-1;if(d.y<0||d.y>c.height)d.dy*=-1;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+d.o+')';ctx.fill()});requestAnimationFrame(draw)}draw()})();
+
+/* ---- Scroll reveal ---- */
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});
+document.querySelectorAll('.section, .step-item').forEach(function(el){observer.observe(el)});
+
+/* ---- Nav ---- */
+var nav=document.getElementById('mainNav'),pills=document.getElementById('navPills');
+var sections=document.querySelectorAll('.section[id]');
+sections.forEach(function(s){var a=document.createElement('a');a.href='#'+s.id;a.textContent=s.querySelector('.section-badge')?s.querySelector('.section-badge').textContent.trim():s.id;a.dataset.nav=s.id;pills.appendChild(a)});
+var lastY=0;
+window.addEventListener('scroll',function(){var y=window.scrollY;nav.classList.toggle('visible',y>300);lastY=y;
+var cur='';sections.forEach(function(s){if(y>=s.offsetTop-200)cur=s.id});
+pills.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.dataset.nav===cur)})});
+
+/* ---- Warm-up canvases ---- */
+function setupWarmCanvas(id,color){
+var el=document.querySelector('[data-id="'+id+'"]');if(!el)return;
+var ctx=el.getContext('2d'),drawing=false;
+el.addEventListener('mousedown',function(e){drawing=true;ctx.beginPath();ctx.moveTo(e.offsetX,e.offsetY)});
+el.addEventListener('mousemove',function(e){if(!drawing)return;ctx.lineTo(e.offsetX,e.offsetY);ctx.strokeStyle=color;ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke()});
+el.addEventListener('mouseup',function(){drawing=false});
+el.addEventListener('mouseleave',function(){drawing=false});
+}
+setupWarmCanvas('warm1','#06B6D4');
+setupWarmCanvas('warm2','#F59E0B');
+setupWarmCanvas('warm3','#8B5CF6');
+setupWarmCanvas('warm4','#10B981');
+
+/* ---- Line demos ---- */
+function drawJitteryLine(ctx,w,h){ctx.clearRect(0,0,w,h);ctx.strokeStyle='#ff4757';ctx.lineWidth=2;ctx.beginPath();var y=h/2;ctx.moveTo(20,y);for(var x=20;x<w-20;x+=3){ctx.lineTo(x,y+Math.sin(x*.15)*12+Math.random()*6-3)}ctx.stroke()}
+function drawSmoothLine(ctx,w,h){ctx.clearRect(0,0,w,h);ctx.strokeStyle='#00ff88';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(20,h/2);ctx.lineTo(w-20,h/2);ctx.stroke()}
+var ld1=document.querySelector('[data-id="lineDemo1"]');if(ld1){var c1=ld1.getContext('2d');drawJitteryLine(c1,ld1.width,ld1.height)}
+var ld2=document.querySelector('[data-id="lineDemo2"]');if(ld2){var c2=ld2.getContext('2d');drawSmoothLine(c2,ld2.width,ld2.height)}
+
+document.querySelector('[data-id="replayIntro"]').onclick=function(){
+var ld1=document.querySelector('[data-id="lineDemo1"]');if(ld1){var c1=ld1.getContext('2d');drawJitteryLine(c1,ld1.width,ld1.height)}
+var ld2=document.querySelector('[data-id="lineDemo2"]');if(ld2){var c2=ld2.getContext('2d');drawSmoothLine(c2,ld2.width,ld2.height)}
+};
+
+/* ---- Section 1: Proportions ---- */
+var propCanvas=document.querySelector('[data-id="propCanvas"]');
+var negCanvas=document.querySelector('[data-id="negCanvas"]');
+var showNeg=false;
+function drawProp(){
+if(!propCanvas)return;
+var ctx=propCanvas.getContext('2d'),w=propCanvas.width,h=propCanvas.height;
+var cw=parseInt(document.querySelector('[data-id="cupW"]').value);
+var bw=parseInt(document.querySelector('[data-id="bookW"]').value);
+ctx.clearRect(0,0,w,h);
+var baseY=h-40;
+ctx.fillStyle='rgba(255,255,255,.06)';ctx.fillRect(0,baseY,w,2);
+var cupX=w/2-cw/2-20;
+ctx.fillStyle='#06B6D4';ctx.fillRect(cupX,baseY-100,cw,100);
+ctx.fillStyle='rgba(255,255,255,.15)';ctx.fillRect(cupX,baseY-100,cw,8);
+var bookX=w/2+bw/2+20-bw;
+ctx.fillStyle='#F59E0B';ctx.fillRect(bookX,baseY-60,bw,60);
+ctx.fillStyle='rgba(255,255,255,.15)';ctx.fillRect(bookX,baseY-60,bw,6);
+ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='12px Cairo';ctx.textAlign='center';
+ctx.fillText('Cup: '+cw+'px',cupX+cw/2,baseY+20);
+ctx.fillText('Book: '+bw+'px',bookX+bw/2,baseY+20);
+if(showNeg&&negCanvas){
+var nctx=negCanvas.getContext('2d');nctx.clearRect(0,0,negCanvas.width,negCanvas.height);
+nctx.fillStyle='rgba(6,182,212,.2)';nctx.fillRect(0,0,negCanvas.width,negCanvas.height);
+nctx.globalCompositeOperation='destination-out';
+nctx.fillStyle='rgba(0,0,0,1)';
+nctx.fillRect(cupX,baseY-100,cw,100);
+nctx.fillRect(bookX,baseY-60,bw,60);
+nctx.globalCompositeOperation='source-over';
+nctx.strokeStyle='rgba(255,255,255,.5)';nctx.lineWidth=2;nctx.setLineDash([5,5]);
+nctx.strokeRect(cupX,baseY-100,cw,100);
+nctx.strokeRect(bookX,baseY-60,bw,60);
+nctx.setLineDash([]);
+nctx.fillStyle='#fff';nctx.font='13px Cairo';nctx.textAlign='center';
+nctx.fillText('Ø§Ù„Ù…Ø³Ø§Ø­Ø© Ø§Ù„Ø³Ø§Ù„Ø¨Ø©',negCanvas.width/2,negCanvas.height/2);
+}
+}
+document.querySelector('[data-id="cupW"]').oninput=drawProp;
+document.querySelector('[data-id="bookW"]').oninput=drawProp;
+document.querySelector('[data-id="toggleNeg"]').onclick=function(){showNeg=!showNeg;this.classList.toggle('active',showNeg);drawProp()};
+drawProp();
+
+/* ---- Section 3: Light simulator ---- */
+var lightDot=document.getElementById('lightDot'),lightSphere=document.getElementById('lightSphere');
+var lightZone=document.querySelector('[data-id="lightZone"]');
+var dragging=false;
+if(lightDot&&lightZone){
+lightDot.addEventListener('mousedown',function(e){dragging=true;e.preventDefault()});
+document.addEventListener('mousemove',function(e){if(!dragging)return;
+var rect=lightZone.getBoundingClientRect();
+var x=Math.max(0,Math.min(rect.width-lightDot.offsetWidth,e.clientX-rect.left));
+var y=Math.max(0,Math.min(rect.height-lightDot.offsetHeight,e.clientY-rect.top));
+lightDot.style.left=x+'px';lightDot.style.top=y+'px';
+var nx=(x+12)/rect.width*100;var ny=(y+12)/rect.height*100;
+lightSphere.style.background='radial-gradient(circle at '+nx+'% '+ny+'%,#fff,#ccc 30%,#888 60%,#333 85%,#111)';
+});
+document.addEventListener('mouseup',function(){dragging=false});
+}
+document.querySelector('[data-id="replayLight"]').onclick=function(){
+if(lightDot){lightDot.style.left='180px';lightDot.style.top='10px'}
+if(lightSphere)lightSphere.style.background='radial-gradient(circle at 60% 35%,#fff,#ccc 30%,#888 60%,#333 85%,#111)';
+};
+
+/* ---- Section 2: Object decomposition ---- */
+document.querySelectorAll('#objGallery .obj-card').forEach(function(card){
+card.addEventListener('click',function(){
+var wasActive=this.classList.contains('active');
+document.querySelectorAll('#objGallery .obj-card').forEach(function(c){c.classList.remove('active')});
+if(!wasActive)this.classList.add('active');
+});
+});
+
+/* ---- Section 5: HSV picker ---- */
+function hsvToRgb(h,s,v){
+s/=100;v/=100;var c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c,r=0,g=0,b=0;
+if(h<60){r=c;g=x}else if(h<120){r=x;g=c}else if(h<180){g=c;b=x}else if(h<240){g=x;b=c}else if(h<300){r=x;b=c}else{r=c;b=x}
+return[Math.round((r+m)*255),Math.round((g+m)*255),Math.round((b+m)*255)];
+}
+function updateHsv(){
+var h=parseInt(document.querySelector('[data-id="hueSlider"]').value);
+var s=parseInt(document.querySelector('[data-id="satSlider"]').value);
+var v=parseInt(document.querySelector('[data-id="valSlider"]').value);
+var rgb=hsvToRgb(h,s,v);
+var sw=document.getElementById('hsvSwatch');
+if(sw)sw.style.background='rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
+document.getElementById('hueVal').textContent=h+'Â°';
+document.getElementById('satVal').textContent=s+'%';
+document.getElementById('valVal').textContent=v+'%';
+var desc=document.querySelector('[data-id="hsvDesc"]');
+if(desc){
+if(s<10&&v>90)desc.textContent='Ø§Ù„Ù„ÙˆÙ† Ø´Ø¨Ù‡ Ø£Ø¨ÙŠØ¶ â€” Saturation Ù…Ù†Ø®ÙØ¶Ø© Ø¬Ø¯Ù‹Ø§.';
+else if(s<10&&v<10)desc.textContent='Ø§Ù„Ù„ÙˆÙ† Ø´Ø¨Ù‡ Ø£Ø³ÙˆØ¯ â€” Saturation Ùˆ Value Ù…Ù†Ø®ÙØ¶ÙŠÙ†.';
+else if(v<20)desc.textContent='Ø§Ù„Ù„ÙˆÙ† ØºØ§Ù…Ù‚ Ø¬Ø¯Ù‹Ø§ â€” Value Ù…Ù†Ø®ÙØ¶Ø©.';
+else if(s>80&&v>80)desc.textContent='Ø§Ù„Ù„ÙˆÙ† ÙÙŠ Ø£Ù‚ØµÙ‰ Ù‚ÙˆØªÙ‡ â€” Saturation Ùˆ Value Ø¹Ø§Ù„ÙŠÙŠÙ†.';
+else desc.textContent='ÙƒÙ„ Ø§Ù„Ø£Ø¨Ø¹Ø§Ø¯ Ù…ØªÙˆØ³Ø·Ø© â€” Ø§Ù„Ù„ÙˆÙ† ÙÙŠ Ù‚ÙˆØªÙ‡ Ø§Ù„Ù…ØªÙˆØ³Ø·Ø©.';
+}
+}
+document.querySelector('[data-id="hueSlider"]').oninput=updateHsv;
+document.querySelector('[data-id="satSlider"]').oninput=updateHsv;
+document.querySelector('[data-id="valSlider"]').oninput=updateHsv;
+document.querySelector('[data-id="replayHsv"]').onclick=function(){
+document.querySelector('[data-id="hueSlider"]').value=180;
+document.querySelector('[data-id="satSlider"]').value=100;
+document.querySelector('[data-id="valSlider"]').value=100;
+updateHsv();
+};
+updateHsv();
+
+/* ---- Section 6: Color wheel ---- */
+var wheelCanvas=document.querySelector('[data-id="wheelCanvas"]');
+if(wheelCanvas){
+var wctx=wheelCanvas.getContext('2d');
+for(var a=0;a<360;a++){
+var rad=(a-90)*Math.PI/180;
+wctx.beginPath();wctx.moveTo(130,130);
+wctx.arc(130,130,120,rad,rad+Math.PI*180/180,false);
+wctx.closePath();
+var c2=hsvToRgb(a,100,100);
+wctx.fillStyle='rgb('+c2[0]+','+c2[1]+','+c2[2]+')';wctx.fill();
+}
+wctx.beginPath();wctx.arc(130,130,50,0,Math.PI*2);wctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();wctx.fill();
+}
+var currentHarmony='comp',selectedHue=0;
+function showHarmonyDots(){
+var container=document.querySelector('[data-id="harmonyDots"]');if(!container)return;
+container.innerHTML='';
+var dots=[];
+if(currentHarmony==='comp'){dots=[selectedHue,(selectedHue+180)%360]}
+else if(currentHarmony==='analog'){dots=[(selectedHue-30+360)%360,selectedHue,(selectedHue+30)%360]}
+else{dots=[selectedHue];for(var i=1;i<=5;i++)dots.push((selectedHue+i*30)%360)}
+dots.forEach(function(h){
+var rad=(h-90)*Math.PI/180;var x=130+Math.cos(rad)*85;var y=130+Math.sin(rad)*85;
+var rgb=hsvToRgb(h,100,100);
+var dot=document.createElement('div');dot.className='harmony-dot';
+dot.style.cssText='left:'+x+'px;top:'+y+'px;background:rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
+container.appendChild(dot);
+});
+}
+document.querySelector('[data-id="btnComp"]').onclick=function(){currentHarmony='comp';document.querySelectorAll('[data-harmony]').forEach(function(b){b.classList.remove('active')});this.classList.add('active');showHarmonyDots()};
+document.querySelector('[data-id="btnAnalog"]').onclick=function(){currentHarmony='analog';document.querySelectorAll('[data-harmony]').forEach(function(b){b.classList.remove('active')});this.classList.add('active');showHarmonyDots()};
+document.querySelector('[data-id="btnMono"]').onclick=function(){currentHarmony='mono';document.querySelectorAll('[data-harmony]').forEach(function(b){b.classList.remove('active')});this.classList.add('active');showHarmonyDots()};
+if(wheelCanvas)wheelCanvas.addEventListener('click',function(e){var rect=wheelCanvas.getBoundingClientRect();var x=e.clientX-rect.left-130;var y=e.clientY-rect.top-130;var angle=Math.atan2(y,x)*180/Math.PI+90;if(angle<0)angle+=360;selectedHue=Math.round(angle)%360;showHarmonyDots()});
+showHarmonyDots();
+
+/* ---- Section 6: Palette builder ---- */
+document.querySelectorAll('[data-palette]').forEach(function(btn){
+btn.addEventListener('click',function(){
+var colors=this.dataset.palette.split(',');
+var strip=document.getElementById('paletteStrip');if(!strip)return;
+strip.innerHTML='';colors.forEach(function(c){var d=document.createElement('div');d.style.background=c;strip.appendChild(d)});
+var warn=document.querySelector('[data-id="paletteWarn"]');
+var hueSet=new Set();colors.forEach(function(c){var m=c.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);if(m){var r=parseInt(m[1],16),g=parseInt(m[2],16),b=parseInt(m[3],16);var max=Math.max(r,g,b),min=Math.min(r,g,b);var h=0;if(max!==min){var d=max-min;h=max===r?((g-b)/d+(g<b?6:0))*60:max===g?((b-r)/d+2)*60:((r-g)/d+4)*60}hueSet.add(Math.round(h/30))}});
+if(hueSet.size>3&&warn)warn.style.display='block';else if(warn)warn.style.display='none';
+});
+});
+
+/* ---- Section 6: Mood palette ---- */
+var moodData={
+calm:{colors:['#87CEEB','#ADD8E6','#FFFFFF','#D3D3D3','#98FB98'],desc:'Calm: Ø£Ù„ÙˆØ§Ù† Ù‡Ø§Ø¯ÙŠØ© â€” Light Blue, Sky Blue, White, Soft Gray, Mint Green â€” Analogous'},
+energy:{colors:['#FF4500','#FFD700','#FF6347','#FFA500','#FF1493'],desc:'Energy: Ø£Ù„ÙˆØ§Ù† Ù†Ø§Ø±ÙŠØ© â€” Red-Orange, Gold, Tomato, Orange, Deep Pink â€” Warm'},
+mystery:{colors:['#2C003E','#512DA8','#7B1FA2','#9C27B0','#E040FB'],desc:'Mystery: Ø£Ù„ÙˆØ§Ù† ØºØ§Ù…Ø¶Ø© â€” Deep Purple, Indigo, Purple, Medium Purple, Fuchsia â€” Monochromatic'},
+cozy:{colors:['#D2691E','#DEB887','#F5DEB3','#FFDEAD','#FFE4B5'],desc:'Cozy: Ø£Ù„ÙˆØ§Ù† Ø¯Ø§ÙÙŠØ© â€” Chocolate, BurlyWood, Wheat, NavajoWhite, Moccasin â€” Analogous'},
+lonely:{colors:['#1C3A5F','#2C5F8A','#4682B4','#87CEEB','#B0C4DE'],desc:'Lonely: Ø£Ù„ÙˆØ§Ù† Ø¨Ø§Ø±Ø¯Ø© ÙˆÙˆØ­ÙŠØ¯Ø© â€” Dark Slate Blue, Steel Blue, Sky Blue, Light Steel Blue â€” Monochromatic Cool'},
+heroic:{colors:['#FFD700','#FFA500','#FF6347','#FF4500','#8B0000'],desc:'Heroic: Ø£Ù„ÙˆØ§Ù† Ù‚ÙˆÙŠØ© â€” Gold, OrangeRed, Crimson â€” Warm & Bold'},
+futuristic:{colors:['#00FFFF','#00CED1','#00BFFF','#1E90FF','#0000FF'],desc:'Futuristic: Ø£Ù„ÙˆØ§Ù† ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ© â€” Cyan, DarkCyan, DeepSkyBlue, DodgerBlue, Blue â€” Cool'}
+};
+document.querySelectorAll('[data-mood]').forEach(function(btn){
+btn.addEventListener('click',function(){
+document.querySelectorAll('[data-mood]').forEach(function(b){b.classList.remove('active')});
+this.classList.add('active');
+var mood=this.dataset.mood;var data=moodData[mood];
+var strip=document.getElementById('moodPalette');if(!strip)return;
+strip.innerHTML='';data.colors.forEach(function(c){var d=document.createElement('div');d.style.background=c;strip.appendChild(d)});
+var desc=document.querySelector('[data-id="moodDesc"]');if(desc)desc.textContent=data.desc;
+});
+});
+
+/* ---- Section 7: Zoom comparison ---- */
+function drawRaster(){
+var c=document.querySelector('[data-id="rasterCanvas"]');if(!c)return;var ctx=c.getContext('2d');
+var zoom=parseInt(document.querySelector('[data-id="zoomSlider"]').value);
+ctx.clearRect(0,0,200,200);
+var gridSize=Math.max(2,Math.round(20/zoom));
+for(var y=0;y<200;y+=gridSize){for(var x=0;x<200;x+=gridSize){
+var dx=x-100,dy=y-100;var dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<70){ctx.fillStyle=dist<30?'#193cff':'#00d4aa'}else{ctx.fillStyle='#111638'}
+ctx.fillRect(x,y,gridSize-1,gridSize-1);
+}}
+}
+function drawVector(){
+var c=document.querySelector('[data-id="vectorCanvas"]');if(!c)return;var ctx=c.getContext('2d');
+var zoom=parseInt(document.querySelector('[data-id="zoomSlider"]').value);
+ctx.clearRect(0,0,200,200);
+ctx.beginPath();ctx.arc(100,100,35*zoom/3,0,Math.PI*2);ctx.fillStyle='#193cff';ctx.fill();
+ctx.beginPath();ctx.arc(100,100,20*zoom/3,0,Math.PI*2);ctx.fillStyle='#00d4aa';ctx.fill();
+}
+var zoomSlider=document.querySelector('[data-id="zoomSlider"]');
+if(zoomSlider)zoomSlider.oninput=function(){
+document.querySelector('[data-id="zoomVal"]').textContent=this.value+'x';
+drawRaster();drawVector();
+};
+drawRaster();drawVector();
+
+/* ---- Section 8: File format matching ---- */
+document.querySelector('[data-id="revealAnswers"]').onclick=function(){
+document.querySelectorAll('.match-ans').forEach(function(el){el.classList.add('show')});
+};
+
+/* ---- Activity 1: Checklist ---- */
+document.querySelectorAll('#checklist1 li').forEach(function(li){
+li.addEventListener('click',function(){this.classList.toggle('done')});
+});
+document.querySelector('[data-id="revealModel1"]').onclick=function(){
+var el=document.getElementById('model1Reveal');if(el)el.style.display=el.style.display==='none'?'block':'none';
+this.textContent=el.style.display==='none'?'Ø§Ø¹Ø±Ø¶ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬':'Ø£Ø®ÙÙŠ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬';
+};
+/* Draw model canvas */
+var mc1=document.querySelector('[data-id="modelCanvas1"]');
+if(mc1){
+var mctx=mc1.getContext('2d');
+mctx.fillStyle='#111638';mctx.fillRect(0,0,500,300);
+var shapes=[{x:80,y:150,r:40,type:'sphere'},{x:200,y:150,r:35,type:'cube'},{x:320,y:150,r:35,type:'cylinder'},{x:430,y:150,r:30,type:'cone'}];
+shapes.forEach(function(s){
+mctx.fillStyle='#555';
+if(s.type==='sphere'){mctx.beginPath();mctx.arc(s.x,s.y,s.r,0,Math.PI*2);mctx.fill();
+var g=mctx.createRadialGradient(s.x-10,s.y-10,5,s.x,s.y,s.r);g.addColorStop(0,'#fff');g.addColorStop(.3,'#ccc');g.addColorStop(.7,'#666');g.addColorStop(1,'#222');
+mctx.fillStyle=g;mctx.beginPath();mctx.arc(s.x,s.y,s.r,0,Math.PI*2);mctx.fill();
+mctx.fillStyle='rgba(255,255,255,.3)';mctx.beginPath();mctx.arc(s.x-10,s.y-10,5,0,Math.PI*2);mctx.fill();
+mctx.fillStyle='rgba(0,0,0,.4)';mctx.fillRect(s.x-2,s.y+s.r+5,s.r*2+10,6);
+}else if(s.type==='cube'){
+mctx.fillStyle='#888';mctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);
+mctx.fillStyle='#666';mctx.fillRect(s.x+s.r,s.y-s.r+5,10,s.r*2-5);
+mctx.fillStyle='#aaa';mctx.fillRect(s.x-s.r,s.y-s.r-5,s.r*2,8);
+mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x+5,s.y+s.r+5,s.r*2,6);
+}else if(s.type==='cylinder'){
+mctx.fillStyle='#777';mctx.fillRect(s.x-s.r,s.y-s.r/2,s.r*2,s.r);
+mctx.beginPath();mctx.ellipse(s.x,s.y-s.r/2,s.r,s.r/4,0,0,Math.PI*2);mctx.fillStyle='#999';mctx.fill();
+mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x+5,s.y+s.r/2+5,s.r*2,6);
+}else{
+mctx.beginPath();mctx.moveTo(s.x,s.y-s.r);mctx.lineTo(s.x+s.r,s.y+s.r);mctx.lineTo(s.x-s.r,s.y+s.r);mctx.closePath();
+var g2=mctx.createLinearGradient(s.x-s.r,s.y,s.x+s.r,s.y);g2.addColorStop(0,'#555');g2.addColorStop(.5,'#999');g2.addColorStop(1,'#555');
+mctx.fillStyle=g2;mctx.fill();
+mctx.fillStyle='rgba(0,0,0,.3)';mctx.fillRect(s.x-5,s.y+s.r+5,s.r+10,6);
+}
+mctx.fillStyle='rgba(255,255,255,.6)';mctx.font='11px Cairo';mctx.textAlign='center';
+mctx.fillText(s.type,s.x,s.y+s.r+25);
+});
+}
+
+/* ---- Section 4: Perspective room builder ---- */
+var roomCanvas=document.querySelector('[data-id="roomCanvas"]');
+var roomFurniture=[];
+var vanishingX=350,vanishingY=150;
+var roomPlaced=false;
+var currentFurniture='bed';
+if(roomCanvas){
+var rctx=roomCanvas.getContext('2d');
+function drawRoom(){
+rctx.clearRect(0,0,700,450);
+rctx.fillStyle='rgba(255,255,255,.03)';rctx.fillRect(0,0,700,450);
+rctx.strokeStyle='rgba(255,255,255,.2)';rctx.lineWidth=1;
+rctx.setLineDash([5,5]);
+rctx.beginPath();rctx.moveTo(0,vanishingY);rctx.lineTo(700,vanishingY);rctx.stroke();
+rctx.setLineDash([]);
+rctx.fillStyle='#EF4444';rctx.beginPath();rctx.arc(vanishingX,vanishingY,6,0,Math.PI*2);rctx.fill();
+rctx.fillStyle='rgba(255,255,255,.5)';rctx.font='11px Cairo';rctx.textAlign='center';rctx.fillText('Vanishing Point',vanishingX,vanishingY-12);
+if(roomPlaced){
+rctx.strokeStyle='rgba(255,255,255,.12)';rctx.lineWidth=1;
+rctx.beginPath();rctx.moveTo(100,100);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.beginPath();rctx.moveTo(600,100);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.beginPath();rctx.moveTo(100,350);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.beginPath();rctx.moveTo(600,350);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.strokeRect(100,100,500,250);
+}
+roomFurniture.forEach(function(f){
+rctx.fillStyle=f.color;rctx.fillRect(f.x,f.y,f.w,f.h);
+rctx.strokeStyle='rgba(255,255,255,.3)';rctx.lineWidth=1;
+rctx.beginPath();rctx.moveTo(f.x+f.w,f.y);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.beginPath();rctx.moveTo(f.x,f.y);rctx.lineTo(vanishingX,vanishingY);rctx.stroke();
+rctx.fillStyle='rgba(255,255,255,.6)';rctx.font='10px Cairo';rctx.textAlign='center';rctx.fillText(f.label,f.x+f.w/2,f.y+f.h+12);
+});
+}
+roomCanvas.addEventListener('click',function(e){
+var rect=roomCanvas.getBoundingClientRect();
+var scaleX=roomCanvas.width/rect.width;var scaleY=roomCanvas.height/rect.height;
+var x=(e.clientX-rect.left)*scaleX;var y=(e.clientY-rect.top)*scaleY;
+if(!roomPlaced){vanishingX=x;vanishingY=y;roomPlaced=true;drawRoom();return}
+var colors={bed:'#06B6D4',desk:'#F59E0B',shelf:'#8B5CF6'};
+var labels={bed:'Bed',desk:'Desk',shelf:'Shelf'};
+var sizes={bed:{w:80,h:40},desk:{w:60,h:35},shelf:{w:50,h:50}};
+var s=sizes[currentFurniture];
+roomFurniture.push({x:x-s.w/2,y:y-s.h/2,w:s.w,h:s.h,color:colors[currentFurniture],label:labels[currentFurniture]});
+drawRoom();
+});
+}
+document.querySelector('[data-id="addBed"]').onclick=function(){currentFurniture='bed'};
+document.querySelector('[data-id="addDesk"]').onclick=function(){currentFurniture='desk'};
+document.querySelector('[data-id="addShelf"]').onclick=function(){currentFurniture='shelf'};
+document.querySelector('[data-id="clearRoom"]').onclick=function(){roomFurniture=[];roomPlaced=false;vanishingX=350;vanishingY=150;drawRoom()};
+document.querySelector('[data-id="replayRoom"]').onclick=function(){roomFurniture=[];roomPlaced=false;vanishingX=350;vanishingY=150;drawRoom()};
+drawRoom();
+
+/* ---- Activity 2: Reveal model ---- */
+document.querySelector('[data-id="revealModel2"]').onclick=function(){
+var el=document.getElementById('model2Reveal');if(el)el.style.display=el.style.display==='none'?'block':'none';
+this.textContent=el.style.display==='none'?'Ø§Ø¹Ø±Ø¶ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬':'Ø£Ø®ÙÙŠ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬';
+};
+
+/* ---- Quiz system ---- */
+var quizData={
+g1:{correct:0,exps:['ØµØ­ÙŠØ­ â€” Ø§Ù„ÙƒØªØ§Ø¨ (Ù¡Ù¥ Ø³Ù…) ØªÙ‚Ø±ÙŠØ¨Ù‹Ø§ Ø¶Ø¹Ù Ø§Ù„ÙƒÙˆØ¨Ø§ÙŠØ© (Ù¨ Ø³Ù…). Ø§Ù„ØªÙ†Ø§Ø³Ø¨ Ù…Ø¸Ø¨ÙˆØ·.','ØºÙ„Ø· â€” Ù¡Ù¥Ã·Ù¨ â‰ˆ Ù¡.Ù©ØŒ ÙŠØ¹Ù†ÙŠ Ø§Ù„ÙƒØªØ§Ø¨ ØªÙ‚Ø±ÙŠØ¨Ù‹Ø§ Ø¶Ø¹Ù Ù…Ø´ triple.','ØºÙ„Ø· â€” ÙÙŠÙ‡ Ø¹Ù„Ø§Ù‚Ø© Ù…Ø¨Ø§Ø´Ø±Ø©: Ø§Ù„ØªÙ†Ø§Ø³Ø¨ Ø¨ÙŠÙ† Ø§Ù„Ø£Ø­Ø¬Ø§Ù….']},
+g2:{correct:2,exps:['ØºÙ„Ø· â€” Highlight Ù‡ÙŠ Ø£Ù„Ù…Ø¹ Ù†Ù‚Ø·Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø¬Ø³Ù… Ù†ÙØ³Ù‡.','ØºÙ„Ø· â€” Core Shadow Ù‡Ùˆ Ø§Ù„Ø¸Ù„ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ø¬Ø³Ù….','ØµØ­ÙŠØ­ â€” Cast Shadow Ù‡Ùˆ Ø§Ù„Ø¸Ù„ Ø§Ù„Ø³Ø§Ù‚Ø· Ø¹Ù„Ù‰ Ø§Ù„Ø£Ø±Ø¶ ÙÙŠ Ø§Ù„Ø§ØªØ¬Ø§Ù‡ Ø§Ù„Ù…Ø¹Ø§ÙƒØ³ Ù„Ù„Ø¶ÙˆØ¡.','ØºÙ„Ø· â€” Reflected Light Ù‡Ùˆ Ø§Ù„Ø¶ÙˆØ¡ Ø§Ù„Ù…Ù†Ø¹ÙƒØ³ Ù…Ù† Ø§Ù„Ø£Ø±Ø¶ Ù„Ù„Ø¬Ø³Ù….']},
+g3:{correct:1,exps:['ØºÙ„Ø· â€” Overlap Ù‡Ùˆ Ù„Ù…Ø§ Ø­Ø§Ø¬Ø© Ø¨ØªØºØ·ÙŠ Ø­Ø§Ø¬Ø© ØªØ§Ù†ÙŠØ©.','ØµØ­ÙŠØ­ â€” Scale: Ø§Ù„Ø¨Ø¹ÙŠØ¯ Ø¨ÙŠØ¨Ø§Ù† Ø£ØµØºØ± Ù…Ù† Ø§Ù„Ù‚Ø±ÙŠØ¨.','ØºÙ„Ø· â€” Placement Ù‡Ùˆ ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ù…ÙƒØ§Ù† (Ø§Ù„Ù„ÙŠ ØªØ­Øª Ø£Ù‚Ø±Ø¨).']},
+g4:{correct:0,exps:['ØµØ­ÙŠØ­ â€” Hue Ù‡Ùˆ Ø¹Ø§Ø¦Ù„Ø© Ø§Ù„Ù„ÙˆÙ† Ù†ÙØ³Ù‡ (Ø§Ù„Ø£Ø­Ù…Ø±ØŒ Ø§Ù„Ø£Ø²Ø±Ù‚ØŒ Ø§Ù„Ø¨Ù†ÙØ³Ø¬ÙŠ...). ØªØºÙŠÙŠØ± Ø§Ù„Ù„ÙˆÙ† Ù…Ù† Ø£Ø²Ø±Ù‚ Ù„Ø¨Ù†åºŸç‰©ç´« ÙŠØ¹Ù†ÙŠ ØªØºÙŠÙŠØ± ÙÙŠ Ø§Ù„Ù€ Hue.','ØºÙ„Ø· â€” Saturation Ù‡ÙŠ Ù‚ÙˆØ© Ø§Ù„Ù„ÙˆÙ† (Ù…Ù† Ø¨Ø§Ù‡Øª Ù„Ù‚ÙˆÙŠ).','ØºÙ„Ø· â€” Value Ù‡ÙŠ Ø¯Ø±Ø¬Ø© Ø§Ù„Ø³Ø·ÙˆØ¹ (ÙØ§ØªØ­/ØºØ§Ù…Ù‚).']},
+g5:{correct:1,exps:['ØºÙ„Ø· â€” Complementary Ù‡Ù…Ø§ Ø§Ù„Ù…ØªÙ‚Ø§Ø¨Ù„ÙŠÙ† ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø©.','ØµØ­ÙŠØ­ â€” Analogous Ù‡Ù…Ø§ Ø§Ù„Ù…ØªØ¬Ø§ÙˆØ±ÙŠÙ† ÙÙŠ Ø§Ù„Ø¹Ø¬Ù„Ø©.','ØºÙ„Ø· â€” Monochromatic Ù‡Ùˆ Ù„ÙˆÙ† ÙˆØ§Ø­Ø¯ Ø¨Ø¯Ø±Ø¬Ø§Øª.']},
+g6:{correct:0,exps:['ØµØ­ÙŠØ­ â€” Ø§Ù„Ø£Ø­Ù…Ø± Ù…Ù† Ø£Ù„ÙˆØ§Ù† Warm: Ø·Ø§Ù‚Ø© ÙˆØ­Ù…Ø§Ø³ ÙˆØ£Ø­ÙŠØ§Ù†Ù‹Ø§ Ø®Ø·Ø±.','ØºÙ„Ø· â€” Cool Ù‡Ùˆ Ø£Ø²Ø±Ù‚/Ø£Ø®Ø¶Ø±/Ø¨Ù†ÙØ³Ø¬ÙŠ: Ù‡Ø¯ÙˆØ¡ ÙˆØºÙ…ÙˆØ¶.','ØºÙ„Ø· â€” Neutral Ù‡Ùˆ Ø£Ø¨ÙŠØ¶/Ø±Ù…Ø§Ø¯ÙŠ/Ø£Ø³ÙˆØ¯: Ø¨Ø³Ø§Ø·Ø© ÙˆØ§Ø­ØªØ±Ø§ÙÙŠØ©.']},
+g7:{correct:1,exps:['ØºÙ„Ø· â€” Raster Ø¨ØªØªØ´ÙˆØ´ Ù„Ùˆ ÙƒØ¨Ø±Ù†Ø§Ù‡Ø§. Ù„Ù„ÙˆØ¬ÙˆÙ‡Ø§Øª Ø§Ù„Ù…Ø·Ø¨ÙˆØ¹Ø© Ø¨Ø­Ø¬Ù… Ø¶Ø®Ù… Ù„Ø§Ø²Ù… Vector.','ØµØ­ÙŠØ­ â€” Vector Ù…Ø¹Ù…ÙˆÙ„Ø© Ù…Ù† paths Ø±ÙŠØ§Ø¶ÙŠØ©ØŒ Ø¨ØªÙØ¶Ù„ ÙˆØ§Ø¶Ø­Ø© Ø£ÙŠ Ø­Ø¬Ù….']}
+};
+document.querySelectorAll('.quiz-opts').forEach(function(optsDiv){
+var fbDiv=optsDiv.nextElementSibling;
+var groupKey=optsDiv.dataset.g;
+var qData=quizData[groupKey];
+optsDiv.querySelectorAll('button').forEach(function(btn){
+btn.addEventListener('click',function(){
+if(optsDiv.dataset.answered)return;
+optsDiv.dataset.answered='1';
+var chosen=parseInt(this.dataset.a);
+optsDiv.querySelectorAll('button').forEach(function(b){b.disabled=true});
+if(chosen===qData.correct){this.classList.add('correct')}
+else{this.classList.add('wrong');optsDiv.children[qData.correct].classList.add('correct')}
+fbDiv.style.display='block';fbDiv.textContent=qData.exps[chosen];
+fbDiv.style.background=chosen===qData.correct?'rgba(0,255,136,.1)':'rgba(255,71,87,.1)';
+fbDiv.style.color=chosen===qData.correct?'var(--success)':'var(--danger)';
+});
+});
+});
+document.querySelectorAll('.quiz-skip').forEach(function(btn){
+btn.addEventListener('click',function(){
+var groupKey=this.dataset.gskip;
+var optsDiv=document.querySelector('[data-g="'+groupKey+'"]');
+if(!optsDiv||optsDiv.dataset.answered)return;
+optsDiv.dataset.answered='1';
+var qData=quizData[groupKey];
+optsDiv.querySelectorAll('button').forEach(function(b){b.disabled=true});
+optsDiv.children[qData.correct].classList.add('correct');
+var fbDiv=optsDiv.nextElementSibling;
+fbDiv.style.display='block';fbDiv.textContent='Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø© Ø§Ù„ØµØ­ÙŠØ­Ø©: '+qData.exps[qData.correct];
+fbDiv.style.background='rgba(0,212,170,.1)';fbDiv.style.color='var(--accent)';
+});
+});
+
+/* ---- Closing chain animation ---- */
+document.querySelectorAll('#closingChain .step-item').forEach(function(el,i){
+setTimeout(function(){el.classList.add('visible')},i*200);
+});
+/* Hero chain */
+document.querySelectorAll('#heroChain .step-item').forEach(function(el,i){
+setTimeout(function(){el.classList.add('visible')},i*200);
+});
+})();
+</script>
+</body>
+</html>
