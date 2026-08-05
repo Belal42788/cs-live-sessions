@@ -1108,13 +1108,28 @@ window.addEventListener('scroll',function(){
   try{var saved=JSON.parse(localStorage.getItem('cs_myproject')||'{}');for(var k in fields){if(saved[k])fields[k]=saved[k]}}catch(e){}
   Object.keys(fields).forEach(function(k){
     var el=document.querySelector('[data-field="'+k+'"]');
-    if(el){el.value=fields[k];el.addEventListener('input',function(){fields[k]=el.value})}
+    if(el){
+      el.value=fields[k]||'';
+      el.addEventListener('input',function(){fields[k]=el.value});
+      el.addEventListener('change',function(){fields[k]=el.value});
+    }
   });
-  if(save)save.addEventListener('click',function(){
+  function saveAll(){
+    Object.keys(fields).forEach(function(k){
+      var el=document.querySelector('[data-field="'+k+'"]');
+      if(el)fields[k]=el.value;
+    });
     try{localStorage.setItem('cs_myproject',JSON.stringify(fields))}catch(e){}
-    var btn=save;btn.textContent='تم الحفظ ✓';setTimeout(function(){btn.textContent='حفظ المشروع'},1500);
+    return fields;
+  }
+  if(save)save.addEventListener('click',function(){
+    saveAll();
+    var btn=save;btn.textContent='تم الحفظ ✓';
+    btn.style.borderColor='var(--success)';btn.style.color='var(--success)';
+    setTimeout(function(){btn.textContent='حفظ المشروع';btn.style.borderColor='';btn.style.color=''},1800);
   });
-  window.__project=function(){return fields};
+  window.__project=saveAll;
+  window.__saveProject=saveAll;
 })();
 // keyboard nav
 (function(){
