@@ -87,6 +87,7 @@ body{
 /* error box */
 .error-box{border:1px solid rgba(255,71,87,.2);background:rgba(255,71,87,.05);border-radius:12px;padding:16px;margin-top:1.6rem}
 .error-box h4{color:var(--danger);font-size:.95rem;margin-bottom:.5rem}
+.error-box h4::first-letter{display:inline-block;animation:emjShake 1.5s ease-in-out infinite}
 .error-box li{color:var(--dim);font-size:.88rem;margin-bottom:.35rem;list-style:disc;margin-right:1.2rem}
 /* activity card */
 .activity-card{background:rgba(139,92,246,.04);border:2px dashed rgba(139,92,246,.35);border-radius:24px;padding:26px;margin:1.4rem 0}
@@ -106,6 +107,7 @@ body{
 .quiz-fb{display:none;margin-top:.6rem;padding:.7rem .9rem;border-radius:10px;font-size:.85rem}
 .quiz-reveal-btn{background:rgba(0,212,170,.1);border:1px solid var(--accent);color:var(--accent);padding:9px 20px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-bottom:1rem;transition:all .2s}
 .quiz-reveal-btn:hover{background:rgba(0,212,170,.2)}
+.quiz-reveal-btn::first-letter{display:inline-block;animation:emjPulse 1.5s ease-in-out infinite}
 .quiz-skip{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.8rem;margin-top:.6rem;transition:all .2s}
 .quiz-skip:hover{color:var(--text);border-color:var(--dim)}
 /* buttons */
@@ -193,6 +195,19 @@ img{max-width:100%}
 .mt{margin-top:1.2rem}
 code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:1px 8px;border-radius:6px;font-size:.85em;direction:ltr;unicode-bidi:isolate}
 [dir="ltr"]{direction:ltr;unicode-bidi:isolate}
+/* emoji animations */
+.emoji-pulse{animation:emjPulse 2s ease-in-out infinite}
+.emoji-shake{animation:emjShake 0.6s ease-in-out infinite}
+.emoji-walk{animation:emjWalk 1.2s ease-in-out infinite}
+.emoji-float{animation:emjFloat 2.5s ease-in-out infinite}
+.emoji-spin{animation:emjSpin 1.8s linear infinite}
+.emoji-glow{animation:emjGlow 2s ease-in-out infinite}
+@keyframes emjPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes emjShake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-3px)}20%,40%,60%,80%{transform:translateX(3px)}}
+@keyframes emjWalk{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes emjFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes emjSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes emjGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,255,255,.3))}50%{filter:drop-shadow(0 0 12px rgba(25,60,255,.6))}}
 </style>
 </head>
 <body>
@@ -234,7 +249,7 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   <div class="orb o2"></div>
   <div class="orb o3"></div>
   <div class="wrap">
-    <span class="hero-el hero-badge">The Creative Process</span>
+    <span class="hero-el hero-badge">🎨 The Creative Process</span>
     <h1 class="hero-el">الرحلة الإبداعية:<br><span>من الـ References للعرض النهائي</span></h1>
     <p class="hero-el">من أول صورة Reference لحد ما تقف تشرح مشروعك — رحلة كل مصمم محترف. ابدأ من هنا واتحرك معانا خطوة بخطوة.</p>
     <div class="hero-el hero-btn"><a class="btn" href="#sec-intro">🚀 نبدأ الرحلة</a></div>
@@ -1161,7 +1176,8 @@ window.addEventListener('scroll',function(){
           fb.style.background=correct?'rgba(0,255,136,.08)':'rgba(255,71,87,.08)';
           fb.style.border='1px solid '+(correct?'var(--success)':'var(--danger)');
           fb.style.color=correct?'var(--success)':'var(--danger)';
-          fb.textContent=correct?'✓ '+btn.getAttribute('data-exp'):'✗ '+btn.getAttribute('data-exp');
+          var emoji=correct?'✅':'❌';
+          fb.innerHTML='<span class="emoji-pulse" style="font-size:1.2rem;margin-left:6px">'+emoji+'</span> '+(correct?'✓ ':'✗ ')+btn.getAttribute('data-exp');
         }
         if(!correct){
           q.querySelectorAll('.quiz-opts button').forEach(function(b){
@@ -1312,7 +1328,12 @@ window.addEventListener('scroll',function(){
 // ---------- checklists ----------
 (function(){
   document.querySelectorAll('.checklist li').forEach(function(li){
-    li.addEventListener('click',function(){li.classList.toggle('done')});
+    li.addEventListener('click',function(){
+      li.classList.toggle('done');
+      var check=li.querySelector('.check');
+      if(li.classList.contains('done')&&check){check.classList.add('emoji-pulse')}
+      else if(check){check.classList.remove('emoji-pulse')}
+    });
   });
 })();
 // ---------- what-if generator ----------
@@ -1332,7 +1353,7 @@ window.addEventListener('scroll',function(){
       c.classList.add('on');
       if(selA&&selB){
         var A=map[selA.getAttribute('data-id')],B=map[selB.getAttribute('data-id')];
-        result.textContent='What if '+A+' في وسط '+B+'؟ 🚀 — ابدأ ارسم و شوف هيطلع إيه!';
+        result.innerHTML='<span class="emoji-glow" style="font-size:1.4rem">🚀</span> What if <strong>'+A+'</strong> في وسط <strong>'+B+'</strong>؟ — ابدأ ارسم و شوف هيطلع إيه!';
       }
     });
   });
@@ -1369,13 +1390,27 @@ window.addEventListener('scroll',function(){
 (function(){
   var j=document.querySelector('[data-id="journey"]');
   if(!j)return;
-  var steps=['References','Mood Board','Inspiration & Analysis','Theme & Mood','Inspiration Map (3 Concepts)','Brainstorming & Iteration','Thumbnails','Feedback (Give & Receive)','Peer Critique','Final Production','Refinement','Artist Statement','العرض النهائي 🎉'];
-  steps.forEach(function(s){
+  var steps=[
+    {t:'References',e:'🔍',a:'emjFloat'},
+    {t:'Mood Board',e:'🎨',a:'emjPulse'},
+    {t:'Inspiration & Analysis',e:'💡',a:'emjGlow'},
+    {t:'Theme & Mood',e:'🎭',a:'emjFloat'},
+    {t:'Inspiration Map (3 Concepts)',e:'🗺️',a:'emjPulse'},
+    {t:'Brainstorming & Iteration',e:'🧠',a:'emjGlow'},
+    {t:'Thumbnails',e:'✏️',a:'emjWalk'},
+    {t:'Feedback (Give & Receive)',e:'💬',a:'emjFloat'},
+    {t:'Peer Critique',e:'🤝',a:'emjPulse'},
+    {t:'Final Production',e:'🏗️',a:'emjGlow'},
+    {t:'Refinement',e:'🔧',a:'emjWalk'},
+    {t:'Artist Statement',e:'🎤',a:'emjFloat'},
+    {t:'العرض النهائي 🎉',e:'🏆',a:'emjPulse'}
+  ];
+  steps.forEach(function(s,i){
     var n=document.createElement('div');
     n.className='jnode';
-    n.innerHTML=s;
+    n.innerHTML='<span class="'+s.a+'" style="font-size:1.4rem;margin-left:8px">'+s.e+'</span> '+s.t;
     j.appendChild(n);
-    if(s!==steps[steps.length-1]){var a=document.createElement('span');a.className='step-arrow';a.textContent='▼';n.appendChild(a)}
+    if(i<steps.length-1){var a=document.createElement('span');a.className='step-arrow';a.textContent='▼';n.appendChild(a)}
   });
 })();
 // ---------- final summary ----------
