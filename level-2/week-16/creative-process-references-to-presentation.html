@@ -182,8 +182,10 @@ body{
 .checklist .check{color:var(--dim);font-weight:900}
 /* journey */
 .journey{display:flex;flex-direction:column;align-items:center;gap:0;margin:2rem 0}
-.jnode{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:.8rem 1.4rem;width:88%;max-width:460px;text-align:center;position:relative;font-weight:700;font-size:.9rem}
-.jnode .step-arrow{display:block;color:var(--accent);font-size:1.4rem;margin:.3rem 0}
+.jnode{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:.7rem 1.4rem;width:88%;max-width:460px;text-align:center;font-weight:700;font-size:.88rem;position:relative;transition:all .3s}
+.jnode:hover{background:var(--card-hover);border-color:rgba(25,60,255,.3);transform:translateY(-2px)}
+.jarrow{display:flex;align-items:center;justify-content:center;height:32px}
+.jarrow svg{width:20px;height:20px;filter:drop-shadow(0 0 6px rgba(0,212,170,.4))}
 /* misc */
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:.8rem 0}
 .legend span{font-size:.75rem;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--dim)}
@@ -1390,6 +1392,7 @@ window.addEventListener('scroll',function(){
 (function(){
   var j=document.querySelector('[data-id="journey"]');
   if(!j)return;
+  var svgArrow='<svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
   var steps=[
     {t:'References',e:'🔍',a:'emjFloat'},
     {t:'Mood Board',e:'🎨',a:'emjPulse'},
@@ -1408,9 +1411,14 @@ window.addEventListener('scroll',function(){
   steps.forEach(function(s,i){
     var n=document.createElement('div');
     n.className='jnode';
-    n.innerHTML='<span class="'+s.a+'" style="font-size:1.4rem;margin-left:8px">'+s.e+'</span> '+s.t;
+    n.innerHTML='<span class="'+s.a+'" style="font-size:1.3rem;margin-left:8px">'+s.e+'</span> '+s.t;
     j.appendChild(n);
-    if(i<steps.length-1){var a=document.createElement('span');a.className='step-arrow';a.textContent='▼';n.appendChild(a)}
+    if(i<steps.length-1){
+      var arrow=document.createElement('div');
+      arrow.className='jarrow';
+      arrow.innerHTML=svgArrow;
+      j.appendChild(arrow);
+    }
   });
 })();
 // ---------- final summary ----------
