@@ -44,10 +44,11 @@ body{
   backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);
   transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .nav.visible{transform:translateY(0)}
-.nav-inner{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.nav-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;background:#193cff}
-.nav-pills{display:flex;gap:6px;flex-wrap:wrap;flex:1;justify-content:flex-end}
-.nav-pills a{color:var(--dim);text-decoration:none;font-size:.78rem;padding:6px 12px;border-radius:25px;border:1px solid transparent;transition:all .2s}
+.nav-inner{max-width:1100px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;gap:12px}
+.nav-logo{width:30px;height:30px;border-radius:8px;object-fit:contain;background:#193cff;flex-shrink:0}
+.nav-pills{display:flex;gap:4px;flex:1;justify-content:flex-end;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;white-space:nowrap}
+.nav-pills::-webkit-scrollbar{display:none}
+.nav-pills a{color:var(--dim);text-decoration:none;font-size:.72rem;padding:4px 10px;border-radius:20px;border:1px solid transparent;transition:all .2s;flex-shrink:0}
 .nav-pills a:hover,.nav-pills a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
 /* hero */
 .hero{min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:70px 20px 50px}
