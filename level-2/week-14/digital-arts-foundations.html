@@ -331,8 +331,8 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <div class="shape-toggle-stage">
         <div class="shape-fig" id="shapeFig">
           <svg id="formSvg" width="170" height="170" viewBox="0 0 170 170">
-            <path id="formTop" d="M40 65 L15 40 L95 40 L120 65 Z" fill="#7c4dd1" opacity="0"/>
-            <path id="formSide" d="M120 65 L95 40 L95 100 L120 125 Z" fill="#6d3fb8" opacity="0"/>
+            <path id="formRight" d="M120 65 L138 77 L138 137 L120 125 Z" fill="#6d3fb8" opacity="0"/>
+            <path id="formBottom" d="M40 125 L120 125 L138 137 L58 137 Z" fill="#7c4dd1" opacity="0"/>
             <rect id="formFront" x="40" y="65" width="80" height="60" fill="#8B5CF6" rx="4"/>
           </svg>
         </div>
@@ -886,20 +886,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ===== SHAPE -> FORM ===== */
   var formFront = document.getElementById('formFront');
-  var formTop = document.getElementById('formTop');
-  var formSide = document.getElementById('formSide');
+  var formRight = document.getElementById('formRight');
+  var formBottom = document.getElementById('formBottom');
   var formOut = document.getElementById('formOut');
   var formOn = false;
   formFront.onclick = function () {
     formOn = !formOn;
-    formTop.setAttribute('opacity', formOn ? '1' : '0');
-    formSide.setAttribute('opacity', formOn ? '1' : '0');
+    formRight.setAttribute('opacity', formOn ? '1' : '0');
+    formBottom.setAttribute('opacity', formOn ? '1' : '0');
     formOut.textContent = formOn ? 'Form (مجسم بثلاثة أبعاد) 🧊' : 'Shape (شكل مسطح)';
   };
   document.getElementById('formReset').onclick = function () {
     formOn = false;
-    formTop.setAttribute('opacity', '0');
-    formSide.setAttribute('opacity', '0');
+    formRight.setAttribute('opacity', '0');
+    formBottom.setAttribute('opacity', '0');
     formOut.textContent = 'Shape (شكل مسطح)';
   };
 
