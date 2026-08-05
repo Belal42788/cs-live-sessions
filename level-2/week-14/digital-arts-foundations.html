@@ -268,9 +268,9 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <button class="btn btn-ghost" id="q1Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
       <div class="quiz-hidden" id="q1Box">
         <p style="margin-bottom:8px">"إشارة تحذير المرور" — دي تعتبر إيه؟</p>
-        <button class="quiz-q" data-val="Design">Design — رسالة وظيفية واضحة</button>
-        <button class="quiz-q" data-val="Art">Art — تعبير عن مشاعر</button>
-        <span class="quiz-feedback" id="q1Fb"></span>
+        <button class="quiz-q" data-val="Design" data-g="1">Design — رسالة وظيفية واضحة</button>
+        <button class="quiz-q" data-val="Art" data-g="1">Art — تعبير عن مشاعر</button>
+        <span class="quiz-feedback" id="q1Fb" data-fb="1"></span>
         <div class="btn-row"><button class="btn btn-ghost" id="q1Skip">تخطي</button></div>
       </div>
     </div>
@@ -331,9 +331,9 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <div class="shape-toggle-stage">
         <div class="shape-fig" id="shapeFig">
           <svg id="formSvg" width="170" height="170" viewBox="0 0 170 170">
-            <rect id="formTop" x="25" y="15" width="100" height="60" fill="#7c4dd1" opacity="0"/>
-            <path id="formSide" d="M25 75 L125 75 L125 135 L25 135 Z" fill="#6d3fb8" opacity="0"/>
-            <rect id="formFront" x="25" y="75" width="100" height="60" fill="#8B5CF6"/>
+            <path id="formTop" d="M40 65 L15 40 L95 40 L120 65 Z" fill="#7c4dd1" opacity="0"/>
+            <path id="formSide" d="M120 65 L95 40 L95 100 L120 125 Z" fill="#6d3fb8" opacity="0"/>
+            <rect id="formFront" x="40" y="65" width="80" height="60" fill="#8B5CF6" rx="4"/>
           </svg>
         </div>
         <div style="text-align:center">
@@ -348,10 +348,10 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <button class="btn btn-ghost" id="q2Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
       <div class="quiz-hidden" id="q2Box">
         <p style="margin-bottom:8px">الخط المتعرّج (Zigzag) بيدي إحساس إيه؟</p>
-        <button class="quiz-q" data-val="Tension">توتر وقلق</button>
-        <button class="quiz-q" data-val="Calm">هدوء وارتياح</button>
-        <button class="quiz-q" data-val="Strength">قوة واستقرار</button>
-        <span class="quiz-feedback" id="q2Fb"></span>
+        <button class="quiz-q" data-val="Tension" data-g="1">توتر وقلق</button>
+        <button class="quiz-q" data-val="Calm" data-g="1">هدوء وارتياح</button>
+        <button class="quiz-q" data-val="Strength" data-g="1">قوة واستقرار</button>
+        <span class="quiz-feedback" id="q2Fb" data-fb="1"></span>
         <div class="btn-row"><button class="btn btn-ghost" id="q2Skip">تخطي</button></div>
       </div>
     </div>
@@ -476,10 +476,10 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <button class="btn btn-ghost" id="q4Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
       <div class="quiz-hidden" id="q4Box">
         <p style="margin-bottom:8px">نقط اتحطت جنب بعض بشكل قريب، فالعين شافتها مجموعة واحدة — ده مبدأ إيه؟</p>
-        <button class="quiz-q" data-val="Proximity">Proximity</button>
-        <button class="quiz-q" data-val="Continuation">Continuation</button>
-        <button class="quiz-q" data-val="Closure">Closure</button>
-        <span class="quiz-feedback" id="q4Fb"></span>
+        <button class="quiz-q" data-val="Proximity" data-g="1">Proximity</button>
+        <button class="quiz-q" data-val="Continuation" data-g="1">Continuation</button>
+        <button class="quiz-q" data-val="Closure" data-g="1">Closure</button>
+        <span class="quiz-feedback" id="q4Fb" data-fb="1"></span>
         <div class="btn-row"><button class="btn btn-ghost" id="q4Skip">تخطي</button></div>
       </div>
     </div>
@@ -526,9 +526,9 @@ footer{position:relative;z-index:1;text-align:center;margin-top:60px;padding:30p
       <button class="btn btn-ghost" id="q5Reveal" style="display:block;width:100%">🧠 سؤال سريع (اضغط للإظهار)</button>
       <div class="quiz-hidden" id="q5Box">
         <p style="margin-bottom:8px">شركة ألعاب أطفال عايزة لوجو — أنهي شكل أنسب؟</p>
-        <button class="quiz-q" data-val="Circle">دواير ناعمة ودودة</button>
-        <button class="quiz-q" data-val="Triangle">مثلثات حادة قوية</button>
-        <span class="quiz-feedback" id="q5Fb"></span>
+        <button class="quiz-q" data-val="Circle" data-g="1">دواير ناعمة ودودة</button>
+        <button class="quiz-q" data-val="Triangle" data-g="1">مثلثات حادة قوية</button>
+        <span class="quiz-feedback" id="q5Fb" data-fb="1"></span>
         <div class="btn-row"><button class="btn btn-ghost" id="q5Skip">تخطي</button></div>
       </div>
     </div>
@@ -925,14 +925,15 @@ document.addEventListener('DOMContentLoaded', function () {
       })(prins[i]);
     }
     prinStage.innerHTML = '';
-    var triFill = pState.contrast ? 'var(--text)' : 'var(--dim)';
-    var tri = '<svg width="200" height="150" viewBox="0 0 200 150"><polygon points="100,15 175,135 25,135" fill="' + triFill + '"/></svg>';
+    var triFill = pState.contrast ? '#fff' : '#8892b0';
+    var triGlow = pState.emphasis ? 'drop-shadow(0 0 22px rgba(255,255,255,.6))' : 'none';
+    var triScale = pState.proportion ? 1 : 0.55;
+    var tri = '<svg width="180" height="140" viewBox="0 0 180 140" style="transform:scale(' + triScale + ');filter:' + triGlow + '"><polygon points="90,12 168,128 12,128" fill="' + triFill + '" stroke="' + (pState.contrast ? 'var(--accent)' : 'none') + '" stroke-width="2"/></svg>';
     var triWrap = document.createElement('div');
     triWrap.style.position = 'absolute';
     triWrap.style.left = '50%';
     triWrap.style.top = '50%';
     triWrap.style.transform = 'translate(-50%,-50%)';
-    triWrap.style.opacity = pState.emphasis ? '1' : '0.25';
     triWrap.innerHTML = tri;
     prinStage.appendChild(triWrap);
     var circleSpecs = [
@@ -952,7 +953,7 @@ document.addEventListener('DOMContentLoaded', function () {
       c.style.height = dia + 'px';
       c.style.borderRadius = '50%';
       c.style.background = circleSpecs[j].c;
-      c.style.opacity = pState.contrast ? '0.8' : '1';
+      c.style.opacity = pState.contrast ? '0.7' : '1';
       c.style.transition = 'opacity .3s';
       prinStage.appendChild(c);
     }
@@ -1150,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     for (var i = 0; i < qs.length; i++) {
       (function (q) {
         q.onclick = function () {
-          var g = q.getAttribute('data-g');
+          var g = q.getAttribute('data-g') || '1';
           var answer = answers[g];
           var fb = box.querySelector('[data-fb="' + g + '"]');
           var siblings = box.querySelectorAll('.quiz-q');
