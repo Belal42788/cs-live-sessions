@@ -183,12 +183,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك</h4>
 <div class="quiz-q" data-id="q1">
 <p>لو الكوباية عرضها ٨ سم والكتاب عرضه ١٥ سم، أي من الكلام ده صحيح؟</p>
-<div class="quiz-opts" data-g="g1">
-<button data-a="0">الكتاب تقريبًا ضعف الكوباية — التناسب مظبوط</button>
-<button data-a="1">الكتاب أكتر من triple الكوباية — لازم نراجع</button>
-<button data-a="2">مفيش علاقة بينهم</button>
-</div><div class="quiz-fb" data-fb="g1"></div></div>
-<button class="quiz-skip" data-gskip="g1">تخطي ←</button>
+<div class="quiz-opts" data-correct="0">
+<button data-correct="true" data-exp="صحيح — الكتاب (١٥ سم) تقريبًا ضعف الكوباية (٨ سم). التناسب مظبوط.">الكتاب تقريبًا ضعف الكوباية — التناسب مظبوط</button>
+<button data-correct="false" data-exp="غلط — ١٥÷٨ ≈ ١.٩، يعني الكتاب تقريبًا ضعف مش triple.">الكتاب أكتر من triple الكوباية — لازم نراجع</button>
+<button data-correct="false" data-exp="غلط — فيه علاقة مباشرة: التناسب بين الأحجام.">مفيش علاقة بينهم</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -252,13 +252,13 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك</h4>
 <div class="quiz-q" data-id="q2">
 <p>الظل اللي بيتكون على الأرض في الاتجاه المعاكس للضوء، اسمه إيه؟</p>
-<div class="quiz-opts" data-g="g2">
-<button data-a="0">Highlight</button>
-<button data-a="1">Core Shadow</button>
-<button data-a="2">Cast Shadow</button>
-<button data-a="3">Reflected Light</button>
-</div><div class="quiz-fb" data-fb="g2"></div></div>
-<button class="quiz-skip" data-gskip="g2">تخطي ←</button>
+<div class="quiz-opts" data-correct="2">
+<button data-correct="false" data-exp="غلط — Highlight هي ألمع نقطة على الجسم نفسه.">Highlight</button>
+<button data-correct="false" data-exp="غلط — Core Shadow هو الظل الأساسي على الجسم.">Core Shadow</button>
+<button data-correct="true" data-exp="صحيح — Cast Shadow هو الظل الساقط على الأرض في الاتجاه المعاكس للضوء.">Cast Shadow</button>
+<button data-correct="false" data-exp="غلط — Reflected Light هو الضوء المنعكس من الأرض للجسم.">Reflected Light</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -309,12 +309,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك</h4>
 <div class="quiz-q" data-id="q3">
 <p>لو الشيء أبعد منك، هتلاقيه أصغر. ده اسمه إيه؟</p>
-<div class="quiz-opts" data-g="g3">
-<button data-a="0">Overlap</button>
-<button data-a="1">Scale</button>
-<button data-a="2">Placement</button>
-</div><div class="quiz-fb" data-fb="g3"></div></div>
-<button class="quiz-skip" data-gskip="g3">تخطي ←</button>
+<div class="quiz-opts" data-correct="1">
+<button data-correct="false" data-exp="غلط — Overlap هو لما حاجة بتغطي حاجة تانية.">Overlap</button>
+<button data-correct="true" data-exp="صحيح — Scale: البعيد بيبان أصغر من القريب.">Scale</button>
+<button data-correct="false" data-exp="غلط — Placement هو تحديد المكان (اللي تحت أقرب).">Placement</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -342,12 +342,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك</h4>
 <div class="quiz-q" data-id="q4">
 <p>لو غيرت اللون من الأزرق للبنفسجي، أي بُعد في الـ HSV اتغير؟</p>
-<div class="quiz-opts" data-g="g4">
-<button data-a="0"><span dir="ltr">Hue</span> — عائلة اللون</button>
-<button data-a="1"><span dir="ltr">Saturation</span> — قوة اللون</button>
-<button data-a="2"><span dir="ltr">Value</span> — درجة السطوع</button>
-</div><div class="quiz-fb" data-fb="g4"></div></div>
-<button class="quiz-skip" data-gskip="g4">تخطي ←</button>
+<div class="quiz-opts" data-correct="0">
+<button data-correct="true" data-exp="صحيح — Hue هو عائلة اللون نفسه (الأحمر، الأزرق، البنفسجي...). تغيير اللون من أزرق للبنفسجي يعني تغيير في الـ Hue."><span dir="ltr">Hue</span> — عائلة اللون</button>
+<button data-correct="false" data-exp="غلط — Saturation هي قوة اللون (من باهت لقوي)."><span dir="ltr">Saturation</span> — قوة اللون</button>
+<button data-correct="false" data-exp="غلط — Value هي درجة السطوع (فاتح/غامق)."><span dir="ltr">Value</span> — درجة السطوع</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -401,20 +401,20 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك (سؤالان)</h4>
 <div class="quiz-q" data-id="q5">
 <p>ألوان متجاورة في العجلة (زي الأزرق والبنفسجي والأخضر) اسمها إيه؟</p>
-<div class="quiz-opts" data-g="g5">
-<button data-a="0">Complementary</button>
-<button data-a="1">Analogous</button>
-<button data-a="2">Monochromatic</button>
-</div><div class="quiz-fb" data-fb="g5"></div></div>
+<div class="quiz-opts" data-correct="1">
+<button data-correct="false" data-exp="غلط — Complementary هما المتقابلين في العجلة.">Complementary</button>
+<button data-correct="true" data-exp="صحيح — Analogous هما المتجاورين في العجلة.">Analogous</button>
+<button data-correct="false" data-exp="غلط — Monochromatic هو لون واحد بدرجات.">Monochromatic</button>
+</div><div class="quiz-fb"></div></div>
 <div class="quiz-q" data-id="q6">
 <p>اللون الأحمر ينفع يوصَف بإيه من دول؟</p>
-<div class="quiz-opts" data-g="g6">
-<button data-a="0">Warm — طاقة وحماس</button>
-<button data-a="1">Cool — هدوء وغموض</button>
-<button data-a="2">Neutral — بساطة واحترافية</button>
-</div><div class="quiz-fb" data-fb="g6"></div></div>
-<button class="quiz-skip" data-gskip="g5">تخطي ←</button>
-<button class="quiz-skip" data-gskip="g6">تخطي ←</button>
+<div class="quiz-opts" data-correct="0">
+<button data-correct="true" data-exp="صحيح — الأحمر من ألوان Warm: طاقة وحماس وأحيانًا خطر.">Warm — طاقة وحماس</button>
+<button data-correct="false" data-exp="غلط — Cool هو أزرق/أخضر/بنفسجي: هدوء وغموض.">Cool — هدوء وغموض</button>
+<button data-correct="false" data-exp="غلط — Neutral هو أبيض/رمادي/أسود: بساطة واحترافية.">Neutral — بساطة واحترافية</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -471,11 +471,11 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-
 <h4>📝 اختبر نفسك</h4>
 <div class="quiz-q" data-id="q7">
 <p>عندك لوجو لشرطة محتاجة تطبعه على بانر ضخم. أي صيغة تختار؟</p>
-<div class="quiz-opts" data-g="g7">
-<button data-a="0"><span dir="ltr">Raster</span> — صورة فوتوغرافية</button>
-<button data-a="1"><span dir="ltr">Vector</span> — path رياضي</button>
-</div><div class="quiz-fb" data-fb="g7"></div></div>
-<button class="quiz-skip" data-gskip="g7">تخطي ←</button>
+<div class="quiz-opts" data-correct="1">
+<button data-correct="false" data-exp="غلط — Raster بتتشوش لو كبرناها. للوجوهات المطبوعة بحجم ضخم لازم Vector."><span dir="ltr">Raster</span> — صورة فوتوغرافية</button>
+<button data-correct="true" data-exp="صحيح — Vector معمولة من paths رياضية، بتفضل واضحة أي حجم."><span dir="ltr">Vector</span> — path رياضي</button>
+</div><div class="quiz-fb"></div></div>
+<button class="quiz-skip">تخطي ←</button>
 </div>
 <div class="mistakes-box">
 <ul style="list-style:none;padding:0">
@@ -588,10 +588,45 @@ if(roomCanvas){var rctx=roomCanvas.getContext('2d');function drawRoom(){rctx.cle
 roomCanvas.addEventListener('click',function(e){var rect=roomCanvas.getBoundingClientRect();var scaleX=roomCanvas.width/rect.width;var scaleY=roomCanvas.height/rect.height;var x=(e.clientX-rect.left)*scaleX;var y=(e.clientY-rect.top)*scaleY;if(!roomPlaced){vanishingX=x;vanishingY=y;roomPlaced=true;drawRoom();return}var colors={bed:'#06B6D4',desk:'#F59E0B',shelf:'#8B5CF6'};var labels={bed:'Bed',desk:'Desk',shelf:'Shelf'};var sizes={bed:{w:80,h:40},desk:{w:60,h:35},shelf:{w:50,h:50}};var s=sizes[currentFurniture];roomFurniture.push({x:x-s.w/2,y:y-s.h/2,w:s.w,h:s.h,color:colors[currentFurniture],label:labels[currentFurniture]});drawRoom()})}
 document.querySelector('[data-id="addBed"]').onclick=function(){currentFurniture='bed'};document.querySelector('[data-id="addDesk"]').onclick=function(){currentFurniture='desk'};document.querySelector('[data-id="addShelf"]').onclick=function(){currentFurniture='shelf'};document.querySelector('[data-id="clearRoom"]').onclick=function(){roomFurniture=[];roomPlaced=false;vanishingX=350;vanishingY=150;drawRoom()};document.querySelector('[data-id="replayRoom"]').onclick=function(){roomFurniture=[];roomPlaced=false;vanishingX=350;vanishingY=150;drawRoom()};drawRoom();
 document.querySelector('[data-id="revealModel2"]').onclick=function(){var el=document.getElementById('model2Reveal');if(el)el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'اعرض النموذج':'أخفي النموذج'};
-var quizData={g1:{correct:0,exps:['صحيح — الكتاب (١٥ سم) تقريبًا ضعف الكوباية (٨ سم). التناسب مظبوط.','غلط — ١٥÷٨ ≈ ١.٩، يعني الكتاب تقريبًا ضعف مش triple.','غلط — فيه علاقة مباشرة: التناسب بين الأحجام.']},g2:{correct:2,exps:['غلط — Highlight هي ألمع نقطة على الجسم نفسه.','غلط — Core Shadow هو الظل الأساسي على الجسم.','صحيح — Cast Shadow هو الظل الساقط على الأرض في الاتجاه المعاكس للضوء.','غلط — Reflected Light هو الضوء المنعكس من الأرض للجسم.']},g3:{correct:1,exps:['غلط — Overlap هو لما حاجة بتغطي حاجة تانية.','صحيح — Scale: البعيد بيبان أصغر من القريب.','غلط — Placement هو تحديد المكان (اللي تحت أقرب).']},g4:{correct:0,exps:['صحيح — Hue هو عائلة اللون نفسه (الأحمر، الأزرق، البنفسجي...). تغيير اللون من أزرق للبنفسجي يعني تغيير في الـ Hue.','غلط — Saturation هي قوة اللون (من باهت لقوي).','غلط — Value هي درجة السطوع (فاتح/غامق).']},g5:{correct:1,exps:['غلط — Complementary هما المتقابلين في العجلة.','صحيح — Analogous هما المتجاورين في العجلة.','غلط — Monochromatic هو لون واحد بدرجات.']},g6:{correct:0,exps:['صحيح — الأحمر من ألوان Warm: طاقة وحماس وأحيانًا خطر.','غلط — Cool هو أزرق/أخضر/بنفسجي: هدوء وغموض.','غلط — Neutral هو أبيض/رمادي/أسود: بساطة واحترافية.']},g7:{correct:1,exps:['غلط — Raster بتتشوش لو كبرناها. للوجوهات المطبوعة بحجم ضخم لازم Vector.','صحيح — Vector معمولة من paths رياضية، بتفضل واضحة أي حجم.']}};
-document.querySelectorAll('.quiz-opts').forEach(function(optsDiv){var fbDiv=optsDiv.nextElementSibling;var groupKey=optsDiv.dataset.g;var qData=quizData[groupKey];optsDiv.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){if(optsDiv.dataset.answered)return;optsDiv.dataset.answered='1';var chosen=parseInt(this.dataset.a);optsDiv.querySelectorAll('button').forEach(function(b){b.disabled=true});if(chosen===qData.correct){this.classList.add('correct')}else{this.classList.add('wrong');optsDiv.children[qData.correct].classList.add('correct')};fbDiv.style.display='block';fbDiv.textContent=qData.exps[chosen];fbDiv.style.background=chosen===qData.correct?'rgba(0,255,136,.1)':'rgba(255,71,87,.1)';fbDiv.style.color=chosen===qData.correct?'var(--success)':'var(--danger)'})})});
-document.querySelectorAll('.quiz-skip').forEach(function(btn){btn.addEventListener('click',function(){var groupKey=this.dataset.gskip;var optsDiv=document.querySelector('[data-g="'+groupKey+'"]');if(!optsDiv||optsDiv.dataset.answered)return;optsDiv.dataset.answered='1';var qData=quizData[groupKey];optsDiv.querySelectorAll('button').forEach(function(b){b.disabled=true});optsDiv.children[qData.correct].classList.add('correct');var fbDiv=optsDiv.nextElementSibling;fbDiv.style.display='block';fbDiv.textContent='الإجابة الصحيحة: '+qData.exps[qData.correct];fbDiv.style.background='rgba(0,212,170,.1)';fbDiv.style.color='var(--accent)'})});
-document.querySelectorAll('#closingChain .step-item').forEach(function(el,i){setTimeout(function(){el.classList.add('visible')},i*200)});
+document.querySelectorAll('.quiz-opts').forEach(function(optsDiv){
+var fbDiv=optsDiv.nextElementSibling;
+optsDiv.querySelectorAll('button').forEach(function(btn){
+btn.addEventListener('click',function(){
+if(optsDiv.dataset.answered)return;
+optsDiv.dataset.answered='1';
+optsDiv.querySelectorAll('button').forEach(function(b){b.disabled=true});
+var isCorrect=btn.dataset.correct==='true';
+var exp=btn.dataset.exp||'';
+if(isCorrect){btn.classList.add('correct')}
+else{btn.classList.add('correct');optsDiv.querySelectorAll('button').forEach(function(b){if(b.dataset.correct==='false'&&b!==btn)b.classList.add('wrong')})}
+fbDiv.style.display='block';
+fbDiv.textContent=exp;
+fbDiv.style.background=isCorrect?'rgba(0,255,136,.1)':'rgba(255,71,87,.1)';
+fbDiv.style.color=isCorrect?'var(--success)':'var(--danger)';
+});
+});
+});
+document.querySelectorAll('.quiz-skip').forEach(function(btn){
+btn.addEventListener('click',function(){
+var optsDiv=this.previousElementSibling;
+while(optsDiv&&optsDiv.tagName!=='DIV')optsDiv=optsDiv.previousElementSibling;
+if(!optsDiv||!optsDiv.classList.contains('quiz-opts')||optsDiv.dataset.answered)return;
+optsDiv.dataset.answered='1';
+var fbDiv=optsDiv.nextElementSibling;
+var correctBtn=null;
+optsDiv.querySelectorAll('button').forEach(function(b){
+b.disabled=true;
+if(b.dataset.correct==='true'){b.classList.add('correct');correctBtn=b}
+else{b.classList.add('wrong')}
+});
+if(correctBtn&&fbDiv){
+fbDiv.style.display='block';
+fbDiv.textContent='الإجابة الصحيحة: '+correctBtn.dataset.exp;
+fbDiv.style.background='rgba(0,212,170,.1)';
+fbDiv.style.color='var(--accent)';
+}
+});
+});document.querySelectorAll('#closingChain .step-item').forEach(function(el,i){setTimeout(function(){el.classList.add('visible')},i*200)});
 document.querySelectorAll('#heroChain .step-item').forEach(function(el,i){setTimeout(function(){el.classList.add('visible')},i*200)});
 })();
 </script>
