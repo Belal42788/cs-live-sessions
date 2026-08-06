@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أول جلسة في عالم الويب — كيف يعمل الويب وأول أكواد HTML</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;
+  --card:#111638;--card-hover:#1a2050;--text:#fff;--dim:#8892b0;
+  --success:#00ff88;--danger:#ff4757;--warn:#ffd700;
+  --s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444;--s7:#193cff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(600px 400px at 30% 50%,rgba(25,60,255,.5),transparent 70%),
+  radial-gradient(600px 400px at 70% 80%,rgba(0,212,170,.4),transparent 70%);
+  animation:bgMove 20s ease-in-out infinite}
+@keyframes bgMove{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-20px)}}
+.particles{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.particles span{position:absolute;bottom:-10px;background:var(--primary);width:4px;height:4px;border-radius:50%;opacity:.3;animation:floatUp 15s linear infinite}
+@keyframes floatUp{to{transform:translateY(-110vh)}}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,39,.95);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);
+  transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.nav.visible{transform:translateY(0)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;gap:12px}
+.nav-logo{width:30px;height:30px;border-radius:8px;object-fit:contain;background:#193cff;flex-shrink:0}
+.nav-pills{display:flex;gap:4px;flex:1;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;white-space:nowrap}
+.nav-pills::-webkit-scrollbar{display:none}
+.nav-pills a{color:var(--dim);text-decoration:none;font-size:.7rem;padding:4px 10px;border-radius:20px;border:1px solid transparent;transition:all .2s;flex-shrink:0}
+.nav-pills a:hover,.nav-pills a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
+/* hero */
+.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:40px 20px}
+.hero .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;pointer-events:none;animation:bob 6s ease-in-out infinite}
+.orb.o1{width:200px;height:200px;background:var(--primary);top:10%;right:10%}
+.orb.o2{width:150px;height:150px;background:var(--accent);bottom:12%;left:10%;animation-delay:1.5s}
+.orb.o3{width:110px;height:110px;background:var(--s5);top:20%;left:28%;animation-delay:3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.hero-el{opacity:0;transform:translateY(40px);animation:fadeUp .8s ease-out forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-block;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.4);color:var(--accent);padding:6px 18px;border-radius:25px;font-size:.85rem;font-weight:700;animation-delay:.1s}
+.hero h1{font-size:clamp(30px,6vw,60px);font-weight:900;margin:16px 0;animation-delay:.3s}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero p{font-size:clamp(15px,2.2vw,20px);color:var(--dim);max-width:700px;margin:0 auto;animation-delay:.5s}
+.hero-btn{margin-top:26px;animation-delay:.7s}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:12px 30px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1rem;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(25,60,255,.35)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,212,170,.35)}
+/* sections */
+.section{margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.sec-num{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--bg);flex-shrink:0;animation:glow 3s infinite}
+@keyframes glow{0%{box-shadow:0 0 15px rgba(25,60,255,.3)}50%{box-shadow:0 0 35px rgba(25,60,255,.6)}100%{box-shadow:0 0 15px rgba(25,60,255,.3)}}
+.sec-head h2{font-size:clamp(18px,3vw,26px);font-weight:900}
+.sec-part{border:2px dashed rgba(255,255,255,.12);border-radius:20px;padding:20px;margin-bottom:3rem;text-align:center}
+.sec-part h3{font-size:1.3rem;font-weight:900;margin:.3rem 0}
+.sec-part p{color:var(--dim)}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:24px;margin:1.3rem 0;transition:all .3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.card p{color:var(--dim);font-size:.94rem;line-height:1.8}
+.card-inner{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;margin:1rem 0}
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.error-box{border:1px solid rgba(255,71,87,.2);background:rgba(255,71,87,.05);border-radius:12px;padding:16px;margin-top:1.5rem}
+.error-box h4{color:var(--danger);font-size:.95rem;margin-bottom:.5rem}
+.error-box h4::first-letter{display:inline-block;animation:emjShake 1.5s ease-in-out infinite}
+.error-box li{color:var(--dim);font-size:.88rem;margin-bottom:.35rem;list-style:disc;margin-right:1.2rem}
+.code-note{border:1px solid rgba(0,212,170,.25);background:rgba(0,212,170,.05);border-radius:12px;padding:16px;margin-top:1.5rem}
+.code-note h4{color:var(--accent);margin-bottom:.5rem}
+.code-note p{color:var(--dim);font-size:.9rem}
+.note-box{border:1px solid rgba(255,215,0,.3);background:rgba(255,215,0,.06);border-radius:12px;padding:16px;margin-top:1.5rem}
+.note-box h4{color:var(--warn);margin-bottom:.5rem}
+.note-box p{color:var(--dim);font-size:.9rem}
+.try-box{border:1px solid rgba(236,72,153,.35);background:rgba(236,72,153,.07);border-radius:16px;padding:22px;margin-top:1.5rem;text-align:center}
+.try-box h4{color:var(--s5);font-size:1.1rem;margin-bottom:.5rem}
+.try-box p{color:var(--dim);font-size:.95rem}
+/* quiz */
+.quiz-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:1.3rem 0}
+.quiz-box h4{color:var(--accent);font-size:1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:8px}
+.quiz-q p{font-weight:700;font-size:.95rem;margin-bottom:.7rem}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opts button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:11px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.9rem;text-align:right;transition:all .2s}
+.quiz-opts button:hover{background:rgba(25,60,255,.15);border-color:var(--primary)}
+.quiz-opts button.correct{background:rgba(0,255,136,.15);border-color:var(--success);color:var(--success)}
+.quiz-opts button.wrong{background:rgba(255,71,87,.15);border-color:var(--danger);color:var(--danger)}
+.quiz-opts button:disabled{cursor:default;opacity:.85}
+.quiz-fb{display:none;margin-top:.6rem;padding:.7rem .9rem;border-radius:10px;font-size:.85rem}
+.quiz-reveal-btn{background:rgba(0,212,170,.1);border:1px solid var(--accent);color:var(--accent);padding:9px 20px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-bottom:1rem;transition:all .2s}
+.quiz-reveal-btn::first-letter{display:inline-block;animation:emjPulse 1.5s ease-in-out infinite}
+.quiz-skip{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.8rem;margin-top:.6rem;transition:all .2s}
+.quiz-skip:hover{color:var(--text);border-color:var(--dim)}
+/* emoji animations */
+.emoji-pulse{animation:emjPulse 2s ease-in-out infinite}
+.emoji-shake{animation:emjShake 0.6s ease-in-out infinite}
+.emoji-walk{animation:emjWalk 1.2s ease-in-out infinite}
+.emoji-float{animation:emjFloat 2.5s ease-in-out infinite}
+.emoji-glow{animation:emjGlow 2s ease-in-out infinite}
+@keyframes emjPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes emjShake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-3px)}20%,40%,60%,80%{transform:translateX(3px)}}
+@keyframes emjFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes emjWalk{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes emjGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,255,255,.3))}50%{filter:drop-shadow(0 0 12px rgba(25,60,255,.6))}}
+/* journey */
+.journey{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:1.2rem}
+.jnode{display:flex;gap:1rem;align-items:center;width:min(560px,92%);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-right:4px solid var(--accent);border-radius:14px;padding:14px 18px}
+.jnode .jemoji{font-size:2rem;flex:0 0 auto}
+.jnode .jtxt h4{margin:0;font-size:1.05rem}
+.jnode .jtxt p{margin:.15rem 0 0;color:var(--dim);font-size:.85rem}
+.jarrow{font-size:1.6rem;padding:.5rem;line-height:1}
+/* buttons */
+.toggle-btn,.replay-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:9px 18px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s}
+.toggle-btn:hover,.replay-btn:hover{background:rgba(25,60,255,.2);border-color:var(--primary)}
+.replay-btn{margin-top:1rem}
+/* grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:1rem 0}
+@media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.tag{display:inline-block;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.35);color:var(--accent);padding:2px 12px;border-radius:20px;font-size:.72rem;font-weight:700;margin:2px 3px}
+.demo-panel{display:flex;flex-direction:column;gap:14px;padding:18px;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
+.demo-panel h4{font-size:.95rem}
+.demo-panel p{color:var(--dim);font-size:.88rem;line-height:1.7}
+.hidden{display:none!important}
+/* terminal / console log */
+.term{background:#0a0e1f;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;font-family:'Courier New',monospace;direction:ltr;text-align:left;margin:1rem 0}
+.term-head{background:rgba(255,255,255,.04);padding:8px 14px;display:flex;gap:6px;align-items:center}
+.term-head i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.term-head span.dir{color:var(--dim);font-size:.72rem;margin-left:8px;direction:ltr}
+.term-body{padding:14px;font-size:.82rem;line-height:1.9;color:#c9d1e8}
+.term-line{opacity:0;animation:termIn .4s ease-out forwards}
+.term-line.ok{color:var(--success)}
+.term-line.warn{color:var(--warn)}
+.term-line.info{color:var(--s1)}
+.term-line.dim{color:var(--dim)}
+.term-line.err{color:var(--danger)}
+@keyframes termIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* sorting game */
+.sort-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.sort-cols{grid-template-columns:1fr}}
+.sort-col{border-radius:16px;padding:16px;min-height:110px}
+.sort-col.net{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.3)}
+.sort-col.web{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.3)}
+.sort-col h4{font-size:.9rem;margin-bottom:.5rem}
+.sort-card{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 14px;margin:6px 0;cursor:pointer;font-size:.85rem;transition:all .2s;color:var(--text)}
+.sort-card:hover{transform:translateY(-2px)}
+.sort-card.placed{cursor:default;opacity:.9}
+.sort-card.placed.ok{border-color:var(--success);background:rgba(0,255,136,.12)}
+.sort-card.placed.no{border-color:var(--danger);background:rgba(255,71,87,.12)}
+/* step reveal */
+.step-card{display:none}
+.step-card.active{display:block;animation:fadeUp2 .5s ease-out}
+@keyframes fadeUp2{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step-nav{display:flex;gap:10px;align-items:center;margin-top:1rem}
+.step-nav button{background:rgba(25,60,255,.2);border:1px solid var(--primary);color:var(--text);padding:8px 18px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.85rem}
+.step-nav .step-count{color:var(--dim);font-size:.85rem;margin:0 10px}
+/* tables */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+th,td{padding:10px 12px;border:1px solid rgba(255,255,255,.1);text-align:right}
+th{background:rgba(25,60,255,.15);color:var(--text);font-weight:700}
+td{color:var(--dim)}
+/* tabs */
+.tab-bar{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
+.tab-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--dim);padding:8px 16px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.82rem;transition:all .2s}
+.tab-btn.active{color:#fff;background:rgba(25,60,255,.3);border-color:var(--primary)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeUp2 .4s ease-out}
+/* URL breakdown */
+.url-box{direction:ltr;text-align:left;font-family:'Courier New',monospace;font-size:.9rem;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px;overflow-x:auto;margin:1rem 0;white-space:nowrap}
+.url-box .seg{cursor:pointer;transition:all .2s;border-radius:6px;padding:2px 4px}
+.url-box .seg:hover,.url-box .seg.active{outline:2px solid var(--accent)}
+/* client-server flow */
+.cs-flow{display:flex;align-items:center;justify-content:center;gap:20px;margin:1.5rem 0;flex-wrap:wrap}
+.cs-box{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px 24px;text-align:center;min-width:130px}
+.cs-box h4{font-size:1rem;margin-bottom:4px}
+.cs-box p{font-size:.75rem;color:var(--dim)}
+.cs-arrow{font-size:1.6rem;animation:arrowPulse 1.6s ease-in-out infinite;color:var(--accent)}
+.cs-arrow.back{color:var(--s5)}
+@keyframes arrowPulse{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+.cs-arrow.back{animation:arrowBack 1.6s ease-in-out infinite}
+@keyframes arrowBack{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+/* static/dynamic */
+.stat-col{padding:18px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+.stat-col h4{margin-bottom:.5rem}
+.stat-col ul{list-style:disc;margin-right:1.2rem;color:var(--dim);font-size:.85rem;line-height:1.9}
+/* devtools mock */
+.dev{background:#0a0e1f;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin:1rem 0;direction:ltr;text-align:left}
+.dev-tabs{display:flex;gap:2px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.1)}
+.dev-tabs button{background:transparent;border:none;color:var(--dim);padding:9px 14px;cursor:pointer;font-family:inherit;font-size:.78rem;border-bottom:2px solid transparent}
+.dev-tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.dev-body{padding:14px;font-family:'Courier New',monospace;font-size:.82rem;color:#c9d1e;line-height:1.7}
+.dev-tab-panel{display:none}
+.dev-tab-panel.active{display:block}
+/* live playground */
+.live-wrap{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
+.live-wrap .live-label{font-size:.75rem;color:var(--dim);padding:6px 14px;background:rgba(255,255,255,.03);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.code-panel,.code-panel .code-body,.code-panel .code-header{direction:ltr;text-align:left;unicode-bidi:isolate}
+.code-panel textarea{border:none;outline:none;background:#0a0e1f;color:#a9c1e;color:#c9d1e;font-family:'Courier New',monospace;font-size:.82rem;padding:14px;width:100%;min-height:140px;resize:vertical;tab-size:2;color:#c9d1e}
+.code-panel textarea:focus{outline:none}
+.code-panel .code-meta{display:flex;gap:10px;flex-wrap:wrap;padding:8px 14px;background:rgba(255,255,255,.03);font-size:.72rem;color:var(--dim)}
+.code-panel .code-meta label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
+.live-frame{background:#fff;direction:ltr}
+.live-frame iframe{width:100%;height:150px;border:none;display:block;background:#fff}
+.live-frame.tall iframe{height:220px}
+/* flush */
+code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:1px 8px;border-radius:6px;font-size:.85em;direction:ltr;unicode-bidi:isolate}
+[dir="ltr"]{direction:ltr;unicode-bidi:isolate}
+.icon-grid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:1rem 0}
+.browser-chip{background:var(--card-hover);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 18px;text-align:center;min-width:90px}
+.browser-chip .ic{font-size:1.8rem;display:block;margin-bottom:4px}
+.browser-chip span{font-size:.8rem;color:var(--dim)}
+.footer{background:rgba(10,14,39,.7);border-top:1px solid rgba(25,60,255,.3);padding:40px 20px;text-align:center;margin-top:3rem}
+.footer-logo{height:40px;border-radius:8px;background:#193cff}
+.footer p{color:var(--dim);font-size:.9rem;margin-top:14px}
+.mt{margin-top:1.2rem}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:.8rem 0}
+.legend span{font-size:.75rem;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--dim)}
+/* ===== session1 consolidated components ===== */
+.ln{opacity:0;animation:termIn .4s ease-out forwards;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ln.ok{color:var(--success)}
+.ln.warn{color:var(--warn)}
+.ln.info{color:var(--s1)}
+.ln.dim{color:var(--dim)}
+.ln.err{color:var(--danger)}
+.center{text-align:center}
+/* youtube tree (S3) */
+.tree-wrap{margin:.5rem 0}
+.tree-node{display:flex;align-items:center;gap:8px;background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:700;font-size:.95rem;transition:all .2s}
+.tree-node:hover{border-color:var(--s3)}
+.tree-toggle{display:inline-block;transition:transform .2s;color:var(--s3);font-size:.9rem}
+.tree-kids{display:none;margin-top:.4rem;margin-right:18px;padding-right:12px;border-right:2px dashed rgba(139,92,246,.4)}
+.tree-kid{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:9px 14px;margin:.3rem 0;font-size:.85rem;color:var(--text)}
+.tree-kid .tree-page{color:var(--dim);font-size:.78rem}
+/* title bar URL (S7) */
+.shake{animation:shakeAnim .5s ease-in-out}
+@keyframes shakeAnim{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.url-bar{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;direction:ltr;text-align:left;font-family:'Courier New',monospace;font-size:.9rem;display:flex;flex-wrap:wrap;gap:2px;margin:1rem 0;overflow-x:auto}
+.url-seg{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:5px 9px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.url-seg:hover,.url-seg.active{outline:2px solid var(--accent);background:rgba(0,212,170,.12)}
+.url-desc{background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.2);border-radius:12px;padding:14px;margin-top:.6rem;font-size:.9rem;color:var(--text);min-height:52px;direction:rtl;text-align:right}
+/* site sort (S11) */
+.site-sort{display:flex;flex-wrap:wrap;gap:10px;margin:1rem 0}
+.site-item{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;cursor:pointer;transition:all .2s}
+.site-item:hover{border-color:var(--primary);transform:translateY(-2px)}
+.site-item.chosen{outline:2px solid var(--primary);background:rgba(25,60,255,.15)}
+.site-item.done{opacity:.5;pointer-events:none}
+.site-btns{display:flex;gap:10px}
+.site-status{font-size:.9rem;margin-top:.8rem;font-weight:700}
+.site-status.ok{color:var(--success)}
+.site-status.mark{color:var(--danger)}
+/* devtools (S12) */
+.devtools{background:#0a0e1f;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin:1rem 0;direction:ltr;text-align:left;font-family:'Courier New',monospace}
+.dt-tabs{display:flex;gap:2px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.1);overflow-x:auto}
+.dt-tab{color:var(--dim);padding:9px 14px;cursor:pointer;font-size:.78rem;border-bottom:2px solid transparent;white-space:nowrap}
+.dt-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.dt-panel{padding:14px;font-size:.82rem;color:#c9d1e;line-height:1.8}
+.dt-line{white-space:pre}
+.dt-tag{color:var(--s4)}
+.dt-text{color:var(--dim)}
+.dt-ok{color:var(--s1)}
+.dt-result{color:var(--success)}
+.indent{margin-left:18px;padding-left:6px;border-left:1px solid rgba(255,255,255,.12)}
+/* live tabs (S10) */
+.live-tabs{display:flex;gap:4px;padding:8px 10px 0;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.08)}
+.live-tab{background:transparent;border:1px solid transparent;border-bottom:none;color:var(--dim);padding:8px 18px;cursor:pointer;font-family:inherit;font-size:.82rem;border-radius:10px 10px 0 0;transition:all .2s}
+.live-tab.active{color:var(--text);background:var(--card);border-color:rgba(255,255,255,.08)}
+.live-out{background:#fff;border-top:1px solid rgba(255,255,255,.08)}
+.live-label{font-size:.72rem;color:#666;padding:4px 12px;background:#f2f3f7}
+.live-out iframe{width:100%;height:160px;border:none;display:block;background:#fff}
+/* playground boxes (S13-17) */
+.pg-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
+.pg-box .live-out iframe{height:150px}
+/* HTTP + code chips (S8) */
+.http-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1rem 0}
+@media(max-width:720px){.http-grid{grid-template-columns:1fr}}
+.http-card{border-radius:14px;padding:16px}
+.http-card.req{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.3)}
+.http-card.res{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.3)}
+.http-card h4{font-size:.9rem;margin-bottom:.6rem;direction:ltr;text-align:left}
+.code-mini{background:#0a0e1f;border-radius:10px;padding:12px;font-size:.82rem;color:#c9d1e;direction:ltr;text-align:left;line-height:1.7;white-space:pre}
+.code-chip{display:inline-block;padding:1px 12px;border-radius:20px;font-weight:800;font-size:.82rem}
+.code-chip.ok{background:rgba(0,255,136,.15);color:var(--success)}
+.code-chip.red{background:rgba(255,71,87,.15);color:var(--danger)}
+.code-chip.blue{background:rgba(25,60,255,.2);color:var(--s1)}
+/* tabs (S17) */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
+.tab{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--dim);padding:9px 16px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.82rem;transition:all .2s}
+.tab.active{color:#fff;background:rgba(25,60,255,.3);border-color:var(--primary)}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <img class="nav-logo" src="" alt="Bilal" width="30" height="30">
+    <div class="nav-pills" id="navPills"></div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="wrap">
+    <span class="hero-el hero-badge">🌐 أول جلسة في عالم الويب</span>
+    <h1 class="hero-el">أول خطوة في عالم <span>الويب</span></h1>
+    <p class="hero-el">كل مرة بتفتح موقع، بيحصل ورا الكواليس رحلة كاملة في أقل من ثانية — تعالى نكتشفها، وبعدين نكتب أول أسطر HTML بإيدينا.</p>
+    <div class="hero-el hero-btn"><a class="btn" href="#sec-1">🚀 نبدأ الرحلة</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="section" id="sec-partA" style="--sn:var(--s1)">
+  <div class="sec-part">
+    <div class="sec-num" style="background:var(--s1);margin:auto">A</div>
+    <h3>الجزء الأول — إيه هو الويب؟ (Theory)</h3>
+    <p>من قبل ما نكتب أي كود، لازم نفهم الرحلة اللي بتحصل كل مرة بنفتح فيها موقع.</p>
+  </div>
+</section>
+
+<section class="section" id="sec-1" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١</div>
+    <h2>الإنترنت: الشبكة اللي بتوصل العالم كله</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الإنترنت شبكة عملاقة</h3>
+      <p>تخيّل إن كل بيت في العالم بيبقى جهاز كمبيوتر، والطرق اللي بتوصل البيوت ببعض هي الـ <span dir="ltr">Internet</span>. الإنترنت بيوصل بلايين الأجهزة في العالم كله بأي معلومة عايزين نتبعت.</p>
+      <p class="mt">وأهم حاجة: أي معلومة بتتبعت بتتقسم لقطع صغيرة اسمها <span dir="ltr">Packets</span> 📦، وكل قطعة تسافر لوحدها، وبعدين تترجع تتجمع تاني لما توصل.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="fact-grid">
+      <div class="demo-panel"><h4>🌍 Global Network</h4><p>شبكة عالمية بتوصل العالم كله.</p></div>
+      <div class="demo-panel"><h4>🛠️ Physical Infrastructure</h4><p>كابلات ولوحات وأبراج فعلًا موجودة.</p></div>
+      <div class="demo-panel"><h4>📤 Data Transfer</h4><p>البيانات بتتقسم لـ Packets.</p></div>
+      <div class="demo-panel"><h4>⚡ Always On</h4><p>شغال دايمًا، يوم وليلة.</p></div>
+      <div class="demo-panel"><h4>🔗 Decentralized</h4><p>مش محتاج جهاز واحد يتحكم.</p></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>📡 محاكاة: "Hello from Cairo!" تقطعت وتجمعت</h3>
+      <p class="mt">الرسالة دي اتقسمت لـ 3 قطع، وكل واحدة عدّت من Router مصر → Router أوروبا → لندن. اضغط وشوف الرحلة:</p>
+      <button class="toggle-btn" id="runPacket">▶️ شغّل الرحلة</button>
+      <div class="term" id="packetTerm" style="display:none">
+        <div class="term-head"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="dir">packet-sim.log</span></div>
+        <div class="term-body" id="packetBody"></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--dim)" class="mt">لاحظ إن كل Packet سافر لوحده، لكن في الآخر اتجمعوا في لندن واتقرأت الرسالة كاملة! 📦✨</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الظن إن الإنترنت "حاجة في السما" — لأ، فيه بنية تحتية حقيقية من كابلات وأبراج.</li>
+        <li>الظن إن الرسالة بتتبعت كقطعة واحدة — لأ، بتتقطع لـ Packets بتسافر لوحدها.</li>
+        <li>الخلط بين الإنترنت والويب — لا، دول حاجات مختلفة وهنفهم الفرق في الركن التاني.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-2" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">٢</div>
+    <h2>الويب مقابل الإنترنت</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الإنترنت = الطرق، الويب = المحلات</h3>
+      <p>الإنترنت هو البنية التحتية (الطرق)، والويب خدمة بتشتغل فوقها (المحلات والأماكن اللي بتزورها). <strong>مش كل استخدام للإنترنت بيبقى ويب!</strong> واتساب بيستخدم إنترنت لكن مش ويب، أما يوتيوب في المتصفح بيستخدم الاتنين.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>مقارنة سريعة</h3>
+      <table>
+        <tr><th></th><th>الإنترنت <span dir="ltr">(Internet)</span></th><th>الويب <span dir="ltr">(Web)</span></th></tr>
+        <tr><td><strong>What it is</strong></td><td>البنية التحتية (الكابلات، الأجهزة، الأندوات)</td><td>خدمة بتشتغل فوق الإنترنت</td></tr>
+        <tr><td><strong>Created</strong></td><td>اتأسس الأول (أنذر زمن)</td><td>جاي بعده وجايب منه</td></tr>
+        <tr><td><strong>Examples</strong></td><td>كابلات، معرّفات، أندوات</td><td>مواقع وصفحات</td></tr>
+        <tr><td><strong>Accessed by</strong></td><td>بأي جهاز بيوصله</td><td>بالمتصفح (Browser)</td></tr>
+        <tr><td><strong>Required?</strong></td><td>هي الأساس</td><td>خدمة فوقه، مش إلزامي ليه</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🎮 لعبة ترتيب: ويب ولا إنترنت بس؟</h3>
+      <p class="mt">اختار نشاط ثم ضعه في العمود الصح (انقر على العمود بعد اختيار النشاط):</p>
+      <div class="sort-cols mt">
+        <div class="sort-col net" id="netCol"><h4 style="color:var(--s1)">🌐 إنترنت بس</h4><div id="netSlots"></div></div>
+        <div class="sort-col web" id="webCol"><h4 style="color:var(--s4)">🌍 إنترنت + ويب</h4><div id="webSlots"></div></div>
+      </div>
+      <div class="sort-bank" id="sortBank" style="margin-top:1rem"></div>
+      <p style="font-size:.82rem;color:var(--dim);margin-top:.8rem">اختار النشاط الأول ثم اضغط على العمود الصح. لو النشاط عدل، هيستقر في العمود.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz2">👁 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz2" style="display:none">
+        <p>عمّال بوصل مكالمة على واتساب — ده بيعتبر إيه؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — المكالمة بتمر على الإنترنت لوحدها، مش عبر المتصفح ولا صفحة ويب.">إنترنت بس</button>
+          <button data-correct="false" data-exp="غلط — الويب بيتطلب متصفح وصفحة. واتساب بيستخدم الإنترنت بس.">إنترنت + ويب</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>اعتبار كل استخدام للإنترنت بيبقى ويب — واتساب وده مثال صريح.</li>
+        <li>الظن إن المتصفح بيشتغل من غير إنترنت أو إن الإنترنت محتاج متصفح — لا.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-3" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">٣</div>
+    <h2>الموقع مقابل الصفحة <span dir="ltr">(Website vs Web Page)</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الموقع = كتاب، الصفحة = صفحة جواه 📖</h3>
+      <p>الـ <span dir="ltr">Website</span> مجموعة صفحات تحت نفس العنوان. الـ <span dir="ltr">Web Page</span> صفحة واحدة بس. مثال: ويكيبيديا موقع كامل، ومقال مصر واحد صفحة جواه.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🌳 شجرة youtube.com — كل فرع صفحة لوحدها</h3>
+      <p class="mt">اضغط على كل عنصر وشوف أنه "صفحة واحدة جوا الموقع":</p>
+      <div id="ytTree"></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz3">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz3" style="display:none">
+        <p>عندنا <code dir="ltr">bbc.com</code> ومقال واحد فيها. إيه الصح؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — bbc.com موقع، المقال فيه صفحة واحدة جواه.">bbc.com = Website، المقال = Web Page</button>
+          <button data-correct="false" data-exp="غلط — الموقع هو المجموعة الكاملة، مش صفحة واحدة.">bbc.com = Web Page، المقال = Website</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>استخدام كلمة "موقع" من غير تقسيم — تذكر: موقع فيه كتير من الصفحات.</li>
+        <li>الظن إن كل مشاركة أو تبويب "موقع" جديد.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-4" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">٤</div>
+    <h2>المتصفح: المترجم اللي بيحول الكود لصفحة</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>المتصفح بيقرا الكود ويطلعلك صفحة ملونة</h3>
+      <p>المتصفح (مثل Chrome) بيقرا كود الصفحة ويحوّله لشكل ملون قابل للضغط — دي الـ <span dir="ltr">Rendering</span>.</p>
+    </div>
+    <div class="icon-grid">
+      <div class="browser-chip"><span class="ic">🧭</span><span>Chrome</span></div>
+      <div class="browser-chip"><span class="ic">🌊</span><span>Edge</span></div>
+      <div class="browser-chip"><span class="ic">🦊</span><span>Firefox</span></div>
+      <div class="browser-chip"><span class="ic">🧭</span><span>Safari</span></div>
+      <div class="browser-chip"><span class="ic">🌍</span><span>Opera</span></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🔁 رحلة فتح صفحة في 7 خطوات (Step 1→7)</h3>
+      <p class="mt">التنقل بالزرارين وشوف التسلسل الزمني:</p>
+      <div class="step-card active" data-step="1">
+        <h4 style="color:var(--s4)">Step 1 — <span dir="ltr">URL</span> في شريط العنوان</h4>
+        <p style="color:var(--dim)">بتدخل العنوان في المتصفح.</p>
+      </div>
+      <div class="step-card" data-step="2">
+        <h4 style="color:var(--s4)">Step 2 — طلب للسيرفر</h4>
+        <p style="color:var(--dim)">المتصفح بيرسل طلب للسيرفر اللي عليه الموقع.</p>
+      </div>
+      <div class="step-card" data-step="3">
+        <h4 style="color:var(--s4)">Step 3 — السيرفر بيرد بالملفات</h4>
+        <p style="color:var(--dim)">السيرفر بيرجّع ملفات الصفحة.</p>
+      </div>
+      <div class="step-card" data-step="4">
+        <h4 style="color:var(--s4)">Step 4 — قراءة HTML</h4>
+        <p style="color:var(--dim)">المتصفح بيقرا هيكل الصفحة.</p>
+      </div>
+      <div class="step-card" data-step="5">
+        <h4 style="color:var(--s4)">Step 5 — قراءة CSS</h4>
+        <p style="color:var(--dim)">المتصفح بيطبق الشكل والألوان.</p>
+      </div>
+      <div class="step-card" data-step="6">
+        <h4 style="color:var(--s4)">Step 6 — قراءة JS</h4>
+        <p style="color:var(--dim)">المتصفح بيشغّل السكربتات.</p>
+      </div>
+      <div class="step-card" data-step="7">
+        <h4 style="color:var(--s4)">Step 7 — عرض الصفحة</h4>
+        <p style="color:var(--dim)">الصفحة اظهرت قدامك كاملة! 🎉</p>
+      </div>
+      <div class="step-nav">
+        <button id="prevStep4">→ السابق</button>
+        <span class="step-count" id="stepCount4">١ / ٧</span>
+        <button id="nextStep4">التالي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الظن إن المتصفح هو الإنترنت نفسه — لا، هو أداة بتقرأ كود الويب.</li>
+        <li>الظن إن الصفحة بتطلع بضغطة واحدة من غير مراحل.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-5" style="--sn:var(--s5)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s5)">٥</div>
+    <h2>علاقة الـ <span dir="ltr">Client</span> بالـ <span dir="ltr">Server</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>مطعم: إنت الزبون، المطبخ هو السيرفر 🍽️</h3>
+      <p>كل زيارة موقع فيها طرفين: <span dir="ltr">Client</span> (المتصفح بتاعك، بيطلب) و <span dir="ltr">Server</span> (كمبيوتر قوي بيرد بالملفات). زي ما إنت الزبون بتطلب من المطبخ، والشبكة هي الجرسون اللي بيوصّل الطلب والرد.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🔁 الطبيعة بين الطرفين</h3>
+      <div class="cs-flow">
+        <div class="cs-box"><h4>💻 Client</h4><p>متصفحك</p><p class="emoji-walk" style="text-align:center;font-size:1.2rem">😋</p></div>
+        <div class="cs-arrow" style="color:var(--s1)">REQUESEST ← </div>
+        <div class="cs-box"><h4>🖥️ Server</h4><p>كمبيوتر قوي</p><p class="emoji-glow" style="text-align:center;font-size:1.2rem">🤖</p></div>
+        <div class="cs-arrow back" style="color:var(--accent)">→ RESPONSE</div>
+      </div>
+      <div class="term" id="csTerm"></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz5">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz5" style="display:none">
+        <p>في الزيارة للموقع، مين اللي "بيطلب"؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الـ Client (المتصفح) هو اللي بيطلب، والـ Server بيرد.">المتصفح (Client)</button>
+          <button data-correct="false" data-exp="غلط — السيرفر هو اللي بيرد على الطلب، مش بيطلبه.">السيرفر (Server)</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الخلط بين الطرف اللي بيطلب والطرف اللي بيرد.</li>
+        <li>نسيان إن الإنترنت هي وسيلة النقل ما بينهم.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-6" style="--sn:var(--s6)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s6)">٦</div>
+    <h2>الرحلة الكاملة: من كتابة العنوان لظهور الصفحة</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>كل حاجة في تسلسل واحد 🗺️</h3>
+      <p>اكتب العنوان → <span dir="ltr">DNS</span> يترجم الاسم لـ <span dir="ltr">IP</span> → الطلب يعدي على الإنترنت → السيرفر يستقبل → يرد بالملفات → المتصفح يعرضها. اضغط وشوف:</p>
+      <button class="toggle-btn" id="runJourney1">▶ شغّل الرحلة</button>
+      <div class="term" id="journeyTerm" style="display:none">
+        <div class="term-head"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="dir">page-load.log</span></div>
+        <div class="term-body" id="journeyBody"></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="note-box">
+      <h4>📖 الـ DNS مش عايز تحفظه دلوقتي</h4>
+      <p>الـ <span dir="ltr">DNS</span> زيّ دليل الهاتف: بيحوّل اسم الموقع لرقم الـ <span dir="ltr">IP</span> اللي الجهاز بيعرف يوصله. هنعمق فيه في درس متقدم لاحقًا، فبلاش تقلق منه دلوقتي.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>تخيل إن الصفحة بتيجي من "اللا مكان" من غير ترتيب.</li>
+        <li>نسيان خطوة الـ DNS في ترجمة العنوان.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="recap1" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">★</div>
+    <h2>كل حاجة اتعلمناها عن الإنترنت والويب 💡</h2>
+  </div>
+  <div class="reveal">
+    <div class="fact-grid">
+      <div class="demo-panel"><h4>🌐 Internet &amp; Web</h4><p>الإنترنت طرق، والويب خدمة فوقها.</p></div>
+      <div class="demo-panel"><h4>📄 Website vs Page</h4><p>الموقع كتاب، الصفحة ورقة جواه.</p></div>
+      <div class="demo-panel"><h4>🧭 Browser</h4><p>بيقرأ الكود ويعرضه.</p></div>
+      <div class="demo-panel"><h4>💻 Client</h4><p>المتصفح اللي بيطلب.</p></div>
+      <div class="demo-panel"><h4>🖥️ Server</h4><p>الكمبيوتر اللي بيرد بالملفات.</p></div>
+      <div class="demo-panel"><h4>🗺️ Web Flow</h4><p>عنوان → DNS → طلب → رد → عرض.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-partB" style="--sn:var(--s4)">
+  <div class="sec-part">
+    <div class="sec-num" style="background:var(--s4);margin:auto">B</div>
+    <h3>الجزء التاني — الموقع مبني من إيه؟ (Website Made of)</h3>
+    <p>نفهم اللي ورا الكواليس: العنوان، الطلبات، والملفات اللي بتكوّن أي موقع.</p>
+  </div>
+</section>
+
+<section class="section" id="sec-7" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">٧</div>
+    <h2>الـ <span dir="ltr">URL</span>: عنوان أي حاجة على الويب</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ URL بيفصل العنوان لأجزاء واضحة 🔍</h3>
+      <p class="mt">الـ <span dir="ltr">URL</span> هو العنوان الكامل لأي صفحة، وفيه أجزاء لكل واحد دور. اضغط على كل جزء وشوف بيعمل إيه:</p>
+      <div class="url-bar" data-id="urlBar">
+        <span class="url-seg" data-seg="0" data-id="urlseg0">https://</span>
+        <span class="url-seg" data-seg="1" data-id="urlseg1">www.example.com</span>
+        <span class="url-seg" data-seg="2" data-id="urlseg2">:443</span>
+        <span class="url-seg" data-seg="3" data-id="urlseg3">/path/page.html</span>
+        <span class="url-seg" data-seg="4" data-id="urlseg4">?query=1</span>
+      </div>
+      <div class="url-desc" id="urlDesc">اضغط على أي جزء من العنوان 🤓</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz7">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz7" style="display:none">
+        <p>في عنوان زي <code dir="ltr">https://example.com/page.html</code>، إيه اسم الجزء <code dir="ltr">https://</code>؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الـ Protocol هو قاعدة الاتصال الأولى في العنوان.">الـ Protocol</button>
+          <button data-correct="false" data-exp="غلط — الـ Domain هو اسم الموقع، والأول هو البروتوكول.">الـ Domain</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الظن إن الـ URL هو اسم الموقع كله — لأ، هو عنوان كامل.</li>
+        <li>الخلط بين الـ Protocol والـ Domain.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-8" style="--sn:var(--s5)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s5)">٨</div>
+    <h2>الطلبات والردود: <span dir="ltr">HTTP</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>لغة الطلب والرد بين المتصفح والسيرفر 💬</h3>
+      <p>عندك <span dir="ltr">HTTP Request</span> (المتصفح بيطلب) و <span dir="ltr">HTTP Response</span> (السيرفر بيرد). دي كلها بتحصل في أجزاء من الثانية. اضغط وشوف زوج طلب/رد:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="http-grid">
+      <div class="http-card req">
+        <h4>📤 Request</h4>
+        <div class="code-mini" dir="ltr">GET / HTTP/1.1<br>Host: www.example.com</div>
+      </div>
+      <div class="http-card res">
+        <h4>📥 Response</h4>
+        <div class="code-mini" dir="ltr">HTTP/1.1 200 OK<br>Content-Type: text/html</div>
+      </div>
+    </div>
+    <div class="note-box">
+      <h4>💡 فعلًا ده اللي بيحصل ورا كل زيارة</h4>
+      <p>كل مرة بتفتح فيها موقع، بتتحرك مئات الطلبات والردود، وكل واحد ليه كود حالة إجابي أو خطأ.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>كودات الرد أشهرها وأهمها 🏷️</h3>
+      <table>
+        <tr><th>الكود</th><th>المعنى</th><th>مثال</th></tr>
+        <tr><td><span class="code-chip ok">200</span></td><td>نجح</td><td>تم تحميل الصفحة</td></tr>
+        <tr><td><span class="code-chip red">404</span></td><td>غير موجود</td><td>رابط مكسور</td></tr>
+        <tr><td><span class="code-chip blue">301</span></td><td>اتحول</td><td>اتنقل الموقع</td></tr>
+        <tr><td><span class="code-chip red">500</span></td><td>خطأ في السيرفر</td><td>عطل عند السيرفر</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz8">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz8" style="display:none">
+        <p>إذا شفت الكود <code dir="ltr">404</code>، يعني إيه؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الصفحة اللي طلبتها مش موجودة.">الصفحة مش موجودة</button>
+          <button data-correct="false" data-exp="غلط — 200 هي اللي بتبقى نجاح، و404 يعني مش موجودة.">تمت العملية بنجاح</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الخلط بين 404 و 500 — 404 عن الصفحة، و500 عن السيرفر نفسه.</li>
+        <li>الظن إن الـ Request والـ Response بيتعملوا مرة واحدة بس.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-9" style="--sn:var(--s6)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s6)">٩</div>
+    <h2>تسلسل تحميل الصفحة بالتفصيل</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>9 خطوات ورا تحميل أي صفحة ⏱️</h3>
+      <p>دي بالترتيب اللي بيحصل فعلًا. اضغط وشوف التسلسل:</p>
+      <button class="toggle-btn" id="runLoad1">▶ شغّل التسلسل</button>
+      <div class="term" id="loadTerm" style="display:none">
+        <div class="term-head"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="dir">page-load.log</span></div>
+        <div class="term-body" id="loadBody"></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>تخيل إن كل اللي بيحصل فورًا من غير مراحل.</li>
+        <li>نسيان إن الملفات دي بتتحمل بالترتيب (HTML أولًا).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-10" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١٠</div>
+    <h2>مكونات الموقع: <span dir="ltr">HTML</span> + <span dir="ltr">CSS</span> + <span dir="ltr">JS</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>المتحكمين التلاتة في أي صفحة 🛠️</h3>
+      <p>الهيكل (HTML) + الشكل (CSS) + السلوك (JS). جرب بنفسك في المعاينة الحية التالية — كل لمسة بتطلعلك نتيجة حقيقية.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="live-wrap">
+      <div class="live-tabs">
+        <button class="live-tab active" data-live="html">HTML</button>
+        <button class="live-tab" data-live="css">CSS</button>
+        <button class="live-tab" data-live="js">JS</button>
+      </div>
+      <div class="code-panel" dir="ltr"><textarea id="lcCode" spellcheck="false"></textarea></div>
+      <div class="live-out">
+        <span class="live-label">النتيجة الحية</span>
+        <iframe id="lcFrame" title="Live Preview"></iframe>
+      </div>
+    </div>
+    <div class="note-box">
+      <h4>🎯 عدّل وجرّب</h4>
+      <p>غيّر النص في HTML أو الألوان في CSS أو رسالة الـ JS، وكل تغيير بيظهر فورًا في المعاينة فوق.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>مين بيشتغل مين؟</h3>
+      <table>
+        <tr><th>الملف</th><th>بيشتغل فين؟</th><th>وظيفته</th></tr>
+        <tr><td>HTML</td><td>المتصفح (دائمًا)</td><td>الهيكل والمحتوى</td></tr>
+        <tr><td>CSS</td><td>المتصفح (دائمًا)</td><td>الشكل والألوان</td></tr>
+        <tr><td>JS</td><td>المتصفح (أو السيرفر)</td><td>السلوك والتفاعل</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz10">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz10" style="display:none">
+        <p>لو عايز تغيّر لون زر الصفحة، تقلب فين؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — الألوان وظيفة الـ CSS.">CSS</button>
+          <button data-correct="false" data-exp="غلط — الـ HTML بيحدد الهيكل، واللون من الـ CSS.">HTML</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الخلط بين وظايف الـ HTML والـ CSS والـ JS.</li>
+        <li>الظن إن JavaScript بتشتغل في السيرفر دائمًا — أحيانًا بس.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-11" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">١١</div>
+    <h2>مواقع ثابتة ومواقع ديناميكية</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>ثابتة vs ديناميكية 🧊 vs 🔥</h3>
+      <p>الموقع الثابت بيطلع نفس المحتوى للجميع. الديناميكي بيغير المحتوى حسب المستخدم والوقت والبيانات. المواقع الحقيقية غالبًا بتجمع الاتنين.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>🎮 صنّف المواقع دي</h3>
+      <p class="mt">كل موقع يظهر تحت، اضغط على التصنيف الصح:</p>
+      <div class="site-sort" data-id="siteSort">
+        <div class="site-item" data-type="static" data-id="site-youtube"><span>🌍</span>YouTube</div>
+        <div class="site-item" data-type="dynamic" data-id="site-fb"><span>👥</span>Facebook</div>
+        <div class="site-item" data-type="static" data-id="site-cv"><span>📄</span>CV صفحة واحدة</div>
+        <div class="site-item" data-type="dynamic" data-id="site-amazon"><span>🛒</span>Amazon</div>
+        <div class="site-item" data-type="dynamic" data-id="site-gmail"><span>✉️</span>Gmail</div>
+      </div>
+      <div class="site-btns">
+        <button class="toggle-btn" data-type="static">🧊 ثابت</button>
+        <button class="toggle-btn" data-type="dynamic">🔥 ديناميكي</button>
+      </div>
+      <p class="site-status" id="siteStatus">اضغط على موقع أولًا</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الظن إن الموقع واحد منها بس — غالبًا بيجمع بين الاتنين.</li>
+        <li>الخلط بين ثابت وديناميكي من اسم الموقع بس.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-12" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">١٢</div>
+    <h2>أدوات المطوّر <span dir="ltr">(DevTools)</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>تنسى المجرمين بينضبطوا بيه 🕵️</h3>
+      <p>كل متصفح ليه <span dir="ltr">DevTools</span> — مفتاح <code dir="ltr">F12</code>. تقدّر تشوف الكود وتفحص أي حاجة وتمسك الأخطاء.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="devtools" dir="ltr">
+      <div class="dt-tabs">
+        <span class="dt-tab active" data-dt="elements">Elements</span>
+        <span class="dt-tab" data-dt="console">Console</span>
+        <span class="dt-tab" data-dt="network">Network</span>
+        <span class="dt-tab" data-dt="sources">Sources</span>
+        <span class="dt-tab" data-dt="application">Application</span>
+      </div>
+      <div class="dt-panel" data-dt="elements">
+        <div class="dt-line"><span class="dt-tag">body</span></div>
+        <div class="dt-line indent"><span class="dt-tag">h1</span><span class="dt-text">Welcome</span></div>
+        <div class="dt-line indent"><span class="dt-tag">p</span><span class="dt-text">This is a page</span></div>
+      </div>
+      <div class="dt-panel" data-dt="console" style="display:none">
+        <div class="dt-line"><span class="dt-ok">&gt; 42 + 3</span></div>
+        <div class="dt-line"><span class="dt-result">45</span></div>
+      </div>
+      <div class="dt-panel" data-dt="network" style="display:none">
+        <div class="dt-line"><span class="dt-ok">GET /index.html</span> <span class="dt-result">200</span></div>
+        <div class="dt-line"><span class="dt-ok">GET /style.css</span> <span class="dt-result">200</span></div>
+      </div>
+      <div class="dt-panel" data-dt="sources" style="display:none">
+        <div class="dt-line"><span class="dt-tag">index.js</span> <span class="dt-text">line 3</span></div>
+      </div>
+      <div class="dt-panel" data-dt="application" style="display:none">
+        <div class="dt-line"><span class="dt-tag">Cookies</span> <span class="dt-text">localStorage</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>الظن إن الـ DevTools بتغيير الموقع الحقيقي — لأ، هي معاينة محلية بس.</li>
+        <li>نسيان استخدام <code dir="ltr">F12</code> لاكتشاف الأخطاء.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="recap2" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">★</div>
+    <h2>كل حاجة اتعلمناها عن الموقع 💡</h2>
+  </div>
+  <div class="reveal">
+    <div class="fact-grid">
+      <div class="demo-panel"><h4>🔍 URL</h4><p>عنوان كامل بأجزاء.</p></div>
+      <div class="demo-panel"><h4>💬 HTTP</h4><p>طلب ورد مع كود حالة.</p></div>
+      <div class="demo-panel"><h4>🛠️ HTML+CSS+JS</h4><p>هيكل + شكل + سلوك.</p></div>
+      <div class="demo-panel"><h4>🧊 Static</h4><p>محتوى ثابت للجميع.</p></div>
+      <div class="demo-panel"><h4>🔥 Dynamic</h4><p>محتوى حسب المستخدم.</p></div>
+      <div class="demo-panel"><h4>🕵️ DevTools</h4><p>F12 لتفحص أي حاجة.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-partC" style="--sn:var(--accent)">
+  <div class="sec-part">
+    <div class="sec-num" style="background:var(--accent);margin:auto">C</div>
+    <h3>الجزء التالت — أول أكواد HTML بيدك (Hands-on)</h3>
+    <p>دلوقتي نكتب كود فعلًا. كل أمثلة اللي فوق دي هتكتبها بنفسك في بيئة معاينة حية.</p>
+  </div>
+</section>
+
+<section class="section" id="sec-13" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١٣</div>
+    <h2>العناوين والفقرات: <span dir="ltr">&lt;h1&gt;…&lt;h6&gt;</span> و <span dir="ltr">&lt;p&gt;</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>الهيكل بيبدأ بعناوين وفقرات 📐</h3>
+      <p>العناوين <code dir="ltr">&lt;h1&gt;</code> لـ <code dir="ltr">&lt;h6&gt;</code> للمراتب، والفقرات <code dir="ltr">&lt;p&gt;</code> للكتابة. جرّب بنفسك:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="pg-box">
+      <div class="code-panel" dir="ltr"><textarea id="pg1Code" spellcheck="false">&lt;h1&gt;Welcome!&lt;/h1&gt;
+&lt;p&gt;This is my first page.&lt;/p&gt;
+&lt;h2&gt;About Me&lt;/h2&gt;
+&lt;p&gt;I love coding &lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="pg1Frame" title="Playground 1"></iframe></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz13">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz13" style="display:none">
+        <p>من الممكن نستخدم <code dir="ltr">&lt;h1&gt;</code> أكثر من مرة في الصفحة؟</p>
+        <div class="quiz-opts">
+          <button data-correct="false" data-exp="غلط — الممارسة السليمة إن الصفحة يكون فيها h1 واحد بس عشان محركات البحث.">أيوه، عدد لا نهائي</button>
+          <button data-correct="true" data-exp="صحيح — الأفضل يكون h1 واحد للصفحة كاملة.">لأ، مرة واحدة</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-14" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">١٤</div>
+    <h2>تنسيق النص: <span dir="ltr">&lt;b&gt; &lt;i&gt; &lt;u&gt;</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>غامق ومائل ومسطّر 🖋️</h3>
+      <p>جرّبهم مع بعض في المعاينة الحية:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="pg-box">
+      <div class="code-panel" dir="ltr"><textarea id="pg2Code" spellcheck="false">&lt;p&gt;&lt;b&gt;Bold&lt;/b&gt; is important&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Italic&lt;/i&gt; is fancy&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;Underline&lt;/u&gt; marks text&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="pg2Frame" title="Playground 2"></iframe></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz14">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz14" style="display:none">
+        <p>مين الوسم اللي بيخلي النص مائل؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — &lt;i&gt; بيعمل مائل.">&lt;i&gt;</button>
+          <button data-correct="false" data-exp="غلط — &lt;b&gt; بيخلي النص غامق، مش مائل.">&lt;b&gt;</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-15" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">١٥</div>
+    <h2>نص له معنى: <span dir="ltr">&lt;strong&gt; &lt;em&gt; &lt;mark&gt;</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>المعنى مهم مش بس الشكل 🧠</h3>
+      <p><code dir="ltr">&lt;strong&gt;</code> للتركيز، <code dir="ltr">&lt;em&gt;</code> للتشديد، <code dir="ltr">&lt;mark&gt;</code> للتمييز. الفرق إنها بتضيف معنى للنص مش بس شكل:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="pg-box">
+      <div class="code-panel" dir="ltr"><textarea id="pg3Code" spellcheck="false">&lt;p&gt;&lt;strong&gt;Careful!&lt;/strong&gt; it is hot.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Really&lt;/em&gt; important.&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;Remember&lt;/mark&gt; this.&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="pg3Frame" title="Playground 3"></iframe></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="note-box">
+      <h4>🎯 الفرق بين b/strong و i/em</h4>
+      <p>الفرق في المعنى: &lt;b&gt; شكل بس، &lt;strong&gt; معناه "مهم". المتصفح بيوريهم نفس الشكل، لكن المعنى بيفرق لمحركات البحث والمتحدث الصوتي.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-16" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">١٦</div>
+    <h2>تعديلات النص: <span dir="ltr">&lt;del&gt; &lt;ins&gt; &lt;small&gt; &lt;br&gt;</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>مثال الأسعار: كأننا في متجر 💸</h3>
+      <p>جرّب أن تعدّل الأسعار والتنسيق في المعاينة الحية:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="pg-box">
+      <div class="code-panel" dir="ltr"><textarea id="pg4Code" spellcheck="false">&lt;p&gt;Price: &lt;del&gt;100$&lt;/del&gt; &lt;ins&gt;80$&lt;/ins&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;valid till Sunday&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Line 1&lt;br&gt;Line 2&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="pg4Frame" title="Playground 4"></iframe></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>📝 اختبر نفسك</h4>
+      <button class="quiz-reveal-btn" data-id="revealQuiz16">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz16" style="display:none">
+        <p>مين الوسم اللي بيعمل سطر جديد؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح — &lt;br&gt; بيعمل سطر جديد.">&lt;br&gt;</button>
+          <button data-correct="false" data-exp="غلط — &lt;small&gt; بيصغّر الخط.">&lt;small&gt;</button>
+        </div>
+        <div class="quiz-fb"></div>
+        <button class="quiz-skip">تخطّي ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-17" style="--sn:var(--s5)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s5)">١٧</div>
+    <h2>مجموعة أمثلة متكاملة: 4 صفحات</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>اختار مثال وارجع للورقة عشان تفهمه 🗂️</h3>
+      <p>أربع صفحات كاملة جاهزة. اطلع على السورس في الورقة وحاول تطبقها بنفسك:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="tabs" data-id="tabs17">
+      <button class="tab active" data-tab="p1">👤 My Profile</button>
+      <button class="tab" data-tab="p2">🏫 School News</button>
+      <button class="tab" data-tab="p3">🖥️ Computer Store</button>
+      <button class="tab" data-tab="p4">📆 Daily Routine</button>
+    </div>
+    <div class="tab-panel" data-tab="p1">
+      <div class="code-panel" dir="ltr"><textarea id="p1Code" spellcheck="false">&lt;h1&gt;My Profile&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Name:&lt;/b&gt; Ali&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;School:&lt;/i&gt; EYouth&lt;/p&gt;
+&lt;p&gt;I &lt;em&gt;love&lt;/em&gt; programming&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="p1Frame" title="Example 1"></iframe></div>
+    </div>
+    <div class="tab-panel" data-tab="p2" style="display:none">
+      <div class="code-panel" dir="ltr"><textarea id="p2Code" spellcheck="false">&lt;h1&gt;School News&lt;/h1&gt;
+&lt;h2&gt;Exam&lt;/h2&gt;
+&lt;p&gt;&lt;mark&gt;Tomorrow&lt;/mark&gt; exam day&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;Cancelled&lt;/del&gt; &lt;ins&gt;Confirmed&lt;/ins&gt;&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="p2Frame" title="Example 2"></iframe></div>
+    </div>
+    <div class="tab-panel" data-tab="p3" style="display:none">
+      <div class="code-panel" dir="ltr"><textarea id="p3Code" spellcheck="false">&lt;h1&gt;Computer Store&lt;/h1&gt;
+&lt;p&gt;Laptop: &lt;del&gt;500$&lt;/del&gt; &lt;ins&gt;400$&lt;/ins&gt;&lt;/p&gt;
+&lt;p&gt;Mouse: 20$&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Free shipping today&lt;/small&gt;&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="p3Frame" title="Example 3"></iframe></div>
+    </div>
+    <div class="tab-panel" data-tab="p4" style="display:none">
+      <div class="code-panel" dir="ltr"><textarea id="p4Code" spellcheck="false">&lt;h1&gt;Daily Routine&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Morning:&lt;/b&gt; wake up&lt;br&gt;
+&lt;b&gt;Noon:&lt;/b&gt; school&lt;br&gt;
+&lt;b&gt;Night:&lt;/b&gt; code&lt;/p&gt;</textarea></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="p4Frame" title="Example 4"></iframe></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="error-box">
+      <h4>⚠️ أخطاء مشتركة</h4>
+      <ul>
+        <li>نسيان غلق الوسم — دايماً كل وسم محتاج زوج.</li>
+        <li>الخلط بين وسم اللي بيتعمل له وسم تاني.</li>
+        <li>نسيان الـ <code dir="ltr">&lt;!DOCTYPE html&gt;</code> أو بنية الصفحة الأساسية.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="closing" style="--sn:var(--accent)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--accent)">★</div>
+    <h2>الخلاصة: اتعلمنا إيه اليوم؟ 🎓</h2>
+  </div>
+  <div class="reveal">
+    <div class="journey">
+      <div class="jnode"><div class="jemoji emoji-pulse">🌐</div><div class="jtxt"><h4>A) الويب</h4><p>إنترنت، متصفح، Client/Server</p></div></div>
+      <div class="jarrow emoji-float">⬇️</div>
+      <div class="jnode"><div class="jemoji emoji-spin">🏗️</div><div class="jtxt"><h4>B) الموقع</h4><p>URL، HTTP، HTML/CSS/JS</p></div></div>
+      <div class="jarrow emoji-float">⬇️</div>
+      <div class="jnode"><div class="jemoji emoji-walk">✍️</div><div class="jtxt"><h4>C) الكود</h4><p>أول وسوم HTML بيدك</p></div></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="card center">
+      <h3>🚀 الخطوة الجاية</h3>
+      <p class="mt">في الدرس الجاي هتكمل وتتعلم وسوم جديدة وهتبني صفحات أكبر.</p>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="footer">
+  <img class="footer-logo" src="" alt="Bilal" width="40" height="40">
+  <p>كل مطور ويب محترف بدأ من أول سطر HTML... إنت كمان تقدر! 🌟</p>
+</footer>
+
+<script>
+(function(){
+var ICON_B64='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';
+var WORD_B64='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';
+document.querySelectorAll('.nav-logo, .footer-logo').forEach(function(img){
+  if(img.classList.contains('nav-logo')){img.src='data:image/webp;base64,'+ICON_B64}
+  else{img.src='data:image/webp;base64,'+WORD_B64}
+});
+// particles
+(function(){var p=document.getElementById('particles');for(var i=0;i<30;i++){var s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.width=s.style.height=(Math.random()*3+2)+'px';s.style.animationDuration=(Math.random()*10+10)+'s';s.style.animationDelay=(Math.random()*12)+'s';p.appendChild(s)}})();
+// nav + observer
+var nav=document.getElementById('mainNav'),pills=document.getElementById('navPills');
+var sections=document.querySelectorAll('.section[id]');
+sections.forEach(function(s){
+  var a=document.createElement('a');
+  a.href='#'+s.id;
+  var badge=s.querySelector('.sec-head h2');
+  a.textContent=badge?badge.textContent.trim():s.id;
+  a.dataset.nav=s.id;
+  pills.appendChild(a);
+});
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});
+document.querySelectorAll('.section, .reveal, .hero-el').forEach(function(el){observer.observe(el)});
+window.__reobserve=function(){document.querySelectorAll('.jnode,.reveal,.section').forEach(function(el){observer.observe(el)})};
+window.addEventListener('scroll',function(){
+  nav.classList.toggle('visible',window.scrollY>100);
+  var cur='';
+  sections.forEach(function(s){if(window.scrollY>=s.offsetTop-220)cur=s.id});
+  pills.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.dataset.nav===cur)});
+});
+// keyboard nav
+(function(){
+  var ids=[];sections.forEach(function(s){ids.push(s.id)});
+  window.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    var cur='',ci=0;
+    sections.forEach(function(s,i){if(window.scrollY>=s.offsetTop-220){cur=s.id;ci=i}});
+    var ni=(e.key==='ArrowRight')?Math.min(ids.length-1,ci+1):Math.max(0,ci-1);
+    if(ni!==ci){document.getElementById(ids[ni]).scrollIntoView({behavior:'smooth'})}
+  });
+})();
+/* ================= HELPERS ================= */
+function $(id){return document.getElementById(id)}
+function logLine(term,emoji,txt,cls){
+  var d=document.createElement('div');
+  d.className='ln '+(cls||'');
+  d.innerHTML=emoji+' '+txt;
+  term.appendChild(d);
+  term.parentElement.scrollTop=term.scrollHeight;
+  return d;
+}
+function delay(ms){return new Promise(function(r){setTimeout(r,ms)})}
+
+/* ================= QUIZ SYSTEM ================= */
+function wireQuiz(qid){
+  var box=$(qid);if(!box)return;
+  var btn=box.querySelector('.quiz-reveal-btn');
+  if(btn){btn.addEventListener('click',function(){box.style.display='block';btn.style.display='none'})}
+  var opts=box.querySelectorAll('.quiz-opts button');
+  var fb=box.querySelector('.quiz-fb');
+  var skip=box.querySelector('.quiz-skip');
+  opts.forEach(function(o){o.addEventListener('click',function(){
+    var wrong=o.getAttribute('data-correct')==='false';
+    opts.forEach(function(x){x.disabled=true;
+      if(x.getAttribute('data-correct')==='true'){x.classList.add('correct')}
+      else{x.classList.add('wrong')}});
+    fb.style.display='block';
+    fb.className='quiz-fb '+(wrong?'mark':'ok');
+    fb.innerHTML=(wrong?'❌ غلق':'✅ صحيح!')+' '+o.getAttribute('data-exp');
+  })});
+  if(skip){skip.addEventListener('click',function(){
+    opts.forEach(function(x){x.disabled=true;
+      if(x.getAttribute('data-correct')==='true'){x.classList.add('correct')}
+      else{x.classList.add('wrong')}});
+    fb.style.display='block';
+    fb.className='quiz-fb ok';
+    fb.innerHTML='💡 الإجابة الصحيحة: '+opts[0].getAttribute('data-exp');
+  })}
+}
+['quiz2','quiz3','quiz5','quiz7','quiz8','quiz10','quiz13','quiz14','quiz16'].forEach(function(q){
+  wireQuiz(q);
+});
+
+/* ================= PACKET SIM (S1) ================= */
+var packetBusy=false;
+$('runPacket').addEventListener('click',async function(){
+  if(packetBusy)return;packetBusy=true;
+  var term=$('packetTerm');term.style.display='block';
+  var body=$('packetBody');body.innerHTML='';
+  await delay(400);
+  logLine(body,'📦','Packet 1: "Hello"  — 🇪🇬Cairo → Router → 🇬🇧London','info');
+  await delay(700);
+  logLine(body,'📦','Packet 2: "from"   — 🇪🇬Cairo → Router → 🇬🇧London','info');
+  await delay(700);
+  logLine(body,'📦','Packet 3: "Cairo!" — 🇪🇬Cairo → Router → 🇬🇧London','info');
+  await delay(900);
+  logLine(body,'✅','All packets arrived → reassembled: "Hello from Cairo!"','ok');
+  packetBusy=false;
+});
+
+/* ================= JOURNEY SIM (S6) ================= */
+var journeyBusy=false;
+$('runJourney1').addEventListener('click',async function(){
+  if(journeyBusy)return;journeyBusy=true;
+  var term=$('journeyTerm');term.style.display='block';
+  var body=$('journeyBody');body.innerHTML='';
+  var steps=[
+    ['⌨️','You type the URL in the browser bar','dim'],
+    ['📖','DNS translates the domain → IP address','dim'],
+    ['📤','Request travels over the Internet (packets)','dim'],
+    ['🖥️','Server receives the request','dim'],
+    ['📦','Server replies with HTML/CSS/JS files','dim'],
+    ['🧠','Browser renders the page','ok']
+  ];
+  for(var i=0;i<steps.length;i++){
+    await delay(600);
+    logLine(body,steps[i][0],steps[i][1],steps[i][2]);
+  }
+  journeyBusy=false;
+});
+
+/* ================= 9-STEP LOAD SIM (S9) ================= */
+var loadBusy=false;
+$('runLoad1').addEventListener('click',async function(){
+  if(loadBusy)return;loadBusy=true;
+  var term=$('loadTerm');term.style.display='block';
+  var body=$('loadBody');body.innerHTML='';
+  var steps=[
+    ['1','DNS lookup','dim'],
+    ['2','TCP connection','dim'],
+    ['3','HTTP request','dim'],
+    ['4','Server processes','dim'],
+    ['5','Response 200 OK','dim'],
+    ['6','Browser parses HTML','dim'],
+    ['7','Browser parses CSS','dim'],
+    ['8','JavaScript runs','dim'],
+    ['9','Page rendered ✔','ok']
+  ];
+  for(var i=0;i<steps.length;i++){
+    await delay(550);
+    logLine(body,'▸','['+steps[i][0]+'] '+steps[i][1],steps[i][2]);
+  }
+  loadBusy=false;
+});
+
+/* ================= SORTING GAME (S2) ================= */
+(function(){
+  var items=[
+    {name:'📱 WhatsApp Call',type:'net'},
+    {name:'🗺️ Google Maps',type:'web'},
+    {name:'🎮 Online Game',type:'net'},
+    {name:'📺 YouTube in Browser',type:'web'},
+    {name:'📞 Phone Call',type:'net'},
+    {name:'🛒 Amazon Website',type:'web'}
+  ];
+  var bank=$('sortBank'),net=$('netSlots'),web=$('webSlots');
+  var current=null;
+  function render(){
+    bank.innerHTML='';
+    items.forEach(function(it){
+      if(it.placed)return;
+      var b=document.createElement('button');
+      b.className='sort-chip';
+      b.textContent=it.name;
+      b.addEventListener('click',function(){current=it;render()});
+      bank.appendChild(b);
+    });
+    if(!current){return}
+  }
+  function colClick(col,type,slot){
+    return function(){
+      if(!current)return;
+      if(current.type===type){
+        current.placed=true;
+        var c=document.createElement('div');
+        c.className='sort-placed';
+        c.textContent=current.name;
+        slot.appendChild(c);
+        current=null;render();
+      }else{
+        var b=$(slot.parentElement.querySelector('h4').parentElement).querySelector('h4');
+        var flash=slot.closest('.sort-col');
+        flash.classList.add('shake');
+        setTimeout(function(){flash.classList.remove('shake')},500);
+      }
+    };
+  }
+  $('netCol').addEventListener('click',colClick('netCol','net',net));
+  $('webCol').addEventListener('click',colClick('webCol','web',web));
+  render();
+})();
+
+/* ================= YOUTUBE TREE (S3) ================= */
+(function(){
+  var root=$('ytTree');if(!root)return;
+  var data=[
+    {name:'youtube.com (Website)',children:['Home','Trending','Subscriptions','Library']}
+  ];
+  root.innerHTML='';
+  data.forEach(function(n){
+    var wrap=document.createElement('div');wrap.className='tree-wrap';
+    var node=document.createElement('div');node.className='tree-node';
+    node.innerHTML='<span class="tree-toggle">▸</span> 🖥️ '+n.name;
+    var kids=document.createElement('div');kids.className='tree-kids';
+    n.children.forEach(function(c){
+      var k=document.createElement('div');k.className='tree-kid';
+      k.innerHTML='📄 '+c+' <span class="tree-page">(Web Page)</span>';
+      kids.appendChild(k);
+    });
+    node.addEventListener('click',function(){
+      var open=kids.style.display!=='block';
+      kids.style.display=open?'block':'none';
+      node.querySelector('.tree-toggle').textContent=open?'▾':'▸';
+    });
+    wrap.appendChild(node);wrap.appendChild(kids);
+    root.appendChild(wrap);
+  });
+})();
+
+/* ================= STEP NAV (S4) ================= */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.step-card'));
+  var cur=0;
+  function show(i){
+    cur=Math.max(0,Math.min(cards.length-1,i));
+    cards.forEach(function(c,j){c.classList.toggle('active',j===cur)});
+    $('stepCount4').textContent=['١','٢','٣','٤','٥','٦','٧'][cur]+' / ٧';
+  }
+  $('nextStep4').addEventListener('click',function(){show(cur+1)});
+  $('prevStep4').addEventListener('click',function(){show(cur-1)});
+  show(0);
+})();
+
+/* ================= CLIENT/SERVER FLOW (S5) ================= */
+(function(){
+  var term=$('csTerm');if(!term)return;
+  var rows=[
+    '<div class="ln dim">— مرحبا بيك في مجله الشبكه —</div>',
+    '<div class="ln">Client: بطلب الصفحة 👋</div>',
+    '<div class="ln">Server: جاري التحضير… 🖥️</div>',
+    '<div class="ln ok">Client: استلمت الرد ✅</div>'
+  ];
+  term.innerHTML=rows.join('');
+})();
+
+/* ================= URL PARTS (S7) ================= */
+(function(){
+  var segs=[].slice.call(document.querySelectorAll('.url-seg'));
+  var desc={
+    0:['https://','Protocol — قاعدة الاتصال، وهي HTTPS بتشفّر البيانات 🔒'],
+    1:['www.example.com','Domain — اسم الموقع اللي بيحله الـ DNS 🏠'],
+    2:[':443','Port — مدخل السيرفر المخصص للـ HTTPS 🚪'],
+    3:['/path/page.html','Path — المسار للصفحة داخل الموقع 📁'],
+    4:['?query=1','Query — بيانات إضافية بتتوصّل للسيرفر 📨']
+  };
+  segs.forEach(function(s){
+    s.addEventListener('click',function(){
+      segs.forEach(function(x){x.classList.remove('active')});
+      s.classList.add('active');
+      $('urlDesc').innerHTML='<b>'+desc[s.dataset.seg][0]+'</b><br>'+desc[s.dataset.seg][1];
+    });
+  });
+})();
+
+/* ================= LIVE CODE PREVIEW (S10 + S13-17) ================= */
+function buildPreview(codeEl,frameEl){
+  var code=$(codeEl),frame=$(frameEl);if(!code||!frame)return;
+  function render(){frame.srcdoc=code.value}
+  code.addEventListener('input',render);
+  render();
+}
+var pgPairs=[['lcCode','lcFrame'],['pg1Code','pg1Frame'],['pg2Code','pg2Frame'],['pg3Code','pg3Frame'],['pg4Code','pg4Frame'],['p1Code','p1Frame'],['p2Code','p2Frame'],['p3Code','p3Frame'],['p4Code','p4Frame']];
+pgPairs.forEach(function(p){buildPreview(p[0],p[1])});
+
+/* S10 tabs: swap code between HTML/CSS/JS samples */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.live-tab'));
+  if(!tabs.length)return;
+  var samples={
+    html:'<h1>Hello World</h1>\n<p>My first live page!</p>',
+    css:'h1 { color: green; text-align: center; }\np { color: gray; font-size: 20px; }',
+    js:'var btn = document.getElementById("btn");\nbtn.onclick = function(){\n  document.getElementById("out").textContent = "Button clicked!";\n};'
+  };
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      var code=$('lcCode');
+      if(t.dataset.live==='js'){
+        code.value=samples.js;
+        $('lcFrame').srcdoc='<style>body{font-family:sans-serif;padding:20px}</style><h2>JS Demo</h2><button id="btn">Click me</button><p id="out"></p><script>'+samples.js+'<\/script>';
+      }else{
+        code.value=samples[t.dataset.live];
+        $('lcFrame').srcdoc=code.value;
+      }
+    });
+  });
+})();
+
+/* ================= SITE SORT (S11) ================= */
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.site-item'));
+  var btns=[].slice.call(document.querySelectorAll('#sec-11 .site-btns .toggle-btn'));
+  var status=$('siteStatus');
+  var chosen=null;
+  var correct=0,total=items.length;
+  items.forEach(function(it){
+    it.addEventListener('click',function(){
+      items.forEach(function(x){x.classList.remove('chosen')});
+      it.classList.add('chosen');
+      chosen=it;
+      status.textContent='اختارت: '+it.textContent.trim()+' — دلوقتي اضغط على التصنيف الصح.';
+      status.className='site-status';
+    });
+  });
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      if(!chosen){status.textContent='🤔 اختار موقع أولًا!';status.className='site-status mark';return}
+      var type=b.dataset.type;
+      var win=chosen.dataset.type===type;
+      if(win){
+        chosen.classList.add('done');
+        chosen.style.pointerEvents='none';
+        chosen.style.opacity='.5';
+        correct++;
+        status.textContent='✅ صحيح! '+chosen.textContent.trim()+' = '+type;
+        status.className='site-status ok';
+      }else{
+        status.textContent='❌ غلق — '+chosen.textContent.trim()+' مش '+type;
+        status.className='site-status mark';
+      }
+      chosen=null;
+      if(correct===total){status.textContent='🎉 أتقنتها! كل المواقع اتأكدت.';
+        status.className='site-status ok';}
+    });
+  });
+})();
+
+/* ================= DEVTOOLS TABS (S12) ================= */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.dt-tab'));
+  var panels=[].slice.call(document.querySelectorAll('.dt-panel'));
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      panels.forEach(function(p){p.style.display='none'});
+      t.classList.add('active');
+      var p=document.querySelector('.dt-panel[data-dt="'+t.dataset.dt+'"]');
+      if(p)p.style.display='block';
+    });
+  });
+})();
+
+/* ================= EXAMPLE TABS (S17) ================= */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#sec-17 .tab'));
+  var panels=[].slice.call(document.querySelectorAll('#sec-17 .tab-panel'));
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      panels.forEach(function(p){p.style.display='none'});
+      t.classList.add('active');
+      var p=document.querySelector('.tab-panel[data-tab="'+t.dataset.tab+'"]');
+      if(p)p.style.display='block';
+    });
+  });
+})();
+})();
+</script>
+</body>
+</html>
