@@ -1613,41 +1613,41 @@ function buildPreview(codeEl,frameEl){
   code.addEventListener('input',render);
   render();
 }
-var pgPairs=[['lcCode','lcFrame'],['pg1Code','pg1Frame'],['pg2Code','pg2Frame'],['pg3Code','pg3Frame'],['pg4Code','pg4Frame'],['p1Code','p1Frame'],['p2Code','p2Frame'],['p3Code','p3Frame'],['p4Code','p4Frame']];
+var pgPairs=[['pg1Code','pg1Frame'],['pg2Code','pg2Frame'],['pg3Code','pg3Frame'],['pg4Code','pg4Frame'],['p1Code','p1Frame'],['p2Code','p2Frame'],['p3Code','p3Frame'],['p4Code','p4Frame']];
 pgPairs.forEach(function(p){buildPreview(p[0],p[1])});
 
-/* S10 tabs: swap code between HTML/CSS/JS samples */
+/* S10: tabbed live editor (HTML/CSS/JS) with persistent state.
+   Each tab keeps its own code independently; the preview always renders the
+   combined HTML document (CSS inside <style>, JS inside <script>) regardless
+   of which tab is active. Switching tabs only swaps the visible editor. */
 (function(){
   var tabs=[].slice.call(document.querySelectorAll('.live-tab'));
-  if(!tabs.length)return;
-  var pageHTML='<h1>Hello World</h1>\n<p>My first live page!</p>';
-  var samples={
+  var code=$('lcCode'), frame=$('lcFrame');
+  if(!tabs.length||!code||!frame)return;
+  var pageHTML='<h1>Hello World</h1>\n<p>My first live page!</p>\n<button id="btn">Click me</button>\n<p id="out"></p>';
+  var state={
     html:pageHTML,
     css:'h1 { color: green; text-align: center; }\np { color: gray; font-size: 20px; }',
     js:'var btn = document.getElementById("btn");\nbtn.onclick = function(){\n  document.getElementById("out").textContent = "Button clicked!";\n};'
   };
-  function render(live){
-    var code=$('lcCode');
-    if(live==='js'){
-      code.value=samples.js;
-      $('lcFrame').srcdoc='<style>body{font-family:sans-serif;padding:20px}</style><h2>JS Demo</h2><button id="btn">Click me</button><p id="out"></p><script>'+samples.js+'<\/script>';
-    }else if(live==='css'){
-      code.value=samples.css;
-      $('lcFrame').srcdoc='<style>'+samples.css+'</style>'+pageHTML;
-    }else{
-      code.value=samples.html;
-      $('lcFrame').srcdoc=code.value;
-    }
-    code.dispatchEvent(new Event('input'));
+  var active='html';
+  function buildDoc(){
+    return '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<style>\n'+state.css+'\n</style>\n</head>\n<body>\n'+state.html+'\n<script>\n'+state.js+'\n<\/script>\n</body>\n</html>';
   }
+  function render(){
+    frame.srcdoc=buildDoc();
+  }
+  function load(name){
+    active=name;
+    code.value=state[name];
+    tabs.forEach(function(t){t.classList.toggle('active',t.dataset.live===name)});
+    render();
+  }
+  code.addEventListener('input',function(){state[active]=code.value;render()});
   tabs.forEach(function(t){
-    t.addEventListener('click',function(){
-      tabs.forEach(function(x){x.classList.remove('active')});
-      t.classList.add('active');
-      render(t.dataset.live);
-    });
+    t.addEventListener('click',function(){load(t.dataset.live)});
   });
-  render('html');
+  load('html');
 })();
 
 /* ================= HTML SKELETON (S13) ================= */
