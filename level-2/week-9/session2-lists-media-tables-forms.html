@@ -136,13 +136,17 @@ td{color:var(--dim)}
 .live-frame{background:#fff;direction:ltr}
 .live-frame iframe{width:100%;height:190px;border:none;display:block;background:#fff}
 .live-frame.tall iframe{height:240px}
-.live-errors{display:none;margin-top:12px;padding:14px 16px;border:1px solid rgba(255,71,87,.3);background:rgba(255,71,87,.07);border-radius:12px;direction:rtl;text-align:right}
-.live-errors h4{color:var(--warn);font-size:.85rem;margin-bottom:.6rem}
+.live-errors{display:none;margin-top:12px;padding:14px 16px;border:1px solid rgba(255,71,87,.35);background:rgba(255,71,87,.07);border-radius:12px;direction:rtl;text-align:right}
+.live-errors h4{color:var(--danger);font-size:.85rem;margin-bottom:.6rem}
 .live-errors ul{list-style:none;display:flex;flex-direction:column;gap:8px}
 .live-errors li{padding:8px 12px;border-left:3px solid var(--danger);background:rgba(255,71,87,.08);border-radius:8px}
 .live-errors .e-msg{display:block;font-size:.82rem;color:var(--text);font-weight:700}
 .live-errors .e-fix{display:block;font-size:.78rem;color:var(--success);margin-top:3px}
 .live-errors .e-fix:before{content:"الحل: "}
+.live-errors.ok{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06)}
+.live-errors.ok h4{color:var(--success)}
+.live-errors.ok .e-off{border-left-color:var(--success);background:rgba(0,255,136,.1)}
+.live-errors.ok .e-msg{color:var(--dim);font-weight:600}
 /* controls */
 .ctrl-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:1rem 0}
 .ctrl-group{display:flex;flex-direction:column;gap:5px}
@@ -918,8 +922,10 @@ var DOCS={
 var VOID_TAGS=['img','br','hr','input','meta','link','source','col','area','base','embed','track','wbr'];
 /* pull tags out of a string while respecting quotes inside attributes */
 function parseTags(h){
-  var tags=[],i=0;
+  var tags=[],i=0,line=1,last=0;
+  function lineAt(){ for(;last<i;last++){ if(h[last]==='\n')line++ } }
   while(i<h.length){
+    lineAt();
     if(h[i]!=='<'){i++;continue}
     var k=i+1,inq='',end=-1;
     for(;k<h.length;k++){
@@ -930,35 +936,41 @@ function parseTags(h){
     }
     if(end<0){i++;continue}
     var raw=h.slice(i+1,end).trim();
-    if(raw[0]==='!'||raw[0]==='?'){i=end+1;continue}
-    if(raw[0]==='<'&&k-h.length===0){i=end+1;continue}
+    i=end+1;
+    if(raw[0]==='!'||raw[0]==='?')continue;
     var close=raw[0]==='/';
     var body=(close?raw.slice(1):raw).trim();
     var nm=body.match(/^[a-zA-Z][a-zA-Z0-9]*/);
-    if(nm)tags.push({close:close,name:nm[0].toLowerCase(),attrs:close?'':body.slice(nm[0].length)});
-    i=end+1;
+    if(nm)tags.push({close:close,name:nm[0].toLowerCase(),attrs:close?'':body.slice(nm[0].length),line:line});
   }
   return tags;
 }
 function checkHTML(h){
   var issues=[],tags=parseTags(h),stack=[];
+  /* 1) attribute errors first (each has a concrete line + fix) */
   tags.forEach(function(t){
-    if(t.close){
-      if(!stack.length){issues.push({msg:'في وسم قفل زايد </'+t.name+'> من غير فتح.',fix:'شيل </'+t.name+'>.</'});return}
-      var top=stack.pop();
-      if(top!==t.name){
-        issues.push({msg:'مفروض تقفل <'+top+'> الأول، بس لقيت </'+t.name+'>.',fix:'رتّب الأقفال: قفل <'+top+'> بـ </'+top+'> قبل أي وسم تاني.'});
-        stack.push(top);
-      }
-      return;
-    }
-    if(t.name==='img'&&!/\balt\s*=/.test(t.attrs)){issues.push({msg:'الصورة <img> مفيهاش alt.',fix:'ضيف alt=\"وصف الصورة\" عشان السكرين ريدر ولو الصورة متحمّلتش.'})}
-    if(t.name==='a'&&!/\bhref\s*=/.test(t.attrs)){issues.push({msg:'اللينك <a> مفيهوش href.',fix:'ضيف href=\"https://...\" للخارجي أو href=\"#...\" جوه الصفحة.'})}
-    if(t.name==='video'&&!/\bcontrols\b/.test(t.attrs)){issues.push({msg:'الفيديو <video> مفيهوش controls.',fix:'ضيف controls عشان يظهر زرار التشغيل.'})}
-    if(VOID_TAGS.indexOf(t.name)<0)stack.push(t.name);
+    if(t.close)return;
+    if(t.name==='img'&&!/\balt\s*=/.test(t.attrs)){issues.push({msg:'الصورة <img> في سطر '+t.line+' مفيهاش alt.',fix:'ضيف alt="وصف الصورة" — السكرين ريدر هيقرا الكلام ده، وهيظهر لو الصورة متحمّلتش.'})}
+    if(t.name==='a'&&!/\bhref\s*=/.test(t.attrs)){issues.push({msg:'اللينك <a> في سطر '+t.line+' مفيهوش href.',fix:'ضيف href="https://..." للينك خارجي أو href="#..." جوه الصفحة.'})}
+    if(t.name==='video'&&!/\bcontrols\b/.test(t.attrs)){issues.push({msg:'الفيديو في سطر '+t.line+' مفيهوش controls.',fix:'ضيف controls على وسم <video> عشان يظهر زرار التشغيل.'})}
   });
-  while(stack.length){var u=stack.pop();issues.push({msg:'الوسم <'+u+'> مش مقفول.',fix:'زود </'+u+'> بعد محتواه.'})}
-  if(!/\bDOCTYPE\b/.test(h)){issues.push({msg:'الصفحة مفتقدة <!DOCTYPE html>.',fix:'حط <!DOCTYPE html> في أول الصفحة.'})}
+  /* 2) structural error — just the ONE real problem, no cascading repeats */
+  var stop=false;
+  for(var ti=0;ti<tags.length;ti++){
+    var t=tags[ti];
+    if(!t.close){if(VOID_TAGS.indexOf(t.name)<0)stack.push({name:t.name,line:t.line});continue}
+    if(!stack.length){issues.push({msg:'لقينا وسم قفل زايد </'+t.name+'> في سطر '+t.line+'.',fix:'شيل </'+t.name+'> — معندهاش وسم قطع بيتماشى معاها.'});stop=true;break}
+    var top=stack.pop();
+    if(top.name!==t.name){
+      issues.push({msg:'الوسم <'+top.name+'> المفتوح في سطر '+top.line+' مش مقفول قدام </'+t.name+'> في سطر '+t.line+'.',fix:'اقفل <'+top.name+'> الأول بـ </'+top.name+'> قبل ما تكتب </'+t.name+'>.'});
+      stop=true;break;
+    }
+  }
+  if(!stop&&stack.length){
+    var open=stack[stack.length-1];
+    issues.push({msg:'الوسم <'+open.name+'> المفتوح في سطر '+open.line+' مش مقفول.',fix:'زود </'+open.name+'> بعد آخر محتوى عندك.'});
+  }
+  if(!/\bDOCTYPE\b/.test(h)){issues.push({msg:'الصفحة مفتقدة <!DOCTYPE html> (سطر 1).',fix:'حط <!DOCTYPE html> كأول وسم في الصفحة.'})}
   return issues;
 }
 function renderErrors(wrap,html){
@@ -966,9 +978,14 @@ function renderErrors(wrap,html){
   var box=wrap.querySelector('.live-errors');
   if(!box)return;
   var issues=checkHTML(html);
-  if(!issues.length){box.style.display='none';box.innerHTML='';return}
   box.style.display='block';
-  box.innerHTML='<h4>⚙ ملاحظات تساعدك قبل ما تكمل</h4><ul>'+issues.map(function(it){
+  if(!issues.length){
+    box.className='live-errors ok';
+    box.innerHTML='<h4>✔ فحص حي: الكود تمام — مفيش أخطاء</h4><ul><li class="e-off"><span class="e-msg">مفيش مشاكل في الـ HTML دلوقتي.</span></li></ul>';
+    return;
+  }
+  box.className='live-errors';
+  box.innerHTML='<h4>⚙ فحص حي: اكتشفنا '+issues.length+(issues.length===1?' مشكلة':' مشاكل')+'</h4><ul>'+issues.map(function(it){
     return '<li><span class="e-msg">'+escHTML(it.msg)+'</span><span class="e-fix">'+escHTML(it.fix)+'</span></li>';
   }).join('')+'</ul>';
 }
