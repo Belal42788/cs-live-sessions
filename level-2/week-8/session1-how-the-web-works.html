@@ -294,9 +294,6 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
 .skeleton-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
 .skeleton-code{background:#0a0e1f;padding:14px 12px;font-family:'Courier New',monospace;font-size:.82rem;direction:ltr;text-align:left;line-height:1.85;overflow-x:auto}
 .skeleton-code .sk-line{white-space:pre;color:#c9d1e9}
-.sk-tag{color:#00d4aa}
-.sk-attr{color:#ff9e64}
-.sk-str{color:#9ece6a}
 .sk-block{position:relative;border-radius:10px;margin:6px 0;padding:8px 12px 8px 12px}
 .sk-block.head{background:rgba(25,60,255,.14);border-left:4px solid var(--primary)}
 .sk-block.body{background:rgba(0,212,170,.1);border-left:4px solid var(--accent)}
@@ -310,6 +307,10 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
 .body-card{background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.35);border-radius:16px;padding:18px}
 .body-card h4{color:#5ee6c8;font-family:'Courier New',monospace;margin-bottom:.5rem;direction:ltr;text-align:left}
 .head-card p,.body-card p{color:var(--dim);font-size:.9rem;line-height:1.8}
+.head-tag{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 18px;margin:1rem 0;display:flex;flex-direction:column;gap:6px}
+.head-tag code{background:rgba(25,60,255,.12);border:1px solid rgba(25,60,255,.3);color:#9db4ff;border-radius:8px;padding:4px 10px;font-size:.82rem;align-self:flex-start;direction:ltr;white-space:nowrap;overflow-x:auto;max-width:100%}
+.head-tag p{color:var(--dim);font-size:.9rem;line-height:1.8}
+.head-tag p::first-letter{display:inline-block;animation:emjPulse 2s ease-in-out infinite}
 /* playground boxes (S13-17) */
 .pg-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
 .pg-box .live-out iframe{height:150px}
@@ -1047,6 +1048,30 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
     </div>
   </div>
   <div class="reveal">
+    <div class="card">
+      <h3>إزاي أملأ الـ <span dir="ltr">&lt;head&gt;</span>؟ 🧠</h3>
+      <p class="mt">الـ <code dir="ltr">&lt;head&gt;</code> بيتكتب فيه معلومات عن الصفحة مش بتظهر للمستخدم، بس المتصفح محتاجها عشان يشتغل صح. أهم تلات وسوم هتشوفها جواه:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="head-tag">
+      <code dir="ltr">&lt;meta charset="UTF-8"&gt;</code>
+      <p>بيقول للمتصفح إن اللغة عربية والكتابة هتترجم صح — من غيره الحروف العربية هتظهر مشوهة.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="head-tag">
+      <code dir="ltr">&lt;title&gt;My First Page&lt;/title&gt;</code>
+      <p>ده اللي بيظهر في تبويب المتصفح فوق — أول حاجة الزائر يقراها عن صفحتك.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="head-tag">
+      <code dir="ltr">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+      <p>بيخلي الصفحة تظهر مظبوطة على الموبايل والتابلت (متجاوبة) — سطر صغير بس أهمية كبيرة.</p>
+    </div>
+  </div>
+  <div class="reveal">
     <div class="note-box">
       <h4>🎯 جرّب بنفسك</h4>
       <p>اضغط "امسح محتوى الـ head" ولاحظ إن التبويب بس هو اللي بيغيّر (عنوان الصفحة بيلاقي). وبعدين "امسح محتوى الـ body" وشوف الصفحة كلها بتتفضى! ده اللي بيوضح الفرق بين القسمين قدامك.</p>
@@ -1663,34 +1688,26 @@ pgPairs.forEach(function(p){buildPreview(p[0],p[1])});
   };
   var hideHead=false, hideBody=false;
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-  function hl(line){
-    var s=esc(line);
-    s=s.replace(/(&lt;\/?[a-zA-Z][a-zA-Z0-9-]*)/g,'<span class="sk-tag">$1</span>');
-    s=s.replace(/([a-zA-Z-]+)=/g,'<span class="sk-attr">$1</span>=');
-    s=s.replace(/(&quot;.*?&quot;)/g,'<span class="sk-str">$1</span>');
-    return s;
-  }
   function build(){
     var src=sk.doctype+'\n'+sk.htmlOpen+'\n'+sk.head.join('\n')+'\n'+sk.body.join('\n')+'\n'+sk.htmlClose;
-    var lines=sk.head.concat(sk.body);
     var h='';
-    h+='<div class="sk-line">'+hl(sk.doctype)+'</div>';
-    h+='<div class="sk-line">'+hl(sk.htmlOpen)+'</div>';
+    h+='<div class="sk-line">'+esc(sk.doctype)+'</div>';
+    h+='<div class="sk-line">'+esc(sk.htmlOpen)+'</div>';
     h+='<div class="sk-block head"><div class="sk-badge">&lt;head&gt;</div>';
     if(hideHead){
       h+='<div class="sk-line sk-gone">&#8212; محتوى الـ head محذوف &#8212;</div>';
     }else{
-      sk.head.forEach(function(l){h+='<div class="sk-line">'+hl(l)+'</div>'});
+      sk.head.forEach(function(l){h+='<div class="sk-line">'+esc(l)+'</div>'});
     }
     h+='</div>';
     h+='<div class="sk-block body"><div class="sk-badge">&lt;body&gt;</div>';
     if(hideBody){
       h+='<div class="sk-line sk-gone">&#8212; محتوى الـ body محذوف &#8212;</div>';
     }else{
-      sk.body.forEach(function(l){h+='<div class="sk-line">'+hl(l)+'</div>'});
+      sk.body.forEach(function(l){h+='<div class="sk-line">'+esc(l)+'</div>'});
     }
     h+='</div>';
-    h+='<div class="sk-line">'+hl(sk.htmlClose)+'</div>';
+    h+='<div class="sk-line">'+esc(sk.htmlClose)+'</div>';
     skCode.innerHTML=h;
     if(hideHead){src=src.replace(sk.head.join('\n'),'  <!-- head -->')}
     if(hideBody){src=src.replace(sk.body.join('\n'),'  <!-- body -->')}
