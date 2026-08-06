@@ -197,14 +197,14 @@ td{color:var(--dim)}
 .dev-tabs{display:flex;gap:2px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.1)}
 .dev-tabs button{background:transparent;border:none;color:var(--dim);padding:9px 14px;cursor:pointer;font-family:inherit;font-size:.78rem;border-bottom:2px solid transparent}
 .dev-tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
-.dev-body{padding:14px;font-family:'Courier New',monospace;font-size:.82rem;color:#c9d1e;line-height:1.7}
+.dev-body{padding:14px;font-family:'Courier New',monospace;font-size:.82rem;color:#c9d1e9;line-height:1.7}
 .dev-tab-panel{display:none}
 .dev-tab-panel.active{display:block}
 /* live playground */
 .live-wrap{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
 .live-wrap .live-label{font-size:.75rem;color:var(--dim);padding:6px 14px;background:rgba(255,255,255,.03);display:flex;justify-content:space-between;align-items:center;gap:8px}
 .code-panel,.code-panel .code-body,.code-panel .code-header{direction:ltr;text-align:left;unicode-bidi:isolate}
-.code-panel textarea{border:none;outline:none;background:#0a0e1f;color:#a9c1e;color:#c9d1e;font-family:'Courier New',monospace;font-size:.82rem;padding:14px;width:100%;min-height:140px;resize:vertical;tab-size:2;color:#c9d1e}
+.code-panel textarea{border:none;outline:none;background:#0a0e1f;color:#a9c1ee;color:#c9d1e9;font-family:'Courier New',monospace;font-size:.82rem;padding:14px;width:100%;min-height:140px;resize:vertical;tab-size:2;color:#c9d1e9}
 .code-panel textarea:focus{outline:none}
 .code-panel .code-meta{display:flex;gap:10px;flex-wrap:wrap;padding:8px 14px;background:rgba(255,255,255,.03);font-size:.72rem;color:var(--dim)}
 .code-panel .code-meta label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
@@ -262,7 +262,7 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
 .dt-tabs{display:flex;gap:2px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.1);overflow-x:auto}
 .dt-tab{color:var(--dim);padding:9px 14px;cursor:pointer;font-size:.78rem;border-bottom:2px solid transparent;white-space:nowrap}
 .dt-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.dt-panel{padding:14px;font-size:.82rem;color:#c9d1e;line-height:1.8}
+.dt-panel{padding:14px;font-size:.82rem;color:#c9d1e9;line-height:1.8}
 .dt-line{white-space:pre}
 .dt-tag{color:var(--s4)}
 .dt-text{color:var(--dim)}
@@ -286,7 +286,7 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
 .http-card.req{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.3)}
 .http-card.res{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.3)}
 .http-card h4{font-size:.9rem;margin-bottom:.6rem;direction:ltr;text-align:left}
-.code-mini{background:#0a0e1f;border-radius:10px;padding:12px;font-size:.82rem;color:#c9d1e;direction:ltr;text-align:left;line-height:1.7;white-space:pre}
+.code-mini{background:#0a0e1f;border-radius:10px;padding:12px;font-size:.82rem;color:#c9d1e9;direction:ltr;text-align:left;line-height:1.7;white-space:pre}
 .code-chip{display:inline-block;padding:1px 12px;border-radius:20px;font-weight:800;font-size:.82rem}
 .code-chip.ok{background:rgba(0,255,136,.15);color:var(--success)}
 .code-chip.red{background:rgba(255,71,87,.15);color:var(--danger)}
@@ -1255,12 +1255,14 @@ function delay(ms){return new Promise(function(r){setTimeout(r,ms)})}
 
 /* ================= QUIZ SYSTEM ================= */
 function wireQuiz(qid){
-  var box=$(qid);if(!box)return;
+  var q=document.querySelector('.quiz-q[data-id="'+qid+'"]');if(!q)return;
+  var box=q.closest('.quiz-box');
   var btn=box.querySelector('.quiz-reveal-btn');
-  if(btn){btn.addEventListener('click',function(){box.style.display='block';btn.style.display='none'})}
-  var opts=box.querySelectorAll('.quiz-opts button');
-  var fb=box.querySelector('.quiz-fb');
-  var skip=box.querySelector('.quiz-skip');
+  if(btn){btn.addEventListener('click',function(){q.style.display='block';btn.style.display='none';
+    if(box.style.display==='none'){box.style.display='block'}})}
+  var opts=q.querySelectorAll('.quiz-opts button');
+  var fb=q.querySelector('.quiz-fb');
+  var skip=q.querySelector('.quiz-skip');
   opts.forEach(function(o){o.addEventListener('click',function(){
     var wrong=o.getAttribute('data-correct')==='false';
     opts.forEach(function(x){x.disabled=true;
