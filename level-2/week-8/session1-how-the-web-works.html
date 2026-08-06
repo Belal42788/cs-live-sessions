@@ -156,6 +156,8 @@ body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overf
 .sort-chip{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);color:var(--text);border-radius:12px;padding:12px 18px;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s}
 .sort-chip:hover{transform:translateY(-2px);border-color:var(--primary);background:rgba(25,60,255,.15)}
 .sort-placed{background:var(--card-hover);border:1px solid var(--success);border-radius:12px;padding:10px 14px;color:var(--text);font-size:.85rem;margin:6px 0}
+.sort-placed.ok{border-color:var(--success);background:rgba(0,255,136,.1);color:var(--success)}
+.sort-placed.no{border-color:var(--danger);background:rgba(255,71,87,.12);color:var(--danger)}
 .sort-card{background:var(--card-hover);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 14px;margin:6px 0;cursor:pointer;font-size:.85rem;transition:all .2s;color:var(--text)}
 .sort-card:hover{transform:translateY(-2px)}
 .sort-card.placed{cursor:default;opacity:.9}
@@ -283,6 +285,31 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
 .live-out{background:#fff;border-top:1px solid rgba(255,255,255,.08)}
 .live-label{font-size:.72rem;color:#666;padding:4px 12px;background:#f2f3f7}
 .live-out iframe{width:100%;height:160px;border:none;display:block;background:#fff}
+.live-err{margin:0;padding:10px 14px;font-size:.82rem;line-height:1.8;border-top:1px solid rgba(255,255,255,.08)}
+.live-err.ok{background:rgba(0,255,136,.07);color:var(--success)}
+.live-err.bad{background:rgba(255,71,87,.08);color:var(--danger)}
+.live-err .live-fix{color:var(--dim)}
+.live-err code{background:rgba(255,255,255,.1);border:none}
+/* annotated HTML skeleton (S13) */
+.skeleton-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
+.skeleton-code{background:#0a0e1f;padding:14px 12px;font-family:'Courier New',monospace;font-size:.82rem;direction:ltr;text-align:left;line-height:1.85;overflow-x:auto}
+.skeleton-code .sk-line{white-space:pre;color:#c9d1e9}
+.sk-tag{color:#00d4aa}
+.sk-attr{color:#ff9e64}
+.sk-str{color:#9ece6a}
+.sk-block{position:relative;border-radius:10px;margin:6px 0;padding:8px 12px 8px 12px}
+.sk-block.head{background:rgba(25,60,255,.14);border-left:4px solid var(--primary)}
+.sk-block.body{background:rgba(0,212,170,.1);border-left:4px solid var(--accent)}
+.sk-badge{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:1px;padding:1px 10px;border-radius:20px;margin-bottom:4px}
+.sk-block.head .sk-badge{background:rgba(25,60,255,.3);color:#9db4ff}
+.sk-block.body .sk-badge{background:rgba(0,212,170,.22);color:#5ee6c8}
+.sk-gone{color:#5b6780;font-style:italic}
+.skeleton-actions{display:flex;gap:10px;flex-wrap:wrap;margin:.6rem 0}
+.head-card{background:rgba(25,60,255,.08);border:1px solid rgba(25,60,255,.35);border-radius:16px;padding:18px}
+.head-card h4{color:#9db4ff;font-family:'Courier New',monospace;margin-bottom:.5rem;direction:ltr;text-align:left}
+.body-card{background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.35);border-radius:16px;padding:18px}
+.body-card h4{color:#5ee6c8;font-family:'Courier New',monospace;margin-bottom:.5rem;direction:ltr;text-align:left}
+.head-card p,.body-card p{color:var(--dim);font-size:.9rem;line-height:1.8}
 /* playground boxes (S13-17) */
 .pg-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
 .pg-box .live-out iframe{height:150px}
@@ -414,7 +441,9 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
         <div class="sort-col web" id="webCol"><h4 style="color:var(--s4)">🌍 إنترنت + ويب</h4><div id="webSlots"></div></div>
       </div>
       <div class="sort-bank" id="sortBank" style="margin-top:1rem"></div>
-      <p style="font-size:.82rem;color:var(--dim);margin-top:.8rem">اختار النشاط الأول ثم اضغط على العمود الصح. لو النشاط عدل، هيستقر في العمود.</p>
+      <p style="font-size:.82rem;color:var(--dim);margin-top:.8rem">اختار النشاط الأول ثم اضغط على العمود الصح. تقدر تختار أي عمود — لو كان غلط هيتحط في العمود لكن مميّز بلون التنبيه.</p>
+      <div class="site-status" id="sortStatus" style="margin-top:.6rem">ابدأ: اختار نشاط واضغط على العمود المناسب. 🎯</div>
+      <button class="toggle-btn" id="sortReset" style="margin-top:.8rem">↩️ إعادة اللعب</button>
     </div>
   </div>
   <div class="reveal">
@@ -982,9 +1011,52 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   </div>
 </section>
 
-<section class="section" id="sec-13" style="--sn:var(--s1)">
+<section class="section" id="sec-13" style="--sn:var(--accent)">
   <div class="sec-head">
-    <div class="sec-num" style="background:var(--s1)">١٣</div>
+    <div class="sec-num" style="background:var(--accent)">١٣</div>
+    <h2>شكل صفحة HTML الكاملة 🏗️</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>كل صفحة على الويب ليها نفس الهيكل الأساسي</h3>
+      <p class="mt">قبل أي كتابة، اعرف إن كل صفحة HTML كاملة محتاجة البنية دي بالظبط: سطر <code>&lt;!DOCTYPE html&gt;</code>، وسم <code>&lt;html&gt;</code> اللي جواه قسمين: <strong>&lt;head&gt;</strong> و <strong>&lt;body&gt;</strong>. اضغط على زرارين اللي تحت وشوف تأثير حذف كل قسم بنفسك:</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="skeleton-box">
+      <div class="skeleton-code" dir="ltr" id="skCode"></div>
+      <div class="live-out"><span class="live-label">النتيجة الحية</span><iframe id="skFrame" title="HTML Skeleton"></iframe></div>
+    </div>
+    <div class="skeleton-actions">
+      <button class="toggle-btn" id="skDelHead">🗑️ امسح محتوى الـ head</button>
+      <button class="toggle-btn" id="skDelBody">🗑️ امسح محتوى الـ body</button>
+      <button class="toggle-btn" id="skReset">↩️ إرجاع الكل</button>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="grid-2">
+      <div class="head-card">
+        <h4>&lt;head&gt;</h4>
+        <p>المعلومات اللي المتصفح محتاجها بس، والزائر مش بيشوفها على الصفحة نفسها — زي العنوان اللي بيظهر في تبويب المتصفح (<code>&lt;title&gt;</code>) وترميز اللغة.</p>
+        <p class="mt" style="color:var(--dim);font-size:.85rem">📌 حاجة مهمة: مفيش حاجة جوه الـ <code>&lt;head&gt;</code> بتظهر على الصفحة بشكل مرئي.</p>
+      </div>
+      <div class="body-card">
+        <h4>&lt;body&gt;</h4>
+        <p>كل حاجة الزائر فعلًا بيشوفها على الصفحة: العناوين، الفقرات، الصور، كل المحتوى المرئي.</p>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="note-box">
+      <h4>🎯 جرّب بنفسك</h4>
+      <p>اضغط "امسح محتوى الـ head" ولاحظ إن التبويب بس هو اللي بيغيّر (عنوان الصفحة بيلاقي). وبعدين "امسح محتوى الـ body" وشوف الصفحة كلها بتتفضى! ده اللي بيوضح الفرق بين القسمين قدامك.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sec-14" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">١٤</div>
     <h2>العناوين والفقرات: <span dir="ltr">&lt;h1&gt;…&lt;h6&gt;</span> و <span dir="ltr">&lt;p&gt;</span></h2>
   </div>
   <div class="reveal">
@@ -1005,8 +1077,8 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   <div class="reveal">
     <div class="quiz-box">
       <h4>📝 اختبر نفسك</h4>
-      <button class="quiz-reveal-btn" data-id="revealQuiz13">👀 اعرض السؤال</button>
-      <div class="quiz-q" data-id="quiz13" style="display:none">
+      <button class="quiz-reveal-btn" data-id="revealQuiz14">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz14" style="display:none">
         <p>من الممكن نستخدم <code dir="ltr">&lt;h1&gt;</code> أكثر من مرة في الصفحة؟</p>
         <div class="quiz-opts">
           <button data-correct="false" data-exp="غلط — الممارسة السليمة إن الصفحة يكون فيها h1 واحد بس عشان محركات البحث.">أيوه، عدد لا نهائي</button>
@@ -1019,9 +1091,9 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   </div>
 </section>
 
-<section class="section" id="sec-14" style="--sn:var(--s2)">
+<section class="section" id="sec-15" style="--sn:var(--s2)">
   <div class="sec-head">
-    <div class="sec-num" style="background:var(--s2)">١٤</div>
+    <div class="sec-num" style="background:var(--s2)">١٥</div>
     <h2>تنسيق النص: <span dir="ltr">&lt;b&gt; &lt;i&gt; &lt;u&gt;</span></h2>
   </div>
   <div class="reveal">
@@ -1041,8 +1113,8 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   <div class="reveal">
     <div class="quiz-box">
       <h4>📝 اختبر نفسك</h4>
-      <button class="quiz-reveal-btn" data-id="revealQuiz14">👀 اعرض السؤال</button>
-      <div class="quiz-q" data-id="quiz14" style="display:none">
+      <button class="quiz-reveal-btn" data-id="revealQuiz15">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz15" style="display:none">
         <p>مين الوسم اللي بيخلي النص مائل؟</p>
         <div class="quiz-opts">
           <button data-correct="true" data-exp="صحيح — &lt;i&gt; بيعمل مائل.">&lt;i&gt;</button>
@@ -1055,9 +1127,9 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   </div>
 </section>
 
-<section class="section" id="sec-15" style="--sn:var(--s3)">
+<section class="section" id="sec-16" style="--sn:var(--s3)">
   <div class="sec-head">
-    <div class="sec-num" style="background:var(--s3)">١٥</div>
+    <div class="sec-num" style="background:var(--s3)">١٦</div>
     <h2>نص له معنى: <span dir="ltr">&lt;strong&gt; &lt;em&gt; &lt;mark&gt;</span></h2>
   </div>
   <div class="reveal">
@@ -1082,9 +1154,9 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   </div>
 </section>
 
-<section class="section" id="sec-16" style="--sn:var(--s4)">
+<section class="section" id="sec-17" style="--sn:var(--s4)">
   <div class="sec-head">
-    <div class="sec-num" style="background:var(--s4)">١٦</div>
+    <div class="sec-num" style="background:var(--s4)">١٧</div>
     <h2>تعديلات النص: <span dir="ltr">&lt;del&gt; &lt;ins&gt; &lt;small&gt; &lt;br&gt;</span></h2>
   </div>
   <div class="reveal">
@@ -1104,8 +1176,8 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   <div class="reveal">
     <div class="quiz-box">
       <h4>📝 اختبر نفسك</h4>
-      <button class="quiz-reveal-btn" data-id="revealQuiz16">👀 اعرض السؤال</button>
-      <div class="quiz-q" data-id="quiz16" style="display:none">
+      <button class="quiz-reveal-btn" data-id="revealQuiz17">👀 اعرض السؤال</button>
+      <div class="quiz-q" data-id="quiz17" style="display:none">
         <p>مين الوسم اللي بيعمل سطر جديد؟</p>
         <div class="quiz-opts">
           <button data-correct="true" data-exp="صحيح — &lt;br&gt; بيعمل سطر جديد.">&lt;br&gt;</button>
@@ -1118,9 +1190,9 @@ code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:
   </div>
 </section>
 
-<section class="section" id="sec-17" style="--sn:var(--s5)">
+<section class="section" id="sec-18" style="--sn:var(--s5)">
   <div class="sec-head">
-    <div class="sec-num" style="background:var(--s5)">١٧</div>
+    <div class="sec-num" style="background:var(--s5)">١٨</div>
     <h2>مجموعة أمثلة متكاملة: 4 صفحات</h2>
   </div>
   <div class="reveal">
@@ -1288,7 +1360,7 @@ function wireQuiz(qid){
     fb.innerHTML='💡 الإجابة الصحيحة: '+opts[0].getAttribute('data-exp');
   })}
 }
-['quiz2','quiz3','quiz5','quiz7','quiz8','quiz10','quiz13','quiz14','quiz16'].forEach(function(q){
+['quiz2','quiz3','quiz5','quiz7','quiz8','quiz10','quiz14','quiz15','quiz17'].forEach(function(q){
   wireQuiz(q);
 });
 
@@ -1365,7 +1437,9 @@ $('runLoad1').addEventListener('click',async function(){
     {name:'🛒 Amazon Website',type:'web'}
   ];
   var bank=$('sortBank'),net=$('netSlots'),web=$('webSlots');
+  var status=$('sortStatus');
   var current=null;
+  var placed=0;
   function render(){
     bank.innerHTML='';
     items.forEach(function(it){
@@ -1376,28 +1450,39 @@ $('runLoad1').addEventListener('click',async function(){
       b.addEventListener('click',function(){current=it;render()});
       bank.appendChild(b);
     });
-    if(!current){return}
+    if(!current)return;
   }
-  function colClick(col,type,slot){
-    return function(){
-      if(!current)return;
-      if(current.type===type){
-        current.placed=true;
-        var c=document.createElement('div');
-        c.className='sort-placed';
-        c.textContent=current.name;
-        slot.appendChild(c);
-        current=null;render();
-      }else{
-        var b=$(slot.parentElement.querySelector('h4').parentElement).querySelector('h4');
-        var flash=slot.closest('.sort-col');
-        flash.classList.add('shake');
-        setTimeout(function(){flash.classList.remove('shake')},500);
-      }
-    };
+  function place(type,slot){
+    if(!current)return;
+    var ok=current.type===type;
+    current.placed=true;placed++;
+    var c=document.createElement('div');
+    c.className='sort-placed '+(ok?'ok':'no');
+    c.textContent=current.name+(ok?'':' ⚠️');
+    slot.appendChild(c);
+    if(ok){
+      status.className='site-status ok';
+      status.textContent='✅ صح! '+current.name+' ينتمي لـ '+(type==='net'?'إنترنت بس':'إنترنت + ويب');
+    }else{
+      status.className='site-status mark';
+      status.textContent='❌ غلط! '+current.name+' مش '+(type==='net'?'إنترنت بس':'إنترنت + ويب')+' — الصح: '+(current.type==='net'?'إنترنت بس':'إنترنت + ويب');
+    }
+    current=null;render();
+    if(placed===items.length){
+      status.className='site-status ok';
+      status.textContent='🎉 خلصت كل الأنشطة! اضغط "إعادة اللعب" لو عايز تبدأ تاني.';
+    }
   }
-  $('netCol').addEventListener('click',colClick('netCol','net',net));
-  $('webCol').addEventListener('click',colClick('webCol','web',web));
+  $('netCol').addEventListener('click',function(){place('net',net)});
+  $('webCol').addEventListener('click',function(){place('web',web)});
+  $('sortReset').addEventListener('click',function(){
+    items.forEach(function(it){it.placed=false});
+    placed=0;current=null;
+    net.innerHTML='';web.innerHTML='';
+    status.className='site-status';
+    status.textContent='ابدأ: اختار نشاط واضغط على العمود المناسب. 🎯';
+    render();
+  });
   render();
 })();
 
@@ -1472,10 +1557,59 @@ $('runLoad1').addEventListener('click',async function(){
   });
 })();
 
-/* ================= LIVE CODE PREVIEW (S10 + S13-17) ================= */
+/* ================= LIVE CODE PREVIEW (S10 + S13-18) ================= */
+var VOID_TAGS=['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'];
+function validateHTML(src){
+  var errs=[];
+  var stack=[];
+  var re=/<(\/?)([a-zA-Z][a-zA-Z0-9-]*)([^>]*)>/g;
+  var line=1,last=0,m;
+  while(m=re.exec(src)){
+    line+=(src.slice(last,m.index).match(/\n/g)||[]).length;
+    last=m.index;
+    var close=m[1]==='/';
+    var tag=m[2].toLowerCase();
+    var attrs=m[3];
+    if(close){
+      if(!stack.length){
+        errs.push({line:line,msg:'وسم إغلاق زائد: <code>&lt;/'+tag+'&gt;</code> من غير وسم فتح.',fix:'امسح وسم الإغلاق ده، أو أضف وسم الفتح <code>&lt;'+tag+'&gt;</code> في بدايته.'});
+      }else if(stack[stack.length-1].tag===tag){
+        stack.pop();
+      }else{
+        var exp=stack[stack.length-1].tag;
+        errs.push({line:line,msg:'وسم إغلاق غلط: بتقفل <code>&lt;/'+tag+'&gt;</code> واللي فاضل مفتوح هو <code>&lt;'+exp+'&gt;</code>.',fix:'أغلق <code>&lt;'+exp+'&gt;</code> الأول، أو غيّر وسم الإغلاق لـ <code>&lt;/'+exp+'&gt;</code>.'});
+        while(stack.length&&stack[stack.length-1].tag!==tag){stack.pop()}
+        if(stack.length)stack.pop();
+      }
+    }else{
+      var selfCl=/\s\/\s*$/.test(attrs);
+      if(VOID_TAGS.indexOf(tag)>=0||selfCl)continue;
+      stack.push({tag:tag,line:line});
+    }
+  }
+  stack.forEach(function(s){
+    errs.push({line:s.line,msg:'وسم فتح من غير إغلاق: <code>&lt;'+s.tag+'&gt;</code>.',fix:'أضف وسم الإغلاق <code>&lt;/'+s.tag+'&gt;</code> بعد محتواه.'});
+  });
+  return errs;
+}
 function buildPreview(codeEl,frameEl){
   var code=$(codeEl),frame=$(frameEl);if(!code||!frame)return;
-  function render(){frame.srcdoc=code.value}
+  var host=frame.closest('.pg-box')||frame.closest('.live-wrap')||frame.parentElement;
+  var errBox=document.createElement('div');
+  errBox.className='live-err';
+  host.appendChild(errBox);
+  function render(){
+    frame.srcdoc=code.value;
+    var errs=validateHTML(code.value);
+    if(!errs.length){
+      errBox.className='live-err ok';
+      errBox.innerHTML='✅ لا توجد أخطاء في الكود';
+      return;
+    }
+    errBox.className='live-err bad';
+    var e=errs[0];
+    errBox.innerHTML='⚠️ <b>خطأ في السطر '+e.line+'</b> — '+e.msg+'<br>💡 <span class="live-fix">الحل: '+e.fix+'</span>'+(errs.length>1?'<br>و'+errs.length+' خطأ/أخطاء تانية محتملة.':'');
+  }
   code.addEventListener('input',render);
   render();
 }
@@ -1504,6 +1638,7 @@ pgPairs.forEach(function(p){buildPreview(p[0],p[1])});
       code.value=samples.html;
       $('lcFrame').srcdoc=code.value;
     }
+    code.dispatchEvent(new Event('input'));
   }
   tabs.forEach(function(t){
     t.addEventListener('click',function(){
@@ -1513,6 +1648,58 @@ pgPairs.forEach(function(p){buildPreview(p[0],p[1])});
     });
   });
   render('html');
+})();
+
+/* ================= HTML SKELETON (S13) ================= */
+(function(){
+  var skCode=$('skCode'),skFrame=$('skFrame');
+  if(!skCode||!skFrame)return;
+  var sk={
+    doctype:'<!DOCTYPE html>',
+    htmlOpen:'<html lang="ar" dir="rtl">',
+    head:['  <head>','    <meta charset="UTF-8">','    <title>My First Page</title>','  </head>'],
+    body:['  <body>','    <h1>Hello World</h1>','    <p>This is my first web page.</p>','  </body>'],
+    htmlClose:'</html>'
+  };
+  var hideHead=false, hideBody=false;
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function hl(line){
+    var s=esc(line);
+    s=s.replace(/(&lt;\/?[a-zA-Z][a-zA-Z0-9-]*)/g,'<span class="sk-tag">$1</span>');
+    s=s.replace(/([a-zA-Z-]+)=/g,'<span class="sk-attr">$1</span>=');
+    s=s.replace(/(&quot;.*?&quot;)/g,'<span class="sk-str">$1</span>');
+    return s;
+  }
+  function build(){
+    var src=sk.doctype+'\n'+sk.htmlOpen+'\n'+sk.head.join('\n')+'\n'+sk.body.join('\n')+'\n'+sk.htmlClose;
+    var lines=sk.head.concat(sk.body);
+    var h='';
+    h+='<div class="sk-line">'+hl(sk.doctype)+'</div>';
+    h+='<div class="sk-line">'+hl(sk.htmlOpen)+'</div>';
+    h+='<div class="sk-block head"><div class="sk-badge">&lt;head&gt;</div>';
+    if(hideHead){
+      h+='<div class="sk-line sk-gone">&#8212; محتوى الـ head محذوف &#8212;</div>';
+    }else{
+      sk.head.forEach(function(l){h+='<div class="sk-line">'+hl(l)+'</div>'});
+    }
+    h+='</div>';
+    h+='<div class="sk-block body"><div class="sk-badge">&lt;body&gt;</div>';
+    if(hideBody){
+      h+='<div class="sk-line sk-gone">&#8212; محتوى الـ body محذوف &#8212;</div>';
+    }else{
+      sk.body.forEach(function(l){h+='<div class="sk-line">'+hl(l)+'</div>'});
+    }
+    h+='</div>';
+    h+='<div class="sk-line">'+hl(sk.htmlClose)+'</div>';
+    skCode.innerHTML=h;
+    if(hideHead){src=src.replace(sk.head.join('\n'),'  <!-- head -->')}
+    if(hideBody){src=src.replace(sk.body.join('\n'),'  <!-- body -->')}
+    skFrame.srcdoc=src;
+  }
+  $('skDelHead').addEventListener('click',function(){hideHead=!hideHead;build()});
+  $('skDelBody').addEventListener('click',function(){hideBody=!hideBody;build()});
+  $('skReset').addEventListener('click',function(){hideHead=false;hideBody=false;build()});
+  build();
 })();
 
 /* ================= SITE SORT (S11) ================= */
