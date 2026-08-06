@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الجلسة الثانية — القوائم، الروابط، الصور، الجداول، والفورم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#193cff;--accent:#00d4aa;--bg:#0a0e27;
+  --card:#111638;--card-hover:#1a2050;--text:#fff;--dim:#8892b0;
+  --success:#00ff88;--danger:#ff4757;--warn:#ffd700;
+  --s1:#06B6D4;--s2:#F59E0B;--s3:#8B5CF6;--s4:#10B981;--s5:#EC4899;--s6:#EF4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(600px 400px at 30% 50%,rgba(25,60,255,.5),transparent 70%),
+  radial-gradient(600px 400px at 70% 80%,rgba(0,212,170,.4),transparent 70%);
+  animation:bgMove 20s ease-in-out infinite}
+@keyframes bgMove{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-20px)}}
+.particles{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.particles span{position:absolute;bottom:-10px;background:var(--primary);width:4px;height:4px;border-radius:50%;opacity:.3;animation:floatUp 15s linear infinite}
+@keyframes floatUp{to{transform:translateY(-110vh)}}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,39,.95);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(25,60,255,.3);
+  transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.nav.visible{transform:translateY(0)}
+.nav-inner{max-width:1150px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;gap:12px}
+.nav-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;background:#193cff;flex-shrink:0}
+.nav-pills{display:flex;gap:4px;flex:1;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;white-space:nowrap}
+.nav-pills::-webkit-scrollbar{display:none}
+.nav-pills a{color:var(--dim);text-decoration:none;font-size:.7rem;padding:4px 10px;border-radius:20px;border:1px solid transparent;transition:all .2s;flex-shrink:0}
+.nav-pills a:hover,.nav-pills a.active{color:var(--text);background:rgba(25,60,255,.2);border-color:var(--primary)}
+/* hero */
+.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:40px 20px}
+.hero .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;pointer-events:none;animation:bob 6s ease-in-out infinite}
+.orb.o1{width:200px;height:200px;background:var(--primary);top:10%;right:10%}
+.orb.o2{width:150px;height:150px;background:var(--accent);bottom:12%;left:10%;animation-delay:1.5s}
+.orb.o3{width:110px;height:110px;background:var(--s5);top:20%;left:28%;animation-delay:3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.hero-el{opacity:0;transform:translateY(40px);animation:fadeUp .8s ease-out forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-block;background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.4);color:var(--accent);padding:6px 18px;border-radius:25px;font-size:.85rem;font-weight:700;animation-delay:.1s}
+.hero h1{font-size:clamp(30px,6vw,60px);font-weight:900;margin:16px 0;animation-delay:.3s}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero p{font-size:clamp(15px,2.2vw,20px);color:var(--dim);max-width:740px;margin:0 auto;animation-delay:.5s}
+.hero-btn{margin-top:26px;animation-delay:.7s}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:12px 30px;border-radius:30px;text-decoration:none;font-weight:700;font-size:1rem;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(25,60,255,.35)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,212,170,.35)}
+/* sections */
+.section{margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.sec-num{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--bg);flex-shrink:0;animation:glow 3s infinite}
+@keyframes glow{0%{box-shadow:0 0 15px rgba(25,60,255,.3)}50%{box-shadow:0 0 35px rgba(25,60,255,.6)}100%{box-shadow:0 0 15px rgba(25,60,255,.3)}}
+.sec-head h2{font-size:clamp(18px,3vw,26px);font-weight:900}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:24px;margin:1.3rem 0;transition:all .3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.card:hover{background:var(--card-hover);transform:translateY(-5px);border-color:rgba(25,60,255,.3)}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.card p{color:var(--dim);font-size:.94rem;line-height:1.8}
+.card p b{color:var(--text)}
+.card-inner{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;margin:1rem 0}
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.error-box{border:1px solid rgba(255,71,87,.2);background:rgba(255,71,87,.05);border-radius:12px;padding:16px;margin-top:1.5rem}
+.error-box h4{color:var(--danger);font-size:.95rem;margin-bottom:.5rem}
+.error-box li{color:var(--dim);font-size:.88rem;margin-bottom:.35rem;list-style:disc;margin-right:1.2rem}
+.note-box{border:1px solid rgba(255,215,0,.3);background:rgba(255,215,0,.06);border-radius:12px;padding:16px;margin-top:1.5rem}
+.note-box h4{color:var(--warn);margin-bottom:.5rem}
+.note-box p{color:var(--dim);font-size:.9rem}
+/* quiz */
+.quiz-box{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:1.3rem 0}
+.quiz-box h4{color:var(--accent);font-size:1rem;margin-bottom:.8rem}
+.quiz-q{display:none}
+.quiz-q p{font-weight:700;font-size:.95rem;margin-bottom:.7rem}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opts button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:11px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.9rem;text-align:right;transition:all .2s}
+.quiz-opts button:hover{background:rgba(25,60,255,.15);border-color:var(--primary)}
+.quiz-opts button.correct{background:rgba(0,255,136,.15);border-color:var(--success);color:var(--success)}
+.quiz-opts button.wrong{background:rgba(255,71,87,.15);border-color:var(--danger);color:var(--danger)}
+.quiz-opts button:disabled{cursor:default;opacity:.85}
+.quiz-fb{display:none;margin-top:.6rem;padding:.7rem .9rem;border-radius:10px;font-size:.85rem}
+.quiz-fb.ok{background:rgba(0,255,136,.08);color:var(--success);border:1px solid rgba(0,255,136,.3)}
+.quiz-fb.mark{background:rgba(255,71,87,.08);color:var(--danger);border:1px solid rgba(255,71,87,.3)}
+.quiz-reveal-btn{background:rgba(0,212,170,.1);border:1px solid var(--accent);color:var(--accent);padding:9px 20px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-bottom:1rem;transition:all .2s}
+.quiz-reveal-btn:hover{background:rgba(0,212,170,.2)}
+.quiz-skip{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.8rem;margin-top:.6rem;transition:all .2s}
+.quiz-skip:hover{color:var(--text);border-color:var(--dim)}
+/* emoji animation keyframe classes (activity props only) */
+.emoji-pulse{animation:emjPulse 2s ease-in-out infinite}
+.emoji-shake{animation:emjShake .6s ease-in-out infinite}
+.emoji-walk{animation:emjWalk 1.2s ease-in-out infinite}
+.emoji-float{animation:emjFloat 2.5s ease-in-out infinite}
+.emoji-glow{animation:emjGlow 2s ease-in-out infinite}
+@keyframes emjPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes emjShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+@keyframes emjFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes emjWalk{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes emjGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,255,255,.35))}50%{filter:drop-shadow(0 0 14px rgba(25,60,255,.7))}}
+/* buttons */
+.toggle-btn,.replay-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:9px 18px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s}
+.toggle-btn:hover,.replay-btn:hover{background:rgba(25,60,255,.2);border-color:var(--primary)}
+/* grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:1rem 0}
+@media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.demo-panel{display:flex;flex-direction:column;gap:14px;padding:18px;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
+.demo-panel h4{font-size:.95rem}
+.demo-panel p{color:var(--dim);font-size:.88rem;line-height:1.7}
+.hidden{display:none!important}
+/* tables */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+th,td{padding:10px 12px;border:1px solid rgba(255,255,255,.1);text-align:right}
+th{background:rgba(25,60,255,.15);color:var(--text);font-weight:700}
+td{color:var(--dim)}
+.table-caption{color:var(--text);font-weight:700;margin-bottom:.4rem;display:block;text-align:right}
+.sec-thead th{background:rgba(139,92,246,.3)}
+.sec-tbody td{background:rgba(16,185,129,.08)}
+.sec-tfoot td{background:rgba(255,71,87,.15);font-style:italic;font-weight:700}
+.part-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--dim);padding:7px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.8rem;transition:all .2s}
+.part-chip.on{border-color:var(--accent);color:var(--text);background:rgba(0,212,170,.12)}
+/* live editor */
+.live-wrap{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:1rem 0}
+.live-label{font-size:.72rem;color:var(--dim);padding:6px 14px;background:rgba(255,255,255,.03);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.code-panel,.code-panel .code-body,.code-panel .code-header{direction:ltr;text-align:left;unicode-bidi:isolate}
+.code-panel textarea{border:none;outline:none;background:#0a0e1f;font-family:'Courier New',monospace;font-size:.8rem;padding:14px;width:100%;min-height:170px;resize:vertical;tab-size:2;color:#c9d1e9;line-height:1.6}
+.code-panel textarea:focus{outline:none}
+.live-frame{background:#fff;direction:ltr}
+.live-frame iframe{width:100%;height:190px;border:none;display:block;background:#fff}
+.live-frame.tall iframe{height:240px}
+/* controls */
+.ctrl-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:1rem 0}
+.ctrl-group{display:flex;flex-direction:column;gap:5px}
+.ctrl-group>label{font-size:.78rem;color:var(--dim)}
+.ctrl-group select,.ctrl-group input[type=text]{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);color:var(--text);padding:8px 12px;border-radius:9px;font-family:inherit;font-size:.85rem;max-width:180px}
+.ctrl-group select:focus,.ctrl-group input:focus{border-color:var(--accent);outline:none}
+/* forms */
+.form-field{display:flex;flex-direction:column;gap:6px;margin:.9rem 0;text-align:right}
+.form-field label{font-size:.85rem;color:var(--text);font-weight:700}
+.form-control{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.9rem;outline:none;width:100%}
+.form-control:focus{border-color:var(--accent)}
+::placeholder{color:var(--dim);opacity:.7}
+code{background:rgba(25,60,255,.15);border:1px solid rgba(25,60,255,.3);padding:1px 8px;border-radius:6px;font-size:.85em;direction:ltr;unicode-bidi:isolate}
+[dir="ltr"]{direction:ltr;unicode-bidi:isolate}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:.8rem 0}
+.legend span{font-size:.75rem;padding:4px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--dim)}
+.center{text-align:center}
+.mt{margin-top:1rem}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.two-col{grid-template-columns:1fr}}
+/* activity card */
+.activity-card{border:2px dashed rgba(245,158,11,.4);background:rgba(245,158,11,.05);border-radius:24px;padding:26px;margin:1.3rem 0}
+.activity-card h3{color:var(--s2);font-size:1.15rem;margin-bottom:.6rem}
+.activity-card p{color:var(--dim);font-size:.94rem;line-height:1.8}
+.activity-form{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px;margin:1.2rem 0;max-width:420px}
+.reveal-code{background:rgba(245,158,11,.12);border:1px solid var(--s2);color:var(--s2);padding:9px 20px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-top:1rem;transition:all .2s}
+.reveal-code:hover{background:rgba(245,158,11,.2)}
+.code-block{font-family:'Courier New',monospace;font-size:.78rem;color:#c9d1e9;background:#0a0e1f;padding:14px;border-radius:10px;overflow-x:auto;white-space:pre;line-height:1.6;direction:ltr;text-align:left}
+/* footer */
+.footer{background:rgba(10,14,39,.7);border-top:1px solid rgba(25,60,255,.3);padding:40px 20px;text-align:center;margin-top:3rem}
+.footer-logo{height:40px;border-radius:8px;background:#193cff}
+.footer p{color:var(--dim);font-size:.9rem;margin-top:14px}
+.icon-grid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:1rem 0}
+.tag-chip{background:var(--card-hover);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;text-align:center;flex:1 1 150px;min-width:120px}
+.tag-chip code{background:transparent;border:none;color:var(--accent);font-size:1rem;padding:0}
+.tag-chip p{font-size:.78rem;color:var(--dim);margin-top:.3rem}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <img class="nav-logo" src="" alt="Bilal">
+    <div class="nav-pills" id="navPills"></div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="wrap">
+    <span class="hero-el hero-badge">الجلسة الثانية: عناصر الويب</span>
+    <h1 class="hero-el">من نص بسيط لصفحة فيها <span>قوائم، صور، جداول، وفورم</span></h1>
+    <p class="hero-el">النهارده هنتعلم نضيف عناصر حقيقية لأي صفحة ويب — قوائم تظبط المحتوى، وروابط وأزرار بتحرك بيها، وصور وفيديو، وجداول، وفورم يخلي الموقع يسمع كلامك.</p>
+    <div class="hero-el hero-btn"><a class="btn" href="#sec-intro">هيا نبدأ</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= INTRO : ATTRIBUTES ================= -->
+<section class="section" id="sec-intro" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">٠</div>
+    <h2>العب مع الـ Attributes</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <h3>قبل ما نبدأ: إيه اللي بيغيّر شغل الوسم؟</h3>
+      <p class="mt">في الجلسة دي هنشرح عناصر زي القوائم والصور والجداول والفورم. لكن قبل ما نبدأ، لازم نفهم الـ <span dir="ltr">Attributes</span> — هي "إعدادات" بتتكتب جوه الوسم نفسه وبتغيّر سلوكه أو شكله.</p>
+      <div class="grid-2 mt">
+        <div class="demo-panel">
+          <h4>1. ليها اختيارات محددة</h4>
+          <p>زي <code>type</code> بتاع الـ <code>&lt;ul&gt;</code> — هتلاقيها Dropdown بتختار منها <code>disc</code> أو <code>circle</code> أو <code>square</code>.</p>
+        </div>
+        <div class="demo-panel">
+          <h4>2. نص حر</h4>
+          <p>زي <code>href</code> بتاع الـ <code>&lt;a&gt;</code> — هتلاقيها خانة تكتب فيها أي عنوان تحب تروح له.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3><code>&lt;ul&gt;</code> وشكل النقطة</h3>
+      <p class="mt">غيّر الـ <code>type</code> من الـ Dropdown تحت وشوف إزاي الكود والـ preview بيتغيروا مع بعض:</p>
+      <div class="ctrl-row">
+        <div class="ctrl-group">
+          <label for="ulType">type</label>
+          <select id="ulType">
+            <option value="disc">disc</option>
+            <option value="circle">circle</option>
+            <option value="square">square</option>
+          </select>
+        </div>
+      </div>
+      <div class="live-wrap">
+        <div class="live-label">unordered-list.html · الصفحة كاملة، مش قطعة</div>
+        <div class="code-panel"><textarea id="introUlCode"></textarea></div>
+        <div class="live-frame"><iframe id="introUlFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3><code>&lt;a&gt;</code> وإزاي بتفتح اللينك</h3>
+      <p class="mt">في اللينك حاجتين بتتحكموا فيه: <code>target</code> (يفتح في نفس الصفحة ولا تاب جديد) و <code>href</code> (تروح فين). جربهم:</p>
+      <div class="ctrl-row">
+        <div class="ctrl-group">
+          <label for="tagTarget">target</label>
+          <select id="tagTarget">
+            <option value="_self">_self</option>
+            <option value="_blank">_blank</option>
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label for="tagHref">href</label>
+          <input type="text" id="tagHref" value="https://www.google.com">
+        </div>
+      </div>
+      <div class="live-wrap">
+        <div class="live-label">links-demo.html</div>
+        <div class="code-panel"><textarea id="tagCode"></textarea></div>
+        <div class="live-frame"><iframe id="tagFrame"></iframe></div>
+      </div>
+      <p class="mt" style="font-size:.9rem;color:var(--dim)">بعض الـ attributes ليها اختيارات محددة (زي type) فهتلاقيها Dropdown، وبعضها نص حر (زي href) فهتلاقيها خانة تكتب فيها.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S1 : LISTS ================= -->
+<section class="section" id="sec-1" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">١</div>
+    <h2>القوائم: مرتبة، غير مرتبة، ومتداخلة</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>ليه القوائم مهمة؟</h3>
+      <p class="mt">القوائم من أكتر الحاجات استخدامًا في أي صفحة ويب — كل مينو (Navigation Menu) بتلاقيه على أي موقع هو في الأصل <code>&lt;ul&gt;</code>. الـ <code>&lt;ul&gt;</code> بنستخدمه لما <b>الترتيب مش مهم</b> (مكونات أكلة، مزايا منتج، روابط مينو) والمتصفح بيحط نقطة قدام كل عنصر.</p>
+      <p class="mt">الـ <code>&lt;ol&gt;</code> بنستخدمه لما <b>الترتيب مهم جدًا</b> (خطوات، وصفة طبخ، ترتيب) والمتصفح بيرقّم لوحده 1, 2, 3 — لو زودت عنصر أو شلت عنصر، الترقيم بيتظبط لوحده. وأنت مش بتكتب الأرقام بإيدك أبدًا.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>قاعدة أساسية: كل عنصر لازم يكون داخل <code>&lt;li&gt;</code></h3>
+      <p class="mt">جوه أي قائمة، كل عنصر لازم يكون داخل <code>&lt;li&gt;</code> (List Item). الـ <code>&lt;li&gt;</code> ممكن يحط جواه نص، أو لينك، أو صورة، أو حتى قائمة تانية كاملة.</p>
+      <div class="two-col mt">
+        <div style="border:1px solid rgba(255,71,87,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--danger);font-size:.9rem;margin-bottom:.4rem">غلط — نص من غير li</h4>
+          <div class="code-block">&lt;ul&gt;
+  HTML
+  CSS
+&lt;/ul&gt;</div>
+          <p class="mt" style="font-size:.8rem;color:var(--dim)">النص بيتلصق في سطر واحد من غير نقط — مفيش هيكل.</p>
+        </div>
+        <div style="border:1px solid rgba(0,255,136,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--success);font-size:.9rem;margin-bottom:.4rem">صح — كل عنصر في li</h4>
+          <div class="code-block">&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;</div>
+          <p class="mt" style="font-size:.8rem;color:var(--dim)">كل عنصر متلف في li — نضف، فيه نقط.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ <code>&lt;ul&gt;</code> — بنفس مثال السورس</h3>
+      <p class="mt">قائمة باللغات: HTML / CSS / JavaScript. بدّل الترتيب وشوف إن المعنى مش بيتغير — عشان كده <code>&lt;ul&gt;</code>.</p>
+      <div class="live-wrap">
+        <div class="live-label">unordered-list.html · my-languages</div>
+        <div class="code-panel"><textarea id="ul1Code"></textarea></div>
+        <div class="live-frame"><iframe id="ul1Frame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ <code>&lt;ol&gt;</code> — الترتيب هو الأساس</h3>
+      <p class="mt">خطوات لازم تترتب: افتح المحرر، اعمل ملف، اكتب الكود، احفظ. الترتيب ده إلزامي — عشان كده <code>&lt;ol&gt;</code>.</p>
+      <div class="live-wrap">
+        <div class="live-label">ordered-list.html · my-daily-routine</div>
+        <div class="code-panel"><textarea id="ol1Code"></textarea></div>
+        <div class="live-frame"><iframe id="ol1Frame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>القوائم المتداخلة (List جوه List)</h3>
+      <p class="mt">لما نحط قائمة جديدة <b>جوه الـ <code>&lt;li&gt;</code> نفسه</b>، المتصفح بيقّعها ويغيّر شكل النقطة من • لنقطة مجوّفة ○ — قسم جوه قسم. مثال السورس: Frontend تحتها HTML/CSS/JavaScript، وBackend تحتها Node.js/Express.</p>
+      <div class="live-wrap">
+        <div class="live-label">nested-list.html · frontend / backend</div>
+        <div class="code-panel"><textarea id="nestCode"></textarea></div>
+        <div class="live-frame tall"><iframe id="nestFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>كتابة نص جوه <code>&lt;ul&gt;</code> أو <code>&lt;ol&gt;</code> مباشرة من غير <code>&lt;li&gt;</code> — غلط. لازم كل عنصر يتلف في <code>&lt;li&gt;</code>.</li>
+        <li>استخدام <code>&lt;ol&gt;</code> لما الترتيب مش مهم — بيلبّس إنهم مرتبين.</li>
+        <li>نسيان وسم القفل: <code>&lt;/li&gt;</code> و <code>&lt;/ul&gt;</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>اختبر نفسك</h4>
+      <button class="quiz-reveal-btn">أظهر السؤال</button>
+      <div class="quiz-q" data-id="quiz1">
+        <p>أي Tag تستخدم لقائمة بالأرقام؟</p>
+        <div class="quiz-opts">
+          <button data-correct="false" data-exp="الـ ul للترتيب غير المهم وبنقط، مش بالأرقام."><code>&lt;ul&gt;</code></button>
+          <button data-correct="true" data-exp="صحيح! الـ ol بيرقّم العناصر 1, 2, 3."><code>&lt;ol&gt;</code></button>
+          <button data-correct="false" data-exp="لا، الإجابة الصح هي ol بس.">الاتنين</button>
+        </div>
+        <button class="quiz-skip">تخطي وعرض الإجابة</button>
+        <div class="quiz-fb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S2 : LINKS & BUTTONS ================= -->
+<section class="section" id="sec-2" style="--sn:var(--s3)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s3)">٢</div>
+    <h2>الروابط والأزرار</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>اللينك هو اللي بيربط كل حاجة</h3>
+      <p class="mt">من غير اللينك، كل صفحة ويب هتكون "جزيرة" منعزلة. الـ <code>&lt;a&gt;</code> بيعمل اللينك، وأهم attribute فيه هو <code>href</code>. ولما نحط صورة أو زرار جوه الـ <code>&lt;a&gt;</code>, بيبقوا روابط تقدر تكس عليها.</p>
+      <p class="mt"><b>الفرق بين a و button:</b> الـ <code>&lt;a&gt;</code> للتنقل (روح لصفحة أو مكان)، والـ <code>&lt;button&gt;</code> لإجراء Action على نفس الصفحة (إرسال فورم). لو عايز زرار شكل جميل بينقّل، اتفّف الـ button جوه a.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>رابط خارجي يفتح في تاب جديد</h3>
+      <p class="mt">الرابط الخارجي بيبدأ دايماً بـ <code>https://</code> (Absolute Path). ونضيف <code>target="_blank"</code> عشان يفتح في تاب جديد، و <code>rel="noopener noreferrer"</code> للأمان. جرب الرابطين — إحساس الـ new tab مختلف:</p>
+      <div class="live-wrap">
+        <div class="live-label">external-link.html · GitHub</div>
+        <div class="code-panel"><textarea id="extCode"></textarea></div>
+        <div class="live-frame"><iframe id="extFrame"></iframe></div>
+      </div>
+      <p class="mt" style="font-size:.9rem;color:var(--dim)">لو حذفت <code>https://</code>, المتصفح بيدور على ملف محلي اسمه <code>www.google.com</code> ويديك 404.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>المسارات النسبية والـ <code>../</code></h3>
+      <p class="mt">المسار النسبي محسوب من المكان اللي الملف الحالي فيه. أنت جوه فولدر <code>pages</code> وعايز تروح للـ homepage؟ لازم <code>../index.html</code> — الـ <code>../</code> معناها "اطلع فولدر ورا".</p>
+      <div class="two-col mt">
+        <div style="border:1px solid rgba(255,71,87,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--danger);font-size:.85rem">غلط</h4>
+          <div class="code-block">&lt;a href="index.html"&gt;Home&lt;/a&gt;</div>
+          <p class="mt" style="font-size:.78rem;color:var(--dim)">بيقّلع فولدر pages ويدور على homepage فه — 404!</p>
+        </div>
+        <div style="border:1px solid rgba(0,255,136,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--success);font-size:.85rem">صح</h4>
+          <div class="code-block">&lt;a href="../index.html"&gt;Home&lt;/a&gt;</div>
+          <p class="mt" style="font-size:.78rem;color:var(--dim)">الـ <code>../</code> صعد فولدر لورا الأول، فهتلاقي الـ homepage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>لينك يقفز لجزء في نفس الصفحة</h3>
+      <p class="mt">قفزة جوه نفس الصفحة — <code>href="#id"</code>. الـ <code>id</code> لازم يطابق الـ href بالظبط (حروف صغيرة و hyphens). جرب: صفحة فيها قسمين، وروابط بيقفزوا بينهم فعلًا.</p>
+      <div class="live-wrap">
+        <div class="live-label">anchor.html · jump links</div>
+        <div class="code-panel"><textarea id="anchorCode"></textarea></div>
+        <div class="live-frame tall"><iframe id="anchorFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>أنواع الـ <code>&lt;button&gt;</code></h3>
+      <p class="mt">الـ <code>&lt;button&gt;</code> له أنواع: <code>submit</code> (بيسجّل الفورم), <code>reset</code> (بيرجّع القيم الافتراضية), <code>button</code> (معندوش فعل على الفاضي). <b>تنبيه:</b> أي زرار جوه فورم من غير <code>type</code> بيتحول لـ submit من نفسه.</p>
+      <div class="live-wrap">
+        <div class="live-label">buttons.html · جرب الأنواع الثلاثة</div>
+        <div class="code-panel"><textarea id="btnCode"></textarea></div>
+        <div class="live-frame"><iframe id="btnFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>نسيان <code>https://</code> في اللينك الخارجي — المتصفح بيدور على ملف محلي.</li>
+        <li>عدد <code>../</code> غلط في المسارات النسبية — 404.</li>
+        <li>نسيان <code>href</code> أصلاً — اللينك مش بينفع على شيء.</li>
+        <li>استخدام <code>&lt;button&gt;</code> للتنقل بدل <code>&lt;a&gt;</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>اختبر نفسك</h4>
+      <button class="quiz-reveal-btn">أظهر السؤال</button>
+      <div class="quiz-q" data-id="quiz2">
+        <p>لو عايز الرابط يفتح في تاب جديد، تستخدم إيه؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح! target="_blank" يفتح تاب جديد والأصل فاضل."><code>target="_blank"</code></button>
+          <button data-correct="false" data-exp="الـ href="#" بتاع القفزة جوه الصفحة، مش التاب."><code>href="#"</code></button>
+          <button data-correct="false" data-exp="الـ rel للأمان مع التاب، مش اللي بيفتحه."><code>rel="noopener"</code></button>
+        </div>
+        <button class="quiz-skip">تخطي وعرض الإجابة</button>
+        <div class="quiz-fb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S3 : MEDIA ================= -->
+<section class="section" id="sec-3" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">٣</div>
+    <h2>الصور والفيديو</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الصورة: <code>&lt;img&gt;</code> و الـ <code>alt</code></h3>
+      <p class="mt">الـ <code>&lt;img&gt;</code> بياخد الصورة من <code>src</code>، والـ <code>alt</code> إجباري — بيتحكا بسكرين ريدر، وبيظهر بدل الصورة لو ما اتحملتش. لو الصورة ديكور، اكتب <code>alt=""</code> فارغة عشان السكرين ريدر يتجاهلها.</p>
+      <p class="mt"><b>مقياس مهم:</b> حدد <code>width</code> بس وسيب <code>height</code> يتحسب لوحده عشان يحافظ على نسبة الأبعاد. لو حددت الاتنين بنسب مختلفة، الصورة بتتسوّه.</p>
+      <div class="two-col mt">
+        <div style="border:1px solid rgba(255,71,87,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--danger);font-size:.85rem">الصورة المسوخة</h4>
+          <div class="code-block">&lt;img src="banner.jpg"<br>&nbsp;&nbsp;width="400" height="400"&gt;</div>
+          <p class="mt" style="font-size:.8rem;color:var(--dim)">بنكسر النسبة 2:1 في 1:1 — الصورة بتتسوّه.</p>
+        </div>
+        <div style="border:1px solid rgba(0,255,136,.3);border-radius:12px;padding:14px">
+          <h4 style="color:var(--success);font-size:.85rem">الصورة السليمة</h4>
+          <div class="code-block">&lt;img src="banner.jpg" width="400"&gt;</div>
+          <p class="mt" style="font-size:.8rem;color:var(--dim)">الطول بيتحسب لوحده — النسبة سليمة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الفيديو: <code>&lt;video&gt;</code></h3>
+      <p class="mt">الفيديو عكس الصورة — له وسم فتح وقفل. <b>بدون <code>controls</code> بيبقى صندوق أسود مش قادر تتحكم فيه.</b> و <code>autoplay</code> مش بيشتغل غير مع <code>muted</code>. وبتقدر تحط <code>poster</code> صورة قبل التشغيل.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>كل ده مع بعض — صفحة حية (FocusFlow)</h3>
+      <p class="mt">صفحة حية فيها صورة حقيقية من الإنترنت (picsum — زي ما السورس نفسه فاعل) وزرّين وفيديو. الصورة هتتحمل فعلًا، والفيديو هيظهر رسالة لأن ملفه مش موجود.</p>
+      <div class="live-wrap">
+        <div class="live-label">focusflow-landing.html · combined</div>
+        <div class="code-panel"><textarea id="mediaCode"></textarea></div>
+        <div class="live-frame tall"><iframe id="mediaFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>نسيان الـ <code>alt</code> على الصورة — السكرين ريدر هيقرا اسم الملف.</li>
+        <li>الـ alt غامض زي "image" أو "photo".</li>
+        <li>تحديد <code>width</code> و <code>height</code> بنسب مختلفة — تشويه.</li>
+        <li>نسيان <code>controls</code> على الفيديو — صندوق أسود.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>اختبر نفسك</h4>
+      <button class="quiz-reveal-btn">أظهر السؤال</button>
+      <div class="quiz-q" data-id="quiz3">
+        <p>ليه مهم نحط <code>alt</code> على الصورة؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح! بيوصفها للسكرين ريدر، وبيظهر بدل الصورة لو عطلت، وبيعمل SEO.">يوصفها للسكرين ريدر وبيظهر بدل الصورة لو عطلت</button>
+          <button data-correct="false" data-exp="لا، alt مش للتكبير — ده لأي مقياس العرض.">عشان تكبر الصورة</button>
+          <button data-correct="false" data-exp="لا، alt مش للسرعة — هو للوصولية.">لتسريع الموقع</button>
+        </div>
+        <button class="quiz-skip">تخطي وعرض الإجابة</button>
+        <div class="quiz-fb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S4 : TABLES ================= -->
+<section class="section" id="sec-4" style="--sn:var(--s5)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s5)">٤</div>
+    <h2>الجداول: الأساسيات</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>إيه هو الجدول؟</h3>
+      <p class="mt">في بيانات كثيرة بطبيعتها "ثنائية الأبعاد" — ليها صفوف وأعمدة والعلاقة بينهم ليها معنى (جدول حصص، درجات طلبة). الـ <code>&lt;table&gt;</code> هو الحاوية الكاملة، جواه بنحط صفوف <code>&lt;tr&gt;</code>، وجوه كل صف خلايا <code>&lt;td&gt;</code>.</p>
+      <p class="mt">رؤوس الأعمدة بنكتبها بـ <code>&lt;th&gt;</code> — مش <code>&lt;td&gt;</code> — لأن <code>&lt;th&gt;</code> بيعطي معنى سيمانتي للسكرين ريدر وبيبقى Bold من نفسه.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>مثال من السورس: جدول بسيط</h3>
+      <div class="live-wrap">
+        <div class="live-label">table-headers.html · Student Name / Math / Science / Average</div>
+        <div class="code-panel"><textarea id="table1Code"></textarea></div>
+        <div class="live-frame"><iframe id="table1Frame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>Mini Project — جدول درجات الطلبة</h3>
+      <p class="mt">البيانات الحقيقية من السورس: Ahmed → 88/92/79، Sara → 95/87/93، Omar → 72/80/85. والكود الكامل للجدول:</p>
+      <div class="live-wrap">
+        <div class="live-label">students-marks.html · complete source</div>
+        <div class="code-panel"><textarea id="marksCode"></textarea></div>
+        <div class="live-frame tall"><iframe id="marksFrame"></iframe></div>
+      </div>
+      <div class="activity-card" id="activityMarks">
+        <h3>طبّقها بنفسك: ضيف طالب</h3>
+        <p>اكتب اسم الطالب ودرجاته في الحقول، واضغط "ضيف طالب" — الصف الجديد بيتضاف للجدول الحي:</p>
+        <div class="ctrl-row">
+          <input type="text" class="form-control" id="newName" placeholder="الاسم" style="max-width:150px">
+          <input type="number" class="form-control" id="newMath" placeholder="Math" style="max-width:100px">
+          <input type="number" class="form-control" id="newSci" placeholder="Science" style="max-width:100px">
+          <input type="number" class="form-control" id="newEng" placeholder="English" style="max-width:100px">
+        </div>
+        <button class="toggle-btn" id="addRowBtn">ضيف طالب</button>
+        <div class="table-wrap">
+          <table id="studentsTable">
+            <thead><tr><th>Name</th><th>Math</th><th>Science</th><th>English</th></tr></thead>
+            <tbody>
+              <tr><td>Ahmed</td><td>88</td><td>92</td><td>79</td></tr>
+              <tr><td>Sara</td><td>95</td><td>87</td><td>93</td></tr>
+              <tr><td>Omar</td><td>72</td><td>80</td><td>85</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>حط <code>&lt;td&gt;</code> مباشرة جوه <code>&lt;table&gt;</code> من غير <code>&lt;tr&gt;</code> — غلط، لازم يتلف جوه <code>&lt;tr&gt;</code> الأول.</li>
+        <li>استخدام <code>&lt;td&gt;</code> للرؤوس بدل <code>&lt;th&gt;</code>.</li>
+        <li>عدد الخلايا غير متساوٍ في الصفوف — الجدول بيبان مكسور.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S5 : COMPLETE TABLE ================= -->
+<section class="section" id="sec-5" style="--sn:var(--s6)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s6)">٥</div>
+    <h2>الجدول الكامل: thead، tbody، tfoot</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الشكل الاحترافي للجدول</h3>
+      <p class="mt">الجدول الاحترافي بيتقسم لتلات أجزاء سيمانتيين: <code>&lt;thead&gt;</code> فيه صف الرؤوس (بالـ <code>&lt;th&gt;</code>), و<code>&lt;tbody&gt;</code> فيه البيانات، و<code>&lt;tfoot&gt;</code> في الآخر إجماليات أو ملاحظات. والقسمة دي بتخلي المتصفح والسكرين ريدر يقرؤوا الجدول صح، وبيسهل تنسيق كل جزء لوحده.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الجدول الكامل من السورس</h3>
+      <p class="mt">دوس على الأزرار وشوف كل جزء لوحده — كل جزء ليه لون مختلف عشان تميز الحدود بينهم:</p>
+      <div class="ctrl-row">
+        <button class="part-chip on" id="chipThead" data-part="thead">thead</button>
+        <button class="part-chip on" id="chipTbody" data-part="tbody">tbody</button>
+        <button class="part-chip on" id="chipTfoot" data-part="tfoot">tfoot</button>
+      </div>
+      <div class="card-inner">
+        <span class="table-caption">Student Grades — Term 1</span>
+        <table>
+          <thead id="tblThead" class="sec-thead">
+            <tr><th>Name</th><th>Math</th><th>Science</th><th>English</th></tr>
+          </thead>
+          <tbody id="tblTbody" class="sec-tbody">
+            <tr><td>Ahmed</td><td>88</td><td>92</td><td>79</td></tr>
+            <tr><td>Sara</td><td>95</td><td>87</td><td>93</td></tr>
+            <tr><td>Omar</td><td>72</td><td>80</td><td>85</td></tr>
+          </tbody>
+          <tfoot id="tblTfoot" class="sec-tfoot">
+            <tr><td>Class Average</td><td>85</td><td>86.3</td><td>85.7</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="legend">
+        <span style="background:rgba(139,92,246,.3)">thead — الرؤوس</span>
+        <span style="background:rgba(16,185,129,.2)">tbody — البيانات</span>
+        <span style="background:rgba(255,71,87,.2)">tfoot — الإجماليات</span>
+      </div>
+      <div class="live-wrap">
+        <div class="live-label">complete-table.html · source</div>
+        <div class="code-panel"><textarea id="ctCode"></textarea></div>
+        <div class="live-frame tall"><iframe id="ctFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>عدد خلايا مختلف في الصفوف — الجدول بيتبهدل.</li>
+        <li>استخدام الجداول للـ Layout (طريقة التسعينيات) — الجداول للبيانات، والتخطيط بـ CSS.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S6 : FORMS ================= -->
+<section class="section" id="sec-6" style="--sn:var(--s1)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s1)">٦</div>
+    <h2>الفورمات ومدخلات المستخدم</h2>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الفورم هو الوسيلة الأساسية للتواصل</h3>
+      <p class="mt">الـ <code>&lt;form&gt;</code> حاوية ليها <code>action</code> (فين تتبعت البيانات — نستخدم <code>#</code> لسه مفيش server) و <code>method</code> (<code>GET</code> بيضيف البيانات في الـ URL، <code>POST</code> بيبعت البيانات في الجسم).</p>
+      <p class="mt">الـ <code>&lt;input&gt;</code> وسم واحد بيتغير شكله وسلوكه كليًا حسب <code>type</code>: <code>text</code>, <code>email</code>, <code>password</code>, <code>number</code>, <code>date</code>, <code>checkbox</code>, <code>radio</code>.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>جرب نوع الـ Input بنفسك</h3>
+      <p class="mt">غيّر الـ <code>type</code> وشوف إزاي شكل الـ input بيتغير فعلًا. وغيّر كمان <code>placeholder</code> و <code>name</code> — الـ placeholder بيظهر بس، والـ name هو اللي بيتبعت للـ server.</p>
+      <div class="ctrl-row">
+        <div class="ctrl-group">
+          <label for="inType">type</label>
+          <select id="inType">
+            <option value="text">text</option>
+            <option value="password">password</option>
+            <option value="email">email</option>
+            <option value="number">number</option>
+            <option value="date">date</option>
+            <option value="checkbox">checkbox</option>
+            <option value="radio">radio</option>
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label for="inPlaceholder">placeholder</label>
+          <input type="text" id="inPlaceholder" value="you@example.com">
+        </div>
+        <div class="ctrl-group">
+          <label for="inName">name</label>
+          <input type="text" id="inName" value="email">
+        </div>
+      </div>
+      <div class="live-wrap">
+        <div class="live-label">input-type.html · الشكل بيتغير مع النوع</div>
+        <div class="code-panel"><textarea id="inCode"></textarea></div>
+        <div class="live-frame"><iframe id="inFrame"></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="card">
+      <h3>الـ <code>label</code> بيربط بالـ input</h3>
+      <p class="mt">اضغط على كلمة "Username" — هتلاقي الـ input بيتفعل (focus) تلقائيًا. ده اللي بيخلي الفورم سهل الاستخدام ولائق للسكرين ريدر.</p>
+      <div class="activity-form">
+        <div class="form-field">
+          <label for="focusDemo">Username</label>
+          <input type="text" id="focusDemo" class="form-control" placeholder="اكتب اسمك">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="error-box">
+      <h4>أخطاء شائعة</h4>
+      <ul>
+        <li>نسيان ربط الـ <code>label</code> بالـ <code>id</code> بتاع الـ input — بالضغط على الكلام مش بيحصل حاجة.</li>
+        <li>نسيان <code>name</code> على الإدخال — البيانات مش هتتبعت.</li>
+        <li>أزرار الـ radio في نفس المجموعة بأسماء مختلفة — الاختيار بيبقى متعدد بدل واحد.</li>
+        <li>استخدام الـ <code>placeholder</code> كبديل عن الـ label — الـ label إجباري.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="quiz-box">
+      <h4>اختبر نفسك</h4>
+      <button class="quiz-reveal-btn">أظهر السؤال</button>
+      <div class="quiz-q" data-id="quiz4">
+        <p>إيه الفرق بين <code>name</code> و <code>placeholder</code>؟</p>
+        <div class="quiz-opts">
+          <button data-correct="true" data-exp="صحيح! name هو المفتاح اللي بيتبعت للـ server، وplaceholder نص مساعد بيفضى أول ما تكتب."><code>name</code> بيتبعت للـ server، و<code>placeholder</code> نص مساعد</button>
+          <button data-correct="false" data-exp="لا، placeholder مش بيتبعت خالص.">الاثنين بيتبعتوا للـ server</button>
+          <button data-correct="false" data-exp="لا، الاتنين حاجات مختلفة تمامًا.">هما نفس الحاجة</button>
+        </div>
+        <button class="quiz-skip">تخطي وعرض الإجابة</button>
+        <div class="quiz-fb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACTIVITY : LOGIN ================= -->
+<section class="section" id="sec-login" style="--sn:var(--s2)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s2)">أ</div>
+    <h2>نشاط: فورم تسجيل دخول كامل</h2>
+  </div>
+  <div class="reveal">
+    <div class="activity-card">
+      <h3>سجّل دخولك في النشاط</h3>
+      <p>دي فورم دخول حقيقية شغالة — اكتب فيها وشاهد القيم (مش بتتتبع في أي مكان، بنخليك بس تشوف السلوك التفاعلي الحقيقي).</p>
+      <div class="activity-form" id="loginForm">
+        <form action="/login" method="POST" onsubmit="return false">
+          <div class="form-field">
+            <label for="lgEmail">Email Address</label>
+            <input type="email" class="form-control" id="lgEmail" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-field">
+            <label for="lgPass">Password</label>
+            <input type="password" class="form-control" id="lgPass" name="password" required>
+          </div>
+          <div class="form-field" style="flex-direction:row;align-items:center;gap:8px">
+            <input type="checkbox" id="lgRemember" name="remember" value="1" style="width:18px;height:18px">
+            <label for="lgRemember" style="font-weight:400;color:var(--dim);margin:0">Remember me on this device</label>
+          </div>
+          <button type="submit" class="btn" style="width:100%">Log In</button>
+        </form>
+      </div>
+      <button class="reveal-code" id="revealLogin">اعرض الكود كامل</button>
+      <div class="live-wrap hidden" id="loginCodeWrap">
+        <div class="live-label">login-form.html · annotated source</div>
+        <div class="code-block" id="loginCodeText"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section class="section" id="sec-close" style="--sn:var(--s4)">
+  <div class="sec-head">
+    <div class="sec-num" style="background:var(--s4)">✓</div>
+    <h2>كل التاجات اللي اتعلمناها النهارده</h2>
+  </div>
+  <div class="reveal">
+    <div class="card">
+      <div class="icon-grid">
+        <div class="tag-chip"><code>&lt;ul&gt;</code><p>قائمة بنقط</p></div>
+        <div class="tag-chip"><code>&lt;ol&gt;</code><p>قائمة مرقمة</p></div>
+        <div class="tag-chip"><code>&lt;a&gt;</code><p>لينك بينقّل</p></div>
+        <div class="tag-chip"><code>&lt;button&gt;</code><p>زرار بيفعل</p></div>
+        <div class="tag-chip"><code>&lt;img&gt;</code><p>صورة</p></div>
+        <div class="tag-chip"><code>&lt;video&gt;</code><p>فيديو</p></div>
+        <div class="tag-chip"><code>&lt;table&gt;</code><p>جدول بيانات</p></div>
+        <div class="tag-chip"><code>&lt;form&gt;</code><p>فورم مدخلات</p></div>
+        <div class="tag-chip"><code>&lt;input&gt;</code><p>حقل إدخال</p></div>
+        <div class="tag-chip"><code>&lt;label&gt;</code><p>وصف للحقل</p></div>
+      </div>
+      <p class="center mt" style="color:var(--text);font-size:1.05rem;font-weight:700">دلوقتي عندك كل الأدوات الأساسية لصفحة ويب حقيقية — قوائم، روابط، وسائط، جداول، وفورم شغال.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <img class="footer-logo" src="" alt="Bilal">
+  <p>كل مطور ويب محترف بدأ بأول وسم زي اللي اتعلمته... إنت كمان تقدر!</p>
+</footer>
+
+<script>
+(function(){
+  var ICON_B64='UklGRsAcAABXRUJQVlA4ILQcAAAQsACdASpYAlUCPlEok0ajoqGhItWIMHAKCWdu/Eb3rSGO7W24Kxp8t/z35QbaL2P8mvy09B3LHy/76/vP/lMzu8T/Ov9N/jP3B/vn/////3R/1/qP/Uf6m/AB/Df4//kP7/+3f9m/////+rT1F/uJ6gP6r/d/+d/hf3/+a7/Jepz/JeoF/Vv7/1iHoCfsB6Yn/r/2Hwe/tJ/5v9F+//0Lfzz+7/9r8//kA9ADqx+wP9p7Rf7Z/XvPvq8+1nMHiU/Fftn+o/uftp7JfkXqBfiX8x/xP5Z8JQAD6t/6b+4+upM+yAOC8oAfpr1aP6T/6f5Pz7/of+X/ab4Dv57/aP+12E/2y///u7/uQEd8QtYY3sgthnhSjzlxsHsUNtqxsYPmY/tAnTWk3eRvx96FjeyHJvbr2WcMflxsHxsHxwNwpR5y43vhzrGX1TpNJmXt4xgkLqDmwfG99YZRGMFcyZ4Uo85gZwBbN+NllprGxSRxW1rTyCRoZg+h0Lk9hyLKBQ73OHulwtb0r7Yt5PSoBq70s+RV+vmqzZCqvAjDoiSnBwHM9u3kIwbzlxsBQO5nrVFmIT0cN4xUVTTop/in5EP7B8VPficNp4Uo9CYJ2MbGe2QcycuNhDjHYMc1hRlU7TBo7ET+m0ecuLWrsysVbJwwyW7Gwci7/f4b7eY3spo8hACO9F7eM0cndhYzBzYPjYPi2s3lloqwH/ypFHIWDg3LWx724JkPCjzlxsIARP9cmu7/ZownOm6SXZWcSrN1ionLjYPjYPdF1f9yA04STy2woP8q2ZDab97eMV4Uo8j+rxDgQtFzXmj0BexP/th4o9HZap/AcfrB8bB8bByt9LZK1LVnj6oAWMnX6h5/qUKSpGE52zPJmXt4xXhLKBMjlKRRBOFPTCBFLs0PlKB6EBul4xXhSgtMgQT6oNB3AFnhzPt44fdrVBd0wgBYJ5nkzL28YroE3NmKKreywfJTq9znjhtX1aq8EtMLlxsHuu2EKfH9FOy4j31Ko0UwYo70PeKl4jJoqMhKYlb5YktMajaS5Wc3/adyZdDaAfhhDWpYWGcPKvDaRep78mGQHCd7//L5zA9p7+w4sz5T9KoniwkKqUrmI71fQgTVtI0XVrqq7V+mYy9wK3ffqz/+Or3peC0mkpVYx955ZowcBHo6v9i29B5LQfA6DqaLpoV7SiHFmRAm0UldUDcX/ouciJah9bJ0zGUds8ApyspaVFT0aFb610bmwG8MKUciDdQbUxIc3kQgFF0BQ2+3/1twur1bsbB8bAIuNI7ctdbxiyyP8bBzhMbmYIM4b8pn03S9501OtiXK9jYPjYPjYBU0J1td0x2zWnRSj2ENErPauhSJbsbB8bB8WzQmMIoN6mSeoaPbS7xhqgz7Rm90udSbfM+/M+/M+2q5zkHwgOmW7IxrgGfnantR5bmZ/GwfGwfGwCfuyIPBLrvY17b1479hUwupcbB8bB8bAQAQPxFm5wHM/DGX2dGUTnPSSORRmBAFKPOXGwfGqnUawYBmUlb7o2gq3xIt+5qaTHReecuNg+Ng5S5VEPIKn7R5y5KdgNEP/CctFGRfdcbB8bB8bAG2kbnnjfj5oluv/gRhkt633Yzw7bkmwo85cbByF8VOjWFDUjwLg+AhHWghGXOkAj3IYK3YrIOKIEsJ2Lx5D63xJhyMnSjFi2aaOqZHGOU83UPjf+fNGyE+Z/GxpEB8bD1WDQ6zDahWy4eI+Q2GD/8t2/te3jGOtkUmvH29gn/+TICZmhiQUW7GwfLPCtqooUgpRoHcGtw3szflXEGGS3Y2D5Kdg+OQE+JVtRv+yklVIuo8dXQx116rM3el4dZCC3JvTG+pMds+GvBFYveHV3km1Cry4VeO7G9/euRjXSwAAP77d89+nafhMf4TD6F7w6ETqw/BiNp9R3MH+fjgGRkNcGuDzzJDh5wD5niJcxxptKbzbw2ZkkcLHYPDYtAgeyGavwCzeP1Hv+Jx2rSaoRfE+1+cYFN6+O2ZqnVjPDdbvv2KdVrlK5PMUvmhCbwAFqQybdpqs3k8yQvZtDTr3o6w4WQHXQz0sykl3GEA/CFxJfMOTkJ1y3/nSlwC+0naIxAJyDvxU6hMY1Kijbe/v3PVRvALgd+p4nomE6P93IUmkld97JR/G3ZE1/J8NqOg4AvmO7nptwCH3HSUoM6p/CRSrejS0vyLndCB//fmeUVLGONqwvyYyljGfrFourMOaQMXBCFRLQAyveZAUJ9JywJ+AVVD+sJNUA6GatZh4AdTxKA2dHNSOckmJRAt/7BHRHNkGj1FU7gHWJmbORZicUCUV2HnTtoWdwwJCBXehscM5VNujpC8Utn5blnaBm35pWeDb7CEt5w+HOnoOBgUZ8lMaeLgCEXlrUJpflBtRgV+gsy7lfDzZuTdBBC9bJ+WjVDLsilgNPYb2Bn4qLf9JCQJz93pPj6pXSeypSJqPO7tDcStOt7hJXjTIABlTAkEZ0ClV1T+Fk/GhKoe7jYAlVZe+AAPqHSZ/5HXWidWApbQ2UMwqybyTQme22FkskGS7op7bwWUmZEuNM5EptmdgYL/bSWxv5zSRLRzZtI7+AuJyPGu5bP91AAy63dbb2jeXmrncak0ayciOLtOOpK2k5sDSiibrh+Muv5FYYShZ3hrKRzQ8UBQ/gfQenCcUNsLynSscgfO50r8yMK9cDuaBxrBESuwTIv/Ba0OrhKBFGKoBl3qVLroHVXijv7TQvCDUoiNj6QzckInt4JNrVD40IKDUFeE+h6CHHeehl/ZG0Ad7sJ7kLTjyLucB/zjIcOzHcQucWaiZ51eTy08zaI7BEoOdEFW2o1U6cCEDY9tvkxj/0aGCk54aEKD6zCqjgQPFPLcXLVZZzkvGIJeZaXqa2WRZ/IIry/rCxb9h1PLcmZ8Wt1zX2zR9vZWfwAAJ9htLnPiA63VF7+H83NoFmLGnFiBJFoDISdaPlPU4X4+EhN0jDFe0wixZBfRJAZbnB3JEh2pivFjU96ax8UCq4Z0zsQib2CXlOVlDdgJeEzH+B4YnFVq8JzwVVUzHrUniFQI/sRaQriG+J2qKN9zH2+ilo3hKJkFjqFWNcKFPqxqK/gHQOYNWlcC3C/aIKttRqpz77PtqzMDT1f1F7c0dKBhiY3IYvx2O42at13k1Yhxf8TJeQJui1Kpa8fhmVemU1QNyk1TIm/1bghfQIAFYQF70bIV7Bpm55kEih6BcY9Uq3UjKZq1tlL5AUmpzCCXKf0Tmdp3LB48OISsYb/SME9HekTO91T31fF7Taf3f1MmICO+AWoIrVmAQmaX6h4PpP9j4/EkKrOyfSQnzitH19H/4c1yr9d0dHU3qN46Amo6Xf5Xd0Gc1FoPixuLj30doDHLcNjQkOekKELEf12Dcy+XllpnDZtzYdVQ7pYMpZ3UDCaGnKVvpzZM/NcwAAK+rG8FhSEcsLamGjV3RMDAHc/cLkPrHqti5utRJ//yFREt5ISjCeQFVrQSb90qDCwphOkX7tJk8STj9IRMoYKJStCMW0Wo0q+LTH+maNPCFUlkVFd8yT0MXTaTE1T1IYN5ZgnsayrqF0w612PjhakbgqBvk9WdsHHkfH5RlihZR+MfTG3a0eiYzaUv8ubMKwAAIqZJl705RYs2D/BSe2+dFn/APWfeDcHQm7effuGf6lb46uKXiOGwU00wIYC0biN/AsWpUy0rhg0gj85my03P7bTDm0u7TNGNcejLO85d50usVZUC/jagNbQDNiRKybMkWpqYAgWb3V99t1UzIaTDi9mhMhpda6hr6N/Zb9Drvr4p7mQ7q7VBZFypv+Mv+73DxLhb/VQAAeH0jvC/DkpFUdv9v43SCuH72zsCKB7f6um2hr77ez5P2RqJ6tv6p4hN5i3/FsTZv9bN+Nl4fv9KKUaDXnMXi7N7f/bZq4DwTNxpUnyiYDd2GQb1nCVo6Gjtzdn+HEbwtYeKBC8j1X1C4qCG30E7tvqEtjkrmhQ4PcACopAAASgT/5kXtSKi9J6EcBv8hPNt1uPaXHQeNjO2lQzqWPIZJUKdg/tFh1DmcnqHGGPFYSTQbfPsjERRa3WkpEh0Dy8sY/Yg0nhlsH0+GWPdBRPzFkd4zvkyT20zqeHtZ7JROwNGlAAvcQIlFJ9nvCvRNK38jR0rFWzvqPk6QViXkBLumJqMKlw2uOiEC9wER6v0Hflp3QYDQ25dkn/cFJ7Y5pS2kdTrLaFp0IRlr4ki2/IgDH5wxgaaybYh81w8Qt9zfoXR3UJhkhQIKIA7WAACd2f2peO5lvJ9lS7TMkCcwOMJh8v03NI4b6DBPlsKtsll+DYtgNcoarMQvauSVcU6okOjbu+Psle925mPQhZ+kV7uGVbW0Bi0jxV51h40/R5iFzu+OrHRhrCV1jBuR4GjHmrVllfL1HHLAQ+AAG2I0xcQol1N6Fk2XFP0e5tO4Y6flC0y01riBHNMDd2mT/VFHEoPb9OJoh+DNIjRmgjzjjxOrvtxOobdx8u7oAiSTWAeORxqDGj4hG5i5mAChl3tAGqbnpCu3ub5cOb+ZaSx61KYf6JuW/CdvA8o68PFWhpzD344h6IUB+RINaQBoB5kXjvYppl6LnvKobIqSlpQaNFFNdOqqRO3NdSdyp1fQiHBHfh13aAPQIr5Q0Ze+hCqrO/mkBLzeVhLmkAAVR+5qO45NgzGlNzWA98NI4zs/xTNG2ERCyHfF3xLhKeIdp97BhBIJceiMGYayZjcXNbw1msYweDmGYCT7SGL1CEPR/SqiOldqpxqfdnSA3Z5qiSmZJ4sOAlcPZvz6A28xZVTiZnZvccPSvpG7Lo3My862Kbx6Xh9nLNNxQJcFRHgZDm+cARCB7LCugHy7kbepoicKQ7UpVLr3o+YbbnvOR7BmMmIn5N3JkqnHF2Ej1bC2wMImRFvhcjsYFH3kL+zpp21DboPHPxU7uRVQM+QhrG5z5uVJ+swmIgwMT+SkqBlUuc1Flu4Uc6G2IjfoTd8N1xuw0bZVHlh8cDcK3oPJ7OxittMYz1zH8d0vZYkquEYU+i375WeraEDESfDjCgNVOE7cEnaouSNx4mciGplmk2ODV8uclKFuTRKTDs32n8XD8y7enPfBGPfMm79dvTU+yYRkTa1j5EuSBIxy2zrFLF0hD/ECUFIk5SHe2gQpcEbBX8yhF6IBZrMtEM12W8LD1Nlbr5/xY3ACw8q5OGgOFXLuYQQnlD+Uxa5ok0BLKGRWfc9wjUz4u8xGIZAhTlrq/qfnMZ2x49l9aUgULleRNw3aODmvc+6cth+WwJ5tuof2QffV5fkGtyBPKEIWD4TBHY9vaTfBAp4vzHSumXeoaM9lw+IvPtQlZr0aU1p25/az85EXf7wyzyHt0OcmzzMMiALkvXPsQAZWQ8nL+zMLA5zR96TKV9+jsoXW03yg1FbEV5URaTTKrdshYI8OUeYjZBrHIWyzETRdiEpp19H3TvGtQS/jDBHH7vf7UPvWwLXnErSl/F52L504J/TwiPNCEexYsHnIPeSn7uCfe8DQriX9WOR7wdSBBXgUZP5zmDHgIR5WC/1uecNdddnM3HbRrPs2lHbLbBAjcDNU8REL46FebHryj9KjLGsaxmS//66+KJu7Qg8e9yo34xjkn1bQYAXz7tN0O63IezR+DUQlCNWkiuuoQDLlJD8wW0bOEJihhKSJw00InMY0pxSUr5Byqxw8ou2Wbhzz4MFEjhF3eSUYnS192yMGP9pA0itiQwKOHBi7PJMk3MmA9zma7mtFiu33G4Pi5ikOyf3gxN2CMyuAyv+l8caLB8Qt/fRpbVHvVuOPXnGat3n3K+Oszq8z/bNWRqeUlgDAz/B8PtyDPZC92jHEAc+ioeNadDdUBCFplppPEhydgEgRc2KgzRwTDYg9Hx+dTopc9aXkhMM1KPddqGrHkpQP/ggLw+HGGIhPnjsksUd3QkgfVdUg8JeP8aGteK/umY6rXA+6QSvWGP7f/HJh/xDzHBfU2l90KF/aV5mp3bGD0Ms7qpju5ofDBfdIPH8bNu8rqy62u5KlnetQaULHdW7F+/zeJ5wlr9H8pls6DGH+irJngNGS82OSScvjRpENTt9XPHrlI+UN/duVQ3KnRTgEOg6GSt1ImqfBwa1Y06Oe+9YthZ4mEuY/itUjcW4Jggs+44stpmPoBHnGSOO7Lz2SCHX9FXfVPrT+QzXwveMMNhvyNwl4jpoBTsONU77voNQrD/zcveT7ckBcdT0gf1RMVqZ3GvM1mcCHgbuLT5xcAG3ZVLvKLrwiZWpDzjkOmg+/TCYuaX/PmRs2QaildfviW/Hevmw9fcUXrTPqGSG1H0GqrjyoxA23V8Bv1vcoq5T+skp8dIbcJSQWuOiEdN/9r6Wwt+ce/Owj5RMyX8svgiDy7Xia6lFiVez5+mc6+MH18/KBmUi0rBT5bMEzDB02KxSzK3qMi/OAOQbYPYfNIl59lkdsAQipp0fl0TyGTMHZ6ntmqj2l5zkJHU7TG1zdi/FIUctcz1DIEPg+NlhS9FbjN2wp3mA4pVD5nTNRsfJ8aoZDP/THBSRncKJ1B32ZKWVISad+YBO2I7HsSylu/2JAid4ONBCK+SXX0Ii5QJpT2K3qJoU5O0AEeUSCFgMH6Y0slKRny0AgFmKdd3IbCl0FGoDRgky6Kpl5nReBFLOxJS3raORhaVQNPjf6oF+EHRybCVLEr2dX0tp6of1g4ChOehyVdIHiy4yc+gbVR3W/VSagggPu3cNPok6jhStOwANbe5q7sXPijAPFAv6IzRTeO+embmWD/0qG5c0hamY1SJx7TGITr8KHQlNMLOnLk6d6hKiUFY33FuDSrU4FOK/DlA77NZOQ2DoItuiRVHrv93c3Ynvsatdiv8ltHKtG/HPn2xQ5i/+KmnggfDXrNjTme/buvA7XBzP+X4knz+wOMF/GahG7NjGP4B3LS0isYWNJlgzkv5ZfAqZmMgiDL4Uw4froX5zPClgLcuZvrSJ3LpZ0hehlg3LRhV48WBz4HdDyylIkXHc+1n8we2Bk9pRa002V390oHwHjfeG+UQzp8xz1K8/Cfw6bCvjE4aKrMJSUJ4q7/F7nFLMCzzZyEr44/A6jwLMnJ3s7RyEHPjMyGRN94cyyYkwoKb46jjdNwFExp+uDx84AAAAroJ0dGaMpTEuuEdi2qExu11QiBqZ/k52IRMSeBomwPLBUoCC8wSTtiP9HRqh7gJus94cKYgES9OiJll+Cd3eIwOD6JCQCieA/wbdylWAGytAp3nxurx9pmMhUhGTeB+MkM5BsZMrDn/2sMJOKRjjNt2g0gMbKKE6b5+Zj7Cnd+it9FsOUbY4dzXBasH8mOWkUdOI8rZbbZ5Ll0X32qlwrfJQrNejOjC88t/wEkQn0aj+6BXoSXhIqy/Og0akMBNMzvrKK+YGjEnqMgfR8Vpj0ee5n2jjWzUqk4KeO/ye62D30AACl1qF9rD6SKSdlx/s5cA4IilVP+dWfn0F78WBdIwyb//SQkDGmtdbenSegElOP6PacZhBb+i/K8WWTu9VXV3yrgDCPhPh6e1HISsrz0WbU+T58ifQfGwICXCSYKy3/m/Q75i2vmdDwxPgO8ZKBu9IGoODXA6ISUVPugBOst1nXbOPsFGCKUxkCIpAtzR0oGWylfhafGgcXX2YVelEAAGZgDheCp4xVtvY6XlUgAdaEsyBTVzlwPi/1zEK15FcNTBocGc2mwzP940f/Ashv782L8JhH49Yr5i19NOyEFc+9yVMP/6v+VKsyT4GdSWcrI4IuBItt9W0eC9/olYFePtXmHUf4orvWMA4Ok/W/DPiAUumcO3Z0vqCIn8iI0XTxO2/zE+EDIAAFuz8FhwjaiUQbn36vQuiVliQzezMSYEHFqL+njMKYWo93d8PUR898ko0xT6vUj+34B+74g4wqOCXw+Cpi7xYYwWrwcwF0nshveDXg8u+B6hLwmZwwxBeoOUIUGwH0wyzflw/31HIVK6kC5oZxg0wgAA82cHeRYUKwMf/ySi9883rB2PBjX8qg2kjev0DgFfZ1IKg9U4aUh8UT1bDFwl3sBQXGuyjBeDP8jqk45LpO+aPbW06uXAoE8nL95AopOsshrUb8sP84XohoiO/5/d08Xryx9hxWI4rLaIBcfmEfVc1NiDjAtOHWezpQb0QAACc5+bXJ/5c8ma7r1QlsmaQAHx0BfVeFYcWPOwD8qxBR4lUSO/nw6bIb6g7TWDahUxcJwuRqbh8PYZ/UtLQFpj8nXxP4U0xeR7RGm3rNZp7dgAYVm91AgbmXK2KNYeYYboTOI6Lh3nCBvAgjPDwP3JK8acBLD88RcNiUjnnXtI/wb+3ss4QXRBsBT6yAAAKLsVYaJb9tG38fU+Dy3kcwCp4xK+BxgigXzeGOjVZ1Zthw0Uot+zDRyv6/H3nGPexdydUWakaeWAvpJAFIx8fT5aJcWISdjzNts2ZCBu9xVyDQejhGxOb1sDHhs4Qk/7zoOavD7DRNkCZqWhPBXpgAAovbf2BaKv5fsKRRZIQGT5BaFjTtxayO1Vd6REt5oNcLWWuV6YaVjmIvvWr82rRWLLttX4fGSUxuQotS3+Y16SrHdinQSlfuhfvL+/uyeTARUxTmsR/AAL1vjINJMdmifKg0gVzJGIu1Z/Dkf5Y/hUzlqBcJb2osBeaSI4M4rnr8RVamVM8Z8AAGxpyQlWyeg+U2Tq5mgyuILgDWO+v8/0RzncBLV3LwOhX/Irt8x3SBRMSdvLIUn3icw4KNUhuDN5Lt+CSvxkqBG19L//adaEnZctqMCo9DEmXJl87OL/CIt6Blqbs3QvZXA9XV9ZAAA85GVkZ+1e47Id5Iy0J0PvVwLkzR2CU4xMBjk5msHJel6C8R0ziTx4LLVIaXvtaUTDd/G79Y0xDsLb6rqCzF28SD/EBTY7FtSFjUvEHAAGBNVeJtO0mdTot44rDszK8dYovrtO4nM7hzp90q6LKQol6jSi2aCdBg1acKvD1Aqv8HTsw66VaIOGvpPUYjPJxleE9cxsPm6UsFjd1dep90xrnSXr38Zz2i0Cs8PfS7DV0V/elsE4FXVUHZ8t7HYJNzeibY84HWUhoCiuWL1RVR8/DkCoD51uyMtlWbJPs/5BI+S8wTiPaQgME2YRkzJezhlvcu0BaaXWlRjPe04fYmbaCaZO4qaBheEE0tWchTr75PJV3HzhDTOdaSszkS/idII8KajAQ/lE1ia6RA3G2JaP8KQPy7Ug32nKmv29lkFjPRdgWsxgiETxNaGHPyAD5AgCXRhQFiSBDDTnAfDFmYIpfMFbI9vO2VWgP/DXKciVSHgZFCvOTrBQPSk5fktQlWoDVJLm318cOxMWCHhT4GfUZsqcA7UoBeHwIxyRbJ25xoP2E8Cyp4UIFXdIa6B5Go+OroDuZkXuw09nlRjdV4RPHCe+xM/Uw1OPHeHNhQ3Qxncojf6ikNcXmVFEqRW71oNAl6NBT7hVd+8Pjdv05Ijez2Y4Z9W2Qu0FlKO7aURS80VVzsFkSpPE2XMX69PwgCxIocOy/ulP4+hklymXG/633l6cdZBe0Or+Qm4vzJMvIFgaOslYHUvpQi1vQfq6j8SL9CNMlzK5AMhNxOYAABYD5T55OaqRumUpYFO85YMYSSAALKHSqDsuryuUgnYT+Bap4FwOS4o51LWFhi/ek4+Ah1dwLscK/+OnBM8TZ5dxmGxO0I1Ppo7wcdEXAKdaiHXyAq03+wgJDKzMcTxJ9T/QADJmGKIdThjZOeWspnLMJHUutYYH+vDPzW/BOQdz+QyyLg8AA';
+  var WORD_B64='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';
+  document.querySelectorAll('.nav-logo, .footer-logo').forEach(function(img){
+    img.src='data:image/webp;base64,'+(img.classList.contains('nav-logo')?ICON_B64:WORD_B64);
+  });
+})();
+</script>
+<script>
+/* ================= HELPERS ================= */
+function $(id){return document.getElementById(id)}
+function escHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+/* full HTML documents used by the live editors */
+var DOCS={
+  ulDefault:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Languages</title>\n</head>\n<body>\n  <ul type="disc">\n    <li>HTML</li>\n    <li>CSS</li>\n    <li>JavaScript</li>\n  </ul>\n</body>\n</html>',
+  aDefault:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Links Demo</title>\n</head>\n<body>\n  <a href="https://www.google.com" target="_self">Search on Google</a>\n</body>\n</html>',
+  ul1:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Favorite Languages</title>\n</head>\n<body>\n  <h1>My Favorite Languages</h1>\n  <ul>\n    <li>HTML</li>\n    <li>CSS</li>\n    <li>JavaScript</li>\n  </ul>\n</body>\n</html>',
+  ol1:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Daily Routine</title>\n</head>\n<body>\n  <h1>My Daily Routine</h1>\n  <ol>\n    <li>Open your code editor</li>\n    <li>Create a new file called index.html</li>\n    <li>Write your HTML structure</li>\n    <li>Save and open in the browser</li>\n  </ol>\n</body>\n</html>',
+  nest:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Frontend / Backend</title>\n</head>\n<body>\n  <ul>\n    <li>Frontend\n      <ul>\n        <li>HTML</li>\n        <li>CSS</li>\n        <li>JavaScript</li>\n      </ul>\n    </li>\n    <li>Backend\n      <ul>\n        <li>Node.js</li>\n        <li>Express</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>',
+  ext:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>External Link</title>\n</head>\n<body>\n  <a href="https://github.com" target="_blank" rel="noopener noreferrer">Visit GitHub</a>\n</body>\n</html>',
+  anchor:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Portfolio</title>\n</head>\n<body>\n  <a href="#skills">Jump to My Skills</a>\n  <a href="#hi">Jump to Intro</a>\n  <h2 id="hi">Introduction</h2>\n  <p>Hello, I am a web developer learning HTML.</p>\n  <h2 id="skills">My Skills</h2>\n  <p>HTML, CSS, and JavaScript.</p>\n</body>\n</html>',
+  btn:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Buttons</title>\n</head>\n<body>\n  <form action="#" method="POST">\n    <input type="text" name="name" placeholder="Enter your name">\n    <button type="button">Preview Profile</button>\n    <button type="reset">Clear Form</button>\n    <button type="submit">Create Account</button>\n  </form>\n</body>\n</html>',
+  table1:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Table Headers</title>\n</head>\n<body>\n  <table>\n    <thead>\n      <tr>\n        <th scope="col">Student Name</th>\n        <th scope="col">Math</th>\n        <th scope="col">Science</th>\n        <th scope="col">Average</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <th scope="row">Ahmed</th>\n        <td>85</td>\n        <td>90</td>\n        <td>87.5</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>',
+  marks:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Students Marks</title>\n</head>\n<body>\n  <table>\n    <tr>\n      <th>Name</th><th>Math</th><th>Science</th><th>English</th>\n    </tr>\n    <tr>\n      <td>Ahmed</td><td>88</td><td>92</td><td>79</td>\n    </tr>\n    <tr>\n      <td>Sara</td><td>95</td><td>87</td><td>93</td>\n    </tr>\n    <tr>\n      <td>Omar</td><td>72</td><td>80</td><td>85</td>\n    </tr>\n  </table>\n</body>\n</html>',
+  ct:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Complete Table</title>\n</head>\n<body>\n  <table>\n    <caption>Student Grades — Term 1</caption>\n    <thead>\n      <tr>\n        <th scope="col">Name</th>\n        <th scope="col">Math</th>\n        <th scope="col">Science</th>\n        <th scope="col">English</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><th scope="row">Ahmed</th><td>88</td><td>92</td><td>79</td></tr>\n      <tr><th scope="row">Sara</th><td>95</td><td>87</td><td>93</td></tr>\n      <tr><th scope="row">Omar</th><td>72</td><td>80</td><td>85</td></tr>\n    </tbody>\n    <tfoot>\n      <tr>\n        <td>Class Average</td><td>85</td><td>86.3</td><td>85.7</td>\n      </tr>\n    </tfoot>\n  </table>\n</body>\n</html>',
+  inDefault:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Input Types</title>\n</head>\n<body>\n  <label for="f1">Email Address</label>\n  <input type="email" id="f1" name="email" placeholder="you@example.com">\n</body>\n</html>',
+  media:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>FocusFlow</title>\n</head>\n<body>\n  <h1>FocusFlow</h1>\n  <p>Build Better Focus. Ship Faster.</p>\n  <a href="#demo-video"><button type="button">Watch Demo ▶</button></a>\n  <img src="https://picsum.photos/200/120" alt="FocusFlow app dashboard" width="200">\n  <section id="demo-video">\n    <h2>See FocusFlow in Action</h2>\n    <video src="videos/focusflow-demo.mp4" controls width="360" poster="images/video-thumbnail.jpg">\n      Your browser does not support the video element.\n    </video>\n  </section>\n</body>\n</html>',
+  login:
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Login</title>\n</head>\n<body>\n  <form action="/login" method="POST">\n\n    <label for="email">Email Address</label>\n    <input type="email" id="email" name="email"\n           placeholder="you@example.com" required>\n\n    <label for="password">Password</label>\n    <input type="password" id="password" name="password" required>\n\n    <label>\n      <input type="checkbox" name="remember" value="1">\n      Remember me on this device\n    </label>\n\n    <button type="submit">Log In</button>\n\n  </form>\n</body>\n</html>'
+};
+
+/* generic live editor: textarea -> iframe srcdoc */
+function wireLive(codeId,frameId,docKey){
+  var code=$(codeId),frame=$(frameId);
+  if(!code||!frame)return;
+  if(docKey)code.value=DOCS[docKey];
+  function render(){frame.srcdoc=code.value;}
+  code.addEventListener('input',render);
+  render();
+}
+wireLive('ul1Code','ul1Frame','ul1');
+wireLive('ol1Code','ol1Frame','ol1');
+wireLive('nestCode','nestFrame','nest');
+wireLive('extCode','extFrame','ext');
+wireLive('anchorCode','anchorFrame','anchor');
+wireLive('btnCode','btnFrame','btn');
+wireLive('table1Code','table1Frame','table1');
+wireLive('marksCode','marksFrame','marks');
+wireLive('ctCode','ctFrame','ct');
+wireLive('mediaCode','mediaFrame','media');
+
+/* intro: ul type dropdown */
+(function(){
+  var sel=$('ulType'),code=$('introUlCode'),frame=$('introUlFrame');
+  if(!sel||!code||!frame)return;
+  code.value=DOCS.ulDefault;
+  function render(){
+    var src=code.value;
+    src=src.replace(/type="[a-z]+"/,'type="'+sel.value+'"');
+    frame.srcdoc=src;
+  }
+  sel.addEventListener('change',render);
+  code.addEventListener('input',render);
+  render();
+})();
+
+/* intro: a target/href controls */
+(function(){
+  var tgt=$('tagTarget'),href=$('tagHref'),code=$('tagCode'),frame=$('tagFrame');
+  if(!tgt||!href||!code||!frame)return;
+  code.value=DOCS.aDefault;
+  function render(){
+    var src=code.value;
+    src=src.replace(/target="_[a-z]+"/,'target="'+tgt.value+'"');
+    src=src.replace(/href="[^"]*"/,'href="'+escHTML(href.value)+'"');
+    frame.srcdoc=src;
+  }
+  tgt.addEventListener('change',render);
+  href.addEventListener('input',render);
+  code.addEventListener('input',render);
+  render();
+})();
+
+/* S6: input type / placeholder / name controls */
+(function(){
+  var type=$('inType'),ph=$('inPlaceholder'),name=$('inName'),code=$('inCode'),frame=$('inFrame');
+  if(!type||!ph||!name||!code||!frame)return;
+  code.value=DOCS.inDefault;
+  function render(){
+    var src=code.value;
+    src=src.replace(/type="[a-z]+"/,'type="'+type.value+'"');
+    src=src.replace(/placeholder="[^"]*"/,'placeholder="'+escHTML(ph.value)+'"');
+    src=src.replace(/name="[a-zA-Z]+"/,'name="'+escHTML(name.value)+'"');
+    frame.srcdoc=src;
+  }
+  type.addEventListener('change',render);
+  ph.addEventListener('input',render);
+  name.addEventListener('input',render);
+  code.addEventListener('input',render);
+  render();
+})();
+
+/* S4: add student row */
+(function(){
+  var btn=$('addRowBtn'),table=$('studentsTable');
+  if(!btn||!table)return;
+  btn.addEventListener('click',function(){
+    var n=$('newName').value.trim();
+    var m=$('newMath').value,sc=$('newSci').value,e=$('newEng').value;
+    if(!n){alert('اكتب اسم الطالب الأول');return}
+    var tr=document.createElement('tr');
+    var vals=[n,m,sc,e];
+    vals.forEach(function(v){
+      var td=document.createElement('td');
+      td.textContent=v||'—';
+      tr.appendChild(td);
+    });
+    table.querySelector('tbody').appendChild(tr);
+    $('newName').value='';$('newMath').value='';$('newSci').value='';$('newEng').value='';
+  });
+})();
+
+/* S5: table part toggles */
+(function(){
+  var parts=['thead','tbody','tfoot'];
+  var map={thead:'tblThead',tbody:'tblTbody',tfoot:'tblTfoot'};
+  var chips={thead:$('chipThead'),tbody:$('chipTbody'),tfoot:$('chipTfoot')};
+  parts.forEach(function(p){
+    if(!chips[p])return;
+    chips[p].addEventListener('click',function(){
+      var hidden=chips[p].classList.toggle('on');
+      var el=$(map[p]);
+      if(el)el.style.display=hidden?'':'none';
+    });
+  });
+})();
+
+/* login form code reveal */
+(function(){
+  var btn=$('revealLogin'),wrap=$('loginCodeWrap'),text=$('loginCodeText');
+  if(!btn||!wrap||!text)return;
+  btn.addEventListener('click',function(){
+    var open=wrap.classList.toggle('hidden');
+    btn.textContent=open?'اعرض الكود كامل':'اخف الكود';
+    text.textContent=DOCS.login;
+  });
+})();
+
+/* ================= QUIZ ================= */
+function wireQuiz(qid){
+  var q=document.querySelector('.quiz-q[data-id="'+qid+'"]');if(!q)return;
+  var box=q.closest('.quiz-box');
+  var btn=box.querySelector('.quiz-reveal-btn');
+  if(btn){btn.addEventListener('click',function(){q.style.display='block';btn.style.display='none'})}
+  var opts=q.querySelectorAll('.quiz-opts button');
+  var fb=q.querySelector('.quiz-fb');
+  var skip=q.querySelector('.quiz-skip');
+  opts.forEach(function(o){o.addEventListener('click',function(){
+    var wrong=o.getAttribute('data-correct')==='false';
+    opts.forEach(function(x){x.disabled=true;
+      if(x.getAttribute('data-correct')==='true'){x.classList.add('correct')}
+      else{x.classList.add('wrong')}});
+    fb.style.display='block';
+    fb.className='quiz-fb '+(wrong?'mark':'ok');
+    fb.innerHTML=(wrong?'❌ غلط':'✅ صحيح!')+' '+o.getAttribute('data-exp');
+  })});
+  if(skip){skip.addEventListener('click',function(){
+    opts.forEach(function(x){x.disabled=true;
+      if(x.getAttribute('data-correct')==='true'){x.classList.add('correct')}
+      else{x.classList.add('wrong')}});
+    fb.style.display='block';
+    fb.className='quiz-fb ok';
+    fb.innerHTML='💡 الإجابة الصحيحة: '+opts[0].getAttribute('data-exp');
+  })}
+}
+['quiz1','quiz2','quiz3','quiz4'].forEach(wireQuiz);
+
+/* ================= PARTICLES + NAV + REVEAL ================= */
+(function(){
+  var p=$('particles');
+  for(var i=0;i<30;i++){
+    var s=document.createElement('span');
+    s.style.left=Math.random()*100+'%';
+    s.style.width=s.style.height=(Math.random()*3+2)+'px';
+    s.style.animationDuration=(Math.random()*10+10)+'s';
+    s.style.animationDelay=(Math.random()*12)+'s';
+    p.appendChild(s);
+  }
+  var nav=$('mainNav'),pills=$('navPills');
+  var sections=document.querySelectorAll('.section[id]');
+  sections.forEach(function(s){
+    var a=document.createElement('a');
+    a.href='#'+s.id;
+    var badge=s.querySelector('.sec-head h2');
+    a.textContent=badge?badge.textContent.trim():s.id;
+    a.dataset.nav=s.id;
+    pills.appendChild(a);
+  });
+  var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05});
+  document.querySelectorAll('.section, .reveal, .hero-el').forEach(function(el){observer.observe(el)});
+  window.addEventListener('scroll',function(){
+    nav.classList.toggle('visible',window.scrollY>100);
+    var cur='';
+    sections.forEach(function(s){if(window.scrollY>=s.offsetTop-220)cur=s.id});
+    pills.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.dataset.nav===cur)});
+  });
+  /* keyboard nav: arrows move between sections, ignore typing fields */
+  var ids=[];sections.forEach(function(s){ids.push(s.id)});
+  window.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    var t=e.target;
+    if(t&&(t.tagName==='TEXTAREA'||t.tagName==='INPUT'||t.isContentEditable))return;
+    var cur='',ci=0;
+    sections.forEach(function(s,i){if(window.scrollY>=s.offsetTop-220){cur=s.id;ci=i}});
+    var ni=(e.key==='ArrowRight')?Math.min(ids.length-1,ci+1):Math.max(0,ci-1);
+    if(ni!==ci){document.getElementById(ids[ni]).scrollIntoView({behavior:'smooth'})}
+  });
+})();
+</script>
+</body>
+</html>
