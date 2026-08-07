@@ -1,0 +1,2209 @@
+CSS: Making Web Pages Look Great
+Lesson 01
+What is CSS? Understanding the Language That Styles the Web
+Learn what CSS is, how it is different from HTML, the basic syntax of a CSS rule, and how a single simple rule can change the way text looks on a web page.
+
+In the previous lesson, Building with HTML Tags and Elements, you learned how to structure a web page using tags like headings, paragraphs, and buttons. That gave your page content — words, structure, and meaning. But if you opened that page in a browser, you probably noticed something: it looked plain. Black text, a white background, default fonts — nothing styled.
+
+This is exactly where CSS comes in. HTML builds the page. CSS makes it look the way you want. In this lesson you will learn how to:
+
+Understand why web pages need styling beyond plain HTML
+Define what CSS is and what it is used for
+See how CSS works with HTML to change the appearance of elements
+Learn the basic structure of a CSS rule — selectors, properties, and values
+Recognize CSS styling in websites you already use every day
+ℹ️
+A Gentle First Step
+This is your very first lesson in CSS. We will keep things simple — just the core idea of what CSS is and how it works. CSS has many properties, and we will learn them gradually in the coming lessons.
+
+Every web page has two separate concerns: content and presentation. Content is the actual information — the words in a heading, the text in a paragraph. Presentation is how that information looks — its color, its size, how it is arranged on the screen.
+
+Content vs Presentation
+Aspect	Content	Presentation
+What it answers	What does the page say?	How does the page look?
+Built with	HTML	CSS
+Example	A heading that says "Welcome"	That heading shown in blue, large text, centered
+What a Page Looks Like Without Styling
+When you write only HTML, the browser applies its own default appearance: black text, a white background, and a basic font. The content is there, but it is plain. Styling is what transforms plain content into a page that looks intentional, organized, and pleasant to read.
+
+💡
+Why Separating Content and Presentation Matters
+Keeping content (HTML) and presentation (CSS) separate means you can completely change how a page looks without rewriting any of its content. This is one of the most useful ideas in web development.
+
+CSS stands for Cascading Style Sheets. It is the language used to control how HTML elements appear on a web page. While HTML tells the browser what content exists, CSS tells the browser how that content should look.
+
+HTML vs CSS — The Core Difference
+Aspect	HTML	CSS
+Full name	HyperText Markup Language	Cascading Style Sheets
+Purpose	Defines the structure and content of a page	Defines the visual appearance of that content
+Answers	"What is on the page?"	"How does it look?"
+Example element	<h1>Welcome</h1>	Makes that heading blue and large
+What CSS Can Affect
+CSS can change many visual aspects of a page. At this stage, the two simplest and most common things CSS controls are:
+
+Text color — changing how dark, light, or vivid text appears
+Text size — making text larger or smaller than the browser's default
+CSS has many more properties than these — colors, fonts, layouts, spacing, and much more. We will learn them gradually in the coming lessons. For now, the goal is simply to understand what CSS is and how it works.
+
+CSS does not exist on its own — it always works together with HTML. CSS looks at the HTML elements already on the page and applies visual changes to them. CSS does not create new content; it only changes how existing content appears.
+
+The Basic Idea
+HTML creates an element — for example, a heading: <h1>Welcome</h1>.
+CSS targets that same element by naming its tag — for example, h1.
+CSS then describes how that element should look — for example, what color its text should be.
+The browser reads both the HTML and the CSS together and displays the styled result.
+📝
+CSS Targets, It Does Not Create
+CSS cannot add a heading or a paragraph to a page — that is HTML's job. CSS only changes how an element that already exists in the HTML will look. Think of HTML as building the room, and CSS as painting and decorating it.
+
+Every instruction in CSS is written as a rule. A rule has a simple, consistent structure made of three parts: a selector, a property, and a value.
+
+The Basic Syntax of a CSS Rule
+CSS Rule — General Syntax
+selector {
+    property: value;
+}
+Breaking Down Each Part
+Part	What It Means	Example
+Selector	The HTML element being targeted	h1
+Property	The aspect of the element being styled	color
+Value	The setting applied to that property	blue
+A Simple CSS Rule
+A Single CSS Rule
+h1 {
+    color: blue;
+}
+This rule says: "find every h1 element on the page, and make its text color blue." That is the entire idea behind CSS — target an element, then describe how it should look.
+
+💡
+Always End a Value with a Semicolon
+Notice the semicolon ; after blue. Every property-value pair inside a CSS rule ends with a semicolon. It separates one instruction from the next, even when there is only one instruction in the rule.
+
+CSS is everywhere on the web. Once you know what to look for, you will start noticing it on almost every page you visit.
+
+Common CSS Styling You See Every Day
+Website Element	What CSS Is Likely Doing
+Page headings	Controlling their color and how large the text appears
+Buttons	Giving them a distinct color so they stand out from regular text
+Body text	Setting a comfortable text size for easy reading
+Every one of these visual details — colors, text sizes, how elements are presented — comes from CSS rules written by the page's developer. The HTML provided the heading, the button, and the text. CSS decided how each one would look.
+
+ℹ️
+Try It Yourself
+The next time you visit any website, look closely at the headings and buttons. Notice their colors and sizes. Behind every one of those visual choices, there is a CSS rule very similar to the ones you just learned about.
+
+Let's see one simple, complete example: a basic HTML page with a heading and a paragraph, styled with two very simple CSS rules using only color and font-size.
+
+The HTML Content
+index.html
+<h1>Welcome to CSS</h1>
+<p>This paragraph will be styled using CSS.</p>
+Browser — Before Any CSS Is Applied
+🌐 Browser — Default Styling Only
+Welcome to CSS
+This paragraph will be styled using CSS.
+Plain black text — no color or size changes yet.
+
+The CSS Rules
+style.css
+h1 {
+    color: blue;
+    font-size: 32px;
+}
+
+p {
+    color: green;
+}
+Browser — After CSS Is Applied
+🌐 Browser — CSS Rules Applied
+Welcome to CSS
+This paragraph will be styled using CSS.
+✅ The heading is now blue and larger. The paragraph text is now green.
+
+What Happened Here
+The h1 rule targeted the heading and changed its color to blue and its font-size to 32 pixels.
+The p rule targeted the paragraph and changed its color to green.
+The HTML content did not change at all — only its appearance changed, because of CSS.
+🎯
+Full Example Summary
+This is the complete idea of CSS in its simplest form: write a selector to choose an HTML element, then describe one or more properties and values to change how it looks. CSS has many properties beyond color and font-size. We will learn them gradually in the coming topics.
+
+Term	Definition
+CSS	Cascading Style Sheets — the language used to control how HTML elements look on a web page.
+HTML	HyperText Markup Language — the language used to define the structure and content of a web page.
+Content	The actual information on a page — text, headings, and other elements created with HTML.
+Presentation	How content appears visually — its color, size, and overall look, controlled by CSS.
+CSS Rule	A single instruction in CSS made of a selector and one or more property-value pairs inside curly braces.
+Selector	The part of a CSS rule that specifies which HTML element the styling should apply to. Example: h1.
+Property	The visual aspect being styled, such as color or font-size.
+Value	The specific setting assigned to a property, such as blue or 32px.
+color	A CSS property that sets the text color of an element.
+font-size	A CSS property that sets how large or small the text of an element appears.
+How CSS and HTML Work Together
+HTML creates an element on the page (e.g. h1)
+▼
+CSS rule is written with a selector that matches that element
+▼
+CSS rule defines a property and a value (e.g. color: blue;)
+▼
+Browser reads both the HTML and the CSS together
+▼
+Browser displays the element with the new styling applied ✅
+What is CSS?
+Content vs Presentation
+→ Content = what the page says (HTML)
+→ Presentation = how the page looks (CSS)
+→ Plain HTML has default, unstyled appearance
+→ CSS transforms plain content into a styled page
+What CSS Is
+→ Stands for Cascading Style Sheets
+→ Controls the visual appearance of HTML elements
+→ Can change text color and text size
+→ Many more properties exist — learned gradually later
+CSS + HTML Relationship
+→ CSS targets elements that HTML already created
+→ CSS does not create content — only styles it
+→ HTML builds the structure, CSS styles the look
+→ Both work together to produce the final page
+CSS Rule Structure
+→ selector { property: value; }
+→ Selector: which element (e.g. h1)
+→ Property: what aspect (e.g. color)
+→ Value: the setting (e.g. blue)
+Where You See CSS
+→ Colored, sized headings on websites
+→ Buttons that stand out visually
+→ Comfortable, readable body text
+→ All controlled by simple CSS rules
+In this lesson, we introduced CSS — the language that controls how HTML elements look on a web page — and saw a simple example of it in action.
+
+What You Learned
+Web pages need styling because plain HTML only provides content, not a polished appearance.
+CSS stands for Cascading Style Sheets and controls the visual presentation of HTML elements.
+HTML and CSS work together — HTML creates elements, and CSS targets them to change how they look.
+A CSS rule is built from a selector, a property, and a value, written as selector { property: value; }.
+CSS styling is visible all over the websites you use every day — in headings, buttons, and text.
+🎯
+Key Takeaway
+CSS is the language that makes web pages look the way they do. Every CSS rule follows the same simple pattern: choose an element with a selector, then set a property to a value. CSS has many properties. We will learn them gradually in the coming topics.
+
+CSS: Making Web Pages Look Great
+Topic 2
+How to Link CSS to HTML
+Discover the three ways to apply CSS styling to your HTML pages — Inline, Internal, and External CSS — and learn why keeping structure and design in separate files makes your projects cleaner and easier to manage.
+
+In the previous topic we learned how HTML creates the structure of a web page — headings, paragraphs, images, and links. But a plain HTML page looks very basic. To make it look good, we use CSS (Cascading Style Sheets).
+
+CSS controls the visual appearance of a page: colors, fonts, sizes, spacing, and layout. The important question is: where do we write our CSS? There are three different places you can put it, and each has its own rules and best uses.
+
+💡
+What is CSS?
+CSS stands for
+Cascading Style Sheets
+. It is the language used to describe how HTML elements should look on screen — their colors, fonts, sizes, borders, spacing, and more.
+
+In this topic, you will learn how to:
+
+Understand why CSS is usually kept in a separate file from HTML
+Write Inline CSS directly on an HTML element
+Write Internal CSS inside a <style> tag in the same HTML file
+Create an External CSS file and link it with a <link> tag
+Compare all three methods and know when to use each one
+Troubleshoot common linking errors
+HTML and CSS have two different jobs. HTML builds the structure — what is on the page. CSS handles the appearance — how it looks. Mixing them together in one file causes problems as your project grows.
+
+The Problem with Mixing Structure and Design
+Imagine you have a website with 50 pages and every heading needs to be blue. If the color is written inside each HTML element, you would need to change 50 files when the client decides they want green instead. But if all color settings live in one CSS file, you change one line and all 50 pages update instantly.
+
+Scenario	CSS Inside HTML	CSS in Separate File
+Change heading color	Edit every HTML file	Edit one CSS file → all pages update
+Reading the code	Messy — HTML and styles mixed	Clean — each file has one job
+Team work	Designers and developers edit same file	Each person edits their own file
+Page load speed	Browser re-downloads styles every page	Browser caches the CSS file once
+✅
+The Golden Rule
+HTML = What is on the page. CSS = How it looks. Keep them in separate files whenever possible. This is called the
+Separation of Concerns
+principle.
+
+Inline CSS is written directly inside an HTML element using the style attribute. The CSS rules are placed as a value of that attribute, separated by semicolons.
+
+Syntax
+HTML — Inline CSS syntax
+<p style="color: blue; font-size: 20px;">This text is blue and large.</p>
+<h1 style="background-color: yellow; text-align: center;">Hello World</h1>
+Browser Preview — index.html
+index.html
+Hello World
+This text is blue and large.
+
+When to Use Inline CSS
+For a very quick, one-time style that only applies to a single element
+When testing or debugging — you want to see a fast change
+When sending an HTML email (some email clients only support inline CSS)
+✅ Advantages
+Immediate — no other file needed
+Highest priority — overrides other CSS
+Easy to test a single element quickly
+❌ Disadvantages
+Hard to maintain — styles scattered everywhere
+Cannot reuse — you must copy styles manually
+Makes HTML messy and hard to read
+Very bad practice for large projects
+⚠️
+Avoid Overusing Inline CSS
+Inline CSS is the weakest approach for real projects. It is acceptable for a single quick test, but never use it as your main way of styling a page. Use External CSS instead.
+
+Internal CSS is written inside a <style> tag placed in the <head> section of your HTML file. All CSS rules for that page go inside this tag. No separate file is needed.
+
+Syntax
+HTML — Internal CSS using <style> tag
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      h1 {
+        color: darkblue;
+        text-align: center;
+      }
+      p {
+        font-size: 16px;
+        color: #333333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Page Title</h1>
+    <p>This is a paragraph on my page.</p>
+  </body>
+</html>
+Browser Preview — index.html
+index.html
+My Page Title
+This is a paragraph on my page.
+
+The h1 is dark blue and centered. The p uses the color and size from the style tag — all applied from one location inside the same HTML file.
+
+How It Works
+The browser reads the <style> tag first (inside <head>) before it renders the body. Every rule you write there applies to matching elements anywhere on that page.
+
+For example, writing p { color: red; } inside the style tag will turn every paragraph on that page red — you don't need to add style="" to each one.
+
+✅ Advantages
+All styles for one page are in one place
+No extra file needed
+Good for single-page projects or quick demos
+Cleaner than inline CSS
+❌ Disadvantages
+Styles only apply to one page — not shared across pages
+HTML file becomes large if you write a lot of CSS
+Not practical for multi-page websites
+💡
+Good For: Single-Page Projects
+Internal CSS works well when you have only one HTML page and don't need to share styles. For school exercises or small demos, it is acceptable. For real websites, always use External CSS.
+
+External CSS is the most professional and most common method. You create a completely separate file with the .css extension and then link it to your HTML file using a <link> tag inside <head>.
+
+Step 1 — Create a CSS File
+Create a new file called style.css (or any name you choose) and write your CSS rules in it.
+
+style.css — external CSS file
+/* This is the style.css file */
+
+h1 {
+  color: darkgreen;
+  font-size: 32px;
+  text-align: center;
+}
+
+p {
+  color: #444444;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+Step 2 — Link the CSS File to HTML
+In your HTML file, add a <link> tag inside <head>. This tells the browser where to find the styles.
+
+HTML — linking with <link> tag
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>My Website</h1>
+    <p>Welcome to my page.</p>
+  </body>
+</html>
+Browser Preview — index.html (styled by style.css)
+index.html
+My Website
+Welcome to my page.
+
+The HTML file has no style attributes. All the styling comes from style.css. If you link the same CSS file to 10 pages, they all share the same look.
+
+Understanding the <link> Tag Attributes
+Attribute	Value	What It Means
+rel	stylesheet	Tells the browser that this linked file is a CSS stylesheet
+href	style.css	The path (location) of the CSS file you want to load
+File Structure Example
+Project folder structure
+my-website/
+  ├── index.html       ← HTML file
+  ├── about.html       ← another HTML file
+  └── style.css        ← ONE CSS file used by both HTML files
+Result — shared styles across all pages
+Both index.html and about.html will look the same — styled by one shared style.css file.
+✅ Advantages
+One CSS file can style many HTML pages
+HTML files stay clean — only structure, no style
+Easy to maintain — change one file to update everything
+Browser caches the CSS file = faster page loads
+Industry standard practice for all real websites
+❌ Disadvantages
+Requires an extra file to manage
+If the link path is wrong, the page appears unstyled
+Now that you know all three methods, let's compare them side by side so you can choose the right one for each situation.
+
+Feature	Inline CSS	Internal CSS	External CSS
+Where it lives	Inside the HTML element's style attribute	Inside <style> in <head>	A separate .css file
+Extra file needed?	No	No	Yes (.css file)
+Applies to	One element only	One page only	All linked pages
+Easy to reuse?	No — must copy each time	No — only for that page	Yes — link it anywhere
+Best for	Quick tests or HTML emails	Single-page demos	All real projects
+Industry standard?	No	Sometimes	Yes ✓
+Which Method Should You Use?
+Quick Decision Guide
+▶
+I need to quickly test one element →
+Inline CSS
+▶
+I am building a single-page exercise →
+Internal CSS
+▶
+I am building a real website with multiple pages →
+External CSS
+▶
+I am writing an HTML email →
+Inline CSS
+🎯
+Key Takeaway
+In almost every professional project, developers use
+External CSS
+. Inline and Internal CSS exist and have specific uses, but External CSS is the method you should practice and master for real web development work.
+
+When using External CSS, the most common problem beginners face is writing the wrong file path in the href attribute. If the path is incorrect, the browser cannot find the CSS file and the page appears completely unstyled.
+
+Mistake 1 — Wrong File Name
+HTML — wrong file name (typo)
+<!-- ❌ WRONG — the file is called style.css not styles.css -->
+<link rel="stylesheet" href="styles.css" />
+
+<!-- ✅ CORRECT -->
+<link rel="stylesheet" href="style.css" />
+Browser result — wrong vs correct
+styles.css — file not found. Page renders with no styling (plain HTML).
+style.css — file found. All CSS rules applied correctly.
+Mistake 2 — Wrong Folder Path
+HTML — file in subfolder, path not updated
+/* Your folder structure: */
+my-website/
+  ├── index.html
+  └── css/
+       └── style.css   ← CSS is INSIDE the css/ folder
+
+<!-- ❌ WRONG — does not include the folder name -->
+<link rel="stylesheet" href="style.css" />
+
+<!-- ✅ CORRECT — includes the subfolder path -->
+<link rel="stylesheet" href="css/style.css" />
+Developer Tools — Network tab result
+Browser Console
+GET http://localhost/style.css 404 (Not Found)
+// The browser looked for style.css next to index.html — not inside /css/ folder
+
+✓ Fixed with: href="css/style.css"
+Mistake 3 — Missing rel="stylesheet"
+HTML — missing rel attribute
+<!-- ❌ WRONG — rel attribute is missing -->
+<link href="style.css" />
+
+<!-- ✅ CORRECT — always include rel="stylesheet" -->
+<link rel="stylesheet" href="style.css" />
+Result
+Without rel="stylesheet", the browser does not know this is a CSS file. Styles are not applied.
+With rel="stylesheet", the browser correctly loads and applies the CSS file.
+Quick Checklist — Before You Save
+CSS Linking Checklist
+▶
+Does
+href
+match the exact file name (including .css)?
+▶
+If the CSS file is in a subfolder, is the folder included in the path?
+▶
+Is
+rel="stylesheet"
+present in the link tag?
+▶
+Is the
+<link>
+tag inside
+<head>
+(not body)?
+Ways to Add CSS
+Inline CSS
+→ Written inside the style="" attribute on an HTML tag
+→ Applies to that single element only
+→ Highest CSS priority — overrides everything else
+→ Best for: quick tests, HTML emails
+→ Avoid in real projects
+Internal CSS
+→ Written inside <style> tag in <head>
+→ Applies to the whole page but only that page
+→ No extra file needed
+→ Best for: single-page demos and small exercises
+→ Not practical for multi-page sites
+External CSS
+→ Written in a separate .css file
+→ Linked using <link rel="stylesheet" href="style.css">
+→ Can be shared by many HTML pages at once
+→ Browser caches it = faster loading
+→ Industry standard — use this for all real projects
+Separation of Concerns
+→ HTML = structure (what is on the page)
+→ CSS = appearance (how it looks)
+→ Keeping them separate makes code cleaner and easier to edit
+→ One CSS change updates all linked pages instantly
+Common Mistakes
+→ Wrong file name in href (typo)
+→ Missing subfolder in path
+→ Forgetting rel="stylesheet"
+→ Placing <link> outside <head>
+→ Symptom: page looks plain/unstyled
+1. Separation of Concerns (Structure vs. Style)
+▸
+MDN Web Docs: How CSS is Structured
+An in-depth article evaluating how browsers process stylesheets and the deep engineering benefits of separating structural nodes from design assets.
+
+2, 3 & 4. Three Structural Ways to Write CSS
+▸
+W3Schools: How To Add CSS (Inline, Internal, External)
+Features editable workspace sandboxes highlighting syntax execution patterns for inline style attributes, internal style elements, and standard external stylesheets.
+
+▸
+web.dev: Architecting and Organizing Stylesheets
+Google's performance-centric insights concerning proper connection management using standard markup tags.
+
+5. Method Comparison & Architectural Choices
+▸
+CSS-Tricks: Comparing Core Style Placement Strategies
+A reference mapping out the specific operational tradeoffs, maintenance effects, and performance limits of all three CSS integration modes.
+
+6. Troubleshooting Links & Path Management
+▸
+MDN: Understanding File Slashing and Relative Path Syntax
+A troubleshooting guide detailing path handling mechanics to prevent common file connection breaks when linking external stylesheets.
+
+Changing Colors, Backgrounds, Fonts, and Text Size
+Topic 3
+Changing Colors, Backgrounds, Fonts, and Text Size
+Learn how to use the color property in CSS to change the color of text inside any HTML element. Make your web pages come alive with color!
+
+CSS Color Property
+The Simplest Way to Add Life to Text
+Welcome To My Website
+This paragraph uses the default text color.
+Visit Our Courses
+color
+Controls text color
+Works on headings
+Links & paragraphs
+h1
+{
+color:
+red;
+}
+Have you ever visited a website where the headings were bright red, or the links were blue? All of that is done using one simple CSS property called color.
+
+In CSS, the color property controls the color of text inside an element. It is one of the very first CSS properties you will use when building a web page.
+
+💡
+What You Will Learn
+How to use the color property to change text colors using color names, hex codes, and RGB values.
+
+In this lesson, you will learn how to:
+
+Use the color property to style text elements
+Write colors using named colors like red or blue
+Write colors using hex codes like #ff0000
+Write colors using RGB values like rgb(255, 0, 0)
+Apply the color property to different HTML elements
+The color Property
+The color property in CSS is used to set the color of text inside an HTML element. You write it inside a CSS rule, like this:
+
+CSS — basic syntax
+selector {
+  color: colorValue;
+}
+Browser Preview
+my-page.html
+This text is black (the default color)
+
+CSS color property is ready to use on any selector
+How to Apply It
+You write the selector (the element you want to style), then inside curly braces { } you write color: followed by the color you want.
+
+CSS — color on a paragraph
+p {
+  color: red;
+}
+Browser Preview
+my-page.html
+This paragraph text is now red!
+
+💡
+Remember the colon and semicolon
+Always write color: red; — use a colon : after the property name, and end with a semicolon ;. This is the basic syntax rule for all CSS properties.
+
+1. Color Names
+The simplest way to set a color is to use a color name in plain English. CSS knows 140+ built-in color names.
+
+CSS — named colors
+h1 { color: red; }
+h2 { color: blue; }
+p  { color: green; }
+span { color: orange; }
+Browser Preview — Named Colors
+my-page.html
+This heading is Red
+This heading is Blue
+This paragraph is Green
+
+This span is Orange
+2. Hex Color Codes
+A hex code is a 6-character code that starts with #. It gives you exact control over millions of colors. Each pair of characters represents red, green, and blue.
+
+CSS — hex color codes
+h1 { color: #ff0000; }  /* pure red */
+h2 { color: #0000ff; }  /* pure blue */
+p  { color: #333333; }  /* dark grey */
+Browser Preview — Hex Colors
+my-page.html
+#ff0000 — Pure Red
+#0000ff — Pure Blue
+#333333 — Dark Grey
+
+📘
+Advanced: How Hex Codes Work
+Hex codes use base-16 numbers (0–9 and A–F) to represent colors. This will be explained in detail in a future advanced lesson on color theory and CSS color models.
+
+3. RGB Values
+RGB stands for Red, Green, Blue. You set each channel from 0 (off) to 255 (full). Mixing different amounts creates any color you want.
+
+CSS — rgb() values
+h1 { color: rgb(255, 0, 0); }    /* red */
+h2 { color: rgb(0, 128, 0); }   /* green */
+p  { color: rgb(100, 100, 100); } /* grey */
+Browser Preview — RGB Colors
+my-page.html
+rgb(255, 0, 0) — Red
+rgb(0, 128, 0) — Green
+rgb(100, 100, 100) — Grey
+
+Comparison Table
+Format	Example	When to Use
+Named Color	color: tomato;	Quick and easy for common colors
+Hex Code	color: #ff6347;	Exact brand colors, most common in real projects
+RGB	color: rgb(255,99,71);	When you want to adjust channels manually
+Term	Definition
+color	A CSS property that sets the color of text inside an element.
+Named Color	A color written as a plain English word, like red, blue, or tomato. CSS has 140+ named colors built in.
+Hex Code	A 6-character color code starting with #, such as #ff0000 for red. Used for precise color control.
+RGB	A color format using three numbers for Red, Green, and Blue — each from 0 to 255. Written as rgb(255, 0, 0).
+Property	A style instruction in CSS, like color, font-size, or background. It always ends with a colon.
+Value	The setting you give to a property. For color, values include red, #ff0000, or rgb(255,0,0).
+Selector	The part of a CSS rule that targets an HTML element, such as p, h1, or span.
+Inheritance	When a child element automatically receives the color set on its parent element. This will be explained in a future lesson.
+Let's see the color property in action across different HTML elements.
+
+Example 1 — Coloring a Heading
+HTML + CSS
+<style>
+  h1 {
+    color: #e63946;
+  }
+</style>
+
+<h1>Welcome to My Website</h1>
+Browser Preview
+my-page.html
+Welcome to My Website
+Example 2 — Different Colors for Different Elements
+HTML + CSS
+<style>
+  h1 { color: #2b2d42; }
+  h2 { color: #e63946; }
+  p  { color: #555555; }
+</style>
+
+<h1>My Blog</h1>
+<h2>Today's Article</h2>
+<p>Here is the content of my article...</p>
+Browser Preview
+my-page.html
+My Blog
+Today's Article
+Here is the content of my article...
+
+Example 3 — Coloring Text Inside a Span
+You can wrap any word in a <span> tag and use the span selector to color that text:
+
+HTML + CSS
+<style>
+  span { color: #f4a261; }
+</style>
+
+<p>I love <span>coding</span> with CSS!</p>
+Browser Preview
+my-page.html
+I love coding with CSS!
+
+CSS color Property
+What it does
+→ Changes the color of text inside an element
+→ Does NOT change background color (that is a different property)
+→ Works on any HTML element that contains text
+Color Formats
+→ Named: red, blue, tomato, coral, navy
+→ Hex: #ff0000, #0000ff, #333333
+→ RGB: rgb(255, 0, 0), rgb(0, 0, 255)
+Syntax Rule
+→ selector { color: value; }
+→ Colon after the property name
+→ Semicolon at the end of each declaration
+Common Elements
+→ h1, h2, h3 — headings
+→ p — paragraphs
+→ span — inline text highlight
+→ a — link text color
+Tips
+→ Use hex codes for exact brand colors
+→ Use named colors for fast practice
+→ Dark text on light background = easy to read
+Scenario — A Simple Colorful Profile Page
+Let's build a small profile card that uses different text colors for each element.
+
+profile.html — full example
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    h1   { color: #e63946; }
+    h2   { color: #457b9d; }
+    p    { color: #333333; }
+    span { color: #2a9d8f; }
+  </style>
+</head>
+<body>
+
+  <h1>Sara Ahmed</h1>
+  <h2>Web Developer</h2>
+  <p>I build websites using HTML and CSS.</p>
+  <p>Current Role: <span>Junior Frontend Developer</span></p>
+
+</body>
+</html>
+Browser Preview — profile.html
+profile.html
+Sara Ahmed
+Web Developer
+I build websites using HTML and CSS.
+
+Current Role: Junior Frontend Developer
+
+All four color rules applied successfully across the page.
+Best Practices
+✅ Do
+Use high-contrast colors so text is easy to read.
+Use hex codes for exact, consistent colors.
+Target the right element with the correct selector.
+Test your colors on a white background first.
+❌ Do Not
+Do not use very light colors on white backgrounds — hard to read.
+Do not use too many different colors on one page.
+Do not confuse color with background-color.
+🎯
+Key Takeaway
+The
+color
+property is how you change text color in CSS. You can write colors as
+named colors
+(like red),
+hex codes
+(like #ff0000), or
+RGB values
+(like rgb(255, 0, 0)). Apply it to any selector — headings, paragraphs, spans — to bring your page to life with color. Always use a colon after the property name and a semicolon at the end.
+
+1. The CSS color Property
+▸
+MDN Web Docs: color Property
+The official reference for the color property, covering its syntax, accepted value types, and how it applies to text inside HTML elements.
+
+▸
+MDN Web Docs: CSS Color Value Data Type
+Explains the different ways a color can be written in CSS, including named colors, hex codes, and RGB values.
+
+2. Named Colors and Hex Codes
+▸
+MDN Web Docs: CSS Named Colors
+A complete list of the named colors built into CSS, such as red, blue, tomato, and coral, with their exact color swatches.
+
+▸
+HTML Color Codes: Hex Color Picker
+A simple tool for browsing and picking hex color codes, useful for finding exact colors to use with the color property.
+
+Changing Fonts and Text Size, …
+Topic 04
+Changing Fonts and Text Size, …
+Learn how to control how text looks on a web page. You will use CSS properties like text-align, font-weight, text-decoration, and line-height to make your text clear, attractive, and easy to read.
+
+When you look at a website, you notice that some text is bold, some is centered on the page, some has an underline, and some paragraphs feel easier to read than others. All of these effects are created with CSS text styling properties.
+
+In this topic, you will learn four important CSS properties that control how text appears on screen. You will also combine them all in a practical styled content section at the end.
+
+💡
+What is CSS?
+CSS stands for Cascading Style Sheets. It is the language that tells the browser how HTML elements should look — their color, size, spacing, and text style. You write CSS rules that connect to your HTML elements.
+
+In this topic, you will learn how to:
+
+Position text using left, center, and right alignment
+Apply bold styling and control text emphasis with font-weight
+Add or remove underlines and other decorations with text-decoration
+Improve paragraph readability using line-height
+Combine multiple text styling techniques in a real example
+The text-align property controls where text sits horizontally inside its container. By default, text in a browser starts from the left. You can change this to center or right.
+
+Value	What It Does	Common Use Case
+left	Text starts from the left side (default)	Normal paragraphs and body text
+center	Text sits in the middle of its container	Page titles, headings, buttons
+right	Text aligns to the right side	Prices, dates, labels on the right
+justify	Text spreads evenly across the full width	Books, news articles (less common on web)
+Example — Using text-align in CSS
+CSS — text-align property
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: left;
+}
+
+div {
+  text-align: right;
+}
+Browser Preview — text-align
+index.html
+text-align: center → h1
+Welcome to My Website
+text-align: left → p
+This is a regular paragraph. Text starts from the left side, which is the most natural reading direction for English.
+text-align: right → div
+$49.99
+💡
+Tip — Center Only the Title
+It is a common design rule to center headings and keep paragraphs left-aligned. Centered paragraphs are harder to read because the eye has to find a new starting point on every line.
+
+HTML + CSS Together
+HTML + CSS — full example
+<!-- HTML -->
+<h1>My Blog</h1>
+<p>Today I learned about CSS text alignment.</p>
+<h2>Posted on June 2025</h2>
+
+<!-- CSS -->
+h1 { text-align: center; }
+p  { text-align: left; }
+h2 { text-align: right; }
+Browser Preview
+index.html
+My Blog
+Today I learned about CSS text alignment.
+Posted on June 2025
+The font-weight property controls how thick or thin the characters look. A higher weight makes the text look bolder and heavier. A lower weight makes it look lighter and thinner.
+
+You can use keyword values like normal and bold, or you can use number values from 100 to 900.
+
+Value	Thickness	Common Use
+100	Thin (lightest)	Decorative, rarely used for body text
+400	Normal (default)	Regular paragraphs and body text
+700	Bold	Headings, labels, important words
+900	Black (heaviest)	Large display titles, hero headings
+normal	Same as 400	Shortcut keyword
+bold	Same as 700	Shortcut keyword
+💡
+Note — Not All Weights Are Always Available
+Whether you can use weights like 100, 200, 300, etc. depends on the font you are using. Some fonts only support 400 and 700. If a requested weight is not available, the browser picks the closest one automatically.
+
+Example — font-weight values
+CSS — font-weight
+.light   { font-weight: 300; }
+.normal  { font-weight: 400; }
+.bold    { font-weight: 700; }
+.black   { font-weight: 900; }
+Browser Preview — font-weight comparison
+index.html
+weight: 300
+This text is light
+weight: 400
+This text is normal
+weight: 700
+This text is bold
+weight: 900
+This text is black
+Using font-weight in a Real Page
+HTML + CSS — bold headings and normal body
+<h2>Product Name</h2>
+<p>This is a description of the product.</p>
+<span>$25.00</span>
+
+h2   { font-weight: 700; }
+p    { font-weight: 400; }
+span { font-weight: 900; }
+Browser Preview
+index.html
+Product Name
+This is a description of the product.
+$25.00
+The text-decoration property adds or removes visual lines on text. The most common uses are underlines on links and strikethrough on prices or deleted content.
+
+Value	What It Looks Like	Common Use
+none	No line at all	Removing the default underline from links
+underline	A line below the text	Links, important terms
+overline	A line above the text	Rare decorative use
+line-through	A line through the middle	Sale prices, deleted items, completed tasks
+💡
+Very Common Pattern — Remove Link Underlines
+By default, all <a> tags have an underline. Many designers remove it with text-decoration: none and style links differently using color or background instead.
+
+Example — text-decoration values
+CSS — text-decoration
+a {
+  text-decoration: none;
+}
+
+.sale-price {
+  text-decoration: line-through;
+}
+
+.highlight {
+  text-decoration: underline;
+}
+Browser Preview — text-decoration
+index.html
+text-decoration: none
+Click here (no underline)
+text-decoration: underline
+Important term
+text-decoration: line-through
+$99.99 (old price)
+text-decoration: overline
+Overline example
+Practical Example — Sale Price Display
+HTML + CSS — sale price with strikethrough
+<p>$120.00</p>
+<span>$79.99</span>
+
+p    { text-decoration: line-through; color: gray; }
+span { color: red; font-weight: 700; }
+Browser Preview
+index.html
+$120.00
+$79.99
+The line-height property controls the vertical space between lines of text inside a paragraph. When lines are too close together, text becomes hard to read. When they have a comfortable gap, the eye can move smoothly from one line to the next.
+
+You can set line-height as a number (a multiplier of the font size), a pixel value, or a percentage. Using a plain number like 1.6 is the most recommended approach.
+
+Value	Effect	Recommended For
+1	No extra space — lines touch	Single-word labels only
+1.4	Slightly spaced — compact	Headings
+1.6	Comfortable spacing	Most body text
+1.8	Generous spacing — very open	Long reading content, articles
+2	Double spacing	Special design cases
+Example — line-height comparison
+CSS — line-height
+.tight {
+  line-height: 1;
+}
+
+.comfortable {
+  line-height: 1.6;
+}
+
+.open {
+  line-height: 2;
+}
+Browser Preview — line-height comparison
+index.html
+line-height: 1 (tight)
+Learning CSS is a great skill. With CSS you can control how every element on a page looks. Text, colors, and spacing are all controlled with CSS.
+
+line-height: 1.6 (comfortable)
+Learning CSS is a great skill. With CSS you can control how every element on a page looks. Text, colors, and spacing are all controlled with CSS.
+
+✅
+Best Practice
+For body text, set line-height: 1.6 or 1.7. This is the standard used by most professional websites and greatly improves reading comfort, especially on mobile devices.
+
+Applying line-height to a Paragraph
+CSS — improved readability
+body {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h2 {
+  line-height: 1.3;
+}
+
+p {
+  line-height: 1.7;
+}
+Browser Preview — well-spaced article
+index.html
+Why Reading Is Important
+Reading every day improves your vocabulary and helps you think more clearly. People who read regularly tend to have better focus and can understand complex ideas more easily.
+
+Now we will combine all four text styling techniques — text-align, font-weight, text-decoration, and line-height — into one practical real-world example: a styled blog article card.
+
+Scenario — A Blog Article Card
+We want to build a small piece of content that shows an article title, its body text, and a link — each styled with the properties from this topic.
+
+HTML — article card structure
+<h2>How CSS Makes the Web Beautiful</h2>
+<p>
+  CSS is one of the most important tools in web design.
+  It controls the colors, fonts, layout, and spacing of
+  every element you see on a web page.
+</p>
+<a href="#">Read More →</a>
+CSS — styling the article card
+h2 {
+  text-align: left;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+p {
+  text-align: left;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #444;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  color: blue;
+}
+Browser Preview — Completed Article Card
+index.html
+How CSS Makes the Web Beautiful
+CSS is one of the most important tools in web design. It controls the colors, fonts, layout, and spacing of every element you see on a web page.
+
+Read More →
+📘
+What Each Property Did
+text-align: left kept all text naturally left-aligned. font-weight: 900 made the title heavy and eye-catching. font-weight: 400 kept the body text readable and light. line-height: 1.7 gave the paragraph comfortable spacing. text-decoration: none removed the default blue underline from the link.
+
+🎯
+Key Takeaway
+The four CSS text properties you learned in this topic are used on almost every website.
+text-align
+positions your text,
+font-weight
+controls thickness and emphasis,
+text-decoration
+adds or removes lines, and
+line-height
+controls reading comfort. When used together, they turn plain HTML text into a clean, professional design.
+
+Properties Summary
+text-align
+Controls where text sits horizontally: left, center, right, or justify
+font-weight
+Controls text thickness: 100 (thin) → 900 (black); keywords: normal, bold
+text-decoration
+Adds or removes lines on text: none, underline, line-through, overline
+line-height
+Sets vertical space between lines: 1.6–1.7 is best for body text
+Term	Definition
+text-align	A CSS property that sets the horizontal position of text inside an element. Values include left, center, right, and justify.
+font-weight	A CSS property that controls how thick or thin text characters appear. Uses numbers from 100 to 900 or keywords like bold and normal.
+text-decoration	A CSS property that adds lines to text. Common values are none, underline, overline, and line-through.
+line-height	A CSS property that sets the vertical space between lines in a paragraph. A value of 1.6 or 1.7 is recommended for comfortable reading.
+CSS property	A single styling rule in CSS that controls one specific visual aspect of an element, such as its color, size, or text alignment.
+value	The setting you give to a CSS property. For example, in font-weight: 700, the value is 700.
+selector	The part of a CSS rule that identifies which HTML element(s) will be styled. For example, p targets all paragraph elements.
+underline	A line drawn below text. Links have underlines by default in most browsers.
+line-through	A line drawn through the middle of text, often used for sale prices or deleted items.
+normal (font-weight)	A keyword value for font-weight, equivalent to 400. Represents regular, unstyled text thickness.
+bold (font-weight)	A keyword value for font-weight, equivalent to 700. Makes text appear heavier and more prominent.
+
+
+CSS: Making Web Pages Look Great
+Topic : 05
+Small Activity: Build and Style Your First Complete Web Page with CSS
+Put everything you have learned into practice — create two files in VS Code, write a simple HTML page with a heading, paragraph, and button, then apply color, font, size, and alignment using CSS step by step.
+
+In the previous lesson, Changing Fonts and Text Size, you learned how to control how text looks on a web page — choosing different fonts, setting sizes, and making text easy to read. Before that, you learned about colors, backgrounds, and text alignment.
+
+Practice Time
+Build a Complete Web Page From Scratch
+What You Know
+• HTML Structure
+• Headings & Text
+• Images & Links
+• CSS Styling
+Build
+Project
+Final Result
+✓ Structured Page
+✓ Styled Content
+✓ Clean Layout
+✓ Complete Website
+No New Concepts — Just Practice Everything You Have Learned So Far
+Now it is time to bring everything together. This lesson is a hands-on activity — there is nothing new to learn here. The goal is to practice what you already know by building a small but complete web page from scratch, step by step, using only HTML and CSS.
+
+By the end of this activity you will have:
+
+Created two real files in VS Code — index.html and style.css
+Written a complete HTML page structure with a heading, paragraph, and button
+Linked your CSS file correctly to your HTML file
+Applied six CSS properties across four different HTML elements
+Opened the finished page in a browser and seen your styling come to life
+ℹ️
+This is a Practice Activity
+This lesson does not introduce new concepts. It is your chance to confirm that you understand the CSS basics covered in the previous lessons. Take your time with each step and make sure your page looks the way you expect before moving on.
+
+You are going to build a simple styled web page. It will not be complicated — but every element on it will have CSS applied to it, and you will write every line yourself.
+
+The HTML Elements You Will Create
+Element	Tag	What It Shows
+Heading	h1	A large title at the top of the page
+Paragraph	p	A line of descriptive text below the heading
+Button	button	A clickable button at the bottom
+The CSS Properties You Will Practice
+CSS Property	What It Does	Applied To
+background-color	Sets the background color of an element or the whole page	body
+font-family	Sets the font used for text	body
+color	Sets the text color	h1, p, button
+text-align	Controls horizontal alignment of text	h1
+font-size	Sets how large the text appears	h1, p, button
+line-height	Sets the vertical spacing between lines of text	p
+font-weight	Controls how bold the text is	button
+💡
+Expected Final Result
+After completing all five steps, your page will have a
+light gray background
+, a
+blue centered heading
+, a
+green paragraph
+with comfortable line spacing, and an
+orange button
+with bold white text — all styled with CSS you wrote yourself.
+
+Before writing any code, you need to create a project folder and two files inside it. This is the standard structure for any web page that uses an external CSS file.
+
+Creating the Project Folder and Files
+Open VS Code on your computer.
+Create a new folder on your Desktop — name it css-activity.
+Open that folder in VS Code using File → Open Folder.
+Inside the folder, create a new file named index.html.
+Create a second new file named style.css.
+Your File Structure
+Project Folder Structure
+css-activity/
+├── index.html    ← your HTML page
+└── style.css     ← your CSS styles
+VS Code — Explorer Panel
+📂 VS Code Explorer — css-activity folder
+📁 css-activity
+📄 index.html
+📄 style.css
+📝
+Both Files Must Be in the Same Folder
+The index.html and style.css files must be inside the same folder. When you link the CSS file in HTML using href="style.css", the browser looks for it in the same location as the HTML file. If they are in different folders, the styles will not apply.
+
+Open your index.html file and write the complete HTML page. This file sets up the structure — the skeleton of the page — and links to the CSS file so the browser knows where to find the styles.
+
+The Complete index.html
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Activity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Welcome To CSS Practice</h1>
+
+    <p>This is a simple paragraph to practice CSS styling.</p>
+
+    <button>Click Me</button>
+
+</body>
+</html>
+index.html — opened in browser (before CSS)
+🌐 Browser — Page Before Any CSS Is Applied
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+At this point the page shows only default browser styling — no colors and no font changes yet. The heading uses the browser's default serif font, the paragraph is plain black text, and the button has the browser's standard gray appearance. This is exactly what you should see before any CSS is applied, and it is the starting point for the next steps.
+
+What Each Line Does
+Line	What It Does
+<!DOCTYPE html>	Tells the browser this is an HTML5 document
+<title>CSS Activity</title>	Sets the text shown on the browser tab
+<link rel="stylesheet" href="style.css">	Links the external CSS file — without this line, no styles will apply
+<h1>	The main heading — the largest and most important text on the page
+<p>	A paragraph of text
+<button>	A clickable button element
+⚠️
+Do Not Forget the link Tag
+The <link rel="stylesheet" href="style.css"> line inside <head> is what connects your HTML to your CSS. If this line is missing or the filename is spelled wrong, the browser will ignore your CSS file completely and show only default styling.
+
+Open your style.css file. Start by styling the body element. Styles applied to body affect the entire page — they set a global background color and a default font for all text on the page.
+
+Writing the body Styles
+style.css — Step 2: body
+body {
+    background-color: lightgray;
+    font-family: Arial;
+}
+Browser — After Styling body
+🌐 Browser — body styles applied
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+After saving both files and refreshing the browser, the page background is now light gray, and the heading, paragraph, and button text are all displayed in the Arial font instead of the browser's default font.
+
+Why Styling body First Makes Sense
+The body element wraps the entire visible page. When you set font-family on body, every element inside it — heading, paragraph, button — inherits that font automatically. You only need to write it once. This is called CSS inheritance.
+
+💡
+CSS Inheritance
+Many CSS properties — like font-family and color — are automatically passed down from a parent element to its children. Setting font-family: Arial on body means every element inside body uses Arial unless you override it with a more specific rule.
+
+Now add styles for the h1 element. The heading will be centered on the page, colored blue, and made larger than its default size.
+
+Writing the h1 Styles
+style.css — Step 3: h1
+h1 {
+    color: blue;
+    text-align: center;
+    font-size: 36px;
+}
+Browser — After Styling h1
+🌐 Browser — h1 styles applied
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+The heading is now blue, centered on the page, and 36 pixels in size. Here is what each property contributed to that result:
+
+What Each Property Did
+Property	Value Used	Effect on the Heading
+color	blue	Changed the heading text color from black to blue
+text-align	center	Moved the heading to the horizontal center of the page
+font-size	36px	Made the heading text 36 pixels tall — larger and more prominent
+Add styles for the p element. The paragraph will be colored green, given a comfortable reading size, and have its line height increased so the text does not feel cramped.
+
+Writing the p Styles
+style.css — Step 4: p
+p {
+    color: green;
+    font-size: 18px;
+    line-height: 1.6;
+}
+Browser — After Styling p
+🌐 Browser — p styles applied
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+The paragraph text is now green, displayed at 18 pixels, with comfortable 1.6 line spacing between each line.
+
+Understanding line-height
+line-height: 1.6 means each line of text is 1.6 times the font size in height. For an 18px font, that gives 28.8px of vertical space per line. This extra space makes longer paragraphs much easier to read — it is a common value used by professional web designers.
+
+📝
+line-height Uses No Unit
+Notice that line-height: 1.6 has no unit like px or em. When written as a plain number, it is a multiplier of the element's own font-size. This is the recommended way to write line-height because it scales correctly if the font size changes later.
+
+Add styles for the button element. The button will stand out with an orange background, white text, and bold font weight so it is immediately visible as something the user can click.
+
+Writing the button Styles
+style.css — Step 5: button
+button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+Browser — After Styling button
+🌐 Browser — button styles applied
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+The button now has an orange background with bold white text, making it clearly visible and styled instead of blending in with the default gray button. Here is what each property contributed to that result:
+
+What Each Property Did
+Property	Value Used	Effect on the Button
+background-color	orange	Filled the button background with orange — replaced the gray default
+color	white	Changed the button text from black to white — high contrast against orange
+font-size	16px	Set a clear, readable text size for the button label
+font-weight	bold	Made the button text thicker and heavier — makes it look more like a call to action
+Here is the complete, final code for both files combined. This is what your project should look like when all five steps are done.
+
+index.html — Final Version
+index.html — Complete File
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Activity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Welcome To CSS Practice</h1>
+
+    <p>This is a simple paragraph to practice CSS styling.</p>
+
+    <button>Click Me</button>
+
+</body>
+</html>
+style.css — Final Version
+style.css — Complete File
+body {
+    background-color: lightgray;
+    font-family: Arial;
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+    font-size: 36px;
+}
+
+p {
+    color: green;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+index.html — Final Result in Browser
+🌐 Browser — Final Styled Page
+Welcome To CSS Practice
+This is a simple paragraph to practice CSS styling.
+Click Me
+What You Should See in the Browser
+The page background is light gray — set by background-color: lightgray on body.
+The heading is centered on the page, colored blue, and 36px in size.
+The paragraph text is green, 18px, and has comfortable 1.6 line spacing.
+The button has an orange background, white bold text, and stands out clearly.
+All text on the page uses the Arial font — set once on the body element.
+🎯
+Activity Complete
+If your page looks like the browser preview above, you have successfully completed the activity. You built a real HTML page, linked an external CSS file, and applied color, font, size, alignment, and weight properties across four different elements — all from scratch. That is exactly what CSS is for.
+
+Term	Definition
+index.html	The standard name for the main HTML file of a website. The browser opens this file first when you open a folder or visit a website.
+style.css	An external CSS file that holds all the style rules for the web page. Kept separate from HTML to make the code organized and easy to update.
+link tag	An HTML tag placed inside head that connects an external CSS file to the HTML page. Uses href to specify the CSS file path.
+background-color	A CSS property that sets the background color of an element. Accepts color names (like lightgray, orange) or hex/rgb values.
+font-family	A CSS property that sets the typeface used for text. Common values include Arial, Georgia, and Verdana.
+color	A CSS property that sets the foreground (text) color of an element.
+font-size	A CSS property that controls how large text appears. Common units include px (pixels) and em.
+text-align	A CSS property that controls the horizontal alignment of text. Values include left, center, right, and justify.
+line-height	A CSS property that sets the vertical space between lines of text. A value like 1.6 means 1.6 times the font size — improves readability.
+font-weight	A CSS property that controls how thick or thin the text strokes are. Common values are normal and bold.
+CSS Inheritance	The mechanism by which child elements automatically receive certain CSS property values from their parent elements. Setting font-family on body passes it to all elements inside.
+External CSS	A separate .css file linked to an HTML page using a link tag. Allows the same styles to be shared across many HTML files.
+Activity Execution Flow — Step by Step
+Open VS Code — create folder css-activity
+▼
+Create index.html and style.css inside the folder
+▼
+Step 1 — Write HTML: h1, p, button + link to style.css
+▼
+Step 2 — CSS: style body → background-color + font-family
+▼
+Step 3 — CSS: style h1 → color + text-align + font-size
+▼
+Step 4 — CSS: style p → color + font-size + line-height
+▼
+Step 5 — CSS: style button → background-color + color + font-size + font-weight
+▼
+Save both files — open index.html in the browser
+▼
+✅ PAGE LOOKS CORRECT
+Gray background, blue heading, green paragraph, orange button — activity complete!
+❌ STYLES NOT SHOWING
+Check: Is the link tag in head? Are both files in the same folder? Is style.css spelled correctly?
+CSS Small Activity
+Files Created
+→ index.html — the HTML structure
+→ style.css — all CSS rules
+→ Both files in the same folder
+→ Linked with <link rel="stylesheet" href="style.css">
+HTML Elements
+→ <h1> — main heading
+→ <p> — paragraph of text
+→ <button> — clickable button
+→ All inside <body>
+body Styles
+→ background-color: lightgray
+→ font-family: Arial
+→ Affects the entire page via CSS inheritance
+→ Set once — applies to all child elements
+h1 Styles
+→ color: blue
+→ text-align: center
+→ font-size: 36px
+→ Large, centered, blue heading
+p Styles
+→ color: green
+→ font-size: 18px
+→ line-height: 1.6 (no unit — multiplier)
+→ Comfortable, readable green text
+button Styles
+→ background-color: orange
+→ color: white
+→ font-size: 16px
+→ font-weight: bold — clear call to action
+In this activity, you built a complete small web page from scratch and applied CSS styling to every element on it — putting all the fundamentals you have learned into practice in a single project.
+
+What You Did in This Activity
+Created a proper project folder with two files — index.html and style.css — in VS Code.
+Wrote a complete HTML page with a heading, paragraph, and button, and linked the CSS file correctly using the link tag.
+Styled the body with a light gray background and Arial font — applied globally through CSS inheritance.
+Styled the h1 heading with blue color, centered alignment, and 36px size.
+Styled the p paragraph with green color, 18px size, and 1.6 line height for comfortable reading.
+Styled the button with an orange background, white bold text, and 16px font size.
+Opened the finished page in a browser and verified all styles were applied correctly.
+🎯
+Key Takeaway
+Building even the simplest styled web page requires all the CSS basics working together at once: a linked external stylesheet, selectors targeting the right elements, and properties controlling color, font, size, alignment, and spacing. You just did all of that in one project — and that is the foundation of everything in web design.
+
+✅
+Activity Checklist
+Before finishing, confirm all of these are true for your page: background is light gray ✓ — heading is blue and centered ✓ — paragraph is green ✓ — button has orange background and white text ✓ — all text uses Arial font ✓
+
+Using Classes and IDs for Custom Styling
+Topic 06
+CSS Classes and IDs
+Learn how to target specific elements on a page with precision. You will use class selectors with . and id selectors with # to write smarter, reusable CSS that keeps your code organized and consistent.
+
+So far you have written CSS rules like h1 { color: red; } or p { font-size: 16px; }. These rules apply to every heading or paragraph on the page. But real websites need more control — some headings should be orange, others black. Some buttons should be big, others small. You need a way to target specific elements.
+
+That is exactly what classes and IDs are for. They give you the power to apply different styles to different elements, even when they are the same HTML tag.
+
+💡
+What You Will Learn
+You will understand why general CSS selectors become limiting, how to write class and ID selectors, when to use each one, and how to apply them to headings, paragraphs, buttons, links, images, and sections.
+
+In this topic, you will learn how to:
+
+Understand why styling all similar elements together is limiting
+Apply the same style to multiple elements using classes
+Target a single unique element using an ID
+Write CSS selectors with . for classes and # for IDs
+Style headings, paragraphs, buttons, links, images, and sections independently
+Reuse styles across a web page by assigning the same class to multiple elements
+Choose between class and ID following clear, simple rules
+Imagine you have a page with three headings. If you write h2 { color: orange; }, every h2 on the page becomes orange — even ones you did not want to change. This is the limitation of using only tag selectors.
+
+See the Problem in Action
+HTML — three headings, one CSS rule
+<h2>Section Title</h2>
+<h2>Product Name</h2>
+<h2>Footer Heading</h2>
+
+h2 { color: orange; }
+Browser Preview — all h2 affected
+index.html
+Section Title ← orange (wanted)
+Product Name ← orange (NOT wanted)
+Footer Heading ← orange (NOT wanted)
+⚠️
+The Problem
+The tag selector h2 has no way to distinguish one heading from another. Every h2 on the entire page gets the same style. This is fine for very simple pages, but breaks down as soon as you need different sections to look different.
+
+The solution is to use classes and IDs — HTML attributes that let you label elements so CSS can target them individually.
+
+❌ Without Classes — No Control
+All h2 elements look identical. You cannot change just one without affecting all others.
+✅ With Classes — Full Control
+Each h2 can have a different class. You style each class independently with complete precision.
+A class is an HTML attribute you add to an element to give it a label. Multiple elements can share the same class name. In CSS, you target a class by writing a dot . before the class name.
+
+How to Add a Class in HTML
+HTML — adding class attributes
+<h2 class="section-title">Section Title</h2>
+<h2 class="product-name">Product Name</h2>
+<h2 class="footer-heading">Footer Heading</h2>
+How to Write Class Selectors in CSS
+CSS — class selectors using .
+.section-title {
+  color: orange;
+  font-size: 24px;
+}
+
+.product-name {
+  color: darkblue;
+  font-size: 20px;
+}
+
+.footer-heading {
+  color: gray;
+  font-size: 16px;
+}
+Browser Preview — each heading styled independently
+index.html
+Section Title ← orange, 24px
+Product Name ← darkblue, 20px
+Footer Heading ← gray, 16px
+✅
+Classes Are Reusable
+The same class can be applied to many different elements across your page. For example, you could give class="highlight" to ten different paragraphs and they would all get the same style from one CSS rule.
+
+Applying One Class to Multiple Elements
+HTML + CSS — one class, many elements
+<p class="highlight">This is important information.</p>
+<p>This is normal text.</p>
+<p class="highlight">This is also important.</p>
+
+.highlight {
+  background-color: yellow;
+  font-weight: 700;
+}
+Browser Preview — class applied to two paragraphs
+index.html
+This is important information.
+
+This is normal text.
+
+This is also important.
+
+An ID is also an HTML attribute, but it works differently from a class. An ID is meant to be unique — each ID should only appear once on the page. Think of it like a name tag: no two people in the same room should have the same name tag.
+
+In CSS, you target an ID by writing a hash symbol # before the ID name.
+
+Feature	class	id
+HTML attribute	class="name"	id="name"
+CSS selector	.name (dot)	#name (hash)
+Can be reused?	Yes — many elements can share a class	No — each ID must appear only once per page
+Best for	Groups of elements with shared styling	One specific unique element
+Example — Using an ID for a Unique Element
+HTML — id attribute
+<header id="main-header">
+  <h1>My Portfolio</h1>
+</header>
+
+<p>Welcome to my page.</p>
+<p>Here you can see my projects.</p>
+CSS — id selector using #
+#main-header {
+  background-color: darkblue;
+  color: white;
+  text-align: center;
+}
+
+p {
+  color: black;
+  font-size: 16px;
+}
+Browser Preview — unique header styled with ID
+index.html
+My Portfolio
+Welcome to my page.
+
+Here you can see my projects.
+
+📘
+ID = One Per Page
+Each id value must be unique on the page. Never use the same ID name twice. If you need to style multiple elements the same way, use a
+class
+instead.
+
+The selector in CSS is what connects your CSS rule to your HTML element. For classes and IDs, the selector is written slightly differently.
+
+Side-by-Side Comparison
+CSS — class selector vs ID selector
+/* Class selector — starts with a dot . */
+.card {
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* ID selector — starts with a hash # */
+#hero-banner {
+  background-color: navy;
+  color: white;
+  height: 300px;
+}
+Browser Preview — class cards and unique ID banner
+index.html
+#hero-banner → Unique, appears once
+.card → Shared style, card 1
+.card → Shared style, card 2
+. (dot)
+Used in CSS to select a class. Example: .highlight targets all elements with class="highlight"
+# (hash)
+Used in CSS to select an ID. Example: #header targets the single element with id="header"
+Classes and IDs can be added to any HTML element — headings, paragraphs, buttons, links, images, and sections. Here is how each one looks in practice.
+
+Headings, Paragraphs, and Sections
+HTML + CSS — different elements, different styles
+<!-- HTML -->
+<section id="intro">
+  <h2 class="section-heading">About Me</h2>
+  <p class="bio-text">I am a student learning web development.</p>
+</section>
+
+<section id="skills">
+  <h2 class="section-heading">My Skills</h2>
+  <p class="skills-text">HTML, CSS, and JavaScript.</p>
+</section>
+
+/* CSS */
+#intro         { background-color: #fffbeb; padding: 24px; }
+#skills        { background-color: #f0fdf4; padding: 24px; }
+.section-heading { font-size: 22px; font-weight: 700; color: navy; }
+.bio-text      { color: #444; line-height: 1.7; }
+.skills-text   { color: green; font-weight: 600; }
+Browser Preview — sections with unique IDs, shared heading class
+index.html
+About Me
+I am a student learning web development.
+
+My Skills
+HTML, CSS, and JavaScript.
+
+Buttons and Links
+HTML + CSS — styled buttons and links
+<button class="btn-primary">Sign Up</button>
+<button class="btn-secondary">Learn More</button>
+<a class="nav-link" href="#">Home</a>
+<a class="nav-link" href="#">About</a>
+<a id="contact-link" href="#">Contact Us</a>
+
+.btn-primary   { background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 6px; }
+.btn-secondary { background-color: white; color: blue; padding: 10px 20px; border: 2px solid blue; border-radius: 6px; }
+.nav-link      { color: gray; text-decoration: none; margin-right: 16px; }
+#contact-link  { color: red; font-weight: 700; text-decoration: underline; }
+Browser Preview — buttons and links
+index.html
+Sign Up
+Learn More
+Home
+About
+Contact Us
+One of the biggest advantages of classes is that you write a CSS rule once and reuse it many times. This keeps your code short and consistent. If you want to change the style later, you only update one place in your CSS.
+
+Example — Product Cards Sharing One Class
+HTML — multiple cards with the same class
+<div class="product-card">
+  <h3>Laptop</h3>
+  <p class="price">$999</p>
+</div>
+
+<div class="product-card">
+  <h3>Mouse</h3>
+  <p class="price">$29</p>
+</div>
+
+<div class="product-card">
+  <h3>Keyboard</h3>
+  <p class="price">$79</p>
+</div>
+CSS — one class styles all three cards
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.price {
+  color: green;
+  font-weight: 700;
+  font-size: 18px;
+}
+Browser Preview — three cards, one CSS class
+index.html
+Laptop
+$999
+Mouse
+$29
+Keyboard
+$79
+💡
+Why Reusable Styles Save Time
+If you later decide to change the card border color from gray to orange, you change just
+one line
+in .product-card and all three cards update instantly. Without classes, you would have to change every card separately — and might miss one.
+
+A common question for beginners is: "When should I use a class and when should I use an ID?" The answer is simpler than it might seem.
+
+✅ Use a Class When…
+Multiple elements need the same style
+You want to reuse the style later
+You are styling things like cards, buttons, or paragraphs that appear more than once
+You are not sure — if in doubt, use a class
+🔑 Use an ID When…
+The element appears only once on the entire page
+It is a major structural section: a header, a footer, a sidebar
+You need to link directly to it using anchor links (e.g. href="#contact")
+JavaScript needs to find this exact element
+Simple Decision Rule
+Ask: Will this element appear more than once?
+Yes → Use a class. No → You can use an ID.
+Ask: Do other elements need the same style?
+Yes → Use a class. No → Either works, but class is safer.
+Ask: Is it a main structural section of the page?
+Yes (header, footer, main, sidebar) → ID is often used here.
+Complete Example — Using Both Together
+HTML + CSS — classes and IDs on the same page
+<!-- HTML -->
+<header id="site-header">
+  <h1>My Shop</h1>
+</header>
+
+<main id="product-list">
+  <div class="product-card">
+    <h3 class="product-name">Book</h3>
+    <p class="product-price">$12</p>
+    <button class="btn-buy">Buy Now</button>
+  </div>
+
+  <div class="product-card">
+    <h3 class="product-name">Pen</h3>
+    <p class="product-price">$3</p>
+    <button class="btn-buy">Buy Now</button>
+  </div>
+</main>
+
+/* CSS */
+#site-header   { background: navy; color: white; padding: 20px; text-align: center; }
+#product-list  { padding: 20px; }
+.product-card  { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.product-name  { font-size: 18px; font-weight: 700; }
+.product-price { color: green; font-weight: 700; }
+.btn-buy       { background: orange; color: white; border: none; padding: 8px 16px; border-radius: 6px; }
+Browser Preview — complete page with IDs and Classes
+shop.html
+My Shop
+Book
+$12
+Buy Now
+Pen
+$3
+Buy Now
+🎯
+Key Takeaway
+Classes
+and
+IDs
+are the foundation of precise CSS targeting. Use .class for styles you want to repeat across many elements, and #id for styles that apply to exactly one unique element. The dot . and hash # are the signals in CSS that tell the browser which type of selector it is reading. Following this simple rule keeps your code clean, consistent, and easy to update.
+
+Term	Definition
+class	An HTML attribute that labels an element so CSS can target it. Multiple elements can share the same class name. Written as class="name" in HTML.
+id	An HTML attribute that gives an element a unique label. Each ID must appear only once per page. Written as id="name" in HTML.
+class selector	A CSS selector that targets elements with a specific class. Written with a dot before the name: .highlight
+ID selector	A CSS selector that targets the element with a specific ID. Written with a hash before the name: #header
+selector	The part of a CSS rule that identifies which HTML element(s) the rule applies to.
+. (dot)	The symbol used in CSS to target a class. For example, .card targets all elements with class="card".
+# (hash)	The symbol used in CSS to target an ID. For example, #footer targets the element with id="footer".
+tag selector	A CSS selector that targets all elements of a specific HTML tag type, such as p, h1, or button.
+reusable style	A CSS rule written once and applied to many elements using the same class name, reducing repetition in your code.
+unique element	An element that appears only once on a web page. IDs are designed to target unique elements.
+specificity	A rule in CSS that determines which style wins when multiple rules apply to the same element. ID selectors have higher specificity than class selectors. This will be explained in detail in a future advanced lesson.
+
+CSS: Making Web Pages Look Great
+Week 10 Activity
+Create Your Personal Profile Page
+Build a complete personal profile webpage using HTML and CSS. Showcase your name, biography, photo, and contact information with professional styling using all the CSS techniques you learned this week.
+
+This week you learned the fundamentals of CSS — the language that makes web pages beautiful. You discovered how to connect stylesheets to HTML, change colors, fonts, sizes, and layouts. Now it's time to apply everything you learned by creating your own professional profile page.
+
+Your task is to build a Personal Profile Page that introduces yourself to the world. This is a real-world project that you can add to your portfolio or personal website.
+
+What This Activity Tests
+Your understanding of HTML structure and semantic elements
+Your ability to link CSS to HTML correctly
+Your skill in applying colors, fonts, and spacing
+Your knowledge of CSS Classes and IDs for targeted styling
+Your ability to create a visually appealing, centered layout
+🎯
+Goal
+Create a complete, functional profile page that demonstrates mastery of HTML and CSS fundamentals. Your page should be clean, professional, and properly styled.
+
+By completing this activity, you will demonstrate:
+
+How to structure an HTML document with proper semantic elements
+How to create an external CSS file and link it to your HTML
+How to use text colors to make content visually distinct
+How to use background colors for contrast and visual hierarchy
+How to control font families and font sizes for readability
+How to align and center text on a page
+How to use CSS Classes for reusable styling
+How to use CSS IDs for unique, one-of-a-kind styling
+How to style images, buttons, and links appropriately
+How to create a cohesive visual design that looks professional
+Your profile page must include all of the following HTML elements and CSS styling features:
+
+Mandatory HTML Elements
+A <h1> heading containing your name
+A <p> paragraph with a brief bio or introduction
+An <img> tag displaying a profile picture or placeholder image
+A <button> element with text "Contact Me"
+An <a> link to your favorite website or social media profile
+Mandatory CSS Features
+At least one Class selector (used on one or more elements)
+At least one ID selector (used on exactly one element)
+Background color for the entire page (body)
+Text color styling for at least two different elements
+Font family declaration (any font except the browser default)
+Font size adjustments for headings and body text
+Text alignment (center alignment recommended)
+Button styling with distinct colors
+Link styling with custom colors and optional text-decoration removal
+✓
+Checklist
+Before submitting, verify that your page includes every single item listed above. Incomplete submissions will not receive full credit.
+
+1. Your Name (Heading)
+Create a main heading using <h1> with your full name. This should be the first thing visitors see. Use an ID selector to make it visually prominent with a large font size and distinct color.
+
+2. Profile Image
+Add an image using <img>. You can use:
+
+A real photo of yourself (recommended)
+A placeholder image from https://via.placeholder.com/200
+Any image file you have on your computer
+The image should be centered on the page.
+
+3. Biography Paragraph
+Write a short paragraph (2-3 sentences) about yourself. This could include:
+
+Your current role or student status
+Your interests in web development or technology
+A brief mention of skills you're learning
+Your career aspirations
+Use a Class selector for this paragraph so you can style it distinctly.
+
+4. Contact Button
+Add a <button> element with the text "Contact Me". Style it with:
+
+A background color that stands out from the page background
+Text color that contrasts with the button background
+Appropriate font size
+5. Website Link
+Include an <a> link to a website you like. This could be:
+
+YouTube or your favorite social media platform
+A news or technology website
+A portfolio or personal website
+Any site that interests you
+Style the link with a distinct color and optionally remove the underline.
+
+Page Background
+Your page must have a non-white background color. Choose a color that is:
+
+Light enough that text remains readable
+Professional and not distracting
+Complementary to your text colors
+Examples: lightgray, lightblue, #f0f0f0, or any light color you prefer.
+
+Text Colors
+Use at least two different text colors for different elements:
+
+Your heading (h1) — should have a distinct, bold color
+Your biography paragraph — can be different from the heading
+Links — should be colored to stand out and indicate they are clickable
+Font Styling
+Apply font styling to enhance readability:
+
+Choose a professional font family (Arial, Verdana, Georgia, etc.)
+Set a reasonable font size for body text (14-18px)
+Make the heading significantly larger (30-50px)
+Adjust line-height for better readability in paragraphs
+Text Alignment
+Center-align your content for a modern, centered profile layout. Use text-align: center; in your body styling.
+
+💡
+Color Harmony
+Choose colors that work well together. A light background pairs well with dark text. Use color contrast tools online if you're unsure about readability.
+
+CSS Selectors
+Element Selector: body { }, h1 { }, img { }, button { }, a { }
+Class Selector: .description { } (use at least once)
+ID Selector: #main-title { } (use at least once)
+CSS Properties You Learned
+background-color: Change page background
+color: Change text color
+font-family: Change typeface
+font-size: Change text size
+text-align: Center or align text
+text-decoration: Remove underlines from links (optional)
+External CSS File
+Your CSS must be in a separate style.css file. Link it to your HTML using:
+
+HTML Link Tag
+<link rel="stylesheet" href="style.css">
+ℹ️
+Why External CSS?
+Separating HTML and CSS is a professional practice. It keeps your code organized, reusable, and easier to maintain. Never put CSS inside HTML for this activity.
+
+Professionalism Matters
+Your page should look clean and professional. Remember:
+
+Use consistent colors throughout your design
+Avoid using too many bright or clashing colors
+Keep font sizes readable — text should never be too small
+Ensure good contrast between text and background
+No Need for Perfection
+Your design doesn't need to be complex or elaborate. Simple, clean, and well-organized is better than complicated.
+
+✓
+Good Design Tips
+Focus on readability, consistency, and proper use of CSS properties. A simple centered layout with good colors and typography will always look professional.
+
+Create Two Files
+You need exactly two files in your project folder:
+
+File 1: index.html
+This is your main HTML file. It contains:
+
+DOCTYPE declaration
+HTML structure with head and body
+Link to your CSS file in the head
+All content elements (heading, image, paragraph, button, link)
+File 2: style.css
+This is your CSS stylesheet. It contains:
+
+All CSS rules for styling your page
+At least one Class selector
+At least one ID selector
+Styling for body, headings, images, buttons, and links
+Folder Structure
+Your Project Folder
+profile-page/
+├── index.html
+└── style.css
+💡
+File Naming
+Use lowercase filenames and avoid spaces. Always use index.html as your main file — this is the standard in web development.
+
+Start Simple
+Don't try to make a complicated design right away
+Get the basic HTML elements on the page first
+Then apply CSS styling step by step
+Test after each change
+Use Your Browser's Developer Tools
+Right-click on any element and select "Inspect"
+You can see your HTML structure and CSS in real-time
+Try changing colors temporarily to see the effect
+Test Your Links
+Click your "Contact Me" button (it won't do anything yet, that's okay)
+Click your website link — it should open in a new tab
+Check Compatibility
+Open your page in different browsers (Chrome, Firefox, Safari)
+Check how it looks on your phone if possible
+Make sure all text is readable
+Go Back to Lessons
+If you get stuck on any CSS concept, go back and review the lessons from this week. Every technique you need is covered in the course materials.
+
+⚠️
+Common Mistake
+Don't put CSS inside your HTML file. Always use a separate style.css file and link it properly. This is a requirement.
+
+Before You Submit
+Make sure your page includes all requirements:
+
+Required Elements
+Your name in h1
+Profile image with img tag
+Biography paragraph
+Contact Me button
+Website link
+Required Styling
+External CSS file
+Background color
+Text colors
+Font family and size
+Class selector (min. 1)
+ID selector (min. 1)
+Submission Steps
+Make sure both index.html and style.css are in the same folder
+Open index.html in your browser and verify everything looks correct
+Check that your page is centered and properly styled
+Zip or compress your project folder
+Submit the compressed file to your course platform
+File Requirements
+File format: ZIP or compressed folder
+Folder name: profile-page or similar
+Files included: index.html and style.css
+No minification or obfuscation (keep code readable)
+✓
+Ready to Submit?
+Double-check everything works in your browser one more time before submitting. You got this!
+
+CSS: Making Web Pages Look Great
+Week 10
+Activity Solution
+Weekly Activity Solution
+Step-by-step walkthrough of the Personal Profile Page solution — covering HTML structure, External CSS, Selectors, Colors, and proper use of Classes & IDs.
+
+In this solution we will build a complete Personal Profile Page using HTML and CSS. We will go through every line of code and explain why each decision was made, not just what was written.
+
+What We Will Create
+File	Purpose
+index.html	Page structure — headings, image, paragraph, button, link
+style.css	All visual styling — colors, fonts, spacing, layout
+Expected Final Result
+A large, colorful main heading
+A profile image centered on the page
+A formatted description paragraph
+A styled button with a different background color
+A link with custom color and no underline
+A page background color
+Correct use of Classes and IDs as selectors
+🎯
+Goal
+By the end of this solution walkthrough, you will understand not just the final code — but the reasoning behind every element and selector choice.
+
+Open VS Code and create two files inside your project folder.
+
+Files to Create
+📄 index.html — the page structure
+🎨 style.css — all the styling
+💡
+Why Two Separate Files?
+Separating HTML and CSS is called External CSS. It keeps your structure and your styling independent — making your code easier to read, maintain, and reuse across multiple pages.
+
+1
+Create the Basic HTML Skeleton & Link CSS
+Inside index.html, write the base structure and connect the CSS file using a <link> tag inside <head>.
+
+index.html — Base Structure
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+</body>
+</html>
+📌
+Why This Matters
+We created the basic page skeleton and linked style.css using <link>. This is what makes External CSS work — the browser loads both files and applies the styles automatically.
+
+2
+Add the Main Heading with an ID
+Inside <body>, add the main heading. We use an id because this heading is unique — it will have its own special styling.
+
+Main Heading — Using ID
+<h1 id="main-title">Ahmed Mohamed</h1>
+💡
+ID vs Class — The Rule
+We used id here because this heading is unique on the page — there is only one main title. IDs are for unique elements. Classes are for elements that share the same style and can appear multiple times.
+
+3
+Add the Profile Image
+Add a placeholder image below the heading. We use a temporary URL so the image appears even without a real photo.
+
+Profile Image
+<img src="https://via.placeholder.com/200" alt="Profile Image">
+4
+Add the Description Paragraph with a Class
+Add a paragraph with a class attribute. We use a class here because the same style might be reused on other paragraphs later.
+
+Description Paragraph — Using Class
+<p class="description">
+    I am learning HTML and CSS and building my first web pages.
+</p>
+5
+Add the Contact Button and Link
+Finally, add a simple button and an anchor link below the paragraph.
+
+Button & Link
+<button>Contact Me</button>
+
+<a href="https://www.youtube.com">Visit My Favorite Website</a>
+Open style.css and add the following rules one by one. Each rule targets a different element on the page.
+
+1
+Style the Body — Background, Font & Alignment
+These three properties set the overall look of the entire page.
+
+style.css — body
+body {
+    background-color: lightgray;
+    font-family: Arial;
+    text-align: center;
+}
+We changed the background color, chose the font, and centered all content on the page.
+
+2
+Style the Main Heading — Using an ID Selector
+We target the unique heading using the # ID selector.
+
+style.css — #main-title (ID Selector)
+#main-title {
+    color: blue;
+    font-size: 40px;
+}
+📌
+ID Selector Syntax
+In CSS, the # symbol targets an element by its id attribute. #main-title targets exactly the <h1 id="main-title"> element.
+
+3
+Style the Description — Using a Class Selector
+We target the paragraph using the . class selector and improve its readability with line-height.
+
+style.css — .description (Class Selector)
+.description {
+    color: green;
+    font-size: 18px;
+    line-height: 1.6;
+}
+💡
+Class Selector Syntax
+The . dot symbol targets elements by their class attribute. .description targets every element with class="description". Unlike IDs, classes can be reused on multiple elements.
+
+4
+Style the Image, Button, and Link
+We target these three elements using their element type selectors — no class or ID needed.
+
+style.css — img, button, a
+img {
+    width: 200px;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+📝
+Note on text-decoration
+By default, links (<a>) have an underline. Setting text-decoration: none removes it for a cleaner look.
+
+💡
+Shortcut for Image Width
+You can also set image width directly in HTML using the width attribute: <img src='' width='200' alt='' />. However, doing it in CSS is the preferred approach as it keeps all styling in one place.
+
+Here is the complete final code for both files after completing all steps.
+
+index.html — Complete
+index.html — Final Version
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="main-title">Ahmed Mohamed</h1>
+
+    <img src="https://via.placeholder.com/200" alt="Profile Image">
+
+    <p class="description">
+        I am learning HTML and CSS and building my first web pages.
+    </p>
+
+    <button>Contact Me</button>
+
+    <a href="https://www.youtube.com">Visit My Favorite Website</a>
+</body>
+</html>
+style.css — Complete
+style.css — Final Version
+body {
+    background-color: lightgray;
+    font-family: Arial;
+    text-align: center;
+}
+
+#main-title {
+    color: blue;
+    font-size: 40px;
+}
+
+.description {
+    color: green;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+img {
+    width: 200px;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+✅
+OUTPUT
+Ahmed Mohamed
+Profile Image
+I am learning HTML and CSS and
+building my first web pages.
+Contact Me
+Visit My Favorite Website
+This activity brought together all the core concepts from Week 10. Here is a summary of everything that was practiced.
+
+Concept	How It Was Used
+HTML	Page structure with headings, image, paragraph, button, and link
+External CSS	Separate style.css linked via <link> tag
+Colors	Text colors on heading, paragraph, button, and link
+Background Colors	Page background with background-color: lightgray
+Font Size	Different sizes for heading (40px) and paragraph (18px)
+Font Family	Global font-family: Arial applied to the body
+Text Alignment	Centered page content with text-align: center
+ID Selector (#)	Unique styling for #main-title
+Class Selector (.)	Reusable styling for .description
+Element Selector	Targeting img, button, and a directly by tag name
