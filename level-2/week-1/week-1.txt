@@ -1,0 +1,878 @@
+Level 2 Python
+Week 1
+What is Programming?
+Discover how computers work and how programming turns your ideas into instructions machines can follow — step by step.
+
+Have you ever wondered how your favorite video game knows exactly when you press a button to jump, or how a microwave knows exactly how long to heat your food? The answer is Programming. Computers are incredibly fast at doing math, but they need us to give them a plan.
+
+Programming — giving computers step-by-step instructions
+Programming — giving computers step-by-step instructions
+Programmer
+The person (like you!) who thinks of the solution and writes the instructions.
+Program
+The final set of instructions that the computer follows to complete a task.
+Code
+The special language used to write those instructions so the computer can understand them.
+🎮
+Think of it this way!
+A computer is like a very fast student who follows directions perfectly but has no imagination. If you don't tell it every single step, it won't know what to do!
+
+Programming languages — the bridge between humans and machines
+Programming languages — the bridge between humans and machines
+Computers don't speak English or Arabic — they communicate using electricity (on and off), represented as Binary (0s and 1s). Writing in 0s and 1s is extremely difficult for humans.
+
+Programming Languages like Python act as a bridge — we write instructions that look almost like English, and a special tool translates that code into the 0s and 1s the machine needs.
+
+Block-based vs text-based coding
+Block-based vs text-based coding
+🎨
+Block-Based
+Visual drag-and-drop
+Colorful 'puzzle piece' blocks like in Scratch. Perfect for beginners — prevents grammar errors so you can focus on logic.
+⌨️
+Text-Based
+Professional code writing
+Actual lines of code using words and symbols — like Python! What professional AI engineers use every day.
+Algorithm
+A step-by-step plan or 'recipe' for solving a problem. You create an algorithm BEFORE you write code.
+Syntax
+The specific 'grammar' rules of a programming language. Just like a sentence needs punctuation, code needs the right symbols.
+Logic
+The 'thinking' part of the program — it determines the order of steps and how the computer makes decisions.
+🍞
+The Robot Chef Analogy
+Imagine you want a robot to make a peanut butter sandwich. If you just say 'Make a sandwich,' the robot does nothing — the instruction is too broad! You need to break it into tiny, precise steps. That's exactly what programming is.
+
+01
+Pick up one slice of bread
+The first action — specific, unambiguous.
+▸ Every step must be exact
+02
+Open the peanut butter jar
+Twist the lid — the robot needs this detail too!
+▸ Computers have NO common sense
+03
+Spread peanut butter on the bread
+Use a knife to spread across the whole surface.
+▸ Precision is everything
+04
+Place a second slice of bread on top
+The sandwich is complete!
+▸ Breaking big tasks into tiny steps = programming
+?
+What is an algorithm?
+
+A
+A programming language like Python
+
+B
+A step-by-step plan or recipe for solving a problem
+
+C
+The 0s and 1s that computers understand
+
+D
+A type of computer hardware
+
+
+
+General Level 2
+Installing & Launching Python + Jupyter/Colab
+Two easy options: Google Colab (browser only, no install) or Local Jupyter (install on computer). Start with Colab — it’s perfect for beginners!
+
+☁
+Google Colab
+Recommended for beginners
+Browser only — no installation needed. Works on any device, auto-saves to Google Drive.
+💻
+Local Jupyter
+Full control
+Install on your computer for offline use and advanced projects.
+⭐
+Start Here
+Start with Colab — it’s perfect for beginners! You can always switch to local Jupyter later when you need more power.
+
+Google Colab interface
+Google Colab — An easy way to learn and use Python in the browser
+Perfect for: Students with Chromebook, tablet, or shared computers.
+
+Step-by-Step Guide
+01
+Open browser
+Go to colab.research.google.com
+02
+Sign in
+Use your Google account (school Gmail works perfectly)
+03
+Click “New Notebook”
+An empty notebook opens and is ready to use
+04
+Rename it
+File → Rename → “My First Data Notebook”
+05
+Test it!
+Type your first code in the first cell
+06
+Run cell
+Press Shift + Enter → See the output below!
+Advantages
+Free GPU for fast computing
+Auto-saves to Google Drive
+Share with one link
+Works on any device
+Jupyter logo
+Project Jupyter — open-source interactive computing
+Perfect for: Working offline, advanced projects.
+
+ℹ
+Before Installation
+Kindly note that there is a minimum requirement for local run. Check the System Requirements section below before proceeding.
+
+Operating System
+Platform	Minimum Version
+Windows	Windows 10 (64-bit) or later
+macOS (Intel)	macOS 10.15 (Catalina) or later
+macOS (Apple Silicon M1/M2/M3)	macOS 12.1 or later
+Linux	Ubuntu 20.04, RedHat/AlmaLinux/Rocky 8+, or equivalent anaconda
+Hardware
+Component	Minimum	Recommended
+CPU	Any 64-bit processor	Intel Core i5 or equivalent multi-core
+RAM	4 GB	8 GB (16 GB+ for large datasets)
+Disk Space	5 GB (Anaconda install)	10 GB+ (for datasets & libraries)
+Internet	Required for installation & packages	Broadband recommended
+Python Version	Python 3.7 or later	Python 3.10+
+Quick Summary Card
+✅ At a Glance
+OS → Windows 10 / macOS 12.1 / Ubuntu 20.04 (all 64-bit)
+RAM → 4 GB minimum | 8 GB recommended
+Storage → 5 GB minimum | 10 GB recommended
+CPU → Any modern 64-bit (i5 or better preferred)
+Python → 3.7+ (bundled with Anaconda automatically)
+Windows Installation
+01
+Download Anaconda
+Go to anaconda.com/download → Windows Python 3.x
+02
+Run installer
+Check “Add to PATH” → click Next through the wizard
+03
+Open “Anaconda Prompt”
+Search for it in the Start menu
+04
+Launch Jupyter
+Type jupyter notebook → press Enter
+05
+Browser opens
+Create a new Python 3 notebook!
+Mac Installation
+01
+Install Homebrew
+(if needed) — copy-paste in Terminal:
+Terminal
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+02
+Install Python
+In Terminal: brew install python
+03
+Install Jupyter
+pip install notebook
+04
+Launch
+jupyter notebook
+Jupyter Notebook file directory
+Jupyter Notebook file directory — your project workspace
+In the first cell, run:
+
+Python
+print("Hello, Python!")
+import sys
+print("Python version:", sys.version)
+import pandas as pd
+print("Pandas ready!")
+✅
+Expected Output
+Your name + version info + “Pandas ready!” — if you see all three lines, your environment is working perfectly!
+
+After launching (Colab or Jupyter):
+
+Top menu
+File, Edit, View, Insert, Runtime (Colab) / Cell (Jupyter)
+Cell types
+Code cell → print("Test") → Shift+Enter
+Text cell → Click + Text → Add headings/lists
+Toolbar
+Run, Stop, Restart kernel (resets everything)
+Save
+Ctrl+S or auto-saves in Colab
+🗺
+Step by Step Flowchart
+Launch Colab or Jupyter → Create a new notebook → Add a code cell → Type your code → Press Shift+Enter to run → Check the output below the cell → Save your work!
+
+Problem	Solution
+“Command not found”	Restart terminal/Anaconda Prompt
+Slow loading	Refresh browser, check internet
+Kernel dies	Runtime → Restart Runtime (Colab)
+Can’t install packages	!pip install pandas in Colab cell
+💡
+Pro Tip
+Colab = !pip install [package] (exclamation mark first!)
+
+Run this complete test in a new notebook:
+
+Python
+# Environment Check
+import sys
+import platform
+print("=== Environment Check ===")
+print(f"Python version: {sys.version}")
+print(f"Platform: {platform.system()} {platform.release()}")
+try:
+    import pandas as pd
+    print(f"Pandas: {pd.__version__} OK")
+except:
+    print("Pandas: not installed")
+print("=== All checks done! ===")
+📸
+Success?
+Share a screenshot with your teacher/classmates!
+
+
+
+
+
+General Level 2
+What Is Python — and Why Should You Care?
+Discover the language that powers AI, data science, and the apps you use every day — and why learning it puts you on the same path as the world's best developers.
+
+Imagine you have a superpower. A tool so flexible that you could use it to build a music recommendation app in the morning, train an AI to recognize faces in the afternoon, and analyze sports statistics at night — all with the same skill.
+
+That tool exists. It's called Python, and by the end of this course, it'll be yours.
+
+Before we write a single line of code, let's answer the most important question: why Python?
+
+Right now, somewhere in the world:
+
+A Netflix engineer is using Python to decide which show to recommend to you next.
+A doctor is using a Python AI model to scan X-rays for early signs of cancer.
+A NASA scientist is using Python to process images sent from space.
+A teenager just like you is using Python to build their first AI project.
+Python isn't just a beginner language. It's the #1 most used programming language in the world — used by beginners and experts alike. Learning it puts you on the exact same path as the people building the future.
+
+A computer is a simple machine that needs instructions to perform tasks. We use programming languages to give these instructions. A set of instructions forms a program, which completes a specific job. Many programs combine to create software. People who write programs are called programmers, and they choose languages based on user needs.
+
+Programming Language Generations diagram
+Programming Language Generations — 1GL to 5GL diagram
+Programming languages are divided into low-level and high-level categories. They include Machine level, Assembly language, Procedural language, Object-oriented language, and Natural language, known as 1GL, 2GL, 3GL, 4GL, and 5GL, respectively.
+
+[Figure: Programming Language Generations — 1GL to 5GL diagram]
+
+Understanding these categories helps you appreciate where Python sits: it is a high-level, 3rd-generation language — designed to be readable by humans and powerful enough for professional use.
+
+Programming languages overview diagram
+High-level vs low-level languages diagram
+Python is a high-level, general-purpose programming language. Let's unpack that:
+
+📖
+High-level
+Designed for humans, not machines. Python uses real English words like print, if, and input. You don't need to speak "computer."
+🔧
+General-purpose
+Not stuck doing one thing. Build websites, games, data tools, AI models — Python does it all.
+⚡
+Interpreted
+Python runs your code immediately, one line at a time. No waiting. Type it, run it, see it.
+💡
+The Simplest Way to Think About It
+"Python is like texting instructions to a computer in almost-plain English."
+
+Both interpreters and compilers are programs that convert the source code (high-level programming language) into machine-level language through a translation process so that the computers can understand them. Typically, a computer program exists in a high-level programming language that humans can understand. On the contrary, computers don't understand human language at all, but they can easily comprehend programs written in binary code.
+
+Interpreter vs Compiler diagram
+Interpreter vs Compiler — from r/PythonLearning
+Difference between Compiler and Interpreter — TutorialsMate
+Difference between Compiler and Interpreter — TutorialsMate
+Python was created by a Dutch programmer named Guido van Rossum, and he started writing it during his Christmas holiday in 1989. His goal was refreshingly simple:
+
+💬
+Guido's Goal
+"I wanted a language that was fun to use and easy to read."
+
+That idea turned into one of the most powerful tools in human history.
+
+Year	What Happened
+1989	Guido starts writing Python during Christmas break
+1991	Python 1.0 is released to the world
+2008	Python 3.0 launches — cleaner and more powerful
+Today	Python is the #1 language in AI, data science & education
+There are thousands of programming languages out there. So why do data scientists, AI engineers, and researchers all choose Python? Three big reasons:
+
+1. It Reads Like a Human Language
+Look at this Python code:
+
+Python
+print("Hello, World!")
+▶ Output
+Hello, World!
+Even if you've never coded before, you can probably guess what that does. That's the magic of Python.
+
+2. It Comes With a Massive Toolbox
+In Python, you don't build everything from scratch. You use libraries — ready-made collections of code that give your program instant superpowers.
+
+Think of it like this: instead of building a car engine from metal and bolts, you order the engine pre-made and just install it.
+
+Library	Superpower
+NumPy	Lightning-fast number crunching
+Pandas	Organize and analyze data tables
+Matplotlib	Turn data into beautiful charts
+Scikit-learn	Build machine learning models
+TensorFlow	Train deep learning neural networks
+OpenCV	Teach computers to see images
+3. You're Never Coding Alone
+Millions of people use Python every day. That means:
+
+If you get stuck, someone has already asked your question online
+Thousands of free tutorials, videos, and guides exist
+A huge global community is constantly improving the language
+You might have heard of other languages like Java or C++. Here's how they compare:
+
+Feature	Python	Java	C++
+Easy to learn	Very easy	Medium	Hard
+Reads like English	Yes	Sort of	No
+Best for AI & data	Industry standard	Rare	Rare
+Speed	Moderate	Fast	Very fast
+Python's trade-off is honest: it's not the fastest, but for AI and data work, nothing matches its combination of ease, power, and community.
+
+Here's a challenge: name one app you used today. Chances are, Python helped build it.
+
+🎵
+Spotify
+Python used to analyze your music taste and build your Daily Mix
+📸
+Instagram
+Python used to processe your photos and powers the explore page
+🎬
+Netflix
+Python used to decide what to recommend based on your watch history
+🔍
+Google
+Python is used across Google's search and AI systems
+🚗
+Tesla
+Python helps process sensor data for self-driving features
+Every expert knows their terms. Here are the key words you'll need:
+
+Syntax
+Python's grammar rules — how code must be written
+Interpreter
+The tool that reads and runs your Python code line by line
+Open Source
+Python is 100% free — and anyone can improve it
+Library
+Pre-written code that adds powerful features to your program
+Variable
+A named box that stores a value — like score = 95
+Bug
+An error in your code that causes unexpected behavior
+Debugging
+Finding and fixing bugs
+Script
+A Python file (.py) containing your instructions
+IDE
+The app where you write and run code (e.g., Jupyter, VS Code)
+Algorithm
+A step-by-step plan that solves a problem
+🌟
+Remember
+Remember:
+Every expert was once a beginner. The only difference between you today and a professional Developer is time and practice. You've already taken the first step by being here. Let's build something amazing.
+
+
+
+
+
+
+General Level 2
+Understanding Basic Python Syntax
+Think of Python syntax like the grammar rules of a language. Learn the rules — and the good news is, they’re surprisingly simple.
+
+What Is Syntax In Programming: Best Practices And Common Mistakes
+What Is Syntax In Programming: Best Practices And Common Mistakes
+Think of Python syntax like the grammar rules of a language.
+
+Just like English has rules — sentences start with capital letters, questions end with question marks — Python has rules that tell the computer how to read and understand your code.
+
+Break the rules in English, and people still understand you. Break them in Python, and the computer gets completely confused. So let’s learn the rules — and the good news is, they’re surprisingly simple.
+
+Python statements are simple instructions that are executed by a Python interpreter. For example, if you assign a value to a variable like a num = 1, this is a Python statement. Apart from this, python has if statements, for statements, while statements, etc.
+
+In Python, each line is one instruction called a statement. Python reads your code top to bottom, one line at a time.
+
+Python
+print("Hello!")
+print("I am learning Python.")
+print("This is fun!")
+▶ Output
+Hello! I am learning Python. This is fun!
+Key Rule: Each statement goes on its own line. No semicolons needed at the end (unlike Java or C++).
+
+Multi-line statement
+The end of a particular statement in Python is marked by a newline character. But if we want to extend any statement over multiple lines, then for that we have line continuation character (\).
+
+Python
+num = 1 + 2 + 3 + \
+4 + 5 + 6 + \
+7 + 8 + 9 + 10
+print(num)
+▶ Output
+55
+This is called an explicit line continuation, we can do the same by giving the sentences or statements inside parentheses ( ), brackets [ ], and braces { }.
+
+Let us implement the above example using parentheses.
+
+We can also put multiple statements, like assigning value to a variable in a single line using semicolons.
+
+Python
+b = 201; a = 101; c = 301
+print(a)
+print(b)
+print(c)
+▶ Output
+101 201 301
+The print() function is your best friend. It displays anything you put inside the parentheses.
+
+Python
+print("My name is Alex")       # prints text
+print(100)                      # prints a number
+print(10 + 5)                   # prints the result: 15
+▶ Output
+My name is Alex 100 15
+Text (words and sentences) must always be wrapped in quotation marks " " or ' '. Numbers don’t need quotes.
+
+Comments are basically for describing the code to the reader, it is not executed by the Python interpreter. They are very important while writing our program. These are given basically for users and readers to understand.
+
+In Python, “#” is used to give comments. It is a single-line comment.
+
+A comment starts with #. Python completely ignores anything after it on that line. Comments are notes you leave for yourself (or others) to explain what the code does.
+
+Python
+# This line prints a welcome message
+print("Welcome to Python!")  # This also has a comment at the end
+Good habit: Always write comments to explain your thinking. It makes your code much easier to understand later.
+
+A multi-line comment (paragraph) starts with ###. Python completely ignores anything after it until it reached it`s closing ###.
+
+Python Single and Multi-Line Comments with Shortcuts
+Python Single and Multi-Line Comments with Shortcuts
+Snowflake and Reserved Words -- DataGeek.blog
+Snowflake and Reserved Words — DataGeek.blog
+Python-reserved words are unique words with special meanings that cannot be used as variable names, constants, or any other identifier names. They all are in lowercase letters only. Here is the list of the keywords that are present in Python.
+
+Writing your first python code. Objective: | by Vidyaprasanna | YavarTechWorks | Medium
+Writing your first python code — Vidyaprasanna | YavarTechWorks | Medium
+
+
+
+
+
+Level 2 Python
+Week 1
+Input and Output — print() and input()
+Master the two most fundamental Python functions — print() talks to users and input() listens to them — then build three real programs.
+
+Input and Output — the conversation between user and program
+Input and Output — the conversation between user and program
+Every program in the world does two fundamental things: it receives information and it gives information back. In Python, these two jobs belong to just two functions: input() and print(). Master these two, and you've unlocked the foundation of every interactive program ever written.
+
+📢
+Output
+print()
+The program talks to YOU — displays messages, results, and data on your screen.
+👂
+Input
+input()
+YOU talk to the program — type something and the program listens and stores it.
+The print() function is how Python displays information on the screen. It's the most-used function in Python and you'll use it in almost every program you ever write.
+
+Python
+# Print text (always use quotation marks)
+print("Hello, World!")
+print('I am learning Python.')
+
+# Print numbers (no quotes needed)
+print(42)
+print(3.14)
+print(100 + 50)
+
+# Print multiple values at once
+name = "Alex"
+score = 95
+print("Student:", name, "|  Score:", score)
+▶ Output
+Hello, World! I am learning Python. 42 3.14 150 Student: Alex | Score: 95
+Three Ways to Format Output
+Python
+# Method 1: Concatenation with +
+name = "Sara"
+print("Welcome, " + name + "!")
+
+# Method 2: Comma separation (easiest — no conversion needed)
+age = 15
+print("Name:", name, "Age:", age)
+
+# Method 3: f-Strings ⭐ (most powerful — professional standard)
+score = 98.5
+print(f"Student {name} is {age} years old and scored {score}.")
+▶ Output
+Welcome, Sara! Name: Sara Age: 15 Student Sara is 15 years old and scored 98.5.
+⭐
+f-Strings are the Modern Standard
+Put an f before the quote, then use { } to drop variables directly into the text. Clean, readable, professional — you'll see f-strings everywhere in real Python code.
+
+Special print() Options
+Python
+# sep — change the separator between values (default is a space)
+print("Python", "is", "awesome", sep="-")
+print("2026", "03", "27", sep="/")
+
+# end — control what happens after the print (default is newline)
+print("Loading", end="...")
+print("Done!")
+▶ Output
+Python-is-awesome 2026/03/27 Loading...Done!
+Code	What It Does	Example Output
+\\n	New line — moves to next line	Splits output across lines
+\\t	Tab space — wide indentation	Aligns text in columns
+\\\\"	Double quote inside string	Prints a literal quote mark
+While print() talks to the user, input() listens from the user. It pauses your program, shows a message, and waits for the user to type something and press Enter.
+
+Python
+# Basic input — stores whatever the user types
+name = input("What is your name? ")
+print("Hello, " + name + "! Welcome to Python.")
+⚠️
+THE MOST IMPORTANT RULE about input()
+Everything typed through input() is stored as a
+STRING
+— even if the user types a number. You CANNOT do math with it directly without converting first!
+
+Python
+# input() returns a string — even for numbers!
+age = input("Enter your age: ")
+print(type(age))     # Output: <class 'str'>
+
+# Convert to number BEFORE doing math
+age = int(input("Enter your age: "))    # int for whole numbers
+height = float(input("Enter height in m: ")) # float for decimals
+print(age + 1)        # Works perfectly now!
+print(height * 100)   # Converts meters to cm
+Function	What It Does	Example
+int()	Converts to whole number	int("15") → 15
+float()	Converts to decimal	float("3.14") → 3.14
+str()	Converts to text	str(100) → "100"
+Example 1 — Personal Greeter
+Python
+name = input("Enter your name: ")
+city = input("Enter your city: ")
+print(f"Hello, {name}! Great to meet someone from {city}.")
+▶ Output
+Enter your name: Alex Enter your city: Cairo Hello, Alex! Great to meet someone from Cairo.
+Example 2 — Simple Calculator
+Python
+print("=== Simple Calculator ===")
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+result = num1 + num2
+print(f"{num1} + {num2} = {result}")
+▶ Output
+=== Simple Calculator === Enter first number: 25 Enter second number: 17 25.0 + 17.0 = 42.0
+Example 3 — Grade Checker
+Python
+print("=== Grade Checker ===")
+name  = input("Enter student name: ")
+score = int(input("Enter score (0-100): "))
+
+if score >= 90:
+    grade = "A ⭐"
+elif score >= 75:
+    grade = "B 👍"
+elif score >= 60:
+    grade = "C 🟡"
+else:
+    grade = "F 😢"
+
+print(f"\nStudent: {name}")
+print(f"Score:   {score}/100")
+print(f"Grade:   {grade}")
+▶ Output
+=== Grade Checker === Enter student name: Alex Enter score (0-100): 88 Student: Alex Score: 88/100 Grade: B 👍
+?
+A user types their age (16) into an input(). What type does Python store it as?
+
+A
+int — Python detects it's a number
+
+B
+float — it could be a decimal
+
+C
+str — input() ALWAYS returns a string
+
+D
+bool — it's a yes/no value
+Task	Code	Example
+Print text	print("text")	print("Hello!")
+Print with f-string	print(f"... {var}")	print(f"Hi {name}")
+Custom separator	print(a, b, sep="-")	print("A","B",sep="-")
+Get user input	input("message")	name = input("Name: ")
+Input as integer	int(input("msg"))	age = int(input("Age: "))
+Input as decimal	float(input("msg"))	h = float(input("Height: "))
+
+
+
+
+Level 2 Python
+Week 1
+Basic Data Types — int, float, str, bool
+Master the four containers Python uses to store information — and learn how to convert between them, combine them, and avoid the most common mistakes.
+
+The four basic Python data types
+The four basic Python data types
+When you store information in Python, the language needs to know what kind of information it is. Is it a whole number? A decimal? A word? A yes-or-no value? This is what data types are for.
+
+🍳
+The Kitchen Container Analogy
+Think of data types like different containers in a kitchen. You wouldn't store soup in a paper bag or carry water in a colander — every type of data has the right container for the job.
+
+Python
+x       = 10        # Python knows this is an integer
+y       = 3.14      # Python knows this is a float
+name    = "Alex"    # Python knows this is a string
+passed  = True      # Python knows this is a boolean
+
+# Check the type of any variable with type()
+print(type(x))      # Output: <class 'int'>
+print(type(name))   # Output: <class 'str'>
+💡
+Python is Dynamically Typed
+You never have to declare the type manually — Python figures it out automatically based on the value you assign. This is one of the reasons Python is so beginner-friendly!
+
+An integer int is any whole number — positive, negative, or zero — with no decimal point.
+
+Python
+age         = 15
+temperature = -5
+score       = 0
+population  = 1000000
+
+a = 20
+b = 6
+print(a + b)    # Addition:       26
+print(a - b)    # Subtraction:    14
+print(a * b)    # Multiplication: 120
+print(a // b)   # Floor division: 3  (whole number only)
+print(a % b)    # Modulo:         2  (remainder)
+print(a ** b)   # Exponent:       64000000
+
+# Key difference: / vs //
+print(10 / 2)    # Output: 5.0  (float — always!)
+print(10 // 2)   # Output: 5   (int — floor division)
+?
+What is the output of: print(17 % 5)?
+
+A
+1 — floor division result
+
+B
+2 — the remainder (17 ÷ 5 = 3 r 2)
+
+C
+17.5 — regular division result
+
+D
+85 — the multiplication
+A float float is any number that contains a decimal point. Used when precision matters.
+
+Python
+height      = 1.75
+gpa         = 3.85
+pi          = 3.14159
+temperature = -12.5
+
+# Scientific notation for very large/small numbers
+distance = 1.5e8   # 1.5 × 10⁸ = 150,000,000 km (distance to the sun!)
+tiny     = 2.5e-4  # 0.00025
+
+# Mixing int + float always gives float
+print(5 + 2.0)     # Output: 7.0  (float)
+print(10 * 3.5)    # Output: 35.0 (float)
+
+# Rounding with round()
+pi = 3.14159
+print(round(pi, 2))   # Output: 3.14
+print(round(pi, 4))   # Output: 3.1416
+🌍
+Real-World Floats
+Prices (9.99 EGP), GPS coordinates (30.0444° N), machine learning accuracy scores (0.9342), temperature (36.6°C) — whenever you need precision, use float.
+
+A string str is any sequence of characters — letters, numbers, spaces, or symbols — enclosed in quotation marks. Strings represent text.
+
+Python
+name    = "Sara"
+city    = 'Cairo'   # single or double quotes both work
+message = "I scored 95 on the test!"
+empty   = ""        # empty string — still a string!
+
+# String operations
+print("Data" + " " + "Science")  # Concatenation → Data Science
+print("-" * 20)              # Repetition  → --------------------
+print(len("Alexandria"))     # Length      → 10
+
+# Indexing — every character has a position (starts at 0!)
+name = "Python"
+print(name[0])   # Output: P  (first character)
+print(name[-1])  # Output: n  (last character)
+
+# Slicing — extract part of a string [start:end]
+print(name[0:3])  # Output: Pyt  (end not included)
+print(name[2:])   # Output: thon (to the end)
+Method	What It Does	Example	Output
+.upper()	Converts to uppercase	"hello".upper()	"HELLO"
+.lower()	Converts to lowercase	"HELLO".lower()	"hello"
+.strip()	Removes extra spaces	" hi ".strip()	"hi"
+.replace()	Replaces part of string	"cat".replace("c","b")	"bat"
+.split()	Splits into a list	"a,b,c".split(",")	["a","b","c"]
+.count()	Counts occurrences	"hello".count("l")	2
+?
+What does name[0] return if name = 'Python'?
+
+A
+'P' — Python indexing starts at 0
+
+B
+'y' — indexing starts at 1
+
+C
+'n' — indexing starts from the end
+
+D
+'Python' — returns the whole string
+A boolean bool has exactly two possible values: True or False. It's the simplest data type and the engine of every decision in Python.
+
+Python
+is_student   = True
+has_passed   = False
+is_raining   = False
+
+# Booleans come from comparisons
+print(10 > 5)        # True
+print(3 == 7)        # False
+print(15 >= 15)      # True
+print("a" == "b")   # False
+
+# Boolean operators: and, or, not
+age    = 16
+has_id = True
+
+print(age >= 16 and has_id)   # True — BOTH must be true
+print(age >= 18 and has_id)   # False — age < 18
+
+is_weekend = False
+is_holiday = True
+print(is_weekend or is_holiday)  # True — at least ONE is true
+print(not is_raining)             # True — reverses the value
+
+# Booleans in if statements — every decision uses them!
+score  = 85
+passed = score >= 60   # passed is True
+
+if passed:
+    print("Congratulations, you passed!")
+else:
+    print("Please try again.")
+⚠️
+Capitalization Matters!
+True and False MUST be capitalized exactly. Writing 'true' or 'TRUE' causes an error. Python is case-sensitive!
+
+Value	Boolean Meaning
+0	False
+"" (empty string)	False
+None	False
+Any non-zero number	True
+Any non-empty string	True
+Here is a complete program that uses all four data types working together:
+
+Python
+# Student Profile Program — using all 4 data types
+name           = "Alex"    # str
+age            = 16         # int
+gpa            = 3.75       # float
+is_honor_roll  = True       # bool
+
+print("=== Student Profile ===")
+print(f"Name:       {name}")
+print(f"Age:        {age} years old")
+print(f"GPA:        {gpa}")
+print(f"Honor Roll: {is_honor_roll}")
+
+if is_honor_roll and gpa >= 3.5:
+    print(f"Congratulations, {name}! You qualify for the scholarship.")
+▶ Output
+=== Student Profile === Name: Alex Age: 16 years old GPA: 3.75 Honor Roll: True Congratulations, Alex! You qualify for the scholarship.
+Type Conversion — Switching Between Types
+Python
+int("15")       # → 15 (string to integer)
+float("3.14")   # → 3.14 (string to float)
+str(100)        # → "100" (integer to string)
+bool(0)         # → False (0 is always False)
+
+# Real use case: user input always needs conversion for math
+age = int(input("Enter your age: "))
+gpa = float(input("Enter your GPA: "))
+print(f"In 5 years you will be {age + 5}")  # math works now!
+Data Type	Keyword	Example	Use Case
+Integer	int	score = 95	Counting, whole numbers
+Float	float	price = 9.99	Decimals, measurements
+String	str	name = "Alex"	Text, words, sentences
+Boolean	bool	passed = True	Yes/No, conditions, logic
+Mistake	Problem	Fix
+"10" + 5	Cannot add string and int	int("10") + 5
+true instead of True	Python is case-sensitive	Always capitalize: True, False
+10 / 2 expecting 5	Result is 5.0 (float)	Use 10 // 2 for integer result
+print(name + age)	Mixing str and int	print(name + str(age))
+?
+What is the output of: print("5" * 3)?
+
+A
+15 — multiplication of 5 and 3
+
+B
+"555" — string repetition!
+
+C
+Error — can't multiply a string
+
+D
+"5 5 5" — separated by spaces
+📋 Quick Summary
+▲
+🐍 The 4 Basic Data Types
+int — Integers
+Whole numbers only
+No decimal point
+Operations: + - * // % **
+Example: age = 16
+float — Decimals
+Has a decimal point
+Mix with int → result is float
+round() controls precision
+Example: gpa = 3.75
+str — Strings
+Text in quotes
+Indexing starts at 0
+Methods: .upper() .lower() .strip()
+Everything from input() is str
+bool — Booleans
+Only True or False
+Capitalized exactly
+Powers every if statement
+From: == > < >= <= !
