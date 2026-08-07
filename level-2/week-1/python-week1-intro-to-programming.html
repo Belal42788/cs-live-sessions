@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Week 1 — إيه هي البرمجة؟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #193cff; --accent: #00d4aa; --bg: #0a0e27;
+  --card: #111638; --card-hover: #1a2050; --text: #fff; --dim: #8892b0;
+  --success: #00ff88; --danger: #ff4757; --warn: #ffd700;
+  --s1: #06B6D4; --s2: #F59E0B; --s3: #8B5CF6; --s4: #10B981; --s5: #EC4899; --s6: #EF4444; --s7: #193cff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Cairo', sans-serif; line-height:1.7;
+  overflow-x:hidden;
+}
+/* animated background */
+.bg-fx { position:fixed; inset:0; z-index:-2; pointer-events:none; }
+.bg-fx::before, .bg-fx::after {
+  content:""; position:absolute; width:60vw; height:60vw; border-radius:50%;
+  filter:blur(120px); opacity:.35;
+}
+.bg-fx::before { background:radial-gradient(circle, rgba(25,60,255,.6), transparent 65%); top:30%; left:50%; animation:bgdrift 20s ease-in-out infinite; }
+.bg-fx::after { background:radial-gradient(circle, rgba(0,212,170,.5), transparent 65%); top:70%; right:20%; animation:bgdrift 20s ease-in-out infinite reverse; }
+@keyframes bgdrift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-4vw,-3vw)} }
+.particles { position:fixed; inset:0; z-index:-1; pointer-events:none; }
+.particle { position:absolute; width:4px; height:4px; background:var(--primary); border-radius:50%; opacity:.3; animation:floatUp 15s linear infinite; }
+@keyframes floatUp { 0%{transform:translateY(0)} 100%{transform:translateY(-110vh)} }
+
+/* nav */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(10,14,39,.95); backdrop-filter: blur(20px);
+  border-bottom:1px solid rgba(25,60,255,.3);
+  transform: translateY(-100%); transition: transform .4s ease;
+}
+nav.visible { transform: translateY(0); }
+.nav-inner { max-width:1200px; margin:0 auto; padding:10px 20px; display:flex; align-items:center; gap:18px; }
+.nav-brand { display:flex; align-items:center; gap:10px; }
+.nav-logo { width:36px; height:36px; border-radius:10px; object-fit:contain; }
+.nav-brand span { font-weight:900; font-size:.95rem; white-space:nowrap; }
+.nav-links { display:flex; gap:6px; flex-wrap:wrap; }
+.nav-links a {
+  color:var(--dim); text-decoration:none; padding:6px 14px; border-radius:25px;
+  font-size:.82rem; font-weight:600; border:1px solid transparent; transition:.2s; white-space:nowrap;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--text); background:rgba(25,60,255,.2); border-color:var(--primary); }
+
+/* hero */
+.hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; padding:80px 20px 60px; }
+.hero-bg { position:absolute; inset:0; overflow:hidden; }
+.hblob { position:absolute; width:300px; height:300px; border-radius:50%; filter:blur(60px); opacity:.28; animation:blobfloat 6s ease-in-out infinite; }
+.hero-bg .b1{ background:#193cff; top:15%; right:12%; }
+.hero-bg .b2{ background:#00d4aa; bottom:18%; left:12%; animation-delay:2s; }
+.hero-bg .b3{ background:#8B5CF6; top:50%; left:40%; width:220px; height:220px; animation-delay:4s; }
+@keyframes blobfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
+.hero-content { position:relative; z-index:2; max-width:900px; display:flex; flex-direction:column; gap:22px; }
+.hero-badge {
+  align-self:center; background:rgba(25,60,255,.15); border:1px solid var(--primary);
+  color:var(--accent); font-weight:700; padding:8px 20px; border-radius:30px; font-size:.95rem;
+}
+.hero h1 { font-size:clamp(36px,8vw,80px); font-weight:900; line-height:1.15; }
+.hero h1 .grad { background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero-sub { color:var(--dim); font-size:clamp(1rem,2vw,1.3rem); max-width:640px; margin:0 auto; }
+.start-btn {
+  align-self:center; display:inline-flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff;
+  border:none; padding:14px 34px; border-radius:40px; font-family:'Cairo',sans-serif;
+  font-size:1.1rem; font-weight:700; cursor:pointer; transition:.3s; box-shadow:0 0 30px rgba(25,60,255,.4);
+}
+.start-btn:hover { transform:translateY(-3px); box-shadow:0 0 40px rgba(0,212,170,.5); }
+.fade-up { opacity:0; transform:translateY(40px); animation:fadeUp .8s ease-out forwards; }
+@keyframes fadeUp { to{ opacity:1; transform:translateY(0);} }
+.d1{ animation-delay:.2s } .d2{ animation-delay:.4s } .d3{ animation-delay:.6s } .d4{ animation-delay:.8s }
+
+/* layout */
+main { max-width:1200px; margin:0 auto; padding:10px 20px 60px; }
+section { padding:60px 0; }
+.split { height:2px; background:linear-gradient(90deg,transparent,var(--primary),transparent); margin:20px 0 10px; }
+.section-head { display:flex; align-items:center; gap:20px; margin-bottom:28px; }
+.section-number {
+  width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:18px; color:var(--bg); flex-shrink:0; animation:badgeGlow 3s infinite;
+}
+@keyframes badgeGlow { 0%,100%{box-shadow:0 0 20px rgba(25,60,255,.3)} 50%{box-shadow:0 0 40px rgba(25,60,255,.6)} }
+.section-head h2 { font-size:clamp(1.4rem,3vw,2rem); font-weight:900; }
+.sec-tag { color:var(--dim); font-size:.85rem; margin-top:2px; }
+
+.card {
+  background:var(--card); border:1px solid rgba(255,255,255,.05); border-radius:16px;
+  padding:22px; transition:.3s; margin-bottom:16px;
+}
+.card:hover { background:var(--card-hover); transform:translateY(-5px); border-color:rgba(25,60,255,.3); }
+.diagram-box { background:var(--card); border:1px solid rgba(255,255,255,.05); border-radius:16px; overflow:hidden; margin:18px 0; }
+.diagram-top { height:3px; background:linear-gradient(90deg,var(--primary),var(--accent)); }
+.diagram-inner { padding:22px; }
+.body { color:var(--dim); margin-bottom:12px; }
+.code-c { color:var(--accent); font-weight:700; }
+.mark { color:var(--warn); font-weight:700; }
+.ltr { direction:ltr; unicode-bidi:isolate; }
+
+/* reveal */
+.rv { opacity:0; transform:translateY(30px); transition:all .6s cubic-bezier(.4,0,.2,1); }
+.rv.visible { opacity:1; transform:translateY(0); }
+
+/* code panels - LTR mandatory */
+.code-panel, .code-panel .code-body, .code-panel .code-header { direction:ltr; text-align:left; unicode-bidi:isolate; }
+.code-panel { background:#0d1230; border:1px solid rgba(25,60,255,.2); border-radius:14px; overflow:hidden; margin:14px 0; }
+.code-header { background:rgba(25,60,255,.1); color:var(--dim); font-size:.8rem; padding:8px 14px; border-bottom:1px solid rgba(25,60,255,.15); }
+.code-body { padding:14px; font-family:'Consolas','Courier New',monospace; font-size:.88rem; color:#e0e7ff; line-height:1.6; white-space:pre-wrap; }
+.t-kw{color:#ff79c6}.t-str{color:#00ff88}.t-cm{color:#8892b0;font-style:italic}.t-fn{color:#8be9fd}.t-num{color:#f59e0b}.t-op{color:#ffd700}
+
+/* terminal output */
+.term { background:#05070f; border:1px solid rgba(0,212,170,.25); border-radius:12px; padding:14px; font-family:Consolas,monospace; font-size:.85rem; min-height:60px; margin:10px 0; direction:ltr; text-align:left; }
+.term .tp{ color:var(--accent); } .term .pr{ color:var(--dim); }
+.term .out-line { color:var(--accent); opacity:0; transform:translateY(4px); animation:lineIn .3s forwards; }
+@keyframes lineIn { to{opacity:1; transform:translateY(0)} }
+.term .cmd { color:#e8e7ff; }
+
+/* buttons */
+.btn, .mini-btn {
+  background:rgba(25,60,255,.15); color:var(--text); border:1px solid rgba(25,60,255,.4);
+  border-radius:30px; padding:10px 22px; font-family:inherit; font-weight:700; font-size:.9rem;
+  cursor:pointer; transition:.25s;
+}
+.btn:hover, .mini-btn:hover { background:rgba(25,60,255,.3); transform:translateY(-2px); }
+.mini-btn { padding:8px 18px; font-size:.85rem; }
+.btn.accent { background:linear-gradient(135deg,var(--primary),var(--accent)); border:none; }
+
+/* step-by-step */
+.steps-wrap { position:relative; }
+.step-card { display:none; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px; }
+.step-card.active { display:block; animation:stepIn .3s ease; }
+@keyframes stepIn { from{opacity:0; transform:translateX(20px)} to{opacity:1; transform:none} }
+.step-num { color:var(--accent); font-weight:900; font-size:1.1rem; }
+.step-title { font-weight:900; font-size:1.15rem; margin:4px 0; }
+.step-note { color:var(--dim); font-size:.9rem; }
+.ctl-row { display:flex; align-items:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
+.step-counter { color:var(--dim); font-size:.85rem; margin-left:auto; margin-right:auto; }
+.arrow-btn { font-size:1.1rem; background:none; border:none; color:var(--text); cursor:pointer; }
+
+/* emoji — animated image-props, activity-only */
+.emoji-pulse{animation:emojiPulse 2s ease-in-out infinite;display:inline-block}
+.emoji-shake{animation:emojiShake 2s ease-in-out infinite;display:inline-block}
+.emoji-walk{animation:emojiWalk 1.6s ease-in-out infinite;display:inline-block}
+.emoji-float{animation:emojiFloat 3s ease-in-out infinite;display:inline-block}
+.emoji-glow{animation:emojiGlow 2s ease-in-out infinite;display:inline-block}
+@keyframes emojiPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes emojiShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes emojiWalk{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes emojiFloat{0%,100%{transform:translateY(0)rotate(0)}50%{transform:translateY(-8px)rotate(-6deg)}}
+@keyframes emojiGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(0,212,170,.4))}50%{filter:drop-shadow(0 0 16px rgba(0,212,170,.9))}}
+
+/* quiz */
+.quiz { background:var(--card); border:1px solid rgba(25,60,255,.3); border-radius:16px; padding:22px; margin:18px 0; }
+.quiz .q { font-weight:900; margin-bottom:14px; font-size:1.1rem; }
+.q-opt { display:block; width:100%; text-align:right; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:var(--text); padding:12px 16px; border-radius:12px; margin-bottom:8px; font-family:inherit; font-size:.95rem; cursor:pointer; transition:.2s; }
+.q-opt:hover{ background:rgba(25,60,255,.15); }
+.q-opt.correct{ background:rgba(0,255,136,.15); border-color:var(--success); }
+.q-opt.wrong{ background:rgba(255,71,87,.15); border-color:var(--danger); }
+.q-fb{ display:none; border-radius:10px; padding:10px 14px; margin-top:10px; font-size:.9rem; }
+.q-fb.green{ background:rgba(0,255,136,.1); color:var(--success); }
+.q-fb.red{ background:rgba(255,71,87,.1); color:var(--danger); }
+.skip { display:inline-block; margin-top:8px; color:var(--dim); font-size:.8rem; cursor:pointer; text-decoration:underline; }
+.quiz-reveal-trigger { background:rgba(25,60,255,.1); border:1px dashed var(--primary); color:var(--accent); border-radius:12px; padding:14px; text-align:center; cursor:pointer; font-weight:700; }
+.qz-hidden{ display:none; }
+
+/* error box */
+.error-box { border:1px solid rgba(255,71,87,.2); background:rgba(255,71,87,.05); border-radius:12px; padding:16px; margin-top:18px; }
+.error-box h4 { color:var(--danger); font-size:.9rem; margin-bottom:10px; }
+.error-box ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.error-box li { color:var(--dim); font-size:.88rem; padding-right:18px; position:relative; }
+.error-box li::before { content:"⚠️"; position:absolute; right:0; }
+
+/* activity grid */
+.activity-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:18px 0; }
+.activity-grid .demo-panel { display:flex; flex-direction:column; gap:16px; padding:20px; background:rgba(255,255,255,.03); border-radius:16px; border:1px solid rgba(255,255,255,.06); }
+@media(max-width:860px){ .activity-grid{grid-template-columns:1fr} .activity-grid .demo-panel{order:1} .activity-grid .code-panel{order:2} }
+
+/* tables */
+table { width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem; }
+th,td { border:1px solid rgba(255,255,255,.08); padding:10px 12px; text-align:right; }
+th { background:rgba(25,60,255,.1); color:var(--text); }
+td{ color:var(--dim); }
+table.dir-ltr th, table.dir-ltr td { direction:ltr; text-align:left; }
+
+/* tabs */
+.tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.tab-pill { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:var(--dim); padding:8px 18px; border-radius:25px; font-family:inherit; font-weight:700; font-size:.85rem; cursor:pointer; transition:.2s; }
+.tab-pill.active { color:var(--text); background:rgba(25,60,255,.2); border-color:var(--primary); }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* controls */
+.ctl-row { display:flex; align-items:center; gap:10px; }
+.ctl-label { color:var(--dim); font-size:.8rem; min-width:70px; }
+input[type=range]{ accent-color:var(--primary); }
+input[type=text],input[type=number],select{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:8px; padding:8px 12px; font-family:inherit; }
+.live-out { background:#05070f; border:1px solid rgba(25,60,255,.3); border-radius:12px; padding:14px; font-family:Consolas,monospace; font-size:.9rem; direction:ltr; text-align:left; min-height:60px; white-space:pre-wrap; }
+.live-out .ok{color:var(--success)} .live-out .acc{color:var(--accent)}
+
+/* footer */
+footer { border-top:1px solid rgba(25,60,255,.3); padding:30px 20px 40px; text-align:center; margin-top:40px; color:var(--dim); }
+footer .footer-logo { height:40px; border-radius:8px; margin-bottom:10px; }
+.foot-msg{ color:var(--dim); font-size:.95rem; margin-top:6px; }
+.logo-badge{ display:inline-flex; align-items:center; justify-content:center; background:#193cff; border-radius:12px; padding:6px; }
+
+.replay { margin-top:10px; }
+
+/* recap mini cards */
+.recap-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:18px 0; }
+@media(max-width:860px){ .recap-grid{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+<div class="bg-fx"></div>
+<div class="particles" id="particles"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="logo-badge"><img class="nav-logo" src="data:image/webp;base64,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" alt="Bilal"></span>
+      <span>Python — الأسبوع الأول</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#intro">إيه هي البرمجة</a>
+      <a href="#env">بيئة العمل</a>
+      <a href="#whypython">ليه Python</a>
+      <a href="#syntax">Syntax</a>
+      <a href="#io">print و input</a>
+      <a href="#types">الأنواع</a>
+      <a href="#recap">الملخص</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"><div class="hblob b1"></div><div class="hblob b2"></div><div class="hblob b3"></div></div>
+  <div class="hero-content">
+    <span class="hero-badge fade-up d1">🐍 Python — أول خطوة</span>
+    <h1 class="fade-up d2"><span class="grad">إيه هي البرمجة،</span> وإزاي الكمبيوتر بيفهمك</h1>
+    <p class="hero-sub fade-up d3">من مجرد فكرة في دماغك، لحد تعليمات الكمبيوتر بينفذها بالظبط زي ما إنت عايز.</p>
+    <button class="start-btn fade-up d4" id="startBtn">ابدأ الرحلة ←</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s1)">01</div>
+      <div><h2>إيه هي البرمجة؟</h2><div class="sec-tag">إديت الكمبيوتر تعليمات خطوة بخطوة</div></div>
+    </div>
+    <div id="introBody">
+      <div class="card rv">
+        <p class="body"><span class="mark">Programming</span> معناه إنك تعطي الكمبيوتر تعليمات <span class="code-c">خطوة بخطوة</span>. الكمبيوتر سريع جدًا في الحساب، بس محتاج خطة منك.</p>
+        <ul>
+          <li class="body"><span class="code-c">Programmer</span> → الشخص (زي إنت!) اللي بيفكر في الحل ويكتب التعليمات.</li>
+          <li class="body"><span class="code-c">Program</span> → مجموعة التعليمات النهائية اللي الكمبيوتر بينفذها لإنجاز مهمة.</li>
+          <li class="body"><span class="code-c">Code</span> → اللغة الخاصة اللي بنكتب بيها التعليمات عشان الكمبيوتر يفهمها.</li>
+        </ul>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <p class="body"><span class="emoji-shake">🎮</span> <strong>فكر بالطريقة دي:</strong> الكمبيوتر زي طالب سريع جدًا وبيمشي بالتعليمات بالظبط، بس <strong>مفيهوش خيال</strong> — لو ما قلتلوش كل خطوة، مش هيعرف يعمل حاجة!</p>
+          <p class="body">الكمبيوتر مش بيفهم إنجليزي ولا عربي — هو بيقلّم باستخدام الكهرباء (شغّلت / طفيت)، ودي بتتمثل في <span class="code-c">Binary (0s و 1s)</span>. الكتابة بالـ 0s والـ 1s صعبة جدًا على البشر، عشان كده جينا للغات البرمجة.</p>
+          <p class="body">لغات زي <span class="ltr">Python</span> بتبقى <span class="mark">جسر</span> بين الإنسان والآلة — بنكتب تعليمات شبه الإنجليزي، وأداة خاصة بترجمها للـ 0 والـ 1 اللي الجهاز محتاجه.</p>
+        </div>
+      </div>
+
+      <div class="row-h2 rv" style="display:flex;gap:20px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:220px">
+          <div style="font-size:2.6rem" class="emoji-float">🎨</div>
+          <h3 class="mark" style="margin:6px 0">Block-Based</h3>
+          <p class="body">سحب وإفلات — قطع ألوان زي اللَغز زي الـ Scratch. مثالي للمبتدئين لأنه بيمنع أخطاء النحو عشان تركّز على المنطق.</p>
+        </div>
+        <div class="card" style="flex:1;min-width:220px">
+          <div style="font-size:2.6rem" class="emoji-float">⌨️</div>
+          <h3 class="mark" style="margin:6px 0">Text-Based</h3>
+          <p class="body">أسطر كود حقيقية بالكلمات والرموز — زي <span class="ltr">Python</span>. ده اللي بيستخدمه مهندسو الـ AI المحترفين كل يوم.</p>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <p class="body"><strong>كلمات مهمة:</strong></p>
+          <ul>
+            <li class="body"><span class="code-c">Algorithm</span> → خطة أو "وصفة" خطوة بخطوة لحل مشكلة. بتعملها <strong>قبل</strong> ما تكتب الكود.</li>
+            <li class="body"><span class="code-c">Syntax</span> → قواعد النحو الخاصة بلغة البرمجة. زي ما الجملة محتاجة علامات ترقيم، الكود محتاج رموز صح.</li>
+            <li class="body"><span class="code-c">Logic</span> → جزئ "التفكير" في البرنامج — بيحدد ترتيب الخطوات وإزاي الكمبيوتر بياخد القرارات.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-color:rgba(245,158,11,.3)">
+        <p class="body"><strong style="color:var(--warn)">🍞 تشبيه الروبوت الشيف:</strong> تخيّل إنك عايز روبوت يعمل ساندوتش زبدة الفول السوداني. لو قلتله "اعمل ساندوتش" بس → الروبوت مش هيعمل حاجة، لأن التعليمات واسعة جدًا! لازم تكسّرها لخطوات صغيرة دقيقة. دي بالظبط البرمجة.</p>
+        <div class="steps-wrap" id="robot-chef">
+          <div class="step-card active" data-step="0">
+            <div class="step-num">01</div>
+            <div style="font-size:2.2rem" class="emoji-walk">🍞</div>
+            <div class="step-title">هات شريحة عيش</div>
+            <p class="step-note">أول إجراء — الفعل لازم يكون محدد وواضح.</p>
+          </div>
+          <div class="step-card" data-step="1">
+            <div class="step-num">02</div>
+            <div style="font-size:2.2rem" class="emoji-shake">🫙</div>
+            <div class="step-title">افتح برطمان الزبدة</div>
+            <p class="step-note">دوّر الغطا — الروبوت محتاج التفصيلة دي كمان!</p>
+          </div>
+          <div class="step-card" data-step="2">
+            <div class="step-num">03</div>
+            <div style="font-size:2.2rem" class="emoji-walk">🥪</div>
+            <div class="step-title">افرد الزبدة على العيش</div>
+            <p class="step-note">استخدم سكينة وتفرد على كل السطح.</p>
+          </div>
+          <div class="step-card" data-step="3">
+            <div class="step-num">04</div>
+            <div style="font-size:2.2rem" class="emoji-float">🎉</div>
+            <div class="step-title">حط شريحة العيش التانية</div>
+            <p class="step-note">الساندوتش اكتمل! تقسيم المهام الكبيرة لخطوات صغيرة = البرمجة.</p>
+          </div>
+        </div>
+        <div class="ctl-row">
+          <button class="arrow-btn" id="chefPrev">→</button>
+          <span class="step-counter" id="chefCounter">1 / 4</span>
+          <button class="arrow-btn" id="chefNext">←</button>
+          <button class="mini-btn replay" id="chefReplay">↺ إعادة</button>
+        </div>
+      </div>
+
+      <div class="quiz rv" data-qz="qIntro">
+        <div class="quiz-reveal-trigger" data-reveal-qz="qIntro">🧠 كويز سريع — اضغط عشان تكشف السؤال</div>
+        <div class="qz-hidden" data-qz-body="qIntro">
+          <div class="q">إيه هو الـ Algorithm؟</div>
+          <button class="q-opt" data-r="0">A — لغة برمجة زي Python</button>
+          <button class="q-opt" data-r="1">B — خطة أو وصفة خطوة بخطوة لحل مشكلة</button>
+          <button class="q-opt" data-r="0">C — الـ 0s والـ 1s اللي الكمبيوتر بيفهمها</button>
+          <button class="q-opt" data-r="0">D — نوع من أجهزة الكمبيوتر</button>
+          <div class="q-fb green">صح! الـ Algorithm خطة أو وصفة خطوة بخطوة — بتعملها قبل ما تكتب الكود.</div>
+          <div class="q-fb red">لأ — الـ Algorithm مش لغة ولا أجهزة، هو الخطة/الوصفة اللي بتحل بيها المشكلة خطوة بخطوة.</div>
+          <a class="skip">تخطّي السؤال</a>
+        </div>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li>الخلط بين الـ Algorithm ولغة البرمجة أو أجهزة الكمبيوتر.</li>
+          <li>تتوقع إن قول الكمبيوتر "اعمل كده" من غير تفاصيل يكفي — لازم خطوة بخطوة.</li>
+          <li>إنك تحسب إن الكمبيوتر عنده حس سليم زي الإنسان — هو معندوش.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENV -->
+  <section id="env">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s2)">02</div>
+      <div><h2>تجهيز بيئة العمل</h2><div class="sec-tag">نبدأ نكتب كود فين؟</div></div>
+    </div>
+    <div id="envBody">
+      <div class="card rv">
+        <p class="body">عشان نكتب <span class="ltr">Python</span> محتاجين مكان نكتب فيه الكود ونشغّله. فيه خيارين:</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:240px;border-color:rgba(6,182,212,.35)">
+            <div style="font-size:2.6rem" class="emoji-float">☁️</div>
+            <h3 class="mark">Google Colab</h3>
+            <p class="body">في المتصفح بس — مفيش تثبيت، بيشتغل على أي جهاز (حتى Chromebook)، وبيحفظ في <span class="ltr">Google Drive</span> تلقائيًا.</p>
+            <span class="code-c">موصى به للمبتدئين</span>
+          </div>
+          <div class="card" style="flex:1;min-width:240px;border-color:rgba(139,92,246,.35)">
+            <div style="font-size:2.6rem" class="emoji-float">💻</div>
+            <h3 class="mark">Jupyter محلي</h3>
+            <p class="body">تثبيت على جهازك — للشغل Offline والمشاريع المتقدمة.</p>
+            <span class="code-c">التحكم الكامل</span>
+          </div>
+        </div>
+        <p class="body" style="margin-top:12px"><span class="mark">⭐ ابدأ بـ Colab</span> — هو الأنسب للمبتدئين. تقدر تنقل لـ Jupyter المحلي في أي وقت بعدين لو احتجت قوة أكبر.</p>
+      </div>
+
+      <div class="card rv" style="border-color:rgba(6,182,212,.35)">
+        <h3 style="margin-bottom:12px">خطوات أول كود ليك في Colab</h3>
+        <div class="steps-wrap" id="colab-steps">
+          <div class="step-card active" data-step="0">
+            <div class="step-num">01</div>
+            <div style="font-size:2rem" class="emoji-float">🌐</div>
+            <div class="step-title">افتح المتصفح</div>
+            <p class="step-note">روح لـ <span class="ltr">colab.research.google.com</span></p>
+          </div>
+          <div class="step-card" data-step="1">
+            <div class="step-num">02</div>
+            <div style="font-size:2rem" class="emoji-float">🔑</div>
+            <div class="step-title">سجّل دخول</div>
+            <p class="step-note">استخدم حساب جوجل — حساب المدرسة شغال تمامًا.</p>
+          </div>
+          <div class="step-card" data-step="2">
+            <div class="step-num">03</div>
+            <div style="font-size:2rem" class="emoji-pulse">📒</div>
+            <div class="step-title">دوس "New Notebook"</div>
+            <p class="step-note">نوت بوك فاضي بيتفتح وجاهز.</p>
+          </div>
+          <div class="step-card" data-step="3">
+            <div class="step-num">04</div>
+            <div style="font-size:2rem" class="emoji-float">✏️</div>
+            <div class="step-title">غيّر الاسم</div>
+            <p class="step-note"><span class="ltr">File → Rename → "My First Data Notebook"</span></p>
+          </div>
+          <div class="step-card" data-step="4">
+            <div class="step-num">05</div>
+            <div style="font-size:2rem" class="emoji-walk">⌨️</div>
+            <div class="step-title">اكتب أول كود</div>
+            <p class="step-note">اكتب أول كود ليك في أول خلية.</p>
+          </div>
+          <div class="step-card" data-step="5">
+            <div class="step-num">06</div>
+            <div style="font-size:2rem" class="emoji-glow">⚡</div>
+            <div class="step-title">شغّل الخلية</div>
+            <p class="step-note">دوس <span class="ltr">Shift + Enter</span> → هيظهر الناتج تحت! 🎉</p>
+          </div>
+        </div>
+        <div class="ctl-row">
+          <button class="arrow-btn" id="colabPrev">→</button>
+          <span class="step-counter" id="colabCounter">1 / 6</span>
+          <button class="arrow-btn" id="colabNext">←</button>
+          <button class="mini-btn replay" id="colabReplay">↺ إعادة</button>
+        </div>
+      </div>
+
+      <div class="activity-grid rv">
+        <div class="demo-panel">
+          <h3>أول تشغيل كود ليك 🚀</h3>
+          <p class="body">اكتب الكود ده في الخلية الأولى:</p>
+          <button class="btn accent" id="envRun">▶ Run</button>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">first cell</div>
+          <div class="code-body"><span class="t-fn">print</span>(<span class="t-str">"Hello, Python!"</span>)</div>
+          <div class="term" id="envTerm"><span class="pr">In [1]: </span><span class="cmd">print("Hello, Python!")</span></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <p class="body" style="color:var(--dim)"><strong style="color:var(--dim)">ملاحظة:</strong> Jupyter المحلي موجود لو حابب تشتغل Offline — تفاصيله التقنية (متطلبات النظام، خطوات التثبيت) في مرجع إضافي لمين عايز يجرب على جهازه.</p>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li>تثبيت Jupyter وتجهيزات معقدة قبل ما تجرب Colab الأول.</li>
+          <li>القلق من "التثبيت" وهو مش محتاج فعلًا للمبتدئ.</li>
+          <li>إنك تنسى تحفظ شغلك في Jupyter المحلي (في Colab الحفظ تلقائي).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PYTHON -->
+  <section id="whypython">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s3)">03</div>
+      <div><h2>إيه هي لغة Python وليه هي الأفضل؟</h2><div class="sec-tag">اللغة اللي بتقرا زي الإنجليزي</div></div>
+    </div>
+    <div id="whypythonBody">
+      <div class="card rv">
+        <p class="body"><span class="ltr">Python</span> لغة برمجة <span class="mark">عالية المستوى</span> — مصممة للبشر، بتستخدم كلمات إنجليزية حقيقية زي <span class="code-c">print</span> و <span class="code-c">if</span> و <span class="code-c">input</span>. مفيش حاجة اسمها تتكلم "لغة الكمبيوتر".</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:10px">
+          <div class="card" style="flex:1;min-width:200px">
+            <div style="font-size:2.4rem" class="emoji-float">📖</div>
+            <h3 class="mark">High-level</h3>
+            <p class="body">مصممة للبشر، مش للآلات — بتقرا زي الإنجليزي.</p>
+          </div>
+          <div class="card" style="flex:1;min-width:200px">
+            <div style="font-size:2.4rem" class="emoji-float">🔧</div>
+            <h3 class="mark">General-purpose</h3>
+            <p class="body">مش محبوسة في حاجة واحدة — مواقع، ألعاب، أدوات بيانات، ذكاء اصطناعي.</p>
+          </div>
+          <div class="card" style="flex:1;min-width:200px">
+            <div style="font-size:2.4rem" class="emoji-pulse">⚡</div>
+            <h3 class="mark">Interpreted</h3>
+            <p class="body">بتشغّل كودك فورًا سطر بسطر — اكتب، شغّل، شوف.</p>
+          </div>
+        </div>
+        <p class="body" style="margin-top:12px"><strong>💡 أبسط طريقة للتفكير فيها:</strong> "Python زي ما تبعت رسالة نصية تعليمات للكمبيوتر بإنجليزي شبه العادي."</p>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>حكاية Python — Timeline</h3>
+          <div class="steps-wrap" id="py-timeline" style="margin-top:14px">
+            <div class="step-card active" data-step="0">
+              <div class="step-num">1989</div>
+              <div style="font-size:2rem" class="emoji-float">🎄</div>
+              <div class="step-title">جويدو بدأ يكتبها</div>
+              <p class="step-note">Guido van Rossum بدأ يكتبها في إجازة الكريسماس. هدفه كان بسيطًا: "عايز لغة تكون ممتعة وسهلة في القراءة."</p>
+            </div>
+            <div class="step-card" data-step="1">
+              <div class="step-num">1991</div>
+              <div style="font-size:2rem" class="emoji-pulse">🐍</div>
+              <div class="step-title">Python 1.0</div>
+              <p class="step-note">أول إصدار بيتنشر للعالم.</p>
+            </div>
+            <div class="step-card" data-step="2">
+              <div class="step-num">2008</div>
+              <div style="font-size:2rem" class="emoji-glow">✨</div>
+              <div class="step-title">Python 3.0</div>
+              <p class="step-note">أحدث وأنضف وأقوى.</p>
+            </div>
+            <div class="step-card" data-step="3">
+              <div class="step-num">النهارده</div>
+              <div style="font-size:2rem" class="emoji-glow">🚀</div>
+              <div class="step-title">اللغة رقم 1</div>
+              <p class="step-note">الأهم في الـ AI وعلم البيانات والتعليم.</p>
+            </div>
+          </div>
+          <div class="ctl-row">
+            <button class="arrow-btn" id="tlPrev">→</button>
+            <span class="step-counter" id="tlCounter">1 / 4</span>
+            <button class="arrow-btn" id="tlNext">←</button>
+            <button class="mini-btn replay" id="tlReplay">↺ إعادة</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>3 أسباب تخلّي Python الرابح 🏆</h3>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:220px;border-color:rgba(0,212,170,.25)">
+            <div style="font-size:2rem" class="emoji-float">1️⃣</div>
+            <h3 class="mark">بتتقرا زي لغة البشر</h3>
+            <p class="body"><span class="ltr"><span class="t-fn">print</span>(<span class="t-str">"Hello, World!"</span>)</span> — حتى لو مبرمجتش قبل كده، تقدّر تخمّن إيه اللي بيحصل. دي سحر Python.</p>
+          </div>
+          <div class="card" style="flex:1;min-width:220px;border-color:rgba(0,212,170,.25)">
+            <div style="font-size:2rem" class="emoji-pulse">🧰</div>
+            <h3 class="mark">صندوق عُدّة ضخم</h3>
+            <p class="body">في Python مش بتبني كل حاجة من الصفر — بتستخدم <span class="code-c">libraries</span> (كود جاهز). زي ما بدل ما تبني المحرك من الحديد، بتركّبه جاهز.</p>
+          </div>
+          <div class="card" style="flex:1;min-width:220px;border-color:rgba(0,212,170,.25)">
+            <div style="font-size:2rem" class="emoji-glow">🌍</div>
+            <h3 class="mark">مش لوحدك أبدًا</h3>
+            <p class="body">ملايين بيستخدموها كل يوم — لو علقت، حد سأل سؤالك قبل كده، وفيه آلاف الشروح المجانية.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>مين بيستخدم Python في العالم الحقيقي؟ 🌐</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:12px">
+          <div class="card"><div style="font-size:2rem" class="emoji-float">🎵</div><strong>Spotify</strong><p class="body">تحليل ذوقك الموسيقي وبناء الـ Daily Mix.</p></div>
+          <div class="card"><div style="font-size:2rem" class="emoji-float">📸</div><strong>Instagram</strong><p class="body">معالجة صورك وتشغيل صفحة الاستكشاف.</p></div>
+          <div class="card"><div style="font-size:2rem" class="emoji-float">🎬</div><strong>Netflix</strong><p class="body">تحديد التوصية المناسبة بناءً على تاريخ مشاهدتك.</p></div>
+          <div class="card"><div style="font-size:2rem" class="emoji-pulse">🔍</div><strong>Google</strong><p class="body">مستخدمة عبر البحث وأنظمة الـ AI.</p></div>
+          <div class="card"><div style="font-size:2rem" class="emoji-glow">🚗</div><strong>Tesla</strong><p class="body">معالجة بيانات الحساسات للقيادة الذاتية.</p></div>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>Python مقابل Java و C++</h3>
+          <table class="dir-ltr">
+            <tr><th>Feature</th><th>Python</th><th>Java</th><th>C++</th></tr>
+            <tr><td>Easy to learn</td><td>Very easy</td><td>Medium</td><td>Hard</td></tr>
+            <tr><td>Reads like English</td><td>Yes</td><td>Sort of</td><td>No</td></tr>
+            <tr><td>Best for AI & data</td><td>Industry standard</td><td>Rare</td><td>Rare</td></tr>
+            <tr><td>Speed</td><td>Moderate</td><td>Fast</td><td>Very fast</td></tr>
+          </table>
+          <p class="body" style="margin-top:10px"><strong>الخلاصة الصريحة:</strong> Python مش الأسرع، بس للـ AI والبيانات مفيش حاجة توازن بين سهولته وقوته ومجتمعه.</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>كلمات هتحتاجها 👀</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px">
+          <div class="card"><span class="code-c">Syntax</span> — قواعد كتابة الكود</div>
+          <div class="card"><span class="code-c">Interpreter</span> — بيقرأ ويشغّل الكود سطر بسطر</div>
+          <div class="card"><span class="code-c">Open Source</span> — مجاني 100% وأي حد يحسّنه</div>
+          <div class="card"><span class="code-c">Library</span> — كود جاهز بيعطي قدرات</div>
+          <div class="card"><span class="code-c">Variable</span> — صندوق باسم بيخزن قيمة</div>
+          <div class="card"><span class="code-c">Bug</span> — خطأ في الكود</div>
+          <div class="card"><span class="code-c">Debugging</span> — إيجاد الأخطاء وإصلاحها</div>
+          <div class="card"><span class="code-c">Script</span> — ملف Python فيه تعليماتك</div>
+          <div class="card"><span class="code-c">IDE</span> — التطبيق اللي بتكتب وتشغّل فيه</div>
+          <div class="card"><span class="code-c">Algorithm</span> — خطة خطوة بخطوة لحل مشكلة</div>
+        </div>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li>الظن إن "Python بطيئة فهي سيئة" — التكلفة مقبولة مقابل سهولتها وقوتها في الـ AI والبيانات.</li>
+          <li>الخلط بين الـ interpreter والـ compiler — الاتنين بترجموا الكود العالي للغة الآلة بس بطريقة مختلفة.</li>
+          <li>الظن إن اللغات الصعبة هي الأفضل — Python موجودة لأنها سهلة وقوية معًا.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYNTAX -->
+  <section id="syntax">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s4)">04</div>
+      <div><h2>قواعد كتابة الكود</h2><div class="sec-tag">الـ Syntax — قواعد اللغة</div></div>
+    </div>
+    <div id="syntaxBody">
+      <div class="card rv">
+        <p class="body">كل سطر في <span class="ltr">Python</span> تعليمة واحدة اسمها <span class="code-c">statement</span>، وPython بيقرا الكود <span class="mark">من فوق لتحت</span> سطر بسطر.</p>
+        <p class="body"><span class="mark">قاعدة مهمة:</span> كل statement في سطر لوحده — مفيش semicolons في الآخر زي Java أو C++.</p>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>أسطر متتالية — بيقرا واحدة واحدة</h3>
+          <div class="code-panel">
+            <div class="code-header">statements.py</div>
+            <div class="code-body"><span class="t-fn">print</span>(<span class="t-str">"Hello!"</span>)
+<span class="t-fn">print</span>(<span class="t-str">"I am learning Python."</span>)
+<span class="t-fn">print</span>(<span class="t-str">"This is fun!"</span>)</div>
+          </div>
+          <button class="btn accent" id="runS1">▶ Run</button>
+          <div class="term" id="s1Term"></div>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>خط متصل — للإجابات الطويلة \</h3>
+          <p class="body">لو عايز تكمل جملة على أكتر من سطر، استخدم الخط <span class="code-c">\</span> في الآخر — أو ظبّط التعليمات جوه أقواس <span class="code-c">( )</span>.</p>
+          <div class="code-panel">
+            <div class="code-header">Python</div>
+            <div class="code-body">num = <span class="t-num">1</span> + <span class="t-num">2</span> + <span class="t-num">3</span> + \
+    <span class="t-num">4</span> + <span class="t-num">5</span> + <span class="t-num">6</span> + \
+    <span class="t-num">7</span> + <span class="t-num">8</span> + <span class="t-num">9</span> + <span class="t-num">10</span>
+<span class="t-fn">print</span>(num)</div>
+          </div>
+          <button class="btn accent" id="runS2">▶ Run</button>
+          <div class="term" id="s2Term"></div>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>الكام statement في سطر واحد — semicolons</h3>
+          <p class="body">ممكن تظبط أكتر من تعليمة في سطر واحد بـ <span class="code-c">;</span> بينهم.</p>
+          <div class="code-panel">
+            <div class="code-header">Python</div>
+            <div class="code-body">b = <span class="t-num">201</span>; a = <span class="t-num">101</span>; c = <span class="t-num">301</span>
+<span class="t-fn">print</span>(a)
+<span class="t-fn">print</span>(b)
+<span class="t-fn">print</span>(c)</div>
+          </div>
+          <button class="btn accent" id="runS3">▶ Run</button>
+          <div class="term" id="s3Term"></div>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>دالة print اللي بتحبها</h3>
+          <div class="code-panel">
+            <div class="code-header">Python</div>
+            <div class="code-body"><span class="t-fn">print</span>(<span class="t-str">"My name is Alex"</span>)       <span class="t-cm"># prints text</span>
+<span class="t-fn">print</span>(<span class="t-num">100</span>)                       <span class="t-cm"># prints a number</span>
+<span class="t-fn">print</span>(<span class="t-num">10</span> + <span class="t-num">5</span>)                <span class="t-cm"># prints the result: 15</span></div>
+          </div>
+          <button class="btn accent" id="runS4">▶ Run</button>
+          <div class="term" id="s4Term"></div>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>الـ Comments — ملاحظاتك البيقول</h3>
+          <p class="body">أي سطر يبدأ بـ <span class="code-c">#</span> هو comment — Python بيه بكامل وببيتجاهل أي حاجة بعدها في نفس السطر. كمان <span class="code-c">###</span> بيبدأ باراجراف كامل.</p>
+          <div class="code-panel">
+            <div class="code-header">Python</div>
+            <div class="code-body"><span class="t-cm"># This line prints a welcome message</span>
+<span class="t-fn">print</span>(<span class="t-str">"Welcome to Python!"</span>)  <span class="t-cm"># This also has a comment at the end</span></div>
+          </div>
+          <button class="btn accent" id="runS5">▶ Run</button>
+          <div class="term" id="s5Term"></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <p class="body"><span class="mark">نصيحة:</span> النصوص (الكلام والجمل) لازم تكون جوه علامات اقتباس <span class="code-c">" "</span> أو <span class="code-c">' '</span> — الأرقام لأ. الكتابة comments عادة كويسة توضح تفكيرك وتسهّل قراءة كودك بعدين.</p>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li>كتابة semicolons في آخر السطر زي جافا و C++ — في Python مش مطلوبة.</li>
+          <li>تتوقع إن الكومنت هيطلع ناتج — الكمبيوتر بجاهله تمامًا.</li>
+          <li>نسيان علامات الاقتباس حوالين النص (الأرقام بس اللي من غير اقتباس).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- IO -->
+  <section id="io">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s5)">05</div>
+      <div><h2>الحوار مع المستخدم</h2><div class="sec-tag">print و input — يتكلموا مع بعض</div></div>
+    </div>
+    <div id="ioBody">
+      <div class="card rv">
+        <p class="body">كل برنامج في العالم بيعمل حاجتين: <span class="mark">بياخد معلومات</span> و <span class="mark">بيرجع معلومات</span>. في Python الاتنين في دالتين:</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:220px;border-color:rgba(0,212,170,.3)">
+            <div style="font-size:2.4rem" class="emoji-float">📢</div>
+            <h3 class="mark">Output — print()</h3>
+            <p class="body">البرنامج بيتكلم معاك — بيظهر الرسايل والنتايج على الشاشة.</p>
+          </div>
+          <div class="card" style="flex:1;min-width:220px;border-color:rgba(25,60,255,.3)">
+            <div style="font-size:2.4rem" class="emoji-float">👂</div>
+            <h3 class="mark">Input — input()</h3>
+            <p class="body">إنت بتتكلم مع البرنامج — بتكتب حاجة، والبرنامج بيستنى وبيخزنها.</p>
+          </div>
+        </div>
+        <div class="error-box" style="margin-top:14px">
+          <h4>⚠️ القاعدة الأهم في input()</h4>
+          <ul>
+            <li>أي حاجة بتدخل من <span class="ltr">input()</span> بتتخزن كـ <strong>String</strong> — حتى لو كتبت رقم! مينفعش تعمل عليها عمليات حسابية قبل ما تحولها بـ <span class="ltr">int()</span> أو <span class="ltr">float()</span>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>3 طرق لتنسيق المخرجات</h3>
+          <div class="code-panel">
+            <div class="code-header">format.py</div>
+            <div class="code-body"><span class="t-cm"># Method 1: Concatenation with +</span>
+name = <span class="t-str">"Sara"</span>
+<span class="t-fn">print</span>(<span class="t-str">"Welcome, "</span> + name + <span class="t-str">"!"</span>)
+
+<span class="t-cm"># Method 2: Comma separation (easiest)</span>
+age = <span class="t-num">15</span>
+<span class="t-fn">print</span>(<span class="t-str">"Name:"</span>, name, <span class="t-str">"Age:"</span>, age)
+
+<span class="t-cm"># Method 3: f-Strings (professional standard)</span>
+score = <span class="t-num">98.5</span>
+<span class="t-fn">print</span>(<span class="t-str">f"Student {name} is {age} years old and scored {score}."</span>)</div>
+          </div>
+          <button class="btn accent" id="runFmt">▶ Run</button>
+          <div class="term" id="fmtTerm"></div>
+          <p class="body" style="margin-top:10px"><span class="mark">⭐ f-Strings هي المعيار الحديث:</span> حط <span class="code-c">f</span> قبل الاقتباس واستخدم <span class="code-c">{ }</span> لدمج المتغيرات مباشرة.</p>
+        </div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>خيارات print الخاصة — sep و end</h3>
+          <div class="code-panel">
+            <div class="code-header">Python</div>
+            <div class="code-body"><span class="t-cm"># sep — the separator between values (default space)</span>
+<span class="t-fn">print</span>(<span class="t-str">"Python"</span>, <span class="t-str">"is"</span>, <span class="t-str">"awesome"</span>, sep=<span class="t-str">"-"</span>)
+
+<span class="t-cm"># end — what happens after print (default newline)</span>
+<span class="t-fn">print</span>(<span class="t-str">"Loading"</span>, end=<span class="t-str">"..."</span>)
+<span class="t-fn">print</span>(<span class="t-str">"Done!"</span>)</div>
+          </div>
+          <button class="btn accent" id="runSep">▶ Run</button>
+          <div class="term" id="sepTerm"></div>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-color:rgba(236,72,153,.3)">
+        <h3>3 برامج حية — جرب بنفسك! 🚀</h3>
+        <p class="body">اكتب في الحقول وبص على الناتج بيتحسب فعلًا في الخلفية — بنفس منطق الكود الأصلي.</p>
+
+        <div class="activity-grid">
+          <div class="demo-panel">
+            <h3>1️⃣ Personal Greeter</h3>
+            <label class="ctl-label">الاسم</label>
+            <input type="text" id="grName" placeholder="اكتب اسمك">
+            <label class="ctl-label">المدينة</label>
+            <input type="text" id="grCity" placeholder="اكتب مدينتك">
+            <div class="live-out" id="grOut"><span class="acc">print() بيستنى منك إدخال...</span></div>
+          </div>
+          <div class="code-panel">
+            <div class="code-header">greeter.py</div>
+            <div class="code-body">name = <span class="t-fn">input</span>(<span class="t-str">"Enter your name: "</span>)
+city = <span class="t-fn">input</span>(<span class="t-str">"Enter your city: "</span>)
+<span class="t-fn">print</span>(<span class="t-str">f"Hello, {name}! Great to meet someone from {city}."</span>)</div>
+          </div>
+        </div>
+
+        <div class="activity-grid">
+          <div class="demo-panel">
+            <h3>2️⃣ Simple Calculator</h3>
+            <label class="ctl-label">الرقم الأول</label>
+            <input type="number" id="calcA" value="25">
+            <label class="ctl-label">الرقم التاني</label>
+            <input type="number" id="calcB" value="17">
+            <div class="live-out" id="calcOut"><span class="acc">Enter first number: 25</span></div>
+          </div>
+          <div class="code-panel">
+            <div class="code-header">calc.py</div>
+            <div class="code-body"><span class="t-fn">print</span>(<span class="t-str">"=== Simple Calculator ==="</span>)
+num1 = <span class="t-fn">float</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter first number: "</span>))
+num2 = <span class="t-fn">float</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter second number: "</span>))
+result = num1 + num2
+<span class="t-fn">print</span>(<span class="t-str">f"{num1} + {num2} = {result}"</span>)</div>
+          </div>
+        </div>
+
+        <div class="activity-grid">
+          <div class="demo-panel">
+            <h3>3️⃣ Grade Checker</h3>
+            <label class="ctl-label">الاسم</label>
+            <input type="text" id="gdName" value="Alex">
+            <label class="ctl-label">الدرجة (0-100)</label>
+            <input type="number" id="gdScore" value="88" min="0" max="100">
+            <div class="live-out" id="gdOut"><span class="acc">بيحسب الدرجة...</span></div>
+          </div>
+          <div class="code-panel">
+            <div class="code-header">grade.py</div>
+            <div class="code-body">score = <span class="t-fn">int</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter score (0-100): "</span>))
+<span class="t-kw">if</span> score >= <span class="t-num">90</span>: grade = <span class="t-str">"A ⭐"</span>
+<span class="t-kw">elif</span> score >= <span class="t-num">75</span>: grade = <span class="t-str">"B 👍"</span>
+<span class="t-kw">elif</span> score >= <span class="t-num">60</span>: grade = <span class="t-str">"C 🟡"</span>
+<span class="t-kw">else</span>: grade = <span class="t-str">"F 😢"</span>
+<span class="t-fn">print</span>(<span class="t-str">f"Student: {name}"</span>)
+<span class="t-fn">print</span>(<span class="t-str">f"Score: {score}/100"</span>)
+<span class="t-fn">print</span>(<span class="t-str">f"Grade: {grade}"</span>)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz rv" data-qz="qIO">
+        <div class="quiz-reveal-trigger" data-reveal-qz="qIO">🧠 كويز سريع — اضغط عشان تكشف السؤال</div>
+        <div class="qz-hidden" data-qz-body="qIO">
+          <div class="q">مستخدم كتب عمره (16) في input(). Python بيخزنها إزاي؟</div>
+          <button class="q-opt" data-r="0">A — int، لأن Python بيكشف إنه رقم</button>
+          <button class="q-opt" data-r="0">B — float، ممكن يكون decimal</button>
+          <button class="q-opt" data-r="1">C — str، لأن input() دايمًا بترجع string</button>
+          <button class="q-opt" data-r="0">D — bool، قيمة صح/غلط</button>
+          <div class="q-fb green">صح! input() دايمًا بترجع string — لازم تحولها بـ int() قبل أي عملية حسابية.</div>
+          <div class="q-fb red">لأ — مش int ولا float، input() بتخزن كل حاجة كـ str حتى لو المستخدم كتب رقم.</div>
+          <a class="skip">تخطّي السؤال</a>
+        </div>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li>إجراء عمليات حسابية على ناتج input() من غير int() أو float().</li>
+          <li>خلط نص ورقم بـ + في print.</li>
+          <li>نسيان إن كل مدخلات المستخدم نصوص — حتى الأرقام.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES -->
+  <section id="types">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s6)">06</div>
+      <div><h2>أنواع البيانات الأساسية</h2><div class="sec-tag">int, float, str, bool</div></div>
+    </div>
+    <div id="typesBody">
+      <div class="card rv">
+        <p class="body"><strong>🍳 تشبيه حاويات المطبخ:</strong> فكّر في أنواع البيانات زي الحاويات المختلفة في المطبخ. مش هتحط شوربة في كيس ورقي، ولا تحمل مية في مصفاية — كل نوع بيانات له "العبوة" المناسبة. لما تخزن معلومات في Python، اللغة لازم تعرف إيه نوعها.</p>
+        <div class="code-panel">
+          <div class="code-header">types.py</div>
+          <div class="code-body">x      = <span class="t-num">10</span>         <span class="t-cm"># int</span>
+y      = <span class="t-num">3.14</span>       <span class="t-cm"># float</span>
+name   = <span class="t-str">"Alex"</span>     <span class="t-cm"># str</span>
+passed = <span class="t-kw">True</span>       <span class="t-cm"># bool</span>
+<span class="t-fn">print</span>(<span class="t-fn">type</span>(x))      <span class="t-cm"># Output: &lt;class 'int'&gt;</span></div>
+        </div>
+        <p class="body"><span class="mark">💡 Python ديناميكية الأنواع:</span> مش لازم تعلن النوع يدويًا — Python بيحدده لوحده من القيمة اللي بتخصصها.</p>
+      </div>
+
+      <div class="activity-grid rv">
+        <div class="demo-panel">
+          <h3>int — أرقام صحيحة 🔢</h3>
+          <p class="body">أي رقم صحيح — موجب/سالب/صفر، من غير نقطة عشرية.</p>
+          <div class="live-out" id="intOut"><span class="acc">جرب العمليات...</span></div>
+          <div class="ctl-row"><span class="ctl-label">a</span><input type="number" id="intA" value="20"><span class="ctl-label">b</span><input type="number" id="intB" value="6"></div>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">int-ops.py</div>
+          <div class="code-body">a = <span class="t-num">20</span>; b = <span class="t-num">6</span>
+<span class="t-fn">print</span>(a + b)   <span class="t-cm"># + addition: 26</span>
+<span class="t-fn">print</span>(a - b)   <span class="t-cm"># - subtraction: 14</span>
+<span class="t-fn">print</span>(a * b)   <span class="t-cm"># * multiplication: 120</span>
+<span class="t-fn">print</span>(a // b)  <span class="t-cm"># // floor division: 3</span>
+<span class="t-fn">print</span>(a % b)   <span class="t-cm"># % modulo: 2 (remainder)</span>
+<span class="t-fn">print</span>(a ** b)  <span class="t-cm"># ** exponent</span>
+<span class="t-fn">print</span>(<span class="t-num">10</span> / <span class="t-num">2</span>)  <span class="t-cm"># 5.0 (float always!)</span>
+<span class="t-fn">print</span>(<span class="t-num">10</span> // <span class="t-num">2</span>) <span class="t-cm"># 5 (int floor)</span></div>
+        </div>
+      </div>
+
+      <div class="activity-grid rv">
+        <div class="demo-panel">
+          <h3>float — أرقام عشرية 🔵</h3>
+          <p class="body">أي رقم فيه نقطة عشرية — بيتستخدم لما الدقة مهمة (أسعار، إحداثيات، درجات دقة ML).</p>
+          <div class="live-out" id="floatOut"><span class="acc">round() بيظبط الدقة...</span></div>
+          <div class="ctl-row"><span class="ctl-label">num</span><input type="number" id="flNum" value="3.14159" step="any"><span class="ctl-label">dec</span><input type="number" id="flDec" value="2" min="0" max="6"></div>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">float.py</div>
+          <div class="code-body">height = <span class="t-num">1.75</span>; pi = <span class="t-num">3.14159</span>
+distance = <span class="t-num">1.5e8</span>  <span class="t-cm"># scientific = 150,000,000</span>
+<span class="t-fn">print</span>(<span class="t-num">5</span> + <span class="t-num">2.0</span>)       <span class="t-cm"># 7.0 (float always)</span>
+<span class="t-fn">print</span>(<span class="t-fn">round</span>(pi, <span class="t-num">2</span>))    <span class="t-cm"># 3.14</span>
+<span class="t-fn">print</span>(<span class="t-fn">round</span>(pi, <span class="t-num">4</span>))    <span class="t-cm"># 3.1416</span></div>
+        </div>
+      </div>
+
+      <div class="activity-grid rv">
+        <div class="demo-panel">
+          <h3>str — نصوص 🔤</h3>
+          <p class="body">أي تسلسل حروف جوه اقتباسات. اكتب نص وجرب الـ methods لحظيًا! (indexing يبدأ من 0)</p>
+          <input type="text" id="strInput" value="Python" style="width:100%">
+          <div class="live-out" id="strOut"></div>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">str.py</div>
+          <div class="code-body">name = <span class="t-str">"Python"</span>
+<span class="t-fn">print</span>(name[<span class="t-num">0</span>])        <span class="t-cm"># 'P' (starts at 0)</span>
+<span class="t-fn">print</span>(name[-<span class="t-num">1</span>])       <span class="t-cm"># 'n' (last char)</span>
+<span class="t-fn">print</span>(name[<span class="t-num">0</span>:<span class="t-num">3</span>])     <span class="t-cm"># 'Pyt' (end not included)</span>
+<span class="t-fn">print</span>(name[<span class="t-num">2</span>:])       <span class="t-cm"># 'thon'</span>
+<span class="t-fn">print</span>(name.<span class="t-fn">upper</span>())     <span class="t-cm"># 'PYTHON'</span>
+<span class="t-fn">print</span>(len(name))       <span class="t-cm"># 6</span></div>
+        </div>
+      </div>
+
+      <div class="activity-grid rv">
+        <div class="demo-panel">
+          <h3>bool — True / False ✅</h3>
+          <p class="body">قيمتين بس، ومحرّك كل قرار في البرامج.</p>
+          <div class="live-out" id="boolOut"><span class="acc">جرب المقارنات والعمليات...</span></div>
+          <div class="ctl-row">
+            <span class="ctl-label">age</span><input type="number" id="boolAge" value="16">
+            <span class="ctl-label">has_id</span><select id="boolId"><option value="true">True</option><option value="false">False</option></select>
+          </div>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">bool.py</div>
+          <div class="code-body"><span class="t-fn">print</span>(<span class="t-num">10</span> &gt; <span class="t-num">5</span>)       <span class="t-cm"># True</span>
+age = <span class="t-num">16</span>; has_id = <span class="t-kw">True</span>
+<span class="t-fn">print</span>(age &gt;= <span class="t-num">16</span> <span class="t-kw">and</span> has_id)  <span class="t-cm"># True (both)</span>
+<span class="t-fn">print</span>(age &gt;= <span class="t-num">18</span> <span class="t-kw">and</span> has_id)  <span class="t-cm"># False</span>
+<span class="t-fn">print</span>(<span class="t-kw">not</span> <span class="t-kw">True</span>)             <span class="t-cm"># False</span></div>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-color:rgba(239,68,68,.35)">
+        <h3>⚠️ تنبيه مهم — حساسية حالة الأحرف</h3>
+        <p class="body"><span class="code-c">True</span> و <span class="code-c">False</span> لازم يتكتبوا بحرف كبير بالظبط — كتابة <span class="code-c">true</span> أو <span class="code-c">TRUE</span> خطأ. Python حساسة لحالة الأحرف.</p>
+        <table>
+          <tr><th>القيمة</th><th>معناها Boolean</th></tr>
+          <tr><td class="ltr">0</td><td>False</td></tr>
+          <tr><td class="ltr">"" (empty string)</td><td>False</td></tr>
+          <tr><td class="ltr">None</td><td>False</td></tr>
+          <tr><td>أي رقم غير صفر</td><td>True</td></tr>
+          <tr><td>أي نص مش فاضي</td><td>True</td></tr>
+        </table>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <h3>برنامج متكامل — Student Profile</h3>
+          <p class="body">الأربع أنواع شغالين مع بعض:</p>
+          <div class="code-panel">
+            <div class="code-header">profile.py</div>
+            <div class="code-body">name          = <span class="t-str">"Alex"</span>    <span class="t-cm"># str</span>
+age           = <span class="t-num">16</span>         <span class="t-cm"># int</span>
+gpa           = <span class="t-num">3.75</span>       <span class="t-cm"># float</span>
+is_honor_roll = <span class="t-kw">True</span>       <span class="t-cm"># bool</span>
+<span class="t-fn">print</span>(<span class="t-str">f"Name: {name}"</span>)
+<span class="t-kw">if</span> is_honor_roll <span class="t-kw">and</span> gpa &gt;= <span class="t-num">3.5</span>:
+    <span class="t-fn">print</span>(<span class="t-str">f"Congratulations, {name}!"</span>)</div>
+          </div>
+          <button class="btn accent" id="runProf">▶ Run</button>
+          <div class="term" id="profTerm"></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>تحويل الأنواع — Type Conversion</h3>
+        <div class="code-panel">
+          <div class="code-header">convert.py</div>
+          <div class="code-body"><span class="t-fn">int</span>(<span class="t-str">"15"</span>)     <span class="t-cm"># → 15 (string to int)</span>
+<span class="t-fn">float</span>(<span class="t-str">"3.14"</span>)  <span class="t-cm"># → 3.14</span>
+<span class="t-fn">str</span>(<span class="t-num">100</span>)      <span class="t-cm"># → "100"</span>
+<span class="t-fn">bool</span>(<span class="t-num">0</span>)       <span class="t-cm"># → False (0 is always False)</span>
+age = <span class="t-fn">int</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter your age: "</span>))
+<span class="t-fn">print</span>(<span class="t-str">f"In 5 years: {age + 5}"</span>) <span class="t-cm"># math works now!</span></div>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>جدول الأخطاء الشائعة</h3>
+        <table>
+          <tr><th>الغلطة</th><th>المشكلة</th><th>الحل</th></tr>
+          <tr><td class="ltr">"10" + 5</td><td>مينفعش تجمع string و int</td><td class="ltr">int("10") + 5</td></tr>
+          <tr><td class="ltr">true بدل True</td><td>Python حساسة لحالة الأحرف</td><td>دايمًا True / False بحرف كبير</td></tr>
+          <tr><td class="ltr">10 / 2</td><td>النتيجة 5.0 (float)</td><td class="ltr">10 // 2 للنتيجة الصحيحة</td></tr>
+          <tr><td class="ltr">print(name + age)</td><td>خلط str و int</td><td class="ltr">print(name + str(age))</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz rv" data-qz="qT1">
+        <div class="quiz-reveal-trigger" data-reveal-qz="qT1">🧠 كويز — ناتج print(17 % 5)</div>
+        <div class="qz-hidden" data-qz-body="qT1">
+          <div class="q">إيه ناتج <span class="ltr">print(17 % 5)</span>؟</div>
+          <button class="q-opt" data-r="0">A — 1، ناتج القسمة الصحيحة</button>
+          <button class="q-opt" data-r="1">B — 2، الباقي (17 ÷ 5 = 3 والباقي 2)</button>
+          <button class="q-opt" data-r="0">C — 17.5، ناتج القسمة العادية</button>
+          <button class="q-opt" data-r="0">D — 85، حاصل الضرب</button>
+          <div class="q-fb green">صح! الـ % بيرجّع الباقي: 17 ÷ 5 = 3 والباقي 2.</div>
+          <div class="q-fb red">لأ — الـ % هو modulo (الباقي). 17 ÷ 5 = 3 والباقي 2.</div>
+          <a class="skip">تخطّي السؤال</a>
+        </div>
+      </div>
+
+      <div class="quiz rv" data-qz="qT2">
+        <div class="quiz-reveal-trigger" data-reveal-qz="qT2">🧠 كويز — ناتج print("5" * 3)</div>
+        <div class="qz-hidden" data-qz-body="qT2">
+          <div class="q">إيه ناتج <span class="ltr">print("5" * 3)</span>؟</div>
+          <button class="q-opt" data-r="0">A — 15، ضرب 5 في 3</button>
+          <button class="q-opt" data-r="1">B — "555"، تكرار النص!</button>
+          <button class="q-opt" data-r="0">C — Error، مينفعش تضرب string</button>
+          <button class="q-opt" data-r="0">D — "5 5 5" بمسافات</button>
+          <div class="q-fb green">صح! مع الـ str، الـ * بيكرر النص: "5" * 3 = "555".</div>
+          <div class="q-fb red">لأ — الـ str * عدد بيكرر النص. "5" × 3 = "555".</div>
+          <a class="skip">تخطّي السؤال</a>
+        </div>
+      </div>
+
+      <div class="error-box rv">
+        <h4>⚠️ أخطاء شائعة</h4>
+        <ul>
+          <li><span class="ltr">"10" + 5</span> — لازم تحول: <span class="ltr">int("10") + 5</span></li>
+          <li>كتابة <span class="ltr">true</span> بدل <span class="ltr">True</span> — حساسية الحروف.</li>
+          <li>تتوقع إن <span class="ltr">10 / 2</span> = 5 (عدد صحيح) — لكن الناتج دايمًا 5.0 (float). استخدم //.</li>
+          <li>خلط النص والرقم في print — استخدم str() أو f-strings.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECAP -->
+  <section id="recap">
+    <div class="split"></div>
+    <div class="section-head rv">
+      <div class="section-number" style="background:var(--s7)">07</div>
+      <div><h2>ملخص الأسبوع الأول</h2><div class="sec-tag">إيه اللي اتعلمناه</div></div>
+    </div>
+    <div id="recapBody">
+      <div class="recap-grid rv">
+        <div class="card"><div style="font-size:2.2rem" class="emoji-glow">🔢</div><h3 class="mark">int</h3><p class="body">أرقام صحيحة بس، من غير نقطة عشرية. عملياته <span class="ltr">+ - * // % **</span>. مثال <span class="ltr">age = 16</span></p></div>
+        <div class="card"><div style="font-size:2.2rem" class="emoji-glow">🔵</div><h3 class="mark">float</h3><p class="body">عليه نقطة عشرية. خلطه مع int بيدي float. <span class="ltr">round()</span> بيظبط الدقة. مثال <span class="ltr">gpa = 3.75</span></p></div>
+        <div class="card"><div style="font-size:2.2rem" class="emoji-glow">🔤</div><h3 class="mark">str</h3><p class="body">نص في اقتباسات. indexing يبدأ من 0. كل ما يجي من <span class="ltr">input()</span> بيبقى str</p></div>
+        <div class="card"><div style="font-size:2.2rem" class="emoji-glow">✅</div><h3 class="mark">bool</h3><p class="body">True/False بس، بحرف كبير. بيقوّي كل if. <span class="ltr">== &gt; &lt; &gt;= &lt;=</span></p></div>
+      </div>
+
+      <div class="diagram-box rv">
+        <div class="diagram-top"></div>
+        <div class="diagram-inner">
+          <p class="body" style="font-size:1.05rem">من فكرة الروبوت اللي محتاج تعليمات دقيقة، لحد أول برنامج بتاعك بيتكلم مع المستخدم — دلوقتي بقى عندك الأساس اللي أي مبرمج Python بدأ بيه. 🐍</p>
+          <p class="body" style="color:var(--accent);font-weight:700">كل خبير كان يومًا مبتدئ. الفرق الوحيد بينك وبين المحترف هو الوقت والممارسة — خدت أول خطوة، واللي جاي هيتبني عليه.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="logo-badge" style="display:inline-flex"><img class="footer-logo" src="data:image/webp;base64,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"></div>
+  <p class="foot-msg">استمر في التمرين — كل خبير كان يومًا مبتدئ. الفرق الوحيد هو الوقت والممارسة. 🚀</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // particles
+  var pcontainer=document.getElementById('particles');
+  for(var i=0;i<30;i++){
+    var d=document.createElement('div'); d.className='particle';
+    d.style.left=(Math.random()*100)+'%';
+    d.style.animationDelay=(Math.random()*15)+'s';
+    d.style.animationDuration=(10+Math.random()*10)+'s';
+    pcontainer.appendChild(d);
+  }
+  // nav show on scroll
+  var nav=document.getElementById('nav');
+  function onScroll(){
+    if(window.scrollY>100)nav.classList.add('visible'); else nav.classList.remove('visible');
+    var links=document.querySelectorAll('.nav-links a');
+    links.forEach && links.forEach(function(){});
+  }
+  window.addEventListener('scroll',onScroll); onScroll();
+  // start button
+  document.getElementById('startBtn').addEventListener('click',function(){ document.getElementById('intro').scrollIntoView({behavior:'smooth'}) });
+  // reveal observer
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target);} });
+  },{threshold:.05});
+  // placeholder selectors (filled by section scripts)
+  var boost=document.querySelectorAll('.section-head'); boost.forEach(function(el){obs.observe(el)});
+  function checkVisibility(){
+    document.querySelectorAll('.rv:not(.visible)').forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*0.95){ el.classList.add('visible'); }
+    });
+  }
+  window.addEventListener('scroll',checkVisibility); checkVisibility();
+  // keyboard nav between sections
+  var sections=['intro','env','whypython','syntax','io','types','recap'];
+  var current=0;
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){
+      if(current<sections.length-1){ current++; document.getElementById(sections[current]).scrollIntoView({behavior:'smooth'}); }
+    } else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){
+      if(current>0){ current--; document.getElementById(sections[current]).scrollIntoView({behavior:'smooth'}); }
+    }
+  });
+  // track current section for keyboard
+  window.addEventListener('scroll',function(){
+    var m=0;
+    sections.forEach(function(id,i){ if(document.getElementById(id).getBoundingClientRect().top<window.innerHeight*0.4){m=i;} });
+    current=m;
+  });
+  // helper: escape html for code
+  window.__esc=function(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+
+  // ---- generic step reveal ----
+  window.__makeSteps=function(wrapId,prevId,nextId,counterId,replayId){
+    var wrap=document.getElementById(wrapId); if(!wrap)return;
+    var cards=wrap.querySelectorAll('.step-card');
+    var idx=0;
+    function show(){
+      cards.forEach(function(c,i){ c.classList.toggle('active',i===idx); });
+      var c=document.getElementById(counterId); if(c)c.textContent=(idx+1)+' / '+cards.length;
+      cards.forEach(function(c){ c.classList.remove('visible'); });
+    }
+    show();
+    var p=document.getElementById(prevId), n=document.getElementById(nextId);
+    if(p)p.addEventListener('click',function(){ if(idx>0){idx--;show();} });
+    if(n)n.addEventListener('click',function(){ if(idx<cards.length-1){idx++;show();} });
+    var r=document.getElementById(replayId);
+    if(r)r.addEventListener('click',function(){ idx=0; show(); });
+  };
+  __makeSteps('robot-chef','chefPrev','chefNext','chefCounter','chefReplay');
+  __makeSteps('colab-steps','colabPrev','colabNext','colabCounter','colabReplay');
+  __makeSteps('py-timeline','tlPrev','tlNext','tlCounter','tlReplay');
+
+  // ---- terminal runner ----
+  window.__runTerm=function(btnId,termId,lines){
+    var b=document.getElementById(btnId); if(!b)return;
+    b.addEventListener('click',function(){
+      var t=document.getElementById(termId); if(!t)return;
+      t.innerHTML='';
+      lines.forEach(function(l,i){
+        setTimeout(function(){
+          var d=document.createElement('div'); d.className='out-line';
+          d.textContent=l; t.appendChild(d);
+          t.scrollTop=t.scrollHeight;
+        },(i+1)*450);
+      });
+    });
+  };
+  __runTerm('envRun','envTerm',['Hello, Python!']);
+  __runTerm('runS1','s1Term',['Hello!','I am learning Python.','This is fun!']);
+  __runTerm('runS2','s2Term',['55']);
+  __runTerm('runS3','s3Term',['101','201','301']);
+  __runTerm('runS4','s4Term',['My name is Alex','100','15']);
+  __runTerm('runS5','s5Term',['Welcome to Python!']);
+  __runTerm('runFmt','fmtTerm',['Welcome, Sara!','Name: Sara Age: 15','Student Sara is 15 years old and scored 98.5.']);
+  __runTerm('runSep','sepTerm',['Python-is-awesome','Loading...Done!']);
+
+  // ---- 3 live interactive programs (real JS computation) ----
+  function gradeOf(score){
+    if(score>=90)return 'A ⭐'; if(score>=75)return 'B 👍'; if(score>=60)return 'C 🟡'; return 'F 😢';
+  }
+  function bindLive(inputs,outId,render){
+    var outs=document.getElementById(outId);
+    inputs.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.addEventListener('input',function(){ render(outs); });
+    });
+    if(outs) render(outs);
+  }
+  bindLive(['grName','grCity'],'grOut',function(out){
+    var n=(document.getElementById('grName').value||'').trim()||'Alex';
+    var c=(document.getElementById('grCity').value||'').trim()||'Cairo';
+    out.innerHTML='<span class="ok">Hello, '+n+'! Great to meet someone from '+c+'.</span>';
+  });
+  bindLive(['calcA','calcB'],'calcOut',function(out){
+    var a=parseFloat(document.getElementById('calcA').value)||0;
+    var b=parseFloat(document.getElementById('calcB').value)||0;
+    out.innerHTML='<span class="pr">=== Simple Calculator ===</span><br><span class="pr">Enter first number: '+a+'</span><br><span class="pr">Enter second number: '+b+'</span><br><span class="ok">'+a+' + '+b+' = '+(a+b)+'</span>';
+  });
+  bindLive(['gdName','gdScore'],'gdOut',function(out){
+    var n=(document.getElementById('gdName').value||'').trim()||'Alex';
+    var s=Math.round(parseFloat(document.getElementById('gdScore').value));
+    if(isNaN(s)) s=0;
+    out.innerHTML='<span class="pr">=== Grade Checker ===</span><br><span class="pr">Student: '+n+'</span><br><span class="pr">Score: '+s+'/100</span><br><span class="ok">Grade: '+gradeOf(s)+'</span>';
+  });
+
+  // ---- data type live demos ----
+  function bindNum(inputs,outId,fn){
+    var out=document.getElementById(outId);
+    function upd(){ out.innerHTML=fn(); }
+    inputs.forEach(function(id){ var el=document.getElementById(id); if(el)el.addEventListener('input',upd); });
+    upd();
+  }
+  bindNum(['intA','intB'],'intOut',function(){
+    var a=parseInt(document.getElementById('intA').value)||0;
+    var b=parseInt(document.getElementById('intB').value)||0;
+    return '<span class="ok">'+a+' + '+b+' = '+(a+b)+'</span><br><span class="ok">'+a+' - '+b+' = '+(a-b)+'</span><br><span class="ok">'+a+' * '+b+' = '+(a*b)+'</span><br><span class="ok">'+a+' // '+b+' = '+Math.floor(a/b)+'</span><br><span class="ok">'+a+' % '+b+' = '+(a%b)+'</span><br><span class="pr">'+a+' / '+b+' = '+(a/b)+' (float)</span>';
+  });
+  bindNum(['flNum','flDec'],'floatOut',function(){
+    var n=parseFloat(document.getElementById('flNum').value); if(isNaN(n))n=3.14159;
+    var d=parseInt(document.getElementById('flDec').value); if(isNaN(d))d=2;
+    var pow=Math.pow(10,d);
+    return '<span class="pr">round('+n+', '+d+') = <span class="ok">'+(Math.round(n*pow)/pow)+'</span></span><br><span class="ok">5 + 2.0 = 7.0 (float)</span><br><span class="pr">scientific: 1.5e8 = 150,000,000</span>';
+  });
+  bindLive(['strInput'],'strOut',function(out){
+    var s=document.getElementById('strInput').value||'';
+    var i0=s.charAt(0)!==''||s.length===0;
+    out.innerHTML='<span class="pr">len("'+s+'") = <b class="ok">'+s.length+'</b></span><br><span class="pr">[0] = <b class="ok">'+(s.charAt(0)||'(empty)')+'</b> (indexing starts at 0)</span><br><span class="pr">[-1] = <b class="ok">'+(s.slice(-1)||'(empty)')+'</b></span><br><span class="pr">'+'[0:3] = <b class="ok">'+s.slice(0,3)+'</b></span><br><span class="pr">.upper() = <b class="ok">'+s.toUpperCase()+'</b></span><br><span class="pr">.lower() = <b class="ok">'+s.toLowerCase()+'</b></span><br><span class="pr">.count("a") = <b class="ok">'+(s.toLowerCase().split('a').length-1)+'</b></span>';
+  });
+  bindLive(['boolAge','boolId'],'boolOut',function(out){
+    var age=parseInt(document.getElementById('boolAge').value)||0;
+    var hasId=document.getElementById('boolId').value==='true';
+    var and16=age>=16&&hasId;
+    out.innerHTML='<span class="pr">10 &gt; 5 = <b class="ok">True</b></span><br><span class="pr">age &gt;= 16 and has_id = <b class="ok">'+(and16?'True':'False')+'</b></span><br><span class="pr">age &gt;= 18 and has_id = <b class="ok">'+(age>=18&&hasId?'True':'False')+'</b></span><br><span class="pr">= not True = <b class="ok">False</b></span>';
+  });
+  __runTerm('runProf','profTerm',['Name: Alex','Congratulations, Alex!']);
+
+  // ---- reveal observer for section-inner pieces ----
+  document.querySelectorAll('#intro .rv').forEach(function(el){
+    if(el.closest('.step-card')) return; // steps handled separately to avoid pre-reveal hiding
+  });
+
+  // ---- quizzes ----
+  document.querySelectorAll('.quiz').forEach(function(qz){
+    var trig=qz.querySelector('[data-reveal-qz]');
+    var body=qz.querySelector('[data-qz-body]');
+    if(trig&&body){
+      trig.addEventListener('click',function(){
+        trig.style.display='none'; body.classList.remove('qz-hidden');
+      });
+    }
+    var opts=qz.querySelectorAll('.q-opt');
+    var done=false;
+    function reveal(correct){
+      if(done) return; done=true;
+      opts.forEach(function(o){
+        var r=o.getAttribute('data-r')==='1';
+        if(r) o.classList.add('correct'); else o.classList.add('wrong');
+      });
+      qz.querySelectorAll('.q-fb').forEach(function(fb){
+        fb.style.display = fb.classList.contains('green')===correct ? 'block':'none';
+      });
+    }
+    opts.forEach(function(o){
+      o.addEventListener('click',function(){
+        var correct=o.getAttribute('data-r')==='1';
+        reveal(correct);
+      });
+    });
+    var skip=qz.querySelector('.skip');
+    if(skip) skip.addEventListener('click',function(){ reveal(opts[1].getAttribute('data-r')==='1'); });
+  });
+  // observe all rv pieces across the page
+  var allRv=document.querySelectorAll('.rv');
+  allRv.forEach(function(el){ obs.observe(el); });
+  checkVisibility();
+});
+</script>
+</body>
+</html>
