@@ -125,14 +125,17 @@ section { padding:60px 0; }
 .term .cmd { color:#e8e7ff; }
 
 /* editable code panels */
-.py-edit, .py-edit:focus { display:block; width:100%; background:transparent; border:none; outline:none; padding:14px; font-family:'Consolas','Courier New',monospace; font-size:.88rem; line-height:1.6; color:#e0e7ff; resize:vertical; min-height:80px; direction:ltr; text-align:left; white-space:pre; overflow-wrap:normal; }
+.py-edit, .py-edit:focus { display:block; width:100%; background:transparent; border:none; outline:none; padding:14px; font-family:'Consolas','Courier New',monospace; font-size:.88rem; line-height:1.6; color:#e0e7ff; resize:none; overflow:hidden; height:auto; min-height:56px; direction:ltr; text-align:left; white-space:pre; overflow-wrap:normal; box-sizing:border-box; }
 .py-ctl { display:flex; gap:10px; align-items:center; padding:8px 14px; border-top:1px solid rgba(25,60,255,.15); }
 .py-ctl .hint { color:var(--dim); font-size:.75rem; margin-left:auto; }
-.py-err { background:#1a0a0f; border:1px solid rgba(255,71,87,.45); border-radius:12px; color:#ff8fa3; font-family:Consolas,monospace; font-size:.82rem; padding:12px 14px; margin:8px 14px; white-space:pre-wrap; direction:ltr; text-align:left; line-height:1.5; }
-.py-err .trace { color:var(--dim); }
-.py-err b { color:var(--danger); }
-@keyframes errIn { from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none} }
-.py-err { animation:errIn .25s ease; }
+.py-err { background:#1a0a0f; border:1px solid rgba(255,71,87,.45); border-radius:12px; color:#ffb3bd; padding:14px 16px; margin:8px 14px; direction:ltr; text-align:left; line-height:1.6; animation:errIn .25s ease; }
+.py-err .errtag { display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:.8rem; letter-spacing:.3px; text-transform:uppercase; color:#ff6474; }
+.py-err .errtag .errbadge { background:rgba(255,71,87,.18); border:1px solid rgba(255,71,87,.4); border-radius:6px; padding:2px 8px; }
+.py-err .errmain { font-family:Consolas,monospace; font-size:.92rem; color:#fff; margin-top:8px; }
+.py-err .errmsg { color:#ffb3ba; font-family:Consolas,monospace; font-size:.82rem; margin-top:4px; }
+.py-err .errctx { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,71,87,.2); color:var(--dim); font-size:.8rem; }
+.py-err .errline { background:rgba(255,71,87,.12); border-radius:6px; padding:6px 10px; margin-top:6px; font-family:Consolas,monospace; color:#ffd9de; font-size:.8rem; white-space:pre; overflow-x:auto; }
+.py-err .errline .ln { display:inline-block; min-width:2.2em; color:#ff6470; margin-right:8px; user-select:none; }
 
 /* buttons */
 .btn, .mini-btn {
@@ -1643,6 +1646,8 @@ document.addEventListener('DOMContentLoaded', function(){
       var ta=document.createElement('textarea');
       ta.className='py-edit'; ta.spellcheck=false; ta.value=src;
       ta.setAttribute('data-src',src);
+      function grow(){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
+      ta.addEventListener('input',grow);
       body.replaceWith(ta);
       var ctl=document.createElement('div'); ctl.className='py-ctl';
       var runBtn=document.createElement('button'); runBtn.className='btn accent'; runBtn.textContent='▶ Run';
@@ -1652,6 +1657,32 @@ document.addEventListener('DOMContentLoaded', function(){
       var term=document.createElement('div'); term.className='term'; term.style.display='none';
       var errBox=document.createElement('div'); errBox.className='py-err'; errBox.style.display='none';
       panel.appendChild(ctl); panel.appendChild(term); panel.appendChild(errBox);
+      function friendlyErr(er, codeSrc){
+        var lineN = er&&er.line? er.line : 1;
+        function lineSrc(n){ if(n<1) return ''; var l=(codeSrc||'').split('\n'); return (n-1<l.length)? l[n-1].trim() : ''; }
+        var m=String(er&&er.msg?er.msg:'خطأ غير معروف'), kind='Error', detail=m;
+        var km=/^([A-Za-z]+(?:Error|Exception)):\s*/.exec(m);
+        if(km){ kind=km[1]; detail=m.slice(km[0].length); } else { kind='SyntaxError'; }
+        var hints={
+          NameError:'الاسم مش معرّف — لازم تعرّفه قبل ما تستخدمه (مثلاً: name = "يمني")',
+          TypeError:'نوع القيمة مش صحّ للعملية دي — مثلاً مش تقدر تجمع نص مع رقم',
+          ValueError:'القيمة مش قابلة للتحويل للنوع المطلوب',
+          ZeroDivisionError:'مينفعش تقسم على صفر',
+          IndexError:'المؤشر برّه حدود النص — الترقيم بيبدأ من صفر',
+          AttributeError:'الخاصية أو الميثود دي مش موجودة على القيمة',
+          SyntaxError:'فيه غلطة في الصياغة — راجع الأقواس أو إنهاء الجمل'
+        };
+        var frag=document.createDocumentFragment();
+        var tag=document.createElement('div'); tag.className='errtag';
+        var badge=document.createElement('span'); badge.className='errbadge'; badge.textContent=kind;
+        tag.appendChild(badge); frag.appendChild(tag);
+        var main=document.createElement('div'); main.className='errmain'; main.textContent=detail||m; frag.appendChild(main);
+        if(hints[kind]){ var hp=document.createElement('div'); hp.className='errmsg'; hp.textContent=hints[kind]; frag.appendChild(hp); }
+        var ctx=document.createElement('div'); ctx.className='errctx'; ctx.textContent='المكان: السطر '+lineN; frag.appendChild(ctx);
+        var src=lineSrc(lineN);
+        if(src){ var lr=document.createElement('div'); lr.className='errline'; var spn=document.createElement('span'); spn.className='ln'; spn.textContent=lineN; lr.appendChild(spn); lr.appendChild(document.createTextNode(src)); frag.appendChild(lr); }
+        return frag;
+      }
       function runIt(){
         var code=ta.value;
         var inputs=[];
@@ -1670,7 +1701,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var res=pyRun(code, inputs, seeds);
         term.innerHTML=''; errBox.innerHTML=''; term.style.display='none'; errBox.style.display='none';
         if(res.err){
-          errBox.innerHTML='<div class="trace">Traceback (most recent call last):</div><div class="trace">  File "&lt;web&gt;", line '+res.err.line+', in &lt;module&gt;</div><b>'+res.err.msg+'</b>';
+          errBox.innerHTML=''; errBox.appendChild(friendlyErr(res.err, code));
           errBox.style.display='block';
         } else {
           if(res.out.length){
@@ -1683,7 +1714,8 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       }
       runBtn.addEventListener('click',runIt);
-      resetBtn.addEventListener('click',function(){ ta.value=ta.getAttribute('data-src'); runIt(); });
+      resetBtn.addEventListener('click',function(){ ta.value=ta.getAttribute('data-src'); grow(); runIt(); });
+      grow();
     });
     // hide legacy fixed-output run buttons + their terminals
     ['envRun','runS1','runS2','runS3','runS4','runS5','runFmt','runSep','runProf',
