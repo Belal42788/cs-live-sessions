@@ -876,3 +876,10 @@ Only True or False
 Capitalized exactly
 Powers every if statement
 From: == > < >= <= !
+
+
+
+
+
+
+
