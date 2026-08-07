@@ -839,13 +839,43 @@ document.addEventListener('DOMContentLoaded', function(){
     return issues;
   }
   function pgEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-  function pgRenderErr(wrap,html){
-    var box=wrap.querySelector('[data-err-panel]'); if(!box)return;
-    var issues=pgCheckHTML(html);
+  function pgCheckCSS(css){
+    var issues=[], text=(''+(css||'')).replace(/\/\*[\s\S]*?\*\//g,'');
+    var open=(text.match(/\{/g)||[]).length, close=(text.match(/\}/g)||[]).length;
+    if(open!==close)issues.push({msg:'مفيش توازن في الأقواس: عندك '+open+' قوس { مفتوح و '+close+' قوس } مقفول.',fix:'خلي كل قوس { له قوس } مطابق في نفس القاعدة (سطر السليكتور فاتح، وآخر السطر قافل).'});
+    var rules=text.split('}');
+    for(var i=0;i<rules.length;i++){
+      var r=rules[i].trim(); if(!r)continue;
+      var b=r.indexOf('{');
+      if(b<0)continue;
+      var sel=r.slice(0,b).trim(), decl=r.slice(b+1).trim();
+      if(!sel)issues.push({msg:'لقيت قاعدة بـ {} من غير selector (اسم المحدَد).',fix:'اكتب اسم العنصر أو الكلاس أو الـ id قبل القوس — زي h1 أو .title أو #main.'});
+      if(decl){
+        var parts=decl.split(';');
+        for(var p=0;p<parts.length;p++){
+          var d=parts[p].trim(); if(!d)continue;
+          var ci=d.indexOf(':');
+          if(ci<0){issues.push({msg:'السطر ده فيه خاصية من غير نقطتين ( : ) — «'+d+'».',fix:'اكتبها property: value; — زي color: red;'});continue}
+          var prop=d.slice(0,ci).trim(), val=d.slice(ci+1).trim();
+          if(!prop)issues.push({msg:'فيه نقطتين بس مفيش اسم الخاصية قبلها.',fix:'اكتب اسم الخاصية الأول — زي color:'});
+          if(!val)issues.push({msg:'الخاصية '+prop+' من غير قيمة بعد النقطتين.',fix:'اكتب قيمة بعد النقطتين — زي '+prop+':red;'});
+        }
+      }
+    }
+    return issues;
+  }
+  function pgRenderErr(scope){
+    var box=scope.querySelector('[data-err-panel]'); if(!box)return;
+    var panel=scope.querySelector('.code-panel'); if(!panel)return;
+    var cssEl=panel.querySelector('.code-body[data-ctab-body="css"]');
+    var htmlEl=panel.querySelector('.code-body[data-ctab-body="html"]');
+    var issues=[];
+    if(cssEl)issues=issues.concat(pgCheckCSS(cssEl.textContent));
+    if(htmlEl)issues=issues.concat(pgCheckHTML(htmlEl.textContent));
     box.style.display='block';
     if(!issues.length){
       box.className='live-errors ok';
-      box.innerHTML='<h4>✔ فحص حي: الكود تمام — مفيش أخطاء</h4><ul><li class="e-off"><span class="e-msg">مفيش مشاكل في الـ HTML دلوقتي.</span></li></ul>';
+      box.innerHTML='<h4>✔ فحص حي: الكود تمام — مفيش أخطاء</h4><ul><li class="e-off"><span class="e-msg">مفيش مشاكل في الـ CSS أو الـ HTML دلوقتي.</span></li></ul>';
       return;
     }
     box.className='live-errors';
@@ -861,7 +891,7 @@ document.addEventListener('DOMContentLoaded', function(){
     function render(){
       var css=lib_getCss(cssEl), html=htmlEl.textContent;
       frame.srcdoc='<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;padding:20px;font-family:Arial;text-align:center;background:#fff;color:#111}img{max-width:80%}</style><style>'+css+'</style></head><body>'+html+'</body></html>';
-      pgRenderErr(wrap,html);
+      pgRenderErr(wrap);
     }
     function lib_getCss(el){ return (el && el.textContent) ? el.textContent : '' }
     cfg.controls.forEach(function(c){
@@ -920,26 +950,18 @@ document.addEventListener('DOMContentLoaded', function(){
     applyCss:function(css){var m=/(?:text-decoration)\s*:\s*([^;]+);?/.exec(css);if(m){var v=m[1].trim();pgDecTd.value=v}}
   });
 
-  // generic: any standalone HTML editor (intro/colors/text) -> its live error panel
-  function wireStandaloneHtml(htmlId){
-    var el=document.getElementById(htmlId); if(!el)return;
-    makeCodeEditable(el,function(html){
-      var scope=el.closest('.section-inner');
-      var box=scope?scope.querySelector('[data-err-panel]'):null;
-      if(!box)return;
-      var issues=pgCheckHTML(html);
-      box.style.display='block';
-      if(!issues.length){ box.className='live-errors ok'; box.innerHTML='<h4>✔ فحص حي: الكود نضيف — مفيش أخطاء</h4><ul><li class="e-off"><span class="e-msg">مفيش مشاكل في الـ HTML.</span></li></ul>'; return; }
-      box.className='live-errors';
-      box.innerHTML='<h4>⚙ فحص حي: اكتشفنا '+issues.length+(issues.length===1?' مشكلة':' مشاكل')+'</h4><ul>'+issues.map(function(it){
-        return '<li><span class="e-msg">'+pgEsc(it.msg)+'</span><span class="e-fix">'+pgEsc(it.fix)+'</span></li>';
-      }).join('')+'</ul>';
+  // generic: each live error panel gets its CSS+HTML bodies re-checked on edit/tab
+  function wireSectionErr(box){
+    var scope=box.parentElement; if(!scope)return;
+    var panel=scope.querySelector('.code-panel'); if(!panel)return;
+    panel.querySelectorAll('.code-body').forEach(function(el){
+      makeCodeEditable(el,function(){ pgRenderErr(scope); });
     });
+    var tabs=panel.querySelector('.code-tabs');
+    if(tabs){ tabs.addEventListener('click',function(){ pgRenderErr(scope); }); }
+    pgRenderErr(scope);
   }
-  wireStandaloneHtml('introHtml');
-  wireStandaloneHtml('colorHtml');
-  wireStandaloneHtml('textHtml');
-  wireStandaloneHtml('clsHtml');
+  document.querySelectorAll('[data-err-panel]').forEach(wireSectionErr);
 
   // copy buttons (pgCopy*) — copy the CSS body of the playground's code panel
   document.querySelectorAll('[data-id^="pgCopy"]').forEach(function(btn){
