@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>CSS Revision</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    ====================================================
+    طرق كتابة CSS
+    ====================================================
+
+    1) Inline CSS
+    بنكتب CSS داخل العنصر نفسه
+
+    مثال:
+    <h2 style="color:red;">
+        Hello
+    </h2>
+
+    مميزاته:
+    - سريع للتجربة
+    عيوبه:
+    - بيخلي الكود غير منظم
+    - صعب التعديل
+
+    ----------------------------------------------------
+
+    2) Internal CSS
+
+    بنكتب CSS داخل نفس صفحة HTML
+    بين:
+    <style>
+    </style>
+
+    مثال:
+    <style>
+        h1{
+            color:red;
+        }
+    </style>
+
+    مميزاته:
+    - مناسب للتجارب الصغيرة
+    عيوبه:
+    - غير مناسب للمشاريع الكبيرة
+
+    ----------------------------------------------------
+
+    3) External CSS
+
+    بنعمل ملف CSS خارجي
+    ونربطه بالصفحة
+
+    باستخدام:
+    <link rel="stylesheet" href="style s3.css">
+
+    مميزاته:
+    - الأكثر استخداماً
+    - منظم
+    - سهل التعديل
+    - نفس الملف يخدم أكثر من صفحة
+    -->
+
+    <link rel="stylesheet" href="style s3.css">
+
+</head>
+
+<body>
+
+    <!--
+    مثال Inline CSS
+    لاحظ إن اللون مكتوب داخل العنصر نفسه
+    -->
+
+    <h2 id="hh">
+        <span id="s">Example</span> Of CSS
+    </h2>
+
+    <hr>
+
+    <!--
+    ID
+    بنستخدمه لعنصر واحد فقط
+
+    في HTML:
+    id="main-title"
+
+    في CSS:
+    #main-title
+    -->
+    <h3 class="section1">
+        hello my class
+    </h3>
+    <p class="section1">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto velit natus quia temporibus dolorum? Vero repellendus fugit libero iusto voluptatem voluptate aliquam eos maxime vitae? Fuga, aliquam nam ex inventore soluta, illo repudiandae quisquam ducimus libero voluptates aliquid dolorem placeat autem corrupti ipsam! Exercitationem commodi explicabo, quisquam sapiente possimus, nostrum minima alias voluptates inventore aliquid vitae sunt doloribus in et dolorem. Ipsum, aspernatur ipsam! Maxime culpa quam itaque beatae consequuntur aut reprehenderit hic, facilis ipsam iusto quidem, numquam repudiandae? Aperiam quibusdam odio quam ipsa blanditiis eveniet distinctio illum eaque delectus labore, et sit repellendus ullam, sunt voluptates hic quis minus.
+    </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h1 id="main-title">
+        CSS Revision
+    </h1>
+
+    <p class="description" id="first">
+        أنا بتعلم CSS وبراجع أهم الخصائص.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus aliquid atque explicabo ea quod maxime eligendi veniam in facere accusamus! Fuga nam, architecto recusandae placeat consequuntur perspiciatis porro natus eos, est omnis iure repudiandae itaque veritatis quisquam? Deserunt facere alias nemo modi accusamus quod, tenetur eaque, itaque minima nulla accusantium et officia blanditiis iure aut libero aspernatur consequatur! Repellendus neque aliquid in laudantium doloribus tempora dolore provident excepturi autem dicta ullam odit accusamus nobis, vel quaerat consequuntur inventore ducimus modi quae unde numquam sed voluptates. Nisi, minus inventore sed mollitia deserunt libero quaerat est saepe consequuntur incidunt animi itaque ipsum?
+    </p>
+
+    <!--
+    Class
+    بنستخدمه لأكثر من عنصر
+
+    في HTML:
+    class="description"
+
+    في CSS:
+    .description
+
+    يمكن استخدامه أكثر من مرة
+    -->
+
+    <p class="description" >
+        نفس الـ Class اتكرر على عنصر تاني.
+    </p>
+
+    <p>
+        دي فقرة عادية بدون Class.
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        About Me
+    </h2>
+
+    <p class="description">
+        اسمي بلال وبحب البرمجة وتطوير الويب.
+    </p>
+
+    <p>
+        دي فقرة عادية علشان نقارن بينها وبين الفقرات اللي عليها Class.
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        My Skills
+    </h2>
+
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Python</li>
+    </ul>
+
+    <p class="description" id="pp">
+        القائمة دي هتوضح <span >تأثير</span> font-family و text-align.
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        Profile Image
+    </h2>
+
+    <img src="./تنزيل.jpg" alt="Profile Image">
+
+    <p>
+        الصورة دي هتوضح تأثير width.
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        Buttons
+    </h2>
+
+    <button class="primary-btn">
+        Contact Me
+    </button>
+
+    <button class="secondary-btn">
+        Learn More
+    </button>
+
+    <button class="primary-btn">
+        Subscribe
+    </button>
+
+    <hr>
+
+    <h2 class="section-title">
+        Links
+    </h2>
+
+    <a href="#">
+        YouTube
+    </a>
+
+    <br><br>
+
+    <a href="#">
+        Facebook
+    </a>
+
+    <br><br>
+
+    <a href="#">
+        Instagram
+    </a>
+
+    <p class="description">
+        الروابط دي هتوضح تأثير color و text-decoration.
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        Product Cards
+    </h2>
+
+    <div class="card">
+
+        <h3>
+            Laptop
+        </h3>
+
+        <p>
+            Price: 1000$
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>
+            Mouse
+        </h3>
+
+        <p>
+            Price: 20$
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>
+            Keyboard
+        </h3>
+
+        <p>
+            Price: 50$
+        </p>
+
+    </div>
+
+    <hr>
+
+    <h2 class="section-title">
+        Contact Information
+    </h2>
+
+    <p class="description">
+        Email: example@gmail.com
+    </p>
+
+    <p class="description">
+        Phone: 01000000000
+    </p>
+
+    <hr>
+
+    <h2 class="section-title">
+        Mini Profile
+    </h2>
+
+    <div class="card">
+
+        <h3>
+            Ahmed Mohamed
+        </h3>
+
+        <p class="description">
+            Front-End Developer
+        </p>
+
+        <button class="primary-btn">
+            View Profile
+        </button>
+
+    </div>
+
+    <hr>
+
+    <h2 class="section-title">
+        CSS Selectors Practice
+    </h2>
+
+    <p>
+        Element Selector بيأثر على كل العناصر من نفس النوع.
+    </p>
+
+    <p class="description">
+        Class Selector بيأثر على كل العناصر اللي عندها نفس الـ Class.
+    </p>
+
+    <p>
+        ID Selector بيأثر على عنصر واحد فقط.
+    </p>
+    <ol>
+        <li>hi</li>
+        <li>hi</li>
+        <li>hi</li>
+    </ol>
+</body>
+
+</html>
+
+<!-- 
+h1
+
+h2
+p
+
+h2
+<ul>
+    <li></li>
+</ul>
+
+h2
+p
+
+
+-->
