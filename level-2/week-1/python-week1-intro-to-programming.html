@@ -124,6 +124,16 @@ section { padding:60px 0; }
 @keyframes lineIn { to{opacity:1; transform:translateY(0)} }
 .term .cmd { color:#e8e7ff; }
 
+/* editable code panels */
+.py-edit, .py-edit:focus { display:block; width:100%; background:transparent; border:none; outline:none; padding:14px; font-family:'Consolas','Courier New',monospace; font-size:.88rem; line-height:1.6; color:#e0e7ff; resize:vertical; min-height:80px; direction:ltr; text-align:left; white-space:pre; overflow-wrap:normal; }
+.py-ctl { display:flex; gap:10px; align-items:center; padding:8px 14px; border-top:1px solid rgba(25,60,255,.15); }
+.py-ctl .hint { color:var(--dim); font-size:.75rem; margin-left:auto; }
+.py-err { background:#1a0a0f; border:1px solid rgba(255,71,87,.45); border-radius:12px; color:#ff8fa3; font-family:Consolas,monospace; font-size:.82rem; padding:12px 14px; margin:8px 14px; white-space:pre-wrap; direction:ltr; text-align:left; line-height:1.5; }
+.py-err .trace { color:var(--dim); }
+.py-err b { color:var(--danger); }
+@keyframes errIn { from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none} }
+.py-err { animation:errIn .25s ease; }
+
 /* buttons */
 .btn, .mini-btn {
   background:rgba(25,60,255,.15); color:var(--text); border:1px solid rgba(25,60,255,.4);
@@ -803,7 +813,7 @@ score = <span class="t-num">98.5</span>
             <input type="text" id="grCity" placeholder="اكتب مدينتك">
             <div class="live-out" id="grOut"><span class="acc">print() بيستنى منك إدخال...</span></div>
           </div>
-          <div class="code-panel">
+          <div class="code-panel" data-inputs="grName,grCity">
             <div class="code-header">greeter.py</div>
             <div class="code-body">name = <span class="t-fn">input</span>(<span class="t-str">"Enter your name: "</span>)
 city = <span class="t-fn">input</span>(<span class="t-str">"Enter your city: "</span>)
@@ -820,7 +830,7 @@ city = <span class="t-fn">input</span>(<span class="t-str">"Enter your city: "</
             <input type="number" id="calcB" value="17">
             <div class="live-out" id="calcOut"><span class="acc">Enter first number: 25</span></div>
           </div>
-          <div class="code-panel">
+          <div class="code-panel" data-inputs="calcA,calcB">
             <div class="code-header">calc.py</div>
             <div class="code-body"><span class="t-fn">print</span>(<span class="t-str">"=== Simple Calculator ==="</span>)
 num1 = <span class="t-fn">float</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter first number: "</span>))
@@ -839,7 +849,7 @@ result = num1 + num2
             <input type="number" id="gdScore" value="88" min="0" max="100">
             <div class="live-out" id="gdOut"><span class="acc">بيحسب الدرجة...</span></div>
           </div>
-          <div class="code-panel">
+          <div class="code-panel" data-inputs="gdScore" data-seed="name=gdName">
             <div class="code-header">grade.py</div>
             <div class="code-body">score = <span class="t-fn">int</span>(<span class="t-fn">input</span>(<span class="t-str">"Enter score (0-100): "</span>))
 <span class="t-kw">if</span> score >= <span class="t-num">90</span>: grade = <span class="t-str">"A ⭐"</span>
@@ -1179,29 +1189,509 @@ document.addEventListener('DOMContentLoaded', function(){
   __makeSteps('colab-steps','colabPrev','colabNext','colabCounter','colabReplay');
   __makeSteps('py-timeline','tlPrev','tlNext','tlCounter','tlReplay');
 
-  // ---- terminal runner ----
-  window.__runTerm=function(btnId,termId,lines){
-    var b=document.getElementById(btnId); if(!b)return;
-    b.addEventListener('click',function(){
-      var t=document.getElementById(termId); if(!t)return;
-      t.innerHTML='';
-      lines.forEach(function(l,i){
-        setTimeout(function(){
-          var d=document.createElement('div'); d.className='out-line';
-          d.textContent=l; t.appendChild(d);
-          t.scrollTop=t.scrollHeight;
-        },(i+1)*450);
-      });
+  // ================= Mini Python interpreter =================
+  // Values: {t:'int'|'float'|'str'|'bool'|'none'|'type'|'fn'}
+  var PNone={t:'none'};
+  function PNum(v,f){ return {t:f?'float':'int', v:v}; }
+  function PStr(v){ return {t:'str', v:String(v)}; }
+  function PBool(v){ return {t:'bool', v:!!v}; }
+  function PType(n){ return {t:'type', name:n}; }
+  function isNum(x){ return x.t==='int'||x.t==='float'; }
+  function pstr(x){
+    if(x.t==='int') return String(x.v);
+    if(x.t==='float'){ return Number.isInteger(x.v)? x.v+'.0' : String(x.v); }
+    if(x.t==='str') return x.v;
+    if(x.t==='bool') return x.v?'True':'False';
+    if(x.t==='none') return 'None';
+    if(x.t==='type') return "<class '"+x.name+"'>";
+    return '';
+  }
+  function ptype(x){
+    return x.t==='int'?'int':x.t==='float'?'float':x.t==='str'?'str':x.t==='bool'?'bool':x.t==='none'?'NoneType':'object';
+  }
+  function truthy(x){
+    if(x.t==='bool') return x.v;
+    if(isNum(x)) return x.v!==0;
+    if(x.t==='str') return x.v.length>0;
+    return false;
+  }
+  function pErr(msg){ var e=new Error(msg); e.msg=msg; return e; }
+
+  function pyTokenize(code){
+    var toks=[], i=0, n=code.length;
+    while(i<n){
+      var c=code[i];
+      if(/\s/.test(c)){ i++; continue; }
+      if(/[0-9]/.test(c) || (c==='.'&&/[0-9]/.test(code[i+1]||''))){
+        var m=/^(?:\d+\.\d*|\.\d+|\d+)(?:[eE][+-]?\d+)?/.exec(code.slice(i));
+        var num=parseFloat(m[0]);
+        toks.push({k:'num', v:num, f:/[.eE]/.test(m[0])});
+        i+=m[0].length; continue;
+      }
+      if(c==='f'&&(code[i+1]==='"'||code[i+1]==="'")){
+        var q2=code[i+1], k=i+2, s2='';
+        while(k<n&&code[k]!==q2){
+          if(code[k]==='\\'&&k+1<n){ s2+=code[k+1]; k+=2; } else { s2+=code[k]; k++; }
+        }
+        toks.push({k:'fstr', v:s2}); i=k+1; continue;
+      }
+      if(c==='"'||c==="'"){
+        var q=c, j=i+1, s='';
+        while(j<n&&code[j]!==q){
+          if(code[j]==='\\'&&j+1<n){ s+=code[j+1]; j+=2; } else { s+=code[j]; j++; }
+        }
+        toks.push({k:'str', v:s}); i=j+1; continue;
+      }
+      if(/[A-Za-z_]/.test(c)){
+        var m2=/^[A-Za-z_][A-Za-z0-9_]*/.exec(code.slice(i));
+        toks.push({k:'id', v:m2[0]}); i+=m2[0].length; continue;
+      }
+      var two=code.slice(i,i+2);
+      if(two==='//'||two==='**'||two==='>='||two==='<='||two==='=='){ toks.push({k:'op',v:two}); i+=2; continue; }
+      if(c==='!'){ toks.push({k:'op',v:'!='}); i+=2; continue; }
+      if('+-*/%()[].,:<>='.indexOf(c)>=0){ toks.push({k:'op',v:c}); i++; continue; }
+      toks.push({k:'op',v:c}); i++;
+    }
+    toks.push({k:'eof',v:''});
+    return toks;
+  }
+
+  function pyParse(code, env, out){
+    var toks=pyTokenize(code), i=0;
+    function peek(){ return toks[i]; }
+    function next(){ return toks[i++]; }
+    function binPrec(t){
+      if(t.k==='id'){ if(t.v==='or')return 1; if(t.v==='and')return 2; return null; }
+      if(t.k==='op'){
+        var m={'==':4,'!=':4,'<':4,'>':4,'<=':4,'>=':4,'+':5,'-':5,'*':6,'/':6,'//':6,'%':6,'**':7};
+        return m[t.v]!==undefined? m[t.v]:null;
+      }
+      return null;
+    }
+    function parseFStr(raw){
+      var s='', depth=0, sub='';
+      for(var j=0;j<raw.length;j++){
+        var c=raw[j];
+        if(c==='{'&&depth===0){ depth=1; sub=''; continue; }
+        if(depth>0){
+          if(c==='{')depth++;
+          else if(c==='}'){ depth--; if(depth===0){ var v=pyParse(sub,env,out).parseAll(); s+=pstr(v); continue; } }
+          sub+=c;
+          continue;
+        }
+        s+=c;
+      }
+      return PStr(s);
+    }
+    function call(fn,args){
+      if(fn.k==='fn'){
+        var name=fn.name;
+        if(name==='print'){
+          var sep=' ', end='\n', vals=[];
+          for(var a=0;a<args.length;a++){
+            if(args[a].k==='kw'){ if(args[a].n==='sep')sep=pstr(args[a].v); else if(args[a].n==='end')end=pstr(args[a].v); }
+            else vals.push(args[a]);
+          }
+          out.buf += vals.map(pstr).join(sep)+end;
+          return PNone;
+        }
+        if(name==='input'){
+          var iv=out.inQ.length? out.inQ.shift() : '';
+          return PStr(iv);
+        }
+        if(name==='int'){
+          var x=args[0];
+          if(x.t==='int')return x;
+          if(x.t==='float')return PNum(Math.trunc(x.v),false);
+          if(x.t==='bool')return PNum(x.v?1:0,false);
+          if(x.t==='str'){
+            var s=x.v.trim();
+            if(/^[+-]?\d+$/.test(s))return PNum(parseInt(s,10),false);
+            if(/^[+-]?(\d+\.\d*|\.\d+|\d+)([eE][+-]?\d+)?$/.test(s))return PNum(parseInt(parseFloat(s),10),false);
+            throw pErr("ValueError: invalid literal for int() with base 10: '"+x.v+"'");
+          }
+          throw pErr("TypeError: int() argument must be a string or a number");
+        }
+        if(name==='float'){
+          var y=args[0];
+          if(y.t==='float')return y;
+          if(y.t==='int')return PNum(y.v,true);
+          if(y.t==='bool')return PNum(y.v?1:0,true);
+          if(y.t==='str'){
+            var s2=y.v.trim();
+            if(/^[+-]?(\d+\.\d*|\.\d+|\d+)([eE][+-]?\d+)?$/.test(s2))return PNum(parseFloat(s2),true);
+            throw pErr("ValueError: could not convert string to float: '"+y.v+"'");
+          }
+          throw pErr("TypeError: float() argument must be a string or a number");
+        }
+        if(name==='str') return PStr(pstr(args[0]));
+        if(name==='bool') return PBool(truthy(args[0]));
+        if(name==='len'){
+          if(args[0].t==='str') return PNum(args[0].v.length,false);
+          throw pErr("TypeError: object of type '"+ptype(args[0])+"' has no len()");
+        }
+        if(name==='round'){
+          var rv=args[0].v, nd=args.length>1? args[1].v : null;
+          var r = nd===null? Math.round(rv) : Math.round(rv*Math.pow(10,nd))/Math.pow(10,nd);
+          return PNum(r, nd!==null);
+        }
+        if(name==='type') return PType(ptype(args[0]));
+        throw pErr("NameError: name '"+name+"' is not defined");
+      }
+      throw pErr("TypeError: '"+ptype(fn)+"' object is not callable");
+    }
+    function normIdx(v,len){ var i=v.v; return i<0? i+len : i; }
+    function index(x,a,b,hasColon){
+      if(x.t!=='str') throw pErr("TypeError: '"+ptype(x)+"' object is not subscriptable");
+      var s=x.v;
+      if(hasColon){
+        var st=a===null?0:normIdx(a,s.length), en=b===null?s.length:normIdx(b,s.length);
+        st=Math.max(0,Math.min(st,s.length)); en=Math.max(0,Math.min(en,s.length));
+        return PStr(s.slice(st,en));
+      }
+      var idx=normIdx(a,s.length);
+      if(idx<0||idx>=s.length) throw pErr("IndexError: string index out of range");
+      return PStr(s[idx]);
+    }
+    function method(x,m,args){
+      if(x.t!=='str') throw pErr("AttributeError: '"+ptype(x)+"' object has no attribute '"+m+"'");
+      if(m==='upper') return PStr(x.v.toUpperCase());
+      if(m==='lower') return PStr(x.v.toLowerCase());
+      if(m==='count'){ var sub=args.length? pstr(args[0]) : ''; return PNum(x.v.split(sub).length-1,false); }
+      throw pErr("AttributeError: 'str' object has no attribute '"+m+"'");
+    }
+    function parsePrimary(){
+      var t=next();
+      if(t.k==='num') return PNum(t.v,t.f);
+      if(t.k==='str') return PStr(t.v);
+      if(t.k==='fstr') return parseFStr(t.v);
+      if(t.k==='id'){
+        if(t.v==='True')return PBool(true);
+        if(t.v==='False')return PBool(false);
+        if(t.v==='None')return PNone;
+        if(t.v in env) return env[t.v];
+        var nt=peek();
+        if(nt.k==='op'&&nt.v==='(') return {k:'fn', name:t.v};
+        throw pErr("NameError: name '"+t.v+"' is not defined");
+      }
+      if(t.k==='op'&&t.v==='('){
+        var e=parseExpr2(0);
+        if(peek().v===')')next();
+        return e;
+      }
+      throw pErr("SyntaxError: unexpected token '"+(t.k==='op'?t.v:t.v)+"'");
+    }
+    function parsePostfix(x){
+      for(;;){
+        var t=peek();
+        if(t.k==='op'&&t.v==='('){
+          next(); var args=[];
+          while(peek().v!==')'){
+            if(peek().k==='id'&&toks[i+1]&&toks[i+1].k==='op'&&toks[i+1].v==='='){
+              var kn=next().v; next();
+              args.push({k:'kw', n:kn, v:parseExpr2(0)});
+            } else {
+              args.push(parseExpr2(0));
+            }
+            if(peek().v===',')next();
+          }
+          if(peek().v===')')next();
+          return call(x,args);
+        }
+        if(t.k==='op'&&t.v==='['){
+          next(); var a=null,b=null,hasColon=false;
+          if(peek().v===':'){ next(); hasColon=true; if(peek().v!==']')b=parseExpr2(0); }
+          else { a=parseExpr2(0); if(peek().v===':'){ next(); hasColon=true; if(peek().v!==']')b=parseExpr2(0); } }
+          if(peek().v===']')next();
+          return index(x,a,b,hasColon);
+        }
+        if(t.k==='op'&&t.v==='.'){
+          next(); var m=next();
+          var args2=[];
+          if(peek().v==='('){
+            next();
+            while(peek().v!==')'){
+              if(peek().k==='id'&&toks[i+1]&&toks[i+1].k==='op'&&toks[i+1].v==='='){
+                var kn2=next().v; next(); args2.push({k:'kw', n:kn2, v:parseExpr2(0)});
+              } else { args2.push(parseExpr2(0)); }
+              if(peek().v===',')next();
+            }
+            if(peek().v===')')next();
+          }
+          return parsePostfix(method(x,m.v,args2));
+        }
+        break;
+      }
+      return x;
+    }
+    function parsePrefix(){
+      var t=peek();
+      if(t.k==='id'&&t.v==='not'){ next(); return PBool(!truthy(parseExpr2(3))); }
+      if(t.k==='op'&&t.v==='-'){
+        next(); var v=parseExpr2(7);
+        if(isNum(v))return PNum(-v.v, v.t==='float');
+        if(v.t==='bool')return PNum(v.v?1:0,false);
+        throw pErr("TypeError: bad operand type for unary -: '"+ptype(v)+"'");
+      }
+      return parsePostfix(parsePrimary());
+    }
+    function binOp(t,a,b){
+      var op=t.k==='id'? t.v : t.v;
+      if(op==='and') return truthy(a)? b : a;
+      if(op==='or') return truthy(a)? a : b;
+      if(op==='=='||op==='!='){
+        var eq=false;
+        if(isNum(a)&&isNum(b))eq=a.v===b.v;
+        else if(a.t==='str'&&b.t==='str')eq=a.v===b.v;
+        else if(a.t==='bool'&&b.t==='bool')eq=a.v===b.v;
+        else if(a.t==='none'&&b.t==='none')eq=true;
+        return PBool(op==='=='?eq:!eq);
+      }
+      if(op==='<'||op==='>'||op==='<='||op==='>='){
+        var r = op==='<'? a.v<b.v : op==='>'? a.v>b.v : op==='<='? a.v<=b.v : a.v>=b.v;
+        return PBool(r);
+      }
+      if(op==='+'){
+        if(a.t==='str'&&b.t==='str')return PStr(a.v+b.v);
+        if(a.t==='str'||b.t==='str') throw pErr("TypeError: can only concatenate str (not '"+ptype(isNum(a)?b:a)+"') to str");
+        return PNum(a.v+b.v, a.t==='float'||b.t==='float');
+      }
+      if(op==='*'&&a.t==='str'&&b.t==='int') return PStr(a.v.repeat(b.v));
+      if(op==='*'&&a.t==='int'&&b.t==='str') return PStr(b.v.repeat(a.v));
+      if(!isNum(a)||!isNum(b)) throw pErr("TypeError: unsupported operand type(s) for "+op+": '"+ptype(a)+"' and '"+ptype(b)+"'");
+      var x=a.v,y=b.v, fl=a.t==='float'||b.t==='float';
+      if(op==='-')return PNum(x-y,fl);
+      if(op==='*')return PNum(x*y,fl);
+      if(op==='/'){
+        if(y===0)throw pErr("ZeroDivisionError: division by zero");
+        return PNum(x/y,true);
+      }
+      if(op==='//'){
+        if(y===0)throw pErr("ZeroDivisionError: integer division or modulo by zero");
+        return PNum(Math.floor(x/y),fl);
+      }
+      if(op==='%'){
+        if(y===0)throw pErr("ZeroDivisionError: integer division or modulo by zero");
+        return PNum(x%y,fl);
+      }
+      if(op==='**')return PNum(Math.pow(x,y),fl);
+      throw pErr("SyntaxError: unknown operator "+op);
+    }
+    function parseExpr2(minPrec){
+      var left=parsePrefix();
+      for(;;){
+        var t=peek();
+        var prec=binPrec(t);
+        if(prec===null||prec<minPrec)break;
+        next();
+        var right=parseExpr2(t.k==='id'? prec+1 : (t.v==='**'? prec : prec+1));
+        left=binOp(t,left,right);
+      }
+      return left;
+    }
+    function parseAll(){
+      var v=parseExpr2(0);
+      if(peek().k!=='eof') throw pErr("SyntaxError: trailing tokens in expression");
+      return v;
+    }
+    return { parseAll: parseAll };
+  }
+
+  function pyStripComment(line){
+    var inStr=null;
+    for(var i=0;i<line.length;i++){
+      var c=line[i];
+      if(inStr){ if(c===inStr)inStr=null; continue; }
+      if(c==='"'||c==="'"){ inStr=c; continue; }
+      if(c==='#')return line.slice(0,i);
+    }
+    return line;
+  }
+  function pyTopColon(s){
+    var depth=0,inStr=null;
+    for(var i=0;i<s.length;i++){
+      var c=s[i];
+      if(inStr){ if(c===inStr)inStr=null; continue; }
+      if(c==='"'||c==="'"){ inStr=c; continue; }
+      if(c==='('||c==='[')depth++;
+      if(c===')'||c===']')depth--;
+      if(c===':'&&depth===0)return i;
+    }
+    return -1;
+  }
+  function pyTopEq(s){
+    var depth=0,inStr=null;
+    for(var i=0;i<s.length;i++){
+      var c=s[i];
+      if(inStr){ if(c===inStr)inStr=null; continue; }
+      if(c==='"'||c==="'"){ inStr=c; continue; }
+      if(c==='('||c==='[')depth++;
+      if(c===')'||c===']')depth--;
+      if(c==='='&&depth===0){
+        var pr=s[i-1],nx=s[i+1];
+        if(pr==='='||pr==='>'||pr==='<'||pr==='!'||nx==='=')continue;
+        return i;
+      }
+    }
+    return -1;
+  }
+  function pySplitStmts(s){
+    var out=[],depth=0,inStr=null,cur='';
+    for(var i=0;i<s.length;i++){
+      var c=s[i];
+      if(inStr){ cur+=c; if(c===inStr)inStr=null; continue; }
+      if(c==='"'||c==="'"){ inStr=c; cur+=c; continue; }
+      if(c==='('||c==='['){ depth++; cur+=c; continue; }
+      if(c===')'||c===']'){ depth--; cur+=c; continue; }
+      if(c===';'&&depth===0){ out.push(cur); cur=''; continue; }
+      cur+=c;
+    }
+    if(cur.trim()!=='')out.push(cur);
+    return out;
+  }
+
+  function pyRun(src, inputs, seeds){
+    var env={}, curLine=0;
+    for(var s in seeds) env[s]=PStr(seeds[s]);
+    var out={ buf:'', inQ:(inputs||[]).slice() };
+    try {
+      var raw=src.split('\n'), lines=[], pending='';
+      for(var r=0;r<raw.length;r++){
+        var line=raw[r].replace(/\r$/,'');
+        var stripped=pyStripComment(line);
+        var indentMatch=/^[ \t]*/.exec(line)[0];
+        var indent=indentMatch.replace(/\t/g,'    ').length;
+        if(/\\\s*$/.test(stripped)){
+          pending += stripped.replace(/\\\s*$/,'').replace(/^[ \t]*/,'')+' ';
+          continue;
+        }
+        var code=(pending+stripped).trim();
+        pending='';
+        if(code==='')continue;
+        lines.push({indent:indent, code:code, line:r+1});
+      }
+      if(pending.trim()!=='') lines.push({indent:0, code:pending.trim(), line:raw.length});
+      function runStmts(arr,start){
+        var i=start;
+        while(i<arr.length){
+          var ln=arr[i];
+          curLine=ln.line;
+          if(/^(if|elif|else)\b/.test(ln.code)){
+            var bi=ln.indent, clauses=[];
+            while(i<arr.length){
+              var cur=arr[i];
+              var cm=/^(if|elif|else)\b/.exec(cur.code);
+              if(!cm||cur.indent!==bi)break;
+              var colonIdx=pyTopColon(cur.code);
+              var condSrc = cm[1]==='else'? '' : cur.code.slice(cm[0].length,colonIdx).trim();
+              var tail = colonIdx>=0? cur.code.slice(colonIdx+1).trim() : '';
+              var body=[];
+              if(tail) body.push({indent:bi+1, code:tail, line:cur.line});
+              var j=i+1;
+              while(j<arr.length&&arr[j].indent>bi){ body.push(arr[j]); j++; }
+              clauses.push({kw:cm[1], cond:condSrc, body:body});
+              i=j;
+              var nl=arr[i];
+              if(!(nl&&/^(elif|else)\b/.test(nl.code)&&nl.indent===bi))break;
+            }
+            var matched=false;
+            for(var c=0;c<clauses.length;c++){
+              var cl=clauses[c];
+              var runIt;
+              if(cl.kw==='else') runIt=!matched;
+              else {
+                runIt=!matched && truthy(pyParse(cl.cond,env,out).parseAll());
+                if(runIt) matched=true;
+              }
+              if(runIt) runStmts(cl.body,0);
+            }
+          } else {
+            pySplitStmts(ln.code).forEach(function(st){
+              var eq=pyTopEq(st);
+              if(eq>0){
+                var name=st.slice(0,eq).trim();
+                var rhs=st.slice(eq+1).trim();
+                if(/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)){
+                  env[name]=pyParse(rhs,env,out).parseAll();
+                  return;
+                }
+              }
+              pyParse(st,env,out).parseAll();
+            });
+            i++;
+          }
+        }
+        return i;
+      }
+      runStmts(lines,0);
+      var text=out.buf;
+      if(text.slice(-1)==='\n')text=text.slice(0,-1);
+      return { out: text===''?[]:text.split('\n'), err:null };
+    } catch(e){
+      var msg=e&&e.msg? e.msg : String(e&&e.message||e);
+      return { out:[], err:{ line:curLine, msg:msg } };
+    }
+  }
+  window.pyRun=pyRun;
+
+  // ---- make every code panel editable + runnable with error panel ----
+  function wireEditors(){
+    document.querySelectorAll('.code-panel').forEach(function(panel){
+      var body=panel.querySelector('.code-body');
+      if(!body) return;
+      var src=body.textContent;
+      var ta=document.createElement('textarea');
+      ta.className='py-edit'; ta.spellcheck=false; ta.value=src;
+      ta.setAttribute('data-src',src);
+      body.replaceWith(ta);
+      var ctl=document.createElement('div'); ctl.className='py-ctl';
+      var runBtn=document.createElement('button'); runBtn.className='btn accent'; runBtn.textContent='▶ Run';
+      var resetBtn=document.createElement('button'); resetBtn.className='mini-btn'; resetBtn.textContent='↺ إعادة';
+      var hint=document.createElement('span'); hint.className='hint'; hint.textContent='✏️ عدّل الكود وشغّله — شوف الناتج أو الأخطاء';
+      ctl.appendChild(runBtn); ctl.appendChild(resetBtn); ctl.appendChild(hint);
+      var term=document.createElement('div'); term.className='term'; term.style.display='none';
+      var errBox=document.createElement('div'); errBox.className='py-err'; errBox.style.display='none';
+      panel.appendChild(ctl); panel.appendChild(term); panel.appendChild(errBox);
+      function runIt(){
+        var code=ta.value;
+        var inputs=[];
+        (panel.getAttribute('data-inputs')||'').split(',').map(function(x){return x.trim();}).filter(Boolean).forEach(function(id){
+          var el=document.getElementById(id);
+          inputs.push(el? el.value : id);
+        });
+        var seeds={};
+        (panel.getAttribute('data-seed')||'').split(',').map(function(x){return x.trim();}).filter(Boolean).forEach(function(pair){
+          var parts=pair.split('=');
+          if(parts.length===2){
+            var el=document.getElementById(parts[1]);
+            if(el) seeds[parts[0]]=el.value;
+          }
+        });
+        var res=pyRun(code, inputs, seeds);
+        term.innerHTML=''; errBox.innerHTML=''; term.style.display='none'; errBox.style.display='none';
+        if(res.err){
+          errBox.innerHTML='<div class="trace">Traceback (most recent call last):</div><div class="trace">  File "&lt;web&gt;", line '+res.err.line+', in &lt;module&gt;</div><b>'+res.err.msg+'</b>';
+          errBox.style.display='block';
+        } else {
+          if(res.out.length){
+            res.out.forEach(function(l){
+              var d=document.createElement('div'); d.className='out-line';
+              d.textContent=l; term.appendChild(d);
+            });
+            term.style.display='block';
+          }
+        }
+      }
+      runBtn.addEventListener('click',runIt);
+      resetBtn.addEventListener('click',function(){ ta.value=ta.getAttribute('data-src'); runIt(); });
     });
-  };
-  __runTerm('envRun','envTerm',['Hello, Python!']);
-  __runTerm('runS1','s1Term',['Hello!','I am learning Python.','This is fun!']);
-  __runTerm('runS2','s2Term',['55']);
-  __runTerm('runS3','s3Term',['101','201','301']);
-  __runTerm('runS4','s4Term',['My name is Alex','100','15']);
-  __runTerm('runS5','s5Term',['Welcome to Python!']);
-  __runTerm('runFmt','fmtTerm',['Welcome, Sara!','Name: Sara Age: 15','Student Sara is 15 years old and scored 98.5.']);
-  __runTerm('runSep','sepTerm',['Python-is-awesome','Loading...Done!']);
+    // hide legacy fixed-output run buttons + their terminals
+    ['envRun','runS1','runS2','runS3','runS4','runS5','runFmt','runSep','runProf',
+     'envTerm','s1Term','s2Term','s3Term','s4Term','s5Term','fmtTerm','sepTerm','profTerm'].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.style.display='none';
+    });
+  }
+  wireEditors();
 
   // ---- 3 live interactive programs (real JS computation) ----
   function gradeOf(score){
@@ -1261,7 +1751,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var and16=age>=16&&hasId;
     out.innerHTML='<span class="pr">10 &gt; 5 = <b class="ok">True</b></span><br><span class="pr">age &gt;= 16 and has_id = <b class="ok">'+(and16?'True':'False')+'</b></span><br><span class="pr">age &gt;= 18 and has_id = <b class="ok">'+(age>=18&&hasId?'True':'False')+'</b></span><br><span class="pr">= not True = <b class="ok">False</b></span>';
   });
-  __runTerm('runProf','profTerm',['Name: Alex','Congratulations, Alex!']);
+  // profile.py code panel is editable+runnable (wired above)
 
   // ---- reveal observer for section-inner pieces ----
   document.querySelectorAll('#intro .rv').forEach(function(el){
