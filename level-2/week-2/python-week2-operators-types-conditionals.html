@@ -161,7 +161,10 @@ section { padding:70px 0 20px; }
 .legend span { display:flex; align-items:center; gap:6px; color:var(--dim); font-size:.8rem; }
 .legend i { width:12px; height:12px; border-radius:3px; display:inline-block; }
 /* ---------- operator gallery ---------- */
-.op-gallery { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+.op-gallery { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.op-gallery.cols-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+@media(max-width:960px){ .op-gallery, .op-gallery.cols-3 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:560px){ .op-gallery, .op-gallery.cols-3 { grid-template-columns:1fr; } }
 .op-chip {
   background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:18px;
   padding:16px 22px; text-align:center; min-width:130px; transition:.2s;
@@ -174,6 +177,8 @@ section { padding:70px 0 20px; }
 .steps-wrap { position:relative; }
 .step-card { display:none; }
 .step-card.active { display:block; animation:cardIn .35s ease; }
+.step-card { padding:18px 22px; }
+.step-card p { margin:0; }
 @keyframes cardIn { from{ opacity:0; transform:translateX(14px) } to{ opacity:1; transform:translateX(0) } }
 .step-counter { text-align:center; color:var(--dim); font-size:.85rem; margin:12px 0; }
 .step-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; align-items:center; }
@@ -185,9 +190,11 @@ section { padding:70px 0 20px; }
 }
 .activity-grid .demo-panel label { color:var(--dim); font-size:.85rem; font-weight:600; }
 .activity-grid .demo-panel input, .activity-grid .demo-panel select {
-  width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.15);
+  width:100%; background:#1a2050; border:1px solid rgba(255,255,255,.15);
   color:var(--text); border-radius:8px; padding:8px 12px; font-family:inherit;
+  color-scheme:dark;
 }
+.activity-grid .demo-panel select option { background:#111638; color:var(--text); }
 .activity-grid .demo-panel input:focus, .activity-grid .demo-panel select:focus { outline:none; border-color:var(--primary); }
 @media(max-width:860px){ .activity-grid{ grid-template-columns:1fr } .activity-grid .demo-panel{ order:1 } .activity-grid .code-panel{ order:2 } }
 /* ---------- code playground (LTR) ---------- */
@@ -299,7 +306,14 @@ section { padding:70px 0 20px; }
   font-size:2.6rem; transition:transform .5s ease; background:rgba(236,72,153,.12); border:2px solid var(--s5);
 }
 .gate-cond { font-family:Consolas,monospace; color:var(--accent); font-size:1rem; text-align:center; }
-.gate-note { text-align:center; color:var(--dim); font-size:.85rem; margin-top:10px; }
+.gate-controls { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.gate-status-lbl { color:var(--dim); font-size:.82rem; font-weight:600; }
+.gate-controls select {
+  background:#1a2050; border:1px solid rgba(255,255,255,.15); color:var(--text);
+  border-radius:8px; padding:8px 12px; font-family:inherit; color-scheme:dark; min-width:120px;
+}
+.gate-controls select option { background:#111638; color:var(--text); }
+.gate-note { text-align:center; color:var(--dim); font-size:.85rem; margin-top:10px; border:1px solid rgba(0,255,136,.25); border-radius:10px; padding:8px 12px; background:rgba(0,255,136,.05); }
 /* ---------- ladder (SVG-free nest demo) ---------- */
 .ladder {
   font-family:Consolas,monospace; font-size:.85rem; background:var(--card);
@@ -766,8 +780,8 @@ print(border)</textarea>
       </p>
       <div class="factory-line rv">
         <div class="factory-cell"><div class="emoji-glow" style="font-size:1.8rem">🎛️</div><div class="tiny">int() يبني رقم صحيح</div></div>
-        <div class="factory-cell"><div class="emoji-float" style="font-size:1.8rem">🎛️</div><div class="tiny">float() يبني رقم عشري</div></div>
-        <div class="factory-cell"><div class="emoji-shake" style="font-size:1.8rem">🎛️</div><div class="tiny">str() يبني نص</div></div>
+        <div class="factory-cell"><div class="emoji-float" style="font-size:1.8rem">🌊</div><div class="tiny">float() يبني رقم عشري</div></div>
+        <div class="factory-cell"><div class="emoji-shake" style="font-size:1.8rem">🔤</div><div class="tiny">str() يبني نص</div></div>
       </div>
     </div>
 
@@ -966,7 +980,7 @@ print('as float:', as_float)</textarea>
         <span class="inline">False</span> (بحرف كبير إجباري — <span class="inline">true</span> أو
         <span class="inline">TRUE</span> غلط!). وكل مقارنة بترجّع واحد منهم.
       </p>
-      <div class="op-gallery rv" style="margin-top:16px">
+      <div class="op-gallery cols-3 rv" style="margin-top:16px">
         <div class="op-chip" style="border-color:var(--s4)"><span class="op">==</span><div class="opdesc">التساوي</div></div>
         <div class="op-chip" style="border-color:var(--s4)"><span class="op">!=</span><div class="opdesc">مش متساوي</div></div>
         <div class="op-chip" style="border-color:var(--s4)"><span class="op">&gt;</span><div class="opdesc">أكبر</div></div>
@@ -1160,11 +1174,22 @@ print(a > b)</textarea>
       <div class="gate-box rv">
         <div class="gate-cond">الشرط<br><b style="color:var(--s5)">temperature &gt; 25</b></div>
         <div class="gate-door" id="gateDoor">🚪</div>
-        <button class="btn accent" id="gateBtn">اختبر البوابة</button>
+        <div class="gate-controls">
+          <label class="gate-status-lbl" for="gateStatus">الحالة</label>
+          <select id="gateStatus">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+          <button class="btn accent" id="gateBtn">افتح البوابة</button>
+        </div>
       </div>
       <div class="gate-note" id="gateNote" style="display:none">
         الشرط <span class="inline" style="direction:ltr">temperature &gt; 25</span> لو كان True —
         البوابة اتفتحت وجوه الشارع.
+      </div>
+      <div class="gate-note" id="gateNoteFalse" style="display:none;border-color:rgba(255,71,87,.35)">
+        الشرط <span class="inline" style="direction:ltr">temperature &gt; 25</span> لو كان False —
+        البرنامج بيعدّي من جنب البوابة ويستمر في الطريق العادي.
       </div>
       <p class="rv" style="margin-top:10px">
         لازم نقطتين <span class="inline">:</span> في آخر جملة الـ <span class="inline">if</span>،
@@ -1259,6 +1284,38 @@ else:
       </div>
       <div class="legend rv">
         <span>كل مستوى = 4 مسافات بادئة — "سلم" مرسوم بالمسافات</span>
+      </div>
+      <div class="rv" style="margin-top:14px">
+        <div class="code-panel">
+          <div class="code-header"><span class="dot"></span>playground.py — عدّل القيم وشغّل</div>
+          <textarea class="py-edit" spellcheck="false"
+data-src="age = 14
+has_id = True
+
+if age >= 12:
+    if has_id:
+        print('Access Granted!')
+    else:
+        print('You need an ID card.')
+else:
+    print('Too young to enter.')">age = 14
+has_id = True
+
+if age >= 12:
+    if has_id:
+        print('Access Granted!')
+    else:
+        print('You need an ID card.')
+else:
+    print('Too young to enter.')</textarea>
+          <div class="py-ctl">
+            <button class="btn accent">▶ Run</button>
+            <button class="mini-btn">↺ إعادة</button>
+            <span class="hint">✏️ غيّر has_id إلى False وشغّل — شوف مين اللي هيخش</span>
+          </div>
+          <div class="term"></div>
+          <div class="py-err"></div>
+        </div>
       </div>
     </div>
 
@@ -1697,7 +1754,7 @@ function wireEditors(){
       function runIt(){
         var code=ta.value;
         var inputs=[];
-        (panel.getAttribute('data-inputs')||'').split(',').map(function(x){return x.trim();}).filter(Boolean).forEach(function(id){
+        (panel.getAttribute('data-inputs')||ta.getAttribute('data-inputs')||'').split(',').map(function(x){return x.trim();}).filter(Boolean).forEach(function(id){
           var el=document.getElementById(id);inputs.push(el?el.value:'');
         });
         var seeds={};
@@ -1833,12 +1890,27 @@ document.addEventListener('DOMContentLoaded',function(){
     panelRun(code);
   });
   /* gate door */
-  document.getElementById('gateBtn').addEventListener('click',function(){
-    var d=document.getElementById('gateDoor');
-    d.style.transform='rotateY(-30deg)';
-    document.getElementById('gateNote').style.display='block';
-    var t=document.getElementById('gateBtn');t.textContent='البوابة اتفتحت';
-    setTimeout(function(){d.style.transform='rotateY(0)';document.getElementById('gateNote').style.display='none';t.textContent='اختبر البوابة';},2500);
+  var gateBtn=document.getElementById('gateBtn');
+  var gateDoor=document.getElementById('gateDoor');
+  var gateTrueNote=document.getElementById('gateNote');
+  var gateFalseNote=document.getElementById('gateNoteFalse');
+  var gateTimer=null;
+  function gateApply(open){
+    gateTrueNote.style.display=open?'block':'none';
+    gateFalseNote.style.display=open?'none':'block';
+    gateDoor.style.transition='transform .6s ease, filter .6s ease';
+    gateDoor.style.transform=open?'rotateY(-30deg)':'rotateY(0)';
+    gateDoor.style.filter=open?'drop-shadow(0 0 14px rgba(0,255,136,.7))':'grayscale(1) brightness(.6)';
+    gateBtn.textContent=open?'البوابة اتفتحت':'البوابة مقفولة';
+    clearTimeout(gateTimer);
+    gateTimer=setTimeout(function(){
+      gateTrueNote.style.display='none';gateFalseNote.style.display='none';
+      gateDoor.style.transform='rotateY(0)';gateDoor.style.filter='none';
+      gateBtn.textContent='افتح البوابة';
+    },3000);
+  }
+  gateBtn.addEventListener('click',function(){
+    gateApply(document.getElementById('gateStatus').value==='true');
   });
   /* quizzes */
   document.querySelectorAll('.quiz').forEach(function(qz){
