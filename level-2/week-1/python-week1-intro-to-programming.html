@@ -43,13 +43,14 @@ nav {
 }
 nav.visible { transform: translateY(0); }
 .nav-inner { max-width:1200px; margin:0 auto; padding:10px 20px; display:flex; align-items:center; gap:18px; }
-.nav-brand { display:flex; align-items:center; gap:10px; }
+.nav-brand { display:flex; align-items:center; gap:10px; flex-shrink:0; }
 .nav-logo { width:36px; height:36px; border-radius:10px; object-fit:contain; }
 .nav-brand span { font-weight:900; font-size:.95rem; white-space:nowrap; }
-.nav-links { display:flex; gap:6px; flex-wrap:wrap; }
+.nav-links { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+.nav-links::-webkit-scrollbar { display:none; }
 .nav-links a {
   color:var(--dim); text-decoration:none; padding:6px 14px; border-radius:25px;
-  font-size:.82rem; font-weight:600; border:1px solid transparent; transition:.2s; white-space:nowrap;
+  font-size:.82rem; font-weight:600; border:1px solid transparent; transition:.2s; white-space:nowrap; flex-shrink:0;
 }
 .nav-links a:hover, .nav-links a.active { color:var(--text); background:rgba(25,60,255,.2); border-color:var(--primary); }
 
