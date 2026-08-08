@@ -303,8 +303,9 @@ section { padding:70px 0 20px; }
 .gate-box { display:flex; align-items:center; justify-content:center; gap:20px; margin:16px 0; flex-wrap:wrap; }
 .gate-door {
   width:110px; height:150px; border-radius:14px; display:flex; align-items:center; justify-content:center;
-  font-size:2.6rem; transition:transform .5s ease; background:rgba(236,72,153,.12); border:2px solid var(--s5);
+  font-size:3.2rem; transition:transform .5s ease; perspective:600px;
 }
+.gate-door#gateDoor.open { transform:perspective(600px) rotateY(-70deg); transform-origin:right center; }
 .gate-cond { font-family:Consolas,monospace; color:var(--accent); font-size:1rem; text-align:center; }
 .gate-controls { display:flex; flex-direction:column; align-items:center; gap:10px; }
 .gate-status-lbl { color:var(--dim); font-size:.82rem; font-weight:600; }
@@ -1899,13 +1900,21 @@ document.addEventListener('DOMContentLoaded',function(){
     gateTrueNote.style.display=open?'block':'none';
     gateFalseNote.style.display=open?'none':'block';
     gateDoor.style.transition='transform .6s ease, filter .6s ease';
-    gateDoor.style.transform=open?'rotateY(-30deg)':'rotateY(0)';
-    gateDoor.style.filter=open?'drop-shadow(0 0 14px rgba(0,255,136,.7))':'grayscale(1) brightness(.6)';
+    if(open){
+      gateDoor.style.transform=''; /* let the .open class apply */
+      gateDoor.classList.add('open');
+      gateDoor.style.filter='drop-shadow(0 0 14px rgba(0,255,136,.7))';
+    }else{
+      gateDoor.classList.remove('open');
+      gateDoor.style.transform='none';
+      gateDoor.style.filter='grayscale(1) brightness(.6)';
+    }
     gateBtn.textContent=open?'البوابة اتفتحت':'البوابة مقفولة';
     clearTimeout(gateTimer);
     gateTimer=setTimeout(function(){
       gateTrueNote.style.display='none';gateFalseNote.style.display='none';
-      gateDoor.style.transform='rotateY(0)';gateDoor.style.filter='none';
+      gateDoor.classList.remove('open');
+      gateDoor.style.transform='none';gateDoor.style.filter='none';
       gateBtn.textContent='افتح البوابة';
     },3000);
   }
