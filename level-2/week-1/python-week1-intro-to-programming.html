@@ -174,7 +174,8 @@ section { padding:60px 0; }
 /* quiz */
 .quiz { background:var(--card); border:1px solid rgba(25,60,255,.3); border-radius:16px; padding:22px; margin:18px 0; }
 .quiz .q { font-weight:900; margin-bottom:14px; font-size:1.1rem; }
-.q-opt { display:block; width:100%; text-align:right; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:var(--text); padding:12px 16px; border-radius:12px; margin-bottom:8px; font-family:inherit; font-size:.95rem; cursor:pointer; transition:.2s; }
+.q-opt { display:flex; align-items:center; width:100%; direction:rtl; text-align:right; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:var(--text); padding:12px 16px; border-radius:12px; margin-bottom:8px; font-family:inherit; font-size:.95rem; cursor:pointer; transition:.2s; }
+.q-opt .optlet { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; margin-left:12px; border-radius:8px; background:rgba(25,60,255,.2); color:var(--accent); font-weight:800; font-size:.85rem; }
 .q-opt:hover{ background:rgba(25,60,255,.15); }
 .q-opt.correct{ background:rgba(0,255,136,.15); border-color:var(--success); }
 .q-opt.wrong{ background:rgba(255,71,87,.15); border-color:var(--danger); }
@@ -357,10 +358,10 @@ footer .footer-logo { height:40px; border-radius:8px; margin-bottom:10px; }
         <div class="quiz-reveal-trigger" data-reveal-qz="qIntro">🧠 كويز سريع — اضغط عشان تكشف السؤال</div>
         <div class="qz-hidden" data-qz-body="qIntro">
           <div class="q">إيه هو الـ Algorithm؟</div>
-          <button class="q-opt" data-r="0">A — لغة برمجة زي Python</button>
-          <button class="q-opt" data-r="1">B — خطة أو وصفة خطوة بخطوة لحل مشكلة</button>
-          <button class="q-opt" data-r="0">C — الـ 0s والـ 1s اللي الكمبيوتر بيفهمها</button>
-          <button class="q-opt" data-r="0">D — نوع من أجهزة الكمبيوتر</button>
+          <button class="q-opt" data-r="0"><span class="optlet">A</span> لغة برمجة زي Python</button>
+          <button class="q-opt" data-r="1"><span class="optlet">B</span> خطة أو وصفة خطوة بخطوة لحل مشكلة</button>
+          <button class="q-opt" data-r="0"><span class="optlet">C</span> الـ 0s والـ 1s اللي الكمبيوتر بيفهمها</button>
+          <button class="q-opt" data-r="0"><span class="optlet">D</span> نوع من أجهزة الكمبيوتر</button>
           <div class="q-fb green">صح! الـ Algorithm خطة أو وصفة خطوة بخطوة — بتعملها قبل ما تكتب الكود.</div>
           <div class="q-fb red">لأ — الـ Algorithm مش لغة ولا أجهزة، هو الخطة/الوصفة اللي بتحل بيها المشكلة خطوة بخطوة.</div>
           <a class="skip">تخطّي السؤال</a>
@@ -870,10 +871,10 @@ result = num1 + num2
         <div class="quiz-reveal-trigger" data-reveal-qz="qIO">🧠 كويز سريع — اضغط عشان تكشف السؤال</div>
         <div class="qz-hidden" data-qz-body="qIO">
           <div class="q">مستخدم كتب عمره (16) في input(). Python بيخزنها إزاي؟</div>
-          <button class="q-opt" data-r="0">A — int، لأن Python بيكشف إنه رقم</button>
-          <button class="q-opt" data-r="0">B — float، ممكن يكون decimal</button>
-          <button class="q-opt" data-r="1">C — str، لأن input() دايمًا بترجع string</button>
-          <button class="q-opt" data-r="0">D — bool، قيمة صح/غلط</button>
+          <button class="q-opt" data-r="0"><span class="optlet">A</span> int، لأن Python بيكشف إنه رقم</button>
+          <button class="q-opt" data-r="0"><span class="optlet">B</span> float، ممكن يكون decimal</button>
+          <button class="q-opt" data-r="1"><span class="optlet">C</span> str، لأن input() دايمًا بترجع string</button>
+          <button class="q-opt" data-r="0"><span class="optlet">D</span> bool، قيمة صح/غلط</button>
           <div class="q-fb green">صح! input() دايمًا بترجع string — لازم تحولها بـ int() قبل أي عملية حسابية.</div>
           <div class="q-fb red">لأ — مش int ولا float، input() بتخزن كل حاجة كـ str حتى لو المستخدم كتب رقم.</div>
           <a class="skip">تخطّي السؤال</a>
@@ -1050,10 +1051,10 @@ age = <span class="t-fn">int</span>(<span class="t-fn">input</span>(<span class=
         <div class="quiz-reveal-trigger" data-reveal-qz="qT1">🧠 كويز — ناتج print(17 % 5)</div>
         <div class="qz-hidden" data-qz-body="qT1">
           <div class="q">إيه ناتج <span class="ltr">print(17 % 5)</span>؟</div>
-          <button class="q-opt" data-r="0">A — 1، ناتج القسمة الصحيحة</button>
-          <button class="q-opt" data-r="1">B — 2، الباقي (17 ÷ 5 = 3 والباقي 2)</button>
-          <button class="q-opt" data-r="0">C — 17.5، ناتج القسمة العادية</button>
-          <button class="q-opt" data-r="0">D — 85، حاصل الضرب</button>
+          <button class="q-opt" data-r="0"><span class="optlet">A</span> 1، ناتج القسمة الصحيحة</button>
+          <button class="q-opt" data-r="1"><span class="optlet">B</span> 2، الباقي (17 ÷ 5 = 3 والباقي 2)</button>
+          <button class="q-opt" data-r="0"><span class="optlet">C</span> 17.5، ناتج القسمة العادية</button>
+          <button class="q-opt" data-r="0"><span class="optlet">D</span> 85، حاصل الضرب</button>
           <div class="q-fb green">صح! الـ % بيرجّع الباقي: 17 ÷ 5 = 3 والباقي 2.</div>
           <div class="q-fb red">لأ — الـ % هو modulo (الباقي). 17 ÷ 5 = 3 والباقي 2.</div>
           <a class="skip">تخطّي السؤال</a>
@@ -1064,10 +1065,10 @@ age = <span class="t-fn">int</span>(<span class="t-fn">input</span>(<span class=
         <div class="quiz-reveal-trigger" data-reveal-qz="qT2">🧠 كويز — ناتج print("5" * 3)</div>
         <div class="qz-hidden" data-qz-body="qT2">
           <div class="q">إيه ناتج <span class="ltr">print("5" * 3)</span>؟</div>
-          <button class="q-opt" data-r="0">A — 15، ضرب 5 في 3</button>
-          <button class="q-opt" data-r="1">B — "555"، تكرار النص!</button>
-          <button class="q-opt" data-r="0">C — Error، مينفعش تضرب string</button>
-          <button class="q-opt" data-r="0">D — "5 5 5" بمسافات</button>
+          <button class="q-opt" data-r="0"><span class="optlet">A</span> 15، ضرب 5 في 3</button>
+          <button class="q-opt" data-r="1"><span class="optlet">B</span> &quot;555&quot;، تكرار النص!</button>
+          <button class="q-opt" data-r="0"><span class="optlet">C</span> Error، مينفعش تضرب string</button>
+          <button class="q-opt" data-r="0"><span class="optlet">D</span> &quot;5 5 5&quot; بمسافات</button>
           <div class="q-fb green">صح! مع الـ str، الـ * بيكرر النص: "5" * 3 = "555".</div>
           <div class="q-fb red">لأ — الـ str * عدد بيكرر النص. "5" × 3 = "555".</div>
           <a class="skip">تخطّي السؤال</a>
