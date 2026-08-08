@@ -1664,7 +1664,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var m=String(er&&er.msg?er.msg:'خطأ غير معروف'), kind='Error', detail=m;
         var km=/^([A-Za-z]+(?:Error|Exception)):\s*/.exec(m);
         if(km){ kind=km[1]; detail=m.slice(km[0].length); } else { kind='SyntaxError'; }
-        var hints={
+var hints={
           NameError:'الاسم مش معرّف — لازم تعرّفه قبل ما تستخدمه (مثلاً: name = "يمني")',
           TypeError:'نوع القيمة مش صحّ للعملية دي — مثلاً مش تقدر تجمع نص مع رقم',
           ValueError:'القيمة مش قابلة للتحويل للنوع المطلوب',
@@ -1677,8 +1677,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var tag=document.createElement('div'); tag.className='errtag';
         var badge=document.createElement('span'); badge.className='errbadge'; badge.textContent=kind;
         tag.appendChild(badge); frag.appendChild(tag);
-        var main=document.createElement('div'); main.className='errmain'; main.textContent=detail||m; frag.appendChild(main);
-        if(hints[kind]){ var hp=document.createElement('div'); hp.className='errmsg'; hp.textContent=hints[kind]; frag.appendChild(hp); }
+        var main=document.createElement('div'); main.className='errmain'; main.textContent=hints[kind]||detail||m; frag.appendChild(main);
         var ctx=document.createElement('div'); ctx.className='errctx'; ctx.textContent='المكان: السطر '+lineN; frag.appendChild(ctx);
         var src=lineSrc(lineN);
         if(src){ var lr=document.createElement('div'); lr.className='errline'; var spn=document.createElement('span'); spn.className='ln'; spn.textContent=lineN; lr.appendChild(spn); lr.appendChild(document.createTextNode(src)); frag.appendChild(lr); }
