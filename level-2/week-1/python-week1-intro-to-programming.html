@@ -217,8 +217,6 @@ table.dir-ltr th, table.dir-ltr td { direction:ltr; text-align:left; }
 .ctl-label { color:var(--dim); font-size:.8rem; min-width:70px; }
 input[type=range]{ accent-color:var(--primary); }
 input[type=text],input[type=number],select{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:8px; padding:8px 12px; font-family:inherit; }
-.live-out { background:#05070f; border:1px solid rgba(25,60,255,.3); border-radius:12px; padding:14px; font-family:Consolas,monospace; font-size:.9rem; direction:ltr; text-align:left; min-height:60px; white-space:pre-wrap; }
-.live-out .ok{color:var(--success)} .live-out .acc{color:var(--accent)}
 
 /* footer */
 footer { border-top:1px solid rgba(25,60,255,.3); padding:30px 20px 40px; text-align:center; margin-top:40px; color:var(--dim); }
@@ -815,7 +813,6 @@ score = <span class="t-num">98.5</span>
             <input type="text" id="grName" placeholder="اكتب اسمك">
             <label class="ctl-label">المدينة</label>
             <input type="text" id="grCity" placeholder="اكتب مدينتك">
-            <div class="live-out" id="grOut"><span class="acc">print() بيستنى منك إدخال...</span></div>
           </div>
           <div class="code-panel" data-inputs="grName,grCity">
             <div class="code-header">greeter.py</div>
@@ -832,7 +829,6 @@ city = <span class="t-fn">input</span>(<span class="t-str">"Enter your city: "</
             <input type="number" id="calcA" value="25">
             <label class="ctl-label">الرقم التاني</label>
             <input type="number" id="calcB" value="17">
-            <div class="live-out" id="calcOut"><span class="acc">Enter first number: 25</span></div>
           </div>
           <div class="code-panel" data-inputs="calcA,calcB">
             <div class="code-header">calc.py</div>
@@ -851,7 +847,6 @@ result = num1 + num2
             <input type="text" id="gdName" value="Alex">
             <label class="ctl-label">الدرجة (0-100)</label>
             <input type="number" id="gdScore" value="88" min="0" max="100">
-            <div class="live-out" id="gdOut"><span class="acc">بيحسب الدرجة...</span></div>
           </div>
           <div class="code-panel" data-inputs="gdScore" data-seed="name=gdName">
             <div class="code-header">grade.py</div>
@@ -917,10 +912,9 @@ passed = <span class="t-kw">True</span>       <span class="t-cm"># bool</span>
         <div class="demo-panel">
           <h3>int — أرقام صحيحة 🔢</h3>
           <p class="body">أي رقم صحيح — موجب/سالب/صفر، من غير نقطة عشرية.</p>
-          <div class="live-out" id="intOut"><span class="acc">جرب العمليات...</span></div>
           <div class="ctl-row"><span class="ctl-label">a</span><input type="number" id="intA" value="20"><span class="ctl-label">b</span><input type="number" id="intB" value="6"></div>
         </div>
-        <div class="code-panel">
+        <div class="code-panel" data-inputs="intA,intB">
           <div class="code-header">int-ops.py</div>
           <div class="code-body">a = <span class="t-num">20</span>; b = <span class="t-num">6</span>
 <span class="t-fn">print</span>(a + b)   <span class="t-cm"># + addition: 26</span>
@@ -938,10 +932,9 @@ passed = <span class="t-kw">True</span>       <span class="t-cm"># bool</span>
         <div class="demo-panel">
           <h3>float — أرقام عشرية 🔵</h3>
           <p class="body">أي رقم فيه نقطة عشرية — بيتستخدم لما الدقة مهمة (أسعار، إحداثيات، درجات دقة ML).</p>
-          <div class="live-out" id="floatOut"><span class="acc">round() بيظبط الدقة...</span></div>
           <div class="ctl-row"><span class="ctl-label">num</span><input type="number" id="flNum" value="3.14159" step="any"><span class="ctl-label">dec</span><input type="number" id="flDec" value="2" min="0" max="6"></div>
         </div>
-        <div class="code-panel">
+        <div class="code-panel" data-inputs="flNum,flDec">
           <div class="code-header">float.py</div>
           <div class="code-body">height = <span class="t-num">1.75</span>; pi = <span class="t-num">3.14159</span>
 distance = <span class="t-num">1.5e8</span>  <span class="t-cm"># scientific = 150,000,000</span>
@@ -954,11 +947,10 @@ distance = <span class="t-num">1.5e8</span>  <span class="t-cm"># scientific = 1
       <div class="activity-grid rv">
         <div class="demo-panel">
           <h3>str — نصوص 🔤</h3>
-          <p class="body">أي تسلسل حروف جوه اقتباسات. اكتب نص وجرب الـ methods لحظيًا! (indexing يبدأ من 0)</p>
+          <p class="body">أي تسلسل حروف جوه اقتباسات. اكتب نص وجرب الـ methods (indexing يبدأ من 0).</p>
           <input type="text" id="strInput" value="Python" style="width:100%">
-          <div class="live-out" id="strOut"></div>
         </div>
-        <div class="code-panel">
+        <div class="code-panel" data-inputs="strInput">
           <div class="code-header">str.py</div>
           <div class="code-body">name = <span class="t-str">"Python"</span>
 <span class="t-fn">print</span>(name[<span class="t-num">0</span>])        <span class="t-cm"># 'P' (starts at 0)</span>
@@ -974,13 +966,12 @@ distance = <span class="t-num">1.5e8</span>  <span class="t-cm"># scientific = 1
         <div class="demo-panel">
           <h3>bool — True / False ✅</h3>
           <p class="body">قيمتين بس، ومحرّك كل قرار في البرامج.</p>
-          <div class="live-out" id="boolOut"><span class="acc">جرب المقارنات والعمليات...</span></div>
           <div class="ctl-row">
             <span class="ctl-label">age</span><input type="number" id="boolAge" value="16">
             <span class="ctl-label">has_id</span><select id="boolId"><option value="true">True</option><option value="false">False</option></select>
           </div>
         </div>
-        <div class="code-panel">
+        <div class="code-panel" data-inputs="boolAge,boolId">
           <div class="code-header">bool.py</div>
           <div class="code-body"><span class="t-fn">print</span>(<span class="t-num">10</span> &gt; <span class="t-num">5</span>)       <span class="t-cm"># True</span>
 age = <span class="t-num">16</span>; has_id = <span class="t-kw">True</span>
@@ -1726,64 +1717,6 @@ var hints={
   }
   wireEditors();
 
-  // ---- 3 live interactive programs (real JS computation) ----
-  function gradeOf(score){
-    if(score>=90)return 'A ⭐'; if(score>=75)return 'B 👍'; if(score>=60)return 'C 🟡'; return 'F 😢';
-  }
-  function bindLive(inputs,outId,render){
-    var outs=document.getElementById(outId);
-    inputs.forEach(function(id){
-      var el=document.getElementById(id);
-      if(el) el.addEventListener('input',function(){ render(outs); });
-    });
-    if(outs) render(outs);
-  }
-  bindLive(['grName','grCity'],'grOut',function(out){
-    var n=(document.getElementById('grName').value||'').trim()||'Alex';
-    var c=(document.getElementById('grCity').value||'').trim()||'Cairo';
-    out.innerHTML='<span class="ok">Hello, '+n+'! Great to meet someone from '+c+'.</span>';
-  });
-  bindLive(['calcA','calcB'],'calcOut',function(out){
-    var a=parseFloat(document.getElementById('calcA').value)||0;
-    var b=parseFloat(document.getElementById('calcB').value)||0;
-    out.innerHTML='<span class="pr">=== Simple Calculator ===</span><br><span class="pr">Enter first number: '+a+'</span><br><span class="pr">Enter second number: '+b+'</span><br><span class="ok">'+a+' + '+b+' = '+(a+b)+'</span>';
-  });
-  bindLive(['gdName','gdScore'],'gdOut',function(out){
-    var n=(document.getElementById('gdName').value||'').trim()||'Alex';
-    var s=Math.round(parseFloat(document.getElementById('gdScore').value));
-    if(isNaN(s)) s=0;
-    out.innerHTML='<span class="pr">=== Grade Checker ===</span><br><span class="pr">Student: '+n+'</span><br><span class="pr">Score: '+s+'/100</span><br><span class="ok">Grade: '+gradeOf(s)+'</span>';
-  });
-
-  // ---- data type live demos ----
-  function bindNum(inputs,outId,fn){
-    var out=document.getElementById(outId);
-    function upd(){ out.innerHTML=fn(); }
-    inputs.forEach(function(id){ var el=document.getElementById(id); if(el)el.addEventListener('input',upd); });
-    upd();
-  }
-  bindNum(['intA','intB'],'intOut',function(){
-    var a=parseInt(document.getElementById('intA').value)||0;
-    var b=parseInt(document.getElementById('intB').value)||0;
-    return '<span class="ok">'+a+' + '+b+' = '+(a+b)+'</span><br><span class="ok">'+a+' - '+b+' = '+(a-b)+'</span><br><span class="ok">'+a+' * '+b+' = '+(a*b)+'</span><br><span class="ok">'+a+' // '+b+' = '+Math.floor(a/b)+'</span><br><span class="ok">'+a+' % '+b+' = '+(a%b)+'</span><br><span class="pr">'+a+' / '+b+' = '+(a/b)+' (float)</span>';
-  });
-  bindNum(['flNum','flDec'],'floatOut',function(){
-    var n=parseFloat(document.getElementById('flNum').value); if(isNaN(n))n=3.14159;
-    var d=parseInt(document.getElementById('flDec').value); if(isNaN(d))d=2;
-    var pow=Math.pow(10,d);
-    return '<span class="pr">round('+n+', '+d+') = <span class="ok">'+(Math.round(n*pow)/pow)+'</span></span><br><span class="ok">5 + 2.0 = 7.0 (float)</span><br><span class="pr">scientific: 1.5e8 = 150,000,000</span>';
-  });
-  bindLive(['strInput'],'strOut',function(out){
-    var s=document.getElementById('strInput').value||'';
-    var i0=s.charAt(0)!==''||s.length===0;
-    out.innerHTML='<span class="pr">len("'+s+'") = <b class="ok">'+s.length+'</b></span><br><span class="pr">[0] = <b class="ok">'+(s.charAt(0)||'(empty)')+'</b> (indexing starts at 0)</span><br><span class="pr">[-1] = <b class="ok">'+(s.slice(-1)||'(empty)')+'</b></span><br><span class="pr">'+'[0:3] = <b class="ok">'+s.slice(0,3)+'</b></span><br><span class="pr">.upper() = <b class="ok">'+s.toUpperCase()+'</b></span><br><span class="pr">.lower() = <b class="ok">'+s.toLowerCase()+'</b></span><br><span class="pr">.count("a") = <b class="ok">'+(s.toLowerCase().split('a').length-1)+'</b></span>';
-  });
-  bindLive(['boolAge','boolId'],'boolOut',function(out){
-    var age=parseInt(document.getElementById('boolAge').value)||0;
-    var hasId=document.getElementById('boolId').value==='true';
-    var and16=age>=16&&hasId;
-    out.innerHTML='<span class="pr">10 &gt; 5 = <b class="ok">True</b></span><br><span class="pr">age &gt;= 16 and has_id = <b class="ok">'+(and16?'True':'False')+'</b></span><br><span class="pr">age &gt;= 18 and has_id = <b class="ok">'+(age>=18&&hasId?'True':'False')+'</b></span><br><span class="pr">= not True = <b class="ok">False</b></span>';
-  });
   // profile.py code panel is editable+runnable (wired above)
 
   // ---- reveal observer for section-inner pieces ----
