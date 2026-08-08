@@ -1382,7 +1382,8 @@ document.addEventListener('DOMContentLoaded', function(){
         if(peek().v===')')next();
         return e;
       }
-      throw pErr("SyntaxError: unexpected token '"+(t.k==='op'?t.v:t.v)+"'");
+      var tk=(t.k==='op'?t.v:t.v);
+      throw pErr("SyntaxError: unexpected token"+(tk?(" '"+tk+"'"):" in the expression"));
     }
     function parsePostfix(x){
       for(;;){
