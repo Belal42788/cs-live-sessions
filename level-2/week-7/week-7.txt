@@ -1,0 +1,952 @@
+Topic 7.1: What is Data Wrangling?
+How raw, scattered data is transformed into something usable — and the five-step pipeline that governs every transformation.
+
+Imagine you manage a busy café that takes orders through four different channels: a mobile app, a counter cashier, handwritten table tickets, and a third-party delivery platform. At the end of each week, the owner wants to know which dishes sold the most so she can plan her ingredient orders.
+
+The problem is immediate. The app records 'Grilled Chicken Wrap'. The cashier types 'GCW'. The table tickets say 'Chicken Wrap — grilled'. The delivery platform lists it as 'Wrap #4'. These are four names for exactly the same product — and no analysis tool in the world can automatically know that.
+
+🔬
+The Statistic That Surprises Most People
+Studies consistently find that Data Scientists spend approximately 80% of their working time on data preparation and wrangling — not on the analysis or machine learning that gets all the attention. Preparation is the majority of the real work.
+
+Café with four order channels
+Four channels, four formats — someone must unify them first.
+Data Wrangling is the process of transforming raw, scattered, inconsistent data into a clean, unified form that is ready for analysis. It is not the analysis itself — it is the essential preparation that makes analysis possible and trustworthy.
+
+The word 'wrangling' deliberately suggests effort. Real-world data is never neat. It arrives from multiple sources, recorded by different people using different conventions, in different file formats, at different times. Wrangling is the disciplined process of resolving all of that.
+
+Raw data
+Data exactly as it was collected — unfiltered, unharmonised, and often containing errors, gaps, and duplicates.
+Clean data
+Data that has been examined, fixed, and standardised so that every row and column means exactly what it is supposed to mean.
+Data Wrangling
+The structured process of moving from raw data to clean data, using a defined sequence of steps.
+✅
+A Useful Distinction
+Data Analysis asks: 'What does the data tell us?' Data Wrangling asks: 'Is the data trustworthy enough to analyse?' You must answer the second question before the first one has any meaning.
+
+There is a principle in data science that is as important as any algorithm: Garbage In, Garbage Out. It means that the quality of your output is determined entirely by the quality of your input. No matter how sophisticated the analysis, it cannot produce reliable insights from unreliable data.
+
+⚠️
+The Core Principle: Garbage In, Garbage Out
+Feeding a flawed dataset into even the most advanced analytical tool will produce flawed results — and those results may look convincing, which makes them more dangerous than obvious errors. Data Wrangling exists precisely to prevent this.
+
+In the café scenario, skipping Data Wrangling means the analysis sees 'Grilled Chicken Wrap', 'GCW', 'Chicken Wrap — grilled', and 'Wrap #4' as four entirely separate menu items. The true bestseller — which may account for a quarter of all orders — appears to be a minor seller in each of its four disguises.
+
+Without Wrangling	With Wrangling
+'Grilled Chicken Wrap' registers as 18 orders.	All variants merge into one item: 72 orders total.
+'GCW' appears as an unknown item with 21 orders.	No mystery items — every name is standardised.
+Owner orders less chicken: wrong decision.	Owner orders more chicken: correct, evidence-based decision.
+Four names, none showing the true picture.	One name, full picture visible.
+Data Wrangling vs Data Analysis
+Wrangling asks 'Is the data trustworthy?' — answer this before analysis.
+Data Wrangling is not a single action — it is a pipeline: a structured sequence of steps, each with a specific purpose. Skipping or reordering steps produces unreliable results. Every professional data workflow follows this same five-stage structure.
+
+Five-step pipeline: Gather → Assess → Clean → Enrich → Publish
+Every data wrangling project follows these five steps in order.
+The Five Steps of the Data Wrangling Pipeline
+1 — Gather
+Collect data from every relevant source into one place.
+In the café example: export the app log, cashier records, table tickets, and delivery platform data.
+Different sources will inevitably use different formats — that is the problem the next steps solve.
+2 — Assess
+Examine the gathered data carefully without changing anything yet.
+Look for problems: missing entries, duplicate rows, inconsistent naming, wrong data types.
+Document every problem you find before attempting any fix.
+3 — Clean
+Address each documented problem with a deliberate, justified fix.
+Standardise dish names, correct date formats, remove duplicate orders.
+Every decision made during cleaning should be recorded — not just what was done, but why.
+4 — Enrich
+Add new information that increases the value of the data.
+In the café: add a column for dish category (hot drinks, sandwiches, desserts), or add calculated profit per order.
+Enrichment draws on external knowledge or derived calculations — it does not invent data.
+5 — Publish
+Deliver the clean, enriched data to whoever needs it.
+For the café owner: a weekly sales report. For the kitchen manager: a dashboard. For the accountant: a spreadsheet.
+Publish is the step that converts all the effort into actual value.
+Step	Question It Answers	Café Example
+Gather	Where does the data live?	Download records from the app, cashier system, and delivery platform.
+Assess	What is wrong with this data?	Notice that the dish 'GCW' and 'Grilled Chicken Wrap' appear to be the same item.
+Clean	How do we fix each problem?	Standardise all variants to 'Grilled Chicken Wrap' across all records.
+Enrich	What extra value can we add?	Add a 'Dish Category' column and a 'Profit Margin' column.
+Publish	Who needs this data, and how?	Export the final table as a report for the owner's Monday meeting.
+⚠️
+Many people use 'data cleaning' and 'data wrangling' as if they mean the same thing. Cleaning is only one step (step 3) in the five-step wrangling pipeline. Wrangling also includes gathering data, assessing its quality, enriching it with new information, and publishing the result.
+There is no such thing as data that arrives perfectly ready for analysis. Even data from a well-maintained database will have edge cases, formatting differences, or missing values caused by genuine gaps in real-world records. Every dataset benefits from at least an assessment phase.
+Data is not static. New records arrive, systems change, and business requirements evolve. Wrangling is an ongoing discipline, not a one-time task. A café that wrangles its data once in January but not again in June will be working from assumptions that no longer match reality.
+?
+Which step in the Data Wrangling pipeline is responsible for fixing missing values and inconsistent dish names?
+
+A.
+Gather
+
+B.
+Assess
+
+C.
+Clean
+
+D.
+Publish
+?
+A café adds a new column to its order data showing the profit margin for each dish. Which pipeline step does this represent?
+
+A.
+Assess
+
+B.
+Clean
+
+C.
+Enrich
+
+D.
+Gather
+📌 Topic Summary
+▲
+Data Wrangling is the structured process of transforming raw, scattered data into clean, reliable data that is ready for analysis.
+The five-step pipeline is: Gather → Assess → Clean → Enrich → Publish. Each step has a specific, non-interchangeable role.
+Data Scientists spend approximately 80% of their time on wrangling — not on the analysis that typically gets credit.
+Garbage In, Garbage Out: no analysis, however sophisticated, can produce trustworthy results from untrustworthy data.
+Enrichment adds new value (categories, calculations, external data); Publish delivers the finished dataset to the people who need it.
+Data Wrangling is not a one-time event — it is a recurring discipline that must be applied every time data arrives or requirements change.
+↗
+What is Data Wrangling? — IBM Think
+https://www.ibm.com/think/topics/data-wrangling
+↗
+What is Data Wrangling? An Introduction — Alteryx (article)
+https://www.alteryx.com/glossary/data-wrangling
+↗
+80% of Data Science Is Data Preparation — Forbes
+https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/
+
+
+Topic 7.2: Different Sources of Data
+The four types of data sources a Data Scientist works with — what each is, when it is used, and how it fits into the wrangling pipeline.
+
+A large hospital generates data constantly. Doctors fill in patient forms by hand, which are later scanned and saved as files. A central patient database stores every admission, discharge, and diagnosis going back twenty years. Medical devices — heart monitors, glucose sensors, blood pressure cuffs — send readings automatically every few minutes. And the hospital's pharmacy portal connects to a national drug-pricing API to retrieve up-to-date medication costs.
+
+This hospital is not unusual. Most real-world organisations rely on all four of these mechanisms simultaneously. Understanding where data comes from — and what the differences between sources mean for how you handle it — is one of the first skills a Data Scientist must develop.
+
+Hospital data sources
+Files, databases, APIs, and live streams — each needs different wrangling.
+A file is a self-contained collection of data stored on a computer or server. Files are the most familiar data format — they are what most people encounter first. The most common file types in data work are CSV (comma-separated values), Excel spreadsheets, and JSON (a structured text format used widely in modern software).
+
+📄
+CSV Files
+Plain text files where each row is a record and columns are separated by commas. Lightweight, universal, and readable by almost any tool. Hospital use: exported patient discharge summaries.
+📊
+Excel Files
+Spreadsheet files with support for multiple sheets, formatting, and formulas. Widely used in administrative and financial contexts. Hospital use: monthly staffing rosters and budget reports.
+🗂️
+JSON Files
+Structured text files that store data as nested key-value pairs. Ideal for complex, hierarchical data. Hospital use: medical imaging metadata and lab test result packages.
+⚠️
+The Wrangling Challenge with Files
+Files go stale. A patient discharge file exported on Monday does not reflect Tuesday's admissions. Files from different departments may also use different column names or date formats for the same underlying information — requiring standardisation before they can be combined.
+
+Common file formats
+CSV, Excel, JSON, Parquet — each suits different use cases.
+A database is an organised, permanent system for storing and retrieving data. Unlike a file, a database is designed to be updated continuously and queried in real time. Hospitals use databases to store every patient record, every scheduled appointment, and every prescription — because data in a database can be searched, filtered, and updated instantly.
+
+What it is
+A structured storage system where data is organised into tables (rows and columns), maintained by dedicated software, and accessed via queries.
+Who manages it
+Usually a Database Administrator (DBA) who controls access, ensures backups, and monitors performance.
+Hospital example
+The central Patient Management System (PMS) — contains every patient's admission history, assigned doctor, diagnoses, and room allocation.
+Key advantage
+Data is always current. Querying a database gives you the state of the data right now, not last week.
+Wrangling note
+Database data is usually more consistent than file data, but it still requires assessment — databases accumulate errors over time through human data entry.
+File
+A snapshot — a frozen moment in time. Best for historical analysis and sharing data with people who don't have direct database access.
+Database
+A living record — continuously updated. The right source for anything that needs to reflect the current state of the world.
+Relational database join
+SQL links tables through shared keys.
+An API (Application Programming Interface) is a structured way for one software system to request data from another. Rather than downloading a file or directly accessing a database, a system sends a request to an API and receives a response — usually formatted as JSON. APIs allow systems to share data without exposing their internal workings.
+
+The hospital's pharmacy system uses a national drug database API. When a doctor prescribes a medication, the pharmacy software sends an API request asking for the current price and stock status of a specific drug. The API responds with the latest information in seconds — without the pharmacy needing to store or maintain that data itself.
+
+How an API Interaction Works
+Step 1 — Request
+The hospital system sends a structured query to the drug database API.
+The query specifies exactly what information is needed (drug name, dosage, region).
+Authentication credentials are included to prove the request is authorised.
+Step 2 — Response
+The drug database returns a structured JSON response.
+The response includes current price, availability, and any regulatory warnings.
+This happens in real time — typically within a fraction of a second.
+Step 3 — Use
+The hospital system extracts the needed fields from the JSON response.
+The extracted data is used immediately or stored for later analysis.
+The API data may need wrangling if formats or units differ between API versions.
+API request/response flow
+APIs let two systems exchange data on demand.
+A live stream is a continuous, uninterrupted flow of data generated in real time. Unlike files or databases, streaming data is not collected and then analysed — it must be processed as it arrives, because the volume is too large and the time sensitivity too high to wait.
+
+In a hospital's Intensive Care Unit (ICU), every patient bed is connected to monitors that continuously stream vital signs: heart rate, blood oxygen level, respiratory rate, and blood pressure. These readings arrive every few seconds. A system that analyses this stream can trigger an alert the moment a patient's readings move outside safe ranges — potentially saving lives.
+
+Feature	File or Database	Live Stream
+Data arrival	Collected and stored, then analysed	Continuous — must be processed in real time
+Volume handling	Manageable in batches	Potentially millions of data points per minute
+Time sensitivity	Historical analysis — timing flexible	Immediate response often required
+Hospital example	Patient admission records	ICU vital signs every 3 seconds
+Wrangling challenge	Outdated formats, duplicate rows	Incomplete readings, sensor errors, signal loss
+⚠️
+The Wrangling Challenge with Live Streams
+Streaming data is the hardest to wrangle because you cannot wait until everything has arrived to fix problems — problems must be detected and handled as they occur. A sensor that fails to send a reading for 30 seconds is a missing value problem that arrives in real time and requires a real-time decision.
+
+Batch vs stream processing
+Batch for periodic reports; stream for real-time decisions.
+Real data projects rarely use just one source type. A hospital data analyst might combine a patient database for historical records, a drug pricing API for current costs, daily CSV exports from a billing system, and a live stream from ICU monitors — all in a single analysis workflow. Understanding what each source provides, and what its limitations are, is essential for planning the wrangling work ahead.
+
+Four data source types: Files, Databases, APIs, Live Streams
+Each source type has a different shape, speed, and access method — choosing the right one matters.
+📁
+Files
+Snapshots in time. Best for batch analysis of completed datasets. Watch for stale data and format inconsistencies between files from different departments.
+🗄️
+Databases
+Living records. Best for current-state queries and large structured datasets. Still require assessment — human entry errors accumulate over years.
+🔌
+APIs
+On-demand data from external systems. Best for real-time lookups and integration with third-party services. Format can change between API versions.
+📡
+Live Streams
+Continuous real-time data. Best for monitoring and instant alerting. Wrangling must happen in real time — problems cannot be fixed retrospectively.
+⚠️
+APIs are structured and consistent compared to hand-typed files, but they are not free of wrangling challenges. API responses may use different units, include fields with null values, or change their structure when the API is updated. Every data source — including APIs — requires assessment.
+A database enforces structure — it ensures that a date field contains a date, not random text. But it cannot prevent a human from entering the wrong date. Databases accumulate human errors over time, and those errors are often subtle: a patient's birth year entered as 1929 instead of 1992, or a diagnosis code with a digit transposed.
+Adding more sources increases complexity and introduces more potential for inconsistency. A well-wrangled dataset from two clean sources is far more valuable than a poorly wrangled dataset from ten sources. Quality of integration matters more than quantity of sources.
+When data professionals work at scale — gathering thousands of rows from multiple sources at once — they turn to Python. Where you use Google Sheets to open a single file manually, a Python script can read hundreds of files, pull data from an API, and query a database automatically, all in one run. You do not need to write Python code yourself at this stage, but understanding what it can do will help you see the full picture of how real data pipelines work.
+
+Source Type	Python Library	What It Does
+Files (CSV, Excel, JSON)	pandas	Reads and writes structured files in a single line — pd.read_csv(), pd.read_excel(), pd.read_json()
+Relational Databases	SQLAlchemy / psycopg2	Connects to databases like PostgreSQL or MySQL and runs SQL queries directly from Python
+APIs	requests	Sends HTTP requests to any API endpoint and receives the JSON response as data ready to analyse
+Live Streams	kafka-python / websocket-client	Listens to a real-time data stream and processes or stores each incoming message as it arrives
+In practice, a data analyst writing a Python script might read a CSV of patient records with pandas, enrich it by calling a hospital API with requests, and save the result back to a database — all without opening a single file manually. This is exactly the kind of automation that makes data gathering at scale possible.
+
+Python data-gathering libraries
+pandas, SQLAlchemy, requests, Kafka — one per source type.
+?
+A hospital's ICU uses devices that send patient vital signs to a central system every five seconds. What type of data source is this?
+
+A.
+File
+
+B.
+Database
+
+C.
+API
+
+D.
+Live Stream
+?
+Which data source type is most appropriate when a pharmacy needs the current price of a medication from a national regulator — without storing the entire national database locally?
+
+A.
+File
+
+B.
+Database
+
+C.
+API
+
+D.
+Live Stream
+📌 Topic Summary
+▲
+Data arrives from four main source types: Files, Databases, APIs, and Live Streams — each with different characteristics and wrangling challenges.
+Files (CSV, Excel, JSON) are snapshots in time — useful for batch analysis but prone to going stale and having format inconsistencies.
+Databases are living records, always current, but still accumulate human entry errors over time and require assessment.
+APIs allow one system to request specific data from another in real time — ideal for external lookups without local storage.
+Live Streams deliver continuous, real-time data that must be processed as it arrives — wrangling problems must be handled in real time.
+Real projects combine multiple source types, making it essential to understand the strengths and limitations of each before planning wrangling work.
+↗
+Introduction to Relational Databases — Oracle
+https://www.oracle.com/database/what-is-a-relational-database/
+↗
+What is an API? — MDN Web Docs (article)
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs/Introduction
+↗
+Stream Processing Explained — Confluent
+https://www.confluent.io/learn/stream-processing/
+
+
+Topic 7.3: Assessing Data Quality
+The three pillars of data quality and the five problem types that assessment uncovers — explored through a sports league management scenario.
+
+Consider the data administrator for a regional football league. Every week, match officials submit scorecards, clubs submit player registration updates, and referees file incident reports. By the time all these submissions reach the central database, the data is a mixture of carefully typed entries, rushed handwriting that was later digitised, and copy-pasted records from older seasons.
+
+Before the league can publish a standings table, award a trophy, or decide whether a player is eligible to play in the final, someone must assess the quality of that data. Not fix it yet — just understand what is right, what is wrong, and what is missing.
+
+ℹ️
+What This File Covers
+This reading introduces the Assessment step of the Data Wrangling pipeline. We examine the three quality pillars — Accuracy, Completeness, and Consistency — and the five specific problem types that assessment is designed to detect. The sports league provides our examples throughout.
+
+When data professionals speak about 'data quality', they are measuring three distinct properties. A dataset can fail on one, two, or all three simultaneously. Understanding each pillar separately makes it possible to assess data methodically rather than just declaring it 'good' or 'bad'.
+
+🎯
+Accuracy
+The data reflects the real-world truth it is supposed to represent. A player's recorded goals tally matches the actual goals the player scored. An incorrect value is inaccurate even if it is formatted perfectly.
+📦
+Completeness
+Every expected value is present. If every player must have a date of birth on file, then any record with a missing birth date fails the completeness check — regardless of how accurate the rest of the record is.
+🔗
+Consistency
+The same information means the same thing everywhere it appears. If one table records a club as 'Al-Ahly SC' and another records the same club as 'Al Ahly', those two representations are inconsistent — even if both are technically accurate.
+Pillar	The Question It Asks	Failing Example from the League
+Accuracy	Is this value correct?	Player recorded as scoring 7 goals when the actual total is 4.
+Completeness	Is any expected value missing?	Player registration has no listed nationality — a required field.
+Consistency	Is the same thing described the same way everywhere?	One table says 'Red Card' and another says 'RC' for the same type of incident.
+🔬
+Why All Three Pillars Matter
+A dataset that is accurate but incomplete cannot be used for any analysis that depends on all records. A dataset that is accurate and complete but inconsistent will produce wrong aggregations — for example, combining 'Red Card' and 'RC' as if they were different things, and missing the true total count of red cards.
+
+Knowing the three quality pillars tells you what you are looking for in principle. The five problem types below tell you specifically what to look for in practice. These five categories cover the vast majority of data quality issues found in real-world datasets.
+
+The Five Data Quality Problem Types
+1 — Missing Values
+A field that should contain a value contains nothing.
+League example: a match scorecard where the half-time score field was left blank.
+Missing values can appear as empty cells, or as placeholder text like 'N/A', 'None', or '0' used incorrectly.
+2 — Duplicates
+The same real-world record appears more than once in the dataset.
+League example: a match result entered twice because two officials both submitted the scorecard independently.
+Duplicates inflate counts and averages — one match appears to have generated twice the goals.
+3 — Wrong Data Types
+A value is stored in a format inappropriate for what it represents.
+League example: the 'Match Date' column contains entries like 'October 5th' (text) alongside '05/10/2024' (a proper date) — the system cannot sort or compare these correctly.
+Wrong data types prevent calculations, sorting, and filtering from working as expected.
+4 — Formatting Inconsistencies
+The same information is written in different formats across different records.
+League example: club names recorded as 'Zamalek', 'zamalek', 'ZAMALEK', and 'Zamalek SC' in different rows.
+Inconsistent formatting causes grouping errors — the system treats each variant as a separate entity.
+5 — Out-of-Range Values
+A value exists but falls outside any plausible or permitted boundary.
+League example: a player's age recorded as 7 years old, or a match attendance figure of -500.
+Out-of-range values often indicate a data entry error (a misplaced digit) or a system fault.
+The Assessment step has one defining rule: observe and document, do not fix. This discipline is not arbitrary. Fixing data without fully understanding the scope of all problems can cause new problems. A 'fix' applied to one issue might interact badly with another issue that has not been identified yet.
+
+In the sports league, this means reviewing all submitted scorecards, player files, and incident reports to catalogue every anomaly before a single change is made. The output of Assessment is a written log of problems — not a repaired dataset.
+
+Rule 1
+Look at every column, not just the suspicious ones.
+Problems often appear where you least expect them. A column that looks fine at a glance may contain formatting inconsistencies invisible at small scale.
+Rule 2
+Record both what the problem is and where it is.
+A problem log entry should specify: problem type, affected column, number of affected rows, and one example. Vague notes ('some dates look wrong') are not useful.
+Rule 3
+Do not make assumptions about why a problem exists.
+During assessment, your job is description, not diagnosis. You note that a value is missing — you do not yet decide whether to fill it in or delete the row.
+✅
+Assessment and Identification Are One Activity
+Assessing data quality and identifying specific problems are not two separate phases — they happen together. As you examine the data, you are simultaneously measuring quality (via the three pillars) and cataloguing specific problems (via the five problem types). The result is a comprehensive problem log that makes the Cleaning step systematic rather than guesswork.
+
+The league administrator needs to publish the end-of-season standings table. Before she can do so, she runs a systematic assessment of the match results database. Here is what she finds, organised by problem type.
+
+Problem Type	What Was Found	Quality Pillar Affected
+Missing Values	3 matches have no recorded final score.	Completeness
+Duplicates	Match on 14 March appears twice — submitted by both teams.	Accuracy
+Wrong Data Types	'Match Date' column has 12 entries stored as text strings, not dates.	Consistency
+Formatting Inconsistencies	Club 'National FC' also appears as 'National' and 'National F.C.' in different rows.	Consistency
+Out-of-Range Values	One match record shows a crowd attendance of 0 — impossible for a played fixture.	Accuracy
+ℹ️
+What Happens with This Log?
+Each entry in this assessment log becomes a task for the Cleaning step. The administrator does not start fixing anything yet — she completes the log first, reviews it, and then moves to Cleaning with a clear, complete picture of what needs to be done and why.
+
+⚠️
+Misconception 1: If the Data Came from a Trusted Source, Assessment Is Unnecessary
+No source is exempt from assessment. Even a database maintained by a professional team accumulates errors over time. Trusted sources reduce the likelihood of problems — they do not eliminate it. The only way to know whether the data is sound is to look at it.
+
+⚠️
+Misconception 2: A Small Number of Problems Is Not Worth Documenting
+Three missing match scores out of 200 might seem trivial — until one of those three missing scores belongs to a match that decides the league title. The significance of a problem depends on its context, not its frequency. Document everything and decide its importance during Cleaning.
+
+⚠️
+Misconception 3: Assessment Must Come Before Gather
+Assessment comes after Gather, not before. You can only assess data that you have collected. The pipeline order — Gather, then Assess — exists because you need all the data in front of you before you can form a complete picture of its quality.
+
+?
+A football league database shows the same player registered under two different spellings: 'Mohamed Ali' and 'Mohammed Ali'. Which problem type does this represent?
+
+A.
+Missing Values
+
+B.
+Duplicates
+
+C.
+Formatting Inconsistencies
+
+D.
+Out-of-Range Values
+?
+During the Assessment step, the administrator notices that a player's recorded age is 112 years. What should she do?
+
+A.
+Immediately change the age to a reasonable value.
+
+B.
+Ignore it — unusual values are sometimes legitimate.
+
+C.
+Document it as an Out-of-Range Value and continue assessing.
+
+D.
+Delete the row immediately to prevent it from affecting analysis.
+📌 Topic Summary
+▲
+Data quality is measured against three pillars: Accuracy (values are correct), Completeness (no expected values are missing), and Consistency (the same thing is represented the same way everywhere).
+The five problem types are: Missing Values, Duplicates, Wrong Data Types, Formatting Inconsistencies, and Out-of-Range Values.
+Assessment is a documentation phase — the goal is to observe and record every problem, not to fix anything yet.
+A problem log is the output of Assessment: each entry specifies problem type, affected column, number of rows affected, and an example.
+Assessment and problem identification happen simultaneously — as you examine the data, you categorise what you find using the five problem types.
+No data source is exempt from assessment — trusted sources reduce error likelihood but never eliminate it entirely.
+↗
+Data Quality: A Comprehensive Overview — DAMA International
+https://www.dama.org/cpages/body-of-knowledge
+↗
+What Is Data Quality? A Guide to Its Key Dimensions (IBM)
+https://www.ibm.com/think/topics/data-quality
+↗
+Assessing Data Quality — Statistics Canada
+https://www150.statcan.gc.ca/n1/pub/12-539-x/2009001/quality-qualite-eng.htm
+
+
+Topic 7.4: Data Cleaning
+One deliberate cleaning strategy for each problem type — explored through the lens of a city bus schedule database.
+
+A city's public transport authority manages dozens of bus routes, hundreds of stops, and thousands of scheduled trips per day. Its schedule database is used by the passenger-facing app, the route planning department, and the operations team. When the database is wrong, buses don't match their published timetables, passengers miss connections, and planners make decisions based on phantom routes.
+
+The authority's data team has completed the Assessment step. They have a problem log — a documented list of every quality issue found in the schedule database. Now they move to Cleaning: applying one deliberate fix to each documented problem type.
+
+Transit authority messy data
+One table, five problem types — each row a different failure.
+A missing value is a field that should contain data but does not. In the transit database, some bus stop records are missing their geographic coordinates. Some trip records are missing their scheduled departure time. The appropriate fix depends entirely on the column and its purpose.
+
+Strategy A — Fill
+Replace the missing value with an appropriate substitute. Used when the data can be reasonably estimated or retrieved. Example: a bus stop with a missing coordinate can have its coordinate looked up from an official mapping source.
+Strategy B — Remove
+Delete the row or column entirely. Used when filling would be guesswork and the row is not essential to the analysis. Example: a trip record missing its departure time and origin stop cannot be used meaningfully — removing it is safer than fabricating values.
+⚠️
+Never Fill Blindly
+A common mistake is filling all missing values with a single default (such as zero or 'Unknown') regardless of context. A departure time of '00:00' is not the same as 'we do not know when this trip departs' — filling with zero creates false precision and can mislead every subsequent analysis.
+
+Missing Value Scenario	Recommended Strategy	Reasoning
+Bus stop coordinate missing	Fill — look up from official map	The correct value exists and can be retrieved reliably.
+Passenger count for one trip missing	Fill — use the average for that route	The true count is unavailable, but the average provides a reasonable estimate.
+Departure time and route both missing	Remove the row	Too much is unknown to make the record useful — filling would be fabrication.
+Fill or remove decision tree
+Depends on recoverability and whether the row is still useful.
+A duplicate is a record that appears more than once representing the same real-world event. In the transit database, Route 42's timetable was uploaded twice by two different staff members. Every trip on Route 42 now appears in duplicate — making the database show twice the actual number of scheduled trips.
+
+The cleaning strategy for duplicates is deduplication: identifying duplicate rows and retaining exactly one copy. The challenge lies in deciding which copy to keep when the two copies differ slightly — for example, if one was uploaded with a minor correction.
+
+Rule 1
+Compare all key fields to confirm the record is truly a duplicate.
+Two rows may look similar but represent different trips. Confirm that route number, direction, date, and time all match before concluding they are duplicates.
+Rule 2
+Keep the most complete or most recently updated copy.
+If one duplicate has a corrected value and the other does not, keep the corrected version. Document which you kept and why.
+Rule 3
+Never delete both copies.
+Removing all copies of a record to 'be safe' deletes real data. The goal is one accurate copy per real-world event — not zero.
+✅
+Why Deduplication Matters for Transit Data
+In the transit authority's passenger app, duplicate trips would show passengers two buses arriving at the same time from the same stop. Passengers might plan around the 'second' bus — which does not exist. Deduplication is not just a data hygiene task; it prevents real operational confusion.
+
+Before/after deduplication
+Use phone + jersey + city — never match on name alone.
+A wrong data type occurs when a value is stored in a format that is inappropriate for what it represents. In the transit database, the 'Scheduled Departure' column contains a mix of properly formatted time values ('08:45') and text strings ('8h45', 'quarter to nine', '845'). The system cannot sort, filter, or calculate anything meaningful from that column in its current state.
+
+The cleaning strategy is type conversion: transforming each value into the correct, consistent format. Every entry in 'Scheduled Departure' should be a standardised 24-hour time value (HH:MM). Values that cannot be converted because they are too ambiguous must be treated as missing values.
+
+What it causes
+Sorting failures, incorrect calculations, and broken filter conditions. A column of mixed types behaves unpredictably.
+The fix
+Convert every value in the column to the correct type. Establish a single standard format before conversion begins.
+Transit example
+'8h45' and '08:45' both become 08:45. '845' becomes 08:45. 'quarter to nine' cannot be converted reliably — treat as missing.
+Document the standard
+Record which format was chosen as the standard (e.g. 24-hour HH:MM) and why, so future data additions follow the same convention.
+Wrong Data Types — Examples and Fixes
+Column
+Wrong Value
+Problem
+Fix
+Age
+Can't sort or calculate
+"fifteen"
+Replace with 15
+Jersey No.
+Text, not integer
+"No. 7"
+Remove "No.", store 7
+Jersey No.
+Arabic label + number
+"رقم 10"
+Remove "رقم", store 10
+Wrong types corrupt calculations silently — validate column types before analysis.
+Text in a numeric column breaks every calculation.
+Formatting inconsistencies occur when the same entity is described in multiple different ways. In the transit database, the same bus depot appears as 'Central Depot', 'central depot', 'Central-Depot', and 'CTR Depot' in different records. Any query that filters or groups by depot name will produce fragmented results.
+
+The cleaning strategy is standardisation: choosing one canonical format and converting every variant to that form. The chosen format should reflect the organisation's official naming — in this case, the formal name used in planning documents.
+
+Before Standardisation	After Standardisation
+central depot	Central Depot
+Central-Depot	Central Depot
+CTR Depot	Central Depot
+Central Depot	Central Depot
+CENTRAL DEPOT	Central Depot
+One Concept, Many Spellings — Formatting Inconsistencies
+Forward
+مهاجم
+Arabic variant
+FWD
+Abbreviation
+Fwrd
+Misspelling
+forward
+Lowercase
+FORWARD
+ALL CAPS
+Fwd.
+Trailing dot
+Same meaning — but a database sees 6 entirely different values.
+Six spellings, one meaning — standardise before any query.
+An out-of-range value is a value that exists but falls outside any plausible boundary. In the transit database, one record shows a bus journey taking 847 minutes between two stops that are actually 12 minutes apart. Another shows a scheduled departure time of '25:00'. These are clearly errors — but the cleaning response is more nuanced than simply deleting them.
+
+🚩
+Strategy A — Flag
+Mark the record as suspect without removing it. Useful when the correct value can be verified with the source. Example: the 847-minute journey should be flagged and sent back to the route data team for verification before being corrected or removed.
+🗑️
+Strategy B — Remove
+Delete the row when the value is impossible and cannot be corrected. Example: a departure time of '25:00' is impossible and has no correct analogue — it should be removed and the source of the error investigated.
+⚠️
+Establish Boundaries Before You Clean
+You cannot identify out-of-range values without first defining what 'in range' means. For the transit database, the data team establishes that journey times must be between 1 and 180 minutes, and departure times must fall between 04:00 and 02:00 (accounting for late-night services). Any value outside these boundaries is out of range.
+
+The five cleaning strategies above are not mechanical rules — they are principled guidelines. The right approach for any given problem depends on how the cleaned data will be used. The same missing value might be filled in one context and removed in another.
+
+Before Cleaning
+Name
+Age
+City
+Score
+Ahmed
+25
+Cairo
+88
+17
+Giza
+72
+Ahmed
+25
+Cairo
+88
+Sara
+N/A
+iskndria
+150
+Mona
+30
+القاهرة
+91
+After Cleaning
+Name
+Age
+City
+Score
+Ahmed
+25
+Cairo
+88
+Unknown
+17
+Giza
+72
+Sara
+0
+Alexandria
+91
+Mona
+30
+Cairo
+91
+Missing value
+Duplicate row
+Wrong data type / format
+Inconsistent value
+Fixed / filled
+Cleaning transforms a dataset with multiple problems into one that is reliable, consistent, and ready to use. Each highlighted cell maps to a problem type in the key.
+For example: a missing passenger count in a trip record might be filled with an average if the data is being used to plan future capacity. But if the data is being used to calculate precise revenue totals, a filled average is not accurate enough — the row should be excluded from that particular calculation.
+
+The Five Cleaning Strategies at a Glance
+Missing Values
+Fill — when a reliable substitute value exists.
+Remove — when filling would require fabrication.
+Duplicates
+Deduplicate — retain one accurate copy, delete the rest.
+Document which copy was kept and why.
+Wrong Data Types
+Convert — transform to the correct, standardised type.
+Treat unconvertible values as missing.
+Formatting Inconsistencies
+Standardise — choose one canonical format and apply it universally.
+Document the chosen standard for future data entry.
+Out-of-Range Values
+Flag — mark as suspect and send for verification.
+Remove — delete if the value is impossible and unverifiable.
+⚠️
+Not every problem identified during Assessment requires a fix. Some problems may be outside the scope of the current analysis. Some may require decisions that only a domain expert can make. The output of Assessment is a problem log — Cleaning works through that log selectively, with justification for every decision.
+Deletion can introduce bias. If bus trips with unusually high passenger counts are consistently the ones with missing values, deleting those rows will make the passenger average artificially lower. Removing data is a decision with consequences — it should be as deliberate as any other cleaning choice.
+Cleaning often requires multiple passes. A first pass might standardise formats; a second pass might then reveal out-of-range values that were previously obscured by the inconsistent formatting. Expect to iterate between Assessment and Cleaning rather than completing one before beginning the other.
+?
+A transit database contains a trip record where the scheduled departure time is listed as '25:30'. What is the most appropriate cleaning strategy?
+
+A.
+Fill it with the average departure time for that route.
+
+B.
+Flag it for verification with the original source.
+
+C.
+Remove it, as the value is impossible and cannot be corrected.
+
+D.
+Leave it unchanged — it may be from a different time zone.
+?
+The transit database has 'Central Depot' recorded as 'central depot', 'CENTRAL DEPOT', and 'CTR Depot' across different rows. Which cleaning strategy addresses this?
+
+A.
+Deduplication
+
+B.
+Type Conversion
+
+C.
+Standardisation
+
+D.
+Flagging
+📌 Topic Summary
+▲
+Cleaning applies one deliberate, documented fix to each problem identified during Assessment — it does not make random or intuitive changes.
+Missing values are addressed by filling (when a reliable substitute exists) or removing (when filling would require fabrication).
+Duplicates are resolved by deduplication: retaining one accurate copy of each real-world record and deleting the rest.
+Wrong data types are fixed by conversion: transforming every value in the column to the correct, standardised type.
+Formatting inconsistencies are resolved by standardisation: choosing one canonical form and applying it universally.
+Out-of-range values are either flagged for verification or removed — the choice depends on whether the correct value can be retrieved.
+↗
+Data Cleaning — Wikipedia
+https://en.wikipedia.org/wiki/Data_cleansing
+↗
+Handling Missing Data — Kaggle Learn
+https://www.kaggle.com/learn/data-cleaning
+↗
+Data Cleaning in Data Science — IBM
+https://www.ibm.com/think/topics/data-cleaning
+
+
+Topic 7.5: Data Wrangling in Real-World Applications
+How the full five-step pipeline operates in real systems — from weather stations to agricultural planning — and why wrangling is the invisible infrastructure of the data world.
+
+A national agricultural ministry wants to help farmers plan their planting schedules. To do this, it needs accurate, timely weather data from hundreds of weather stations scattered across the country — data that can then be combined with soil quality records, crop performance history, and satellite imagery to produce regional planting recommendations.
+
+Behind every recommendation that reaches a farmer's phone, the full Data Wrangling pipeline has already run. Weather readings were gathered from incompatible station systems. Data quality was assessed and problems were catalogued. Records were cleaned. New fields were added. And the final dataset was published to the recommendation engine. None of that work is visible to the farmer — but without it, the recommendations would be dangerously wrong.
+
+The agricultural ministry's data team runs the pipeline on a 24-hour cycle. Each phase has a defined input, a defined output, and a specific team responsible for it. What follows is a realistic walkthrough of how all five steps operate together.
+
+Spotify wrangling pipeline: Gather → Assess → Clean → Enrich → Publish
+This is what happens behind the scenes every time Spotify updates your Discover Weekly playlist.
+The Five-Step Pipeline: Agricultural Weather System
+Step 1 — Gather
+Every six hours, the system pulls readings from 340 weather stations across the country.
+Stations use three different hardware generations — each sends data in a different format.
+Temperature may arrive in Celsius from some stations and Fahrenheit from others.
+Some stations transmit via cellular network; remote stations transmit via satellite. Both feeds are collected into one raw data store.
+Step 2 — Assess
+The system automatically checks for missing readings, duplicate transmissions, and values outside physical possibility.
+A station reporting a temperature of -200°C or 9999mm of rainfall has clearly malfunctioned.
+Assessment produces a quality report: which stations sent clean data, which sent suspicious data, and which sent nothing at all.
+Step 3 — Clean
+Temperature values in Fahrenheit are converted to Celsius — all measurements standardised.
+Duplicate transmissions (caused by stations resending after a connectivity drop) are deduplicated.
+Readings from malfunctioning stations are flagged and excluded from that cycle's analysis.
+Missing readings for minor stations are filled using interpolation from neighbouring stations.
+Step 4 — Enrich
+Each station's readings are joined with its location metadata: elevation, region, historical averages.
+A new field 'Frost Risk Index' is calculated from temperature, humidity, and wind speed together.
+Crop vulnerability ratings are added for each region based on the current weather pattern and the crops planted there.
+Satellite data is merged to add cloud cover and soil moisture readings not available from ground stations.
+Step 5 — Publish
+The clean, enriched dataset is delivered to three consumers: the public weather forecast API, the ministry's internal crop planning dashboard, and the farmer-facing mobile app.
+Each consumer receives the data in its required format: JSON for the API, a database table for the dashboard, push notifications for the app.
+A data lineage record is saved: which station, which cycle, which cleaning decisions were applied — so any recommendation can be traced back to its source.
+Enrichment is the step in the pipeline that transforms a clean dataset into a genuinely useful one. The distinction is important: clean data is correct; enriched data is correct and contextualised. Enrichment adds fields, joins external sources, and creates derived calculations — but it never fabricates values.
+
+In the agricultural system, the raw weather readings are correct after Cleaning — but they do not yet mean anything to a wheat farmer in the Delta region. The Enrich step calculates the Frost Risk Index, joins in historical crop yield data, and adds a regional advisory flag ('High Risk — postpone planting'). All of this is derived from real data, not invented.
+
+What Enrichment Adds	How It Is Generated	Why It Matters
+Frost Risk Index	Calculated from temperature, humidity, and wind speed together	A single number that summarises complex conditions for a non-specialist farmer
+Historical Comparison	Joined from a 30-year historical weather database	Allows the ministry to say 'this October is 2°C colder than average'
+Crop Vulnerability Rating	Derived from the current weather pattern and the regional crop registry	Tells the system which crops in which regions are most at risk today
+Regional Advisory Flag	Set by a rule engine using the Frost Risk Index and crop ratings	Provides an actionable recommendation the farmer can act on immediately
+✅
+Enrichment Is Not Guessing
+Every field added during Enrichment must be traceable to a real calculation or a real external source. If the Frost Risk Index is calculated from temperature, humidity, and wind speed, those three values must be present in the record. Enrichment that fills gaps by estimation is actually part of the Cleaning step — not Enrichment.
+
+Enrichment before/after
+Every new column must trace back to real source data.
+The Publish step delivers the finished dataset to its intended consumers. 'Finished' here means clean and enriched — all the work of the previous four steps has been completed. Publish is not just exporting a file; it is a thoughtful delivery that matches the data format and content to the consumer's needs.
+
+The agricultural ministry's data has three very different consumers, each with different requirements. The same underlying clean dataset is published in three different ways — demonstrating that the Publish step is not one-size-fits-all.
+
+🌐
+Public Weather API
+Receives a JSON feed every six hours. External app developers query this API to build weather widgets and agricultural planning tools. The feed includes temperature, humidity, wind speed, and the Frost Risk Index — but not the internal advisory flags.
+📊
+Ministry Dashboard
+Receives the full enriched dataset as a database table, updated every six hours. Ministry analysts use this to monitor conditions across all 340 stations and to identify regions needing intervention. Includes all fields, including internal advisory flags.
+📱
+Farmer Mobile App
+Receives targeted push notifications when the Frost Risk Index for a farmer's registered region crosses a threshold. No raw weather data — just a plain-language advisory: 'Frost risk tonight. Consider covering crops or delaying irrigation.'
+🔬
+Data Lineage: The Hidden Record
+Every published dataset in a professional system is accompanied by a data lineage record — a log showing exactly which sources contributed to it, which cleaning decisions were made, and when the pipeline ran. If a farmer's advisory turns out to be wrong, the data team can trace the error back to a specific station reading on a specific cycle, find out what went wrong, and prevent it from recurring.
+
+Who receives the published data
+Analyst, model, partner, or app — 'publish' means deliver.
+The farmer who receives the planting advisory on her phone sees a simple message. She does not see 340 data streams being harmonised, duplicate transmissions being removed, Fahrenheit readings being converted, or a Frost Risk Index being calculated from three separate measurements. All of that work is invisible to her — and that is precisely the point.
+
+This is what it means to call Data Wrangling 'invisible infrastructure'. Like the water pipes under a city or the electrical wiring inside a wall, wrangling is the essential, hidden work that makes everything else function. The crop recommendation app, the ministry dashboard, and the public weather API all depend completely on the wrangling pipeline — but none of them expose it.
+
+Spotify
+Cleans listening logs, deduplicates play events, enriches tracks with genre tags and mood scores — before any recommendation algorithm runs.
+Egyptian Football Association
+Wrangles match data from different stadium systems into a unified format — before publishing league tables and player statistics.
+Food Delivery Apps
+Standardises restaurant menus from different formats, languages, and pricing conventions — before presenting a unified browsable catalogue to the customer.
+Agricultural Ministry
+Harmonises weather station feeds, cleans malfunctioning readings, enriches with crop data — before publishing planting advisories to farmers.
+Wrangling as invisible infrastructure
+Users see the product — never the pipeline that makes it possible.
+⚠️
+An automated pipeline handles the routine work — but it does not handle everything. New data sources, changed station formats, unexpected sensor failures, and evolving ministry requirements all require human judgment. A pipeline is a tool; it still needs people who understand the five steps to monitor it, update it, and intervene when something goes wrong.
+Enrichment cannot rescue uncleaned data. Calculating a Frost Risk Index from a temperature reading that was never corrected produces a wrong index — and a wrong advisory. Enrichment works only on data that has already been properly cleaned. The pipeline steps have a strict order for good reason.
+Publish in the wrangling pipeline simply means 'deliver to the next consumer'. That consumer might be an internal analyst, a machine learning model, another database, or a partner organisation — not necessarily the general public. The term describes the handoff of finished data, not public disclosure.
+?
+The agricultural ministry calculates a 'Frost Risk Index' from temperature, humidity, and wind speed, and adds it as a new column. Which pipeline step does this represent?
+
+A.
+Assess
+
+B.
+Clean
+
+C.
+Enrich
+
+D.
+Publish
+?
+A weather station sends its temperature reading twice because of a connectivity issue, causing the same reading to appear in the database twice. Which pipeline step and strategy resolves this?
+
+A.
+Assess — document the duplicate for later review.
+
+B.
+Clean — apply deduplication to remove one copy of the repeated reading.
+
+C.
+Enrich — add a 'duplicate' flag to the repeated reading.
+
+D.
+Gather — re-collect the data to avoid the duplicate arriving at all.
+📌 Topic Summary
+▲
+The full five-step pipeline — Gather, Assess, Clean, Enrich, Publish — operates in real systems continuously, often on automated schedules with human oversight.
+Enrichment adds genuinely new value: calculated indices, joined external data, derived flags — all traceable to real sources, never fabricated.
+Publish delivers clean, enriched data to multiple consumers simultaneously, each receiving the data in the format and at the level of detail appropriate for their use.
+Data lineage records accompany every published dataset in professional systems — enabling errors to be traced back to their source and corrected.
+Data Wrangling is invisible infrastructure: the essential work that every data product depends on, but that no end user ever directly sees.
+Real-world systems — Spotify, football associations, food delivery apps, weather services — all run wrangling pipelines behind their visible features.
+↗
+Data Pipelines: A Practical Introduction — Databricks
+https://www.databricks.com/glossary/data-pipeline
+↗
+What is Data Enrichment? — Informatica
+https://www.informatica.com/resources/articles/what-is-data-enrichment.html
+↗
+Data Lineage Explained — Monte Carlo
+https://www.montecarlodata.com/blog-data-lineage/
+
+
+Topic 7.6a: Activity — The Messy Roster
+Assess the data quality of a school sports club roster and document every problem you find.
+
+The coordinator of your school's sports club has come to you with a problem. Tomorrow morning, the football team's player roster must be submitted to the league registration office — and the deadline is firm. The file sitting in front of you was compiled by hand over the course of several weeks, with different staff members entering data at different times, using whatever format felt right to them at the moment. Your job is straightforward: go through every row and every column, find every problem in the roster, and write down exactly what is wrong and what you would do to fix it. You are not fixing the file today. You are producing a complete, well-documented problem log that the coordinator can act on before submission.
+
+ℹ️
+Use the Framework You Learned This Week
+Use the vocabulary and framework you learned this week — the three quality pillars and five problem types are your tools.
+
+Here is the roster as it was received.
+
+#	Name	Age	Position	Jersey No.	Phone	City
+1	Ahmed Samy	16	مهاجم	9	01012345678	Cairo
+2	Mariam Ashraf	13	Defender	5	01223456789	Alexandria
+3	Khaled Nasser	15	Midfielder	8	01098765432	Giza
+4	Nour Ibrahim	خمستاشر	Goalkeeper	No. 7		Mansoura
+5	Youssef Ali	17	Defender	4	01156789012	Aswan
+6	Sara Mohamed		Midfielder	رقم 10	01345678901	Cairo
+7	Omar Hassan	14	FWD	11		Alexandria
+8	Layla Kamal	16	مهاجم	6		Giza
+9	Hassan Ali	4	forward	99	01187654321	Cairo
+10	Mahmoud Farouk	15	Forward	3	01234567890	Mansoura
+11	أحمد سامي	16	مهاجم	9	01012345678	Cairo
+12	Tarek Salah	14	Midfielder	2	01267891234	Aswan
+⚠️
+Look Carefully
+Some problems are obvious. Others require cross-checking more than one column.
+
+1
+Go through the roster column by column. List every problem you find.
+2
+For each problem, identify its type: Missing Value, Duplicate, Wrong Data Type, Formatting Inconsistency, or Out-of-Range Value.
+3
+For each problem, describe what you would do to fix it — and explain why.
+4
+Count how many instances of each problem type appear in the roster.
+↗
+What Is Data Quality? — IBM
+https://www.ibm.com/topics/data-quality
+↗
+Data Wrangling Explained — Towards Data Science
+https://towardsdatascience.com/data-wrangling-the-real-game-changer-in-data-science-16c69fcab4a0
+
+
+Topic 7.6b: Activity Solution — The Clean Roster
+A complete step-by-step walkthrough of how to assess and clean the messy roster, with the reasoning behind every decision.
+
+A successful solution to this activity looks like one thing: a clean, complete, and consistent roster that any league administrator could accept without hesitation. Every field must be present and correctly typed, every record must be unique, every value must fall within a plausible range, and every column must follow one format throughout. The raw file we received was far from that standard. This walkthrough documents every problem found in the roster, explains the reasoning behind each identification, and specifies the fix — so that a student reading from top to bottom understands not just the answers, but how an analyst thinks through each step.
+
+What we are looking for
+Count in this dataset
+Missing Values
+4
+Duplicates
+2
+Wrong Data Types
+3
+Formatting Inconsistencies
+4
+Out-of-Range Values
+2
+Total problems
+15
+Before touching a single problem, the most important decision is how to read the dataset. The instinct most beginners follow is to start at row one and read across — name, age, position, jersey number, phone, city — then move to row two and repeat. This feels natural because it mirrors how you might scan a list of people. But it is the wrong approach for data assessment, and the reason is simple: each column holds one type of information and one expected format. When you look at every age in the dataset at once, an age of 4 leaps off the screen immediately. When you look at every position at once, you see four different spellings of the same role side by side. Row-by-row reading scatters your attention across six different data types simultaneously, making each anomaly harder to spot. Column-by-column reading gives each variable its own moment of examination, where any value that breaks the pattern has nowhere to hide.
+
+Rule 1
+Assess one column completely before moving to the next.
+Each column is a single type of information. Completing it fully before moving on prevents split attention and ensures no problem in that column is overlooked.
+Rule 2
+Sort each column before scanning — patterns surface immediately.
+Sorting the Age column from lowest to highest would place the value 4 at the very top of the list. Sorting the Position column alphabetically would group all variants of the same role together. Sorting transforms a scattered list into a structured one.
+Rule 3
+Cross-check suspicious rows across other columns before making a decision.
+A name that appears twice is not conclusive proof of a duplicate. The phone number, jersey number, and city together provide the evidence needed to act with confidence.
+The Phone column is the first place to scan for Missing Values — and three cells are empty. Then the Age column: one cell is empty. These four blank cells are Missing Values. Each one represents a field that should contain a value but does not. The next question is not just where they are, but what to do about each one — and the answer depends on context. Phone and Age are not equal in this situation. Phone numbers are contact information; their absence is inconvenient but survivable. Age is a mandatory field for league registration; its absence is a registration blocker.
+
+Row	Player	Column	Problem	Fix Decision
+4	Nour Ibrahim	Phone	Phone field is empty.	Attempt to retrieve the number from the original source. If unavailable, retain the row and add a note. Phone is not a mandatory registration field — the player record can still be submitted.
+7	Omar Hassan	Phone	Phone field is empty.	Same approach as Row 4. Retain the player record with a note. Deleting the row over a missing phone number would remove a valid player from registration.
+8	Layla Kamal	Phone	Phone field is empty.	Same approach as Rows 4 and 7. Retain with a note and seek the number from the coordinator.
+6	Sara Mohamed	Age	Age field is empty.	Age is a mandatory registration field. This record cannot be submitted to the league until the age is confirmed. Flag for urgent verification with the coordinator before the deadline.
+⚠️
+Not All Missing Values Are Treated the Same Way
+Not all missing values are treated the same way. A missing phone number may be acceptable — the player can still register. A missing age is a registration blocker — the coordinator must provide it before the roster is submitted.
+
+Scanning the Name column, two entries appear twice: 'Ahmed Samy' in Row 1 and 'أحمد سامي' in Row 11 look like different people at first glance — they are written in completely different scripts. But the phone number is the key. Both entries carry the exact same phone number: 01012345678. The same phone number appearing on two different rows, combined with the same jersey number (9) and the same city (Cairo), is conclusive evidence that these are not two different players. They are the same person entered twice under two different name spellings. The English entry is the intended format for this file, so Row 11 is removed and Row 1 is kept as the canonical record.
+
+Row 1	Row 2	Matching Field	Action
+Row 1 — Ahmed Samy	Row 11 — أحمد سامي	Same phone (01012345678), same jersey number (9), same city (Cairo)	Keep Row 1, remove Row 11. The name difference is a script variation, not a different person.
+⚠️
+Never Rely on Name Matching Alone
+Never rely on name matching alone to find duplicates — names can be spelled differently, abbreviated, or written in different languages. Always cross-check with a second unique field such as phone number or national ID.
+
+Some values in this roster are present in the correct cell — they are not missing — but they are stored in the wrong format. The Age column should contain plain integers. The Jersey No. column should also contain plain integers. When a column that is supposed to hold numbers contains text, it breaks every operation that depends on that column being numeric. You cannot sort ages correctly if one age is the word 'خمستاشر'. You cannot rank jersey numbers if one of them is 'No. 7'. A spreadsheet application will refuse to run arithmetic on these cells, and a database will reject the column as inconsistent. The fix in every case is to remove the non-numeric content and store only the plain number.
+
+Row	Column	Current Value	Problem	Fix
+4	Age	خمستاشر	The value 'خمستاشر' (the Egyptian Arabic word for fifteen) is text stored in a numeric column. No calculation or sort will work correctly on this value.	Replace 'خمستاشر' with the numeric value 15.
+4	Jersey No.	No. 7	The label 'No.' has been embedded alongside the number. The cell contains a text string, not an integer.	Remove the label 'No.' and store only the numeric value 7.
+6	Jersey No.	رقم 10	The Arabic word for 'number' followed by the digit 10 — the cell contains a mixed-language text string, not an integer.	Remove 'رقم' and store only the numeric value 10.
+ℹ️
+Wrong Data Types Are Invisible Until You Operate on the Column
+Wrong data types are invisible until you try to calculate with the column. Always check: can this column be sorted numerically? If not, there may be type contamination.
+
+The Position column is where the most visible inconsistency lives. Scanning the full column top to bottom reveals four different ways of writing the same position — the attacking forward role. One row uses the Arabic word 'مهاجم'. Another uses the full English word 'Forward'. A third uses the English abbreviation 'FWD'. A fourth uses the lowercase version 'forward'. To a human reader, these are obviously equivalent. To a computer, they are four completely different values. A database filter looking for all Forward players would return different results depending on which spelling it was asked to match. A sorting operation would scatter the four variants across the column rather than grouping them together. This is what makes Formatting Inconsistencies dangerous: they appear harmless but silently break every automated operation that relies on the column.
+
+Row	Value Found	Standardised Value	Change Required
+1	مهاجم	Forward	Arabic variant — replace with the standardised English form.
+7	FWD	Forward	Abbreviation — replace with the full standardised form.
+8	مهاجم	Forward	Arabic variant — replace with the standardised English form.
+9	forward	Forward	Lowercase — capitalise to match the standard.
+🔬
+Inconsistencies Break Queries Silently
+In a real database, a query for all 'Forward' players would miss everyone listed as 'FWD' or 'forward'. Formatting inconsistencies silently break queries and reports.
+
+The final problem type is the most deceptive, because the values are present, they are the correct data type, and their cells are not blank. They look perfectly fine until you compare them against what is plausible in context. Row 9 (Hassan Ali) carries two out-of-range problems in a single row. The age is 4 — an integer in the right column, but not a possible age for any youth football player. Youth league registration typically requires players to be between 12 and 18. An age of 4 fails the plausibility check entirely. The jersey number in the same row is 99. School club rosters typically use jersey numbers in the range of 1 to 30. The number 99 is present and correctly typed — it is simply implausible for this context.
+
+Row	Column	Value	Problem	Action
+9	Age	4	An age of 4 is impossible for a youth football player. Youth league eligibility typically requires players to be aged 12 to 18.	Flag for coordinator verification. The value 4 is most likely a typo for 14 — but that assumption must not be acted on without confirmation. Do not change the value unilaterally.
+9	Jersey No.	99	Jersey number 99 falls well outside the typical range for a school club (1 to 30). This is likely a data entry error.	Flag for coordinator verification. Do not change the value without confirming the correct number with the player or the coordinator.
+⚠️
+Flag, Then Verify — Never Assume
+Out-of-range values must be flagged, not automatically deleted. Age 4 could be a typo. Jersey 99 might be a deliberate choice. Always verify with the data owner before removing a value that looks wrong.
+
+Row 2 contains Mariam Ashraf — a name typically given to girls. If this league is male-only, this row may have been added by mistake. This is not a data quality problem in the technical sense: all values are present, correctly typed, and plausible. But it is a contextual observation that a careful assessor would document. The correct action is to add a note for the coordinator to verify whether this player belongs on this roster — not to delete the row, and not to treat the name as a data error without confirmation.
+
+After working through all six columns systematically, here is the confirmed problem count. If your tally matches this, your assessment was thorough. If it differs, return to the section where the gap occurs and compare your findings against the walkthrough.
+
+Missing Values
+4 instances — Phone missing in Rows 4, 7, and 8; Age missing in Row 6.
+Duplicates
+2 rows implicated — Rows 1 and 11 form one confirmed duplicate pair (same phone, same jersey, same city). Row 11 is removed.
+Wrong Data Types
+3 instances — 'خمستاشر' in Row 4 Age; 'No. 7' in Row 4 Jersey No.; 'رقم 10' in Row 6 Jersey No.
+Formatting Inconsistencies
+4 instances in the Position column — 'مهاجم' (Rows 1 and 8), 'FWD' (Row 7), 'forward' (Row 9) — all deviating from the standard 'Forward'.
+Out-of-Range Values
+2 instances — Age of 4 in Row 9; Jersey number of 99 in Row 9.
+Total problems
+15 problems identified across a 12-row dataset.
+📌 Topic Summary
+▼
+?
+Ahmed Samy appears twice in the roster — once as 'Ahmed Samy' and once as 'أحمد سامي'. What is the most reliable way to confirm these are the same person?
+
+A.
+A) The names sound the same when read aloud.
+
+B.
+B) Both rows have the same jersey number and phone number.
+
+C.
+C) One row is in English and the other in Arabic so they must be duplicates.
+
+D.
+D) The positions are the same in both rows.
+↗
+Data Quality: Dimensions and Definitions — IBM
+https://www.ibm.com/topics/data-quality
+↗
+Assessing Data Quality — Statistics Canada
+https://www150.statcan.gc.ca/n1/pub/12-539-x/2009001/quality-qualite-eng.htm

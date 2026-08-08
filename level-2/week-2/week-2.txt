@@ -1,0 +1,584 @@
+2.1 Arithmetic Operations & Expressions
+Turn Python into a powerful calculator and learn how to handle division, remainders, and complex equations with ease.
+
+Computers are essentially extremely fast calculators. Every action you see on a screen—from a character jumping in a game to a video stream loading—is powered by billions of tiny math calculations happening every second. Python uses symbols called Operators to perform these calculations on your variables.
+
+Basic arithmetic in Python works exactly like the math you learned in school, but with a few specialized symbols for computers. Let's look at the "Big Four" and a powerful newcomer:
+
++
+Addition: Joins two numbers. 10 + 5 results in 15.
+-
+Subtraction: Subtracts the right from the left. 10 - 5 results in 5.
+*
+Multiplication: Uses the asterisk symbol. 10 * 5 results in 50.
+**
+Exponent: Raises the left number to the power of the right. 2 ** 3 is 2³ which equals 8.
+Python
+apples = 10
+oranges = 5
+
+total_fruit = apples + oranges
+square_of_apples = apples ** 2
+
+print("Total Fruit:", total_fruit)
+print("10 Squared:", square_of_apples)
+▶ Output
+Total Fruit: 15
+10 Squared: 100
+🚀
+The Power of the Exponent
+In many other languages, you need a special function to do "to the power of." In Python, it's as easy as typing two stars! 10 ** 6 results in a million in less than a microsecond.
+
+Division in Python 3 is a bit special. Depending on whether you're splitting a bill with friends or trying to find how many whole items fit into a box, Python offers three distinct tools.
+
+1. Regular Division (/)
+This is the "fair" division. It always results in a float (a decimal number), even if the numbers divide perfectly. Python does this to ensure maximum precision in your calculations.
+
+print(10 / 2)  # Output: 5.0 (Note the .0!)
+2. Floor Division (//)
+This is the "integer" division. It calculates the answer and then "rounds down" to the nearest whole number (towards the floor). It simply throws away any decimal remainder.
+
+print(17 // 5) # Output: 3 (Because 5 goes into 17 three whole times)
+3. Modulo (%)
+This is the "leftover" operator. It doesn't tell you the answer to the division; it tells you what remains after the floor division is done. This is incredibly useful for finding if a number is even or odd (e.g., number % 2 == 0).
+
+print(17 % 5)  # Output: 2 (Because 17 - 15 = 2)
+🍭
+The Candy Example
+Imagine you have 10 candies and 3 friends:
+▸ 10 / 3 gives each friend 3.3333333333333335 candies (messy!).
+▸ 10 // 3 gives each friend 3 whole candies.
+▸ 10 % 3 tells you there is exactly 1 candy left in the bowl for you!
+
+When you have a long equation like 10 + 2 * 5, which part does Python do first? Just like in algebra, Python follows a strict hierarchy of Precedence. If you ignore this, your program might give you very confusing (and incorrect) results!
+
+01
+Parentheses ( )
+Anything inside brackets is evaluated first.
+This is your way of overriding the rules.
+▸ (10 + 2) * 5 = 60
+02
+Exponents **
+Python calculates powers before multiplication or division.
+▸ 2 + 3 ** 2 = 11
+03
+Multiplication & Division
+These have equal priority and are handled from left to right.
+Includes*, /, //, and %.
+▸ 10 * 2 // 5 = 4
+04
+Addition & Subtraction
+These are always handled last, from left to right.
+Includes + and -.
+▸ 10 - 2 + 5 = 13
+💡
+Explicit is Better
+Even if you are a math wizard, always use Parentheses to make your code easier to read. Writing total = (price * quantity) + shipping is much clearer to a human than total = price * quantity + shipping.
+
+Let's use our new skills to simulate a real-world calculation: splitting a Talabat bill between 3 friends, including a delivery fee and a discount voucher.
+
+Python
+burger_price = 150
+quantity = 3
+delivery_fee = 45
+voucher = 20
+
+# Step 1: Calculate the full cost
+subtotal = (burger_price * quantity) + delivery_fee
+final_total = subtotal - voucher
+
+# Step 2: Split the cost exactly
+each_pays = final_total / 3
+
+print("The final total is:", final_total)
+print("Each person pays:", each_pays)
+▶ Output
+The final total is: 475
+Each person pays: 158.33333333333334
+?
+What is the exact output of print(10 + 10 // 3)?
+
+A
+6
+
+B
+13.333333333333334
+
+C
+13
+
+D
+20
+📌 Section Summary
+▲
+Python supports standard arithmetic: +, -, *, /, //, %, **.
+Regular division / always returns a float.
+Floor division // rounds down to the nearest integer.
+Modulo % returns the remainder of a division.
+Operations follow PEMDAS (Parentheses, Exponents, Mult/Div, Add/Sub).
+↗
+W3Schools — Python Operators
+https://www.w3schools.com/python/python_operators.asp
+↗
+GeeksforGeeks — Python Operators Tutorial
+https://www.geeksforgeeks.org/python-operators/
+
+2.2 String Operations & Formatting
+Learn the art of engineering text to create professional layouts, beautiful borders, and interactive user messages.
+
+In Python, text data is officially known as a String (shortened to str). A string is essentially a Sequence—a series of individual characters (letters, numbers, or symbols) linked together like beads on a necklace. These characters are stored in a specific order in the computer's memory, which allows us to manipulate them with high precision.
+
+Every time you see a message on your phone or a headline on a website, you are looking at a string. In Python, these are the "words" our programs use to speak to the world.
+
+ℹ️
+The Quotes Rule
+Python only recognizes text as a string if it is enclosed in Quotes (either "Double" or 'Single'). Without quotes, Python tries to interpret the text as a variable name or a command. Always use quotes for literal text!
+
+Python
+greeting = "Hello, Ashbal Egypt!"
+city = "Cairo"
+empty_string = ""  # Yes, strings can be empty!
+Just like you can add numbers together to get a sum, you can "add" text together to build sentences. Python gives us two primary arithmetic operators that perform very different actions when applied to strings.
+
+Concatenation (+)
+The act of fusing two or more strings together to form one continuous chain of text.
+Repetition (*)
+Repeating a specific string a set number of times. This is the fastest way to build dividers or patterns.
+🧩
+The Puzzle Analogy
+Think of Concatenation like snapping puzzle pieces together. The + sign is the glue. Crucially, the glue is thin—it doesn't add spaces automatically! If you want a space between words, you must add a " " string yourself.
+
+Python
+# Concatenation (The Glue)
+first = "Mazin"
+msg = "Welcome, " + first + "!"
+
+# Repetition (The Pattern)
+border = "*" * 20
+
+print(border)
+print(msg)
+print(border)
+▶ Output
+********************
+Welcome, Mazin!
+********************
+As you build professional applications, you'll need to organize your text across multiple lines or create neat columns. Since you can't just hit "Enter" inside a string literal, Python uses Escape Sequences. These are invisible "design codes" that start with a backslash \ and tell Python to perform a specific formatting action.
+
+⏎
+New Line (\n)
+Instructs Python to move the "cursor" to the next line immediately. It acts like hitting the Enter key.
+⇥
+Horizontal Tab (\t)
+Creates a wide, standardized space. This is the secret to making data line up perfectly in columns.
+💡
+Code vs. Reality
+These symbols are "escaped," meaning they aren't printed literally. You type \n in your code, but the computer translates it into a physical jump to a new line in the output window.
+
+Python
+print("Item:\tBurger\nPrice:\t150 EGP")
+▶ Output
+Item: Burger
+Price: 150 EGP
+Let's combine everything we've learned to build a professional-looking digital event ticket layout. We will use repetition for the borders, concatenation to include the guest's name, and control codes to organize the seat information.
+
+Python
+guest = "Mazin"
+seat = "B-25"
+border = "=" * 30
+
+# Combine everything into one string
+ticket_body = "GUEST NAME:\t" + guest + "\nSEAT NUMBER:\t" + seat
+
+print(border)
+print(ticket_body)
+print(border)
+▶ Output
+==============================
+GUEST NAME: Mazin
+SEAT NUMBER: B-25
+==============================
+⚠️
+The Price Tag Trap
+Python is a "Strongly Typed" language. This means you cannot directly use + to join a string and a number (e.g., "Price: " + 100). This will cause a TypeError. We will learn how to fix this using conversion in the next lesson!
+
+?
+What is the purpose of the \t symbol in a Python string?
+
+A
+To move text to a new line
+
+B
+To add a large horizontal space (Tab)
+
+C
+To repeat the text multiple times
+
+D
+To end the Python program
+📌 Section Summary
+▲
+Strings are sequences of characters linked together.
+Use the + operator to concatenate (join) strings.
+Use the * operator to repeat a string multiple times.
+Escape Sequences like \n (New Line) and \t (Tab) are used for formatting.
+You cannot use + between a string and a number without conversion.
+↗
+W3Schools — Python Strings
+https://www.w3schools.com/python/python_strings.asp
+↗
+GeeksforGeeks — Python String Tutorial
+https://www.geeksforgeeks.org/python-strings/
+
+2.3 More on Data Types
+Solve the "10 + 20 = 1020" mystery by learning how to change data shapes and verify what type of information your program is holding.
+
+In the previous lessons, we saw that Python treats text and numbers very differently. Sometimes, you need to change the "shape" of your data to make it usable for a specific task. This process is called Type Conversion (or Casting). It's a fundamental skill for making different parts of your program work together.
+
+Think of it like building with Lego: you might have a block that looks like a number, but if it's categorized as "text," Python won't let you use it in an addition. To fix this, you must explicitly tell Python to reconstruct that data into a new type.
+
+🏗️
+The Factory Analogy
+Think of conversion functions like Constructors or factories. They take raw data (like a paper picture of a number) and use it as a template to build a brand new object (like a solid metallic number) in the computer's memory. The old "paper" version remains unchanged!
+
+Python provides three main "factories" for basic data types:
+
+int()
+Constructs a whole Integer from a string or float. Perfect for counts or IDs.
+float()
+Constructs a Float (decimal) from a string or integer. Essential for prices or measurements.
+str()
+Constructs a String (text) from any other data type. Required for building messages.
+Python
+# Converting a string to an integer
+price_text = "150"
+price_num = int(price_text)
+
+# Converting a number to text for printing
+age = 15
+print("I am " + str(age) + " years old")
+▶ Output
+I am 15 years old
+Why do we need conversion so often? The biggest culprit is the input() function. In Python, input() always returns a string, no matter what the user types. Even if the user types 100, Python receives it as the text "100".
+
+🔬
+The Character Stream
+Your keyboard is essentially a digital typewriter. When you press the '7' key, it sends a "character signal," not a mathematical value. Python collects these signals into a safe String container. It's up to you, the developer, to tell Python if those characters represent a number.
+
+The Standard Workflow
+To perform calculations with user input, you must convert it immediately after receiving it. This is the professional way to handle data entry:
+
+01
+Gather InputCollect the text stream from the keyboard.▸ weight = input("Enter weight: ")
+02
+Convert ShapeSend the text to the factory to build a numeric object.▸ weight_num = float(weight)
+03
+Process MathNow you can safely perform calculations.▸ print(weight_num / 2)
+⚠️
+The ValueError Crash
+If you try to convert text that isn't a number (like int("apple")), Python will crash with a ValueError. The conversion factory isn't magic; it needs raw material that actually looks like a number to succeed!
+
+When converting data, you need to understand how Python handles precision. Converting from an integer to a float is called "up-casting"—you're adding precision (like turning 10 into 10.0). However, converting from a float to an integer involves Truncation.
+
+Python does not round numbers during conversion. It simply "snips off" everything after the decimal point, effectively moving the number closer to zero.
+
+✂️
+Truncation (int)
+int(9.9) becomes 9 .
+Python ignores the .9 and throws it away.
+It does not round up to 10!
+🏗️
+Up-casting (float)
+float(10) becomes 10.0 .
+It adds a decimal point to allow for future precision.
+Python
+raw_score = 98.7
+clean_score = int(raw_score)
+print("Original:", raw_score)
+print("Truncated:", clean_score)
+▶ Output
+Original: 98.7
+Truncated: 98
+As your programs grow more complex with many variables, it's easy to lose track of what's what. Is user_data a number or text? Python provides a built-in "Inspector" function called type() to reveal the true identity of any data in your RAM.
+
+This is a vital tool for Debugging. If your program is crashing with a math error, the first thing you should do is use type() to check if you're accidentally trying to subtract two words!
+
+Python
+a = 10
+b = "10"
+
+print(type(a))
+print(type(b))
+▶ Output
+<class 'int'>
+<class 'str'>
+?
+What is the exact result of print(int(15.9))?
+
+A
+16
+
+B
+15
+
+C
+15.0
+
+D
+ValueError
+📌 Section Summary
+▲
+Type Conversion creates a NEW object of a different type from existing data.
+input() always returns data as a String.
+Use int() and float() to turn text into numbers for math.
+int() truncates decimals (it does not round).
+Use type() to inspect the data type of any variable.
+↗
+W3Schools — Python Casting
+https://www.w3schools.com/python/python_casting.asp
+↗
+GeeksforGeeks — Type Casting in Python
+https://www.geeksforgeeks.org/type-casting-in-python/
+
+2.4 Asking Questions with Data
+Discover how programs make binary decisions by comparing values and using logical gates to build complex "if this, then that" reasoning.
+
+Logic is the "brain" of any computer program. At its core, a computer is just a series of billions of binary choices—Yes or No. In Python, these choices are represented by a data type called a Boolean (bool).
+
+A Boolean value can only be one of two states. These represent the absolute truth of a statement. In Python, these values are special keywords:
+
+✅
+True
+Represents a "Yes" or a successful condition.
+Note the capital T !
+Often represented in memory as 1.
+❌
+False
+Represents a "No" or an unsuccessful condition.
+Note the capital F !
+Often represented in memory as 0.
+We use Comparison Operators to ask Python specific questions about our variables. Python evaluates our question against the data in memory and gives us a Boolean answer back. This answer is what we use to control the flow of our program later on.
+
+This is the single most important rule in Python logic! There is a massive functional difference between using one equals sign and using two. Confusing these two is the #1 cause of "Logic Errors" for new developers.
+
+⚖️ Equality Symbols
+📣 Telling (=)
+Assignment Operator
+"Put this value in this variable."
+This is an
+Action
+that changes memory.
+❓ Asking (==)
+Comparison Operator
+"Are these two things the same?"
+This is a
+Question
+that returns a Boolean.
+⚠️
+Dangerous Bug
+If you use = when you meant to use ==, Python will think you are trying to assign a value to a variable instead of checking it. In many cases, this will cause a SyntaxError or, worse, a program that runs but behaves incorrectly!
+
+Python
+score = 100  # Telling: Store 100 in 'score'
+
+# Asking questions
+print("Is score 100?", score == 100)
+print("Is score 50?", score == 50)
+▶ Output
+Is score 100? True
+Is score 50? False
+Beyond checking if things are perfectly equal, we can ask many other types of quantitative and qualitative questions using standard mathematical symbols. These allow your program to "feel" the data and understand ranges.
+
+==
+Equal to: Returns True if both sides match exactly.
+!=
+Not equal to: Returns True if the sides are different.
+>
+Greater than: Standard math comparison.
+<
+Less than: Standard math comparison.
+>=
+Greater than or equal to: Includes the number itself.
+<=
+Less than or equal to: Includes the number itself.
+ℹ️
+Textual Logic
+You can compare strings too! However, "Admin" == "admin" is False because Python is case-sensitive. Capital 'A' and lowercase 'a' are different signals to the computer.
+
+Python
+age = 15
+print("Over 12?", age > 12)
+print("Is not 10?", age != 10)
+▶ Output
+Over 12? True
+Is not 10? True
+In the real world, decisions are rarely based on a single question. Usually, it's a combination: "Is the user over 12 AND do they have a ticket?" To handle these, Python uses Logical Operators. These act like "gates" that combine multiple Boolean answers into one final result.
+
+💎
+and (The Greedy Gate)
+Returns True only if ALL conditions are True. If even one part is False, the gate closes and returns False.
+🚪
+or (The Easy-Going Gate)
+Returns True if at least ONE condition is True. It only returns False if every single part is False.
+🔄
+not (The Flipper)
+Inverts the logic. It turns True into False, and False into True. Useful for checking if a state is "NOT" something.
+🎮
+The Smart Gateway Analogy
+Imagine a phone's security check: (fingerprint_ok and passcode_ok) requires both to open the device. Whereas a VIP list like (is_on_list or has_invite) means either one is enough to get you into the party!
+
+Python
+is_admin = True
+has_permission = False
+
+print("Access Both:", is_admin and has_permission)
+print("Access Either:", is_admin or has_permission)
+▶ Output
+Access Both: False
+Access Either: True
+?
+What is the result of (10 == 10) and (5 > 10)?
+
+A
+True
+
+B
+False
+
+C
+1
+
+D
+SyntaxError
+📌 Section Summary
+▲
+Booleans are binary values: True or False.
+Use == to ask (compare) and = to tell (assign).
+Comparison symbols include ==, !=, >, <, >=, <=.
+and requires everything to be True.
+or requires at least one thing to be True.
+not flips True to False and vice versa.
+↗
+W3Schools — Python Booleans
+https://www.w3schools.com/python/python_booleans.asp
+↗
+GeeksforGeeks — Comparison & Logical Operators
+https://www.geeksforgeeks.org/python-operators/
+
+2.5 Conditionals: if / elif / else
+Give your code a mind of its own by learning how to evaluate conditions and direct the program's flow down different paths based on data.
+
+Until now, your code has been running like a train on a single track—strictly from top to bottom, executing every line one after another. But real-world programs need to make Choices based on shifting circumstances. If a user enters the correct password, they should see their dashboard; if not, they should see an error. If a character collects 100 coins, they should Level Up; if they have 99, they shouldn't.
+
+In Python, we use Conditionals to create "forks in the road." Your program looks at a Boolean condition (True or False) and dynamically decides which track to follow. This is what makes software "smart" and interactive!
+
+🎮
+The Gatekeeper Analogy
+Think of an if statement as a locked gate. Python looks at the keys you are holding (your variables). if the condition is True, the gate swings open and you get to run the special code inside. If the condition is False, Python ignores that entire section and keeps walking down the main road!
+
+The if statement is the most basic building block of decision-making. It evaluates a specific expression, and only executes the indented code block directly beneath it if the result of that evaluation is exactly True.
+
+To build an if statement, you need three components: the if keyword, a logical expression, and a Colon (:). The colon is non-optional; it is the signal to Python that a new "block" of code is starting.
+
+Python
+score = 105
+
+if score >= 100:
+    print("LEVEL UP!")
+    print("You gained a new skill!")
+▶ Output
+LEVEL UP!
+You gained a new skill!
+ℹ️
+Logic Flow
+If you change the score to 50 and run the code again, nothing will happen. Python evaluates the condition as False, skips the entire indented block, and moves to the end of the file.
+
+In other languages, curly brackets {} are used to group code. In Python, we use Indentation (empty space). This is not just for neatness; it is a mandatory syntax rule. Indentation defines the Scope—the "ownership" zone of a statement.
+
+Standard Indent
+Exactly 4 spaces (or 1 Tab). Most editors like Jupyter or VS Code add this automatically when you hit Enter after a colon.
+Indented Block
+All lines with the same level of indentation are considered part of the same "group."
+Python
+if True:
+    print("I am INSIDE the if.")  # Owned by the if (4 spaces)
+print("I am OUTSIDE the if.")    # Independent (0 spaces)
+⚠️
+IndentationError
+If you forget the spaces, or if you use an inconsistent number of spaces (like 3 in one line and 4 in the next), Python will crash with an IndentationError. This is the #1 mistake for beginners—watch your spaces!
+
+What if you have a "Plan B" or a "Plan C"? Using only if statements can be messy and inefficient. Python provides two extra keywords to build a logical "Decision Tree" where only one path can be taken.
+
+🥈
+elif (Plan B)
+Short for "else if." It provides an alternate condition to check only if the previous conditions were False. You can have as many elif blocks as you need!
+🛡️
+else (The Safety Net)
+This block runs automatically if NONE of the conditions in the entire chain were True. It is the final fallback path.
+Example: E-commerce Logic
+Imagine a smart checkout system that calculates shipping costs based on the total order value:
+
+Python
+total = 450
+
+if total >= 500:
+    print("Free Shipping!")
+elif total >= 300:
+    print("Shipping cost: 20 EGP")
+else:
+    print("Shipping cost: 50 EGP")
+▶ Output
+Shipping cost: 20 EGP
+🔬
+The First-Match Rule
+Python checks the chain from top to bottom. As soon as it finds a True condition, it runs that specific block and exits the entire tree. Even if later elif statements are also True, they will be completely ignored!
+
+Real-life logic often goes deeper than a single question. You might ask a follow-up question only if the first answer was "Yes." In Python, this is called Nesting—putting one if statement inside another.
+
+This creates a hierarchy of logic. The inner if is only ever seen by the computer if the outer if evaluates to True. Each level of nesting requires another 4 spaces of indentation.
+
+Python
+age = 15
+has_id = True
+
+if age >= 12:
+    # Follow-up question
+    if has_id:
+        print("Access Granted!")
+    else:
+        print("You need an ID card.")
+else:
+    print("Too young to enter.")
+▶ Output
+Access Granted!
+💡
+Visualizing the Scope
+Notice the print("Access Granted!") line is indented by 8 spaces! That's 4 spaces for the first level, and 4 more for the nested level. This visual "staircase" tells you exactly how deep the logic goes.
+
+?
+What is the purpose of indentation in a Python if statement?
+
+A
+To make the code look pretty but it is optional
+
+B
+To define the block of code that belongs to the statement
+
+C
+To make the program run faster
+
+D
+To turn the code into a comment
+📌 Section Summary
+▲
+Conditionals allow your program to take different paths based on data.
+The if statement checks if a condition is True.
+Indentation (4 spaces) defines which code belongs to the decision.
+Use elif for alternate plans and else as a final fallback.
+Python stops checking the chain as soon as it finds the first True condition.
+↗
+W3Schools — Python If...Else
+https://www.w3schools.com/python/python_conditions.asp
+↗
+GeeksforGeeks — Python If Else Statement
+https://www.geeksforgeeks.org/python-if-else/
